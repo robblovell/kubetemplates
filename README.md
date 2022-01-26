@@ -9,36 +9,37 @@ Example:
 ```javascript
 const csr = new CSR('bob-eng-csr')
     .spec('29387fasiudaiugw9er80asidf')
+console.log(csr.json())
 ```
 Results in:
 ```bash
 {
   "apiVersion": "certificates.k8s.io/v1",
-  "kind": "CertificateSigningRequest",
+  "kind": "Secret",
   "metadata": {
-    "name": "bob-eng-csr"
+    "name": "cluster-certificate-tls",
+    "namespace": "mess-system"
   },
-  "spec": {
-    "request": "29387fasiudaiugw9er80asidf",
-    "signerName": "kubernetes.io/kube-apiserver-client",
-    "usages": [
-      "client auth"
-    ]
+  "type": {
+    "type": "kubernetes.io/tls"
+  },
+  "data": {
+    "tls.crt": "tls.crt",
+    "tls.key": "tls.key"
   }
 }
-
 ```
 
 You can set global defaults for annotations and labels by using the static functions `defaultAnnotaions` and `defaultLabels`.
 For example:
 ```javascript
 Template.defaultAnnotations = {
-    'system.codezero.io/id': 'codezero.io',
+    'system.cat-in-the-hat.io/id': 'cat-in-the-hat.io',
 }
 Template.labels({
-    'system.codezero.io/version': '1.2.3'
+    'system.cat-in-the-hat.io/version': '1.2.3'
 })
-const secret2 = new Secret('cat-in-the-hat')
+const secret = new Secret('cat-in-the-hat')
     .namespace('mess-system')
     .data({
         'thing1': 'mess1',
@@ -50,7 +51,7 @@ const secret2 = new Secret('cat-in-the-hat')
     .annotations({
         'observe2': 2
     })
-console.log(secret2.json())
+console.log(secret.json())
 ```
 Results in:
 ```bash
@@ -59,10 +60,10 @@ Results in:
   "kind": "Secret",
   "metadata": {
     "labels": {
-      "system.codezero.io/version": "1.2.3"
+      "system.cat-in-the-hat.io/version": "1.2.3"
     },
     "annotations": {
-      "system.codezero.io/id": "codezero.io",
+      "system.cat-in-the-hat.io/id": "cat-in-the-hat.io",
       "observe1": 1,
       "observe2": 2
     },
@@ -74,5 +75,61 @@ Results in:
     "thing2": "mess2"
   }
 }
+```
 
+Some objects are constructed from other objects, like Deployments which consist of a list of containers:
+
+```javascript
+const deployment = new Deployment('cat-in-the-hat-core')
+    .namespace('cat-in-the-hat')
+    .labels({
+        'system.cat-in-the-hat/type': 'home-mess'
+    })
+    .labels({
+        thing1: 'mess1',
+        thing2: 'mess2'
+    })
+    .spec({ app: 'a-name' }, {})
+
+const container = new Container('cathat/home-mess:21345', deployment)
+deployment.containers([container])
+console.log(deployment.json())
+```
+Results in:
+```bash
+{
+  "apiVersion": "certificates.k8s.io/v1",
+  "kind": "Deployment",
+  "metadata": {
+    "labels": {
+      "system.cat-in-the-hat/type": "home-mess",
+      "thing1": "mess1",
+      "thing2": "mess2"
+    },
+    "name": "cat-in-the-hat-core",
+    "namespace": "cat-in-the-hat"
+  },
+  "spec": {
+    "selector": {
+      "matchLabels": {
+        "app": "a-name"
+      }
+    },
+    "template": {
+      "metadata": {},
+      "spec": {
+        "containers": [
+          {
+            "image": "cathat/home-mess:21345",
+            "name": "cat-in-the-hat-core",
+            "imagePullPolicy": "always"
+          }
+        ],
+        "securityContext": {
+          "fsGroup": 1000
+        }
+      }
+    }
+  }
+}
 ```

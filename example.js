@@ -5,32 +5,26 @@ const { Deployment } = require('./deployment')
 const { Container } = require('./container')
 const { CSR } = require('./csr')
 
-Template.defaultAnnotations = {
-    'system.codezero.io/id': 'codezero.io',
-}
-Template.labels({
-    'system.codezero.io/version': '1.2.3'
-})
-const deployment = new Deployment('sample-project-core')
-    .namespace('sample-project')
+const deployment = new Deployment('cat-in-the-hat-core')
+    .namespace('cat-in-the-hat')
     .labels({
-        'system.codezero.io/type': 'environment'
+        'system.cat-in-the-hat/type': 'home-mess'
     })
     .labels({
-        thing1: 'thing2'
+        thing1: 'mess1',
+        thing2: 'mess2'
     })
     .spec({ app: 'a-name' }, {})
 
-const container = new Container('c6oio/sample-project:21345', deployment)
+const container = new Container('cathat/home-mess:21345', deployment)
 deployment.containers([container])
-console.log(deployment)
 console.log(deployment.json())
 
 const pvc = new PersistentVolumeClaim()
-    .name('sample-project-core')
-    .namespace('sample-project')
+    .name('cat-in-the-hat-core')
+    .namespace('cat-in-the-hat')
     .labels({
-        'system.codezero.io/type': 'environment'
+        'system.cat-in-the-hat.io/type': 'home-mess'
     })
     .labels({
         thing1: 'thing2'
@@ -38,8 +32,13 @@ const pvc = new PersistentVolumeClaim()
     .spec('10Gi')
 console.log(pvc.json())
 
+const csr = new CSR('bob-eng-csr')
+    .spec('29387fasiudaiugw9er80asidf')
+
+console.log(csr.json())
+
 const secret = new Secret('cluster-certificate-tls')
-    .namespace('istio-system')
+    .namespace('mess-system')
     .type('kubernetes.io/tls')
     .data({
         'tls.crt': 'tls.crt',
@@ -47,6 +46,12 @@ const secret = new Secret('cluster-certificate-tls')
     })
 console.log(secret.json())
 
+Template.defaultAnnotations = {
+    'system.cat-in-the-hat.io/id': 'cat-in-the-hat.io',
+}
+Template.labels({
+    'system.cat-in-the-hat.io/version': '1.2.3'
+})
 const secret2 = new Secret('cat-in-the-hat')
     .namespace('mess-system')
     .data({
@@ -60,8 +65,3 @@ const secret2 = new Secret('cat-in-the-hat')
         'observe2': 2
     })
 console.log(secret2.json())
-
-const csr = new CSR('bob-eng-csr')
-    .spec('29387fasiudaiugw9er80asidf')
-
-console.log(csr.json())
