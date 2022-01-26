@@ -8,8 +8,8 @@ class Template {
             apiVersion: `certificates.k8s.io/${apiVersion}`,
             kind: kind,
             metadata: {
-                labels: { ...Template.defaultLabels },
-                annotations: { ...Template.defaultAnnotations },
+                labels: Template.defaultLabels,
+                annotations: Template.defaultAnnotations,
                 ...metadata,
                 name,
             },
