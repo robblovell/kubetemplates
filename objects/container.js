@@ -1,14 +1,16 @@
-class Container {
-    template = undefined
+const { Template } = require('../template')
+
+class Container extends Template {
 
     constructor(image, name = undefined, imagePullPolicy = undefined) {
+        super()
         this.template = {
             image,
             name: name ? // if this is a deployment, use the deployment name.
                 name.template ? (name.template.metadata.name) : name :
                 // if name doesn't exist, use the image name.
                 image,
-            imagePullPolicy: imagePullPolicy || 'always',
+            imagePullPolicy: imagePullPolicy || 'never',
         }
         return this
     }
@@ -50,6 +52,7 @@ class Container {
             ...this.template,
             ports: [...this.template.ports, ...ports]
         }
+        return this
     }
 }
 

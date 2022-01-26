@@ -33,10 +33,10 @@ Results in:
 You can set global defaults for annotations and labels by using the static functions `defaultAnnotaions` and `defaultLabels`.
 For example:
 ```javascript
-Template.defaultAnnotations = {
+Resource.defaultAnnotations = {
     'system.cat-in-the-hat.io/id': 'cat-in-the-hat.io',
 }
-Template.labels({
+Resource.labels({
     'system.cat-in-the-hat.io/version': '1.2.3'
 })
 const secret = new Secret('cat-in-the-hat')

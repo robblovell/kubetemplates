@@ -1,6 +1,6 @@
-const { Template } = require('./template')
+const { Resource } = require('./resource')
 
-class Secret extends Template {
+class Secret extends Resource {
     constructor(name) {
         super(name, 'Secret')
     }

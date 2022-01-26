@@ -4,12 +4,32 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "c8 ava"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "vorpal": "^1.12.0"
+  "author": "robblovell@gmail.com",
+  "license": "MIT",
+  "devDependencies": {
+    "ava": "^4.0.1",
+    "c8": "^7.11.0",
+    "testdouble": "^3.16.4"
+  },
+  "repository": "git@github.com:robblovell/kubetemplates.git",
+  "ava": {
+    "files": [
+      "**/*.unit.js",
+      "!node_modules"
+    ],
+    "concurrency": 10,
+    "failFast": true,
+    "failWithoutAssertions": false,
+    "environmentVariables": {
+      "MY_ENVIRONMENT_VARIABLE": "some value"
+    },
+    "verbose": true,
+    "nodeArguments": [
+      "--trace-deprecation",
+      "--napi-modules"
+    ]
   }
 }

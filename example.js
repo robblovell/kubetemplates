@@ -1,8 +1,8 @@
-const { Template } = require('./template')
+const { Resource } = require('./resource')
 const { Secret } = require('./secret')
 const { PersistentVolumeClaim } = require('./pvc')
 const { Deployment } = require('./deployment')
-const { Container } = require('./container')
+const { Container } = require('./objects/container')
 const { CSR } = require('./csr')
 
 const deployment = new Deployment('cat-in-the-hat-core')
@@ -46,10 +46,10 @@ const secret = new Secret('cluster-certificate-tls')
     })
 console.log(secret.json())
 
-Template.defaultAnnotations = {
+Resource.defaultAnnotations = {
     'system.cat-in-the-hat.io/id': 'cat-in-the-hat.io',
 }
-Template.labels({
+Resource.labels({
     'system.cat-in-the-hat.io/version': '1.2.3'
 })
 const secret2 = new Secret('cat-in-the-hat')

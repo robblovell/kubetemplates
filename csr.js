@@ -1,6 +1,6 @@
-const { Template } = require('./template')
+const { Resource } = require('./resource')
 
-class CSR extends Template {
+class CSR extends Resource {
     constructor(name) {
         super(name, 'CertificateSigningRequest')
     }

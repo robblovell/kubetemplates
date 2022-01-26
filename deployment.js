@@ -1,9 +1,10 @@
-const { Template } = require('./template')
-const { Container } = require('./container')
+const { Resource } = require('./resource')
+const { Container } = require('./objects/container')
 
-class Deployment extends Template {
-    constructor(name) {
+class Deployment extends Resource {
+    constructor(name, containers) {
         super(name, 'Deployment')
+        this.containers(containers)
     }
 
     // for securityContext, see: // See https://github.com/c6o/provisioners/issues/182
