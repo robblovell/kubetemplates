@@ -7,12 +7,20 @@ class Template {
 
     tidy() {
         // delete the spec, or any other value if it is undefined
-        Object.keys(this.template).forEach(key => {
-            if (this.template[key] === undefined) {
-                delete this.template[key];
+        this._tidy(this.template)
+        return this
+    }
+    _tidy(object) {
+        Object.keys(object).forEach(key => {
+            if (object[key] === undefined) {
+                delete object[key];
+            }
+            if (typeof object[key] === 'object' &&
+                !Array.isArray(object[key]) &&
+                object[key] !== null) {
+                this._tidy(object[key])
             }
         })
-        return this
     }
 
     json() {

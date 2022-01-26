@@ -14,8 +14,6 @@ test('Construct a Secret', t => {
             apiVersion: 'certificates.k8s.io/v1',
             kind: 'Secret',
             metadata: {
-                annotations: undefined,
-                labels: undefined,
                 name: 'name',
             },
         }

@@ -1,8 +1,8 @@
 const { Resource } = require('./resource')
 
-class ClusterRoleBinding extends Resource {
+class RoleBinding extends Resource {
     constructor(name, clusterRole, subjects) {
-        super(name, 'ClusterRoleBinding')
+        super(name, 'RoleBinding')
         this.binding(clusterRole, subjects)
         return this
     }
@@ -21,4 +21,4 @@ class ClusterRoleBinding extends Resource {
     }
 }
 
-module.exports = { ClusterRoleBinding }
+module.exports = { RoleBinding }

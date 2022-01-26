@@ -15,8 +15,6 @@ test('New PVC', t => {
             apiVersion: 'certificates.k8s.io/v1',
             kind: 'PersistentVolumeClaim',
             metadata: {
-                annotations: undefined,
-                labels: undefined,
                 name: 'name',
 
             }
@@ -31,8 +29,6 @@ test('PVC with spec', t => {
         apiVersion: 'certificates.k8s.io/v1',
         kind: 'PersistentVolumeClaim',
         metadata: {
-            annotations: undefined,
-            labels: undefined,
             name: 'name',
 
         },

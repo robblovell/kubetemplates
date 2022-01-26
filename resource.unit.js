@@ -15,8 +15,6 @@ test('Construct a Resource', t => {
             apiVersion: 'certificates.k8s.io/v1',
             kind: 'kind',
             metadata: {
-                annotations: undefined,
-                labels: undefined,
                 name: 'name',
             },
         }

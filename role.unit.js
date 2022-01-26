@@ -14,8 +14,6 @@ test('Construct a Role', t => {
             apiVersion: 'certificates.k8s.io/v1',
             kind: 'Role',
             metadata: {
-                annotations: undefined,
-                labels: undefined,
                 name: 'name',
             },
             rules: [],

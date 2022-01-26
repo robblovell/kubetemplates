@@ -14,8 +14,6 @@ test('Construct a Deployment', t => {
             apiVersion: 'certificates.k8s.io/v1',
             kind: 'Deployment',
             metadata: {
-                annotations: undefined,
-                labels: undefined,
                 name: 'name',
             },
         }
