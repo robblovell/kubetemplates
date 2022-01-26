@@ -1,5 +1,6 @@
 class Container {
     template = undefined
+
     constructor(image, name = undefined, imagePullPolicy = undefined) {
         this.template = {
             image,
@@ -11,6 +12,7 @@ class Container {
         }
         return this
     }
+
     image(image) {
         this.template = {
             ...this.template,
@@ -18,6 +20,7 @@ class Container {
         }
         return this
     }
+
     name(name) {
         this.template = {
             ...this.template,
@@ -25,6 +28,7 @@ class Container {
         }
         return this
     }
+
     imagePullPolicy(imagePullPolicy) {
         this.template = {
             ...this.template,
@@ -32,6 +36,7 @@ class Container {
         }
         return this
     }
+
     command(command) {
         this.template = {
             ...this.template,
@@ -39,6 +44,7 @@ class Container {
         }
         return this
     }
+
     ports(ports) { //
         this.contianer = {
             ...this.template,
@@ -46,4 +52,5 @@ class Container {
         }
     }
 }
+
 module.exports = { Container }

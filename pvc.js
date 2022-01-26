@@ -1,8 +1,8 @@
-const {Template} = require('./template')
+const { Template } = require('./template')
 
 class PersistentVolumeClaim extends Template {
     constructor(name) {
-        super(name,'PersistentVolumeClaim')
+        super(name, 'PersistentVolumeClaim')
     }
 
     spec(size, accessModes = ['ReadWriteOnce']) {

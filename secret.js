@@ -2,10 +2,10 @@ const { Template } = require('./template')
 
 class Secret extends Template {
     constructor(name) {
-        super(name,'Secret')
+        super(name, 'Secret')
     }
 
-    type(type= 'kubernetes.io/tls') {
+    type(type = 'kubernetes.io/tls') {
         this.template.type = {
             ...this.template.type,
             type
@@ -21,4 +21,5 @@ class Secret extends Template {
         return this
     }
 }
+
 module.exports = { Secret }

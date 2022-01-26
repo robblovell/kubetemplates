@@ -1,4 +1,4 @@
-const { Template} = require('./template')
+const { Template } = require('./template')
 const { Secret } = require('./secret')
 const { PersistentVolumeClaim } = require('./pvc')
 const { Deployment } = require('./deployment')
@@ -19,13 +19,7 @@ const deployment = new Deployment('sample-project-core')
     .labels({
         thing1: 'thing2'
     })
-    .spec({app: 'a-name'}, {})
-// .image()
-// .imagePullPolicy()
-// .command()
-// .securityContext()
-// .matchLabels()
-// .templateLabels()
+    .spec({ app: 'a-name' }, {})
 
 const container = new Container('c6oio/sample-project:21345', deployment)
 deployment.containers([container])

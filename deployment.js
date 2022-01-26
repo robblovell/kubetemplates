@@ -5,8 +5,9 @@ class Deployment extends Template {
     constructor(name) {
         super(name, 'Deployment')
     }
+
     // for securityContext, see: // See https://github.com/c6o/provisioners/issues/182
-    spec(matchLabels = {}, labels = {}, containers = [], securityContext = { fsGroup: 1000 })  {
+    spec(matchLabels = {}, labels = {}, containers = [], securityContext = { fsGroup: 1000 }) {
         this.template.spec = {
             ...this.template.spec,
             ...{
