@@ -2,7 +2,7 @@ const { Resource } = require('./resource')
 
 class ClusterRoleBinding extends Resource {
     constructor(name, clusterRole, subjects) {
-        super(name, 'ClusterRoleBinding')
+        super(name, 'ClusterRoleBinding', 'rbac.authorization.k8s.io/v1')
         this.binding(clusterRole, subjects)
         return this
     }
