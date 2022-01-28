@@ -1,5 +1,4 @@
 const { Resource } = require('./resource')
-const { Container } = require('./objects/container')
 
 class Deployment extends Resource {
     constructor(name, containers) {
@@ -44,4 +43,4 @@ class Deployment extends Resource {
     }
 }
 
-module.exports = { Container, Deployment }
+module.exports = { Deployment }
