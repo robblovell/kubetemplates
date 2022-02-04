@@ -4,9 +4,9 @@ class Resource extends Template {
     static defaultAnnotations = undefined
     static defaultLabels = undefined
 
-    constructor(name = undefined, kind = undefined, apiVersion = "certificates.k8s.io/v1", metadata = undefined, spec = undefined) {
+    constructor(name = undefined, kind = undefined, apiVersion = "v1", metadata = undefined, spec = undefined) {
         super()
-        if (!name) throw new Error('A name must be defined.')
+        // if (!name) throw new Error('A name must be defined.')
         if (!kind) throw new Error('A kind must be defined.')
         this.template = {
             apiVersion: apiVersion,
@@ -70,6 +70,18 @@ class Resource extends Template {
             ...this.template.metadata.annotations,
             ...annotations
         }
+        return this
+    }
+
+    static from(resource) {
+        // add resource api and kind
+        resource.kind = this.kind
+        resource.apiVersion = this.apiVersion
+        return resource
+    }
+
+    from(resource) {
+        this.template = resource || new Resource(null, this.template.kind)
         return this
     }
 

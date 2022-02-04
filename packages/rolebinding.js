@@ -1,8 +1,11 @@
 const { Resource } = require('./resource')
 
 class RoleBinding extends Resource {
-    constructor(name, roleReference, subjects) {
-        super(name, 'RoleBinding', 'rbac.authorization.k8s.io/v1')
+    static kind = 'RoleBinding'
+    static apiVersion = 'rbac.authorization.k8s.io/v1'
+
+    constructor(name, roleReference= {}, subjects= []) {
+        super(name, RoleBinding.kind, RoleBinding.apiVersion)
         this.binding(roleReference, subjects)
         return this
     }

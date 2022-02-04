@@ -1,8 +1,11 @@
 const { Resource } = require('./resource')
 
 class Secret extends Resource {
+    static kind = 'PersistentVolumeClaim'
+    static apiVersion = 'v1'
+
     constructor(name) {
-        super(name, 'Secret')
+        super(name, Secret.kind, Secret.apiVersion)
     }
 
     type(type = 'kubernetes.io/tls') {

@@ -1,9 +1,12 @@
 const { Resource } = require('./resource')
 
 class ClusterRoleBinding extends Resource {
+    static kind = 'ClusterRoleBinding'
+    static apiVersion = 'rbac.authorization.k8s.io/v1'
     constructor(name, clusterRole, subjects) {
-        super(name, 'ClusterRoleBinding', 'rbac.authorization.k8s.io/v1')
-        this.binding(clusterRole, subjects)
+        super(name, ClusterRoleBinding.kind, ClusterRoleBinding.apiVersion)
+        if (clusterRole && subjects)
+            this.binding(clusterRole, subjects)
         return this
     }
 

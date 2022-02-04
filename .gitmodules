@@ -1,0 +1,3 @@
+[submodule "kubeclient"]
+	path = kubeclient
+	url = git@github.com:c6o/kubeclient.git

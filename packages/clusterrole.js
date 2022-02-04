@@ -1,8 +1,10 @@
 const { Resource } = require('./resource')
 
 class ClusterRole extends Resource {
+    static kind = 'ClusterRole'
+    static apiVersion = 'rbac.authorization.k8s.io/v1'
     constructor(name, rules = []) {
-        super(name, 'ClusterRole', 'rbac.authorization.k8s.io/v1')
+        super(name, ClusterRole.kind, ClusterRole.apiVersion)
         this.rules(rules)
         return this
     }

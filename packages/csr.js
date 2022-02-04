@@ -1,9 +1,11 @@
 const { Resource } = require('./resource')
 
 class CSR extends Resource {
+    static kind = 'CertificateSigningRequest'
+    static apiVersion = 'certificates.k8s.io/v1'
+
     constructor(name) {
-        super(name, 'CertificateSigningRequest', 'certificates.k8s.io/v1')
-        this.template
+        super(name, CSR.kind, CSR.apiVersion)
     }
 
     apiserverClientSpec(request) {

@@ -1,8 +1,11 @@
 const { Resource } = require('./resource')
 
 class PersistentVolumeClaim extends Resource {
+    static kind = 'PersistentVolumeClaim'
+    static apiVersion = 'v1'
+
     constructor(name) {
-        super(name, 'PersistentVolumeClaim')
+        super(name, PersistentVolumeClaim.kind, PersistentVolumeClaim.apiVersion)
     }
 
     spec(size, accessModes = ['ReadWriteOnce']) {
