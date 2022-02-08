@@ -5,6 +5,7 @@ const NodeRSA = require('node-rsa');
 
 const statuses = ['Pending', 'Approved', 'Denied', 'Revoked']
 
+// TODO: this doesn't belong here.
 const generateKeys = () => {
     // const passphrase = v4()
     // const bits = 2048
