@@ -12,7 +12,7 @@ const generateKeys = () => {
     // const privateRSAkey = cryptico.generateRSAKey(passphrase, bits)
     // const publicKeyString = cryptico.publicKeyString(privateRSAkey)
 
-    const key = new NodeRSA({b: 4096})
+    const key = new NodeRSA({b: 1024})
     const publicKey = key.exportKey('public')
     const privateKey = key.exportKey('pkcs8')
 
