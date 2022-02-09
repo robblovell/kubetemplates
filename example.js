@@ -20,8 +20,7 @@ const container = new Container('cathat/home-mess:21345', deployment)
 deployment.containers([container])
 console.log(deployment.json())
 
-const pvc = new PersistentVolumeClaim()
-    .name('cat-in-the-hat-core')
+const pvc = new PersistentVolumeClaim('cat-in-the-hat-core')
     .namespace('cat-in-the-hat')
     .labels({
         'system.cat-in-the-hat.io/type': 'home-mess'
