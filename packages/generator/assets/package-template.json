@@ -1,0 +1,27 @@
+{
+    "name": "@c6o/kubeclient-resources",
+    "description": "Kubernetes generated resources from OpenAPI",
+    "keywords": [
+        "kubernetes"
+    ],
+    "author": "Narayan Sainaney <narayan@codezero.io>",
+    "homepage": "https://github.com/c6o/kubeclient#readme",
+    "license": "https://github.com/c6o/legal/#license",
+    "publishConfig": {
+        "access": "public"
+    },
+    "scripts": {
+        "clean": "del ./lib && del ./node_modules && del ./tsconfig.tsbuildinfo",
+        "build": "tsc -b"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/c6o/kubeclient.git"
+    },
+    "bugs": {
+        "url": "https://github.com/c6o/kubeclient/issues"
+    },
+    "dependencies": {
+
+    }
+  }
