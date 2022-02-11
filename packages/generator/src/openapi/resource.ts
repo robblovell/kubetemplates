@@ -7,7 +7,6 @@ import { addHelperMethod } from './resourceMethods'
 export const addResource = (params) => {
     const {proj, name, path, def, api, file, fileImports} = params
 
-
     if (name in scalarTypes || name in elidedTypes || name in basicTypes || name in emptyTypes) {
         console.log("name (S): ", name)
     } else {

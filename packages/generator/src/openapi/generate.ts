@@ -19,7 +19,8 @@ import { definitions } from './definitions'
 // console.log(smallSet)
 
 export const generate = (proj: Project, api: API) => {
-  const imports: Map<string, Imports> = new Map()
+  const imports1: Map<string, Imports> = new Map()
+  const imports2: Map<string, Imports> = new Map()
 
   for (const { name, path, def } of definitions(api)) {
     //console.log(`Processing ${path} ${name}`)
@@ -28,28 +29,30 @@ export const generate = (proj: Project, api: API) => {
       continue
     }
     const file1 = ensureFile(proj, filePath(path))
-    let fileImports1 = imports.get(file1.getFilePath())
+    let fileImports1 = imports1.get(file1.getFilePath())
 
     if (fileImports1 == null) {
       fileImports1 = new Imports(file1)
-      imports.set(file1.getFilePath(), fileImports1)
+      imports1.set(file1.getFilePath(), fileImports1)
     }
     addInterface({proj, name, path, def, api, file: file1, fileImports: fileImports1})
 
     const file2 = ensureFile(proj, filePath(path+'-helper'))
-    let fileImports2 = imports.get(file2.getFilePath())
+    let fileImports2 = imports2.get(file2.getFilePath())
     if (fileImports2 == null) {
       fileImports2 = new Imports(file2)
-      imports.set(file2.getFilePath(), fileImports2)
+      imports2.set(file2.getFilePath(), fileImports2)
     }
     if (name in basicTypes || name in emptyTypes) continue
     // if (!(smallSet.find(n => n == name))) continue
-
     addResource({proj, name, path, def, api, file: file2, fileImports: fileImports2})
   }
 
-  for (const fileImports of imports.values()) {
-    fileImports.apply(['Resource', 'ResourceTemplate'])
+  for (const fileImports of imports1.values()) {
+    fileImports.apply(['Resource'])
+  }
+  for (const fileImports of imports2.values()) {
+    fileImports.apply(['ResourceTemplate'])
   }
 }
 
