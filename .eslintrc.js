@@ -23,5 +23,10 @@ module.exports = {
         "@typescript-eslint/no-use-before-define": "off",
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/no-empty-interface": "off",
+        "no-unused-vars": "off",
+        "no-unused-class": "off",
+        "no-unused-method": "off",
+        "no-unused-private-class-members": "off",
+        "no-unused-class-members": "off",
     },
   }

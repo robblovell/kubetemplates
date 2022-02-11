@@ -47,6 +47,12 @@ class User extends Resource {
             this.template.spec.revisions.push(revision)
         }
     }
+    array(array) {
+        if (!Array.isArray(array)) { array = [array] }
+        if (!this.template.array) this.template.array = array
+        this.template.array = [...this.template.array, ...array]
+        return this
+    }
 
     status(status) {
         if (!statuses.some(s => status === s))

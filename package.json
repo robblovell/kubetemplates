@@ -14,6 +14,11 @@
     "c8": "^7.11.0",
     "testdouble": "^3.16.4"
   },
+  "dependencies": {
+    "@c6o/kubeclient-resources": "^0.0.13",
+    "c8": "^7.11.0",
+    "testdouble": "^3.16.4"
+  },
   "repository": "git@github.com:robblovell/kubetemplates.git",
   "ava": {
     "files": [
