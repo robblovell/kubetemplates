@@ -65,7 +65,7 @@ const getType = (property, propertyType) => {
         type = `${propertyType}`
         fun = 'setArrayByType'
     } else {
-        type = `${propertyType}Helper` //Helper`
+        type = `${propertyType}` //Helper`
     }
     return { type, fun }
     // if (propertyType in scalarTypes)
