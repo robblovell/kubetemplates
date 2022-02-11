@@ -1,69 +1,89 @@
-const { Template } = require('./template')
+import { Template } from './template'
 
 export const ResourceTemplate = class extends Template {
-    __apiVersion
-    __kind
-    __name
-    __namespace
+    static defaultAnnotations = undefined
+    static defaultLabels = undefined
 
-    constructor(name = undefined, namespace = undefined) {
+    constructor(name = undefined, kind = undefined, apiVersion = "v1", metadata = undefined, spec = undefined) {
         super()
-        this.name = name
-        this.namespace = namespace
+        // if (!name) throw new Error('A name must be defined.')
+        if (!kind) throw new Error('A kind must be defined.')
+        this.template = {
+            apiVersion: apiVersion,
+            kind: kind,
+            metadata: {
+                labels: ResourceTemplate.defaultLabels,
+                annotations: ResourceTemplate.defaultAnnotations,
+                ...metadata,
+                name,
+            },
+            spec: spec,
+        }
+        // if (Resource.defaultLabels) this.template.metadata.labels = Resource.defaultLabels
+        // if (Resource.defaultAnnotations) this.template.metadata.annotations = Resource.defaultAnnotations
+        this.tidy()
+        return this
     }
 
-    get kind(): string {
-        return this.__kind
-    }
-    set kind(x: string) {
-        this.__kind = this.setPropertyByType(this.kind, x, 'string')
-    }
-    setKind(x: string) {
-        this.kind = x; return this
+    name(name) {
+        this.template.metadata = {
+            ...this.template.metadata,
+            name
+        }
+        return this
     }
 
-    get apiVersion(): string {
-        return this.__apiVersion
+    namespace(namespace) {
+        this.template.metadata = {
+            ...this.template.metadata,
+            namespace
     }
-    set apiVersion(x: string) {
-        this.__apiVersion = this.setPropertyByType(this.apiVersion, x, 'string')
+        return this
     }
-    setApiVersion(x: string) {
-        this.apiVersion = x; return this
+
+    static labels(defaultLabels) {
+        this.defaultLabels = {
+            ...this.defaultLabels,
+            ...defaultLabels
+        }
+    }
+
+    labels(labels) {
+        this.template.metadata.labels = {
+            ...ResourceTemplate.defaultLabels,
+            ...this.template.metadata.labels,
+            ...labels
+    }
+        return this
     }
     
-    get name(): string {
-        return this.__name
+    static annotations(defaultAnnotations) {
+        this.defaultAnnotations = {
+            ...this.defaultAnnotations,
+            ...defaultAnnotations
     }
-    set name(x: string) {
-        this.__name = this.setPropertyByType(this.name, x, 'string')
-    }
-    setName(x: string) {
-        this.name = x; return this
     }
 
-    get namespace(): string {
-        return this.__namespace
+    annotations(annotations) {
+        this.template.metadata.annotations = {
+            ...ResourceTemplate.defaultAnnotations,
+            ...this.template.metadata.annotations,
+            ...annotations
     }
-    set namespace(x: string) {
-        this.__namespace = this.setPropertyByType(this.namespace, x, 'string')
-    }
-    setNamespace(x: string) {
-        this.namespace = x; return this
-    }
-
-    static from(resource) {
-        // add resource api and kind
-        resource.kind = this.kind
-        resource.apiVersion = this.apiVersion
-        // TODO: call from on the child? or call this class from the child...
-        return resource
+        return this
     }
 
-    // TODO: Instance from resource.
-    // from(resource) {
-    //     this = resource || new ResourceTemplate(null, )
-    //     return this
+    // static from(resource) {
+    //     // add resource api and kind
+    //     resource.kind = this.kind
+    //     resource.apiVersion = this.apiVersion
+    //     // TODO: call from on the child? or call this class from the child...
+    //     return resource
     // }
+
+    from(resource) {
+        this.template = resource || new ResourceTemplate(null, this.template.kind)
+        return this
+    }
 
 }
