@@ -3,7 +3,7 @@ import { Project, SourceFile } from 'ts-morph'
 export class Imports {
   private imports: Map<SourceFile, Set<string>> = new Map()
 
-  constructor(private file: SourceFile) { }
+  constructor(private file: SourceFile, public root: string) { }
 
   public add(from: SourceFile, name: string): this {
     if (from === this.file) {
@@ -20,9 +20,9 @@ export class Imports {
     return this
   }
 
-  public apply(namedImports) {
+  public apply(namedImports, moduleSpecifier) {
     this.file.addImportDeclaration({
-      moduleSpecifier: '@c6o/kubeclient-contracts',
+      moduleSpecifier,
       namedImports,
     })
 

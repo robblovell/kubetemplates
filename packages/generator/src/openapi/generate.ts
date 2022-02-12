@@ -22,7 +22,7 @@ export const generate = (proj: Project, api: API) => {
   const imports1: Map<string, Imports> = new Map()
   const imports2: Map<string, Imports> = new Map()
 
-  for (const { name, path, def } of definitions(api)) {
+  for (const { name, path, root, def } of definitions(api)) {
     //console.log(`Processing ${path} ${name}`)
     //console.log(`Processing ${path} ${name}`)
     if (name in elidedTypes) {
@@ -32,7 +32,7 @@ export const generate = (proj: Project, api: API) => {
     let fileImports1 = imports1.get(file1.getFilePath())
 
     if (fileImports1 == null) {
-      fileImports1 = new Imports(file1)
+      fileImports1 = new Imports(file1, root)
       imports1.set(file1.getFilePath(), fileImports1)
     }
     addInterface({proj, name, path, def, api, file: file1, fileImports: fileImports1})
@@ -40,7 +40,7 @@ export const generate = (proj: Project, api: API) => {
     const file2 = ensureFile(proj, filePath(path+'-helper'))
     let fileImports2 = imports2.get(file2.getFilePath())
     if (fileImports2 == null) {
-      fileImports2 = new Imports(file2)
+      fileImports2 = new Imports(file2, root)
       imports2.set(file2.getFilePath(), fileImports2)
     }
     if (name in basicTypes || name in emptyTypes) continue
@@ -49,10 +49,13 @@ export const generate = (proj: Project, api: API) => {
   }
 
   for (const fileImports of imports1.values()) {
-    fileImports.apply(['Resource'])
+    fileImports.apply(['Resource'], '@c6o/kubeclient-contracts')
   }
   for (const fileImports of imports2.values()) {
-    fileImports.apply(['ResourceTemplate'])
+    if (fileImports.root == './')
+      fileImports.apply(['ResourceTemplate'], './resourceTemplate')
+    else
+      fileImports.apply(['ResourceTemplate'], '../resourceTemplate')
   }
 }
 

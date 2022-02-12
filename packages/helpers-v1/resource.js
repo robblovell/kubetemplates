@@ -19,8 +19,8 @@ class Resource extends Template {
             },
             spec: spec,
         }
-        // if (Resource.defaultLabels) this.template.metadata.labels = Resource.defaultLabels
-        // if (Resource.defaultAnnotations) this.template.metadata.annotations = Resource.defaultAnnotations
+        // if (Resource.defaultLabels) this._template.metadata.labels = Resource.defaultLabels
+        // if (Resource.defaultAnnotations) this._template.metadata.annotations = Resource.defaultAnnotations
         this.tidy()
         return this
     }

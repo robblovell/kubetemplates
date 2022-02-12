@@ -115,7 +115,7 @@ Results in:
         "app": "a-name"
       }
     },
-    "template": {
+    "_template": {
       "metadata": {},
       "spec": {
         "containers": [

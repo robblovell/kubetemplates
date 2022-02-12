@@ -1,0 +1,1 @@
+import { ResourceTemplate } from "../resourceTemplate";

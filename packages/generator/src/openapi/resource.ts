@@ -27,7 +27,9 @@ export const addResource = (params) => {
                 const property = def.properties[propertyName]
                 if (propertyName == 'kind' || propertyName == 'apiVersion')
                     continue
-                addHelperMethod(classObject, name, propertyName, property, prop.find((p => p.name == propertyName)))
+                if (propertyName == 'name' || propertyName == 'namespace')
+                    continue
+                addHelperMethod(classObject, helperName, propertyName, property, prop.find((p => p.name == propertyName)))
             }
         }
         const ctor = classObject.addConstructor({
@@ -35,8 +37,8 @@ export const addResource = (params) => {
             parameters: [{name: 'name'}, {name: 'namespace'}]
         })
         ctor.setBodyText(`super(name, namespace)
-this.kind = ${helperName}.kind
-this.apiVersion = ${helperName}.apiVersion`)
+this._template.kind = ${helperName}.kind
+this._template.apiVersion = ${helperName}.apiVersion`)
 
         classObject.setExtends('ResourceTemplate')
         // if (name === 'RuleWithOperations') //JSONSchemaProps

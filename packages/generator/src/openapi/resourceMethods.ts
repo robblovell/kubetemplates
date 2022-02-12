@@ -1,4 +1,4 @@
-import { basicTypes, elidedTypes, emptyTypes, scalarTypes } from './types'
+import { basicTypes, elidedTypes, emptyTypes, scalarTypes, simpleTypes } from './types'
 import { ClassDeclaration } from 'ts-morph'
 
 /**
@@ -115,7 +115,7 @@ const getType = (property, propertyType) => {
 
 /**
  *
- * @param templateFile
+ * @param classObject
  * @param templateName
  * @param propertyName
  * @param property
@@ -139,15 +139,14 @@ export const addHelperMethod = (classObject, templateName, propertyName, propert
         returnType: `${templateName}`,
         description: property.description,
     })
-    if (property.type in scalarTypes || property.type in elidedTypes ||
-        property.type in basicTypes || property.type in emptyTypes) {
-        method.setBodyText(simpleAssignment(propertyName))
-    } else if(property.additionalProperties?.type == 'string') {
+    if(prop.type == '{[name: string]: string}') {
         method.setBodyText(keymapAssignment(propertyName))
-    } else if (property.type == 'object' || property.type == undefined) {
-        method.setBodyText(objectAssignment(propertyName))
     } else if (property.type == 'array') {
         method.setBodyText(arrayAssignment(propertyName))
+    } else if (simpleTypes.some(p=>p==prop.type)) {
+        method.setBodyText(simpleAssignment(propertyName))
+    } else if (property.type == 'object' || property.type == undefined) {
+        method.setBodyText(objectAssignment(propertyName))
     } else {
         //console.log(property.type)
     }

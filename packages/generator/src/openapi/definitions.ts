@@ -3,6 +3,7 @@ import { API, Definition } from './index'
 interface ResolvedDefinition {
     name: string
     path: string
+    root: string
     def: Definition
 }
 
@@ -36,7 +37,7 @@ const simplifyDefName = (name: string): string | undefined => {
     return undefined
 }
 
-export function parseDefName(name: string): { name: string; path: string } | undefined {
+export function parseDefName(name: string): { name: string; path: string; root: string } | undefined {
     const simplifiedName = simplifyDefName(name)
     if (simplifiedName == null) {
         return undefined
@@ -46,6 +47,8 @@ export function parseDefName(name: string): { name: string; path: string } | und
     const parts = name.split('.')
     name = parts[parts.length - 1]
     const path = parts.slice(0, -1).join('/')
-
-    return { name, path }
+    const root = parts.length > 2 ?
+        parts.slice(0, -2).join('/') :
+        `./`
+    return { name, path, root }
 }
