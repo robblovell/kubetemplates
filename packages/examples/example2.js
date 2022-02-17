@@ -7,15 +7,19 @@ const { ContainerHelper } = require('../resources/lib/core/v1-helper')
 // const { CSR } = require('./packages/csr')
 
 const deployment = new DeploymentHelper('cat-in-the-hat-core')
-    .namespace('cat-in-the-hat')
-    // .labels({
-    //     'system.cat-in-the-hat/type': 'home-mess'
-    // })
-    // .labels({
-    //     thing1: 'mess1',
-    //     thing2: 'mess2'
-    // })
-    .spec({ app: 'a-name' }, {})
+    .$namespace('cat-in-the-hat2')
+    .$spec({ app: 'a-name' }, {})
+    .$labels({
+        'system.cat-in-the-hat/type': 'home-mess'
+    })
+    .$annotations({
+        annotation1: 'annotate this'
+    })
+deployment.labels = {
+        thing1: 'mess1',
+        thing2: 'mess2'
+    }
+// deployment.spec({ app: 'a-name' }, {})
 
 // const container = new ContainerHelper('cathat/home-mess:21345', deployment)
 // deployment.containers([container])

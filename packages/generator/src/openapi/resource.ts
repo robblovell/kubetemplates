@@ -40,11 +40,13 @@ export const addResource = (params) => {
         classObject.setExtends('ResourceTemplate')
 
         // Static members for kind and apiVersion. These are fixed for a resource.
-        classObject.addMember({ isStatic: true,
-            name: "kind", initializer: `'${name}'`, kind: StructureKind.Property})
-        classObject.addMember({ isStatic: true,
-            name: "apiVersion", initializer: `'${path}'`, kind: StructureKind.Property
+        let variable = classObject.addMember({ isStatic: true,
+            name: "kind", kind: StructureKind.Property})
+        variable.setInitializer(`'${name}'`)
+        variable = classObject.addMember({ isStatic: true,
+            name: "apiVersion", kind: StructureKind.Property
         })
+        variable.setInitializer(`'${path}'`)
 
         // Add the constructor for the Resource class.
         const ctor = classObject.addConstructor({
@@ -81,7 +83,7 @@ export const addResource = (params) => {
             // Don't add setters for name and namespace
             if (propertyName == 'name' || propertyName == 'namespace')
                 continue
-            addHelperMethod(classObject, interfaceObject, helperName, propertyName, property, prop.find((p => p.name == propertyName)))
+            addHelperMethod(classObject, interfaceObject, helperName, propertyName, property, prop.find((p => p.name == propertyName)), proj, api, fileImports)
         }
     }
 }

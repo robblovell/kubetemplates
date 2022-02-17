@@ -22,6 +22,7 @@
     "url": "https://github.com/c6o/kubeclient/issues"
   },
   "dependencies": {
+    "jsonpath": "^1.1.1",
     "@c6o/kubeclient-contracts": "^0.0.13"
   },
   "version": "0.0.13"

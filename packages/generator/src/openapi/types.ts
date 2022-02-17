@@ -19,12 +19,15 @@ export const simpleTypes = [
 ]
 export const elidedTypes: { [name: string]: string } = {
     IntOrString: 'number | string',
+    'number | string': 'number | string',
 }
-export const scalarTypes: { [name: string]: string } = {
+export const scalarTypes = {
     Quantity: 'string',
     Time: 'string',
     MicroTime: 'string',
-
+    'JSONSchemaProps | JSONSchemaProps[]': 'JSONSchemaProps | JSONSchemaProps[]',
+    'JSONSchemaProps | boolean': 'JSONSchemaProps | boolean',
+    'JSONSchemaProps | string[]': 'JSONSchemaProps | string[]',
     JSONSchemaPropsOrArray: 'JSONSchemaProps | JSONSchemaProps[]',
     JSONSchemaPropsOrBool: 'JSONSchemaProps | boolean',
     JSONSchemaPropsOrStringArray: 'JSONSchemaProps | string[]',

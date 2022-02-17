@@ -43,7 +43,7 @@ export function kindType(
 
     return undefined
 }
-const addImport = (proj, api, imports, value) => {
+export const addImport = (proj, api, imports, value, trueType = undefined, truePath = 'helper') => {
     let t = ''
     if (!value.$ref)
         return
@@ -53,7 +53,11 @@ const addImport = (proj, api, imports, value) => {
     if (ref.name in elidedTypes) {
         t = elidedTypes[ref.name]
     } else {
-        imports.add(ensureFile(proj, filePath(ref.path)), ref.name)
+        if (trueType)
+            imports.add(ensureFile(proj, filePath(ref.path+`-${truePath}`)), trueType)
+        else
+            imports.add(ensureFile(proj, filePath(ref.path)), ref.name)
+
         t = ref.name
     }
     return t

@@ -36,6 +36,7 @@
   "dependencies": {
     "@c6o/kubeclient": "^0.0.13",
     "@c6o/kubeclient-contracts": "^0.0.13",
+    "jsonpath": "^1.1.1",
     "ts-morph": "^13.0.3"
   },
   "repository": "git@github.com:robblovell/kubetemplates.git",

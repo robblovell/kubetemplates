@@ -4,6 +4,7 @@ export { Template }
 
 export interface ResourceTemplate extends Resource {
     $name(x: string): ResourceTemplate
+    // namespace: string
     $namespace(x: string): ResourceTemplate
     $labels(x: {[name: string]: string}): ResourceTemplate
     $annotations(x: {[name: string]: string}): ResourceTemplate
@@ -44,7 +45,7 @@ export const ResourceTemplate = class extends Template implements ResourceTempla
     // _kind: string
     // get kind() { return this._kind }
     // // set kind(x: string) { this._kind = x }
-
+    //
     // _apiVersion: string // 'v1' if not specified
     // get apiVersion() { return this._apiVersion }
     // // set apiVersion(x: string) { this._apiVersion = x }

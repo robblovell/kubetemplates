@@ -11,6 +11,7 @@ export const generate = (proj: Project, api: API) => {
   const imports2: Map<string, Imports> = new Map()
 
   const defs = definitions(api)
+  // let i = 0
   for (const { name, path, root, def } of definitions(api)) {
     //console.log(`Processing ${path} ${name}`)
     //console.log(`Processing ${path} ${name}`)
@@ -35,6 +36,8 @@ export const generate = (proj: Project, api: API) => {
     if (name in basicTypes || name in emptyTypes) continue
     // if (!(smallSet.find(n => n == name))) continue
     addResource({proj, name, path, def, api, file: file2, fileImports: fileImports2})
+    // if (i++ > 50)
+    //   break
   }
 
   for (const fileImports of imports1.values()) {

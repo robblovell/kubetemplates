@@ -26,7 +26,7 @@ export class InfoHelper extends Template implements InfoHelper {
     set buildDate(x: string) {
         this._buildDate = x
     }
-    $BuildDate(x: string) {
+    $buildDate(x: string) {
         this.buildDate = x; return this
     }
 
@@ -37,7 +37,7 @@ export class InfoHelper extends Template implements InfoHelper {
     set compiler(x: string) {
         this._compiler = x
     }
-    $Compiler(x: string) {
+    $compiler(x: string) {
         this.compiler = x; return this
     }
 
@@ -48,7 +48,7 @@ export class InfoHelper extends Template implements InfoHelper {
     set gitCommit(x: string) {
         this._gitCommit = x
     }
-    $GitCommit(x: string) {
+    $gitCommit(x: string) {
         this.gitCommit = x; return this
     }
 
@@ -59,7 +59,7 @@ export class InfoHelper extends Template implements InfoHelper {
     set gitTreeState(x: string) {
         this._gitTreeState = x
     }
-    $GitTreeState(x: string) {
+    $gitTreeState(x: string) {
         this.gitTreeState = x; return this
     }
 
@@ -70,7 +70,7 @@ export class InfoHelper extends Template implements InfoHelper {
     set gitVersion(x: string) {
         this._gitVersion = x
     }
-    $GitVersion(x: string) {
+    $gitVersion(x: string) {
         this.gitVersion = x; return this
     }
 
@@ -81,7 +81,7 @@ export class InfoHelper extends Template implements InfoHelper {
     set goVersion(x: string) {
         this._goVersion = x
     }
-    $GoVersion(x: string) {
+    $goVersion(x: string) {
         this.goVersion = x; return this
     }
 
@@ -92,7 +92,7 @@ export class InfoHelper extends Template implements InfoHelper {
     set major(x: string) {
         this._major = x
     }
-    $Major(x: string) {
+    $major(x: string) {
         this.major = x; return this
     }
 
@@ -103,7 +103,7 @@ export class InfoHelper extends Template implements InfoHelper {
     set minor(x: string) {
         this._minor = x
     }
-    $Minor(x: string) {
+    $minor(x: string) {
         this.minor = x; return this
     }
 
@@ -114,7 +114,7 @@ export class InfoHelper extends Template implements InfoHelper {
     set platform(x: string) {
         this._platform = x
     }
-    $Platform(x: string) {
+    $platform(x: string) {
         this.platform = x; return this
     }
 }
