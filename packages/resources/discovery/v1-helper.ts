@@ -1,227 +1,332 @@
-import { ResourceTemplate } from "../resourceTemplate";
-import { Endpoint, EndpointConditions, EndpointHints, EndpointPort, EndpointSlice, ForZone } from "./v1";
+import { ResourceTemplate, Template } from "../resourceTemplate";
+import { Endpoint, EndpointConditions, EndpointHints, EndpointPort, EndpointSlice, EndpointSliceList, ForZone } from "./v1";
 import { ObjectReference } from "../core/v1";
 import { ListMeta, ObjectMeta } from "../meta/v1";
 
+export interface EndpointHelper extends Endpoint {
+    $addresses(x: any): any;
+    $conditions(x: any): any;
+    $deprecatedTopology(x: any): any;
+    $hints(x: any): any;
+    $hostname(x: any): any;
+    $nodeName(x: any): any;
+    $targetRef(x: any): any;
+    $zone(x: any): any;
+}
+
 /** Endpoint represents a single logical "backend" implementing a service. */
-export class EndpointHelper extends ResourceTemplate {
-    static kind = 'Endpoint';
-    static apiVersion = 'discovery/v1';
-
-    addresses(addresses: Array<string>): EndpointHelper {
-        if (!Array.isArray(addresses)) { addresses = [addresses] }
-        if (!this._template.addresses) this._template.addresses = addresses
-        this._template.addresses = [...this._template.addresses, ...addresses]
-        return this
+export class EndpointHelper extends Template implements EndpointHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    conditions(conditions: EndpointConditions): EndpointHelper {
-        if (!this._template.conditions) this._template.conditions = []
-        this._template.conditions = {
-            ...this._template.conditions,
-            ...conditions
-        }
-        return this
+    _addresses: any;
+    get addresses(): any /*Array<string>*/ {
+        return this._addresses
+    }
+    set addresses(x: any /*Array<string>*/) {
+        this._addresses = this.set(this.addresses, x)
+    }
+    setAddresses(x: any /*Array<string>*/) {
+        this.addresses = x; return this
     }
 
-    deprecatedTopology(deprecatedTopology: {[name: string]: string}): EndpointHelper {
-        if (!this._template.deprecatedTopology) this._template.deprecatedTopology = []
-        this._template.deprecatedTopology = {
-            ...this._template.deprecatedTopology,
-            ...deprecatedTopology
-        }
-        return this
+    _conditions: any;
+    get conditions(): any /*EndpointConditionsHelper*/ {
+        return this._conditions
+    }
+    set conditions(x: any /*EndpointConditionsHelper*/) {
+        this._conditions = x
+    }
+    setConditions(x: any /*EndpointConditionsHelper*/) {
+        this.conditions = x; return this
     }
 
-    hints(hints: EndpointHints): EndpointHelper {
-        if (!this._template.hints) this._template.hints = []
-        this._template.hints = {
-            ...this._template.hints,
-            ...hints
-        }
-        return this
+    _deprecatedTopology: any;
+    get deprecatedTopology(): any /*any*/ {
+        return this._deprecatedTopology
+    }
+    set deprecatedTopology(x: any /*any*/) {
+        this._deprecatedTopology = this.set(this.deprecatedTopology, x)
+    }
+    setDeprecatedTopology(x: any /*any*/) {
+        this.deprecatedTopology = x; return this
     }
 
-    hostname(hostname: string): EndpointHelper {
-        this._template.hostname = hostname
-        return this
+    _hints: any;
+    get hints(): any /*EndpointHintsHelper*/ {
+        return this._hints
+    }
+    set hints(x: any /*EndpointHintsHelper*/) {
+        this._hints = x
+    }
+    setHints(x: any /*EndpointHintsHelper*/) {
+        this.hints = x; return this
     }
 
-    nodeName(nodeName: string): EndpointHelper {
-        this._template.nodeName = nodeName
-        return this
+    _hostname: any;
+    get hostname(): any /*string*/ {
+        return this._hostname
+    }
+    set hostname(x: any /*string*/) {
+        this._hostname = x
+    }
+    setHostname(x: any /*string*/) {
+        this.hostname = x; return this
     }
 
-    targetRef(targetRef: ObjectReference): EndpointHelper {
-        if (!this._template.targetRef) this._template.targetRef = []
-        this._template.targetRef = {
-            ...this._template.targetRef,
-            ...targetRef
-        }
-        return this
+    _nodeName: any;
+    get nodeName(): any /*string*/ {
+        return this._nodeName
+    }
+    set nodeName(x: any /*string*/) {
+        this._nodeName = x
+    }
+    setNodeName(x: any /*string*/) {
+        this.nodeName = x; return this
     }
 
-    zone(zone: string): EndpointHelper {
-        this._template.zone = zone
-        return this
+    _targetRef: any;
+    get targetRef(): any /*ObjectReferenceHelper*/ {
+        return this._targetRef
+    }
+    set targetRef(x: any /*ObjectReferenceHelper*/) {
+        this._targetRef = x
+    }
+    setTargetRef(x: any /*ObjectReferenceHelper*/) {
+        this.targetRef = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = EndpointHelper.kind
-        this._template.apiVersion = EndpointHelper.apiVersion
+    _zone: any;
+    get zone(): any /*string*/ {
+        return this._zone
     }
+    set zone(x: any /*string*/) {
+        this._zone = x
+    }
+    setZone(x: any /*string*/) {
+        this.zone = x; return this
+    }
+}
+
+export interface EndpointConditionsHelper extends EndpointConditions {
+    $ready(x: any): any;
+    $serving(x: any): any;
+    $terminating(x: any): any;
 }
 
 /** EndpointConditions represents the current condition of an endpoint. */
-export class EndpointConditionsHelper extends ResourceTemplate {
-    static kind = 'EndpointConditions';
-    static apiVersion = 'discovery/v1';
-
-    ready(ready: boolean): EndpointConditionsHelper {
-        this._template.ready = ready
-        return this
+export class EndpointConditionsHelper extends Template implements EndpointConditionsHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    serving(serving: boolean): EndpointConditionsHelper {
-        this._template.serving = serving
-        return this
+    _ready: any;
+    get ready(): any /*boolean*/ {
+        return this._ready
+    }
+    set ready(x: any /*boolean*/) {
+        this._ready = x
+    }
+    setReady(x: any /*boolean*/) {
+        this.ready = x; return this
     }
 
-    terminating(terminating: boolean): EndpointConditionsHelper {
-        this._template.terminating = terminating
-        return this
+    _serving: any;
+    get serving(): any /*boolean*/ {
+        return this._serving
+    }
+    set serving(x: any /*boolean*/) {
+        this._serving = x
+    }
+    setServing(x: any /*boolean*/) {
+        this.serving = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = EndpointConditionsHelper.kind
-        this._template.apiVersion = EndpointConditionsHelper.apiVersion
+    _terminating: any;
+    get terminating(): any /*boolean*/ {
+        return this._terminating
     }
+    set terminating(x: any /*boolean*/) {
+        this._terminating = x
+    }
+    setTerminating(x: any /*boolean*/) {
+        this.terminating = x; return this
+    }
+}
+
+export interface EndpointHintsHelper extends EndpointHints {
+    $forZones(x: any): any;
 }
 
 /** EndpointHints provides hints describing how an endpoint should be consumed. */
-export class EndpointHintsHelper extends ResourceTemplate {
-    static kind = 'EndpointHints';
-    static apiVersion = 'discovery/v1';
-
-    forZones(forZones: Array<ForZone>): EndpointHintsHelper {
-        if (!Array.isArray(forZones)) { forZones = [forZones] }
-        if (!this._template.forZones) this._template.forZones = forZones
-        this._template.forZones = [...this._template.forZones, ...forZones]
-        return this
+export class EndpointHintsHelper extends Template implements EndpointHintsHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = EndpointHintsHelper.kind
-        this._template.apiVersion = EndpointHintsHelper.apiVersion
+    _forZones: any;
+    get forZones(): any /*Array<ForZone>*/ {
+        return this._forZones
     }
+    set forZones(x: any /*Array<ForZone>*/) {
+        this._forZones = this.set(this.forZones, x)
+    }
+    setForZones(x: any /*Array<ForZone>*/) {
+        this.forZones = x; return this
+    }
+}
+
+export interface EndpointPortHelper extends EndpointPort {
+    $appProtocol(x: any): any;
+    $port(x: any): any;
+    $protocol(x: any): any;
 }
 
 /** EndpointPort represents a Port used by an EndpointSlice */
-export class EndpointPortHelper extends ResourceTemplate {
-    static kind = 'EndpointPort';
-    static apiVersion = 'discovery/v1';
-
-    appProtocol(appProtocol: string): EndpointPortHelper {
-        this._template.appProtocol = appProtocol
-        return this
+export class EndpointPortHelper extends Template implements EndpointPortHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    port(port: number): EndpointPortHelper {
-        this._template.port = port
-        return this
+    _appProtocol: any;
+    get appProtocol(): any /*string*/ {
+        return this._appProtocol
+    }
+    set appProtocol(x: any /*string*/) {
+        this._appProtocol = x
+    }
+    setAppProtocol(x: any /*string*/) {
+        this.appProtocol = x; return this
     }
 
-    protocol(protocol: string): EndpointPortHelper {
-        this._template.protocol = protocol
-        return this
+    _port: any;
+    get port(): any /*number*/ {
+        return this._port
+    }
+    set port(x: any /*number*/) {
+        this._port = x
+    }
+    setPort(x: any /*number*/) {
+        this.port = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = EndpointPortHelper.kind
-        this._template.apiVersion = EndpointPortHelper.apiVersion
+    _protocol: any;
+    get protocol(): any /*string*/ {
+        return this._protocol
     }
+    set protocol(x: any /*string*/) {
+        this._protocol = x
+    }
+    setProtocol(x: any /*string*/) {
+        this.protocol = x; return this
+    }
+}
+
+export interface EndpointSliceHelper extends EndpointSlice {
+    $addressType(x: any): any;
+    $endpoints(x: any): any;
+    $metadata(x: any): any;
+    $ports(x: any): any;
 }
 
 /** EndpointSlice represents a subset of the endpoints that implement a service. For a given service there may be multiple EndpointSlice objects, selected by labels, which must be joined to produce the full set of endpoints. */
-export class EndpointSliceHelper extends ResourceTemplate {
+export class EndpointSliceHelper extends ResourceTemplate implements EndpointSliceHelper {
     static kind = 'EndpointSlice';
     static apiVersion = 'discovery/v1';
 
-    addressType(addressType: string): EndpointSliceHelper {
-        this._template.addressType = addressType
-        return this
+    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
+        super(nameOrObject, namespace, EndpointSliceHelper.kind, EndpointSliceHelper.apiVersion)
     }
 
-    endpoints(endpoints: Array<Endpoint>): EndpointSliceHelper {
-        if (!Array.isArray(endpoints)) { endpoints = [endpoints] }
-        if (!this._template.endpoints) this._template.endpoints = endpoints
-        this._template.endpoints = [...this._template.endpoints, ...endpoints]
-        return this
+    _addressType: any;
+    get addressType(): any /*string*/ {
+        return this._addressType
+    }
+    set addressType(x: any /*string*/) {
+        this._addressType = x
+    }
+    setAddressType(x: any /*string*/) {
+        this.addressType = x; return this
     }
 
-    metadata(metadata: ObjectMeta): EndpointSliceHelper {
-        if (!this._template.metadata) this._template.metadata = []
-        this._template.metadata = {
-            ...this._template.metadata,
-            ...metadata
-        }
-        return this
+    _endpoints: any;
+    get endpoints(): any /*Array<Endpoint>*/ {
+        return this._endpoints
+    }
+    set endpoints(x: any /*Array<Endpoint>*/) {
+        this._endpoints = this.set(this.endpoints, x)
+    }
+    setEndpoints(x: any /*Array<Endpoint>*/) {
+        this.endpoints = x; return this
     }
 
-    ports(ports: Array<EndpointPort>): EndpointSliceHelper {
-        if (!Array.isArray(ports)) { ports = [ports] }
-        if (!this._template.ports) this._template.ports = ports
-        this._template.ports = [...this._template.ports, ...ports]
-        return this
+    _metadata: any;
+    get metadata(): any /*ObjectMetaHelper*/ {
+        return this._metadata
+    }
+    set metadata(x: any /*ObjectMetaHelper*/) {
+        this._metadata = x
+    }
+    setMetadata(x: any /*ObjectMetaHelper*/) {
+        this.metadata = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = EndpointSliceHelper.kind
-        this._template.apiVersion = EndpointSliceHelper.apiVersion
+    _ports: any;
+    get ports(): any /*Array<EndpointPort>*/ {
+        return this._ports
     }
+    set ports(x: any /*Array<EndpointPort>*/) {
+        this._ports = this.set(this.ports, x)
+    }
+    setPorts(x: any /*Array<EndpointPort>*/) {
+        this.ports = x; return this
+    }
+}
+
+export interface EndpointSliceListHelper extends EndpointSliceList {
+    $items(x: any): any;
+    $metadata(x: any): any;
 }
 
 /** EndpointSliceList represents a list of endpoint slices */
-export class EndpointSliceListHelper extends ResourceTemplate {
+export class EndpointSliceListHelper extends ResourceTemplate implements EndpointSliceListHelper {
     static kind = 'EndpointSliceList';
     static apiVersion = 'discovery/v1';
 
-    items(items: Array<EndpointSlice>): EndpointSliceListHelper {
-        if (!Array.isArray(items)) { items = [items] }
-        if (!this._template.items) this._template.items = items
-        this._template.items = [...this._template.items, ...items]
-        return this
+    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
+        super(nameOrObject, namespace, EndpointSliceListHelper.kind, EndpointSliceListHelper.apiVersion)
     }
 
-    metadata(metadata: ListMeta): EndpointSliceListHelper {
-        if (!this._template.metadata) this._template.metadata = []
-        this._template.metadata = {
-            ...this._template.metadata,
-            ...metadata
-        }
-        return this
+    _items: any;
+    get items(): any /*Array<EndpointSlice>*/ {
+        return this._items
+    }
+    set items(x: any /*Array<EndpointSlice>*/) {
+        this._items = this.set(this.items, x)
+    }
+    setItems(x: any /*Array<EndpointSlice>*/) {
+        this.items = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = EndpointSliceListHelper.kind
-        this._template.apiVersion = EndpointSliceListHelper.apiVersion
+    _metadata: any;
+    get metadata(): any /*ListMetaHelper*/ {
+        return this._metadata
+    }
+    set metadata(x: any /*ListMetaHelper*/) {
+        this._metadata = x
+    }
+    setMetadata(x: any /*ListMetaHelper*/) {
+        this.metadata = x; return this
     }
 }
 
-/** ForZone provides information about which zones should consume this endpoint. */
-export class ForZoneHelper extends ResourceTemplate {
-    static kind = 'ForZone';
-    static apiVersion = 'discovery/v1';
+export interface ForZoneHelper extends ForZone {
+}
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = ForZoneHelper.kind
-        this._template.apiVersion = ForZoneHelper.apiVersion
+/** ForZone provides information about which zones should consume this endpoint. */
+export class ForZoneHelper extends Template implements ForZoneHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 }

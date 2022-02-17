@@ -1,14 +1,105 @@
-export const Template = class {
-    _template: any = {}
+const jp = require('jsonpath')
+type basic = string | number | boolean | undefined | null | unknown
+type map = { [name: string]: basic }
 
-    constructor() {
+// TODO: unit tests.
+export const Template = class {
+    constructor(obj: any = undefined) { this.fromObject(obj) }
+
+    set(to: any, from: any) {
+        if (!to) return from
+        if (Array.isArray(from)) { // to is array too.
+            for (const value of from) {
+                if (!to.includes(value)) {
+                    to.push(value)
+                }
+            }
+        } else if (Array.isArray(to)) {
+            to.push(from)
+        } else if (typeof from == 'object') { // to is object or map too.
+            const result = from
+            for (const key of Object.keys(to)) {
+                result[key] = to[key]
+            }
+            return result
+        } else // to is not an array, from is not object or array.
+            to = from
+        return to
+    }
+
+    setArray(to: any[], from: any[]) {
+        if (Array.isArray(from))
+            for (const value of from) {
+                if (!to.includes(value)) {
+                    to.push(value)
+                }
+            }
+        else
+            to.push(from)
+        return to
+    }
+    setObject(to: map | object, from: map | object ) {
+        if (!to) return from
+        const result = from
+        for (const key of Object.keys(to)) {
+            result[key] = to[key]
+        }
+        return result
+    }
+
+    string() {
+        return JSON.stringify(this, undefined, 2)
+            .replace(/_/g,'')
+    }
+    toJson() {
+        return this.string()
+    }
+
+    toTemplate(): any {
+        let obj = {}
+        for (const key of Object.keys(this)) {
+            const value = this[key]
+
+            const field = key.replace(/_/g,'')
+            if (Array.isArray(value)) {
+                obj[field] = value.map(v => v.toTemplate ? v.toTemplate() : v)
+            } else if (value instanceof Object) {
+                obj[field] = value.toTemplate ? value.toTemplate(): value
+            } else {
+                obj[field] = value
+            }
+        }
+        return obj
+    }
+
+    fromObject(obj): any {
+        if (!obj) return
+        for (const key of Object.keys(obj)) {
+            const value = obj[key]
+            const field = key.replace(/_/g,'')
+            this[field] = value
+            // TODO: is this needed??? Need unit tests for from.
+            // if (Array.isArray(value)) {
+            //     this[field] = value.map(v => v) //v.from ? v.from() : v)
+            // } else if (value instanceof Object) {
+            //     this[field] = value //.from ? value.from(): value
+            // } else {
+            //     this[field] = value
+            // }
+        }
+        return this
+    }
+
+    at(path) {
+        return jp.query(this, path)
     }
 
     tidy() {
         // delete the spec, or any other value if it is undefined
-        this._tidy(this._template)
+        this._tidy(this)
         return this
     }
+
     _tidy(object) {
         Object.keys(object).forEach(key => {
             if (object[key] === undefined) {
@@ -20,28 +111,6 @@ export const Template = class {
                 this._tidy(object[key])
             }
         })
+        return object
     }
-    toJson() {
-        return JSON.stringify(this._template, null, 2)
-    }
-    // toString() {
-    //     return JSON.stringify(this).replace(/__/g,'')
-    // }
-    // toTemplate(): any {
-    //     let obj = {}
-    //     for (const key of Object.keys(this)) {
-    //         const value = this[key]
-    //
-    //         const field = key.replace(/__/g,'')
-    //         if (Array.isArray(value)) {
-    //             obj[field] = value.map(v => v.toTemplate ? v.toTemplate() : v)
-    //         } else if (value instanceof Object) {
-    //             obj[field] = value.toTemplate ? value.toTemplate(): value
-    //         } else {
-    //             obj[field] = value
-    //         }
-    //     }
-    //     return obj
-    // }
-
 }

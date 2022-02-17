@@ -1,161 +1,268 @@
-import { ResourceTemplate } from "../resourceTemplate";
+import { ResourceTemplate, Template } from "../resourceTemplate";
+import { Event, EventList, EventSeries } from "./v1";
 import { ListMeta, MicroTime, ObjectMeta, Time } from "../meta/v1";
 import { EventSource, ObjectReference } from "../core/v1";
-import { Event, EventSeries } from "./v1";
+
+export interface EventHelper extends Event {
+    $action(x: any): any;
+    $deprecatedCount(x: any): any;
+    $deprecatedFirstTimestamp(x: any): any;
+    $deprecatedLastTimestamp(x: any): any;
+    $deprecatedSource(x: any): any;
+    $eventTime(x: any): any;
+    $metadata(x: any): any;
+    $note(x: any): any;
+    $reason(x: any): any;
+    $regarding(x: any): any;
+    $related(x: any): any;
+    $reportingController(x: any): any;
+    $reportingInstance(x: any): any;
+    $series(x: any): any;
+    $type(x: any): any;
+}
 
 /** Event is a report of an event somewhere in the cluster. It generally denotes some state change in the system. Events have a limited retention time and triggers and messages may evolve with time.  Event consumers should not rely on the timing of an event with a given Reason reflecting a consistent underlying trigger, or the continued existence of events with that Reason.  Events should be treated as informative, best-effort, supplemental data. */
-export class EventHelper extends ResourceTemplate {
+export class EventHelper extends ResourceTemplate implements EventHelper {
     static kind = 'Event';
     static apiVersion = 'events/v1';
 
-    action(action: string): EventHelper {
-        this._template.action = action
-        return this
+    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
+        super(nameOrObject, namespace, EventHelper.kind, EventHelper.apiVersion)
     }
 
-    deprecatedCount(deprecatedCount: number): EventHelper {
-        this._template.deprecatedCount = deprecatedCount
-        return this
+    _action: any;
+    get action(): any /*string*/ {
+        return this._action
+    }
+    set action(x: any /*string*/) {
+        this._action = x
+    }
+    setAction(x: any /*string*/) {
+        this.action = x; return this
     }
 
-    deprecatedFirstTimestamp(deprecatedFirstTimestamp: Time): EventHelper {
-        this._template.deprecatedFirstTimestamp = deprecatedFirstTimestamp
-        return this
+    _deprecatedCount: any;
+    get deprecatedCount(): any /*number*/ {
+        return this._deprecatedCount
+    }
+    set deprecatedCount(x: any /*number*/) {
+        this._deprecatedCount = x
+    }
+    setDeprecatedCount(x: any /*number*/) {
+        this.deprecatedCount = x; return this
     }
 
-    deprecatedLastTimestamp(deprecatedLastTimestamp: Time): EventHelper {
-        this._template.deprecatedLastTimestamp = deprecatedLastTimestamp
-        return this
+    _deprecatedFirstTimestamp: any;
+    get deprecatedFirstTimestamp(): any /*Time*/ {
+        return this._deprecatedFirstTimestamp
+    }
+    set deprecatedFirstTimestamp(x: any /*Time*/) {
+        this._deprecatedFirstTimestamp = x
+    }
+    setDeprecatedFirstTimestamp(x: any /*Time*/) {
+        this.deprecatedFirstTimestamp = x; return this
     }
 
-    deprecatedSource(deprecatedSource: EventSource): EventHelper {
-        if (!this._template.deprecatedSource) this._template.deprecatedSource = []
-        this._template.deprecatedSource = {
-            ...this._template.deprecatedSource,
-            ...deprecatedSource
-        }
-        return this
+    _deprecatedLastTimestamp: any;
+    get deprecatedLastTimestamp(): any /*Time*/ {
+        return this._deprecatedLastTimestamp
+    }
+    set deprecatedLastTimestamp(x: any /*Time*/) {
+        this._deprecatedLastTimestamp = x
+    }
+    setDeprecatedLastTimestamp(x: any /*Time*/) {
+        this.deprecatedLastTimestamp = x; return this
     }
 
-    eventTime(eventTime: MicroTime): EventHelper {
-        this._template.eventTime = eventTime
-        return this
+    _deprecatedSource: any;
+    get deprecatedSource(): any /*EventSourceHelper*/ {
+        return this._deprecatedSource
+    }
+    set deprecatedSource(x: any /*EventSourceHelper*/) {
+        this._deprecatedSource = x
+    }
+    setDeprecatedSource(x: any /*EventSourceHelper*/) {
+        this.deprecatedSource = x; return this
     }
 
-    metadata(metadata: ObjectMeta): EventHelper {
-        if (!this._template.metadata) this._template.metadata = []
-        this._template.metadata = {
-            ...this._template.metadata,
-            ...metadata
-        }
-        return this
+    _eventTime: any;
+    get eventTime(): any /*MicroTime*/ {
+        return this._eventTime
+    }
+    set eventTime(x: any /*MicroTime*/) {
+        this._eventTime = x
+    }
+    setEventTime(x: any /*MicroTime*/) {
+        this.eventTime = x; return this
     }
 
-    note(note: string): EventHelper {
-        this._template.note = note
-        return this
+    _metadata: any;
+    get metadata(): any /*ObjectMetaHelper*/ {
+        return this._metadata
+    }
+    set metadata(x: any /*ObjectMetaHelper*/) {
+        this._metadata = x
+    }
+    setMetadata(x: any /*ObjectMetaHelper*/) {
+        this.metadata = x; return this
     }
 
-    reason(reason: string): EventHelper {
-        this._template.reason = reason
-        return this
+    _note: any;
+    get note(): any /*string*/ {
+        return this._note
+    }
+    set note(x: any /*string*/) {
+        this._note = x
+    }
+    setNote(x: any /*string*/) {
+        this.note = x; return this
     }
 
-    regarding(regarding: ObjectReference): EventHelper {
-        if (!this._template.regarding) this._template.regarding = []
-        this._template.regarding = {
-            ...this._template.regarding,
-            ...regarding
-        }
-        return this
+    _reason: any;
+    get reason(): any /*string*/ {
+        return this._reason
+    }
+    set reason(x: any /*string*/) {
+        this._reason = x
+    }
+    setReason(x: any /*string*/) {
+        this.reason = x; return this
     }
 
-    related(related: ObjectReference): EventHelper {
-        if (!this._template.related) this._template.related = []
-        this._template.related = {
-            ...this._template.related,
-            ...related
-        }
-        return this
+    _regarding: any;
+    get regarding(): any /*ObjectReferenceHelper*/ {
+        return this._regarding
+    }
+    set regarding(x: any /*ObjectReferenceHelper*/) {
+        this._regarding = x
+    }
+    setRegarding(x: any /*ObjectReferenceHelper*/) {
+        this.regarding = x; return this
     }
 
-    reportingController(reportingController: string): EventHelper {
-        this._template.reportingController = reportingController
-        return this
+    _related: any;
+    get related(): any /*ObjectReferenceHelper*/ {
+        return this._related
+    }
+    set related(x: any /*ObjectReferenceHelper*/) {
+        this._related = x
+    }
+    setRelated(x: any /*ObjectReferenceHelper*/) {
+        this.related = x; return this
     }
 
-    reportingInstance(reportingInstance: string): EventHelper {
-        this._template.reportingInstance = reportingInstance
-        return this
+    _reportingController: any;
+    get reportingController(): any /*string*/ {
+        return this._reportingController
+    }
+    set reportingController(x: any /*string*/) {
+        this._reportingController = x
+    }
+    setReportingController(x: any /*string*/) {
+        this.reportingController = x; return this
     }
 
-    series(series: EventSeries): EventHelper {
-        if (!this._template.series) this._template.series = []
-        this._template.series = {
-            ...this._template.series,
-            ...series
-        }
-        return this
+    _reportingInstance: any;
+    get reportingInstance(): any /*string*/ {
+        return this._reportingInstance
+    }
+    set reportingInstance(x: any /*string*/) {
+        this._reportingInstance = x
+    }
+    setReportingInstance(x: any /*string*/) {
+        this.reportingInstance = x; return this
     }
 
-    type(type: string): EventHelper {
-        this._template.type = type
-        return this
+    _series: any;
+    get series(): any /*EventSeriesHelper*/ {
+        return this._series
+    }
+    set series(x: any /*EventSeriesHelper*/) {
+        this._series = x
+    }
+    setSeries(x: any /*EventSeriesHelper*/) {
+        this.series = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = EventHelper.kind
-        this._template.apiVersion = EventHelper.apiVersion
+    _type: any;
+    get type(): any /*string*/ {
+        return this._type
     }
+    set type(x: any /*string*/) {
+        this._type = x
+    }
+    setType(x: any /*string*/) {
+        this.type = x; return this
+    }
+}
+
+export interface EventListHelper extends EventList {
+    $items(x: any): any;
+    $metadata(x: any): any;
 }
 
 /** EventList is a list of Event objects. */
-export class EventListHelper extends ResourceTemplate {
+export class EventListHelper extends ResourceTemplate implements EventListHelper {
     static kind = 'EventList';
     static apiVersion = 'events/v1';
 
-    items(items: Array<Event>): EventListHelper {
-        if (!Array.isArray(items)) { items = [items] }
-        if (!this._template.items) this._template.items = items
-        this._template.items = [...this._template.items, ...items]
-        return this
+    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
+        super(nameOrObject, namespace, EventListHelper.kind, EventListHelper.apiVersion)
     }
 
-    metadata(metadata: ListMeta): EventListHelper {
-        if (!this._template.metadata) this._template.metadata = []
-        this._template.metadata = {
-            ...this._template.metadata,
-            ...metadata
-        }
-        return this
+    _items: any;
+    get items(): any /*Array<Event>*/ {
+        return this._items
+    }
+    set items(x: any /*Array<Event>*/) {
+        this._items = this.set(this.items, x)
+    }
+    setItems(x: any /*Array<Event>*/) {
+        this.items = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = EventListHelper.kind
-        this._template.apiVersion = EventListHelper.apiVersion
+    _metadata: any;
+    get metadata(): any /*ListMetaHelper*/ {
+        return this._metadata
+    }
+    set metadata(x: any /*ListMetaHelper*/) {
+        this._metadata = x
+    }
+    setMetadata(x: any /*ListMetaHelper*/) {
+        this.metadata = x; return this
     }
 }
 
+export interface EventSeriesHelper extends EventSeries {
+    $count(x: any): any;
+    $lastObservedTime(x: any): any;
+}
+
 /** EventSeries contain information on series of events, i.e. thing that was/is happening continuously for some time. How often to update the EventSeries is up to the event reporters. The default event reporter in "k8s.io/client-go/tools/events/event_broadcaster.go" shows how this struct is updated on heartbeats and can guide customized reporter implementations. */
-export class EventSeriesHelper extends ResourceTemplate {
-    static kind = 'EventSeries';
-    static apiVersion = 'events/v1';
-
-    count(count: number): EventSeriesHelper {
-        this._template.count = count
-        return this
+export class EventSeriesHelper extends Template implements EventSeriesHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    lastObservedTime(lastObservedTime: MicroTime): EventSeriesHelper {
-        this._template.lastObservedTime = lastObservedTime
-        return this
+    _count: any;
+    get count(): any /*number*/ {
+        return this._count
+    }
+    set count(x: any /*number*/) {
+        this._count = x
+    }
+    setCount(x: any /*number*/) {
+        this.count = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = EventSeriesHelper.kind
-        this._template.apiVersion = EventSeriesHelper.apiVersion
+    _lastObservedTime: any;
+    get lastObservedTime(): any /*MicroTime*/ {
+        return this._lastObservedTime
+    }
+    set lastObservedTime(x: any /*MicroTime*/) {
+        this._lastObservedTime = x
+    }
+    setLastObservedTime(x: any /*MicroTime*/) {
+        this.lastObservedTime = x; return this
     }
 }

@@ -1,648 +1,852 @@
-import { ResourceTemplate } from "../resourceTemplate";
-import { HTTPIngressPath, HTTPIngressRuleValue, IPBlock, Ingress, IngressBackend, IngressClass, IngressClassParametersReference, IngressClassSpec, IngressRule, IngressServiceBackend, IngressSpec, IngressStatus, IngressTLS, NetworkPolicy, NetworkPolicyEgressRule, NetworkPolicyIngressRule, NetworkPolicyPeer, NetworkPolicyPort, NetworkPolicySpec, ServiceBackendPort } from "./v1";
+import { ResourceTemplate, Template } from "../resourceTemplate";
+import { HTTPIngressPath, HTTPIngressRuleValue, IPBlock, Ingress, IngressBackend, IngressClass, IngressClassList, IngressClassParametersReference, IngressClassSpec, IngressList, IngressRule, IngressServiceBackend, IngressSpec, IngressStatus, IngressTLS, NetworkPolicy, NetworkPolicyEgressRule, NetworkPolicyIngressRule, NetworkPolicyList, NetworkPolicyPeer, NetworkPolicyPort, NetworkPolicySpec, ServiceBackendPort } from "./v1";
 import { LabelSelector, ListMeta, ObjectMeta } from "../meta/v1";
 import { LoadBalancerStatus, TypedLocalObjectReference } from "../core/v1";
 
+export interface HTTPIngressPathHelper extends HTTPIngressPath {
+    $backend(x: any): any;
+    $path(x: any): any;
+    $pathType(x: any): any;
+}
+
 /** HTTPIngressPath associates a path with a backend. Incoming urls matching the path are forwarded to the backend. */
-export class HTTPIngressPathHelper extends ResourceTemplate {
-    static kind = 'HTTPIngressPath';
-    static apiVersion = 'networking/v1';
-
-    backend(backend: IngressBackend): HTTPIngressPathHelper {
-        if (!this._template.backend) this._template.backend = []
-        this._template.backend = {
-            ...this._template.backend,
-            ...backend
-        }
-        return this
+export class HTTPIngressPathHelper extends Template implements HTTPIngressPathHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    path(path: string): HTTPIngressPathHelper {
-        this._template.path = path
-        return this
+    _backend: any;
+    get backend(): any /*IngressBackendHelper*/ {
+        return this._backend
+    }
+    set backend(x: any /*IngressBackendHelper*/) {
+        this._backend = x
+    }
+    setBackend(x: any /*IngressBackendHelper*/) {
+        this.backend = x; return this
     }
 
-    pathType(pathType: string): HTTPIngressPathHelper {
-        this._template.pathType = pathType
-        return this
+    _path: any;
+    get path(): any /*string*/ {
+        return this._path
+    }
+    set path(x: any /*string*/) {
+        this._path = x
+    }
+    setPath(x: any /*string*/) {
+        this.path = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = HTTPIngressPathHelper.kind
-        this._template.apiVersion = HTTPIngressPathHelper.apiVersion
+    _pathType: any;
+    get pathType(): any /*string*/ {
+        return this._pathType
     }
+    set pathType(x: any /*string*/) {
+        this._pathType = x
+    }
+    setPathType(x: any /*string*/) {
+        this.pathType = x; return this
+    }
+}
+
+export interface HTTPIngressRuleValueHelper extends HTTPIngressRuleValue {
+    $paths(x: any): any;
 }
 
 /** HTTPIngressRuleValue is a list of http selectors pointing to backends. In the example: http://<host>/<path>?<searchpart> -> backend where where parts of the url correspond to RFC 3986, this resource will be used to match against everything after the last '/' and before the first '?' or '#'. */
-export class HTTPIngressRuleValueHelper extends ResourceTemplate {
-    static kind = 'HTTPIngressRuleValue';
-    static apiVersion = 'networking/v1';
-
-    paths(paths: Array<HTTPIngressPath>): HTTPIngressRuleValueHelper {
-        if (!Array.isArray(paths)) { paths = [paths] }
-        if (!this._template.paths) this._template.paths = paths
-        this._template.paths = [...this._template.paths, ...paths]
-        return this
+export class HTTPIngressRuleValueHelper extends Template implements HTTPIngressRuleValueHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = HTTPIngressRuleValueHelper.kind
-        this._template.apiVersion = HTTPIngressRuleValueHelper.apiVersion
+    _paths: any;
+    get paths(): any /*Array<HTTPIngressPath>*/ {
+        return this._paths
     }
+    set paths(x: any /*Array<HTTPIngressPath>*/) {
+        this._paths = this.set(this.paths, x)
+    }
+    setPaths(x: any /*Array<HTTPIngressPath>*/) {
+        this.paths = x; return this
+    }
+}
+
+export interface IPBlockHelper extends IPBlock {
+    $cidr(x: any): any;
+    $except(x: any): any;
 }
 
 /** IPBlock describes a particular CIDR (Ex. "192.168.1.1/24","2001:db9::/64") that is allowed to the pods matched by a NetworkPolicySpec's podSelector. The except entry describes CIDRs that should not be included within this rule. */
-export class IPBlockHelper extends ResourceTemplate {
-    static kind = 'IPBlock';
-    static apiVersion = 'networking/v1';
-
-    cidr(cidr: string): IPBlockHelper {
-        this._template.cidr = cidr
-        return this
+export class IPBlockHelper extends Template implements IPBlockHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    except(except: Array<string>): IPBlockHelper {
-        if (!Array.isArray(except)) { except = [except] }
-        if (!this._template.except) this._template.except = except
-        this._template.except = [...this._template.except, ...except]
-        return this
+    _cidr: any;
+    get cidr(): any /*string*/ {
+        return this._cidr
+    }
+    set cidr(x: any /*string*/) {
+        this._cidr = x
+    }
+    setCidr(x: any /*string*/) {
+        this.cidr = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = IPBlockHelper.kind
-        this._template.apiVersion = IPBlockHelper.apiVersion
+    _except: any;
+    get except(): any /*Array<string>*/ {
+        return this._except
     }
+    set except(x: any /*Array<string>*/) {
+        this._except = this.set(this.except, x)
+    }
+    setExcept(x: any /*Array<string>*/) {
+        this.except = x; return this
+    }
+}
+
+export interface IngressHelper extends Ingress {
+    $metadata(x: any): any;
+    $spec(x: any): any;
+    $status(x: any): any;
 }
 
 /** Ingress is a collection of rules that allow inbound connections to reach the endpoints defined by a backend. An Ingress can be configured to give services externally-reachable urls, load balance traffic, terminate SSL, offer name based virtual hosting etc. */
-export class IngressHelper extends ResourceTemplate {
+export class IngressHelper extends ResourceTemplate implements IngressHelper {
     static kind = 'Ingress';
     static apiVersion = 'networking/v1';
 
-    metadata(metadata: ObjectMeta): IngressHelper {
-        if (!this._template.metadata) this._template.metadata = []
-        this._template.metadata = {
-            ...this._template.metadata,
-            ...metadata
-        }
-        return this
+    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
+        super(nameOrObject, namespace, IngressHelper.kind, IngressHelper.apiVersion)
     }
 
-    spec(spec: IngressSpec): IngressHelper {
-        if (!this._template.spec) this._template.spec = []
-        this._template.spec = {
-            ...this._template.spec,
-            ...spec
-        }
-        return this
+    _metadata: any;
+    get metadata(): any /*ObjectMetaHelper*/ {
+        return this._metadata
+    }
+    set metadata(x: any /*ObjectMetaHelper*/) {
+        this._metadata = x
+    }
+    setMetadata(x: any /*ObjectMetaHelper*/) {
+        this.metadata = x; return this
     }
 
-    status(status: IngressStatus): IngressHelper {
-        if (!this._template.status) this._template.status = []
-        this._template.status = {
-            ...this._template.status,
-            ...status
-        }
-        return this
+    _spec: any;
+    get spec(): any /*IngressSpecHelper*/ {
+        return this._spec
+    }
+    set spec(x: any /*IngressSpecHelper*/) {
+        this._spec = x
+    }
+    setSpec(x: any /*IngressSpecHelper*/) {
+        this.spec = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = IngressHelper.kind
-        this._template.apiVersion = IngressHelper.apiVersion
+    _status: any;
+    get status(): any /*IngressStatusHelper*/ {
+        return this._status
     }
+    set status(x: any /*IngressStatusHelper*/) {
+        this._status = x
+    }
+    setStatus(x: any /*IngressStatusHelper*/) {
+        this.status = x; return this
+    }
+}
+
+export interface IngressBackendHelper extends IngressBackend {
+    $resource(x: any): any;
+    $service(x: any): any;
 }
 
 /** IngressBackend describes all endpoints for a given service and port. */
-export class IngressBackendHelper extends ResourceTemplate {
-    static kind = 'IngressBackend';
-    static apiVersion = 'networking/v1';
-
-    resource(resource: TypedLocalObjectReference): IngressBackendHelper {
-        if (!this._template.resource) this._template.resource = []
-        this._template.resource = {
-            ...this._template.resource,
-            ...resource
-        }
-        return this
+export class IngressBackendHelper extends Template implements IngressBackendHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    service(service: IngressServiceBackend): IngressBackendHelper {
-        if (!this._template.service) this._template.service = []
-        this._template.service = {
-            ...this._template.service,
-            ...service
-        }
-        return this
+    _resource: any;
+    get resource(): any /*TypedLocalObjectReferenceHelper*/ {
+        return this._resource
+    }
+    set resource(x: any /*TypedLocalObjectReferenceHelper*/) {
+        this._resource = x
+    }
+    setResource(x: any /*TypedLocalObjectReferenceHelper*/) {
+        this.resource = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = IngressBackendHelper.kind
-        this._template.apiVersion = IngressBackendHelper.apiVersion
+    _service: any;
+    get service(): any /*IngressServiceBackendHelper*/ {
+        return this._service
     }
+    set service(x: any /*IngressServiceBackendHelper*/) {
+        this._service = x
+    }
+    setService(x: any /*IngressServiceBackendHelper*/) {
+        this.service = x; return this
+    }
+}
+
+export interface IngressClassHelper extends IngressClass {
+    $metadata(x: any): any;
+    $spec(x: any): any;
 }
 
 /** IngressClass represents the class of the Ingress, referenced by the Ingress Spec. The `ingressclass.kubernetes.io/is-default-class` annotation can be used to indicate that an IngressClass should be considered default. When a single IngressClass resource has this annotation set to true, new Ingress resources without a class specified will be assigned this default class. */
-export class IngressClassHelper extends ResourceTemplate {
+export class IngressClassHelper extends ResourceTemplate implements IngressClassHelper {
     static kind = 'IngressClass';
     static apiVersion = 'networking/v1';
 
-    metadata(metadata: ObjectMeta): IngressClassHelper {
-        if (!this._template.metadata) this._template.metadata = []
-        this._template.metadata = {
-            ...this._template.metadata,
-            ...metadata
-        }
-        return this
+    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
+        super(nameOrObject, namespace, IngressClassHelper.kind, IngressClassHelper.apiVersion)
     }
 
-    spec(spec: IngressClassSpec): IngressClassHelper {
-        if (!this._template.spec) this._template.spec = []
-        this._template.spec = {
-            ...this._template.spec,
-            ...spec
-        }
-        return this
+    _metadata: any;
+    get metadata(): any /*ObjectMetaHelper*/ {
+        return this._metadata
+    }
+    set metadata(x: any /*ObjectMetaHelper*/) {
+        this._metadata = x
+    }
+    setMetadata(x: any /*ObjectMetaHelper*/) {
+        this.metadata = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = IngressClassHelper.kind
-        this._template.apiVersion = IngressClassHelper.apiVersion
+    _spec: any;
+    get spec(): any /*IngressClassSpecHelper*/ {
+        return this._spec
     }
+    set spec(x: any /*IngressClassSpecHelper*/) {
+        this._spec = x
+    }
+    setSpec(x: any /*IngressClassSpecHelper*/) {
+        this.spec = x; return this
+    }
+}
+
+export interface IngressClassListHelper extends IngressClassList {
+    $items(x: any): any;
+    $metadata(x: any): any;
 }
 
 /** IngressClassList is a collection of IngressClasses. */
-export class IngressClassListHelper extends ResourceTemplate {
+export class IngressClassListHelper extends ResourceTemplate implements IngressClassListHelper {
     static kind = 'IngressClassList';
     static apiVersion = 'networking/v1';
 
-    items(items: Array<IngressClass>): IngressClassListHelper {
-        if (!Array.isArray(items)) { items = [items] }
-        if (!this._template.items) this._template.items = items
-        this._template.items = [...this._template.items, ...items]
-        return this
+    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
+        super(nameOrObject, namespace, IngressClassListHelper.kind, IngressClassListHelper.apiVersion)
     }
 
-    metadata(metadata: ListMeta): IngressClassListHelper {
-        if (!this._template.metadata) this._template.metadata = []
-        this._template.metadata = {
-            ...this._template.metadata,
-            ...metadata
-        }
-        return this
+    _items: any;
+    get items(): any /*Array<IngressClass>*/ {
+        return this._items
+    }
+    set items(x: any /*Array<IngressClass>*/) {
+        this._items = this.set(this.items, x)
+    }
+    setItems(x: any /*Array<IngressClass>*/) {
+        this.items = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = IngressClassListHelper.kind
-        this._template.apiVersion = IngressClassListHelper.apiVersion
+    _metadata: any;
+    get metadata(): any /*ListMetaHelper*/ {
+        return this._metadata
     }
+    set metadata(x: any /*ListMetaHelper*/) {
+        this._metadata = x
+    }
+    setMetadata(x: any /*ListMetaHelper*/) {
+        this.metadata = x; return this
+    }
+}
+
+export interface IngressClassParametersReferenceHelper extends IngressClassParametersReference {
+    $apiGroup(x: any): any;
+    $scope(x: any): any;
 }
 
 /** IngressClassParametersReference identifies an API object. This can be used to specify a cluster or namespace-scoped resource. */
-export class IngressClassParametersReferenceHelper extends ResourceTemplate {
-    static kind = 'IngressClassParametersReference';
-    static apiVersion = 'networking/v1';
-
-    apiGroup(apiGroup: string): IngressClassParametersReferenceHelper {
-        this._template.apiGroup = apiGroup
-        return this
+export class IngressClassParametersReferenceHelper extends Template implements IngressClassParametersReferenceHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    scope(scope: string): IngressClassParametersReferenceHelper {
-        this._template.scope = scope
-        return this
+    _apiGroup: any;
+    get apiGroup(): any /*string*/ {
+        return this._apiGroup
+    }
+    set apiGroup(x: any /*string*/) {
+        this._apiGroup = x
+    }
+    setApiGroup(x: any /*string*/) {
+        this.apiGroup = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = IngressClassParametersReferenceHelper.kind
-        this._template.apiVersion = IngressClassParametersReferenceHelper.apiVersion
+    _scope: any;
+    get scope(): any /*string*/ {
+        return this._scope
     }
+    set scope(x: any /*string*/) {
+        this._scope = x
+    }
+    setScope(x: any /*string*/) {
+        this.scope = x; return this
+    }
+}
+
+export interface IngressClassSpecHelper extends IngressClassSpec {
+    $controller(x: any): any;
+    $parameters(x: any): any;
 }
 
 /** IngressClassSpec provides information about the class of an Ingress. */
-export class IngressClassSpecHelper extends ResourceTemplate {
-    static kind = 'IngressClassSpec';
-    static apiVersion = 'networking/v1';
-
-    controller(controller: string): IngressClassSpecHelper {
-        this._template.controller = controller
-        return this
+export class IngressClassSpecHelper extends Template implements IngressClassSpecHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    parameters(parameters: IngressClassParametersReference): IngressClassSpecHelper {
-        if (!this._template.parameters) this._template.parameters = []
-        this._template.parameters = {
-            ...this._template.parameters,
-            ...parameters
-        }
-        return this
+    _controller: any;
+    get controller(): any /*string*/ {
+        return this._controller
+    }
+    set controller(x: any /*string*/) {
+        this._controller = x
+    }
+    setController(x: any /*string*/) {
+        this.controller = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = IngressClassSpecHelper.kind
-        this._template.apiVersion = IngressClassSpecHelper.apiVersion
+    _parameters: any;
+    get parameters(): any /*IngressClassParametersReferenceHelper*/ {
+        return this._parameters
     }
+    set parameters(x: any /*IngressClassParametersReferenceHelper*/) {
+        this._parameters = x
+    }
+    setParameters(x: any /*IngressClassParametersReferenceHelper*/) {
+        this.parameters = x; return this
+    }
+}
+
+export interface IngressListHelper extends IngressList {
+    $items(x: any): any;
+    $metadata(x: any): any;
 }
 
 /** IngressList is a collection of Ingress. */
-export class IngressListHelper extends ResourceTemplate {
+export class IngressListHelper extends ResourceTemplate implements IngressListHelper {
     static kind = 'IngressList';
     static apiVersion = 'networking/v1';
 
-    items(items: Array<Ingress>): IngressListHelper {
-        if (!Array.isArray(items)) { items = [items] }
-        if (!this._template.items) this._template.items = items
-        this._template.items = [...this._template.items, ...items]
-        return this
+    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
+        super(nameOrObject, namespace, IngressListHelper.kind, IngressListHelper.apiVersion)
     }
 
-    metadata(metadata: ListMeta): IngressListHelper {
-        if (!this._template.metadata) this._template.metadata = []
-        this._template.metadata = {
-            ...this._template.metadata,
-            ...metadata
-        }
-        return this
+    _items: any;
+    get items(): any /*Array<Ingress>*/ {
+        return this._items
+    }
+    set items(x: any /*Array<Ingress>*/) {
+        this._items = this.set(this.items, x)
+    }
+    setItems(x: any /*Array<Ingress>*/) {
+        this.items = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = IngressListHelper.kind
-        this._template.apiVersion = IngressListHelper.apiVersion
+    _metadata: any;
+    get metadata(): any /*ListMetaHelper*/ {
+        return this._metadata
     }
+    set metadata(x: any /*ListMetaHelper*/) {
+        this._metadata = x
+    }
+    setMetadata(x: any /*ListMetaHelper*/) {
+        this.metadata = x; return this
+    }
+}
+
+export interface IngressRuleHelper extends IngressRule {
+    $host(x: any): any;
+    $http(x: any): any;
 }
 
 /** IngressRule represents the rules mapping the paths under a specified host to the related backend services. Incoming requests are first evaluated for a host match, then routed to the backend associated with the matching IngressRuleValue. */
-export class IngressRuleHelper extends ResourceTemplate {
-    static kind = 'IngressRule';
-    static apiVersion = 'networking/v1';
-
-    host(host: string): IngressRuleHelper {
-        this._template.host = host
-        return this
+export class IngressRuleHelper extends Template implements IngressRuleHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    http(http: HTTPIngressRuleValue): IngressRuleHelper {
-        if (!this._template.http) this._template.http = []
-        this._template.http = {
-            ...this._template.http,
-            ...http
-        }
-        return this
+    _host: any;
+    get host(): any /*string*/ {
+        return this._host
+    }
+    set host(x: any /*string*/) {
+        this._host = x
+    }
+    setHost(x: any /*string*/) {
+        this.host = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = IngressRuleHelper.kind
-        this._template.apiVersion = IngressRuleHelper.apiVersion
+    _http: any;
+    get http(): any /*HTTPIngressRuleValueHelper*/ {
+        return this._http
     }
+    set http(x: any /*HTTPIngressRuleValueHelper*/) {
+        this._http = x
+    }
+    setHttp(x: any /*HTTPIngressRuleValueHelper*/) {
+        this.http = x; return this
+    }
+}
+
+export interface IngressServiceBackendHelper extends IngressServiceBackend {
+    $port(x: any): any;
 }
 
 /** IngressServiceBackend references a Kubernetes Service as a Backend. */
-export class IngressServiceBackendHelper extends ResourceTemplate {
-    static kind = 'IngressServiceBackend';
-    static apiVersion = 'networking/v1';
-
-    port(port: ServiceBackendPort): IngressServiceBackendHelper {
-        if (!this._template.port) this._template.port = []
-        this._template.port = {
-            ...this._template.port,
-            ...port
-        }
-        return this
+export class IngressServiceBackendHelper extends Template implements IngressServiceBackendHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = IngressServiceBackendHelper.kind
-        this._template.apiVersion = IngressServiceBackendHelper.apiVersion
+    _port: any;
+    get port(): any /*ServiceBackendPortHelper*/ {
+        return this._port
     }
+    set port(x: any /*ServiceBackendPortHelper*/) {
+        this._port = x
+    }
+    setPort(x: any /*ServiceBackendPortHelper*/) {
+        this.port = x; return this
+    }
+}
+
+export interface IngressSpecHelper extends IngressSpec {
+    $defaultBackend(x: any): any;
+    $ingressClassName(x: any): any;
+    $rules(x: any): any;
+    $tls(x: any): any;
 }
 
 /** IngressSpec describes the Ingress the user wishes to exist. */
-export class IngressSpecHelper extends ResourceTemplate {
-    static kind = 'IngressSpec';
-    static apiVersion = 'networking/v1';
-
-    defaultBackend(defaultBackend: IngressBackend): IngressSpecHelper {
-        if (!this._template.defaultBackend) this._template.defaultBackend = []
-        this._template.defaultBackend = {
-            ...this._template.defaultBackend,
-            ...defaultBackend
-        }
-        return this
+export class IngressSpecHelper extends Template implements IngressSpecHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    ingressClassName(ingressClassName: string): IngressSpecHelper {
-        this._template.ingressClassName = ingressClassName
-        return this
+    _defaultBackend: any;
+    get defaultBackend(): any /*IngressBackendHelper*/ {
+        return this._defaultBackend
+    }
+    set defaultBackend(x: any /*IngressBackendHelper*/) {
+        this._defaultBackend = x
+    }
+    setDefaultBackend(x: any /*IngressBackendHelper*/) {
+        this.defaultBackend = x; return this
     }
 
-    rules(rules: Array<IngressRule>): IngressSpecHelper {
-        if (!Array.isArray(rules)) { rules = [rules] }
-        if (!this._template.rules) this._template.rules = rules
-        this._template.rules = [...this._template.rules, ...rules]
-        return this
+    _ingressClassName: any;
+    get ingressClassName(): any /*string*/ {
+        return this._ingressClassName
+    }
+    set ingressClassName(x: any /*string*/) {
+        this._ingressClassName = x
+    }
+    setIngressClassName(x: any /*string*/) {
+        this.ingressClassName = x; return this
     }
 
-    tls(tls: Array<IngressTLS>): IngressSpecHelper {
-        if (!Array.isArray(tls)) { tls = [tls] }
-        if (!this._template.tls) this._template.tls = tls
-        this._template.tls = [...this._template.tls, ...tls]
-        return this
+    _rules: any;
+    get rules(): any /*Array<IngressRule>*/ {
+        return this._rules
+    }
+    set rules(x: any /*Array<IngressRule>*/) {
+        this._rules = this.set(this.rules, x)
+    }
+    setRules(x: any /*Array<IngressRule>*/) {
+        this.rules = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = IngressSpecHelper.kind
-        this._template.apiVersion = IngressSpecHelper.apiVersion
+    _tls: any;
+    get tls(): any /*Array<IngressTLS>*/ {
+        return this._tls
     }
+    set tls(x: any /*Array<IngressTLS>*/) {
+        this._tls = this.set(this.tls, x)
+    }
+    setTls(x: any /*Array<IngressTLS>*/) {
+        this.tls = x; return this
+    }
+}
+
+export interface IngressStatusHelper extends IngressStatus {
+    $loadBalancer(x: any): any;
 }
 
 /** IngressStatus describe the current state of the Ingress. */
-export class IngressStatusHelper extends ResourceTemplate {
-    static kind = 'IngressStatus';
-    static apiVersion = 'networking/v1';
-
-    loadBalancer(loadBalancer: LoadBalancerStatus): IngressStatusHelper {
-        if (!this._template.loadBalancer) this._template.loadBalancer = []
-        this._template.loadBalancer = {
-            ...this._template.loadBalancer,
-            ...loadBalancer
-        }
-        return this
+export class IngressStatusHelper extends Template implements IngressStatusHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = IngressStatusHelper.kind
-        this._template.apiVersion = IngressStatusHelper.apiVersion
+    _loadBalancer: any;
+    get loadBalancer(): any /*LoadBalancerStatusHelper*/ {
+        return this._loadBalancer
     }
+    set loadBalancer(x: any /*LoadBalancerStatusHelper*/) {
+        this._loadBalancer = x
+    }
+    setLoadBalancer(x: any /*LoadBalancerStatusHelper*/) {
+        this.loadBalancer = x; return this
+    }
+}
+
+export interface IngressTLSHelper extends IngressTLS {
+    $hosts(x: any): any;
+    $secretName(x: any): any;
 }
 
 /** IngressTLS describes the transport layer security associated with an Ingress. */
-export class IngressTLSHelper extends ResourceTemplate {
-    static kind = 'IngressTLS';
-    static apiVersion = 'networking/v1';
-
-    hosts(hosts: Array<string>): IngressTLSHelper {
-        if (!Array.isArray(hosts)) { hosts = [hosts] }
-        if (!this._template.hosts) this._template.hosts = hosts
-        this._template.hosts = [...this._template.hosts, ...hosts]
-        return this
+export class IngressTLSHelper extends Template implements IngressTLSHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    secretName(secretName: string): IngressTLSHelper {
-        this._template.secretName = secretName
-        return this
+    _hosts: any;
+    get hosts(): any /*Array<string>*/ {
+        return this._hosts
+    }
+    set hosts(x: any /*Array<string>*/) {
+        this._hosts = this.set(this.hosts, x)
+    }
+    setHosts(x: any /*Array<string>*/) {
+        this.hosts = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = IngressTLSHelper.kind
-        this._template.apiVersion = IngressTLSHelper.apiVersion
+    _secretName: any;
+    get secretName(): any /*string*/ {
+        return this._secretName
     }
+    set secretName(x: any /*string*/) {
+        this._secretName = x
+    }
+    setSecretName(x: any /*string*/) {
+        this.secretName = x; return this
+    }
+}
+
+export interface NetworkPolicyHelper extends NetworkPolicy {
+    $metadata(x: any): any;
+    $spec(x: any): any;
 }
 
 /** NetworkPolicy describes what network traffic is allowed for a set of Pods */
-export class NetworkPolicyHelper extends ResourceTemplate {
+export class NetworkPolicyHelper extends ResourceTemplate implements NetworkPolicyHelper {
     static kind = 'NetworkPolicy';
     static apiVersion = 'networking/v1';
 
-    metadata(metadata: ObjectMeta): NetworkPolicyHelper {
-        if (!this._template.metadata) this._template.metadata = []
-        this._template.metadata = {
-            ...this._template.metadata,
-            ...metadata
-        }
-        return this
+    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
+        super(nameOrObject, namespace, NetworkPolicyHelper.kind, NetworkPolicyHelper.apiVersion)
     }
 
-    spec(spec: NetworkPolicySpec): NetworkPolicyHelper {
-        if (!this._template.spec) this._template.spec = []
-        this._template.spec = {
-            ...this._template.spec,
-            ...spec
-        }
-        return this
+    _metadata: any;
+    get metadata(): any /*ObjectMetaHelper*/ {
+        return this._metadata
+    }
+    set metadata(x: any /*ObjectMetaHelper*/) {
+        this._metadata = x
+    }
+    setMetadata(x: any /*ObjectMetaHelper*/) {
+        this.metadata = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = NetworkPolicyHelper.kind
-        this._template.apiVersion = NetworkPolicyHelper.apiVersion
+    _spec: any;
+    get spec(): any /*NetworkPolicySpecHelper*/ {
+        return this._spec
     }
+    set spec(x: any /*NetworkPolicySpecHelper*/) {
+        this._spec = x
+    }
+    setSpec(x: any /*NetworkPolicySpecHelper*/) {
+        this.spec = x; return this
+    }
+}
+
+export interface NetworkPolicyEgressRuleHelper extends NetworkPolicyEgressRule {
+    $ports(x: any): any;
+    $to(x: any): any;
 }
 
 /** NetworkPolicyEgressRule describes a particular set of traffic that is allowed out of pods matched by a NetworkPolicySpec's podSelector. The traffic must match both ports and to. This type is beta-level in 1.8 */
-export class NetworkPolicyEgressRuleHelper extends ResourceTemplate {
-    static kind = 'NetworkPolicyEgressRule';
-    static apiVersion = 'networking/v1';
-
-    ports(ports: Array<NetworkPolicyPort>): NetworkPolicyEgressRuleHelper {
-        if (!Array.isArray(ports)) { ports = [ports] }
-        if (!this._template.ports) this._template.ports = ports
-        this._template.ports = [...this._template.ports, ...ports]
-        return this
+export class NetworkPolicyEgressRuleHelper extends Template implements NetworkPolicyEgressRuleHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    to(to: Array<NetworkPolicyPeer>): NetworkPolicyEgressRuleHelper {
-        if (!Array.isArray(to)) { to = [to] }
-        if (!this._template.to) this._template.to = to
-        this._template.to = [...this._template.to, ...to]
-        return this
+    _ports: any;
+    get ports(): any /*Array<NetworkPolicyPort>*/ {
+        return this._ports
+    }
+    set ports(x: any /*Array<NetworkPolicyPort>*/) {
+        this._ports = this.set(this.ports, x)
+    }
+    setPorts(x: any /*Array<NetworkPolicyPort>*/) {
+        this.ports = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = NetworkPolicyEgressRuleHelper.kind
-        this._template.apiVersion = NetworkPolicyEgressRuleHelper.apiVersion
+    _to: any;
+    get to(): any /*Array<NetworkPolicyPeer>*/ {
+        return this._to
     }
+    set to(x: any /*Array<NetworkPolicyPeer>*/) {
+        this._to = this.set(this.to, x)
+    }
+    setTo(x: any /*Array<NetworkPolicyPeer>*/) {
+        this.to = x; return this
+    }
+}
+
+export interface NetworkPolicyIngressRuleHelper extends NetworkPolicyIngressRule {
+    $from(x: any): any;
+    $ports(x: any): any;
 }
 
 /** NetworkPolicyIngressRule describes a particular set of traffic that is allowed to the pods matched by a NetworkPolicySpec's podSelector. The traffic must match both ports and from. */
-export class NetworkPolicyIngressRuleHelper extends ResourceTemplate {
-    static kind = 'NetworkPolicyIngressRule';
-    static apiVersion = 'networking/v1';
-
-    from(from: Array<NetworkPolicyPeer>): NetworkPolicyIngressRuleHelper {
-        if (!Array.isArray(from)) { from = [from] }
-        if (!this._template.from) this._template.from = from
-        this._template.from = [...this._template.from, ...from]
-        return this
+export class NetworkPolicyIngressRuleHelper extends Template implements NetworkPolicyIngressRuleHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    ports(ports: Array<NetworkPolicyPort>): NetworkPolicyIngressRuleHelper {
-        if (!Array.isArray(ports)) { ports = [ports] }
-        if (!this._template.ports) this._template.ports = ports
-        this._template.ports = [...this._template.ports, ...ports]
-        return this
+    _from: any;
+    get from(): any /*Array<NetworkPolicyPeer>*/ {
+        return this._from
+    }
+    set from(x: any /*Array<NetworkPolicyPeer>*/) {
+        this._from = this.set(this.from, x)
+    }
+    setFrom(x: any /*Array<NetworkPolicyPeer>*/) {
+        this.from = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = NetworkPolicyIngressRuleHelper.kind
-        this._template.apiVersion = NetworkPolicyIngressRuleHelper.apiVersion
+    _ports: any;
+    get ports(): any /*Array<NetworkPolicyPort>*/ {
+        return this._ports
     }
+    set ports(x: any /*Array<NetworkPolicyPort>*/) {
+        this._ports = this.set(this.ports, x)
+    }
+    setPorts(x: any /*Array<NetworkPolicyPort>*/) {
+        this.ports = x; return this
+    }
+}
+
+export interface NetworkPolicyListHelper extends NetworkPolicyList {
+    $items(x: any): any;
+    $metadata(x: any): any;
 }
 
 /** NetworkPolicyList is a list of NetworkPolicy objects. */
-export class NetworkPolicyListHelper extends ResourceTemplate {
+export class NetworkPolicyListHelper extends ResourceTemplate implements NetworkPolicyListHelper {
     static kind = 'NetworkPolicyList';
     static apiVersion = 'networking/v1';
 
-    items(items: Array<NetworkPolicy>): NetworkPolicyListHelper {
-        if (!Array.isArray(items)) { items = [items] }
-        if (!this._template.items) this._template.items = items
-        this._template.items = [...this._template.items, ...items]
-        return this
+    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
+        super(nameOrObject, namespace, NetworkPolicyListHelper.kind, NetworkPolicyListHelper.apiVersion)
     }
 
-    metadata(metadata: ListMeta): NetworkPolicyListHelper {
-        if (!this._template.metadata) this._template.metadata = []
-        this._template.metadata = {
-            ...this._template.metadata,
-            ...metadata
-        }
-        return this
+    _items: any;
+    get items(): any /*Array<NetworkPolicy>*/ {
+        return this._items
+    }
+    set items(x: any /*Array<NetworkPolicy>*/) {
+        this._items = this.set(this.items, x)
+    }
+    setItems(x: any /*Array<NetworkPolicy>*/) {
+        this.items = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = NetworkPolicyListHelper.kind
-        this._template.apiVersion = NetworkPolicyListHelper.apiVersion
+    _metadata: any;
+    get metadata(): any /*ListMetaHelper*/ {
+        return this._metadata
     }
+    set metadata(x: any /*ListMetaHelper*/) {
+        this._metadata = x
+    }
+    setMetadata(x: any /*ListMetaHelper*/) {
+        this.metadata = x; return this
+    }
+}
+
+export interface NetworkPolicyPeerHelper extends NetworkPolicyPeer {
+    $ipBlock(x: any): any;
+    $namespaceSelector(x: any): any;
+    $podSelector(x: any): any;
 }
 
 /** NetworkPolicyPeer describes a peer to allow traffic to/from. Only certain combinations of fields are allowed */
-export class NetworkPolicyPeerHelper extends ResourceTemplate {
-    static kind = 'NetworkPolicyPeer';
-    static apiVersion = 'networking/v1';
-
-    ipBlock(ipBlock: IPBlock): NetworkPolicyPeerHelper {
-        if (!this._template.ipBlock) this._template.ipBlock = []
-        this._template.ipBlock = {
-            ...this._template.ipBlock,
-            ...ipBlock
-        }
-        return this
+export class NetworkPolicyPeerHelper extends Template implements NetworkPolicyPeerHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    namespaceSelector(namespaceSelector: LabelSelector): NetworkPolicyPeerHelper {
-        if (!this._template.namespaceSelector) this._template.namespaceSelector = []
-        this._template.namespaceSelector = {
-            ...this._template.namespaceSelector,
-            ...namespaceSelector
-        }
-        return this
+    _ipBlock: any;
+    get ipBlock(): any /*IPBlockHelper*/ {
+        return this._ipBlock
+    }
+    set ipBlock(x: any /*IPBlockHelper*/) {
+        this._ipBlock = x
+    }
+    setIpBlock(x: any /*IPBlockHelper*/) {
+        this.ipBlock = x; return this
     }
 
-    podSelector(podSelector: LabelSelector): NetworkPolicyPeerHelper {
-        if (!this._template.podSelector) this._template.podSelector = []
-        this._template.podSelector = {
-            ...this._template.podSelector,
-            ...podSelector
-        }
-        return this
+    _namespaceSelector: any;
+    get namespaceSelector(): any /*LabelSelectorHelper*/ {
+        return this._namespaceSelector
+    }
+    set namespaceSelector(x: any /*LabelSelectorHelper*/) {
+        this._namespaceSelector = x
+    }
+    setNamespaceSelector(x: any /*LabelSelectorHelper*/) {
+        this.namespaceSelector = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = NetworkPolicyPeerHelper.kind
-        this._template.apiVersion = NetworkPolicyPeerHelper.apiVersion
+    _podSelector: any;
+    get podSelector(): any /*LabelSelectorHelper*/ {
+        return this._podSelector
     }
+    set podSelector(x: any /*LabelSelectorHelper*/) {
+        this._podSelector = x
+    }
+    setPodSelector(x: any /*LabelSelectorHelper*/) {
+        this.podSelector = x; return this
+    }
+}
+
+export interface NetworkPolicyPortHelper extends NetworkPolicyPort {
+    $endPort(x: any): any;
+    $port(x: any): any;
+    $protocol(x: any): any;
 }
 
 /** NetworkPolicyPort describes a port to allow traffic on */
-export class NetworkPolicyPortHelper extends ResourceTemplate {
-    static kind = 'NetworkPolicyPort';
-    static apiVersion = 'networking/v1';
-
-    endPort(endPort: number): NetworkPolicyPortHelper {
-        this._template.endPort = endPort
-        return this
+export class NetworkPolicyPortHelper extends Template implements NetworkPolicyPortHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    port(port: number | string): NetworkPolicyPortHelper {
-        this._template.port = port
-        return this
+    _endPort: any;
+    get endPort(): any /*number*/ {
+        return this._endPort
+    }
+    set endPort(x: any /*number*/) {
+        this._endPort = x
+    }
+    setEndPort(x: any /*number*/) {
+        this.endPort = x; return this
     }
 
-    protocol(protocol: string): NetworkPolicyPortHelper {
-        this._template.protocol = protocol
-        return this
+    _port: any;
+    get port(): any /*number | stringHelper*/ {
+        return this._port
+    }
+    set port(x: any /*number | stringHelper*/) {
+        this._port = x
+    }
+    setPort(x: any /*number | stringHelper*/) {
+        this.port = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = NetworkPolicyPortHelper.kind
-        this._template.apiVersion = NetworkPolicyPortHelper.apiVersion
+    _protocol: any;
+    get protocol(): any /*string*/ {
+        return this._protocol
     }
+    set protocol(x: any /*string*/) {
+        this._protocol = x
+    }
+    setProtocol(x: any /*string*/) {
+        this.protocol = x; return this
+    }
+}
+
+export interface NetworkPolicySpecHelper extends NetworkPolicySpec {
+    $egress(x: any): any;
+    $ingress(x: any): any;
+    $podSelector(x: any): any;
+    $policyTypes(x: any): any;
 }
 
 /** NetworkPolicySpec provides the specification of a NetworkPolicy */
-export class NetworkPolicySpecHelper extends ResourceTemplate {
-    static kind = 'NetworkPolicySpec';
-    static apiVersion = 'networking/v1';
-
-    egress(egress: Array<NetworkPolicyEgressRule>): NetworkPolicySpecHelper {
-        if (!Array.isArray(egress)) { egress = [egress] }
-        if (!this._template.egress) this._template.egress = egress
-        this._template.egress = [...this._template.egress, ...egress]
-        return this
+export class NetworkPolicySpecHelper extends Template implements NetworkPolicySpecHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    ingress(ingress: Array<NetworkPolicyIngressRule>): NetworkPolicySpecHelper {
-        if (!Array.isArray(ingress)) { ingress = [ingress] }
-        if (!this._template.ingress) this._template.ingress = ingress
-        this._template.ingress = [...this._template.ingress, ...ingress]
-        return this
+    _egress: any;
+    get egress(): any /*Array<NetworkPolicyEgressRule>*/ {
+        return this._egress
+    }
+    set egress(x: any /*Array<NetworkPolicyEgressRule>*/) {
+        this._egress = this.set(this.egress, x)
+    }
+    setEgress(x: any /*Array<NetworkPolicyEgressRule>*/) {
+        this.egress = x; return this
     }
 
-    podSelector(podSelector: LabelSelector): NetworkPolicySpecHelper {
-        if (!this._template.podSelector) this._template.podSelector = []
-        this._template.podSelector = {
-            ...this._template.podSelector,
-            ...podSelector
-        }
-        return this
+    _ingress: any;
+    get ingress(): any /*Array<NetworkPolicyIngressRule>*/ {
+        return this._ingress
+    }
+    set ingress(x: any /*Array<NetworkPolicyIngressRule>*/) {
+        this._ingress = this.set(this.ingress, x)
+    }
+    setIngress(x: any /*Array<NetworkPolicyIngressRule>*/) {
+        this.ingress = x; return this
     }
 
-    policyTypes(policyTypes: Array<string>): NetworkPolicySpecHelper {
-        if (!Array.isArray(policyTypes)) { policyTypes = [policyTypes] }
-        if (!this._template.policyTypes) this._template.policyTypes = policyTypes
-        this._template.policyTypes = [...this._template.policyTypes, ...policyTypes]
-        return this
+    _podSelector: any;
+    get podSelector(): any /*LabelSelectorHelper*/ {
+        return this._podSelector
+    }
+    set podSelector(x: any /*LabelSelectorHelper*/) {
+        this._podSelector = x
+    }
+    setPodSelector(x: any /*LabelSelectorHelper*/) {
+        this.podSelector = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = NetworkPolicySpecHelper.kind
-        this._template.apiVersion = NetworkPolicySpecHelper.apiVersion
+    _policyTypes: any;
+    get policyTypes(): any /*Array<string>*/ {
+        return this._policyTypes
+    }
+    set policyTypes(x: any /*Array<string>*/) {
+        this._policyTypes = this.set(this.policyTypes, x)
+    }
+    setPolicyTypes(x: any /*Array<string>*/) {
+        this.policyTypes = x; return this
     }
 }
 
-/** ServiceBackendPort is the service port being referenced. */
-export class ServiceBackendPortHelper extends ResourceTemplate {
-    static kind = 'ServiceBackendPort';
-    static apiVersion = 'networking/v1';
+export interface ServiceBackendPortHelper extends ServiceBackendPort {
+    $number(x: any): any;
+}
 
-    number(number: number): ServiceBackendPortHelper {
-        this._template.number = number
-        return this
+/** ServiceBackendPort is the service port being referenced. */
+export class ServiceBackendPortHelper extends Template implements ServiceBackendPortHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = ServiceBackendPortHelper.kind
-        this._template.apiVersion = ServiceBackendPortHelper.apiVersion
+    _number: any;
+    get number(): any /*number*/ {
+        return this._number
+    }
+    set number(x: any /*number*/) {
+        this._number = x
+    }
+    setNumber(x: any /*number*/) {
+        this.number = x; return this
     }
 }

@@ -6,22 +6,11 @@ import { addInterface } from './interface'
 import { addResource } from './resource'
 import { definitions } from './definitions'
 
-// const bases = ['Secret', 'ConfigMap', 'Namespace', 'Spec', 'Deployment', 'Object', 'MutatingWebhook', 'Container']
-// const smallSet = bases.reduce((ac, x) => {
-//   ac.push(x)
-//   ac.push(x+'List')
-//   ac.push(x+'Item')
-//   ac.push(x+'Spec')
-//   ac.push(x+'Status')
-//   ac.push(x+'Meta')
-//   return ac
-// }, [])
-// console.log(smallSet)
-
 export const generate = (proj: Project, api: API) => {
   const imports1: Map<string, Imports> = new Map()
   const imports2: Map<string, Imports> = new Map()
 
+  const defs = definitions(api)
   for (const { name, path, root, def } of definitions(api)) {
     //console.log(`Processing ${path} ${name}`)
     //console.log(`Processing ${path} ${name}`)
@@ -53,9 +42,9 @@ export const generate = (proj: Project, api: API) => {
   }
   for (const fileImports of imports2.values()) {
     if (fileImports.root == './')
-      fileImports.apply(['ResourceTemplate'], './resourceTemplate')
+      fileImports.apply(['ResourceTemplate', 'Template'], './resourceTemplate')
     else
-      fileImports.apply(['ResourceTemplate'], '../resourceTemplate')
+      fileImports.apply(['ResourceTemplate', 'Template'], '../resourceTemplate')
   }
 }
 

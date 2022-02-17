@@ -1,369 +1,494 @@
-import { ResourceTemplate } from "../resourceTemplate";
-import { HTTPIngressPath, HTTPIngressRuleValue, Ingress, IngressBackend, IngressClass, IngressClassParametersReference, IngressClassSpec, IngressRule, IngressSpec, IngressStatus, IngressTLS } from "./v1beta1";
+import { ResourceTemplate, Template } from "../resourceTemplate";
+import { HTTPIngressPath, HTTPIngressRuleValue, Ingress, IngressBackend, IngressClass, IngressClassList, IngressClassParametersReference, IngressClassSpec, IngressList, IngressRule, IngressSpec, IngressStatus, IngressTLS } from "./v1beta1";
 import { ListMeta, ObjectMeta } from "../meta/v1";
 import { LoadBalancerStatus, TypedLocalObjectReference } from "../core/v1";
 
+export interface HTTPIngressPathHelper extends HTTPIngressPath {
+    $backend(x: any): any;
+    $path(x: any): any;
+    $pathType(x: any): any;
+}
+
 /** HTTPIngressPath associates a path with a backend. Incoming urls matching the path are forwarded to the backend. */
-export class HTTPIngressPathHelper extends ResourceTemplate {
-    static kind = 'HTTPIngressPath';
-    static apiVersion = 'networking/v1beta1';
-
-    backend(backend: IngressBackend): HTTPIngressPathHelper {
-        if (!this._template.backend) this._template.backend = []
-        this._template.backend = {
-            ...this._template.backend,
-            ...backend
-        }
-        return this
+export class HTTPIngressPathHelper extends Template implements HTTPIngressPathHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    path(path: string): HTTPIngressPathHelper {
-        this._template.path = path
-        return this
+    _backend: any;
+    get backend(): any /*IngressBackendHelper*/ {
+        return this._backend
+    }
+    set backend(x: any /*IngressBackendHelper*/) {
+        this._backend = x
+    }
+    setBackend(x: any /*IngressBackendHelper*/) {
+        this.backend = x; return this
     }
 
-    pathType(pathType: string): HTTPIngressPathHelper {
-        this._template.pathType = pathType
-        return this
+    _path: any;
+    get path(): any /*string*/ {
+        return this._path
+    }
+    set path(x: any /*string*/) {
+        this._path = x
+    }
+    setPath(x: any /*string*/) {
+        this.path = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = HTTPIngressPathHelper.kind
-        this._template.apiVersion = HTTPIngressPathHelper.apiVersion
+    _pathType: any;
+    get pathType(): any /*string*/ {
+        return this._pathType
     }
+    set pathType(x: any /*string*/) {
+        this._pathType = x
+    }
+    setPathType(x: any /*string*/) {
+        this.pathType = x; return this
+    }
+}
+
+export interface HTTPIngressRuleValueHelper extends HTTPIngressRuleValue {
+    $paths(x: any): any;
 }
 
 /** HTTPIngressRuleValue is a list of http selectors pointing to backends. In the example: http://<host>/<path>?<searchpart> -> backend where where parts of the url correspond to RFC 3986, this resource will be used to match against everything after the last '/' and before the first '?' or '#'. */
-export class HTTPIngressRuleValueHelper extends ResourceTemplate {
-    static kind = 'HTTPIngressRuleValue';
-    static apiVersion = 'networking/v1beta1';
-
-    paths(paths: Array<HTTPIngressPath>): HTTPIngressRuleValueHelper {
-        if (!Array.isArray(paths)) { paths = [paths] }
-        if (!this._template.paths) this._template.paths = paths
-        this._template.paths = [...this._template.paths, ...paths]
-        return this
+export class HTTPIngressRuleValueHelper extends Template implements HTTPIngressRuleValueHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = HTTPIngressRuleValueHelper.kind
-        this._template.apiVersion = HTTPIngressRuleValueHelper.apiVersion
+    _paths: any;
+    get paths(): any /*Array<HTTPIngressPath>*/ {
+        return this._paths
     }
+    set paths(x: any /*Array<HTTPIngressPath>*/) {
+        this._paths = this.set(this.paths, x)
+    }
+    setPaths(x: any /*Array<HTTPIngressPath>*/) {
+        this.paths = x; return this
+    }
+}
+
+export interface IngressHelper extends Ingress {
+    $metadata(x: any): any;
+    $spec(x: any): any;
+    $status(x: any): any;
 }
 
 /** Ingress is a collection of rules that allow inbound connections to reach the endpoints defined by a backend. An Ingress can be configured to give services externally-reachable urls, load balance traffic, terminate SSL, offer name based virtual hosting etc. */
-export class IngressHelper extends ResourceTemplate {
+export class IngressHelper extends ResourceTemplate implements IngressHelper {
     static kind = 'Ingress';
     static apiVersion = 'networking/v1beta1';
 
-    metadata(metadata: ObjectMeta): IngressHelper {
-        if (!this._template.metadata) this._template.metadata = []
-        this._template.metadata = {
-            ...this._template.metadata,
-            ...metadata
-        }
-        return this
+    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
+        super(nameOrObject, namespace, IngressHelper.kind, IngressHelper.apiVersion)
     }
 
-    spec(spec: IngressSpec): IngressHelper {
-        if (!this._template.spec) this._template.spec = []
-        this._template.spec = {
-            ...this._template.spec,
-            ...spec
-        }
-        return this
+    _metadata: any;
+    get metadata(): any /*ObjectMetaHelper*/ {
+        return this._metadata
+    }
+    set metadata(x: any /*ObjectMetaHelper*/) {
+        this._metadata = x
+    }
+    setMetadata(x: any /*ObjectMetaHelper*/) {
+        this.metadata = x; return this
     }
 
-    status(status: IngressStatus): IngressHelper {
-        if (!this._template.status) this._template.status = []
-        this._template.status = {
-            ...this._template.status,
-            ...status
-        }
-        return this
+    _spec: any;
+    get spec(): any /*IngressSpecHelper*/ {
+        return this._spec
+    }
+    set spec(x: any /*IngressSpecHelper*/) {
+        this._spec = x
+    }
+    setSpec(x: any /*IngressSpecHelper*/) {
+        this.spec = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = IngressHelper.kind
-        this._template.apiVersion = IngressHelper.apiVersion
+    _status: any;
+    get status(): any /*IngressStatusHelper*/ {
+        return this._status
     }
+    set status(x: any /*IngressStatusHelper*/) {
+        this._status = x
+    }
+    setStatus(x: any /*IngressStatusHelper*/) {
+        this.status = x; return this
+    }
+}
+
+export interface IngressBackendHelper extends IngressBackend {
+    $resource(x: any): any;
+    $serviceName(x: any): any;
+    $servicePort(x: any): any;
 }
 
 /** IngressBackend describes all endpoints for a given service and port. */
-export class IngressBackendHelper extends ResourceTemplate {
-    static kind = 'IngressBackend';
-    static apiVersion = 'networking/v1beta1';
-
-    resource(resource: TypedLocalObjectReference): IngressBackendHelper {
-        if (!this._template.resource) this._template.resource = []
-        this._template.resource = {
-            ...this._template.resource,
-            ...resource
-        }
-        return this
+export class IngressBackendHelper extends Template implements IngressBackendHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    serviceName(serviceName: string): IngressBackendHelper {
-        this._template.serviceName = serviceName
-        return this
+    _resource: any;
+    get resource(): any /*TypedLocalObjectReferenceHelper*/ {
+        return this._resource
+    }
+    set resource(x: any /*TypedLocalObjectReferenceHelper*/) {
+        this._resource = x
+    }
+    setResource(x: any /*TypedLocalObjectReferenceHelper*/) {
+        this.resource = x; return this
     }
 
-    servicePort(servicePort: number | string): IngressBackendHelper {
-        this._template.servicePort = servicePort
-        return this
+    _serviceName: any;
+    get serviceName(): any /*string*/ {
+        return this._serviceName
+    }
+    set serviceName(x: any /*string*/) {
+        this._serviceName = x
+    }
+    setServiceName(x: any /*string*/) {
+        this.serviceName = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = IngressBackendHelper.kind
-        this._template.apiVersion = IngressBackendHelper.apiVersion
+    _servicePort: any;
+    get servicePort(): any /*number | stringHelper*/ {
+        return this._servicePort
     }
+    set servicePort(x: any /*number | stringHelper*/) {
+        this._servicePort = x
+    }
+    setServicePort(x: any /*number | stringHelper*/) {
+        this.servicePort = x; return this
+    }
+}
+
+export interface IngressClassHelper extends IngressClass {
+    $metadata(x: any): any;
+    $spec(x: any): any;
 }
 
 /** IngressClass represents the class of the Ingress, referenced by the Ingress Spec. The `ingressclass.kubernetes.io/is-default-class` annotation can be used to indicate that an IngressClass should be considered default. When a single IngressClass resource has this annotation set to true, new Ingress resources without a class specified will be assigned this default class. */
-export class IngressClassHelper extends ResourceTemplate {
+export class IngressClassHelper extends ResourceTemplate implements IngressClassHelper {
     static kind = 'IngressClass';
     static apiVersion = 'networking/v1beta1';
 
-    metadata(metadata: ObjectMeta): IngressClassHelper {
-        if (!this._template.metadata) this._template.metadata = []
-        this._template.metadata = {
-            ...this._template.metadata,
-            ...metadata
-        }
-        return this
+    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
+        super(nameOrObject, namespace, IngressClassHelper.kind, IngressClassHelper.apiVersion)
     }
 
-    spec(spec: IngressClassSpec): IngressClassHelper {
-        if (!this._template.spec) this._template.spec = []
-        this._template.spec = {
-            ...this._template.spec,
-            ...spec
-        }
-        return this
+    _metadata: any;
+    get metadata(): any /*ObjectMetaHelper*/ {
+        return this._metadata
+    }
+    set metadata(x: any /*ObjectMetaHelper*/) {
+        this._metadata = x
+    }
+    setMetadata(x: any /*ObjectMetaHelper*/) {
+        this.metadata = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = IngressClassHelper.kind
-        this._template.apiVersion = IngressClassHelper.apiVersion
+    _spec: any;
+    get spec(): any /*IngressClassSpecHelper*/ {
+        return this._spec
     }
+    set spec(x: any /*IngressClassSpecHelper*/) {
+        this._spec = x
+    }
+    setSpec(x: any /*IngressClassSpecHelper*/) {
+        this.spec = x; return this
+    }
+}
+
+export interface IngressClassListHelper extends IngressClassList {
+    $items(x: any): any;
+    $metadata(x: any): any;
 }
 
 /** IngressClassList is a collection of IngressClasses. */
-export class IngressClassListHelper extends ResourceTemplate {
+export class IngressClassListHelper extends ResourceTemplate implements IngressClassListHelper {
     static kind = 'IngressClassList';
     static apiVersion = 'networking/v1beta1';
 
-    items(items: Array<IngressClass>): IngressClassListHelper {
-        if (!Array.isArray(items)) { items = [items] }
-        if (!this._template.items) this._template.items = items
-        this._template.items = [...this._template.items, ...items]
-        return this
+    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
+        super(nameOrObject, namespace, IngressClassListHelper.kind, IngressClassListHelper.apiVersion)
     }
 
-    metadata(metadata: ListMeta): IngressClassListHelper {
-        if (!this._template.metadata) this._template.metadata = []
-        this._template.metadata = {
-            ...this._template.metadata,
-            ...metadata
-        }
-        return this
+    _items: any;
+    get items(): any /*Array<IngressClass>*/ {
+        return this._items
+    }
+    set items(x: any /*Array<IngressClass>*/) {
+        this._items = this.set(this.items, x)
+    }
+    setItems(x: any /*Array<IngressClass>*/) {
+        this.items = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = IngressClassListHelper.kind
-        this._template.apiVersion = IngressClassListHelper.apiVersion
+    _metadata: any;
+    get metadata(): any /*ListMetaHelper*/ {
+        return this._metadata
     }
+    set metadata(x: any /*ListMetaHelper*/) {
+        this._metadata = x
+    }
+    setMetadata(x: any /*ListMetaHelper*/) {
+        this.metadata = x; return this
+    }
+}
+
+export interface IngressClassParametersReferenceHelper extends IngressClassParametersReference {
+    $apiGroup(x: any): any;
+    $scope(x: any): any;
 }
 
 /** IngressClassParametersReference identifies an API object. This can be used to specify a cluster or namespace-scoped resource. */
-export class IngressClassParametersReferenceHelper extends ResourceTemplate {
-    static kind = 'IngressClassParametersReference';
-    static apiVersion = 'networking/v1beta1';
-
-    apiGroup(apiGroup: string): IngressClassParametersReferenceHelper {
-        this._template.apiGroup = apiGroup
-        return this
+export class IngressClassParametersReferenceHelper extends Template implements IngressClassParametersReferenceHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    scope(scope: string): IngressClassParametersReferenceHelper {
-        this._template.scope = scope
-        return this
+    _apiGroup: any;
+    get apiGroup(): any /*string*/ {
+        return this._apiGroup
+    }
+    set apiGroup(x: any /*string*/) {
+        this._apiGroup = x
+    }
+    setApiGroup(x: any /*string*/) {
+        this.apiGroup = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = IngressClassParametersReferenceHelper.kind
-        this._template.apiVersion = IngressClassParametersReferenceHelper.apiVersion
+    _scope: any;
+    get scope(): any /*string*/ {
+        return this._scope
     }
+    set scope(x: any /*string*/) {
+        this._scope = x
+    }
+    setScope(x: any /*string*/) {
+        this.scope = x; return this
+    }
+}
+
+export interface IngressClassSpecHelper extends IngressClassSpec {
+    $controller(x: any): any;
+    $parameters(x: any): any;
 }
 
 /** IngressClassSpec provides information about the class of an Ingress. */
-export class IngressClassSpecHelper extends ResourceTemplate {
-    static kind = 'IngressClassSpec';
-    static apiVersion = 'networking/v1beta1';
-
-    controller(controller: string): IngressClassSpecHelper {
-        this._template.controller = controller
-        return this
+export class IngressClassSpecHelper extends Template implements IngressClassSpecHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    parameters(parameters: IngressClassParametersReference): IngressClassSpecHelper {
-        if (!this._template.parameters) this._template.parameters = []
-        this._template.parameters = {
-            ...this._template.parameters,
-            ...parameters
-        }
-        return this
+    _controller: any;
+    get controller(): any /*string*/ {
+        return this._controller
+    }
+    set controller(x: any /*string*/) {
+        this._controller = x
+    }
+    setController(x: any /*string*/) {
+        this.controller = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = IngressClassSpecHelper.kind
-        this._template.apiVersion = IngressClassSpecHelper.apiVersion
+    _parameters: any;
+    get parameters(): any /*IngressClassParametersReferenceHelper*/ {
+        return this._parameters
     }
+    set parameters(x: any /*IngressClassParametersReferenceHelper*/) {
+        this._parameters = x
+    }
+    setParameters(x: any /*IngressClassParametersReferenceHelper*/) {
+        this.parameters = x; return this
+    }
+}
+
+export interface IngressListHelper extends IngressList {
+    $items(x: any): any;
+    $metadata(x: any): any;
 }
 
 /** IngressList is a collection of Ingress. */
-export class IngressListHelper extends ResourceTemplate {
+export class IngressListHelper extends ResourceTemplate implements IngressListHelper {
     static kind = 'IngressList';
     static apiVersion = 'networking/v1beta1';
 
-    items(items: Array<Ingress>): IngressListHelper {
-        if (!Array.isArray(items)) { items = [items] }
-        if (!this._template.items) this._template.items = items
-        this._template.items = [...this._template.items, ...items]
-        return this
+    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
+        super(nameOrObject, namespace, IngressListHelper.kind, IngressListHelper.apiVersion)
     }
 
-    metadata(metadata: ListMeta): IngressListHelper {
-        if (!this._template.metadata) this._template.metadata = []
-        this._template.metadata = {
-            ...this._template.metadata,
-            ...metadata
-        }
-        return this
+    _items: any;
+    get items(): any /*Array<Ingress>*/ {
+        return this._items
+    }
+    set items(x: any /*Array<Ingress>*/) {
+        this._items = this.set(this.items, x)
+    }
+    setItems(x: any /*Array<Ingress>*/) {
+        this.items = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = IngressListHelper.kind
-        this._template.apiVersion = IngressListHelper.apiVersion
+    _metadata: any;
+    get metadata(): any /*ListMetaHelper*/ {
+        return this._metadata
     }
+    set metadata(x: any /*ListMetaHelper*/) {
+        this._metadata = x
+    }
+    setMetadata(x: any /*ListMetaHelper*/) {
+        this.metadata = x; return this
+    }
+}
+
+export interface IngressRuleHelper extends IngressRule {
+    $host(x: any): any;
+    $http(x: any): any;
 }
 
 /** IngressRule represents the rules mapping the paths under a specified host to the related backend services. Incoming requests are first evaluated for a host match, then routed to the backend associated with the matching IngressRuleValue. */
-export class IngressRuleHelper extends ResourceTemplate {
-    static kind = 'IngressRule';
-    static apiVersion = 'networking/v1beta1';
-
-    host(host: string): IngressRuleHelper {
-        this._template.host = host
-        return this
+export class IngressRuleHelper extends Template implements IngressRuleHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    http(http: HTTPIngressRuleValue): IngressRuleHelper {
-        if (!this._template.http) this._template.http = []
-        this._template.http = {
-            ...this._template.http,
-            ...http
-        }
-        return this
+    _host: any;
+    get host(): any /*string*/ {
+        return this._host
+    }
+    set host(x: any /*string*/) {
+        this._host = x
+    }
+    setHost(x: any /*string*/) {
+        this.host = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = IngressRuleHelper.kind
-        this._template.apiVersion = IngressRuleHelper.apiVersion
+    _http: any;
+    get http(): any /*HTTPIngressRuleValueHelper*/ {
+        return this._http
     }
+    set http(x: any /*HTTPIngressRuleValueHelper*/) {
+        this._http = x
+    }
+    setHttp(x: any /*HTTPIngressRuleValueHelper*/) {
+        this.http = x; return this
+    }
+}
+
+export interface IngressSpecHelper extends IngressSpec {
+    $backend(x: any): any;
+    $ingressClassName(x: any): any;
+    $rules(x: any): any;
+    $tls(x: any): any;
 }
 
 /** IngressSpec describes the Ingress the user wishes to exist. */
-export class IngressSpecHelper extends ResourceTemplate {
-    static kind = 'IngressSpec';
-    static apiVersion = 'networking/v1beta1';
-
-    backend(backend: IngressBackend): IngressSpecHelper {
-        if (!this._template.backend) this._template.backend = []
-        this._template.backend = {
-            ...this._template.backend,
-            ...backend
-        }
-        return this
+export class IngressSpecHelper extends Template implements IngressSpecHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    ingressClassName(ingressClassName: string): IngressSpecHelper {
-        this._template.ingressClassName = ingressClassName
-        return this
+    _backend: any;
+    get backend(): any /*IngressBackendHelper*/ {
+        return this._backend
+    }
+    set backend(x: any /*IngressBackendHelper*/) {
+        this._backend = x
+    }
+    setBackend(x: any /*IngressBackendHelper*/) {
+        this.backend = x; return this
     }
 
-    rules(rules: Array<IngressRule>): IngressSpecHelper {
-        if (!Array.isArray(rules)) { rules = [rules] }
-        if (!this._template.rules) this._template.rules = rules
-        this._template.rules = [...this._template.rules, ...rules]
-        return this
+    _ingressClassName: any;
+    get ingressClassName(): any /*string*/ {
+        return this._ingressClassName
+    }
+    set ingressClassName(x: any /*string*/) {
+        this._ingressClassName = x
+    }
+    setIngressClassName(x: any /*string*/) {
+        this.ingressClassName = x; return this
     }
 
-    tls(tls: Array<IngressTLS>): IngressSpecHelper {
-        if (!Array.isArray(tls)) { tls = [tls] }
-        if (!this._template.tls) this._template.tls = tls
-        this._template.tls = [...this._template.tls, ...tls]
-        return this
+    _rules: any;
+    get rules(): any /*Array<IngressRule>*/ {
+        return this._rules
+    }
+    set rules(x: any /*Array<IngressRule>*/) {
+        this._rules = this.set(this.rules, x)
+    }
+    setRules(x: any /*Array<IngressRule>*/) {
+        this.rules = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = IngressSpecHelper.kind
-        this._template.apiVersion = IngressSpecHelper.apiVersion
+    _tls: any;
+    get tls(): any /*Array<IngressTLS>*/ {
+        return this._tls
     }
+    set tls(x: any /*Array<IngressTLS>*/) {
+        this._tls = this.set(this.tls, x)
+    }
+    setTls(x: any /*Array<IngressTLS>*/) {
+        this.tls = x; return this
+    }
+}
+
+export interface IngressStatusHelper extends IngressStatus {
+    $loadBalancer(x: any): any;
 }
 
 /** IngressStatus describe the current state of the Ingress. */
-export class IngressStatusHelper extends ResourceTemplate {
-    static kind = 'IngressStatus';
-    static apiVersion = 'networking/v1beta1';
-
-    loadBalancer(loadBalancer: LoadBalancerStatus): IngressStatusHelper {
-        if (!this._template.loadBalancer) this._template.loadBalancer = []
-        this._template.loadBalancer = {
-            ...this._template.loadBalancer,
-            ...loadBalancer
-        }
-        return this
+export class IngressStatusHelper extends Template implements IngressStatusHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = IngressStatusHelper.kind
-        this._template.apiVersion = IngressStatusHelper.apiVersion
+    _loadBalancer: any;
+    get loadBalancer(): any /*LoadBalancerStatusHelper*/ {
+        return this._loadBalancer
+    }
+    set loadBalancer(x: any /*LoadBalancerStatusHelper*/) {
+        this._loadBalancer = x
+    }
+    setLoadBalancer(x: any /*LoadBalancerStatusHelper*/) {
+        this.loadBalancer = x; return this
     }
 }
 
+export interface IngressTLSHelper extends IngressTLS {
+    $hosts(x: any): any;
+    $secretName(x: any): any;
+}
+
 /** IngressTLS describes the transport layer security associated with an Ingress. */
-export class IngressTLSHelper extends ResourceTemplate {
-    static kind = 'IngressTLS';
-    static apiVersion = 'networking/v1beta1';
-
-    hosts(hosts: Array<string>): IngressTLSHelper {
-        if (!Array.isArray(hosts)) { hosts = [hosts] }
-        if (!this._template.hosts) this._template.hosts = hosts
-        this._template.hosts = [...this._template.hosts, ...hosts]
-        return this
+export class IngressTLSHelper extends Template implements IngressTLSHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    secretName(secretName: string): IngressTLSHelper {
-        this._template.secretName = secretName
-        return this
+    _hosts: any;
+    get hosts(): any /*Array<string>*/ {
+        return this._hosts
+    }
+    set hosts(x: any /*Array<string>*/) {
+        this._hosts = this.set(this.hosts, x)
+    }
+    setHosts(x: any /*Array<string>*/) {
+        this.hosts = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = IngressTLSHelper.kind
-        this._template.apiVersion = IngressTLSHelper.apiVersion
+    _secretName: any;
+    get secretName(): any /*string*/ {
+        return this._secretName
+    }
+    set secretName(x: any /*string*/) {
+        this._secretName = x
+    }
+    setSecretName(x: any /*string*/) {
+        this.secretName = x; return this
     }
 }

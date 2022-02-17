@@ -1,233 +1,332 @@
-import { ResourceTemplate } from "../resourceTemplate";
+import { ResourceTemplate, Template } from "../resourceTemplate";
+import { CrossVersionObjectReference, HorizontalPodAutoscaler, HorizontalPodAutoscalerList, HorizontalPodAutoscalerSpec, HorizontalPodAutoscalerStatus, Scale, ScaleSpec, ScaleStatus } from "./v1";
 import { ListMeta, ObjectMeta, Time } from "../meta/v1";
-import { CrossVersionObjectReference, HorizontalPodAutoscaler, HorizontalPodAutoscalerSpec, HorizontalPodAutoscalerStatus, ScaleSpec, ScaleStatus } from "./v1";
+
+export interface CrossVersionObjectReferenceHelper extends CrossVersionObjectReference {
+}
 
 /** CrossVersionObjectReference contains enough information to let you identify the referred resource. */
-export class CrossVersionObjectReferenceHelper extends ResourceTemplate {
-    static kind = 'CrossVersionObjectReference';
-    static apiVersion = 'autoscaling/v1';
-
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = CrossVersionObjectReferenceHelper.kind
-        this._template.apiVersion = CrossVersionObjectReferenceHelper.apiVersion
+export class CrossVersionObjectReferenceHelper extends Template implements CrossVersionObjectReferenceHelper {
+    constructor(obj: any) {
+        super(obj)
     }
+}
+
+export interface HorizontalPodAutoscalerHelper extends HorizontalPodAutoscaler {
+    $metadata(x: any): any;
+    $spec(x: any): any;
+    $status(x: any): any;
 }
 
 /** configuration of a horizontal pod autoscaler. */
-export class HorizontalPodAutoscalerHelper extends ResourceTemplate {
+export class HorizontalPodAutoscalerHelper extends ResourceTemplate implements HorizontalPodAutoscalerHelper {
     static kind = 'HorizontalPodAutoscaler';
     static apiVersion = 'autoscaling/v1';
 
-    metadata(metadata: ObjectMeta): HorizontalPodAutoscalerHelper {
-        if (!this._template.metadata) this._template.metadata = []
-        this._template.metadata = {
-            ...this._template.metadata,
-            ...metadata
-        }
-        return this
+    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
+        super(nameOrObject, namespace, HorizontalPodAutoscalerHelper.kind, HorizontalPodAutoscalerHelper.apiVersion)
     }
 
-    spec(spec: HorizontalPodAutoscalerSpec): HorizontalPodAutoscalerHelper {
-        if (!this._template.spec) this._template.spec = []
-        this._template.spec = {
-            ...this._template.spec,
-            ...spec
-        }
-        return this
+    _metadata: any;
+    get metadata(): any /*ObjectMetaHelper*/ {
+        return this._metadata
+    }
+    set metadata(x: any /*ObjectMetaHelper*/) {
+        this._metadata = x
+    }
+    setMetadata(x: any /*ObjectMetaHelper*/) {
+        this.metadata = x; return this
     }
 
-    status(status: HorizontalPodAutoscalerStatus): HorizontalPodAutoscalerHelper {
-        if (!this._template.status) this._template.status = []
-        this._template.status = {
-            ...this._template.status,
-            ...status
-        }
-        return this
+    _spec: any;
+    get spec(): any /*HorizontalPodAutoscalerSpecHelper*/ {
+        return this._spec
+    }
+    set spec(x: any /*HorizontalPodAutoscalerSpecHelper*/) {
+        this._spec = x
+    }
+    setSpec(x: any /*HorizontalPodAutoscalerSpecHelper*/) {
+        this.spec = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = HorizontalPodAutoscalerHelper.kind
-        this._template.apiVersion = HorizontalPodAutoscalerHelper.apiVersion
+    _status: any;
+    get status(): any /*HorizontalPodAutoscalerStatusHelper*/ {
+        return this._status
     }
+    set status(x: any /*HorizontalPodAutoscalerStatusHelper*/) {
+        this._status = x
+    }
+    setStatus(x: any /*HorizontalPodAutoscalerStatusHelper*/) {
+        this.status = x; return this
+    }
+}
+
+export interface HorizontalPodAutoscalerListHelper extends HorizontalPodAutoscalerList {
+    $items(x: any): any;
+    $metadata(x: any): any;
 }
 
 /** list of horizontal pod autoscaler objects. */
-export class HorizontalPodAutoscalerListHelper extends ResourceTemplate {
+export class HorizontalPodAutoscalerListHelper extends ResourceTemplate implements HorizontalPodAutoscalerListHelper {
     static kind = 'HorizontalPodAutoscalerList';
     static apiVersion = 'autoscaling/v1';
 
-    items(items: Array<HorizontalPodAutoscaler>): HorizontalPodAutoscalerListHelper {
-        if (!Array.isArray(items)) { items = [items] }
-        if (!this._template.items) this._template.items = items
-        this._template.items = [...this._template.items, ...items]
-        return this
+    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
+        super(nameOrObject, namespace, HorizontalPodAutoscalerListHelper.kind, HorizontalPodAutoscalerListHelper.apiVersion)
     }
 
-    metadata(metadata: ListMeta): HorizontalPodAutoscalerListHelper {
-        if (!this._template.metadata) this._template.metadata = []
-        this._template.metadata = {
-            ...this._template.metadata,
-            ...metadata
-        }
-        return this
+    _items: any;
+    get items(): any /*Array<HorizontalPodAutoscaler>*/ {
+        return this._items
+    }
+    set items(x: any /*Array<HorizontalPodAutoscaler>*/) {
+        this._items = this.set(this.items, x)
+    }
+    setItems(x: any /*Array<HorizontalPodAutoscaler>*/) {
+        this.items = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = HorizontalPodAutoscalerListHelper.kind
-        this._template.apiVersion = HorizontalPodAutoscalerListHelper.apiVersion
+    _metadata: any;
+    get metadata(): any /*ListMetaHelper*/ {
+        return this._metadata
     }
+    set metadata(x: any /*ListMetaHelper*/) {
+        this._metadata = x
+    }
+    setMetadata(x: any /*ListMetaHelper*/) {
+        this.metadata = x; return this
+    }
+}
+
+export interface HorizontalPodAutoscalerSpecHelper extends HorizontalPodAutoscalerSpec {
+    $maxReplicas(x: any): any;
+    $minReplicas(x: any): any;
+    $scaleTargetRef(x: any): any;
+    $targetCPUUtilizationPercentage(x: any): any;
 }
 
 /** specification of a horizontal pod autoscaler. */
-export class HorizontalPodAutoscalerSpecHelper extends ResourceTemplate {
-    static kind = 'HorizontalPodAutoscalerSpec';
-    static apiVersion = 'autoscaling/v1';
-
-    maxReplicas(maxReplicas: number): HorizontalPodAutoscalerSpecHelper {
-        this._template.maxReplicas = maxReplicas
-        return this
+export class HorizontalPodAutoscalerSpecHelper extends Template implements HorizontalPodAutoscalerSpecHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    minReplicas(minReplicas: number): HorizontalPodAutoscalerSpecHelper {
-        this._template.minReplicas = minReplicas
-        return this
+    _maxReplicas: any;
+    get maxReplicas(): any /*number*/ {
+        return this._maxReplicas
+    }
+    set maxReplicas(x: any /*number*/) {
+        this._maxReplicas = x
+    }
+    setMaxReplicas(x: any /*number*/) {
+        this.maxReplicas = x; return this
     }
 
-    scaleTargetRef(scaleTargetRef: CrossVersionObjectReference): HorizontalPodAutoscalerSpecHelper {
-        if (!this._template.scaleTargetRef) this._template.scaleTargetRef = []
-        this._template.scaleTargetRef = {
-            ...this._template.scaleTargetRef,
-            ...scaleTargetRef
-        }
-        return this
+    _minReplicas: any;
+    get minReplicas(): any /*number*/ {
+        return this._minReplicas
+    }
+    set minReplicas(x: any /*number*/) {
+        this._minReplicas = x
+    }
+    setMinReplicas(x: any /*number*/) {
+        this.minReplicas = x; return this
     }
 
-    targetCPUUtilizationPercentage(targetCPUUtilizationPercentage: number): HorizontalPodAutoscalerSpecHelper {
-        this._template.targetCPUUtilizationPercentage = targetCPUUtilizationPercentage
-        return this
+    _scaleTargetRef: any;
+    get scaleTargetRef(): any /*CrossVersionObjectReferenceHelper*/ {
+        return this._scaleTargetRef
+    }
+    set scaleTargetRef(x: any /*CrossVersionObjectReferenceHelper*/) {
+        this._scaleTargetRef = x
+    }
+    setScaleTargetRef(x: any /*CrossVersionObjectReferenceHelper*/) {
+        this.scaleTargetRef = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = HorizontalPodAutoscalerSpecHelper.kind
-        this._template.apiVersion = HorizontalPodAutoscalerSpecHelper.apiVersion
+    _targetCPUUtilizationPercentage: any;
+    get targetCPUUtilizationPercentage(): any /*number*/ {
+        return this._targetCPUUtilizationPercentage
     }
+    set targetCPUUtilizationPercentage(x: any /*number*/) {
+        this._targetCPUUtilizationPercentage = x
+    }
+    setTargetCPUUtilizationPercentage(x: any /*number*/) {
+        this.targetCPUUtilizationPercentage = x; return this
+    }
+}
+
+export interface HorizontalPodAutoscalerStatusHelper extends HorizontalPodAutoscalerStatus {
+    $currentCPUUtilizationPercentage(x: any): any;
+    $currentReplicas(x: any): any;
+    $desiredReplicas(x: any): any;
+    $lastScaleTime(x: any): any;
+    $observedGeneration(x: any): any;
 }
 
 /** current status of a horizontal pod autoscaler */
-export class HorizontalPodAutoscalerStatusHelper extends ResourceTemplate {
-    static kind = 'HorizontalPodAutoscalerStatus';
-    static apiVersion = 'autoscaling/v1';
-
-    currentCPUUtilizationPercentage(currentCPUUtilizationPercentage: number): HorizontalPodAutoscalerStatusHelper {
-        this._template.currentCPUUtilizationPercentage = currentCPUUtilizationPercentage
-        return this
+export class HorizontalPodAutoscalerStatusHelper extends Template implements HorizontalPodAutoscalerStatusHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    currentReplicas(currentReplicas: number): HorizontalPodAutoscalerStatusHelper {
-        this._template.currentReplicas = currentReplicas
-        return this
+    _currentCPUUtilizationPercentage: any;
+    get currentCPUUtilizationPercentage(): any /*number*/ {
+        return this._currentCPUUtilizationPercentage
+    }
+    set currentCPUUtilizationPercentage(x: any /*number*/) {
+        this._currentCPUUtilizationPercentage = x
+    }
+    setCurrentCPUUtilizationPercentage(x: any /*number*/) {
+        this.currentCPUUtilizationPercentage = x; return this
     }
 
-    desiredReplicas(desiredReplicas: number): HorizontalPodAutoscalerStatusHelper {
-        this._template.desiredReplicas = desiredReplicas
-        return this
+    _currentReplicas: any;
+    get currentReplicas(): any /*number*/ {
+        return this._currentReplicas
+    }
+    set currentReplicas(x: any /*number*/) {
+        this._currentReplicas = x
+    }
+    setCurrentReplicas(x: any /*number*/) {
+        this.currentReplicas = x; return this
     }
 
-    lastScaleTime(lastScaleTime: Time): HorizontalPodAutoscalerStatusHelper {
-        this._template.lastScaleTime = lastScaleTime
-        return this
+    _desiredReplicas: any;
+    get desiredReplicas(): any /*number*/ {
+        return this._desiredReplicas
+    }
+    set desiredReplicas(x: any /*number*/) {
+        this._desiredReplicas = x
+    }
+    setDesiredReplicas(x: any /*number*/) {
+        this.desiredReplicas = x; return this
     }
 
-    observedGeneration(observedGeneration: number): HorizontalPodAutoscalerStatusHelper {
-        this._template.observedGeneration = observedGeneration
-        return this
+    _lastScaleTime: any;
+    get lastScaleTime(): any /*Time*/ {
+        return this._lastScaleTime
+    }
+    set lastScaleTime(x: any /*Time*/) {
+        this._lastScaleTime = x
+    }
+    setLastScaleTime(x: any /*Time*/) {
+        this.lastScaleTime = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = HorizontalPodAutoscalerStatusHelper.kind
-        this._template.apiVersion = HorizontalPodAutoscalerStatusHelper.apiVersion
+    _observedGeneration: any;
+    get observedGeneration(): any /*number*/ {
+        return this._observedGeneration
     }
+    set observedGeneration(x: any /*number*/) {
+        this._observedGeneration = x
+    }
+    setObservedGeneration(x: any /*number*/) {
+        this.observedGeneration = x; return this
+    }
+}
+
+export interface ScaleHelper extends Scale {
+    $metadata(x: any): any;
+    $spec(x: any): any;
+    $status(x: any): any;
 }
 
 /** Scale represents a scaling request for a resource. */
-export class ScaleHelper extends ResourceTemplate {
+export class ScaleHelper extends ResourceTemplate implements ScaleHelper {
     static kind = 'Scale';
     static apiVersion = 'autoscaling/v1';
 
-    metadata(metadata: ObjectMeta): ScaleHelper {
-        if (!this._template.metadata) this._template.metadata = []
-        this._template.metadata = {
-            ...this._template.metadata,
-            ...metadata
-        }
-        return this
+    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
+        super(nameOrObject, namespace, ScaleHelper.kind, ScaleHelper.apiVersion)
     }
 
-    spec(spec: ScaleSpec): ScaleHelper {
-        if (!this._template.spec) this._template.spec = []
-        this._template.spec = {
-            ...this._template.spec,
-            ...spec
-        }
-        return this
+    _metadata: any;
+    get metadata(): any /*ObjectMetaHelper*/ {
+        return this._metadata
+    }
+    set metadata(x: any /*ObjectMetaHelper*/) {
+        this._metadata = x
+    }
+    setMetadata(x: any /*ObjectMetaHelper*/) {
+        this.metadata = x; return this
     }
 
-    status(status: ScaleStatus): ScaleHelper {
-        if (!this._template.status) this._template.status = []
-        this._template.status = {
-            ...this._template.status,
-            ...status
-        }
-        return this
+    _spec: any;
+    get spec(): any /*ScaleSpecHelper*/ {
+        return this._spec
+    }
+    set spec(x: any /*ScaleSpecHelper*/) {
+        this._spec = x
+    }
+    setSpec(x: any /*ScaleSpecHelper*/) {
+        this.spec = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = ScaleHelper.kind
-        this._template.apiVersion = ScaleHelper.apiVersion
+    _status: any;
+    get status(): any /*ScaleStatusHelper*/ {
+        return this._status
     }
+    set status(x: any /*ScaleStatusHelper*/) {
+        this._status = x
+    }
+    setStatus(x: any /*ScaleStatusHelper*/) {
+        this.status = x; return this
+    }
+}
+
+export interface ScaleSpecHelper extends ScaleSpec {
+    $replicas(x: any): any;
 }
 
 /** ScaleSpec describes the attributes of a scale subresource. */
-export class ScaleSpecHelper extends ResourceTemplate {
-    static kind = 'ScaleSpec';
-    static apiVersion = 'autoscaling/v1';
-
-    replicas(replicas: number): ScaleSpecHelper {
-        this._template.replicas = replicas
-        return this
+export class ScaleSpecHelper extends Template implements ScaleSpecHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = ScaleSpecHelper.kind
-        this._template.apiVersion = ScaleSpecHelper.apiVersion
+    _replicas: any;
+    get replicas(): any /*number*/ {
+        return this._replicas
+    }
+    set replicas(x: any /*number*/) {
+        this._replicas = x
+    }
+    setReplicas(x: any /*number*/) {
+        this.replicas = x; return this
     }
 }
 
+export interface ScaleStatusHelper extends ScaleStatus {
+    $replicas(x: any): any;
+    $selector(x: any): any;
+}
+
 /** ScaleStatus represents the current status of a scale subresource. */
-export class ScaleStatusHelper extends ResourceTemplate {
-    static kind = 'ScaleStatus';
-    static apiVersion = 'autoscaling/v1';
-
-    replicas(replicas: number): ScaleStatusHelper {
-        this._template.replicas = replicas
-        return this
+export class ScaleStatusHelper extends Template implements ScaleStatusHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    selector(selector: string): ScaleStatusHelper {
-        this._template.selector = selector
-        return this
+    _replicas: any;
+    get replicas(): any /*number*/ {
+        return this._replicas
+    }
+    set replicas(x: any /*number*/) {
+        this._replicas = x
+    }
+    setReplicas(x: any /*number*/) {
+        this.replicas = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = ScaleStatusHelper.kind
-        this._template.apiVersion = ScaleStatusHelper.apiVersion
+    _selector: any;
+    get selector(): any /*string*/ {
+        return this._selector
+    }
+    set selector(x: any /*string*/) {
+        this._selector = x
+    }
+    setSelector(x: any /*string*/) {
+        this.selector = x; return this
     }
 }

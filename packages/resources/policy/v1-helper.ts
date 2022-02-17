@@ -1,154 +1,229 @@
-import { ResourceTemplate } from "../resourceTemplate";
+import { ResourceTemplate, Template } from "../resourceTemplate";
+import { PodDisruptionBudget, PodDisruptionBudgetList, PodDisruptionBudgetSpec, PodDisruptionBudgetStatus } from "./v1";
 import { Condition, LabelSelector, ListMeta, ObjectMeta, Time } from "../meta/v1";
-import { PodDisruptionBudget, PodDisruptionBudgetSpec, PodDisruptionBudgetStatus } from "./v1";
+
+export interface PodDisruptionBudgetHelper extends PodDisruptionBudget {
+    $metadata(x: any): any;
+    $spec(x: any): any;
+    $status(x: any): any;
+}
 
 /** PodDisruptionBudget is an object to define the max disruption that can be caused to a collection of pods */
-export class PodDisruptionBudgetHelper extends ResourceTemplate {
+export class PodDisruptionBudgetHelper extends ResourceTemplate implements PodDisruptionBudgetHelper {
     static kind = 'PodDisruptionBudget';
     static apiVersion = 'policy/v1';
 
-    metadata(metadata: ObjectMeta): PodDisruptionBudgetHelper {
-        if (!this._template.metadata) this._template.metadata = []
-        this._template.metadata = {
-            ...this._template.metadata,
-            ...metadata
-        }
-        return this
+    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
+        super(nameOrObject, namespace, PodDisruptionBudgetHelper.kind, PodDisruptionBudgetHelper.apiVersion)
     }
 
-    spec(spec: PodDisruptionBudgetSpec): PodDisruptionBudgetHelper {
-        if (!this._template.spec) this._template.spec = []
-        this._template.spec = {
-            ...this._template.spec,
-            ...spec
-        }
-        return this
+    _metadata: any;
+    get metadata(): any /*ObjectMetaHelper*/ {
+        return this._metadata
+    }
+    set metadata(x: any /*ObjectMetaHelper*/) {
+        this._metadata = x
+    }
+    setMetadata(x: any /*ObjectMetaHelper*/) {
+        this.metadata = x; return this
     }
 
-    status(status: PodDisruptionBudgetStatus): PodDisruptionBudgetHelper {
-        if (!this._template.status) this._template.status = []
-        this._template.status = {
-            ...this._template.status,
-            ...status
-        }
-        return this
+    _spec: any;
+    get spec(): any /*PodDisruptionBudgetSpecHelper*/ {
+        return this._spec
+    }
+    set spec(x: any /*PodDisruptionBudgetSpecHelper*/) {
+        this._spec = x
+    }
+    setSpec(x: any /*PodDisruptionBudgetSpecHelper*/) {
+        this.spec = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = PodDisruptionBudgetHelper.kind
-        this._template.apiVersion = PodDisruptionBudgetHelper.apiVersion
+    _status: any;
+    get status(): any /*PodDisruptionBudgetStatusHelper*/ {
+        return this._status
     }
+    set status(x: any /*PodDisruptionBudgetStatusHelper*/) {
+        this._status = x
+    }
+    setStatus(x: any /*PodDisruptionBudgetStatusHelper*/) {
+        this.status = x; return this
+    }
+}
+
+export interface PodDisruptionBudgetListHelper extends PodDisruptionBudgetList {
+    $items(x: any): any;
+    $metadata(x: any): any;
 }
 
 /** PodDisruptionBudgetList is a collection of PodDisruptionBudgets. */
-export class PodDisruptionBudgetListHelper extends ResourceTemplate {
+export class PodDisruptionBudgetListHelper extends ResourceTemplate implements PodDisruptionBudgetListHelper {
     static kind = 'PodDisruptionBudgetList';
     static apiVersion = 'policy/v1';
 
-    items(items: Array<PodDisruptionBudget>): PodDisruptionBudgetListHelper {
-        if (!Array.isArray(items)) { items = [items] }
-        if (!this._template.items) this._template.items = items
-        this._template.items = [...this._template.items, ...items]
-        return this
+    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
+        super(nameOrObject, namespace, PodDisruptionBudgetListHelper.kind, PodDisruptionBudgetListHelper.apiVersion)
     }
 
-    metadata(metadata: ListMeta): PodDisruptionBudgetListHelper {
-        if (!this._template.metadata) this._template.metadata = []
-        this._template.metadata = {
-            ...this._template.metadata,
-            ...metadata
-        }
-        return this
+    _items: any;
+    get items(): any /*Array<PodDisruptionBudget>*/ {
+        return this._items
+    }
+    set items(x: any /*Array<PodDisruptionBudget>*/) {
+        this._items = this.set(this.items, x)
+    }
+    setItems(x: any /*Array<PodDisruptionBudget>*/) {
+        this.items = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = PodDisruptionBudgetListHelper.kind
-        this._template.apiVersion = PodDisruptionBudgetListHelper.apiVersion
+    _metadata: any;
+    get metadata(): any /*ListMetaHelper*/ {
+        return this._metadata
     }
+    set metadata(x: any /*ListMetaHelper*/) {
+        this._metadata = x
+    }
+    setMetadata(x: any /*ListMetaHelper*/) {
+        this.metadata = x; return this
+    }
+}
+
+export interface PodDisruptionBudgetSpecHelper extends PodDisruptionBudgetSpec {
+    $maxUnavailable(x: any): any;
+    $minAvailable(x: any): any;
+    $selector(x: any): any;
 }
 
 /** PodDisruptionBudgetSpec is a description of a PodDisruptionBudget. */
-export class PodDisruptionBudgetSpecHelper extends ResourceTemplate {
-    static kind = 'PodDisruptionBudgetSpec';
-    static apiVersion = 'policy/v1';
-
-    maxUnavailable(maxUnavailable: number | string): PodDisruptionBudgetSpecHelper {
-        this._template.maxUnavailable = maxUnavailable
-        return this
+export class PodDisruptionBudgetSpecHelper extends Template implements PodDisruptionBudgetSpecHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    minAvailable(minAvailable: number | string): PodDisruptionBudgetSpecHelper {
-        this._template.minAvailable = minAvailable
-        return this
+    _maxUnavailable: any;
+    get maxUnavailable(): any /*number | stringHelper*/ {
+        return this._maxUnavailable
+    }
+    set maxUnavailable(x: any /*number | stringHelper*/) {
+        this._maxUnavailable = x
+    }
+    setMaxUnavailable(x: any /*number | stringHelper*/) {
+        this.maxUnavailable = x; return this
     }
 
-    selector(selector: LabelSelector): PodDisruptionBudgetSpecHelper {
-        if (!this._template.selector) this._template.selector = []
-        this._template.selector = {
-            ...this._template.selector,
-            ...selector
-        }
-        return this
+    _minAvailable: any;
+    get minAvailable(): any /*number | stringHelper*/ {
+        return this._minAvailable
+    }
+    set minAvailable(x: any /*number | stringHelper*/) {
+        this._minAvailable = x
+    }
+    setMinAvailable(x: any /*number | stringHelper*/) {
+        this.minAvailable = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = PodDisruptionBudgetSpecHelper.kind
-        this._template.apiVersion = PodDisruptionBudgetSpecHelper.apiVersion
+    _selector: any;
+    get selector(): any /*LabelSelectorHelper*/ {
+        return this._selector
+    }
+    set selector(x: any /*LabelSelectorHelper*/) {
+        this._selector = x
+    }
+    setSelector(x: any /*LabelSelectorHelper*/) {
+        this.selector = x; return this
     }
 }
 
+export interface PodDisruptionBudgetStatusHelper extends PodDisruptionBudgetStatus {
+    $conditions(x: any): any;
+    $currentHealthy(x: any): any;
+    $desiredHealthy(x: any): any;
+    $disruptedPods(x: any): any;
+    $disruptionsAllowed(x: any): any;
+    $expectedPods(x: any): any;
+    $observedGeneration(x: any): any;
+}
+
 /** PodDisruptionBudgetStatus represents information about the status of a PodDisruptionBudget. Status may trail the actual state of a system. */
-export class PodDisruptionBudgetStatusHelper extends ResourceTemplate {
-    static kind = 'PodDisruptionBudgetStatus';
-    static apiVersion = 'policy/v1';
-
-    conditions(conditions: Array<Condition>): PodDisruptionBudgetStatusHelper {
-        if (!Array.isArray(conditions)) { conditions = [conditions] }
-        if (!this._template.conditions) this._template.conditions = conditions
-        this._template.conditions = [...this._template.conditions, ...conditions]
-        return this
+export class PodDisruptionBudgetStatusHelper extends Template implements PodDisruptionBudgetStatusHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    currentHealthy(currentHealthy: number): PodDisruptionBudgetStatusHelper {
-        this._template.currentHealthy = currentHealthy
-        return this
+    _conditions: any;
+    get conditions(): any /*Array<Condition>*/ {
+        return this._conditions
+    }
+    set conditions(x: any /*Array<Condition>*/) {
+        this._conditions = this.set(this.conditions, x)
+    }
+    setConditions(x: any /*Array<Condition>*/) {
+        this.conditions = x; return this
     }
 
-    desiredHealthy(desiredHealthy: number): PodDisruptionBudgetStatusHelper {
-        this._template.desiredHealthy = desiredHealthy
-        return this
+    _currentHealthy: any;
+    get currentHealthy(): any /*number*/ {
+        return this._currentHealthy
+    }
+    set currentHealthy(x: any /*number*/) {
+        this._currentHealthy = x
+    }
+    setCurrentHealthy(x: any /*number*/) {
+        this.currentHealthy = x; return this
     }
 
-    disruptedPods(disruptedPods: {[name: string]: Time}): PodDisruptionBudgetStatusHelper {
-        if (!this._template.disruptedPods) this._template.disruptedPods = []
-        this._template.disruptedPods = {
-            ...this._template.disruptedPods,
-            ...disruptedPods
-        }
-        return this
+    _desiredHealthy: any;
+    get desiredHealthy(): any /*number*/ {
+        return this._desiredHealthy
+    }
+    set desiredHealthy(x: any /*number*/) {
+        this._desiredHealthy = x
+    }
+    setDesiredHealthy(x: any /*number*/) {
+        this.desiredHealthy = x; return this
     }
 
-    disruptionsAllowed(disruptionsAllowed: number): PodDisruptionBudgetStatusHelper {
-        this._template.disruptionsAllowed = disruptionsAllowed
-        return this
+    _disruptedPods: any;
+    get disruptedPods(): any /*{[name: string]: Time}Helper*/ {
+        return this._disruptedPods
+    }
+    set disruptedPods(x: any /*{[name: string]: Time}Helper*/) {
+        this._disruptedPods = this.set(this.disruptedPods, x)
+    }
+    setDisruptedPods(x: any /*{[name: string]: Time}Helper*/) {
+        this.disruptedPods = x; return this
     }
 
-    expectedPods(expectedPods: number): PodDisruptionBudgetStatusHelper {
-        this._template.expectedPods = expectedPods
-        return this
+    _disruptionsAllowed: any;
+    get disruptionsAllowed(): any /*number*/ {
+        return this._disruptionsAllowed
+    }
+    set disruptionsAllowed(x: any /*number*/) {
+        this._disruptionsAllowed = x
+    }
+    setDisruptionsAllowed(x: any /*number*/) {
+        this.disruptionsAllowed = x; return this
     }
 
-    observedGeneration(observedGeneration: number): PodDisruptionBudgetStatusHelper {
-        this._template.observedGeneration = observedGeneration
-        return this
+    _expectedPods: any;
+    get expectedPods(): any /*number*/ {
+        return this._expectedPods
+    }
+    set expectedPods(x: any /*number*/) {
+        this._expectedPods = x
+    }
+    setExpectedPods(x: any /*number*/) {
+        this.expectedPods = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = PodDisruptionBudgetStatusHelper.kind
-        this._template.apiVersion = PodDisruptionBudgetStatusHelper.apiVersion
+    _observedGeneration: any;
+    get observedGeneration(): any /*number*/ {
+        return this._observedGeneration
+    }
+    set observedGeneration(x: any /*number*/) {
+        this._observedGeneration = x
+    }
+    setObservedGeneration(x: any /*number*/) {
+        this.observedGeneration = x; return this
     }
 }

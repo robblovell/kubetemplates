@@ -1,188 +1,296 @@
-import { ResourceTemplate } from "../resourceTemplate";
+import { ResourceTemplate, Template } from "../resourceTemplate";
+import { CertificateSigningRequest, CertificateSigningRequestCondition, CertificateSigningRequestList, CertificateSigningRequestSpec, CertificateSigningRequestStatus } from "./v1beta1";
 import { ListMeta, ObjectMeta, Time } from "../meta/v1";
-import { CertificateSigningRequest, CertificateSigningRequestCondition, CertificateSigningRequestSpec, CertificateSigningRequestStatus } from "./v1beta1";
+
+export interface CertificateSigningRequestHelper extends CertificateSigningRequest {
+    $metadata(x: any): any;
+    $spec(x: any): any;
+    $status(x: any): any;
+}
 
 /** Describes a certificate signing request */
-export class CertificateSigningRequestHelper extends ResourceTemplate {
+export class CertificateSigningRequestHelper extends ResourceTemplate implements CertificateSigningRequestHelper {
     static kind = 'CertificateSigningRequest';
     static apiVersion = 'certificates/v1beta1';
 
-    metadata(metadata: ObjectMeta): CertificateSigningRequestHelper {
-        if (!this._template.metadata) this._template.metadata = []
-        this._template.metadata = {
-            ...this._template.metadata,
-            ...metadata
-        }
-        return this
+    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
+        super(nameOrObject, namespace, CertificateSigningRequestHelper.kind, CertificateSigningRequestHelper.apiVersion)
     }
 
-    spec(spec: CertificateSigningRequestSpec): CertificateSigningRequestHelper {
-        if (!this._template.spec) this._template.spec = []
-        this._template.spec = {
-            ...this._template.spec,
-            ...spec
-        }
-        return this
+    _metadata: any;
+    get metadata(): any /*ObjectMetaHelper*/ {
+        return this._metadata
+    }
+    set metadata(x: any /*ObjectMetaHelper*/) {
+        this._metadata = x
+    }
+    setMetadata(x: any /*ObjectMetaHelper*/) {
+        this.metadata = x; return this
     }
 
-    status(status: CertificateSigningRequestStatus): CertificateSigningRequestHelper {
-        if (!this._template.status) this._template.status = []
-        this._template.status = {
-            ...this._template.status,
-            ...status
-        }
-        return this
+    _spec: any;
+    get spec(): any /*CertificateSigningRequestSpecHelper*/ {
+        return this._spec
+    }
+    set spec(x: any /*CertificateSigningRequestSpecHelper*/) {
+        this._spec = x
+    }
+    setSpec(x: any /*CertificateSigningRequestSpecHelper*/) {
+        this.spec = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = CertificateSigningRequestHelper.kind
-        this._template.apiVersion = CertificateSigningRequestHelper.apiVersion
+    _status: any;
+    get status(): any /*CertificateSigningRequestStatusHelper*/ {
+        return this._status
     }
-}
-
-export class CertificateSigningRequestConditionHelper extends ResourceTemplate {
-    static kind = 'CertificateSigningRequestCondition';
-    static apiVersion = 'certificates/v1beta1';
-
-    lastTransitionTime(lastTransitionTime: Time): CertificateSigningRequestConditionHelper {
-        this._template.lastTransitionTime = lastTransitionTime
-        return this
+    set status(x: any /*CertificateSigningRequestStatusHelper*/) {
+        this._status = x
     }
-
-    lastUpdateTime(lastUpdateTime: Time): CertificateSigningRequestConditionHelper {
-        this._template.lastUpdateTime = lastUpdateTime
-        return this
-    }
-
-    message(message: string): CertificateSigningRequestConditionHelper {
-        this._template.message = message
-        return this
-    }
-
-    reason(reason: string): CertificateSigningRequestConditionHelper {
-        this._template.reason = reason
-        return this
-    }
-
-    status(status: string): CertificateSigningRequestConditionHelper {
-        this._template.status = status
-        return this
-    }
-
-    type(type: string): CertificateSigningRequestConditionHelper {
-        this._template.type = type
-        return this
-    }
-
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = CertificateSigningRequestConditionHelper.kind
-        this._template.apiVersion = CertificateSigningRequestConditionHelper.apiVersion
+    setStatus(x: any /*CertificateSigningRequestStatusHelper*/) {
+        this.status = x; return this
     }
 }
 
-export class CertificateSigningRequestListHelper extends ResourceTemplate {
+export interface CertificateSigningRequestConditionHelper extends CertificateSigningRequestCondition {
+    $lastTransitionTime(x: any): any;
+    $lastUpdateTime(x: any): any;
+    $message(x: any): any;
+    $reason(x: any): any;
+    $status(x: any): any;
+    $type(x: any): any;
+}
+
+export class CertificateSigningRequestConditionHelper extends Template implements CertificateSigningRequestConditionHelper {
+    constructor(obj: any) {
+        super(obj)
+    }
+
+    _lastTransitionTime: any;
+    get lastTransitionTime(): any /*Time*/ {
+        return this._lastTransitionTime
+    }
+    set lastTransitionTime(x: any /*Time*/) {
+        this._lastTransitionTime = x
+    }
+    setLastTransitionTime(x: any /*Time*/) {
+        this.lastTransitionTime = x; return this
+    }
+
+    _lastUpdateTime: any;
+    get lastUpdateTime(): any /*Time*/ {
+        return this._lastUpdateTime
+    }
+    set lastUpdateTime(x: any /*Time*/) {
+        this._lastUpdateTime = x
+    }
+    setLastUpdateTime(x: any /*Time*/) {
+        this.lastUpdateTime = x; return this
+    }
+
+    _message: any;
+    get message(): any /*string*/ {
+        return this._message
+    }
+    set message(x: any /*string*/) {
+        this._message = x
+    }
+    setMessage(x: any /*string*/) {
+        this.message = x; return this
+    }
+
+    _reason: any;
+    get reason(): any /*string*/ {
+        return this._reason
+    }
+    set reason(x: any /*string*/) {
+        this._reason = x
+    }
+    setReason(x: any /*string*/) {
+        this.reason = x; return this
+    }
+
+    _status: any;
+    get status(): any /*string*/ {
+        return this._status
+    }
+    set status(x: any /*string*/) {
+        this._status = x
+    }
+    setStatus(x: any /*string*/) {
+        this.status = x; return this
+    }
+
+    _type: any;
+    get type(): any /*string*/ {
+        return this._type
+    }
+    set type(x: any /*string*/) {
+        this._type = x
+    }
+    setType(x: any /*string*/) {
+        this.type = x; return this
+    }
+}
+
+export interface CertificateSigningRequestListHelper extends CertificateSigningRequestList {
+    $items(x: any): any;
+    $metadata(x: any): any;
+}
+
+export class CertificateSigningRequestListHelper extends ResourceTemplate implements CertificateSigningRequestListHelper {
     static kind = 'CertificateSigningRequestList';
     static apiVersion = 'certificates/v1beta1';
 
-    items(items: Array<CertificateSigningRequest>): CertificateSigningRequestListHelper {
-        if (!Array.isArray(items)) { items = [items] }
-        if (!this._template.items) this._template.items = items
-        this._template.items = [...this._template.items, ...items]
-        return this
+    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
+        super(nameOrObject, namespace, CertificateSigningRequestListHelper.kind, CertificateSigningRequestListHelper.apiVersion)
     }
 
-    metadata(metadata: ListMeta): CertificateSigningRequestListHelper {
-        if (!this._template.metadata) this._template.metadata = []
-        this._template.metadata = {
-            ...this._template.metadata,
-            ...metadata
-        }
-        return this
+    _items: any;
+    get items(): any /*Array<CertificateSigningRequest>*/ {
+        return this._items
+    }
+    set items(x: any /*Array<CertificateSigningRequest>*/) {
+        this._items = this.set(this.items, x)
+    }
+    setItems(x: any /*Array<CertificateSigningRequest>*/) {
+        this.items = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = CertificateSigningRequestListHelper.kind
-        this._template.apiVersion = CertificateSigningRequestListHelper.apiVersion
+    _metadata: any;
+    get metadata(): any /*ListMetaHelper*/ {
+        return this._metadata
     }
+    set metadata(x: any /*ListMetaHelper*/) {
+        this._metadata = x
+    }
+    setMetadata(x: any /*ListMetaHelper*/) {
+        this.metadata = x; return this
+    }
+}
+
+export interface CertificateSigningRequestSpecHelper extends CertificateSigningRequestSpec {
+    $extra(x: any): any;
+    $groups(x: any): any;
+    $request(x: any): any;
+    $signerName(x: any): any;
+    $uid(x: any): any;
+    $usages(x: any): any;
+    $username(x: any): any;
 }
 
 /** This information is immutable after the request is created. Only the Request and Usages fields can be set on creation, other fields are derived by Kubernetes and cannot be modified by users. */
-export class CertificateSigningRequestSpecHelper extends ResourceTemplate {
-    static kind = 'CertificateSigningRequestSpec';
-    static apiVersion = 'certificates/v1beta1';
-
-    extra(extra: {[name: string]: Array<string>}): CertificateSigningRequestSpecHelper {
-        if (!this._template.extra) this._template.extra = []
-        this._template.extra = {
-            ...this._template.extra,
-            ...extra
-        }
-        return this
+export class CertificateSigningRequestSpecHelper extends Template implements CertificateSigningRequestSpecHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    groups(groups: Array<string>): CertificateSigningRequestSpecHelper {
-        if (!Array.isArray(groups)) { groups = [groups] }
-        if (!this._template.groups) this._template.groups = groups
-        this._template.groups = [...this._template.groups, ...groups]
-        return this
+    _extra: any;
+    get extra(): any /*{[name: string]: Array<string>}Helper*/ {
+        return this._extra
+    }
+    set extra(x: any /*{[name: string]: Array<string>}Helper*/) {
+        this._extra = this.set(this.extra, x)
+    }
+    setExtra(x: any /*{[name: string]: Array<string>}Helper*/) {
+        this.extra = x; return this
     }
 
-    request(request: string): CertificateSigningRequestSpecHelper {
-        this._template.request = request
-        return this
+    _groups: any;
+    get groups(): any /*Array<string>*/ {
+        return this._groups
+    }
+    set groups(x: any /*Array<string>*/) {
+        this._groups = this.set(this.groups, x)
+    }
+    setGroups(x: any /*Array<string>*/) {
+        this.groups = x; return this
     }
 
-    signerName(signerName: string): CertificateSigningRequestSpecHelper {
-        this._template.signerName = signerName
-        return this
+    _request: any;
+    get request(): any /*string*/ {
+        return this._request
+    }
+    set request(x: any /*string*/) {
+        this._request = x
+    }
+    setRequest(x: any /*string*/) {
+        this.request = x; return this
     }
 
-    uid(uid: string): CertificateSigningRequestSpecHelper {
-        this._template.uid = uid
-        return this
+    _signerName: any;
+    get signerName(): any /*string*/ {
+        return this._signerName
+    }
+    set signerName(x: any /*string*/) {
+        this._signerName = x
+    }
+    setSignerName(x: any /*string*/) {
+        this.signerName = x; return this
     }
 
-    usages(usages: Array<string>): CertificateSigningRequestSpecHelper {
-        if (!Array.isArray(usages)) { usages = [usages] }
-        if (!this._template.usages) this._template.usages = usages
-        this._template.usages = [...this._template.usages, ...usages]
-        return this
+    _uid: any;
+    get uid(): any /*string*/ {
+        return this._uid
+    }
+    set uid(x: any /*string*/) {
+        this._uid = x
+    }
+    setUid(x: any /*string*/) {
+        this.uid = x; return this
     }
 
-    username(username: string): CertificateSigningRequestSpecHelper {
-        this._template.username = username
-        return this
+    _usages: any;
+    get usages(): any /*Array<string>*/ {
+        return this._usages
+    }
+    set usages(x: any /*Array<string>*/) {
+        this._usages = this.set(this.usages, x)
+    }
+    setUsages(x: any /*Array<string>*/) {
+        this.usages = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = CertificateSigningRequestSpecHelper.kind
-        this._template.apiVersion = CertificateSigningRequestSpecHelper.apiVersion
+    _username: any;
+    get username(): any /*string*/ {
+        return this._username
+    }
+    set username(x: any /*string*/) {
+        this._username = x
+    }
+    setUsername(x: any /*string*/) {
+        this.username = x; return this
     }
 }
 
-export class CertificateSigningRequestStatusHelper extends ResourceTemplate {
-    static kind = 'CertificateSigningRequestStatus';
-    static apiVersion = 'certificates/v1beta1';
+export interface CertificateSigningRequestStatusHelper extends CertificateSigningRequestStatus {
+    $certificate(x: any): any;
+    $conditions(x: any): any;
+}
 
-    certificate(certificate: string): CertificateSigningRequestStatusHelper {
-        this._template.certificate = certificate
-        return this
+export class CertificateSigningRequestStatusHelper extends Template implements CertificateSigningRequestStatusHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    conditions(conditions: Array<CertificateSigningRequestCondition>): CertificateSigningRequestStatusHelper {
-        if (!Array.isArray(conditions)) { conditions = [conditions] }
-        if (!this._template.conditions) this._template.conditions = conditions
-        this._template.conditions = [...this._template.conditions, ...conditions]
-        return this
+    _certificate: any;
+    get certificate(): any /*string*/ {
+        return this._certificate
+    }
+    set certificate(x: any /*string*/) {
+        this._certificate = x
+    }
+    setCertificate(x: any /*string*/) {
+        this.certificate = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = CertificateSigningRequestStatusHelper.kind
-        this._template.apiVersion = CertificateSigningRequestStatusHelper.apiVersion
+    _conditions: any;
+    get conditions(): any /*Array<CertificateSigningRequestCondition>*/ {
+        return this._conditions
+    }
+    set conditions(x: any /*Array<CertificateSigningRequestCondition>*/) {
+        this._conditions = this.set(this.conditions, x)
+    }
+    setConditions(x: any /*Array<CertificateSigningRequestCondition>*/) {
+        this.conditions = x; return this
     }
 }

@@ -10,12 +10,14 @@ export class Imports {
       return this
     }
 
+    // get the imports for this source file, if it doesn't exist, create it and add it to the imports map.
     let fileImports = this.imports.get(from)
     if (fileImports == null) {
       fileImports = new Set()
       this.imports.set(from, fileImports)
     }
 
+    // add this import.
     fileImports.add(name)
     return this
   }

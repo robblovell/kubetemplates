@@ -1,225 +1,312 @@
-import { ResourceTemplate } from "../resourceTemplate";
+import { ResourceTemplate, Template } from "../resourceTemplate";
+import { FlowDistinguisherMethod, FlowSchema, FlowSchemaCondition, FlowSchemaList, FlowSchemaSpec, FlowSchemaStatus, GroupSubject, LimitResponse, LimitedPriorityLevelConfiguration, NonResourcePolicyRule, PolicyRulesWithSubjects, PriorityLevelConfiguration, PriorityLevelConfigurationCondition, PriorityLevelConfigurationList, PriorityLevelConfigurationReference, PriorityLevelConfigurationSpec, PriorityLevelConfigurationStatus, QueuingConfiguration, ResourcePolicyRule, ServiceAccountSubject, Subject, UserSubject } from "./v1beta1";
 import { ListMeta, ObjectMeta, Time } from "../meta/v1";
-import { FlowDistinguisherMethod, FlowSchema, FlowSchemaCondition, FlowSchemaSpec, FlowSchemaStatus, GroupSubject, LimitResponse, LimitedPriorityLevelConfiguration, NonResourcePolicyRule, PolicyRulesWithSubjects, PriorityLevelConfiguration, PriorityLevelConfigurationCondition, PriorityLevelConfigurationReference, PriorityLevelConfigurationSpec, PriorityLevelConfigurationStatus, QueuingConfiguration, ResourcePolicyRule, ServiceAccountSubject, Subject, UserSubject } from "./v1beta1";
+
+export interface FlowDistinguisherMethodHelper extends FlowDistinguisherMethod {
+    $type(x: any): any;
+}
 
 /** FlowDistinguisherMethod specifies the method of a flow distinguisher. */
-export class FlowDistinguisherMethodHelper extends ResourceTemplate {
-    static kind = 'FlowDistinguisherMethod';
-    static apiVersion = 'flowcontrol/v1beta1';
-
-    type(type: string): FlowDistinguisherMethodHelper {
-        this._template.type = type
-        return this
+export class FlowDistinguisherMethodHelper extends Template implements FlowDistinguisherMethodHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = FlowDistinguisherMethodHelper.kind
-        this._template.apiVersion = FlowDistinguisherMethodHelper.apiVersion
+    _type: any;
+    get type(): any /*string*/ {
+        return this._type
     }
+    set type(x: any /*string*/) {
+        this._type = x
+    }
+    setType(x: any /*string*/) {
+        this.type = x; return this
+    }
+}
+
+export interface FlowSchemaHelper extends FlowSchema {
+    $metadata(x: any): any;
+    $spec(x: any): any;
+    $status(x: any): any;
 }
 
 /** FlowSchema defines the schema of a group of flows. Note that a flow is made up of a set of inbound API requests with similar attributes and is identified by a pair of strings: the name of the FlowSchema and a "flow distinguisher". */
-export class FlowSchemaHelper extends ResourceTemplate {
+export class FlowSchemaHelper extends ResourceTemplate implements FlowSchemaHelper {
     static kind = 'FlowSchema';
     static apiVersion = 'flowcontrol/v1beta1';
 
-    metadata(metadata: ObjectMeta): FlowSchemaHelper {
-        if (!this._template.metadata) this._template.metadata = []
-        this._template.metadata = {
-            ...this._template.metadata,
-            ...metadata
-        }
-        return this
+    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
+        super(nameOrObject, namespace, FlowSchemaHelper.kind, FlowSchemaHelper.apiVersion)
     }
 
-    spec(spec: FlowSchemaSpec): FlowSchemaHelper {
-        if (!this._template.spec) this._template.spec = []
-        this._template.spec = {
-            ...this._template.spec,
-            ...spec
-        }
-        return this
+    _metadata: any;
+    get metadata(): any /*ObjectMetaHelper*/ {
+        return this._metadata
+    }
+    set metadata(x: any /*ObjectMetaHelper*/) {
+        this._metadata = x
+    }
+    setMetadata(x: any /*ObjectMetaHelper*/) {
+        this.metadata = x; return this
     }
 
-    status(status: FlowSchemaStatus): FlowSchemaHelper {
-        if (!this._template.status) this._template.status = []
-        this._template.status = {
-            ...this._template.status,
-            ...status
-        }
-        return this
+    _spec: any;
+    get spec(): any /*FlowSchemaSpecHelper*/ {
+        return this._spec
+    }
+    set spec(x: any /*FlowSchemaSpecHelper*/) {
+        this._spec = x
+    }
+    setSpec(x: any /*FlowSchemaSpecHelper*/) {
+        this.spec = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = FlowSchemaHelper.kind
-        this._template.apiVersion = FlowSchemaHelper.apiVersion
+    _status: any;
+    get status(): any /*FlowSchemaStatusHelper*/ {
+        return this._status
     }
+    set status(x: any /*FlowSchemaStatusHelper*/) {
+        this._status = x
+    }
+    setStatus(x: any /*FlowSchemaStatusHelper*/) {
+        this.status = x; return this
+    }
+}
+
+export interface FlowSchemaConditionHelper extends FlowSchemaCondition {
+    $lastTransitionTime(x: any): any;
+    $message(x: any): any;
+    $reason(x: any): any;
+    $status(x: any): any;
+    $type(x: any): any;
 }
 
 /** FlowSchemaCondition describes conditions for a FlowSchema. */
-export class FlowSchemaConditionHelper extends ResourceTemplate {
-    static kind = 'FlowSchemaCondition';
-    static apiVersion = 'flowcontrol/v1beta1';
-
-    lastTransitionTime(lastTransitionTime: Time): FlowSchemaConditionHelper {
-        this._template.lastTransitionTime = lastTransitionTime
-        return this
+export class FlowSchemaConditionHelper extends Template implements FlowSchemaConditionHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    message(message: string): FlowSchemaConditionHelper {
-        this._template.message = message
-        return this
+    _lastTransitionTime: any;
+    get lastTransitionTime(): any /*Time*/ {
+        return this._lastTransitionTime
+    }
+    set lastTransitionTime(x: any /*Time*/) {
+        this._lastTransitionTime = x
+    }
+    setLastTransitionTime(x: any /*Time*/) {
+        this.lastTransitionTime = x; return this
     }
 
-    reason(reason: string): FlowSchemaConditionHelper {
-        this._template.reason = reason
-        return this
+    _message: any;
+    get message(): any /*string*/ {
+        return this._message
+    }
+    set message(x: any /*string*/) {
+        this._message = x
+    }
+    setMessage(x: any /*string*/) {
+        this.message = x; return this
     }
 
-    status(status: string): FlowSchemaConditionHelper {
-        this._template.status = status
-        return this
+    _reason: any;
+    get reason(): any /*string*/ {
+        return this._reason
+    }
+    set reason(x: any /*string*/) {
+        this._reason = x
+    }
+    setReason(x: any /*string*/) {
+        this.reason = x; return this
     }
 
-    type(type: string): FlowSchemaConditionHelper {
-        this._template.type = type
-        return this
+    _status: any;
+    get status(): any /*string*/ {
+        return this._status
+    }
+    set status(x: any /*string*/) {
+        this._status = x
+    }
+    setStatus(x: any /*string*/) {
+        this.status = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = FlowSchemaConditionHelper.kind
-        this._template.apiVersion = FlowSchemaConditionHelper.apiVersion
+    _type: any;
+    get type(): any /*string*/ {
+        return this._type
     }
+    set type(x: any /*string*/) {
+        this._type = x
+    }
+    setType(x: any /*string*/) {
+        this.type = x; return this
+    }
+}
+
+export interface FlowSchemaListHelper extends FlowSchemaList {
+    $items(x: any): any;
+    $metadata(x: any): any;
 }
 
 /** FlowSchemaList is a list of FlowSchema objects. */
-export class FlowSchemaListHelper extends ResourceTemplate {
+export class FlowSchemaListHelper extends ResourceTemplate implements FlowSchemaListHelper {
     static kind = 'FlowSchemaList';
     static apiVersion = 'flowcontrol/v1beta1';
 
-    items(items: Array<FlowSchema>): FlowSchemaListHelper {
-        if (!Array.isArray(items)) { items = [items] }
-        if (!this._template.items) this._template.items = items
-        this._template.items = [...this._template.items, ...items]
-        return this
+    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
+        super(nameOrObject, namespace, FlowSchemaListHelper.kind, FlowSchemaListHelper.apiVersion)
     }
 
-    metadata(metadata: ListMeta): FlowSchemaListHelper {
-        if (!this._template.metadata) this._template.metadata = []
-        this._template.metadata = {
-            ...this._template.metadata,
-            ...metadata
-        }
-        return this
+    _items: any;
+    get items(): any /*Array<FlowSchema>*/ {
+        return this._items
+    }
+    set items(x: any /*Array<FlowSchema>*/) {
+        this._items = this.set(this.items, x)
+    }
+    setItems(x: any /*Array<FlowSchema>*/) {
+        this.items = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = FlowSchemaListHelper.kind
-        this._template.apiVersion = FlowSchemaListHelper.apiVersion
+    _metadata: any;
+    get metadata(): any /*ListMetaHelper*/ {
+        return this._metadata
     }
+    set metadata(x: any /*ListMetaHelper*/) {
+        this._metadata = x
+    }
+    setMetadata(x: any /*ListMetaHelper*/) {
+        this.metadata = x; return this
+    }
+}
+
+export interface FlowSchemaSpecHelper extends FlowSchemaSpec {
+    $distinguisherMethod(x: any): any;
+    $matchingPrecedence(x: any): any;
+    $priorityLevelConfiguration(x: any): any;
+    $rules(x: any): any;
 }
 
 /** FlowSchemaSpec describes how the FlowSchema's specification looks like. */
-export class FlowSchemaSpecHelper extends ResourceTemplate {
-    static kind = 'FlowSchemaSpec';
-    static apiVersion = 'flowcontrol/v1beta1';
-
-    distinguisherMethod(distinguisherMethod: FlowDistinguisherMethod): FlowSchemaSpecHelper {
-        if (!this._template.distinguisherMethod) this._template.distinguisherMethod = []
-        this._template.distinguisherMethod = {
-            ...this._template.distinguisherMethod,
-            ...distinguisherMethod
-        }
-        return this
+export class FlowSchemaSpecHelper extends Template implements FlowSchemaSpecHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    matchingPrecedence(matchingPrecedence: number): FlowSchemaSpecHelper {
-        this._template.matchingPrecedence = matchingPrecedence
-        return this
+    _distinguisherMethod: any;
+    get distinguisherMethod(): any /*FlowDistinguisherMethodHelper*/ {
+        return this._distinguisherMethod
+    }
+    set distinguisherMethod(x: any /*FlowDistinguisherMethodHelper*/) {
+        this._distinguisherMethod = x
+    }
+    setDistinguisherMethod(x: any /*FlowDistinguisherMethodHelper*/) {
+        this.distinguisherMethod = x; return this
     }
 
-    priorityLevelConfiguration(priorityLevelConfiguration: PriorityLevelConfigurationReference): FlowSchemaSpecHelper {
-        if (!this._template.priorityLevelConfiguration) this._template.priorityLevelConfiguration = []
-        this._template.priorityLevelConfiguration = {
-            ...this._template.priorityLevelConfiguration,
-            ...priorityLevelConfiguration
-        }
-        return this
+    _matchingPrecedence: any;
+    get matchingPrecedence(): any /*number*/ {
+        return this._matchingPrecedence
+    }
+    set matchingPrecedence(x: any /*number*/) {
+        this._matchingPrecedence = x
+    }
+    setMatchingPrecedence(x: any /*number*/) {
+        this.matchingPrecedence = x; return this
     }
 
-    rules(rules: Array<PolicyRulesWithSubjects>): FlowSchemaSpecHelper {
-        if (!Array.isArray(rules)) { rules = [rules] }
-        if (!this._template.rules) this._template.rules = rules
-        this._template.rules = [...this._template.rules, ...rules]
-        return this
+    _priorityLevelConfiguration: any;
+    get priorityLevelConfiguration(): any /*PriorityLevelConfigurationReferenceHelper*/ {
+        return this._priorityLevelConfiguration
+    }
+    set priorityLevelConfiguration(x: any /*PriorityLevelConfigurationReferenceHelper*/) {
+        this._priorityLevelConfiguration = x
+    }
+    setPriorityLevelConfiguration(x: any /*PriorityLevelConfigurationReferenceHelper*/) {
+        this.priorityLevelConfiguration = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = FlowSchemaSpecHelper.kind
-        this._template.apiVersion = FlowSchemaSpecHelper.apiVersion
+    _rules: any;
+    get rules(): any /*Array<PolicyRulesWithSubjects>*/ {
+        return this._rules
     }
+    set rules(x: any /*Array<PolicyRulesWithSubjects>*/) {
+        this._rules = this.set(this.rules, x)
+    }
+    setRules(x: any /*Array<PolicyRulesWithSubjects>*/) {
+        this.rules = x; return this
+    }
+}
+
+export interface FlowSchemaStatusHelper extends FlowSchemaStatus {
+    $conditions(x: any): any;
 }
 
 /** FlowSchemaStatus represents the current state of a FlowSchema. */
-export class FlowSchemaStatusHelper extends ResourceTemplate {
-    static kind = 'FlowSchemaStatus';
-    static apiVersion = 'flowcontrol/v1beta1';
-
-    conditions(conditions: Array<FlowSchemaCondition>): FlowSchemaStatusHelper {
-        if (!Array.isArray(conditions)) { conditions = [conditions] }
-        if (!this._template.conditions) this._template.conditions = conditions
-        this._template.conditions = [...this._template.conditions, ...conditions]
-        return this
+export class FlowSchemaStatusHelper extends Template implements FlowSchemaStatusHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = FlowSchemaStatusHelper.kind
-        this._template.apiVersion = FlowSchemaStatusHelper.apiVersion
+    _conditions: any;
+    get conditions(): any /*Array<FlowSchemaCondition>*/ {
+        return this._conditions
     }
+    set conditions(x: any /*Array<FlowSchemaCondition>*/) {
+        this._conditions = this.set(this.conditions, x)
+    }
+    setConditions(x: any /*Array<FlowSchemaCondition>*/) {
+        this.conditions = x; return this
+    }
+}
+
+export interface GroupSubjectHelper extends GroupSubject {
 }
 
 /** GroupSubject holds detailed information for group-kind subject. */
-export class GroupSubjectHelper extends ResourceTemplate {
-    static kind = 'GroupSubject';
-    static apiVersion = 'flowcontrol/v1beta1';
-
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = GroupSubjectHelper.kind
-        this._template.apiVersion = GroupSubjectHelper.apiVersion
+export class GroupSubjectHelper extends Template implements GroupSubjectHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 }
 
+export interface LimitResponseHelper extends LimitResponse {
+    $queuing(x: any): any;
+    $type(x: any): any;
+}
+
 /** LimitResponse defines how to handle requests that can not be executed right now. */
-export class LimitResponseHelper extends ResourceTemplate {
-    static kind = 'LimitResponse';
-    static apiVersion = 'flowcontrol/v1beta1';
-
-    queuing(queuing: QueuingConfiguration): LimitResponseHelper {
-        if (!this._template.queuing) this._template.queuing = []
-        this._template.queuing = {
-            ...this._template.queuing,
-            ...queuing
-        }
-        return this
+export class LimitResponseHelper extends Template implements LimitResponseHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    type(type: string): LimitResponseHelper {
-        this._template.type = type
-        return this
+    _queuing: any;
+    get queuing(): any /*QueuingConfigurationHelper*/ {
+        return this._queuing
+    }
+    set queuing(x: any /*QueuingConfigurationHelper*/) {
+        this._queuing = x
+    }
+    setQueuing(x: any /*QueuingConfigurationHelper*/) {
+        this.queuing = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = LimitResponseHelper.kind
-        this._template.apiVersion = LimitResponseHelper.apiVersion
+    _type: any;
+    get type(): any /*string*/ {
+        return this._type
     }
+    set type(x: any /*string*/) {
+        this._type = x
+    }
+    setType(x: any /*string*/) {
+        this.type = x; return this
+    }
+}
+
+export interface LimitedPriorityLevelConfigurationHelper extends LimitedPriorityLevelConfiguration {
+    $assuredConcurrencyShares(x: any): any;
+    $limitResponse(x: any): any;
 }
 
 /**
@@ -227,382 +314,514 @@ export class LimitResponseHelper extends ResourceTemplate {
  *  * How are requests for this priority level limited?
  *  * What should be done with requests that exceed the limit?
  */
-export class LimitedPriorityLevelConfigurationHelper extends ResourceTemplate {
-    static kind = 'LimitedPriorityLevelConfiguration';
-    static apiVersion = 'flowcontrol/v1beta1';
-
-    assuredConcurrencyShares(assuredConcurrencyShares: number): LimitedPriorityLevelConfigurationHelper {
-        this._template.assuredConcurrencyShares = assuredConcurrencyShares
-        return this
+export class LimitedPriorityLevelConfigurationHelper extends Template implements LimitedPriorityLevelConfigurationHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    limitResponse(limitResponse: LimitResponse): LimitedPriorityLevelConfigurationHelper {
-        if (!this._template.limitResponse) this._template.limitResponse = []
-        this._template.limitResponse = {
-            ...this._template.limitResponse,
-            ...limitResponse
-        }
-        return this
+    _assuredConcurrencyShares: any;
+    get assuredConcurrencyShares(): any /*number*/ {
+        return this._assuredConcurrencyShares
+    }
+    set assuredConcurrencyShares(x: any /*number*/) {
+        this._assuredConcurrencyShares = x
+    }
+    setAssuredConcurrencyShares(x: any /*number*/) {
+        this.assuredConcurrencyShares = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = LimitedPriorityLevelConfigurationHelper.kind
-        this._template.apiVersion = LimitedPriorityLevelConfigurationHelper.apiVersion
+    _limitResponse: any;
+    get limitResponse(): any /*LimitResponseHelper*/ {
+        return this._limitResponse
     }
+    set limitResponse(x: any /*LimitResponseHelper*/) {
+        this._limitResponse = x
+    }
+    setLimitResponse(x: any /*LimitResponseHelper*/) {
+        this.limitResponse = x; return this
+    }
+}
+
+export interface NonResourcePolicyRuleHelper extends NonResourcePolicyRule {
+    $nonResourceURLs(x: any): any;
+    $verbs(x: any): any;
 }
 
 /** NonResourcePolicyRule is a predicate that matches non-resource requests according to their verb and the target non-resource URL. A NonResourcePolicyRule matches a request if and only if both (a) at least one member of verbs matches the request and (b) at least one member of nonResourceURLs matches the request. */
-export class NonResourcePolicyRuleHelper extends ResourceTemplate {
-    static kind = 'NonResourcePolicyRule';
-    static apiVersion = 'flowcontrol/v1beta1';
-
-    nonResourceURLs(nonResourceURLs: Array<string>): NonResourcePolicyRuleHelper {
-        if (!Array.isArray(nonResourceURLs)) { nonResourceURLs = [nonResourceURLs] }
-        if (!this._template.nonResourceURLs) this._template.nonResourceURLs = nonResourceURLs
-        this._template.nonResourceURLs = [...this._template.nonResourceURLs, ...nonResourceURLs]
-        return this
+export class NonResourcePolicyRuleHelper extends Template implements NonResourcePolicyRuleHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    verbs(verbs: Array<string>): NonResourcePolicyRuleHelper {
-        if (!Array.isArray(verbs)) { verbs = [verbs] }
-        if (!this._template.verbs) this._template.verbs = verbs
-        this._template.verbs = [...this._template.verbs, ...verbs]
-        return this
+    _nonResourceURLs: any;
+    get nonResourceURLs(): any /*Array<string>*/ {
+        return this._nonResourceURLs
+    }
+    set nonResourceURLs(x: any /*Array<string>*/) {
+        this._nonResourceURLs = this.set(this.nonResourceURLs, x)
+    }
+    setNonResourceURLs(x: any /*Array<string>*/) {
+        this.nonResourceURLs = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = NonResourcePolicyRuleHelper.kind
-        this._template.apiVersion = NonResourcePolicyRuleHelper.apiVersion
+    _verbs: any;
+    get verbs(): any /*Array<string>*/ {
+        return this._verbs
     }
+    set verbs(x: any /*Array<string>*/) {
+        this._verbs = this.set(this.verbs, x)
+    }
+    setVerbs(x: any /*Array<string>*/) {
+        this.verbs = x; return this
+    }
+}
+
+export interface PolicyRulesWithSubjectsHelper extends PolicyRulesWithSubjects {
+    $nonResourceRules(x: any): any;
+    $resourceRules(x: any): any;
+    $subjects(x: any): any;
 }
 
 /** PolicyRulesWithSubjects prescribes a test that applies to a request to an apiserver. The test considers the subject making the request, the verb being requested, and the resource to be acted upon. This PolicyRulesWithSubjects matches a request if and only if both (a) at least one member of subjects matches the request and (b) at least one member of resourceRules or nonResourceRules matches the request. */
-export class PolicyRulesWithSubjectsHelper extends ResourceTemplate {
-    static kind = 'PolicyRulesWithSubjects';
-    static apiVersion = 'flowcontrol/v1beta1';
-
-    nonResourceRules(nonResourceRules: Array<NonResourcePolicyRule>): PolicyRulesWithSubjectsHelper {
-        if (!Array.isArray(nonResourceRules)) { nonResourceRules = [nonResourceRules] }
-        if (!this._template.nonResourceRules) this._template.nonResourceRules = nonResourceRules
-        this._template.nonResourceRules = [...this._template.nonResourceRules, ...nonResourceRules]
-        return this
+export class PolicyRulesWithSubjectsHelper extends Template implements PolicyRulesWithSubjectsHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    resourceRules(resourceRules: Array<ResourcePolicyRule>): PolicyRulesWithSubjectsHelper {
-        if (!Array.isArray(resourceRules)) { resourceRules = [resourceRules] }
-        if (!this._template.resourceRules) this._template.resourceRules = resourceRules
-        this._template.resourceRules = [...this._template.resourceRules, ...resourceRules]
-        return this
+    _nonResourceRules: any;
+    get nonResourceRules(): any /*Array<NonResourcePolicyRule>*/ {
+        return this._nonResourceRules
+    }
+    set nonResourceRules(x: any /*Array<NonResourcePolicyRule>*/) {
+        this._nonResourceRules = this.set(this.nonResourceRules, x)
+    }
+    setNonResourceRules(x: any /*Array<NonResourcePolicyRule>*/) {
+        this.nonResourceRules = x; return this
     }
 
-    subjects(subjects: Array<Subject>): PolicyRulesWithSubjectsHelper {
-        if (!Array.isArray(subjects)) { subjects = [subjects] }
-        if (!this._template.subjects) this._template.subjects = subjects
-        this._template.subjects = [...this._template.subjects, ...subjects]
-        return this
+    _resourceRules: any;
+    get resourceRules(): any /*Array<ResourcePolicyRule>*/ {
+        return this._resourceRules
+    }
+    set resourceRules(x: any /*Array<ResourcePolicyRule>*/) {
+        this._resourceRules = this.set(this.resourceRules, x)
+    }
+    setResourceRules(x: any /*Array<ResourcePolicyRule>*/) {
+        this.resourceRules = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = PolicyRulesWithSubjectsHelper.kind
-        this._template.apiVersion = PolicyRulesWithSubjectsHelper.apiVersion
+    _subjects: any;
+    get subjects(): any /*Array<Subject>*/ {
+        return this._subjects
     }
+    set subjects(x: any /*Array<Subject>*/) {
+        this._subjects = this.set(this.subjects, x)
+    }
+    setSubjects(x: any /*Array<Subject>*/) {
+        this.subjects = x; return this
+    }
+}
+
+export interface PriorityLevelConfigurationHelper extends PriorityLevelConfiguration {
+    $metadata(x: any): any;
+    $spec(x: any): any;
+    $status(x: any): any;
 }
 
 /** PriorityLevelConfiguration represents the configuration of a priority level. */
-export class PriorityLevelConfigurationHelper extends ResourceTemplate {
+export class PriorityLevelConfigurationHelper extends ResourceTemplate implements PriorityLevelConfigurationHelper {
     static kind = 'PriorityLevelConfiguration';
     static apiVersion = 'flowcontrol/v1beta1';
 
-    metadata(metadata: ObjectMeta): PriorityLevelConfigurationHelper {
-        if (!this._template.metadata) this._template.metadata = []
-        this._template.metadata = {
-            ...this._template.metadata,
-            ...metadata
-        }
-        return this
+    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
+        super(nameOrObject, namespace, PriorityLevelConfigurationHelper.kind, PriorityLevelConfigurationHelper.apiVersion)
     }
 
-    spec(spec: PriorityLevelConfigurationSpec): PriorityLevelConfigurationHelper {
-        if (!this._template.spec) this._template.spec = []
-        this._template.spec = {
-            ...this._template.spec,
-            ...spec
-        }
-        return this
+    _metadata: any;
+    get metadata(): any /*ObjectMetaHelper*/ {
+        return this._metadata
+    }
+    set metadata(x: any /*ObjectMetaHelper*/) {
+        this._metadata = x
+    }
+    setMetadata(x: any /*ObjectMetaHelper*/) {
+        this.metadata = x; return this
     }
 
-    status(status: PriorityLevelConfigurationStatus): PriorityLevelConfigurationHelper {
-        if (!this._template.status) this._template.status = []
-        this._template.status = {
-            ...this._template.status,
-            ...status
-        }
-        return this
+    _spec: any;
+    get spec(): any /*PriorityLevelConfigurationSpecHelper*/ {
+        return this._spec
+    }
+    set spec(x: any /*PriorityLevelConfigurationSpecHelper*/) {
+        this._spec = x
+    }
+    setSpec(x: any /*PriorityLevelConfigurationSpecHelper*/) {
+        this.spec = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = PriorityLevelConfigurationHelper.kind
-        this._template.apiVersion = PriorityLevelConfigurationHelper.apiVersion
+    _status: any;
+    get status(): any /*PriorityLevelConfigurationStatusHelper*/ {
+        return this._status
     }
+    set status(x: any /*PriorityLevelConfigurationStatusHelper*/) {
+        this._status = x
+    }
+    setStatus(x: any /*PriorityLevelConfigurationStatusHelper*/) {
+        this.status = x; return this
+    }
+}
+
+export interface PriorityLevelConfigurationConditionHelper extends PriorityLevelConfigurationCondition {
+    $lastTransitionTime(x: any): any;
+    $message(x: any): any;
+    $reason(x: any): any;
+    $status(x: any): any;
+    $type(x: any): any;
 }
 
 /** PriorityLevelConfigurationCondition defines the condition of priority level. */
-export class PriorityLevelConfigurationConditionHelper extends ResourceTemplate {
-    static kind = 'PriorityLevelConfigurationCondition';
-    static apiVersion = 'flowcontrol/v1beta1';
-
-    lastTransitionTime(lastTransitionTime: Time): PriorityLevelConfigurationConditionHelper {
-        this._template.lastTransitionTime = lastTransitionTime
-        return this
+export class PriorityLevelConfigurationConditionHelper extends Template implements PriorityLevelConfigurationConditionHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    message(message: string): PriorityLevelConfigurationConditionHelper {
-        this._template.message = message
-        return this
+    _lastTransitionTime: any;
+    get lastTransitionTime(): any /*Time*/ {
+        return this._lastTransitionTime
+    }
+    set lastTransitionTime(x: any /*Time*/) {
+        this._lastTransitionTime = x
+    }
+    setLastTransitionTime(x: any /*Time*/) {
+        this.lastTransitionTime = x; return this
     }
 
-    reason(reason: string): PriorityLevelConfigurationConditionHelper {
-        this._template.reason = reason
-        return this
+    _message: any;
+    get message(): any /*string*/ {
+        return this._message
+    }
+    set message(x: any /*string*/) {
+        this._message = x
+    }
+    setMessage(x: any /*string*/) {
+        this.message = x; return this
     }
 
-    status(status: string): PriorityLevelConfigurationConditionHelper {
-        this._template.status = status
-        return this
+    _reason: any;
+    get reason(): any /*string*/ {
+        return this._reason
+    }
+    set reason(x: any /*string*/) {
+        this._reason = x
+    }
+    setReason(x: any /*string*/) {
+        this.reason = x; return this
     }
 
-    type(type: string): PriorityLevelConfigurationConditionHelper {
-        this._template.type = type
-        return this
+    _status: any;
+    get status(): any /*string*/ {
+        return this._status
+    }
+    set status(x: any /*string*/) {
+        this._status = x
+    }
+    setStatus(x: any /*string*/) {
+        this.status = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = PriorityLevelConfigurationConditionHelper.kind
-        this._template.apiVersion = PriorityLevelConfigurationConditionHelper.apiVersion
+    _type: any;
+    get type(): any /*string*/ {
+        return this._type
     }
+    set type(x: any /*string*/) {
+        this._type = x
+    }
+    setType(x: any /*string*/) {
+        this.type = x; return this
+    }
+}
+
+export interface PriorityLevelConfigurationListHelper extends PriorityLevelConfigurationList {
+    $items(x: any): any;
+    $metadata(x: any): any;
 }
 
 /** PriorityLevelConfigurationList is a list of PriorityLevelConfiguration objects. */
-export class PriorityLevelConfigurationListHelper extends ResourceTemplate {
+export class PriorityLevelConfigurationListHelper extends ResourceTemplate implements PriorityLevelConfigurationListHelper {
     static kind = 'PriorityLevelConfigurationList';
     static apiVersion = 'flowcontrol/v1beta1';
 
-    items(items: Array<PriorityLevelConfiguration>): PriorityLevelConfigurationListHelper {
-        if (!Array.isArray(items)) { items = [items] }
-        if (!this._template.items) this._template.items = items
-        this._template.items = [...this._template.items, ...items]
-        return this
+    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
+        super(nameOrObject, namespace, PriorityLevelConfigurationListHelper.kind, PriorityLevelConfigurationListHelper.apiVersion)
     }
 
-    metadata(metadata: ListMeta): PriorityLevelConfigurationListHelper {
-        if (!this._template.metadata) this._template.metadata = []
-        this._template.metadata = {
-            ...this._template.metadata,
-            ...metadata
-        }
-        return this
+    _items: any;
+    get items(): any /*Array<PriorityLevelConfiguration>*/ {
+        return this._items
+    }
+    set items(x: any /*Array<PriorityLevelConfiguration>*/) {
+        this._items = this.set(this.items, x)
+    }
+    setItems(x: any /*Array<PriorityLevelConfiguration>*/) {
+        this.items = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = PriorityLevelConfigurationListHelper.kind
-        this._template.apiVersion = PriorityLevelConfigurationListHelper.apiVersion
+    _metadata: any;
+    get metadata(): any /*ListMetaHelper*/ {
+        return this._metadata
     }
+    set metadata(x: any /*ListMetaHelper*/) {
+        this._metadata = x
+    }
+    setMetadata(x: any /*ListMetaHelper*/) {
+        this.metadata = x; return this
+    }
+}
+
+export interface PriorityLevelConfigurationReferenceHelper extends PriorityLevelConfigurationReference {
 }
 
 /** PriorityLevelConfigurationReference contains information that points to the "request-priority" being used. */
-export class PriorityLevelConfigurationReferenceHelper extends ResourceTemplate {
-    static kind = 'PriorityLevelConfigurationReference';
-    static apiVersion = 'flowcontrol/v1beta1';
-
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = PriorityLevelConfigurationReferenceHelper.kind
-        this._template.apiVersion = PriorityLevelConfigurationReferenceHelper.apiVersion
+export class PriorityLevelConfigurationReferenceHelper extends Template implements PriorityLevelConfigurationReferenceHelper {
+    constructor(obj: any) {
+        super(obj)
     }
+}
+
+export interface PriorityLevelConfigurationSpecHelper extends PriorityLevelConfigurationSpec {
+    $limited(x: any): any;
+    $type(x: any): any;
 }
 
 /** PriorityLevelConfigurationSpec specifies the configuration of a priority level. */
-export class PriorityLevelConfigurationSpecHelper extends ResourceTemplate {
-    static kind = 'PriorityLevelConfigurationSpec';
-    static apiVersion = 'flowcontrol/v1beta1';
-
-    limited(limited: LimitedPriorityLevelConfiguration): PriorityLevelConfigurationSpecHelper {
-        if (!this._template.limited) this._template.limited = []
-        this._template.limited = {
-            ...this._template.limited,
-            ...limited
-        }
-        return this
+export class PriorityLevelConfigurationSpecHelper extends Template implements PriorityLevelConfigurationSpecHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    type(type: string): PriorityLevelConfigurationSpecHelper {
-        this._template.type = type
-        return this
+    _limited: any;
+    get limited(): any /*LimitedPriorityLevelConfigurationHelper*/ {
+        return this._limited
+    }
+    set limited(x: any /*LimitedPriorityLevelConfigurationHelper*/) {
+        this._limited = x
+    }
+    setLimited(x: any /*LimitedPriorityLevelConfigurationHelper*/) {
+        this.limited = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = PriorityLevelConfigurationSpecHelper.kind
-        this._template.apiVersion = PriorityLevelConfigurationSpecHelper.apiVersion
+    _type: any;
+    get type(): any /*string*/ {
+        return this._type
     }
+    set type(x: any /*string*/) {
+        this._type = x
+    }
+    setType(x: any /*string*/) {
+        this.type = x; return this
+    }
+}
+
+export interface PriorityLevelConfigurationStatusHelper extends PriorityLevelConfigurationStatus {
+    $conditions(x: any): any;
 }
 
 /** PriorityLevelConfigurationStatus represents the current state of a "request-priority". */
-export class PriorityLevelConfigurationStatusHelper extends ResourceTemplate {
-    static kind = 'PriorityLevelConfigurationStatus';
-    static apiVersion = 'flowcontrol/v1beta1';
-
-    conditions(conditions: Array<PriorityLevelConfigurationCondition>): PriorityLevelConfigurationStatusHelper {
-        if (!Array.isArray(conditions)) { conditions = [conditions] }
-        if (!this._template.conditions) this._template.conditions = conditions
-        this._template.conditions = [...this._template.conditions, ...conditions]
-        return this
+export class PriorityLevelConfigurationStatusHelper extends Template implements PriorityLevelConfigurationStatusHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = PriorityLevelConfigurationStatusHelper.kind
-        this._template.apiVersion = PriorityLevelConfigurationStatusHelper.apiVersion
+    _conditions: any;
+    get conditions(): any /*Array<PriorityLevelConfigurationCondition>*/ {
+        return this._conditions
     }
+    set conditions(x: any /*Array<PriorityLevelConfigurationCondition>*/) {
+        this._conditions = this.set(this.conditions, x)
+    }
+    setConditions(x: any /*Array<PriorityLevelConfigurationCondition>*/) {
+        this.conditions = x; return this
+    }
+}
+
+export interface QueuingConfigurationHelper extends QueuingConfiguration {
+    $handSize(x: any): any;
+    $queueLengthLimit(x: any): any;
+    $queues(x: any): any;
 }
 
 /** QueuingConfiguration holds the configuration parameters for queuing */
-export class QueuingConfigurationHelper extends ResourceTemplate {
-    static kind = 'QueuingConfiguration';
-    static apiVersion = 'flowcontrol/v1beta1';
-
-    handSize(handSize: number): QueuingConfigurationHelper {
-        this._template.handSize = handSize
-        return this
+export class QueuingConfigurationHelper extends Template implements QueuingConfigurationHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    queueLengthLimit(queueLengthLimit: number): QueuingConfigurationHelper {
-        this._template.queueLengthLimit = queueLengthLimit
-        return this
+    _handSize: any;
+    get handSize(): any /*number*/ {
+        return this._handSize
+    }
+    set handSize(x: any /*number*/) {
+        this._handSize = x
+    }
+    setHandSize(x: any /*number*/) {
+        this.handSize = x; return this
     }
 
-    queues(queues: number): QueuingConfigurationHelper {
-        this._template.queues = queues
-        return this
+    _queueLengthLimit: any;
+    get queueLengthLimit(): any /*number*/ {
+        return this._queueLengthLimit
+    }
+    set queueLengthLimit(x: any /*number*/) {
+        this._queueLengthLimit = x
+    }
+    setQueueLengthLimit(x: any /*number*/) {
+        this.queueLengthLimit = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = QueuingConfigurationHelper.kind
-        this._template.apiVersion = QueuingConfigurationHelper.apiVersion
+    _queues: any;
+    get queues(): any /*number*/ {
+        return this._queues
     }
+    set queues(x: any /*number*/) {
+        this._queues = x
+    }
+    setQueues(x: any /*number*/) {
+        this.queues = x; return this
+    }
+}
+
+export interface ResourcePolicyRuleHelper extends ResourcePolicyRule {
+    $apiGroups(x: any): any;
+    $clusterScope(x: any): any;
+    $namespaces(x: any): any;
+    $resources(x: any): any;
+    $verbs(x: any): any;
 }
 
 /** ResourcePolicyRule is a predicate that matches some resource requests, testing the request's verb and the target resource. A ResourcePolicyRule matches a resource request if and only if: (a) at least one member of verbs matches the request, (b) at least one member of apiGroups matches the request, (c) at least one member of resources matches the request, and (d) least one member of namespaces matches the request. */
-export class ResourcePolicyRuleHelper extends ResourceTemplate {
-    static kind = 'ResourcePolicyRule';
-    static apiVersion = 'flowcontrol/v1beta1';
-
-    apiGroups(apiGroups: Array<string>): ResourcePolicyRuleHelper {
-        if (!Array.isArray(apiGroups)) { apiGroups = [apiGroups] }
-        if (!this._template.apiGroups) this._template.apiGroups = apiGroups
-        this._template.apiGroups = [...this._template.apiGroups, ...apiGroups]
-        return this
+export class ResourcePolicyRuleHelper extends Template implements ResourcePolicyRuleHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    clusterScope(clusterScope: boolean): ResourcePolicyRuleHelper {
-        this._template.clusterScope = clusterScope
-        return this
+    _apiGroups: any;
+    get apiGroups(): any /*Array<string>*/ {
+        return this._apiGroups
+    }
+    set apiGroups(x: any /*Array<string>*/) {
+        this._apiGroups = this.set(this.apiGroups, x)
+    }
+    setApiGroups(x: any /*Array<string>*/) {
+        this.apiGroups = x; return this
     }
 
-    namespaces(namespaces: Array<string>): ResourcePolicyRuleHelper {
-        if (!Array.isArray(namespaces)) { namespaces = [namespaces] }
-        if (!this._template.namespaces) this._template.namespaces = namespaces
-        this._template.namespaces = [...this._template.namespaces, ...namespaces]
-        return this
+    _clusterScope: any;
+    get clusterScope(): any /*boolean*/ {
+        return this._clusterScope
+    }
+    set clusterScope(x: any /*boolean*/) {
+        this._clusterScope = x
+    }
+    setClusterScope(x: any /*boolean*/) {
+        this.clusterScope = x; return this
     }
 
-    resources(resources: Array<string>): ResourcePolicyRuleHelper {
-        if (!Array.isArray(resources)) { resources = [resources] }
-        if (!this._template.resources) this._template.resources = resources
-        this._template.resources = [...this._template.resources, ...resources]
-        return this
+    _namespaces: any;
+    get namespaces(): any /*Array<string>*/ {
+        return this._namespaces
+    }
+    set namespaces(x: any /*Array<string>*/) {
+        this._namespaces = this.set(this.namespaces, x)
+    }
+    setNamespaces(x: any /*Array<string>*/) {
+        this.namespaces = x; return this
     }
 
-    verbs(verbs: Array<string>): ResourcePolicyRuleHelper {
-        if (!Array.isArray(verbs)) { verbs = [verbs] }
-        if (!this._template.verbs) this._template.verbs = verbs
-        this._template.verbs = [...this._template.verbs, ...verbs]
-        return this
+    _resources: any;
+    get resources(): any /*Array<string>*/ {
+        return this._resources
+    }
+    set resources(x: any /*Array<string>*/) {
+        this._resources = this.set(this.resources, x)
+    }
+    setResources(x: any /*Array<string>*/) {
+        this.resources = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = ResourcePolicyRuleHelper.kind
-        this._template.apiVersion = ResourcePolicyRuleHelper.apiVersion
+    _verbs: any;
+    get verbs(): any /*Array<string>*/ {
+        return this._verbs
     }
+    set verbs(x: any /*Array<string>*/) {
+        this._verbs = this.set(this.verbs, x)
+    }
+    setVerbs(x: any /*Array<string>*/) {
+        this.verbs = x; return this
+    }
+}
+
+export interface ServiceAccountSubjectHelper extends ServiceAccountSubject {
 }
 
 /** ServiceAccountSubject holds detailed information for service-account-kind subject. */
-export class ServiceAccountSubjectHelper extends ResourceTemplate {
-    static kind = 'ServiceAccountSubject';
-    static apiVersion = 'flowcontrol/v1beta1';
-
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = ServiceAccountSubjectHelper.kind
-        this._template.apiVersion = ServiceAccountSubjectHelper.apiVersion
+export class ServiceAccountSubjectHelper extends Template implements ServiceAccountSubjectHelper {
+    constructor(obj: any) {
+        super(obj)
     }
+}
+
+export interface SubjectHelper extends Subject {
+    $group(x: any): any;
+    $serviceAccount(x: any): any;
+    $user(x: any): any;
 }
 
 /** Subject matches the originator of a request, as identified by the request authentication system. There are three ways of matching an originator; by user, group, or service account. */
-export class SubjectHelper extends ResourceTemplate {
-    static kind = 'Subject';
-    static apiVersion = 'flowcontrol/v1beta1';
-
-    group(group: GroupSubject): SubjectHelper {
-        if (!this._template.group) this._template.group = []
-        this._template.group = {
-            ...this._template.group,
-            ...group
-        }
-        return this
+export class SubjectHelper extends Template implements SubjectHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    serviceAccount(serviceAccount: ServiceAccountSubject): SubjectHelper {
-        if (!this._template.serviceAccount) this._template.serviceAccount = []
-        this._template.serviceAccount = {
-            ...this._template.serviceAccount,
-            ...serviceAccount
-        }
-        return this
+    _group: any;
+    get group(): any /*GroupSubjectHelper*/ {
+        return this._group
+    }
+    set group(x: any /*GroupSubjectHelper*/) {
+        this._group = x
+    }
+    setGroup(x: any /*GroupSubjectHelper*/) {
+        this.group = x; return this
     }
 
-    user(user: UserSubject): SubjectHelper {
-        if (!this._template.user) this._template.user = []
-        this._template.user = {
-            ...this._template.user,
-            ...user
-        }
-        return this
+    _serviceAccount: any;
+    get serviceAccount(): any /*ServiceAccountSubjectHelper*/ {
+        return this._serviceAccount
+    }
+    set serviceAccount(x: any /*ServiceAccountSubjectHelper*/) {
+        this._serviceAccount = x
+    }
+    setServiceAccount(x: any /*ServiceAccountSubjectHelper*/) {
+        this.serviceAccount = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = SubjectHelper.kind
-        this._template.apiVersion = SubjectHelper.apiVersion
+    _user: any;
+    get user(): any /*UserSubjectHelper*/ {
+        return this._user
+    }
+    set user(x: any /*UserSubjectHelper*/) {
+        this._user = x
+    }
+    setUser(x: any /*UserSubjectHelper*/) {
+        this.user = x; return this
     }
 }
 
-/** UserSubject holds detailed information for user-kind subject. */
-export class UserSubjectHelper extends ResourceTemplate {
-    static kind = 'UserSubject';
-    static apiVersion = 'flowcontrol/v1beta1';
+export interface UserSubjectHelper extends UserSubject {
+}
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = UserSubjectHelper.kind
-        this._template.apiVersion = UserSubjectHelper.apiVersion
+/** UserSubject holds detailed information for user-kind subject. */
+export class UserSubjectHelper extends Template implements UserSubjectHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 }

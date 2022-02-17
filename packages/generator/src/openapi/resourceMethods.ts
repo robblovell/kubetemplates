@@ -1,58 +1,5 @@
 import { basicTypes, elidedTypes, emptyTypes, scalarTypes, simpleTypes } from './types'
-import { ClassDeclaration } from 'ts-morph'
-
-/**
- *
- * @param propertyName
- */
-const simpleAssignment = (propertyName) => {
-    return `this._template.${propertyName} = ${propertyName}
-return this`
-}
-
-/**
- * keymapAssignment
- * @param propertyName
- */
-const keymapAssignment = (propertyName) => {
-    return `if (!this._template.${propertyName}) this._template.${propertyName} = []
-this._template.${propertyName} = {
-    ...this._template.${propertyName},
-    ...${propertyName}
-}
-return this`
-}
-
-/**
- * resourceAssignment
- * @param propertyName
- */
-const resourceAssignment = (propertyName, propertyType) => {
-}
-
-/**
- * objectAssignment
- * @param propertyName
- */
-const objectAssignment = (propertyName) => {
-    return `if (!this._template.${propertyName}) this._template.${propertyName} = []
-this._template.${propertyName} = {
-    ...this._template.${propertyName},
-    ...${propertyName}
-}
-return this`
-}
-
-/**
- * arrayAssignment
- * @param propertyName
- */
-const arrayAssignment = (propertyName) => {
-    return `if (!Array.isArray(${propertyName})) { ${propertyName} = [${propertyName}] }
-if (!this._template.${propertyName}) this._template.${propertyName} = ${propertyName}
-this._template.${propertyName} = [...this._template.${propertyName}, ...${propertyName}]
-return this`
-}
+import { ClassDeclaration, StructureKind } from 'ts-morph'
 
 const capitalize = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -63,56 +10,61 @@ const getType = (property, propertyType) => {
     if (propertyType in scalarTypes || propertyType in elidedTypes || propertyType in basicTypes || propertyType in emptyTypes) {
         type = `${propertyType}`
     } else if(property.additionalProperties?.type == 'string') {
-        type = 'any'
+        type = 'any' // TODO: map?
     } else if (property.type == 'array') {
         type = `${propertyType}`
     } else {
-        type = `${propertyType}Helper` //Helper`
+        type = `${propertyType}Helper`
     }
     return type
-    // if (propertyType in scalarTypes)
-    //     return type
-    // else if (Array.isArray(propertyType)) {
-    //     return `${type} | ${type}[] | any | any[]`
-    // } else {
-    //     return `${type} | any`
-    // }
-    // return type
 }
-//
-// const addGetter = (classObject: ClassDeclaration, propertyName: string, propertyType: string, property: any) => {
-//     const { type, fun } = getType(property, propertyType)
-//
-//     classObject.addProperty({
-//         isStatic: false,
-//         name: `__${propertyName}`,
-//         type,
-//     });
-//     classObject.getChildSyntaxListOrThrow().addChildText(writer => {
-//         writer.write(`get ${propertyName}(): ${type}`).block(() => {
-//             writer.writeLine(`return this.__${propertyName}`);
-//         });
-//     });
-// }
-//
-// const addSetter = (classObject: ClassDeclaration, propertyName: string, propertyType: string, property: any) => {
-//     const { type, fun } = getType(property, propertyType)
-//     classObject.getChildSyntaxListOrThrow().addChildText(writer => {
-//         writer.write(`set ${propertyName}(x: ${type})`).block(() => {
-//             writer.writeLine(`this.__${propertyName} = this.${fun}(this.${propertyName}, x, '${type}')`);
-//         });
-//     });
-// }
-//
-// const addSetSetter = (classObject: ClassDeclaration, propertyName: string, propertyType: string, property: any) => {
-//     const { type, fun } = getType(property, propertyType)
-//     const method = classObject.getChildSyntaxListOrThrow().addChildText(writer => {
-//         writer.write(`set${capitalize(propertyName)}(x: ${type})`).block(() => {
-//             writer.writeLine(`this.${propertyName} = x; return this`);
-//         });
-//     });
-// }
 
+const addGetter = (classObject: ClassDeclaration, propertyName: string, propertyType: string, property: any) => {
+    const type = getType(property, propertyType)
+
+    classObject.addProperty({
+        isStatic: false,
+        name: `_${propertyName}`,
+        type: 'any' // TODO: type,
+    });
+    classObject.getChildSyntaxListOrThrow().addChildText(writer => {
+        // TODO: any
+        writer.write(`get ${propertyName}(): any /*${type}*/`).block(() => {
+            writer.writeLine(`return this._${propertyName}`);
+        });
+    });
+}
+
+const addComplexSetter = (classObject: ClassDeclaration, templateName: string,
+                          propertyName: string, propertyType: string, property: any) => {
+    const type = getType(property, propertyType)
+    classObject.getChildSyntaxListOrThrow().addChildText(writer => {
+        // TODO: any
+        writer.write(`set ${propertyName}(x: any /*${type}*/)`).block(() => {
+            writer.writeLine(`this._${propertyName} = this.set(this.${propertyName}, x)`);
+        });
+    });
+}
+const addSimpleSetter = (classObject: ClassDeclaration, templateName: string,
+                         propertyName: string, propertyType: string, property: any) => {
+    const type = getType(property, propertyType)
+    classObject.getChildSyntaxListOrThrow().addChildText(writer => {
+        // TODO: any
+        writer.write(`set ${propertyName}(x: any /*${type}*/)`).block(() => {
+            writer.writeLine(`this._${propertyName} = x`);
+        });
+    });
+}
+
+const addDollarSetter = (classObject: ClassDeclaration, propertyName: string, propertyType: string, property: any) => {
+    const type = getType(property, propertyType)
+    const method = classObject.getChildSyntaxListOrThrow().addChildText(writer => {
+        // TODO: any
+        writer.write(`set${capitalize(propertyName)}(x: any /*${type}*/)`).block(() => {
+            writer.writeLine(`this.${propertyName} = x; return this`);
+        });
+    });
+}
 /**
  *
  * @param classObject
@@ -122,33 +74,43 @@ const getType = (property, propertyType) => {
  * @param prop
  */
 // TODO: clean up parameters.
-export const addHelperMethod = (classObject, templateName, propertyName, property, prop) => {
+export const addHelperMethod = (classObject, interfaceObject, templateName, propertyName, property, prop) => {
     // TODO: Decide on how to handle reserved word fields.
     // default and continue are javascript reserved words.
     if (propertyName == 'default') propertyName = 'default_'
     if (propertyName == 'continue') propertyName = 'continue_'
-    // addGetter(classObject, propertyName, prop.type, property)
-    // addSetter(classObject, propertyName, prop.type, property)
-    // addSetSetter(classObject, propertyName, prop.type, property)
-    const type = getType(property, prop.type)
 
-    let method = classObject.addMethod({
-        isStatic: false,
-        name: propertyName,
-        parameters: [{name: propertyName, type: prop.type}],
-        returnType: `${templateName}`,
-        description: property.description,
+    const trueType = getType(property, prop.type)
+
+    // Interface Methods
+    // Add only 'Helper' types to the interface.
+    // TODO: add when trueType is back.
+    // if (trueType == `${prop.type}Helper`) {
+    //     interfaceObject.addProperty({
+    //         name: `${propertyName}`,
+    //         type: 'any' //TODO: trueType
+    //     })
+    // }
+
+    // Add the fluent ($) signature to the interface.
+    // TODO: any
+    const methodSignature = interfaceObject.addMethod({
+        name: `$${propertyName}`,
+        returnType: 'any' //TODO: templateName
     })
-    if(prop.type == '{[name: string]: string}') {
-        method.setBodyText(keymapAssignment(propertyName))
-    } else if (property.type == 'array') {
-        method.setBodyText(arrayAssignment(propertyName))
-    } else if (simpleTypes.some(p=>p==prop.type)) {
-        method.setBodyText(simpleAssignment(propertyName))
-    } else if (property.type == 'object' || property.type == undefined) {
-        method.setBodyText(objectAssignment(propertyName))
+    methodSignature.addParameter({name: 'x', type: 'any' }) //TODO: `${trueType}`})
+
+    // Class Methods
+    // Add the field getter
+    addGetter(classObject, propertyName,  prop.type, property)
+
+    // add the field setter
+    if(prop.type == '{[name: string]: string}' || property.type == 'array' || property.type == 'object') {
+        addComplexSetter(classObject, templateName, propertyName, prop.type, property)
     } else {
-        //console.log(property.type)
+        addSimpleSetter(classObject, templateName, propertyName, prop.type, property)
     }
-    return method
+
+    // add the fluent ($) setter.
+    addDollarSetter(classObject, propertyName,  prop.type, property)
 }

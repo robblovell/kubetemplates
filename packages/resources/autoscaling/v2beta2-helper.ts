@@ -1,795 +1,1078 @@
-import { ResourceTemplate } from "../resourceTemplate";
-import { ContainerResourceMetricSource, ContainerResourceMetricStatus, CrossVersionObjectReference, ExternalMetricSource, ExternalMetricStatus, HPAScalingPolicy, HPAScalingRules, HorizontalPodAutoscaler, HorizontalPodAutoscalerBehavior, HorizontalPodAutoscalerCondition, HorizontalPodAutoscalerSpec, HorizontalPodAutoscalerStatus, MetricIdentifier, MetricSpec, MetricStatus, MetricTarget, MetricValueStatus, ObjectMetricSource, ObjectMetricStatus, PodsMetricSource, PodsMetricStatus, ResourceMetricSource, ResourceMetricStatus } from "./v2beta2";
+import { ResourceTemplate, Template } from "../resourceTemplate";
+import { ContainerResourceMetricSource, ContainerResourceMetricStatus, CrossVersionObjectReference, ExternalMetricSource, ExternalMetricStatus, HPAScalingPolicy, HPAScalingRules, HorizontalPodAutoscaler, HorizontalPodAutoscalerBehavior, HorizontalPodAutoscalerCondition, HorizontalPodAutoscalerList, HorizontalPodAutoscalerSpec, HorizontalPodAutoscalerStatus, MetricIdentifier, MetricSpec, MetricStatus, MetricTarget, MetricValueStatus, ObjectMetricSource, ObjectMetricStatus, PodsMetricSource, PodsMetricStatus, ResourceMetricSource, ResourceMetricStatus } from "./v2beta2";
 import { LabelSelector, ListMeta, ObjectMeta, Time } from "../meta/v1";
 import { Quantity } from "../api/resource";
 
+export interface ContainerResourceMetricSourceHelper extends ContainerResourceMetricSource {
+    $container(x: any): any;
+    $target(x: any): any;
+}
+
 /** ContainerResourceMetricSource indicates how to scale on a resource metric known to Kubernetes, as specified in requests and limits, describing each pod in the current scale target (e.g. CPU or memory).  The values will be averaged together before being compared to the target.  Such metrics are built in to Kubernetes, and have special scaling options on top of those available to normal per-pod metrics using the "pods" source.  Only one "target" type should be set. */
-export class ContainerResourceMetricSourceHelper extends ResourceTemplate {
-    static kind = 'ContainerResourceMetricSource';
-    static apiVersion = 'autoscaling/v2beta2';
-
-    container(container: string): ContainerResourceMetricSourceHelper {
-        this._template.container = container
-        return this
+export class ContainerResourceMetricSourceHelper extends Template implements ContainerResourceMetricSourceHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    target(target: MetricTarget): ContainerResourceMetricSourceHelper {
-        if (!this._template.target) this._template.target = []
-        this._template.target = {
-            ...this._template.target,
-            ...target
-        }
-        return this
+    _container: any;
+    get container(): any /*string*/ {
+        return this._container
+    }
+    set container(x: any /*string*/) {
+        this._container = x
+    }
+    setContainer(x: any /*string*/) {
+        this.container = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = ContainerResourceMetricSourceHelper.kind
-        this._template.apiVersion = ContainerResourceMetricSourceHelper.apiVersion
+    _target: any;
+    get target(): any /*MetricTargetHelper*/ {
+        return this._target
     }
+    set target(x: any /*MetricTargetHelper*/) {
+        this._target = x
+    }
+    setTarget(x: any /*MetricTargetHelper*/) {
+        this.target = x; return this
+    }
+}
+
+export interface ContainerResourceMetricStatusHelper extends ContainerResourceMetricStatus {
+    $container(x: any): any;
+    $current(x: any): any;
 }
 
 /** ContainerResourceMetricStatus indicates the current value of a resource metric known to Kubernetes, as specified in requests and limits, describing a single container in each pod in the current scale target (e.g. CPU or memory).  Such metrics are built in to Kubernetes, and have special scaling options on top of those available to normal per-pod metrics using the "pods" source. */
-export class ContainerResourceMetricStatusHelper extends ResourceTemplate {
-    static kind = 'ContainerResourceMetricStatus';
-    static apiVersion = 'autoscaling/v2beta2';
-
-    container(container: string): ContainerResourceMetricStatusHelper {
-        this._template.container = container
-        return this
+export class ContainerResourceMetricStatusHelper extends Template implements ContainerResourceMetricStatusHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    current(current: MetricValueStatus): ContainerResourceMetricStatusHelper {
-        if (!this._template.current) this._template.current = []
-        this._template.current = {
-            ...this._template.current,
-            ...current
-        }
-        return this
+    _container: any;
+    get container(): any /*string*/ {
+        return this._container
+    }
+    set container(x: any /*string*/) {
+        this._container = x
+    }
+    setContainer(x: any /*string*/) {
+        this.container = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = ContainerResourceMetricStatusHelper.kind
-        this._template.apiVersion = ContainerResourceMetricStatusHelper.apiVersion
+    _current: any;
+    get current(): any /*MetricValueStatusHelper*/ {
+        return this._current
     }
+    set current(x: any /*MetricValueStatusHelper*/) {
+        this._current = x
+    }
+    setCurrent(x: any /*MetricValueStatusHelper*/) {
+        this.current = x; return this
+    }
+}
+
+export interface CrossVersionObjectReferenceHelper extends CrossVersionObjectReference {
 }
 
 /** CrossVersionObjectReference contains enough information to let you identify the referred resource. */
-export class CrossVersionObjectReferenceHelper extends ResourceTemplate {
-    static kind = 'CrossVersionObjectReference';
-    static apiVersion = 'autoscaling/v2beta2';
-
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = CrossVersionObjectReferenceHelper.kind
-        this._template.apiVersion = CrossVersionObjectReferenceHelper.apiVersion
+export class CrossVersionObjectReferenceHelper extends Template implements CrossVersionObjectReferenceHelper {
+    constructor(obj: any) {
+        super(obj)
     }
+}
+
+export interface ExternalMetricSourceHelper extends ExternalMetricSource {
+    $metric(x: any): any;
+    $target(x: any): any;
 }
 
 /** ExternalMetricSource indicates how to scale on a metric not associated with any Kubernetes object (for example length of queue in cloud messaging service, or QPS from loadbalancer running outside of cluster). */
-export class ExternalMetricSourceHelper extends ResourceTemplate {
-    static kind = 'ExternalMetricSource';
-    static apiVersion = 'autoscaling/v2beta2';
-
-    metric(metric: MetricIdentifier): ExternalMetricSourceHelper {
-        if (!this._template.metric) this._template.metric = []
-        this._template.metric = {
-            ...this._template.metric,
-            ...metric
-        }
-        return this
+export class ExternalMetricSourceHelper extends Template implements ExternalMetricSourceHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    target(target: MetricTarget): ExternalMetricSourceHelper {
-        if (!this._template.target) this._template.target = []
-        this._template.target = {
-            ...this._template.target,
-            ...target
-        }
-        return this
+    _metric: any;
+    get metric(): any /*MetricIdentifierHelper*/ {
+        return this._metric
+    }
+    set metric(x: any /*MetricIdentifierHelper*/) {
+        this._metric = x
+    }
+    setMetric(x: any /*MetricIdentifierHelper*/) {
+        this.metric = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = ExternalMetricSourceHelper.kind
-        this._template.apiVersion = ExternalMetricSourceHelper.apiVersion
+    _target: any;
+    get target(): any /*MetricTargetHelper*/ {
+        return this._target
     }
+    set target(x: any /*MetricTargetHelper*/) {
+        this._target = x
+    }
+    setTarget(x: any /*MetricTargetHelper*/) {
+        this.target = x; return this
+    }
+}
+
+export interface ExternalMetricStatusHelper extends ExternalMetricStatus {
+    $current(x: any): any;
+    $metric(x: any): any;
 }
 
 /** ExternalMetricStatus indicates the current value of a global metric not associated with any Kubernetes object. */
-export class ExternalMetricStatusHelper extends ResourceTemplate {
-    static kind = 'ExternalMetricStatus';
-    static apiVersion = 'autoscaling/v2beta2';
-
-    current(current: MetricValueStatus): ExternalMetricStatusHelper {
-        if (!this._template.current) this._template.current = []
-        this._template.current = {
-            ...this._template.current,
-            ...current
-        }
-        return this
+export class ExternalMetricStatusHelper extends Template implements ExternalMetricStatusHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    metric(metric: MetricIdentifier): ExternalMetricStatusHelper {
-        if (!this._template.metric) this._template.metric = []
-        this._template.metric = {
-            ...this._template.metric,
-            ...metric
-        }
-        return this
+    _current: any;
+    get current(): any /*MetricValueStatusHelper*/ {
+        return this._current
+    }
+    set current(x: any /*MetricValueStatusHelper*/) {
+        this._current = x
+    }
+    setCurrent(x: any /*MetricValueStatusHelper*/) {
+        this.current = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = ExternalMetricStatusHelper.kind
-        this._template.apiVersion = ExternalMetricStatusHelper.apiVersion
+    _metric: any;
+    get metric(): any /*MetricIdentifierHelper*/ {
+        return this._metric
     }
+    set metric(x: any /*MetricIdentifierHelper*/) {
+        this._metric = x
+    }
+    setMetric(x: any /*MetricIdentifierHelper*/) {
+        this.metric = x; return this
+    }
+}
+
+export interface HPAScalingPolicyHelper extends HPAScalingPolicy {
+    $periodSeconds(x: any): any;
+    $type(x: any): any;
+    $value(x: any): any;
 }
 
 /** HPAScalingPolicy is a single policy which must hold true for a specified past interval. */
-export class HPAScalingPolicyHelper extends ResourceTemplate {
-    static kind = 'HPAScalingPolicy';
-    static apiVersion = 'autoscaling/v2beta2';
-
-    periodSeconds(periodSeconds: number): HPAScalingPolicyHelper {
-        this._template.periodSeconds = periodSeconds
-        return this
+export class HPAScalingPolicyHelper extends Template implements HPAScalingPolicyHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    type(type: string): HPAScalingPolicyHelper {
-        this._template.type = type
-        return this
+    _periodSeconds: any;
+    get periodSeconds(): any /*number*/ {
+        return this._periodSeconds
+    }
+    set periodSeconds(x: any /*number*/) {
+        this._periodSeconds = x
+    }
+    setPeriodSeconds(x: any /*number*/) {
+        this.periodSeconds = x; return this
     }
 
-    value(value: number): HPAScalingPolicyHelper {
-        this._template.value = value
-        return this
+    _type: any;
+    get type(): any /*string*/ {
+        return this._type
+    }
+    set type(x: any /*string*/) {
+        this._type = x
+    }
+    setType(x: any /*string*/) {
+        this.type = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = HPAScalingPolicyHelper.kind
-        this._template.apiVersion = HPAScalingPolicyHelper.apiVersion
+    _value: any;
+    get value(): any /*number*/ {
+        return this._value
     }
+    set value(x: any /*number*/) {
+        this._value = x
+    }
+    setValue(x: any /*number*/) {
+        this.value = x; return this
+    }
+}
+
+export interface HPAScalingRulesHelper extends HPAScalingRules {
+    $policies(x: any): any;
+    $selectPolicy(x: any): any;
+    $stabilizationWindowSeconds(x: any): any;
 }
 
 /** HPAScalingRules configures the scaling behavior for one direction. These Rules are applied after calculating DesiredReplicas from metrics for the HPA. They can limit the scaling velocity by specifying scaling policies. They can prevent flapping by specifying the stabilization window, so that the number of replicas is not set instantly, instead, the safest value from the stabilization window is chosen. */
-export class HPAScalingRulesHelper extends ResourceTemplate {
-    static kind = 'HPAScalingRules';
-    static apiVersion = 'autoscaling/v2beta2';
-
-    policies(policies: Array<HPAScalingPolicy>): HPAScalingRulesHelper {
-        if (!Array.isArray(policies)) { policies = [policies] }
-        if (!this._template.policies) this._template.policies = policies
-        this._template.policies = [...this._template.policies, ...policies]
-        return this
+export class HPAScalingRulesHelper extends Template implements HPAScalingRulesHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    selectPolicy(selectPolicy: string): HPAScalingRulesHelper {
-        this._template.selectPolicy = selectPolicy
-        return this
+    _policies: any;
+    get policies(): any /*Array<HPAScalingPolicy>*/ {
+        return this._policies
+    }
+    set policies(x: any /*Array<HPAScalingPolicy>*/) {
+        this._policies = this.set(this.policies, x)
+    }
+    setPolicies(x: any /*Array<HPAScalingPolicy>*/) {
+        this.policies = x; return this
     }
 
-    stabilizationWindowSeconds(stabilizationWindowSeconds: number): HPAScalingRulesHelper {
-        this._template.stabilizationWindowSeconds = stabilizationWindowSeconds
-        return this
+    _selectPolicy: any;
+    get selectPolicy(): any /*string*/ {
+        return this._selectPolicy
+    }
+    set selectPolicy(x: any /*string*/) {
+        this._selectPolicy = x
+    }
+    setSelectPolicy(x: any /*string*/) {
+        this.selectPolicy = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = HPAScalingRulesHelper.kind
-        this._template.apiVersion = HPAScalingRulesHelper.apiVersion
+    _stabilizationWindowSeconds: any;
+    get stabilizationWindowSeconds(): any /*number*/ {
+        return this._stabilizationWindowSeconds
     }
+    set stabilizationWindowSeconds(x: any /*number*/) {
+        this._stabilizationWindowSeconds = x
+    }
+    setStabilizationWindowSeconds(x: any /*number*/) {
+        this.stabilizationWindowSeconds = x; return this
+    }
+}
+
+export interface HorizontalPodAutoscalerHelper extends HorizontalPodAutoscaler {
+    $metadata(x: any): any;
+    $spec(x: any): any;
+    $status(x: any): any;
 }
 
 /** HorizontalPodAutoscaler is the configuration for a horizontal pod autoscaler, which automatically manages the replica count of any resource implementing the scale subresource based on the metrics specified. */
-export class HorizontalPodAutoscalerHelper extends ResourceTemplate {
+export class HorizontalPodAutoscalerHelper extends ResourceTemplate implements HorizontalPodAutoscalerHelper {
     static kind = 'HorizontalPodAutoscaler';
     static apiVersion = 'autoscaling/v2beta2';
 
-    metadata(metadata: ObjectMeta): HorizontalPodAutoscalerHelper {
-        if (!this._template.metadata) this._template.metadata = []
-        this._template.metadata = {
-            ...this._template.metadata,
-            ...metadata
-        }
-        return this
+    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
+        super(nameOrObject, namespace, HorizontalPodAutoscalerHelper.kind, HorizontalPodAutoscalerHelper.apiVersion)
     }
 
-    spec(spec: HorizontalPodAutoscalerSpec): HorizontalPodAutoscalerHelper {
-        if (!this._template.spec) this._template.spec = []
-        this._template.spec = {
-            ...this._template.spec,
-            ...spec
-        }
-        return this
+    _metadata: any;
+    get metadata(): any /*ObjectMetaHelper*/ {
+        return this._metadata
+    }
+    set metadata(x: any /*ObjectMetaHelper*/) {
+        this._metadata = x
+    }
+    setMetadata(x: any /*ObjectMetaHelper*/) {
+        this.metadata = x; return this
     }
 
-    status(status: HorizontalPodAutoscalerStatus): HorizontalPodAutoscalerHelper {
-        if (!this._template.status) this._template.status = []
-        this._template.status = {
-            ...this._template.status,
-            ...status
-        }
-        return this
+    _spec: any;
+    get spec(): any /*HorizontalPodAutoscalerSpecHelper*/ {
+        return this._spec
+    }
+    set spec(x: any /*HorizontalPodAutoscalerSpecHelper*/) {
+        this._spec = x
+    }
+    setSpec(x: any /*HorizontalPodAutoscalerSpecHelper*/) {
+        this.spec = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = HorizontalPodAutoscalerHelper.kind
-        this._template.apiVersion = HorizontalPodAutoscalerHelper.apiVersion
+    _status: any;
+    get status(): any /*HorizontalPodAutoscalerStatusHelper*/ {
+        return this._status
     }
+    set status(x: any /*HorizontalPodAutoscalerStatusHelper*/) {
+        this._status = x
+    }
+    setStatus(x: any /*HorizontalPodAutoscalerStatusHelper*/) {
+        this.status = x; return this
+    }
+}
+
+export interface HorizontalPodAutoscalerBehaviorHelper extends HorizontalPodAutoscalerBehavior {
+    $scaleDown(x: any): any;
+    $scaleUp(x: any): any;
 }
 
 /** HorizontalPodAutoscalerBehavior configures the scaling behavior of the target in both Up and Down directions (scaleUp and scaleDown fields respectively). */
-export class HorizontalPodAutoscalerBehaviorHelper extends ResourceTemplate {
-    static kind = 'HorizontalPodAutoscalerBehavior';
-    static apiVersion = 'autoscaling/v2beta2';
-
-    scaleDown(scaleDown: HPAScalingRules): HorizontalPodAutoscalerBehaviorHelper {
-        if (!this._template.scaleDown) this._template.scaleDown = []
-        this._template.scaleDown = {
-            ...this._template.scaleDown,
-            ...scaleDown
-        }
-        return this
+export class HorizontalPodAutoscalerBehaviorHelper extends Template implements HorizontalPodAutoscalerBehaviorHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    scaleUp(scaleUp: HPAScalingRules): HorizontalPodAutoscalerBehaviorHelper {
-        if (!this._template.scaleUp) this._template.scaleUp = []
-        this._template.scaleUp = {
-            ...this._template.scaleUp,
-            ...scaleUp
-        }
-        return this
+    _scaleDown: any;
+    get scaleDown(): any /*HPAScalingRulesHelper*/ {
+        return this._scaleDown
+    }
+    set scaleDown(x: any /*HPAScalingRulesHelper*/) {
+        this._scaleDown = x
+    }
+    setScaleDown(x: any /*HPAScalingRulesHelper*/) {
+        this.scaleDown = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = HorizontalPodAutoscalerBehaviorHelper.kind
-        this._template.apiVersion = HorizontalPodAutoscalerBehaviorHelper.apiVersion
+    _scaleUp: any;
+    get scaleUp(): any /*HPAScalingRulesHelper*/ {
+        return this._scaleUp
     }
+    set scaleUp(x: any /*HPAScalingRulesHelper*/) {
+        this._scaleUp = x
+    }
+    setScaleUp(x: any /*HPAScalingRulesHelper*/) {
+        this.scaleUp = x; return this
+    }
+}
+
+export interface HorizontalPodAutoscalerConditionHelper extends HorizontalPodAutoscalerCondition {
+    $lastTransitionTime(x: any): any;
+    $message(x: any): any;
+    $reason(x: any): any;
+    $status(x: any): any;
+    $type(x: any): any;
 }
 
 /** HorizontalPodAutoscalerCondition describes the state of a HorizontalPodAutoscaler at a certain point. */
-export class HorizontalPodAutoscalerConditionHelper extends ResourceTemplate {
-    static kind = 'HorizontalPodAutoscalerCondition';
-    static apiVersion = 'autoscaling/v2beta2';
-
-    lastTransitionTime(lastTransitionTime: Time): HorizontalPodAutoscalerConditionHelper {
-        this._template.lastTransitionTime = lastTransitionTime
-        return this
+export class HorizontalPodAutoscalerConditionHelper extends Template implements HorizontalPodAutoscalerConditionHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    message(message: string): HorizontalPodAutoscalerConditionHelper {
-        this._template.message = message
-        return this
+    _lastTransitionTime: any;
+    get lastTransitionTime(): any /*Time*/ {
+        return this._lastTransitionTime
+    }
+    set lastTransitionTime(x: any /*Time*/) {
+        this._lastTransitionTime = x
+    }
+    setLastTransitionTime(x: any /*Time*/) {
+        this.lastTransitionTime = x; return this
     }
 
-    reason(reason: string): HorizontalPodAutoscalerConditionHelper {
-        this._template.reason = reason
-        return this
+    _message: any;
+    get message(): any /*string*/ {
+        return this._message
+    }
+    set message(x: any /*string*/) {
+        this._message = x
+    }
+    setMessage(x: any /*string*/) {
+        this.message = x; return this
     }
 
-    status(status: string): HorizontalPodAutoscalerConditionHelper {
-        this._template.status = status
-        return this
+    _reason: any;
+    get reason(): any /*string*/ {
+        return this._reason
+    }
+    set reason(x: any /*string*/) {
+        this._reason = x
+    }
+    setReason(x: any /*string*/) {
+        this.reason = x; return this
     }
 
-    type(type: string): HorizontalPodAutoscalerConditionHelper {
-        this._template.type = type
-        return this
+    _status: any;
+    get status(): any /*string*/ {
+        return this._status
+    }
+    set status(x: any /*string*/) {
+        this._status = x
+    }
+    setStatus(x: any /*string*/) {
+        this.status = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = HorizontalPodAutoscalerConditionHelper.kind
-        this._template.apiVersion = HorizontalPodAutoscalerConditionHelper.apiVersion
+    _type: any;
+    get type(): any /*string*/ {
+        return this._type
     }
+    set type(x: any /*string*/) {
+        this._type = x
+    }
+    setType(x: any /*string*/) {
+        this.type = x; return this
+    }
+}
+
+export interface HorizontalPodAutoscalerListHelper extends HorizontalPodAutoscalerList {
+    $items(x: any): any;
+    $metadata(x: any): any;
 }
 
 /** HorizontalPodAutoscalerList is a list of horizontal pod autoscaler objects. */
-export class HorizontalPodAutoscalerListHelper extends ResourceTemplate {
+export class HorizontalPodAutoscalerListHelper extends ResourceTemplate implements HorizontalPodAutoscalerListHelper {
     static kind = 'HorizontalPodAutoscalerList';
     static apiVersion = 'autoscaling/v2beta2';
 
-    items(items: Array<HorizontalPodAutoscaler>): HorizontalPodAutoscalerListHelper {
-        if (!Array.isArray(items)) { items = [items] }
-        if (!this._template.items) this._template.items = items
-        this._template.items = [...this._template.items, ...items]
-        return this
+    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
+        super(nameOrObject, namespace, HorizontalPodAutoscalerListHelper.kind, HorizontalPodAutoscalerListHelper.apiVersion)
     }
 
-    metadata(metadata: ListMeta): HorizontalPodAutoscalerListHelper {
-        if (!this._template.metadata) this._template.metadata = []
-        this._template.metadata = {
-            ...this._template.metadata,
-            ...metadata
-        }
-        return this
+    _items: any;
+    get items(): any /*Array<HorizontalPodAutoscaler>*/ {
+        return this._items
+    }
+    set items(x: any /*Array<HorizontalPodAutoscaler>*/) {
+        this._items = this.set(this.items, x)
+    }
+    setItems(x: any /*Array<HorizontalPodAutoscaler>*/) {
+        this.items = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = HorizontalPodAutoscalerListHelper.kind
-        this._template.apiVersion = HorizontalPodAutoscalerListHelper.apiVersion
+    _metadata: any;
+    get metadata(): any /*ListMetaHelper*/ {
+        return this._metadata
     }
+    set metadata(x: any /*ListMetaHelper*/) {
+        this._metadata = x
+    }
+    setMetadata(x: any /*ListMetaHelper*/) {
+        this.metadata = x; return this
+    }
+}
+
+export interface HorizontalPodAutoscalerSpecHelper extends HorizontalPodAutoscalerSpec {
+    $behavior(x: any): any;
+    $maxReplicas(x: any): any;
+    $metrics(x: any): any;
+    $minReplicas(x: any): any;
+    $scaleTargetRef(x: any): any;
 }
 
 /** HorizontalPodAutoscalerSpec describes the desired functionality of the HorizontalPodAutoscaler. */
-export class HorizontalPodAutoscalerSpecHelper extends ResourceTemplate {
-    static kind = 'HorizontalPodAutoscalerSpec';
-    static apiVersion = 'autoscaling/v2beta2';
-
-    behavior(behavior: HorizontalPodAutoscalerBehavior): HorizontalPodAutoscalerSpecHelper {
-        if (!this._template.behavior) this._template.behavior = []
-        this._template.behavior = {
-            ...this._template.behavior,
-            ...behavior
-        }
-        return this
+export class HorizontalPodAutoscalerSpecHelper extends Template implements HorizontalPodAutoscalerSpecHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    maxReplicas(maxReplicas: number): HorizontalPodAutoscalerSpecHelper {
-        this._template.maxReplicas = maxReplicas
-        return this
+    _behavior: any;
+    get behavior(): any /*HorizontalPodAutoscalerBehaviorHelper*/ {
+        return this._behavior
+    }
+    set behavior(x: any /*HorizontalPodAutoscalerBehaviorHelper*/) {
+        this._behavior = x
+    }
+    setBehavior(x: any /*HorizontalPodAutoscalerBehaviorHelper*/) {
+        this.behavior = x; return this
     }
 
-    metrics(metrics: Array<MetricSpec>): HorizontalPodAutoscalerSpecHelper {
-        if (!Array.isArray(metrics)) { metrics = [metrics] }
-        if (!this._template.metrics) this._template.metrics = metrics
-        this._template.metrics = [...this._template.metrics, ...metrics]
-        return this
+    _maxReplicas: any;
+    get maxReplicas(): any /*number*/ {
+        return this._maxReplicas
+    }
+    set maxReplicas(x: any /*number*/) {
+        this._maxReplicas = x
+    }
+    setMaxReplicas(x: any /*number*/) {
+        this.maxReplicas = x; return this
     }
 
-    minReplicas(minReplicas: number): HorizontalPodAutoscalerSpecHelper {
-        this._template.minReplicas = minReplicas
-        return this
+    _metrics: any;
+    get metrics(): any /*Array<MetricSpec>*/ {
+        return this._metrics
+    }
+    set metrics(x: any /*Array<MetricSpec>*/) {
+        this._metrics = this.set(this.metrics, x)
+    }
+    setMetrics(x: any /*Array<MetricSpec>*/) {
+        this.metrics = x; return this
     }
 
-    scaleTargetRef(scaleTargetRef: CrossVersionObjectReference): HorizontalPodAutoscalerSpecHelper {
-        if (!this._template.scaleTargetRef) this._template.scaleTargetRef = []
-        this._template.scaleTargetRef = {
-            ...this._template.scaleTargetRef,
-            ...scaleTargetRef
-        }
-        return this
+    _minReplicas: any;
+    get minReplicas(): any /*number*/ {
+        return this._minReplicas
+    }
+    set minReplicas(x: any /*number*/) {
+        this._minReplicas = x
+    }
+    setMinReplicas(x: any /*number*/) {
+        this.minReplicas = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = HorizontalPodAutoscalerSpecHelper.kind
-        this._template.apiVersion = HorizontalPodAutoscalerSpecHelper.apiVersion
+    _scaleTargetRef: any;
+    get scaleTargetRef(): any /*CrossVersionObjectReferenceHelper*/ {
+        return this._scaleTargetRef
     }
+    set scaleTargetRef(x: any /*CrossVersionObjectReferenceHelper*/) {
+        this._scaleTargetRef = x
+    }
+    setScaleTargetRef(x: any /*CrossVersionObjectReferenceHelper*/) {
+        this.scaleTargetRef = x; return this
+    }
+}
+
+export interface HorizontalPodAutoscalerStatusHelper extends HorizontalPodAutoscalerStatus {
+    $conditions(x: any): any;
+    $currentMetrics(x: any): any;
+    $currentReplicas(x: any): any;
+    $desiredReplicas(x: any): any;
+    $lastScaleTime(x: any): any;
+    $observedGeneration(x: any): any;
 }
 
 /** HorizontalPodAutoscalerStatus describes the current status of a horizontal pod autoscaler. */
-export class HorizontalPodAutoscalerStatusHelper extends ResourceTemplate {
-    static kind = 'HorizontalPodAutoscalerStatus';
-    static apiVersion = 'autoscaling/v2beta2';
-
-    conditions(conditions: Array<HorizontalPodAutoscalerCondition>): HorizontalPodAutoscalerStatusHelper {
-        if (!Array.isArray(conditions)) { conditions = [conditions] }
-        if (!this._template.conditions) this._template.conditions = conditions
-        this._template.conditions = [...this._template.conditions, ...conditions]
-        return this
+export class HorizontalPodAutoscalerStatusHelper extends Template implements HorizontalPodAutoscalerStatusHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    currentMetrics(currentMetrics: Array<MetricStatus>): HorizontalPodAutoscalerStatusHelper {
-        if (!Array.isArray(currentMetrics)) { currentMetrics = [currentMetrics] }
-        if (!this._template.currentMetrics) this._template.currentMetrics = currentMetrics
-        this._template.currentMetrics = [...this._template.currentMetrics, ...currentMetrics]
-        return this
+    _conditions: any;
+    get conditions(): any /*Array<HorizontalPodAutoscalerCondition>*/ {
+        return this._conditions
+    }
+    set conditions(x: any /*Array<HorizontalPodAutoscalerCondition>*/) {
+        this._conditions = this.set(this.conditions, x)
+    }
+    setConditions(x: any /*Array<HorizontalPodAutoscalerCondition>*/) {
+        this.conditions = x; return this
     }
 
-    currentReplicas(currentReplicas: number): HorizontalPodAutoscalerStatusHelper {
-        this._template.currentReplicas = currentReplicas
-        return this
+    _currentMetrics: any;
+    get currentMetrics(): any /*Array<MetricStatus>*/ {
+        return this._currentMetrics
+    }
+    set currentMetrics(x: any /*Array<MetricStatus>*/) {
+        this._currentMetrics = this.set(this.currentMetrics, x)
+    }
+    setCurrentMetrics(x: any /*Array<MetricStatus>*/) {
+        this.currentMetrics = x; return this
     }
 
-    desiredReplicas(desiredReplicas: number): HorizontalPodAutoscalerStatusHelper {
-        this._template.desiredReplicas = desiredReplicas
-        return this
+    _currentReplicas: any;
+    get currentReplicas(): any /*number*/ {
+        return this._currentReplicas
+    }
+    set currentReplicas(x: any /*number*/) {
+        this._currentReplicas = x
+    }
+    setCurrentReplicas(x: any /*number*/) {
+        this.currentReplicas = x; return this
     }
 
-    lastScaleTime(lastScaleTime: Time): HorizontalPodAutoscalerStatusHelper {
-        this._template.lastScaleTime = lastScaleTime
-        return this
+    _desiredReplicas: any;
+    get desiredReplicas(): any /*number*/ {
+        return this._desiredReplicas
+    }
+    set desiredReplicas(x: any /*number*/) {
+        this._desiredReplicas = x
+    }
+    setDesiredReplicas(x: any /*number*/) {
+        this.desiredReplicas = x; return this
     }
 
-    observedGeneration(observedGeneration: number): HorizontalPodAutoscalerStatusHelper {
-        this._template.observedGeneration = observedGeneration
-        return this
+    _lastScaleTime: any;
+    get lastScaleTime(): any /*Time*/ {
+        return this._lastScaleTime
+    }
+    set lastScaleTime(x: any /*Time*/) {
+        this._lastScaleTime = x
+    }
+    setLastScaleTime(x: any /*Time*/) {
+        this.lastScaleTime = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = HorizontalPodAutoscalerStatusHelper.kind
-        this._template.apiVersion = HorizontalPodAutoscalerStatusHelper.apiVersion
+    _observedGeneration: any;
+    get observedGeneration(): any /*number*/ {
+        return this._observedGeneration
     }
+    set observedGeneration(x: any /*number*/) {
+        this._observedGeneration = x
+    }
+    setObservedGeneration(x: any /*number*/) {
+        this.observedGeneration = x; return this
+    }
+}
+
+export interface MetricIdentifierHelper extends MetricIdentifier {
+    $selector(x: any): any;
 }
 
 /** MetricIdentifier defines the name and optionally selector for a metric */
-export class MetricIdentifierHelper extends ResourceTemplate {
-    static kind = 'MetricIdentifier';
-    static apiVersion = 'autoscaling/v2beta2';
-
-    selector(selector: LabelSelector): MetricIdentifierHelper {
-        if (!this._template.selector) this._template.selector = []
-        this._template.selector = {
-            ...this._template.selector,
-            ...selector
-        }
-        return this
+export class MetricIdentifierHelper extends Template implements MetricIdentifierHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = MetricIdentifierHelper.kind
-        this._template.apiVersion = MetricIdentifierHelper.apiVersion
+    _selector: any;
+    get selector(): any /*LabelSelectorHelper*/ {
+        return this._selector
     }
+    set selector(x: any /*LabelSelectorHelper*/) {
+        this._selector = x
+    }
+    setSelector(x: any /*LabelSelectorHelper*/) {
+        this.selector = x; return this
+    }
+}
+
+export interface MetricSpecHelper extends MetricSpec {
+    $containerResource(x: any): any;
+    $external(x: any): any;
+    $object(x: any): any;
+    $pods(x: any): any;
+    $resource(x: any): any;
+    $type(x: any): any;
 }
 
 /** MetricSpec specifies how to scale based on a single metric (only `type` and one other matching field should be set at once). */
-export class MetricSpecHelper extends ResourceTemplate {
-    static kind = 'MetricSpec';
-    static apiVersion = 'autoscaling/v2beta2';
-
-    containerResource(containerResource: ContainerResourceMetricSource): MetricSpecHelper {
-        if (!this._template.containerResource) this._template.containerResource = []
-        this._template.containerResource = {
-            ...this._template.containerResource,
-            ...containerResource
-        }
-        return this
+export class MetricSpecHelper extends Template implements MetricSpecHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    external(external: ExternalMetricSource): MetricSpecHelper {
-        if (!this._template.external) this._template.external = []
-        this._template.external = {
-            ...this._template.external,
-            ...external
-        }
-        return this
+    _containerResource: any;
+    get containerResource(): any /*ContainerResourceMetricSourceHelper*/ {
+        return this._containerResource
+    }
+    set containerResource(x: any /*ContainerResourceMetricSourceHelper*/) {
+        this._containerResource = x
+    }
+    setContainerResource(x: any /*ContainerResourceMetricSourceHelper*/) {
+        this.containerResource = x; return this
     }
 
-    object(object: ObjectMetricSource): MetricSpecHelper {
-        if (!this._template.object) this._template.object = []
-        this._template.object = {
-            ...this._template.object,
-            ...object
-        }
-        return this
+    _external: any;
+    get external(): any /*ExternalMetricSourceHelper*/ {
+        return this._external
+    }
+    set external(x: any /*ExternalMetricSourceHelper*/) {
+        this._external = x
+    }
+    setExternal(x: any /*ExternalMetricSourceHelper*/) {
+        this.external = x; return this
     }
 
-    pods(pods: PodsMetricSource): MetricSpecHelper {
-        if (!this._template.pods) this._template.pods = []
-        this._template.pods = {
-            ...this._template.pods,
-            ...pods
-        }
-        return this
+    _object: any;
+    get object(): any /*ObjectMetricSourceHelper*/ {
+        return this._object
+    }
+    set object(x: any /*ObjectMetricSourceHelper*/) {
+        this._object = x
+    }
+    setObject(x: any /*ObjectMetricSourceHelper*/) {
+        this.object = x; return this
     }
 
-    resource(resource: ResourceMetricSource): MetricSpecHelper {
-        if (!this._template.resource) this._template.resource = []
-        this._template.resource = {
-            ...this._template.resource,
-            ...resource
-        }
-        return this
+    _pods: any;
+    get pods(): any /*PodsMetricSourceHelper*/ {
+        return this._pods
+    }
+    set pods(x: any /*PodsMetricSourceHelper*/) {
+        this._pods = x
+    }
+    setPods(x: any /*PodsMetricSourceHelper*/) {
+        this.pods = x; return this
     }
 
-    type(type: string): MetricSpecHelper {
-        this._template.type = type
-        return this
+    _resource: any;
+    get resource(): any /*ResourceMetricSourceHelper*/ {
+        return this._resource
+    }
+    set resource(x: any /*ResourceMetricSourceHelper*/) {
+        this._resource = x
+    }
+    setResource(x: any /*ResourceMetricSourceHelper*/) {
+        this.resource = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = MetricSpecHelper.kind
-        this._template.apiVersion = MetricSpecHelper.apiVersion
+    _type: any;
+    get type(): any /*string*/ {
+        return this._type
     }
+    set type(x: any /*string*/) {
+        this._type = x
+    }
+    setType(x: any /*string*/) {
+        this.type = x; return this
+    }
+}
+
+export interface MetricStatusHelper extends MetricStatus {
+    $containerResource(x: any): any;
+    $external(x: any): any;
+    $object(x: any): any;
+    $pods(x: any): any;
+    $resource(x: any): any;
+    $type(x: any): any;
 }
 
 /** MetricStatus describes the last-read state of a single metric. */
-export class MetricStatusHelper extends ResourceTemplate {
-    static kind = 'MetricStatus';
-    static apiVersion = 'autoscaling/v2beta2';
-
-    containerResource(containerResource: ContainerResourceMetricStatus): MetricStatusHelper {
-        if (!this._template.containerResource) this._template.containerResource = []
-        this._template.containerResource = {
-            ...this._template.containerResource,
-            ...containerResource
-        }
-        return this
+export class MetricStatusHelper extends Template implements MetricStatusHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    external(external: ExternalMetricStatus): MetricStatusHelper {
-        if (!this._template.external) this._template.external = []
-        this._template.external = {
-            ...this._template.external,
-            ...external
-        }
-        return this
+    _containerResource: any;
+    get containerResource(): any /*ContainerResourceMetricStatusHelper*/ {
+        return this._containerResource
+    }
+    set containerResource(x: any /*ContainerResourceMetricStatusHelper*/) {
+        this._containerResource = x
+    }
+    setContainerResource(x: any /*ContainerResourceMetricStatusHelper*/) {
+        this.containerResource = x; return this
     }
 
-    object(object: ObjectMetricStatus): MetricStatusHelper {
-        if (!this._template.object) this._template.object = []
-        this._template.object = {
-            ...this._template.object,
-            ...object
-        }
-        return this
+    _external: any;
+    get external(): any /*ExternalMetricStatusHelper*/ {
+        return this._external
+    }
+    set external(x: any /*ExternalMetricStatusHelper*/) {
+        this._external = x
+    }
+    setExternal(x: any /*ExternalMetricStatusHelper*/) {
+        this.external = x; return this
     }
 
-    pods(pods: PodsMetricStatus): MetricStatusHelper {
-        if (!this._template.pods) this._template.pods = []
-        this._template.pods = {
-            ...this._template.pods,
-            ...pods
-        }
-        return this
+    _object: any;
+    get object(): any /*ObjectMetricStatusHelper*/ {
+        return this._object
+    }
+    set object(x: any /*ObjectMetricStatusHelper*/) {
+        this._object = x
+    }
+    setObject(x: any /*ObjectMetricStatusHelper*/) {
+        this.object = x; return this
     }
 
-    resource(resource: ResourceMetricStatus): MetricStatusHelper {
-        if (!this._template.resource) this._template.resource = []
-        this._template.resource = {
-            ...this._template.resource,
-            ...resource
-        }
-        return this
+    _pods: any;
+    get pods(): any /*PodsMetricStatusHelper*/ {
+        return this._pods
+    }
+    set pods(x: any /*PodsMetricStatusHelper*/) {
+        this._pods = x
+    }
+    setPods(x: any /*PodsMetricStatusHelper*/) {
+        this.pods = x; return this
     }
 
-    type(type: string): MetricStatusHelper {
-        this._template.type = type
-        return this
+    _resource: any;
+    get resource(): any /*ResourceMetricStatusHelper*/ {
+        return this._resource
+    }
+    set resource(x: any /*ResourceMetricStatusHelper*/) {
+        this._resource = x
+    }
+    setResource(x: any /*ResourceMetricStatusHelper*/) {
+        this.resource = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = MetricStatusHelper.kind
-        this._template.apiVersion = MetricStatusHelper.apiVersion
+    _type: any;
+    get type(): any /*string*/ {
+        return this._type
     }
+    set type(x: any /*string*/) {
+        this._type = x
+    }
+    setType(x: any /*string*/) {
+        this.type = x; return this
+    }
+}
+
+export interface MetricTargetHelper extends MetricTarget {
+    $averageUtilization(x: any): any;
+    $averageValue(x: any): any;
+    $type(x: any): any;
+    $value(x: any): any;
 }
 
 /** MetricTarget defines the target value, average value, or average utilization of a specific metric */
-export class MetricTargetHelper extends ResourceTemplate {
-    static kind = 'MetricTarget';
-    static apiVersion = 'autoscaling/v2beta2';
-
-    averageUtilization(averageUtilization: number): MetricTargetHelper {
-        this._template.averageUtilization = averageUtilization
-        return this
+export class MetricTargetHelper extends Template implements MetricTargetHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    averageValue(averageValue: Quantity): MetricTargetHelper {
-        this._template.averageValue = averageValue
-        return this
+    _averageUtilization: any;
+    get averageUtilization(): any /*number*/ {
+        return this._averageUtilization
+    }
+    set averageUtilization(x: any /*number*/) {
+        this._averageUtilization = x
+    }
+    setAverageUtilization(x: any /*number*/) {
+        this.averageUtilization = x; return this
     }
 
-    type(type: string): MetricTargetHelper {
-        this._template.type = type
-        return this
+    _averageValue: any;
+    get averageValue(): any /*Quantity*/ {
+        return this._averageValue
+    }
+    set averageValue(x: any /*Quantity*/) {
+        this._averageValue = x
+    }
+    setAverageValue(x: any /*Quantity*/) {
+        this.averageValue = x; return this
     }
 
-    value(value: Quantity): MetricTargetHelper {
-        this._template.value = value
-        return this
+    _type: any;
+    get type(): any /*string*/ {
+        return this._type
+    }
+    set type(x: any /*string*/) {
+        this._type = x
+    }
+    setType(x: any /*string*/) {
+        this.type = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = MetricTargetHelper.kind
-        this._template.apiVersion = MetricTargetHelper.apiVersion
+    _value: any;
+    get value(): any /*Quantity*/ {
+        return this._value
     }
+    set value(x: any /*Quantity*/) {
+        this._value = x
+    }
+    setValue(x: any /*Quantity*/) {
+        this.value = x; return this
+    }
+}
+
+export interface MetricValueStatusHelper extends MetricValueStatus {
+    $averageUtilization(x: any): any;
+    $averageValue(x: any): any;
+    $value(x: any): any;
 }
 
 /** MetricValueStatus holds the current value for a metric */
-export class MetricValueStatusHelper extends ResourceTemplate {
-    static kind = 'MetricValueStatus';
-    static apiVersion = 'autoscaling/v2beta2';
-
-    averageUtilization(averageUtilization: number): MetricValueStatusHelper {
-        this._template.averageUtilization = averageUtilization
-        return this
+export class MetricValueStatusHelper extends Template implements MetricValueStatusHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    averageValue(averageValue: Quantity): MetricValueStatusHelper {
-        this._template.averageValue = averageValue
-        return this
+    _averageUtilization: any;
+    get averageUtilization(): any /*number*/ {
+        return this._averageUtilization
+    }
+    set averageUtilization(x: any /*number*/) {
+        this._averageUtilization = x
+    }
+    setAverageUtilization(x: any /*number*/) {
+        this.averageUtilization = x; return this
     }
 
-    value(value: Quantity): MetricValueStatusHelper {
-        this._template.value = value
-        return this
+    _averageValue: any;
+    get averageValue(): any /*Quantity*/ {
+        return this._averageValue
+    }
+    set averageValue(x: any /*Quantity*/) {
+        this._averageValue = x
+    }
+    setAverageValue(x: any /*Quantity*/) {
+        this.averageValue = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = MetricValueStatusHelper.kind
-        this._template.apiVersion = MetricValueStatusHelper.apiVersion
+    _value: any;
+    get value(): any /*Quantity*/ {
+        return this._value
     }
+    set value(x: any /*Quantity*/) {
+        this._value = x
+    }
+    setValue(x: any /*Quantity*/) {
+        this.value = x; return this
+    }
+}
+
+export interface ObjectMetricSourceHelper extends ObjectMetricSource {
+    $describedObject(x: any): any;
+    $metric(x: any): any;
+    $target(x: any): any;
 }
 
 /** ObjectMetricSource indicates how to scale on a metric describing a kubernetes object (for example, hits-per-second on an Ingress object). */
-export class ObjectMetricSourceHelper extends ResourceTemplate {
-    static kind = 'ObjectMetricSource';
-    static apiVersion = 'autoscaling/v2beta2';
-
-    describedObject(describedObject: CrossVersionObjectReference): ObjectMetricSourceHelper {
-        if (!this._template.describedObject) this._template.describedObject = []
-        this._template.describedObject = {
-            ...this._template.describedObject,
-            ...describedObject
-        }
-        return this
+export class ObjectMetricSourceHelper extends Template implements ObjectMetricSourceHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    metric(metric: MetricIdentifier): ObjectMetricSourceHelper {
-        if (!this._template.metric) this._template.metric = []
-        this._template.metric = {
-            ...this._template.metric,
-            ...metric
-        }
-        return this
+    _describedObject: any;
+    get describedObject(): any /*CrossVersionObjectReferenceHelper*/ {
+        return this._describedObject
+    }
+    set describedObject(x: any /*CrossVersionObjectReferenceHelper*/) {
+        this._describedObject = x
+    }
+    setDescribedObject(x: any /*CrossVersionObjectReferenceHelper*/) {
+        this.describedObject = x; return this
     }
 
-    target(target: MetricTarget): ObjectMetricSourceHelper {
-        if (!this._template.target) this._template.target = []
-        this._template.target = {
-            ...this._template.target,
-            ...target
-        }
-        return this
+    _metric: any;
+    get metric(): any /*MetricIdentifierHelper*/ {
+        return this._metric
+    }
+    set metric(x: any /*MetricIdentifierHelper*/) {
+        this._metric = x
+    }
+    setMetric(x: any /*MetricIdentifierHelper*/) {
+        this.metric = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = ObjectMetricSourceHelper.kind
-        this._template.apiVersion = ObjectMetricSourceHelper.apiVersion
+    _target: any;
+    get target(): any /*MetricTargetHelper*/ {
+        return this._target
     }
+    set target(x: any /*MetricTargetHelper*/) {
+        this._target = x
+    }
+    setTarget(x: any /*MetricTargetHelper*/) {
+        this.target = x; return this
+    }
+}
+
+export interface ObjectMetricStatusHelper extends ObjectMetricStatus {
+    $current(x: any): any;
+    $describedObject(x: any): any;
+    $metric(x: any): any;
 }
 
 /** ObjectMetricStatus indicates the current value of a metric describing a kubernetes object (for example, hits-per-second on an Ingress object). */
-export class ObjectMetricStatusHelper extends ResourceTemplate {
-    static kind = 'ObjectMetricStatus';
-    static apiVersion = 'autoscaling/v2beta2';
-
-    current(current: MetricValueStatus): ObjectMetricStatusHelper {
-        if (!this._template.current) this._template.current = []
-        this._template.current = {
-            ...this._template.current,
-            ...current
-        }
-        return this
+export class ObjectMetricStatusHelper extends Template implements ObjectMetricStatusHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    describedObject(describedObject: CrossVersionObjectReference): ObjectMetricStatusHelper {
-        if (!this._template.describedObject) this._template.describedObject = []
-        this._template.describedObject = {
-            ...this._template.describedObject,
-            ...describedObject
-        }
-        return this
+    _current: any;
+    get current(): any /*MetricValueStatusHelper*/ {
+        return this._current
+    }
+    set current(x: any /*MetricValueStatusHelper*/) {
+        this._current = x
+    }
+    setCurrent(x: any /*MetricValueStatusHelper*/) {
+        this.current = x; return this
     }
 
-    metric(metric: MetricIdentifier): ObjectMetricStatusHelper {
-        if (!this._template.metric) this._template.metric = []
-        this._template.metric = {
-            ...this._template.metric,
-            ...metric
-        }
-        return this
+    _describedObject: any;
+    get describedObject(): any /*CrossVersionObjectReferenceHelper*/ {
+        return this._describedObject
+    }
+    set describedObject(x: any /*CrossVersionObjectReferenceHelper*/) {
+        this._describedObject = x
+    }
+    setDescribedObject(x: any /*CrossVersionObjectReferenceHelper*/) {
+        this.describedObject = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = ObjectMetricStatusHelper.kind
-        this._template.apiVersion = ObjectMetricStatusHelper.apiVersion
+    _metric: any;
+    get metric(): any /*MetricIdentifierHelper*/ {
+        return this._metric
     }
+    set metric(x: any /*MetricIdentifierHelper*/) {
+        this._metric = x
+    }
+    setMetric(x: any /*MetricIdentifierHelper*/) {
+        this.metric = x; return this
+    }
+}
+
+export interface PodsMetricSourceHelper extends PodsMetricSource {
+    $metric(x: any): any;
+    $target(x: any): any;
 }
 
 /** PodsMetricSource indicates how to scale on a metric describing each pod in the current scale target (for example, transactions-processed-per-second). The values will be averaged together before being compared to the target value. */
-export class PodsMetricSourceHelper extends ResourceTemplate {
-    static kind = 'PodsMetricSource';
-    static apiVersion = 'autoscaling/v2beta2';
-
-    metric(metric: MetricIdentifier): PodsMetricSourceHelper {
-        if (!this._template.metric) this._template.metric = []
-        this._template.metric = {
-            ...this._template.metric,
-            ...metric
-        }
-        return this
+export class PodsMetricSourceHelper extends Template implements PodsMetricSourceHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    target(target: MetricTarget): PodsMetricSourceHelper {
-        if (!this._template.target) this._template.target = []
-        this._template.target = {
-            ...this._template.target,
-            ...target
-        }
-        return this
+    _metric: any;
+    get metric(): any /*MetricIdentifierHelper*/ {
+        return this._metric
+    }
+    set metric(x: any /*MetricIdentifierHelper*/) {
+        this._metric = x
+    }
+    setMetric(x: any /*MetricIdentifierHelper*/) {
+        this.metric = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = PodsMetricSourceHelper.kind
-        this._template.apiVersion = PodsMetricSourceHelper.apiVersion
+    _target: any;
+    get target(): any /*MetricTargetHelper*/ {
+        return this._target
     }
+    set target(x: any /*MetricTargetHelper*/) {
+        this._target = x
+    }
+    setTarget(x: any /*MetricTargetHelper*/) {
+        this.target = x; return this
+    }
+}
+
+export interface PodsMetricStatusHelper extends PodsMetricStatus {
+    $current(x: any): any;
+    $metric(x: any): any;
 }
 
 /** PodsMetricStatus indicates the current value of a metric describing each pod in the current scale target (for example, transactions-processed-per-second). */
-export class PodsMetricStatusHelper extends ResourceTemplate {
-    static kind = 'PodsMetricStatus';
-    static apiVersion = 'autoscaling/v2beta2';
-
-    current(current: MetricValueStatus): PodsMetricStatusHelper {
-        if (!this._template.current) this._template.current = []
-        this._template.current = {
-            ...this._template.current,
-            ...current
-        }
-        return this
+export class PodsMetricStatusHelper extends Template implements PodsMetricStatusHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    metric(metric: MetricIdentifier): PodsMetricStatusHelper {
-        if (!this._template.metric) this._template.metric = []
-        this._template.metric = {
-            ...this._template.metric,
-            ...metric
-        }
-        return this
+    _current: any;
+    get current(): any /*MetricValueStatusHelper*/ {
+        return this._current
+    }
+    set current(x: any /*MetricValueStatusHelper*/) {
+        this._current = x
+    }
+    setCurrent(x: any /*MetricValueStatusHelper*/) {
+        this.current = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = PodsMetricStatusHelper.kind
-        this._template.apiVersion = PodsMetricStatusHelper.apiVersion
+    _metric: any;
+    get metric(): any /*MetricIdentifierHelper*/ {
+        return this._metric
     }
+    set metric(x: any /*MetricIdentifierHelper*/) {
+        this._metric = x
+    }
+    setMetric(x: any /*MetricIdentifierHelper*/) {
+        this.metric = x; return this
+    }
+}
+
+export interface ResourceMetricSourceHelper extends ResourceMetricSource {
+    $target(x: any): any;
 }
 
 /** ResourceMetricSource indicates how to scale on a resource metric known to Kubernetes, as specified in requests and limits, describing each pod in the current scale target (e.g. CPU or memory).  The values will be averaged together before being compared to the target.  Such metrics are built in to Kubernetes, and have special scaling options on top of those available to normal per-pod metrics using the "pods" source.  Only one "target" type should be set. */
-export class ResourceMetricSourceHelper extends ResourceTemplate {
-    static kind = 'ResourceMetricSource';
-    static apiVersion = 'autoscaling/v2beta2';
-
-    target(target: MetricTarget): ResourceMetricSourceHelper {
-        if (!this._template.target) this._template.target = []
-        this._template.target = {
-            ...this._template.target,
-            ...target
-        }
-        return this
+export class ResourceMetricSourceHelper extends Template implements ResourceMetricSourceHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = ResourceMetricSourceHelper.kind
-        this._template.apiVersion = ResourceMetricSourceHelper.apiVersion
+    _target: any;
+    get target(): any /*MetricTargetHelper*/ {
+        return this._target
+    }
+    set target(x: any /*MetricTargetHelper*/) {
+        this._target = x
+    }
+    setTarget(x: any /*MetricTargetHelper*/) {
+        this.target = x; return this
     }
 }
 
-/** ResourceMetricStatus indicates the current value of a resource metric known to Kubernetes, as specified in requests and limits, describing each pod in the current scale target (e.g. CPU or memory).  Such metrics are built in to Kubernetes, and have special scaling options on top of those available to normal per-pod metrics using the "pods" source. */
-export class ResourceMetricStatusHelper extends ResourceTemplate {
-    static kind = 'ResourceMetricStatus';
-    static apiVersion = 'autoscaling/v2beta2';
+export interface ResourceMetricStatusHelper extends ResourceMetricStatus {
+    $current(x: any): any;
+}
 
-    current(current: MetricValueStatus): ResourceMetricStatusHelper {
-        if (!this._template.current) this._template.current = []
-        this._template.current = {
-            ...this._template.current,
-            ...current
-        }
-        return this
+/** ResourceMetricStatus indicates the current value of a resource metric known to Kubernetes, as specified in requests and limits, describing each pod in the current scale target (e.g. CPU or memory).  Such metrics are built in to Kubernetes, and have special scaling options on top of those available to normal per-pod metrics using the "pods" source. */
+export class ResourceMetricStatusHelper extends Template implements ResourceMetricStatusHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = ResourceMetricStatusHelper.kind
-        this._template.apiVersion = ResourceMetricStatusHelper.apiVersion
+    _current: any;
+    get current(): any /*MetricValueStatusHelper*/ {
+        return this._current
+    }
+    set current(x: any /*MetricValueStatusHelper*/) {
+        this._current = x
+    }
+    setCurrent(x: any /*MetricValueStatusHelper*/) {
+        this.current = x; return this
     }
 }

@@ -1,126 +1,159 @@
-import { ResourceTemplate } from "../resourceTemplate";
+import { ResourceTemplate, Template } from "../resourceTemplate";
+import { Overhead, RuntimeClass, RuntimeClassList, Scheduling } from "./v1beta1";
 import { Quantity } from "../api/resource";
 import { ListMeta, ObjectMeta } from "../meta/v1";
-import { Overhead, RuntimeClass, Scheduling } from "./v1beta1";
 import { Toleration } from "../core/v1";
 
+export interface OverheadHelper extends Overhead {
+    $podFixed(x: any): any;
+}
+
 /** Overhead structure represents the resource overhead associated with running a pod. */
-export class OverheadHelper extends ResourceTemplate {
-    static kind = 'Overhead';
-    static apiVersion = 'node/v1beta1';
-
-    podFixed(podFixed: {[name: string]: Quantity}): OverheadHelper {
-        if (!this._template.podFixed) this._template.podFixed = []
-        this._template.podFixed = {
-            ...this._template.podFixed,
-            ...podFixed
-        }
-        return this
+export class OverheadHelper extends Template implements OverheadHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = OverheadHelper.kind
-        this._template.apiVersion = OverheadHelper.apiVersion
+    _podFixed: any;
+    get podFixed(): any /*{[name: string]: Quantity}Helper*/ {
+        return this._podFixed
     }
+    set podFixed(x: any /*{[name: string]: Quantity}Helper*/) {
+        this._podFixed = this.set(this.podFixed, x)
+    }
+    setPodFixed(x: any /*{[name: string]: Quantity}Helper*/) {
+        this.podFixed = x; return this
+    }
+}
+
+export interface RuntimeClassHelper extends RuntimeClass {
+    $handler(x: any): any;
+    $metadata(x: any): any;
+    $overhead(x: any): any;
+    $scheduling(x: any): any;
 }
 
 /** RuntimeClass defines a class of container runtime supported in the cluster. The RuntimeClass is used to determine which container runtime is used to run all containers in a pod. RuntimeClasses are (currently) manually defined by a user or cluster provisioner, and referenced in the PodSpec. The Kubelet is responsible for resolving the RuntimeClassName reference before running the pod.  For more details, see https://git.k8s.io/enhancements/keps/sig-node/runtime-class.md */
-export class RuntimeClassHelper extends ResourceTemplate {
+export class RuntimeClassHelper extends ResourceTemplate implements RuntimeClassHelper {
     static kind = 'RuntimeClass';
     static apiVersion = 'node/v1beta1';
 
-    handler(handler: string): RuntimeClassHelper {
-        this._template.handler = handler
-        return this
+    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
+        super(nameOrObject, namespace, RuntimeClassHelper.kind, RuntimeClassHelper.apiVersion)
     }
 
-    metadata(metadata: ObjectMeta): RuntimeClassHelper {
-        if (!this._template.metadata) this._template.metadata = []
-        this._template.metadata = {
-            ...this._template.metadata,
-            ...metadata
-        }
-        return this
+    _handler: any;
+    get handler(): any /*string*/ {
+        return this._handler
+    }
+    set handler(x: any /*string*/) {
+        this._handler = x
+    }
+    setHandler(x: any /*string*/) {
+        this.handler = x; return this
     }
 
-    overhead(overhead: Overhead): RuntimeClassHelper {
-        if (!this._template.overhead) this._template.overhead = []
-        this._template.overhead = {
-            ...this._template.overhead,
-            ...overhead
-        }
-        return this
+    _metadata: any;
+    get metadata(): any /*ObjectMetaHelper*/ {
+        return this._metadata
+    }
+    set metadata(x: any /*ObjectMetaHelper*/) {
+        this._metadata = x
+    }
+    setMetadata(x: any /*ObjectMetaHelper*/) {
+        this.metadata = x; return this
     }
 
-    scheduling(scheduling: Scheduling): RuntimeClassHelper {
-        if (!this._template.scheduling) this._template.scheduling = []
-        this._template.scheduling = {
-            ...this._template.scheduling,
-            ...scheduling
-        }
-        return this
+    _overhead: any;
+    get overhead(): any /*OverheadHelper*/ {
+        return this._overhead
+    }
+    set overhead(x: any /*OverheadHelper*/) {
+        this._overhead = x
+    }
+    setOverhead(x: any /*OverheadHelper*/) {
+        this.overhead = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = RuntimeClassHelper.kind
-        this._template.apiVersion = RuntimeClassHelper.apiVersion
+    _scheduling: any;
+    get scheduling(): any /*SchedulingHelper*/ {
+        return this._scheduling
     }
+    set scheduling(x: any /*SchedulingHelper*/) {
+        this._scheduling = x
+    }
+    setScheduling(x: any /*SchedulingHelper*/) {
+        this.scheduling = x; return this
+    }
+}
+
+export interface RuntimeClassListHelper extends RuntimeClassList {
+    $items(x: any): any;
+    $metadata(x: any): any;
 }
 
 /** RuntimeClassList is a list of RuntimeClass objects. */
-export class RuntimeClassListHelper extends ResourceTemplate {
+export class RuntimeClassListHelper extends ResourceTemplate implements RuntimeClassListHelper {
     static kind = 'RuntimeClassList';
     static apiVersion = 'node/v1beta1';
 
-    items(items: Array<RuntimeClass>): RuntimeClassListHelper {
-        if (!Array.isArray(items)) { items = [items] }
-        if (!this._template.items) this._template.items = items
-        this._template.items = [...this._template.items, ...items]
-        return this
+    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
+        super(nameOrObject, namespace, RuntimeClassListHelper.kind, RuntimeClassListHelper.apiVersion)
     }
 
-    metadata(metadata: ListMeta): RuntimeClassListHelper {
-        if (!this._template.metadata) this._template.metadata = []
-        this._template.metadata = {
-            ...this._template.metadata,
-            ...metadata
-        }
-        return this
+    _items: any;
+    get items(): any /*Array<RuntimeClass>*/ {
+        return this._items
+    }
+    set items(x: any /*Array<RuntimeClass>*/) {
+        this._items = this.set(this.items, x)
+    }
+    setItems(x: any /*Array<RuntimeClass>*/) {
+        this.items = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = RuntimeClassListHelper.kind
-        this._template.apiVersion = RuntimeClassListHelper.apiVersion
+    _metadata: any;
+    get metadata(): any /*ListMetaHelper*/ {
+        return this._metadata
+    }
+    set metadata(x: any /*ListMetaHelper*/) {
+        this._metadata = x
+    }
+    setMetadata(x: any /*ListMetaHelper*/) {
+        this.metadata = x; return this
     }
 }
 
+export interface SchedulingHelper extends Scheduling {
+    $nodeSelector(x: any): any;
+    $tolerations(x: any): any;
+}
+
 /** Scheduling specifies the scheduling constraints for nodes supporting a RuntimeClass. */
-export class SchedulingHelper extends ResourceTemplate {
-    static kind = 'Scheduling';
-    static apiVersion = 'node/v1beta1';
-
-    nodeSelector(nodeSelector: {[name: string]: string}): SchedulingHelper {
-        if (!this._template.nodeSelector) this._template.nodeSelector = []
-        this._template.nodeSelector = {
-            ...this._template.nodeSelector,
-            ...nodeSelector
-        }
-        return this
+export class SchedulingHelper extends Template implements SchedulingHelper {
+    constructor(obj: any) {
+        super(obj)
     }
 
-    tolerations(tolerations: Array<Toleration>): SchedulingHelper {
-        if (!Array.isArray(tolerations)) { tolerations = [tolerations] }
-        if (!this._template.tolerations) this._template.tolerations = tolerations
-        this._template.tolerations = [...this._template.tolerations, ...tolerations]
-        return this
+    _nodeSelector: any;
+    get nodeSelector(): any /*any*/ {
+        return this._nodeSelector
+    }
+    set nodeSelector(x: any /*any*/) {
+        this._nodeSelector = this.set(this.nodeSelector, x)
+    }
+    setNodeSelector(x: any /*any*/) {
+        this.nodeSelector = x; return this
     }
 
-    constructor(name, namespace) {
-        super(name, namespace)
-        this._template.kind = SchedulingHelper.kind
-        this._template.apiVersion = SchedulingHelper.apiVersion
+    _tolerations: any;
+    get tolerations(): any /*Array<Toleration>*/ {
+        return this._tolerations
+    }
+    set tolerations(x: any /*Array<Toleration>*/) {
+        this._tolerations = this.set(this.tolerations, x)
+    }
+    setTolerations(x: any /*Array<Toleration>*/) {
+        this.tolerations = x; return this
     }
 }

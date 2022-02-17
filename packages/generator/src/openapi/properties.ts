@@ -43,22 +43,36 @@ export function kindType(
 
     return undefined
 }
+const addImport = (proj, api, imports, value) => {
+    let t = ''
+    if (!value.$ref)
+        return
+    const ref = parseDefName(resolve(api, value).name)
+    if (ref == null) { throw new Error(`Value references excluded type: ${JSON.stringify(value)}`) }
+
+    if (ref.name in elidedTypes) {
+        t = elidedTypes[ref.name]
+    } else {
+        imports.add(ensureFile(proj, filePath(ref.path)), ref.name)
+        t = ref.name
+    }
+    return t
+}
 
 export function type(proj: Project, api: API, imports: Imports, value: Value): string {
     let t = ''
 
     if ('$ref' in value) {
-        const ref = parseDefName(resolve(api, value).name)
-        if (ref == null) {
-            throw new Error(`Value references excluded type: ${JSON.stringify(value)}`)
-        }
-
-        if (ref.name in elidedTypes) {
-            t = elidedTypes[ref.name]
-        } else {
-            imports.add(ensureFile(proj, filePath(ref.path)), ref.name)
-            t = ref.name
-        }
+        t = addImport(proj, api, imports, value)
+        // const ref = parseDefName(resolve(api, value).name)
+        // if (ref == null) { throw new Error(`Value references excluded type: ${JSON.stringify(value)}`) }
+        //
+        // if (ref.name in elidedTypes) {
+        //     t = elidedTypes[ref.name]
+        // } else {
+        //     imports.add(ensureFile(proj, filePath(ref.path)), ref.name)
+        //     t = ref.name
+        // }
     } else if ('type' in value) {
         switch (value.type) {
             case 'string':
@@ -71,9 +85,11 @@ export function type(proj: Project, api: API, imports: Imports, value: Value): s
                 break
             case 'object':
                 t = `{[name: string]: ${type(proj, api, imports, value.additionalProperties)}}`
+                // addImport(proj, api, value, imports)
                 break
             case 'array':
                 t = `Array<${type(proj, api, imports, value.items)}>`
+                // addImport(proj, api, imports, value)
                 break
             default:
                 assertNever(value)
