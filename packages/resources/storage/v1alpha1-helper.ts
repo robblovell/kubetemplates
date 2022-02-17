@@ -5,11 +5,13 @@ import { LabelSelector, ListMeta, ObjectMeta, Time } from "../meta/v1";
 import { PersistentVolumeSpec } from "../core/v1";
 
 export interface CSIStorageCapacityHelper extends CSIStorageCapacity {
-    $capacity(x: any): any;
-    $maximumVolumeSize(x: any): any;
-    $metadata(x: any): any;
-    $nodeTopology(x: any): any;
-    $storageClassName(x: any): any;
+    $capacity(x: Quantity): CSIStorageCapacityHelper;
+    $maximumVolumeSize(x: Quantity): CSIStorageCapacityHelper;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): CSIStorageCapacityHelper;
+    nodeTopology: LabelSelectorHelper;
+    $nodeTopology(x: LabelSelectorHelper): CSIStorageCapacityHelper;
+    $storageClassName(x: string): CSIStorageCapacityHelper;
 }
 
 /**
@@ -31,65 +33,66 @@ export class CSIStorageCapacityHelper extends ResourceTemplate implements CSISto
         super(nameOrObject, namespace, CSIStorageCapacityHelper.kind, CSIStorageCapacityHelper.apiVersion)
     }
 
-    _capacity: any;
-    get capacity(): any /*Quantity*/ {
+    _capacity: Quantity;
+    get capacity(): Quantity {
         return this._capacity
     }
-    set capacity(x: any /*Quantity*/) {
+    set capacity(x: Quantity) {
         this._capacity = x
     }
-    setCapacity(x: any /*Quantity*/) {
+    $Capacity(x: Quantity) {
         this.capacity = x; return this
     }
 
-    _maximumVolumeSize: any;
-    get maximumVolumeSize(): any /*Quantity*/ {
+    _maximumVolumeSize: Quantity;
+    get maximumVolumeSize(): Quantity {
         return this._maximumVolumeSize
     }
-    set maximumVolumeSize(x: any /*Quantity*/) {
+    set maximumVolumeSize(x: Quantity) {
         this._maximumVolumeSize = x
     }
-    setMaximumVolumeSize(x: any /*Quantity*/) {
+    $MaximumVolumeSize(x: Quantity) {
         this.maximumVolumeSize = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _nodeTopology: any;
-    get nodeTopology(): any /*LabelSelectorHelper*/ {
+    _nodeTopology: LabelSelectorHelper;
+    get nodeTopology(): LabelSelectorHelper {
         return this._nodeTopology
     }
-    set nodeTopology(x: any /*LabelSelectorHelper*/) {
+    set nodeTopology(x: LabelSelectorHelper) {
         this._nodeTopology = x
     }
-    setNodeTopology(x: any /*LabelSelectorHelper*/) {
+    $NodeTopology(x: LabelSelectorHelper) {
         this.nodeTopology = x; return this
     }
 
-    _storageClassName: any;
-    get storageClassName(): any /*string*/ {
+    _storageClassName: string;
+    get storageClassName(): string {
         return this._storageClassName
     }
-    set storageClassName(x: any /*string*/) {
+    set storageClassName(x: string) {
         this._storageClassName = x
     }
-    setStorageClassName(x: any /*string*/) {
+    $StorageClassName(x: string) {
         this.storageClassName = x; return this
     }
 }
 
 export interface CSIStorageCapacityListHelper extends CSIStorageCapacityList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<CSIStorageCapacity>): CSIStorageCapacityListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): CSIStorageCapacityListHelper;
 }
 
 /** CSIStorageCapacityList is a collection of CSIStorageCapacity objects. */
@@ -101,33 +104,36 @@ export class CSIStorageCapacityListHelper extends ResourceTemplate implements CS
         super(nameOrObject, namespace, CSIStorageCapacityListHelper.kind, CSIStorageCapacityListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<CSIStorageCapacity>*/ {
+    _items: Array<CSIStorageCapacity>;
+    get items(): Array<CSIStorageCapacity> {
         return this._items
     }
-    set items(x: any /*Array<CSIStorageCapacity>*/) {
+    set items(x: Array<CSIStorageCapacity>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<CSIStorageCapacity>*/) {
+    $Items(x: Array<CSIStorageCapacity>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface VolumeAttachmentHelper extends VolumeAttachment {
-    $metadata(x: any): any;
-    $spec(x: any): any;
-    $status(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): VolumeAttachmentHelper;
+    spec: VolumeAttachmentSpecHelper;
+    $spec(x: VolumeAttachmentSpecHelper): VolumeAttachmentHelper;
+    status: VolumeAttachmentStatusHelper;
+    $status(x: VolumeAttachmentStatusHelper): VolumeAttachmentHelper;
 }
 
 /**
@@ -143,43 +149,44 @@ export class VolumeAttachmentHelper extends ResourceTemplate implements VolumeAt
         super(nameOrObject, namespace, VolumeAttachmentHelper.kind, VolumeAttachmentHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*VolumeAttachmentSpecHelper*/ {
+    _spec: VolumeAttachmentSpecHelper;
+    get spec(): VolumeAttachmentSpecHelper {
         return this._spec
     }
-    set spec(x: any /*VolumeAttachmentSpecHelper*/) {
+    set spec(x: VolumeAttachmentSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*VolumeAttachmentSpecHelper*/) {
+    $Spec(x: VolumeAttachmentSpecHelper) {
         this.spec = x; return this
     }
 
-    _status: any;
-    get status(): any /*VolumeAttachmentStatusHelper*/ {
+    _status: VolumeAttachmentStatusHelper;
+    get status(): VolumeAttachmentStatusHelper {
         return this._status
     }
-    set status(x: any /*VolumeAttachmentStatusHelper*/) {
+    set status(x: VolumeAttachmentStatusHelper) {
         this._status = x
     }
-    setStatus(x: any /*VolumeAttachmentStatusHelper*/) {
+    $Status(x: VolumeAttachmentStatusHelper) {
         this.status = x; return this
     }
 }
 
 export interface VolumeAttachmentListHelper extends VolumeAttachmentList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<VolumeAttachment>): VolumeAttachmentListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): VolumeAttachmentListHelper;
 }
 
 /** VolumeAttachmentList is a collection of VolumeAttachment objects. */
@@ -191,32 +198,33 @@ export class VolumeAttachmentListHelper extends ResourceTemplate implements Volu
         super(nameOrObject, namespace, VolumeAttachmentListHelper.kind, VolumeAttachmentListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<VolumeAttachment>*/ {
+    _items: Array<VolumeAttachment>;
+    get items(): Array<VolumeAttachment> {
         return this._items
     }
-    set items(x: any /*Array<VolumeAttachment>*/) {
+    set items(x: Array<VolumeAttachment>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<VolumeAttachment>*/) {
+    $Items(x: Array<VolumeAttachment>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface VolumeAttachmentSourceHelper extends VolumeAttachmentSource {
-    $inlineVolumeSpec(x: any): any;
-    $persistentVolumeName(x: any): any;
+    inlineVolumeSpec: PersistentVolumeSpecHelper;
+    $inlineVolumeSpec(x: PersistentVolumeSpecHelper): VolumeAttachmentSourceHelper;
+    $persistentVolumeName(x: string): VolumeAttachmentSourceHelper;
 }
 
 /** VolumeAttachmentSource represents a volume that should be attached. Right now only PersistenVolumes can be attached via external attacher, in future we may allow also inline volumes in pods. Exactly one member can be set. */
@@ -225,33 +233,34 @@ export class VolumeAttachmentSourceHelper extends Template implements VolumeAtta
         super(obj)
     }
 
-    _inlineVolumeSpec: any;
-    get inlineVolumeSpec(): any /*PersistentVolumeSpecHelper*/ {
+    _inlineVolumeSpec: PersistentVolumeSpecHelper;
+    get inlineVolumeSpec(): PersistentVolumeSpecHelper {
         return this._inlineVolumeSpec
     }
-    set inlineVolumeSpec(x: any /*PersistentVolumeSpecHelper*/) {
+    set inlineVolumeSpec(x: PersistentVolumeSpecHelper) {
         this._inlineVolumeSpec = x
     }
-    setInlineVolumeSpec(x: any /*PersistentVolumeSpecHelper*/) {
+    $InlineVolumeSpec(x: PersistentVolumeSpecHelper) {
         this.inlineVolumeSpec = x; return this
     }
 
-    _persistentVolumeName: any;
-    get persistentVolumeName(): any /*string*/ {
+    _persistentVolumeName: string;
+    get persistentVolumeName(): string {
         return this._persistentVolumeName
     }
-    set persistentVolumeName(x: any /*string*/) {
+    set persistentVolumeName(x: string) {
         this._persistentVolumeName = x
     }
-    setPersistentVolumeName(x: any /*string*/) {
+    $PersistentVolumeName(x: string) {
         this.persistentVolumeName = x; return this
     }
 }
 
 export interface VolumeAttachmentSpecHelper extends VolumeAttachmentSpec {
-    $attacher(x: any): any;
-    $nodeName(x: any): any;
-    $source(x: any): any;
+    $attacher(x: string): VolumeAttachmentSpecHelper;
+    $nodeName(x: string): VolumeAttachmentSpecHelper;
+    source: VolumeAttachmentSourceHelper;
+    $source(x: VolumeAttachmentSourceHelper): VolumeAttachmentSpecHelper;
 }
 
 /** VolumeAttachmentSpec is the specification of a VolumeAttachment request. */
@@ -260,45 +269,47 @@ export class VolumeAttachmentSpecHelper extends Template implements VolumeAttach
         super(obj)
     }
 
-    _attacher: any;
-    get attacher(): any /*string*/ {
+    _attacher: string;
+    get attacher(): string {
         return this._attacher
     }
-    set attacher(x: any /*string*/) {
+    set attacher(x: string) {
         this._attacher = x
     }
-    setAttacher(x: any /*string*/) {
+    $Attacher(x: string) {
         this.attacher = x; return this
     }
 
-    _nodeName: any;
-    get nodeName(): any /*string*/ {
+    _nodeName: string;
+    get nodeName(): string {
         return this._nodeName
     }
-    set nodeName(x: any /*string*/) {
+    set nodeName(x: string) {
         this._nodeName = x
     }
-    setNodeName(x: any /*string*/) {
+    $NodeName(x: string) {
         this.nodeName = x; return this
     }
 
-    _source: any;
-    get source(): any /*VolumeAttachmentSourceHelper*/ {
+    _source: VolumeAttachmentSourceHelper;
+    get source(): VolumeAttachmentSourceHelper {
         return this._source
     }
-    set source(x: any /*VolumeAttachmentSourceHelper*/) {
+    set source(x: VolumeAttachmentSourceHelper) {
         this._source = x
     }
-    setSource(x: any /*VolumeAttachmentSourceHelper*/) {
+    $Source(x: VolumeAttachmentSourceHelper) {
         this.source = x; return this
     }
 }
 
 export interface VolumeAttachmentStatusHelper extends VolumeAttachmentStatus {
-    $attachError(x: any): any;
-    $attached(x: any): any;
-    $attachmentMetadata(x: any): any;
-    $detachError(x: any): any;
+    attachError: VolumeErrorHelper;
+    $attachError(x: VolumeErrorHelper): VolumeAttachmentStatusHelper;
+    $attached(x: boolean): VolumeAttachmentStatusHelper;
+    $attachmentMetadata(x: any): VolumeAttachmentStatusHelper;
+    detachError: VolumeErrorHelper;
+    $detachError(x: VolumeErrorHelper): VolumeAttachmentStatusHelper;
 }
 
 /** VolumeAttachmentStatus is the status of a VolumeAttachment request. */
@@ -307,54 +318,54 @@ export class VolumeAttachmentStatusHelper extends Template implements VolumeAtta
         super(obj)
     }
 
-    _attachError: any;
-    get attachError(): any /*VolumeErrorHelper*/ {
+    _attachError: VolumeErrorHelper;
+    get attachError(): VolumeErrorHelper {
         return this._attachError
     }
-    set attachError(x: any /*VolumeErrorHelper*/) {
+    set attachError(x: VolumeErrorHelper) {
         this._attachError = x
     }
-    setAttachError(x: any /*VolumeErrorHelper*/) {
+    $AttachError(x: VolumeErrorHelper) {
         this.attachError = x; return this
     }
 
-    _attached: any;
-    get attached(): any /*boolean*/ {
+    _attached: boolean;
+    get attached(): boolean {
         return this._attached
     }
-    set attached(x: any /*boolean*/) {
+    set attached(x: boolean) {
         this._attached = x
     }
-    setAttached(x: any /*boolean*/) {
+    $Attached(x: boolean) {
         this.attached = x; return this
     }
 
     _attachmentMetadata: any;
-    get attachmentMetadata(): any /*any*/ {
+    get attachmentMetadata(): any {
         return this._attachmentMetadata
     }
-    set attachmentMetadata(x: any /*any*/) {
+    set attachmentMetadata(x: any) {
         this._attachmentMetadata = this.set(this.attachmentMetadata, x)
     }
-    setAttachmentMetadata(x: any /*any*/) {
+    $AttachmentMetadata(x: any) {
         this.attachmentMetadata = x; return this
     }
 
-    _detachError: any;
-    get detachError(): any /*VolumeErrorHelper*/ {
+    _detachError: VolumeErrorHelper;
+    get detachError(): VolumeErrorHelper {
         return this._detachError
     }
-    set detachError(x: any /*VolumeErrorHelper*/) {
+    set detachError(x: VolumeErrorHelper) {
         this._detachError = x
     }
-    setDetachError(x: any /*VolumeErrorHelper*/) {
+    $DetachError(x: VolumeErrorHelper) {
         this.detachError = x; return this
     }
 }
 
 export interface VolumeErrorHelper extends VolumeError {
-    $message(x: any): any;
-    $time(x: any): any;
+    $message(x: string): VolumeErrorHelper;
+    $time(x: Time): VolumeErrorHelper;
 }
 
 /** VolumeError captures an error encountered during a volume operation. */
@@ -363,25 +374,25 @@ export class VolumeErrorHelper extends Template implements VolumeErrorHelper {
         super(obj)
     }
 
-    _message: any;
-    get message(): any /*string*/ {
+    _message: string;
+    get message(): string {
         return this._message
     }
-    set message(x: any /*string*/) {
+    set message(x: string) {
         this._message = x
     }
-    setMessage(x: any /*string*/) {
+    $Message(x: string) {
         this.message = x; return this
     }
 
-    _time: any;
-    get time(): any /*Time*/ {
+    _time: Time;
+    get time(): Time {
         return this._time
     }
-    set time(x: any /*Time*/) {
+    set time(x: Time) {
         this._time = x
     }
-    setTime(x: any /*Time*/) {
+    $Time(x: Time) {
         this.time = x; return this
     }
 }

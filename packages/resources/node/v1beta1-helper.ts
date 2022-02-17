@@ -5,7 +5,7 @@ import { ListMeta, ObjectMeta } from "../meta/v1";
 import { Toleration } from "../core/v1";
 
 export interface OverheadHelper extends Overhead {
-    $podFixed(x: any): any;
+    $podFixed(x: {[name: string]: Quantity}): OverheadHelper;
 }
 
 /** Overhead structure represents the resource overhead associated with running a pod. */
@@ -14,23 +14,26 @@ export class OverheadHelper extends Template implements OverheadHelper {
         super(obj)
     }
 
-    _podFixed: any;
-    get podFixed(): any /*{[name: string]: Quantity}Helper*/ {
+    _podFixed: {[name: string]: Quantity};
+    get podFixed(): {[name: string]: Quantity} {
         return this._podFixed
     }
-    set podFixed(x: any /*{[name: string]: Quantity}Helper*/) {
+    set podFixed(x: {[name: string]: Quantity}) {
         this._podFixed = this.set(this.podFixed, x)
     }
-    setPodFixed(x: any /*{[name: string]: Quantity}Helper*/) {
+    $PodFixed(x: {[name: string]: Quantity}) {
         this.podFixed = x; return this
     }
 }
 
 export interface RuntimeClassHelper extends RuntimeClass {
-    $handler(x: any): any;
-    $metadata(x: any): any;
-    $overhead(x: any): any;
-    $scheduling(x: any): any;
+    $handler(x: string): RuntimeClassHelper;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): RuntimeClassHelper;
+    overhead: OverheadHelper;
+    $overhead(x: OverheadHelper): RuntimeClassHelper;
+    scheduling: SchedulingHelper;
+    $scheduling(x: SchedulingHelper): RuntimeClassHelper;
 }
 
 /** RuntimeClass defines a class of container runtime supported in the cluster. The RuntimeClass is used to determine which container runtime is used to run all containers in a pod. RuntimeClasses are (currently) manually defined by a user or cluster provisioner, and referenced in the PodSpec. The Kubelet is responsible for resolving the RuntimeClassName reference before running the pod.  For more details, see https://git.k8s.io/enhancements/keps/sig-node/runtime-class.md */
@@ -42,54 +45,55 @@ export class RuntimeClassHelper extends ResourceTemplate implements RuntimeClass
         super(nameOrObject, namespace, RuntimeClassHelper.kind, RuntimeClassHelper.apiVersion)
     }
 
-    _handler: any;
-    get handler(): any /*string*/ {
+    _handler: string;
+    get handler(): string {
         return this._handler
     }
-    set handler(x: any /*string*/) {
+    set handler(x: string) {
         this._handler = x
     }
-    setHandler(x: any /*string*/) {
+    $Handler(x: string) {
         this.handler = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _overhead: any;
-    get overhead(): any /*OverheadHelper*/ {
+    _overhead: OverheadHelper;
+    get overhead(): OverheadHelper {
         return this._overhead
     }
-    set overhead(x: any /*OverheadHelper*/) {
+    set overhead(x: OverheadHelper) {
         this._overhead = x
     }
-    setOverhead(x: any /*OverheadHelper*/) {
+    $Overhead(x: OverheadHelper) {
         this.overhead = x; return this
     }
 
-    _scheduling: any;
-    get scheduling(): any /*SchedulingHelper*/ {
+    _scheduling: SchedulingHelper;
+    get scheduling(): SchedulingHelper {
         return this._scheduling
     }
-    set scheduling(x: any /*SchedulingHelper*/) {
+    set scheduling(x: SchedulingHelper) {
         this._scheduling = x
     }
-    setScheduling(x: any /*SchedulingHelper*/) {
+    $Scheduling(x: SchedulingHelper) {
         this.scheduling = x; return this
     }
 }
 
 export interface RuntimeClassListHelper extends RuntimeClassList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<RuntimeClass>): RuntimeClassListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): RuntimeClassListHelper;
 }
 
 /** RuntimeClassList is a list of RuntimeClass objects. */
@@ -101,32 +105,32 @@ export class RuntimeClassListHelper extends ResourceTemplate implements RuntimeC
         super(nameOrObject, namespace, RuntimeClassListHelper.kind, RuntimeClassListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<RuntimeClass>*/ {
+    _items: Array<RuntimeClass>;
+    get items(): Array<RuntimeClass> {
         return this._items
     }
-    set items(x: any /*Array<RuntimeClass>*/) {
+    set items(x: Array<RuntimeClass>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<RuntimeClass>*/) {
+    $Items(x: Array<RuntimeClass>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface SchedulingHelper extends Scheduling {
-    $nodeSelector(x: any): any;
-    $tolerations(x: any): any;
+    $nodeSelector(x: any): SchedulingHelper;
+    $tolerations(x: Array<Toleration>): SchedulingHelper;
 }
 
 /** Scheduling specifies the scheduling constraints for nodes supporting a RuntimeClass. */
@@ -136,24 +140,24 @@ export class SchedulingHelper extends Template implements SchedulingHelper {
     }
 
     _nodeSelector: any;
-    get nodeSelector(): any /*any*/ {
+    get nodeSelector(): any {
         return this._nodeSelector
     }
-    set nodeSelector(x: any /*any*/) {
+    set nodeSelector(x: any) {
         this._nodeSelector = this.set(this.nodeSelector, x)
     }
-    setNodeSelector(x: any /*any*/) {
+    $NodeSelector(x: any) {
         this.nodeSelector = x; return this
     }
 
-    _tolerations: any;
-    get tolerations(): any /*Array<Toleration>*/ {
+    _tolerations: Array<Toleration>;
+    get tolerations(): Array<Toleration> {
         return this._tolerations
     }
-    set tolerations(x: any /*Array<Toleration>*/) {
+    set tolerations(x: Array<Toleration>) {
         this._tolerations = this.set(this.tolerations, x)
     }
-    setTolerations(x: any /*Array<Toleration>*/) {
+    $Tolerations(x: Array<Toleration>) {
         this.tolerations = x; return this
     }
 }

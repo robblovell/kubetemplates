@@ -5,9 +5,11 @@ import { LabelSelector, ListMeta, ObjectMeta, Time } from "../meta/v1";
 import { PersistentVolumeClaim, PodTemplateSpec } from "../core/v1";
 
 export interface ControllerRevisionHelper extends ControllerRevision {
-    $data(x: any): any;
-    $metadata(x: any): any;
-    $revision(x: any): any;
+    data: RawExtensionHelper;
+    $data(x: RawExtensionHelper): ControllerRevisionHelper;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): ControllerRevisionHelper;
+    $revision(x: number): ControllerRevisionHelper;
 }
 
 /** ControllerRevision implements an immutable snapshot of state data. Clients are responsible for serializing and deserializing the objects that contain their internal state. Once a ControllerRevision has been successfully created, it can not be updated. The API Server will fail validation of all requests that attempt to mutate the Data field. ControllerRevisions may, however, be deleted. Note that, due to its use by both the DaemonSet and StatefulSet controllers for update and rollback, this object is beta. However, it may be subject to name and representation changes in future releases, and clients should not depend on its stability. It is primarily for internal use by controllers. */
@@ -19,43 +21,44 @@ export class ControllerRevisionHelper extends ResourceTemplate implements Contro
         super(nameOrObject, namespace, ControllerRevisionHelper.kind, ControllerRevisionHelper.apiVersion)
     }
 
-    _data: any;
-    get data(): any /*RawExtensionHelper*/ {
+    _data: RawExtensionHelper;
+    get data(): RawExtensionHelper {
         return this._data
     }
-    set data(x: any /*RawExtensionHelper*/) {
+    set data(x: RawExtensionHelper) {
         this._data = x
     }
-    setData(x: any /*RawExtensionHelper*/) {
+    $Data(x: RawExtensionHelper) {
         this.data = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _revision: any;
-    get revision(): any /*number*/ {
+    _revision: number;
+    get revision(): number {
         return this._revision
     }
-    set revision(x: any /*number*/) {
+    set revision(x: number) {
         this._revision = x
     }
-    setRevision(x: any /*number*/) {
+    $Revision(x: number) {
         this.revision = x; return this
     }
 }
 
 export interface ControllerRevisionListHelper extends ControllerRevisionList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<ControllerRevision>): ControllerRevisionListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): ControllerRevisionListHelper;
 }
 
 /** ControllerRevisionList is a resource containing a list of ControllerRevision objects. */
@@ -67,33 +70,36 @@ export class ControllerRevisionListHelper extends ResourceTemplate implements Co
         super(nameOrObject, namespace, ControllerRevisionListHelper.kind, ControllerRevisionListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<ControllerRevision>*/ {
+    _items: Array<ControllerRevision>;
+    get items(): Array<ControllerRevision> {
         return this._items
     }
-    set items(x: any /*Array<ControllerRevision>*/) {
+    set items(x: Array<ControllerRevision>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<ControllerRevision>*/) {
+    $Items(x: Array<ControllerRevision>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface DaemonSetHelper extends DaemonSet {
-    $metadata(x: any): any;
-    $spec(x: any): any;
-    $status(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): DaemonSetHelper;
+    spec: DaemonSetSpecHelper;
+    $spec(x: DaemonSetSpecHelper): DaemonSetHelper;
+    status: DaemonSetStatusHelper;
+    $status(x: DaemonSetStatusHelper): DaemonSetHelper;
 }
 
 /** DaemonSet represents the configuration of a daemon set. */
@@ -105,46 +111,46 @@ export class DaemonSetHelper extends ResourceTemplate implements DaemonSetHelper
         super(nameOrObject, namespace, DaemonSetHelper.kind, DaemonSetHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*DaemonSetSpecHelper*/ {
+    _spec: DaemonSetSpecHelper;
+    get spec(): DaemonSetSpecHelper {
         return this._spec
     }
-    set spec(x: any /*DaemonSetSpecHelper*/) {
+    set spec(x: DaemonSetSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*DaemonSetSpecHelper*/) {
+    $Spec(x: DaemonSetSpecHelper) {
         this.spec = x; return this
     }
 
-    _status: any;
-    get status(): any /*DaemonSetStatusHelper*/ {
+    _status: DaemonSetStatusHelper;
+    get status(): DaemonSetStatusHelper {
         return this._status
     }
-    set status(x: any /*DaemonSetStatusHelper*/) {
+    set status(x: DaemonSetStatusHelper) {
         this._status = x
     }
-    setStatus(x: any /*DaemonSetStatusHelper*/) {
+    $Status(x: DaemonSetStatusHelper) {
         this.status = x; return this
     }
 }
 
 export interface DaemonSetConditionHelper extends DaemonSetCondition {
-    $lastTransitionTime(x: any): any;
-    $message(x: any): any;
-    $reason(x: any): any;
-    $status(x: any): any;
-    $type(x: any): any;
+    $lastTransitionTime(x: Time): DaemonSetConditionHelper;
+    $message(x: string): DaemonSetConditionHelper;
+    $reason(x: string): DaemonSetConditionHelper;
+    $status(x: string): DaemonSetConditionHelper;
+    $type(x: string): DaemonSetConditionHelper;
 }
 
 /** DaemonSetCondition describes the state of a DaemonSet at a certain point. */
@@ -153,65 +159,66 @@ export class DaemonSetConditionHelper extends Template implements DaemonSetCondi
         super(obj)
     }
 
-    _lastTransitionTime: any;
-    get lastTransitionTime(): any /*Time*/ {
+    _lastTransitionTime: Time;
+    get lastTransitionTime(): Time {
         return this._lastTransitionTime
     }
-    set lastTransitionTime(x: any /*Time*/) {
+    set lastTransitionTime(x: Time) {
         this._lastTransitionTime = x
     }
-    setLastTransitionTime(x: any /*Time*/) {
+    $LastTransitionTime(x: Time) {
         this.lastTransitionTime = x; return this
     }
 
-    _message: any;
-    get message(): any /*string*/ {
+    _message: string;
+    get message(): string {
         return this._message
     }
-    set message(x: any /*string*/) {
+    set message(x: string) {
         this._message = x
     }
-    setMessage(x: any /*string*/) {
+    $Message(x: string) {
         this.message = x; return this
     }
 
-    _reason: any;
-    get reason(): any /*string*/ {
+    _reason: string;
+    get reason(): string {
         return this._reason
     }
-    set reason(x: any /*string*/) {
+    set reason(x: string) {
         this._reason = x
     }
-    setReason(x: any /*string*/) {
+    $Reason(x: string) {
         this.reason = x; return this
     }
 
-    _status: any;
-    get status(): any /*string*/ {
+    _status: string;
+    get status(): string {
         return this._status
     }
-    set status(x: any /*string*/) {
+    set status(x: string) {
         this._status = x
     }
-    setStatus(x: any /*string*/) {
+    $Status(x: string) {
         this.status = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }
 
 export interface DaemonSetListHelper extends DaemonSetList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<DaemonSet>): DaemonSetListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): DaemonSetListHelper;
 }
 
 /** DaemonSetList is a collection of daemon sets. */
@@ -223,35 +230,38 @@ export class DaemonSetListHelper extends ResourceTemplate implements DaemonSetLi
         super(nameOrObject, namespace, DaemonSetListHelper.kind, DaemonSetListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<DaemonSet>*/ {
+    _items: Array<DaemonSet>;
+    get items(): Array<DaemonSet> {
         return this._items
     }
-    set items(x: any /*Array<DaemonSet>*/) {
+    set items(x: Array<DaemonSet>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<DaemonSet>*/) {
+    $Items(x: Array<DaemonSet>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface DaemonSetSpecHelper extends DaemonSetSpec {
-    $minReadySeconds(x: any): any;
-    $revisionHistoryLimit(x: any): any;
-    $selector(x: any): any;
-    $template(x: any): any;
-    $updateStrategy(x: any): any;
+    $minReadySeconds(x: number): DaemonSetSpecHelper;
+    $revisionHistoryLimit(x: number): DaemonSetSpecHelper;
+    selector: LabelSelectorHelper;
+    $selector(x: LabelSelectorHelper): DaemonSetSpecHelper;
+    template: PodTemplateSpecHelper;
+    $template(x: PodTemplateSpecHelper): DaemonSetSpecHelper;
+    updateStrategy: DaemonSetUpdateStrategyHelper;
+    $updateStrategy(x: DaemonSetUpdateStrategyHelper): DaemonSetSpecHelper;
 }
 
 /** DaemonSetSpec is the specification of a daemon set. */
@@ -260,73 +270,73 @@ export class DaemonSetSpecHelper extends Template implements DaemonSetSpecHelper
         super(obj)
     }
 
-    _minReadySeconds: any;
-    get minReadySeconds(): any /*number*/ {
+    _minReadySeconds: number;
+    get minReadySeconds(): number {
         return this._minReadySeconds
     }
-    set minReadySeconds(x: any /*number*/) {
+    set minReadySeconds(x: number) {
         this._minReadySeconds = x
     }
-    setMinReadySeconds(x: any /*number*/) {
+    $MinReadySeconds(x: number) {
         this.minReadySeconds = x; return this
     }
 
-    _revisionHistoryLimit: any;
-    get revisionHistoryLimit(): any /*number*/ {
+    _revisionHistoryLimit: number;
+    get revisionHistoryLimit(): number {
         return this._revisionHistoryLimit
     }
-    set revisionHistoryLimit(x: any /*number*/) {
+    set revisionHistoryLimit(x: number) {
         this._revisionHistoryLimit = x
     }
-    setRevisionHistoryLimit(x: any /*number*/) {
+    $RevisionHistoryLimit(x: number) {
         this.revisionHistoryLimit = x; return this
     }
 
-    _selector: any;
-    get selector(): any /*LabelSelectorHelper*/ {
+    _selector: LabelSelectorHelper;
+    get selector(): LabelSelectorHelper {
         return this._selector
     }
-    set selector(x: any /*LabelSelectorHelper*/) {
+    set selector(x: LabelSelectorHelper) {
         this._selector = x
     }
-    setSelector(x: any /*LabelSelectorHelper*/) {
+    $Selector(x: LabelSelectorHelper) {
         this.selector = x; return this
     }
 
-    _template: any;
-    get template(): any /*PodTemplateSpecHelper*/ {
+    _template: PodTemplateSpecHelper;
+    get template(): PodTemplateSpecHelper {
         return this._template
     }
-    set template(x: any /*PodTemplateSpecHelper*/) {
+    set template(x: PodTemplateSpecHelper) {
         this._template = x
     }
-    setTemplate(x: any /*PodTemplateSpecHelper*/) {
+    $Template(x: PodTemplateSpecHelper) {
         this.template = x; return this
     }
 
-    _updateStrategy: any;
-    get updateStrategy(): any /*DaemonSetUpdateStrategyHelper*/ {
+    _updateStrategy: DaemonSetUpdateStrategyHelper;
+    get updateStrategy(): DaemonSetUpdateStrategyHelper {
         return this._updateStrategy
     }
-    set updateStrategy(x: any /*DaemonSetUpdateStrategyHelper*/) {
+    set updateStrategy(x: DaemonSetUpdateStrategyHelper) {
         this._updateStrategy = x
     }
-    setUpdateStrategy(x: any /*DaemonSetUpdateStrategyHelper*/) {
+    $UpdateStrategy(x: DaemonSetUpdateStrategyHelper) {
         this.updateStrategy = x; return this
     }
 }
 
 export interface DaemonSetStatusHelper extends DaemonSetStatus {
-    $collisionCount(x: any): any;
-    $conditions(x: any): any;
-    $currentNumberScheduled(x: any): any;
-    $desiredNumberScheduled(x: any): any;
-    $numberAvailable(x: any): any;
-    $numberMisscheduled(x: any): any;
-    $numberReady(x: any): any;
-    $numberUnavailable(x: any): any;
-    $observedGeneration(x: any): any;
-    $updatedNumberScheduled(x: any): any;
+    $collisionCount(x: number): DaemonSetStatusHelper;
+    $conditions(x: Array<DaemonSetCondition>): DaemonSetStatusHelper;
+    $currentNumberScheduled(x: number): DaemonSetStatusHelper;
+    $desiredNumberScheduled(x: number): DaemonSetStatusHelper;
+    $numberAvailable(x: number): DaemonSetStatusHelper;
+    $numberMisscheduled(x: number): DaemonSetStatusHelper;
+    $numberReady(x: number): DaemonSetStatusHelper;
+    $numberUnavailable(x: number): DaemonSetStatusHelper;
+    $observedGeneration(x: number): DaemonSetStatusHelper;
+    $updatedNumberScheduled(x: number): DaemonSetStatusHelper;
 }
 
 /** DaemonSetStatus represents the current status of a daemon set. */
@@ -335,120 +345,121 @@ export class DaemonSetStatusHelper extends Template implements DaemonSetStatusHe
         super(obj)
     }
 
-    _collisionCount: any;
-    get collisionCount(): any /*number*/ {
+    _collisionCount: number;
+    get collisionCount(): number {
         return this._collisionCount
     }
-    set collisionCount(x: any /*number*/) {
+    set collisionCount(x: number) {
         this._collisionCount = x
     }
-    setCollisionCount(x: any /*number*/) {
+    $CollisionCount(x: number) {
         this.collisionCount = x; return this
     }
 
-    _conditions: any;
-    get conditions(): any /*Array<DaemonSetCondition>*/ {
+    _conditions: Array<DaemonSetCondition>;
+    get conditions(): Array<DaemonSetCondition> {
         return this._conditions
     }
-    set conditions(x: any /*Array<DaemonSetCondition>*/) {
+    set conditions(x: Array<DaemonSetCondition>) {
         this._conditions = this.set(this.conditions, x)
     }
-    setConditions(x: any /*Array<DaemonSetCondition>*/) {
+    $Conditions(x: Array<DaemonSetCondition>) {
         this.conditions = x; return this
     }
 
-    _currentNumberScheduled: any;
-    get currentNumberScheduled(): any /*number*/ {
+    _currentNumberScheduled: number;
+    get currentNumberScheduled(): number {
         return this._currentNumberScheduled
     }
-    set currentNumberScheduled(x: any /*number*/) {
+    set currentNumberScheduled(x: number) {
         this._currentNumberScheduled = x
     }
-    setCurrentNumberScheduled(x: any /*number*/) {
+    $CurrentNumberScheduled(x: number) {
         this.currentNumberScheduled = x; return this
     }
 
-    _desiredNumberScheduled: any;
-    get desiredNumberScheduled(): any /*number*/ {
+    _desiredNumberScheduled: number;
+    get desiredNumberScheduled(): number {
         return this._desiredNumberScheduled
     }
-    set desiredNumberScheduled(x: any /*number*/) {
+    set desiredNumberScheduled(x: number) {
         this._desiredNumberScheduled = x
     }
-    setDesiredNumberScheduled(x: any /*number*/) {
+    $DesiredNumberScheduled(x: number) {
         this.desiredNumberScheduled = x; return this
     }
 
-    _numberAvailable: any;
-    get numberAvailable(): any /*number*/ {
+    _numberAvailable: number;
+    get numberAvailable(): number {
         return this._numberAvailable
     }
-    set numberAvailable(x: any /*number*/) {
+    set numberAvailable(x: number) {
         this._numberAvailable = x
     }
-    setNumberAvailable(x: any /*number*/) {
+    $NumberAvailable(x: number) {
         this.numberAvailable = x; return this
     }
 
-    _numberMisscheduled: any;
-    get numberMisscheduled(): any /*number*/ {
+    _numberMisscheduled: number;
+    get numberMisscheduled(): number {
         return this._numberMisscheduled
     }
-    set numberMisscheduled(x: any /*number*/) {
+    set numberMisscheduled(x: number) {
         this._numberMisscheduled = x
     }
-    setNumberMisscheduled(x: any /*number*/) {
+    $NumberMisscheduled(x: number) {
         this.numberMisscheduled = x; return this
     }
 
-    _numberReady: any;
-    get numberReady(): any /*number*/ {
+    _numberReady: number;
+    get numberReady(): number {
         return this._numberReady
     }
-    set numberReady(x: any /*number*/) {
+    set numberReady(x: number) {
         this._numberReady = x
     }
-    setNumberReady(x: any /*number*/) {
+    $NumberReady(x: number) {
         this.numberReady = x; return this
     }
 
-    _numberUnavailable: any;
-    get numberUnavailable(): any /*number*/ {
+    _numberUnavailable: number;
+    get numberUnavailable(): number {
         return this._numberUnavailable
     }
-    set numberUnavailable(x: any /*number*/) {
+    set numberUnavailable(x: number) {
         this._numberUnavailable = x
     }
-    setNumberUnavailable(x: any /*number*/) {
+    $NumberUnavailable(x: number) {
         this.numberUnavailable = x; return this
     }
 
-    _observedGeneration: any;
-    get observedGeneration(): any /*number*/ {
+    _observedGeneration: number;
+    get observedGeneration(): number {
         return this._observedGeneration
     }
-    set observedGeneration(x: any /*number*/) {
+    set observedGeneration(x: number) {
         this._observedGeneration = x
     }
-    setObservedGeneration(x: any /*number*/) {
+    $ObservedGeneration(x: number) {
         this.observedGeneration = x; return this
     }
 
-    _updatedNumberScheduled: any;
-    get updatedNumberScheduled(): any /*number*/ {
+    _updatedNumberScheduled: number;
+    get updatedNumberScheduled(): number {
         return this._updatedNumberScheduled
     }
-    set updatedNumberScheduled(x: any /*number*/) {
+    set updatedNumberScheduled(x: number) {
         this._updatedNumberScheduled = x
     }
-    setUpdatedNumberScheduled(x: any /*number*/) {
+    $UpdatedNumberScheduled(x: number) {
         this.updatedNumberScheduled = x; return this
     }
 }
 
 export interface DaemonSetUpdateStrategyHelper extends DaemonSetUpdateStrategy {
-    $rollingUpdate(x: any): any;
-    $type(x: any): any;
+    rollingUpdate: RollingUpdateDaemonSetHelper;
+    $rollingUpdate(x: RollingUpdateDaemonSetHelper): DaemonSetUpdateStrategyHelper;
+    $type(x: string): DaemonSetUpdateStrategyHelper;
 }
 
 /** DaemonSetUpdateStrategy is a struct used to control the update strategy for a DaemonSet. */
@@ -457,33 +468,36 @@ export class DaemonSetUpdateStrategyHelper extends Template implements DaemonSet
         super(obj)
     }
 
-    _rollingUpdate: any;
-    get rollingUpdate(): any /*RollingUpdateDaemonSetHelper*/ {
+    _rollingUpdate: RollingUpdateDaemonSetHelper;
+    get rollingUpdate(): RollingUpdateDaemonSetHelper {
         return this._rollingUpdate
     }
-    set rollingUpdate(x: any /*RollingUpdateDaemonSetHelper*/) {
+    set rollingUpdate(x: RollingUpdateDaemonSetHelper) {
         this._rollingUpdate = x
     }
-    setRollingUpdate(x: any /*RollingUpdateDaemonSetHelper*/) {
+    $RollingUpdate(x: RollingUpdateDaemonSetHelper) {
         this.rollingUpdate = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }
 
 export interface DeploymentHelper extends Deployment {
-    $metadata(x: any): any;
-    $spec(x: any): any;
-    $status(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): DeploymentHelper;
+    spec: DeploymentSpecHelper;
+    $spec(x: DeploymentSpecHelper): DeploymentHelper;
+    status: DeploymentStatusHelper;
+    $status(x: DeploymentStatusHelper): DeploymentHelper;
 }
 
 /** Deployment enables declarative updates for Pods and ReplicaSets. */
@@ -495,47 +509,47 @@ export class DeploymentHelper extends ResourceTemplate implements DeploymentHelp
         super(nameOrObject, namespace, DeploymentHelper.kind, DeploymentHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*DeploymentSpecHelper*/ {
+    _spec: DeploymentSpecHelper;
+    get spec(): DeploymentSpecHelper {
         return this._spec
     }
-    set spec(x: any /*DeploymentSpecHelper*/) {
+    set spec(x: DeploymentSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*DeploymentSpecHelper*/) {
+    $Spec(x: DeploymentSpecHelper) {
         this.spec = x; return this
     }
 
-    _status: any;
-    get status(): any /*DeploymentStatusHelper*/ {
+    _status: DeploymentStatusHelper;
+    get status(): DeploymentStatusHelper {
         return this._status
     }
-    set status(x: any /*DeploymentStatusHelper*/) {
+    set status(x: DeploymentStatusHelper) {
         this._status = x
     }
-    setStatus(x: any /*DeploymentStatusHelper*/) {
+    $Status(x: DeploymentStatusHelper) {
         this.status = x; return this
     }
 }
 
 export interface DeploymentConditionHelper extends DeploymentCondition {
-    $lastTransitionTime(x: any): any;
-    $lastUpdateTime(x: any): any;
-    $message(x: any): any;
-    $reason(x: any): any;
-    $status(x: any): any;
-    $type(x: any): any;
+    $lastTransitionTime(x: Time): DeploymentConditionHelper;
+    $lastUpdateTime(x: Time): DeploymentConditionHelper;
+    $message(x: string): DeploymentConditionHelper;
+    $reason(x: string): DeploymentConditionHelper;
+    $status(x: string): DeploymentConditionHelper;
+    $type(x: string): DeploymentConditionHelper;
 }
 
 /** DeploymentCondition describes the state of a deployment at a certain point. */
@@ -544,76 +558,77 @@ export class DeploymentConditionHelper extends Template implements DeploymentCon
         super(obj)
     }
 
-    _lastTransitionTime: any;
-    get lastTransitionTime(): any /*Time*/ {
+    _lastTransitionTime: Time;
+    get lastTransitionTime(): Time {
         return this._lastTransitionTime
     }
-    set lastTransitionTime(x: any /*Time*/) {
+    set lastTransitionTime(x: Time) {
         this._lastTransitionTime = x
     }
-    setLastTransitionTime(x: any /*Time*/) {
+    $LastTransitionTime(x: Time) {
         this.lastTransitionTime = x; return this
     }
 
-    _lastUpdateTime: any;
-    get lastUpdateTime(): any /*Time*/ {
+    _lastUpdateTime: Time;
+    get lastUpdateTime(): Time {
         return this._lastUpdateTime
     }
-    set lastUpdateTime(x: any /*Time*/) {
+    set lastUpdateTime(x: Time) {
         this._lastUpdateTime = x
     }
-    setLastUpdateTime(x: any /*Time*/) {
+    $LastUpdateTime(x: Time) {
         this.lastUpdateTime = x; return this
     }
 
-    _message: any;
-    get message(): any /*string*/ {
+    _message: string;
+    get message(): string {
         return this._message
     }
-    set message(x: any /*string*/) {
+    set message(x: string) {
         this._message = x
     }
-    setMessage(x: any /*string*/) {
+    $Message(x: string) {
         this.message = x; return this
     }
 
-    _reason: any;
-    get reason(): any /*string*/ {
+    _reason: string;
+    get reason(): string {
         return this._reason
     }
-    set reason(x: any /*string*/) {
+    set reason(x: string) {
         this._reason = x
     }
-    setReason(x: any /*string*/) {
+    $Reason(x: string) {
         this.reason = x; return this
     }
 
-    _status: any;
-    get status(): any /*string*/ {
+    _status: string;
+    get status(): string {
         return this._status
     }
-    set status(x: any /*string*/) {
+    set status(x: string) {
         this._status = x
     }
-    setStatus(x: any /*string*/) {
+    $Status(x: string) {
         this.status = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }
 
 export interface DeploymentListHelper extends DeploymentList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<Deployment>): DeploymentListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): DeploymentListHelper;
 }
 
 /** DeploymentList is a list of Deployments. */
@@ -625,38 +640,41 @@ export class DeploymentListHelper extends ResourceTemplate implements Deployment
         super(nameOrObject, namespace, DeploymentListHelper.kind, DeploymentListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<Deployment>*/ {
+    _items: Array<Deployment>;
+    get items(): Array<Deployment> {
         return this._items
     }
-    set items(x: any /*Array<Deployment>*/) {
+    set items(x: Array<Deployment>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<Deployment>*/) {
+    $Items(x: Array<Deployment>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface DeploymentSpecHelper extends DeploymentSpec {
-    $minReadySeconds(x: any): any;
-    $paused(x: any): any;
-    $progressDeadlineSeconds(x: any): any;
-    $replicas(x: any): any;
-    $revisionHistoryLimit(x: any): any;
-    $selector(x: any): any;
-    $strategy(x: any): any;
-    $template(x: any): any;
+    $minReadySeconds(x: number): DeploymentSpecHelper;
+    $paused(x: boolean): DeploymentSpecHelper;
+    $progressDeadlineSeconds(x: number): DeploymentSpecHelper;
+    $replicas(x: number): DeploymentSpecHelper;
+    $revisionHistoryLimit(x: number): DeploymentSpecHelper;
+    selector: LabelSelectorHelper;
+    $selector(x: LabelSelectorHelper): DeploymentSpecHelper;
+    strategy: DeploymentStrategyHelper;
+    $strategy(x: DeploymentStrategyHelper): DeploymentSpecHelper;
+    template: PodTemplateSpecHelper;
+    $template(x: PodTemplateSpecHelper): DeploymentSpecHelper;
 }
 
 /** DeploymentSpec is the specification of the desired behavior of the Deployment. */
@@ -665,104 +683,104 @@ export class DeploymentSpecHelper extends Template implements DeploymentSpecHelp
         super(obj)
     }
 
-    _minReadySeconds: any;
-    get minReadySeconds(): any /*number*/ {
+    _minReadySeconds: number;
+    get minReadySeconds(): number {
         return this._minReadySeconds
     }
-    set minReadySeconds(x: any /*number*/) {
+    set minReadySeconds(x: number) {
         this._minReadySeconds = x
     }
-    setMinReadySeconds(x: any /*number*/) {
+    $MinReadySeconds(x: number) {
         this.minReadySeconds = x; return this
     }
 
-    _paused: any;
-    get paused(): any /*boolean*/ {
+    _paused: boolean;
+    get paused(): boolean {
         return this._paused
     }
-    set paused(x: any /*boolean*/) {
+    set paused(x: boolean) {
         this._paused = x
     }
-    setPaused(x: any /*boolean*/) {
+    $Paused(x: boolean) {
         this.paused = x; return this
     }
 
-    _progressDeadlineSeconds: any;
-    get progressDeadlineSeconds(): any /*number*/ {
+    _progressDeadlineSeconds: number;
+    get progressDeadlineSeconds(): number {
         return this._progressDeadlineSeconds
     }
-    set progressDeadlineSeconds(x: any /*number*/) {
+    set progressDeadlineSeconds(x: number) {
         this._progressDeadlineSeconds = x
     }
-    setProgressDeadlineSeconds(x: any /*number*/) {
+    $ProgressDeadlineSeconds(x: number) {
         this.progressDeadlineSeconds = x; return this
     }
 
-    _replicas: any;
-    get replicas(): any /*number*/ {
+    _replicas: number;
+    get replicas(): number {
         return this._replicas
     }
-    set replicas(x: any /*number*/) {
+    set replicas(x: number) {
         this._replicas = x
     }
-    setReplicas(x: any /*number*/) {
+    $Replicas(x: number) {
         this.replicas = x; return this
     }
 
-    _revisionHistoryLimit: any;
-    get revisionHistoryLimit(): any /*number*/ {
+    _revisionHistoryLimit: number;
+    get revisionHistoryLimit(): number {
         return this._revisionHistoryLimit
     }
-    set revisionHistoryLimit(x: any /*number*/) {
+    set revisionHistoryLimit(x: number) {
         this._revisionHistoryLimit = x
     }
-    setRevisionHistoryLimit(x: any /*number*/) {
+    $RevisionHistoryLimit(x: number) {
         this.revisionHistoryLimit = x; return this
     }
 
-    _selector: any;
-    get selector(): any /*LabelSelectorHelper*/ {
+    _selector: LabelSelectorHelper;
+    get selector(): LabelSelectorHelper {
         return this._selector
     }
-    set selector(x: any /*LabelSelectorHelper*/) {
+    set selector(x: LabelSelectorHelper) {
         this._selector = x
     }
-    setSelector(x: any /*LabelSelectorHelper*/) {
+    $Selector(x: LabelSelectorHelper) {
         this.selector = x; return this
     }
 
-    _strategy: any;
-    get strategy(): any /*DeploymentStrategyHelper*/ {
+    _strategy: DeploymentStrategyHelper;
+    get strategy(): DeploymentStrategyHelper {
         return this._strategy
     }
-    set strategy(x: any /*DeploymentStrategyHelper*/) {
+    set strategy(x: DeploymentStrategyHelper) {
         this._strategy = x
     }
-    setStrategy(x: any /*DeploymentStrategyHelper*/) {
+    $Strategy(x: DeploymentStrategyHelper) {
         this.strategy = x; return this
     }
 
-    _template: any;
-    get template(): any /*PodTemplateSpecHelper*/ {
+    _template: PodTemplateSpecHelper;
+    get template(): PodTemplateSpecHelper {
         return this._template
     }
-    set template(x: any /*PodTemplateSpecHelper*/) {
+    set template(x: PodTemplateSpecHelper) {
         this._template = x
     }
-    setTemplate(x: any /*PodTemplateSpecHelper*/) {
+    $Template(x: PodTemplateSpecHelper) {
         this.template = x; return this
     }
 }
 
 export interface DeploymentStatusHelper extends DeploymentStatus {
-    $availableReplicas(x: any): any;
-    $collisionCount(x: any): any;
-    $conditions(x: any): any;
-    $observedGeneration(x: any): any;
-    $readyReplicas(x: any): any;
-    $replicas(x: any): any;
-    $unavailableReplicas(x: any): any;
-    $updatedReplicas(x: any): any;
+    $availableReplicas(x: number): DeploymentStatusHelper;
+    $collisionCount(x: number): DeploymentStatusHelper;
+    $conditions(x: Array<DeploymentCondition>): DeploymentStatusHelper;
+    $observedGeneration(x: number): DeploymentStatusHelper;
+    $readyReplicas(x: number): DeploymentStatusHelper;
+    $replicas(x: number): DeploymentStatusHelper;
+    $unavailableReplicas(x: number): DeploymentStatusHelper;
+    $updatedReplicas(x: number): DeploymentStatusHelper;
 }
 
 /** DeploymentStatus is the most recently observed status of the Deployment. */
@@ -771,98 +789,99 @@ export class DeploymentStatusHelper extends Template implements DeploymentStatus
         super(obj)
     }
 
-    _availableReplicas: any;
-    get availableReplicas(): any /*number*/ {
+    _availableReplicas: number;
+    get availableReplicas(): number {
         return this._availableReplicas
     }
-    set availableReplicas(x: any /*number*/) {
+    set availableReplicas(x: number) {
         this._availableReplicas = x
     }
-    setAvailableReplicas(x: any /*number*/) {
+    $AvailableReplicas(x: number) {
         this.availableReplicas = x; return this
     }
 
-    _collisionCount: any;
-    get collisionCount(): any /*number*/ {
+    _collisionCount: number;
+    get collisionCount(): number {
         return this._collisionCount
     }
-    set collisionCount(x: any /*number*/) {
+    set collisionCount(x: number) {
         this._collisionCount = x
     }
-    setCollisionCount(x: any /*number*/) {
+    $CollisionCount(x: number) {
         this.collisionCount = x; return this
     }
 
-    _conditions: any;
-    get conditions(): any /*Array<DeploymentCondition>*/ {
+    _conditions: Array<DeploymentCondition>;
+    get conditions(): Array<DeploymentCondition> {
         return this._conditions
     }
-    set conditions(x: any /*Array<DeploymentCondition>*/) {
+    set conditions(x: Array<DeploymentCondition>) {
         this._conditions = this.set(this.conditions, x)
     }
-    setConditions(x: any /*Array<DeploymentCondition>*/) {
+    $Conditions(x: Array<DeploymentCondition>) {
         this.conditions = x; return this
     }
 
-    _observedGeneration: any;
-    get observedGeneration(): any /*number*/ {
+    _observedGeneration: number;
+    get observedGeneration(): number {
         return this._observedGeneration
     }
-    set observedGeneration(x: any /*number*/) {
+    set observedGeneration(x: number) {
         this._observedGeneration = x
     }
-    setObservedGeneration(x: any /*number*/) {
+    $ObservedGeneration(x: number) {
         this.observedGeneration = x; return this
     }
 
-    _readyReplicas: any;
-    get readyReplicas(): any /*number*/ {
+    _readyReplicas: number;
+    get readyReplicas(): number {
         return this._readyReplicas
     }
-    set readyReplicas(x: any /*number*/) {
+    set readyReplicas(x: number) {
         this._readyReplicas = x
     }
-    setReadyReplicas(x: any /*number*/) {
+    $ReadyReplicas(x: number) {
         this.readyReplicas = x; return this
     }
 
-    _replicas: any;
-    get replicas(): any /*number*/ {
+    _replicas: number;
+    get replicas(): number {
         return this._replicas
     }
-    set replicas(x: any /*number*/) {
+    set replicas(x: number) {
         this._replicas = x
     }
-    setReplicas(x: any /*number*/) {
+    $Replicas(x: number) {
         this.replicas = x; return this
     }
 
-    _unavailableReplicas: any;
-    get unavailableReplicas(): any /*number*/ {
+    _unavailableReplicas: number;
+    get unavailableReplicas(): number {
         return this._unavailableReplicas
     }
-    set unavailableReplicas(x: any /*number*/) {
+    set unavailableReplicas(x: number) {
         this._unavailableReplicas = x
     }
-    setUnavailableReplicas(x: any /*number*/) {
+    $UnavailableReplicas(x: number) {
         this.unavailableReplicas = x; return this
     }
 
-    _updatedReplicas: any;
-    get updatedReplicas(): any /*number*/ {
+    _updatedReplicas: number;
+    get updatedReplicas(): number {
         return this._updatedReplicas
     }
-    set updatedReplicas(x: any /*number*/) {
+    set updatedReplicas(x: number) {
         this._updatedReplicas = x
     }
-    setUpdatedReplicas(x: any /*number*/) {
+    $UpdatedReplicas(x: number) {
         this.updatedReplicas = x; return this
     }
 }
 
 export interface DeploymentStrategyHelper extends DeploymentStrategy {
-    $rollingUpdate(x: any): any;
-    $type(x: any): any;
+    rollingUpdate: RollingUpdateDeploymentHelper;
+    $rollingUpdate(x: RollingUpdateDeploymentHelper): DeploymentStrategyHelper;
+    $type(x: string): DeploymentStrategyHelper;
 }
 
 /** DeploymentStrategy describes how to replace existing pods with new ones. */
@@ -871,33 +890,36 @@ export class DeploymentStrategyHelper extends Template implements DeploymentStra
         super(obj)
     }
 
-    _rollingUpdate: any;
-    get rollingUpdate(): any /*RollingUpdateDeploymentHelper*/ {
+    _rollingUpdate: RollingUpdateDeploymentHelper;
+    get rollingUpdate(): RollingUpdateDeploymentHelper {
         return this._rollingUpdate
     }
-    set rollingUpdate(x: any /*RollingUpdateDeploymentHelper*/) {
+    set rollingUpdate(x: RollingUpdateDeploymentHelper) {
         this._rollingUpdate = x
     }
-    setRollingUpdate(x: any /*RollingUpdateDeploymentHelper*/) {
+    $RollingUpdate(x: RollingUpdateDeploymentHelper) {
         this.rollingUpdate = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }
 
 export interface ReplicaSetHelper extends ReplicaSet {
-    $metadata(x: any): any;
-    $spec(x: any): any;
-    $status(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): ReplicaSetHelper;
+    spec: ReplicaSetSpecHelper;
+    $spec(x: ReplicaSetSpecHelper): ReplicaSetHelper;
+    status: ReplicaSetStatusHelper;
+    $status(x: ReplicaSetStatusHelper): ReplicaSetHelper;
 }
 
 /** ReplicaSet ensures that a specified number of pod replicas are running at any given time. */
@@ -909,46 +931,46 @@ export class ReplicaSetHelper extends ResourceTemplate implements ReplicaSetHelp
         super(nameOrObject, namespace, ReplicaSetHelper.kind, ReplicaSetHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*ReplicaSetSpecHelper*/ {
+    _spec: ReplicaSetSpecHelper;
+    get spec(): ReplicaSetSpecHelper {
         return this._spec
     }
-    set spec(x: any /*ReplicaSetSpecHelper*/) {
+    set spec(x: ReplicaSetSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*ReplicaSetSpecHelper*/) {
+    $Spec(x: ReplicaSetSpecHelper) {
         this.spec = x; return this
     }
 
-    _status: any;
-    get status(): any /*ReplicaSetStatusHelper*/ {
+    _status: ReplicaSetStatusHelper;
+    get status(): ReplicaSetStatusHelper {
         return this._status
     }
-    set status(x: any /*ReplicaSetStatusHelper*/) {
+    set status(x: ReplicaSetStatusHelper) {
         this._status = x
     }
-    setStatus(x: any /*ReplicaSetStatusHelper*/) {
+    $Status(x: ReplicaSetStatusHelper) {
         this.status = x; return this
     }
 }
 
 export interface ReplicaSetConditionHelper extends ReplicaSetCondition {
-    $lastTransitionTime(x: any): any;
-    $message(x: any): any;
-    $reason(x: any): any;
-    $status(x: any): any;
-    $type(x: any): any;
+    $lastTransitionTime(x: Time): ReplicaSetConditionHelper;
+    $message(x: string): ReplicaSetConditionHelper;
+    $reason(x: string): ReplicaSetConditionHelper;
+    $status(x: string): ReplicaSetConditionHelper;
+    $type(x: string): ReplicaSetConditionHelper;
 }
 
 /** ReplicaSetCondition describes the state of a replica set at a certain point. */
@@ -957,65 +979,66 @@ export class ReplicaSetConditionHelper extends Template implements ReplicaSetCon
         super(obj)
     }
 
-    _lastTransitionTime: any;
-    get lastTransitionTime(): any /*Time*/ {
+    _lastTransitionTime: Time;
+    get lastTransitionTime(): Time {
         return this._lastTransitionTime
     }
-    set lastTransitionTime(x: any /*Time*/) {
+    set lastTransitionTime(x: Time) {
         this._lastTransitionTime = x
     }
-    setLastTransitionTime(x: any /*Time*/) {
+    $LastTransitionTime(x: Time) {
         this.lastTransitionTime = x; return this
     }
 
-    _message: any;
-    get message(): any /*string*/ {
+    _message: string;
+    get message(): string {
         return this._message
     }
-    set message(x: any /*string*/) {
+    set message(x: string) {
         this._message = x
     }
-    setMessage(x: any /*string*/) {
+    $Message(x: string) {
         this.message = x; return this
     }
 
-    _reason: any;
-    get reason(): any /*string*/ {
+    _reason: string;
+    get reason(): string {
         return this._reason
     }
-    set reason(x: any /*string*/) {
+    set reason(x: string) {
         this._reason = x
     }
-    setReason(x: any /*string*/) {
+    $Reason(x: string) {
         this.reason = x; return this
     }
 
-    _status: any;
-    get status(): any /*string*/ {
+    _status: string;
+    get status(): string {
         return this._status
     }
-    set status(x: any /*string*/) {
+    set status(x: string) {
         this._status = x
     }
-    setStatus(x: any /*string*/) {
+    $Status(x: string) {
         this.status = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }
 
 export interface ReplicaSetListHelper extends ReplicaSetList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<ReplicaSet>): ReplicaSetListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): ReplicaSetListHelper;
 }
 
 /** ReplicaSetList is a collection of ReplicaSets. */
@@ -1027,34 +1050,36 @@ export class ReplicaSetListHelper extends ResourceTemplate implements ReplicaSet
         super(nameOrObject, namespace, ReplicaSetListHelper.kind, ReplicaSetListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<ReplicaSet>*/ {
+    _items: Array<ReplicaSet>;
+    get items(): Array<ReplicaSet> {
         return this._items
     }
-    set items(x: any /*Array<ReplicaSet>*/) {
+    set items(x: Array<ReplicaSet>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<ReplicaSet>*/) {
+    $Items(x: Array<ReplicaSet>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface ReplicaSetSpecHelper extends ReplicaSetSpec {
-    $minReadySeconds(x: any): any;
-    $replicas(x: any): any;
-    $selector(x: any): any;
-    $template(x: any): any;
+    $minReadySeconds(x: number): ReplicaSetSpecHelper;
+    $replicas(x: number): ReplicaSetSpecHelper;
+    selector: LabelSelectorHelper;
+    $selector(x: LabelSelectorHelper): ReplicaSetSpecHelper;
+    template: PodTemplateSpecHelper;
+    $template(x: PodTemplateSpecHelper): ReplicaSetSpecHelper;
 }
 
 /** ReplicaSetSpec is the specification of a ReplicaSet. */
@@ -1063,58 +1088,58 @@ export class ReplicaSetSpecHelper extends Template implements ReplicaSetSpecHelp
         super(obj)
     }
 
-    _minReadySeconds: any;
-    get minReadySeconds(): any /*number*/ {
+    _minReadySeconds: number;
+    get minReadySeconds(): number {
         return this._minReadySeconds
     }
-    set minReadySeconds(x: any /*number*/) {
+    set minReadySeconds(x: number) {
         this._minReadySeconds = x
     }
-    setMinReadySeconds(x: any /*number*/) {
+    $MinReadySeconds(x: number) {
         this.minReadySeconds = x; return this
     }
 
-    _replicas: any;
-    get replicas(): any /*number*/ {
+    _replicas: number;
+    get replicas(): number {
         return this._replicas
     }
-    set replicas(x: any /*number*/) {
+    set replicas(x: number) {
         this._replicas = x
     }
-    setReplicas(x: any /*number*/) {
+    $Replicas(x: number) {
         this.replicas = x; return this
     }
 
-    _selector: any;
-    get selector(): any /*LabelSelectorHelper*/ {
+    _selector: LabelSelectorHelper;
+    get selector(): LabelSelectorHelper {
         return this._selector
     }
-    set selector(x: any /*LabelSelectorHelper*/) {
+    set selector(x: LabelSelectorHelper) {
         this._selector = x
     }
-    setSelector(x: any /*LabelSelectorHelper*/) {
+    $Selector(x: LabelSelectorHelper) {
         this.selector = x; return this
     }
 
-    _template: any;
-    get template(): any /*PodTemplateSpecHelper*/ {
+    _template: PodTemplateSpecHelper;
+    get template(): PodTemplateSpecHelper {
         return this._template
     }
-    set template(x: any /*PodTemplateSpecHelper*/) {
+    set template(x: PodTemplateSpecHelper) {
         this._template = x
     }
-    setTemplate(x: any /*PodTemplateSpecHelper*/) {
+    $Template(x: PodTemplateSpecHelper) {
         this.template = x; return this
     }
 }
 
 export interface ReplicaSetStatusHelper extends ReplicaSetStatus {
-    $availableReplicas(x: any): any;
-    $conditions(x: any): any;
-    $fullyLabeledReplicas(x: any): any;
-    $observedGeneration(x: any): any;
-    $readyReplicas(x: any): any;
-    $replicas(x: any): any;
+    $availableReplicas(x: number): ReplicaSetStatusHelper;
+    $conditions(x: Array<ReplicaSetCondition>): ReplicaSetStatusHelper;
+    $fullyLabeledReplicas(x: number): ReplicaSetStatusHelper;
+    $observedGeneration(x: number): ReplicaSetStatusHelper;
+    $readyReplicas(x: number): ReplicaSetStatusHelper;
+    $replicas(x: number): ReplicaSetStatusHelper;
 }
 
 /** ReplicaSetStatus represents the current status of a ReplicaSet. */
@@ -1123,76 +1148,78 @@ export class ReplicaSetStatusHelper extends Template implements ReplicaSetStatus
         super(obj)
     }
 
-    _availableReplicas: any;
-    get availableReplicas(): any /*number*/ {
+    _availableReplicas: number;
+    get availableReplicas(): number {
         return this._availableReplicas
     }
-    set availableReplicas(x: any /*number*/) {
+    set availableReplicas(x: number) {
         this._availableReplicas = x
     }
-    setAvailableReplicas(x: any /*number*/) {
+    $AvailableReplicas(x: number) {
         this.availableReplicas = x; return this
     }
 
-    _conditions: any;
-    get conditions(): any /*Array<ReplicaSetCondition>*/ {
+    _conditions: Array<ReplicaSetCondition>;
+    get conditions(): Array<ReplicaSetCondition> {
         return this._conditions
     }
-    set conditions(x: any /*Array<ReplicaSetCondition>*/) {
+    set conditions(x: Array<ReplicaSetCondition>) {
         this._conditions = this.set(this.conditions, x)
     }
-    setConditions(x: any /*Array<ReplicaSetCondition>*/) {
+    $Conditions(x: Array<ReplicaSetCondition>) {
         this.conditions = x; return this
     }
 
-    _fullyLabeledReplicas: any;
-    get fullyLabeledReplicas(): any /*number*/ {
+    _fullyLabeledReplicas: number;
+    get fullyLabeledReplicas(): number {
         return this._fullyLabeledReplicas
     }
-    set fullyLabeledReplicas(x: any /*number*/) {
+    set fullyLabeledReplicas(x: number) {
         this._fullyLabeledReplicas = x
     }
-    setFullyLabeledReplicas(x: any /*number*/) {
+    $FullyLabeledReplicas(x: number) {
         this.fullyLabeledReplicas = x; return this
     }
 
-    _observedGeneration: any;
-    get observedGeneration(): any /*number*/ {
+    _observedGeneration: number;
+    get observedGeneration(): number {
         return this._observedGeneration
     }
-    set observedGeneration(x: any /*number*/) {
+    set observedGeneration(x: number) {
         this._observedGeneration = x
     }
-    setObservedGeneration(x: any /*number*/) {
+    $ObservedGeneration(x: number) {
         this.observedGeneration = x; return this
     }
 
-    _readyReplicas: any;
-    get readyReplicas(): any /*number*/ {
+    _readyReplicas: number;
+    get readyReplicas(): number {
         return this._readyReplicas
     }
-    set readyReplicas(x: any /*number*/) {
+    set readyReplicas(x: number) {
         this._readyReplicas = x
     }
-    setReadyReplicas(x: any /*number*/) {
+    $ReadyReplicas(x: number) {
         this.readyReplicas = x; return this
     }
 
-    _replicas: any;
-    get replicas(): any /*number*/ {
+    _replicas: number;
+    get replicas(): number {
         return this._replicas
     }
-    set replicas(x: any /*number*/) {
+    set replicas(x: number) {
         this._replicas = x
     }
-    setReplicas(x: any /*number*/) {
+    $Replicas(x: number) {
         this.replicas = x; return this
     }
 }
 
 export interface RollingUpdateDaemonSetHelper extends RollingUpdateDaemonSet {
-    $maxSurge(x: any): any;
-    $maxUnavailable(x: any): any;
+    maxSurge: number | stringHelper;
+    $maxSurge(x: number | stringHelper): RollingUpdateDaemonSetHelper;
+    maxUnavailable: number | stringHelper;
+    $maxUnavailable(x: number | stringHelper): RollingUpdateDaemonSetHelper;
 }
 
 /** Spec to control the desired behavior of daemon set rolling update. */
@@ -1201,32 +1228,34 @@ export class RollingUpdateDaemonSetHelper extends Template implements RollingUpd
         super(obj)
     }
 
-    _maxSurge: any;
-    get maxSurge(): any /*number | stringHelper*/ {
+    _maxSurge: number | stringHelper;
+    get maxSurge(): number | stringHelper {
         return this._maxSurge
     }
-    set maxSurge(x: any /*number | stringHelper*/) {
+    set maxSurge(x: number | stringHelper) {
         this._maxSurge = x
     }
-    setMaxSurge(x: any /*number | stringHelper*/) {
+    $MaxSurge(x: number | stringHelper) {
         this.maxSurge = x; return this
     }
 
-    _maxUnavailable: any;
-    get maxUnavailable(): any /*number | stringHelper*/ {
+    _maxUnavailable: number | stringHelper;
+    get maxUnavailable(): number | stringHelper {
         return this._maxUnavailable
     }
-    set maxUnavailable(x: any /*number | stringHelper*/) {
+    set maxUnavailable(x: number | stringHelper) {
         this._maxUnavailable = x
     }
-    setMaxUnavailable(x: any /*number | stringHelper*/) {
+    $MaxUnavailable(x: number | stringHelper) {
         this.maxUnavailable = x; return this
     }
 }
 
 export interface RollingUpdateDeploymentHelper extends RollingUpdateDeployment {
-    $maxSurge(x: any): any;
-    $maxUnavailable(x: any): any;
+    maxSurge: number | stringHelper;
+    $maxSurge(x: number | stringHelper): RollingUpdateDeploymentHelper;
+    maxUnavailable: number | stringHelper;
+    $maxUnavailable(x: number | stringHelper): RollingUpdateDeploymentHelper;
 }
 
 /** Spec to control the desired behavior of rolling update. */
@@ -1235,31 +1264,31 @@ export class RollingUpdateDeploymentHelper extends Template implements RollingUp
         super(obj)
     }
 
-    _maxSurge: any;
-    get maxSurge(): any /*number | stringHelper*/ {
+    _maxSurge: number | stringHelper;
+    get maxSurge(): number | stringHelper {
         return this._maxSurge
     }
-    set maxSurge(x: any /*number | stringHelper*/) {
+    set maxSurge(x: number | stringHelper) {
         this._maxSurge = x
     }
-    setMaxSurge(x: any /*number | stringHelper*/) {
+    $MaxSurge(x: number | stringHelper) {
         this.maxSurge = x; return this
     }
 
-    _maxUnavailable: any;
-    get maxUnavailable(): any /*number | stringHelper*/ {
+    _maxUnavailable: number | stringHelper;
+    get maxUnavailable(): number | stringHelper {
         return this._maxUnavailable
     }
-    set maxUnavailable(x: any /*number | stringHelper*/) {
+    set maxUnavailable(x: number | stringHelper) {
         this._maxUnavailable = x
     }
-    setMaxUnavailable(x: any /*number | stringHelper*/) {
+    $MaxUnavailable(x: number | stringHelper) {
         this.maxUnavailable = x; return this
     }
 }
 
 export interface RollingUpdateStatefulSetStrategyHelper extends RollingUpdateStatefulSetStrategy {
-    $partition(x: any): any;
+    $partition(x: number): RollingUpdateStatefulSetStrategyHelper;
 }
 
 /** RollingUpdateStatefulSetStrategy is used to communicate parameter for RollingUpdateStatefulSetStrategyType. */
@@ -1268,22 +1297,25 @@ export class RollingUpdateStatefulSetStrategyHelper extends Template implements 
         super(obj)
     }
 
-    _partition: any;
-    get partition(): any /*number*/ {
+    _partition: number;
+    get partition(): number {
         return this._partition
     }
-    set partition(x: any /*number*/) {
+    set partition(x: number) {
         this._partition = x
     }
-    setPartition(x: any /*number*/) {
+    $Partition(x: number) {
         this.partition = x; return this
     }
 }
 
 export interface StatefulSetHelper extends StatefulSet {
-    $metadata(x: any): any;
-    $spec(x: any): any;
-    $status(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): StatefulSetHelper;
+    spec: StatefulSetSpecHelper;
+    $spec(x: StatefulSetSpecHelper): StatefulSetHelper;
+    status: StatefulSetStatusHelper;
+    $status(x: StatefulSetStatusHelper): StatefulSetHelper;
 }
 
 /**
@@ -1300,46 +1332,46 @@ export class StatefulSetHelper extends ResourceTemplate implements StatefulSetHe
         super(nameOrObject, namespace, StatefulSetHelper.kind, StatefulSetHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*StatefulSetSpecHelper*/ {
+    _spec: StatefulSetSpecHelper;
+    get spec(): StatefulSetSpecHelper {
         return this._spec
     }
-    set spec(x: any /*StatefulSetSpecHelper*/) {
+    set spec(x: StatefulSetSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*StatefulSetSpecHelper*/) {
+    $Spec(x: StatefulSetSpecHelper) {
         this.spec = x; return this
     }
 
-    _status: any;
-    get status(): any /*StatefulSetStatusHelper*/ {
+    _status: StatefulSetStatusHelper;
+    get status(): StatefulSetStatusHelper {
         return this._status
     }
-    set status(x: any /*StatefulSetStatusHelper*/) {
+    set status(x: StatefulSetStatusHelper) {
         this._status = x
     }
-    setStatus(x: any /*StatefulSetStatusHelper*/) {
+    $Status(x: StatefulSetStatusHelper) {
         this.status = x; return this
     }
 }
 
 export interface StatefulSetConditionHelper extends StatefulSetCondition {
-    $lastTransitionTime(x: any): any;
-    $message(x: any): any;
-    $reason(x: any): any;
-    $status(x: any): any;
-    $type(x: any): any;
+    $lastTransitionTime(x: Time): StatefulSetConditionHelper;
+    $message(x: string): StatefulSetConditionHelper;
+    $reason(x: string): StatefulSetConditionHelper;
+    $status(x: string): StatefulSetConditionHelper;
+    $type(x: string): StatefulSetConditionHelper;
 }
 
 /** StatefulSetCondition describes the state of a statefulset at a certain point. */
@@ -1348,65 +1380,66 @@ export class StatefulSetConditionHelper extends Template implements StatefulSetC
         super(obj)
     }
 
-    _lastTransitionTime: any;
-    get lastTransitionTime(): any /*Time*/ {
+    _lastTransitionTime: Time;
+    get lastTransitionTime(): Time {
         return this._lastTransitionTime
     }
-    set lastTransitionTime(x: any /*Time*/) {
+    set lastTransitionTime(x: Time) {
         this._lastTransitionTime = x
     }
-    setLastTransitionTime(x: any /*Time*/) {
+    $LastTransitionTime(x: Time) {
         this.lastTransitionTime = x; return this
     }
 
-    _message: any;
-    get message(): any /*string*/ {
+    _message: string;
+    get message(): string {
         return this._message
     }
-    set message(x: any /*string*/) {
+    set message(x: string) {
         this._message = x
     }
-    setMessage(x: any /*string*/) {
+    $Message(x: string) {
         this.message = x; return this
     }
 
-    _reason: any;
-    get reason(): any /*string*/ {
+    _reason: string;
+    get reason(): string {
         return this._reason
     }
-    set reason(x: any /*string*/) {
+    set reason(x: string) {
         this._reason = x
     }
-    setReason(x: any /*string*/) {
+    $Reason(x: string) {
         this.reason = x; return this
     }
 
-    _status: any;
-    get status(): any /*string*/ {
+    _status: string;
+    get status(): string {
         return this._status
     }
-    set status(x: any /*string*/) {
+    set status(x: string) {
         this._status = x
     }
-    setStatus(x: any /*string*/) {
+    $Status(x: string) {
         this.status = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }
 
 export interface StatefulSetListHelper extends StatefulSetList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<StatefulSet>): StatefulSetListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): StatefulSetListHelper;
 }
 
 /** StatefulSetList is a collection of StatefulSets. */
@@ -1418,38 +1451,41 @@ export class StatefulSetListHelper extends ResourceTemplate implements StatefulS
         super(nameOrObject, namespace, StatefulSetListHelper.kind, StatefulSetListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<StatefulSet>*/ {
+    _items: Array<StatefulSet>;
+    get items(): Array<StatefulSet> {
         return this._items
     }
-    set items(x: any /*Array<StatefulSet>*/) {
+    set items(x: Array<StatefulSet>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<StatefulSet>*/) {
+    $Items(x: Array<StatefulSet>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface StatefulSetSpecHelper extends StatefulSetSpec {
-    $podManagementPolicy(x: any): any;
-    $replicas(x: any): any;
-    $revisionHistoryLimit(x: any): any;
-    $selector(x: any): any;
-    $serviceName(x: any): any;
-    $template(x: any): any;
-    $updateStrategy(x: any): any;
-    $volumeClaimTemplates(x: any): any;
+    $podManagementPolicy(x: string): StatefulSetSpecHelper;
+    $replicas(x: number): StatefulSetSpecHelper;
+    $revisionHistoryLimit(x: number): StatefulSetSpecHelper;
+    selector: LabelSelectorHelper;
+    $selector(x: LabelSelectorHelper): StatefulSetSpecHelper;
+    $serviceName(x: string): StatefulSetSpecHelper;
+    template: PodTemplateSpecHelper;
+    $template(x: PodTemplateSpecHelper): StatefulSetSpecHelper;
+    updateStrategy: StatefulSetUpdateStrategyHelper;
+    $updateStrategy(x: StatefulSetUpdateStrategyHelper): StatefulSetSpecHelper;
+    $volumeClaimTemplates(x: Array<PersistentVolumeClaim>): StatefulSetSpecHelper;
 }
 
 /** A StatefulSetSpec is the specification of a StatefulSet. */
@@ -1458,105 +1494,105 @@ export class StatefulSetSpecHelper extends Template implements StatefulSetSpecHe
         super(obj)
     }
 
-    _podManagementPolicy: any;
-    get podManagementPolicy(): any /*string*/ {
+    _podManagementPolicy: string;
+    get podManagementPolicy(): string {
         return this._podManagementPolicy
     }
-    set podManagementPolicy(x: any /*string*/) {
+    set podManagementPolicy(x: string) {
         this._podManagementPolicy = x
     }
-    setPodManagementPolicy(x: any /*string*/) {
+    $PodManagementPolicy(x: string) {
         this.podManagementPolicy = x; return this
     }
 
-    _replicas: any;
-    get replicas(): any /*number*/ {
+    _replicas: number;
+    get replicas(): number {
         return this._replicas
     }
-    set replicas(x: any /*number*/) {
+    set replicas(x: number) {
         this._replicas = x
     }
-    setReplicas(x: any /*number*/) {
+    $Replicas(x: number) {
         this.replicas = x; return this
     }
 
-    _revisionHistoryLimit: any;
-    get revisionHistoryLimit(): any /*number*/ {
+    _revisionHistoryLimit: number;
+    get revisionHistoryLimit(): number {
         return this._revisionHistoryLimit
     }
-    set revisionHistoryLimit(x: any /*number*/) {
+    set revisionHistoryLimit(x: number) {
         this._revisionHistoryLimit = x
     }
-    setRevisionHistoryLimit(x: any /*number*/) {
+    $RevisionHistoryLimit(x: number) {
         this.revisionHistoryLimit = x; return this
     }
 
-    _selector: any;
-    get selector(): any /*LabelSelectorHelper*/ {
+    _selector: LabelSelectorHelper;
+    get selector(): LabelSelectorHelper {
         return this._selector
     }
-    set selector(x: any /*LabelSelectorHelper*/) {
+    set selector(x: LabelSelectorHelper) {
         this._selector = x
     }
-    setSelector(x: any /*LabelSelectorHelper*/) {
+    $Selector(x: LabelSelectorHelper) {
         this.selector = x; return this
     }
 
-    _serviceName: any;
-    get serviceName(): any /*string*/ {
+    _serviceName: string;
+    get serviceName(): string {
         return this._serviceName
     }
-    set serviceName(x: any /*string*/) {
+    set serviceName(x: string) {
         this._serviceName = x
     }
-    setServiceName(x: any /*string*/) {
+    $ServiceName(x: string) {
         this.serviceName = x; return this
     }
 
-    _template: any;
-    get template(): any /*PodTemplateSpecHelper*/ {
+    _template: PodTemplateSpecHelper;
+    get template(): PodTemplateSpecHelper {
         return this._template
     }
-    set template(x: any /*PodTemplateSpecHelper*/) {
+    set template(x: PodTemplateSpecHelper) {
         this._template = x
     }
-    setTemplate(x: any /*PodTemplateSpecHelper*/) {
+    $Template(x: PodTemplateSpecHelper) {
         this.template = x; return this
     }
 
-    _updateStrategy: any;
-    get updateStrategy(): any /*StatefulSetUpdateStrategyHelper*/ {
+    _updateStrategy: StatefulSetUpdateStrategyHelper;
+    get updateStrategy(): StatefulSetUpdateStrategyHelper {
         return this._updateStrategy
     }
-    set updateStrategy(x: any /*StatefulSetUpdateStrategyHelper*/) {
+    set updateStrategy(x: StatefulSetUpdateStrategyHelper) {
         this._updateStrategy = x
     }
-    setUpdateStrategy(x: any /*StatefulSetUpdateStrategyHelper*/) {
+    $UpdateStrategy(x: StatefulSetUpdateStrategyHelper) {
         this.updateStrategy = x; return this
     }
 
-    _volumeClaimTemplates: any;
-    get volumeClaimTemplates(): any /*Array<PersistentVolumeClaim>*/ {
+    _volumeClaimTemplates: Array<PersistentVolumeClaim>;
+    get volumeClaimTemplates(): Array<PersistentVolumeClaim> {
         return this._volumeClaimTemplates
     }
-    set volumeClaimTemplates(x: any /*Array<PersistentVolumeClaim>*/) {
+    set volumeClaimTemplates(x: Array<PersistentVolumeClaim>) {
         this._volumeClaimTemplates = this.set(this.volumeClaimTemplates, x)
     }
-    setVolumeClaimTemplates(x: any /*Array<PersistentVolumeClaim>*/) {
+    $VolumeClaimTemplates(x: Array<PersistentVolumeClaim>) {
         this.volumeClaimTemplates = x; return this
     }
 }
 
 export interface StatefulSetStatusHelper extends StatefulSetStatus {
-    $collisionCount(x: any): any;
-    $conditions(x: any): any;
-    $currentReplicas(x: any): any;
-    $currentRevision(x: any): any;
-    $observedGeneration(x: any): any;
-    $readyReplicas(x: any): any;
-    $replicas(x: any): any;
-    $updateRevision(x: any): any;
-    $updatedReplicas(x: any): any;
+    $collisionCount(x: number): StatefulSetStatusHelper;
+    $conditions(x: Array<StatefulSetCondition>): StatefulSetStatusHelper;
+    $currentReplicas(x: number): StatefulSetStatusHelper;
+    $currentRevision(x: string): StatefulSetStatusHelper;
+    $observedGeneration(x: number): StatefulSetStatusHelper;
+    $readyReplicas(x: number): StatefulSetStatusHelper;
+    $replicas(x: number): StatefulSetStatusHelper;
+    $updateRevision(x: string): StatefulSetStatusHelper;
+    $updatedReplicas(x: number): StatefulSetStatusHelper;
 }
 
 /** StatefulSetStatus represents the current state of a StatefulSet. */
@@ -1565,109 +1601,110 @@ export class StatefulSetStatusHelper extends Template implements StatefulSetStat
         super(obj)
     }
 
-    _collisionCount: any;
-    get collisionCount(): any /*number*/ {
+    _collisionCount: number;
+    get collisionCount(): number {
         return this._collisionCount
     }
-    set collisionCount(x: any /*number*/) {
+    set collisionCount(x: number) {
         this._collisionCount = x
     }
-    setCollisionCount(x: any /*number*/) {
+    $CollisionCount(x: number) {
         this.collisionCount = x; return this
     }
 
-    _conditions: any;
-    get conditions(): any /*Array<StatefulSetCondition>*/ {
+    _conditions: Array<StatefulSetCondition>;
+    get conditions(): Array<StatefulSetCondition> {
         return this._conditions
     }
-    set conditions(x: any /*Array<StatefulSetCondition>*/) {
+    set conditions(x: Array<StatefulSetCondition>) {
         this._conditions = this.set(this.conditions, x)
     }
-    setConditions(x: any /*Array<StatefulSetCondition>*/) {
+    $Conditions(x: Array<StatefulSetCondition>) {
         this.conditions = x; return this
     }
 
-    _currentReplicas: any;
-    get currentReplicas(): any /*number*/ {
+    _currentReplicas: number;
+    get currentReplicas(): number {
         return this._currentReplicas
     }
-    set currentReplicas(x: any /*number*/) {
+    set currentReplicas(x: number) {
         this._currentReplicas = x
     }
-    setCurrentReplicas(x: any /*number*/) {
+    $CurrentReplicas(x: number) {
         this.currentReplicas = x; return this
     }
 
-    _currentRevision: any;
-    get currentRevision(): any /*string*/ {
+    _currentRevision: string;
+    get currentRevision(): string {
         return this._currentRevision
     }
-    set currentRevision(x: any /*string*/) {
+    set currentRevision(x: string) {
         this._currentRevision = x
     }
-    setCurrentRevision(x: any /*string*/) {
+    $CurrentRevision(x: string) {
         this.currentRevision = x; return this
     }
 
-    _observedGeneration: any;
-    get observedGeneration(): any /*number*/ {
+    _observedGeneration: number;
+    get observedGeneration(): number {
         return this._observedGeneration
     }
-    set observedGeneration(x: any /*number*/) {
+    set observedGeneration(x: number) {
         this._observedGeneration = x
     }
-    setObservedGeneration(x: any /*number*/) {
+    $ObservedGeneration(x: number) {
         this.observedGeneration = x; return this
     }
 
-    _readyReplicas: any;
-    get readyReplicas(): any /*number*/ {
+    _readyReplicas: number;
+    get readyReplicas(): number {
         return this._readyReplicas
     }
-    set readyReplicas(x: any /*number*/) {
+    set readyReplicas(x: number) {
         this._readyReplicas = x
     }
-    setReadyReplicas(x: any /*number*/) {
+    $ReadyReplicas(x: number) {
         this.readyReplicas = x; return this
     }
 
-    _replicas: any;
-    get replicas(): any /*number*/ {
+    _replicas: number;
+    get replicas(): number {
         return this._replicas
     }
-    set replicas(x: any /*number*/) {
+    set replicas(x: number) {
         this._replicas = x
     }
-    setReplicas(x: any /*number*/) {
+    $Replicas(x: number) {
         this.replicas = x; return this
     }
 
-    _updateRevision: any;
-    get updateRevision(): any /*string*/ {
+    _updateRevision: string;
+    get updateRevision(): string {
         return this._updateRevision
     }
-    set updateRevision(x: any /*string*/) {
+    set updateRevision(x: string) {
         this._updateRevision = x
     }
-    setUpdateRevision(x: any /*string*/) {
+    $UpdateRevision(x: string) {
         this.updateRevision = x; return this
     }
 
-    _updatedReplicas: any;
-    get updatedReplicas(): any /*number*/ {
+    _updatedReplicas: number;
+    get updatedReplicas(): number {
         return this._updatedReplicas
     }
-    set updatedReplicas(x: any /*number*/) {
+    set updatedReplicas(x: number) {
         this._updatedReplicas = x
     }
-    setUpdatedReplicas(x: any /*number*/) {
+    $UpdatedReplicas(x: number) {
         this.updatedReplicas = x; return this
     }
 }
 
 export interface StatefulSetUpdateStrategyHelper extends StatefulSetUpdateStrategy {
-    $rollingUpdate(x: any): any;
-    $type(x: any): any;
+    rollingUpdate: RollingUpdateStatefulSetStrategyHelper;
+    $rollingUpdate(x: RollingUpdateStatefulSetStrategyHelper): StatefulSetUpdateStrategyHelper;
+    $type(x: string): StatefulSetUpdateStrategyHelper;
 }
 
 /** StatefulSetUpdateStrategy indicates the strategy that the StatefulSet controller will use to perform updates. It includes any additional parameters necessary to perform the update for the indicated strategy. */
@@ -1676,25 +1713,25 @@ export class StatefulSetUpdateStrategyHelper extends Template implements Statefu
         super(obj)
     }
 
-    _rollingUpdate: any;
-    get rollingUpdate(): any /*RollingUpdateStatefulSetStrategyHelper*/ {
+    _rollingUpdate: RollingUpdateStatefulSetStrategyHelper;
+    get rollingUpdate(): RollingUpdateStatefulSetStrategyHelper {
         return this._rollingUpdate
     }
-    set rollingUpdate(x: any /*RollingUpdateStatefulSetStrategyHelper*/) {
+    set rollingUpdate(x: RollingUpdateStatefulSetStrategyHelper) {
         this._rollingUpdate = x
     }
-    setRollingUpdate(x: any /*RollingUpdateStatefulSetStrategyHelper*/) {
+    $RollingUpdate(x: RollingUpdateStatefulSetStrategyHelper) {
         this.rollingUpdate = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }

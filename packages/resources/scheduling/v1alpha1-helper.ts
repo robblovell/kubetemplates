@@ -3,11 +3,12 @@ import { PriorityClass, PriorityClassList } from "./v1alpha1";
 import { ListMeta, ObjectMeta } from "../meta/v1";
 
 export interface PriorityClassHelper extends PriorityClass {
-    $description(x: any): any;
-    $globalDefault(x: any): any;
-    $metadata(x: any): any;
-    $preemptionPolicy(x: any): any;
-    $value(x: any): any;
+    $description(x: string): PriorityClassHelper;
+    $globalDefault(x: boolean): PriorityClassHelper;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): PriorityClassHelper;
+    $preemptionPolicy(x: string): PriorityClassHelper;
+    $value(x: number): PriorityClassHelper;
 }
 
 /** DEPRECATED - This group version of PriorityClass is deprecated by scheduling.k8s.io/v1/PriorityClass. PriorityClass defines mapping from a priority class name to the priority integer value. The value can be any valid integer. */
@@ -19,65 +20,66 @@ export class PriorityClassHelper extends ResourceTemplate implements PriorityCla
         super(nameOrObject, namespace, PriorityClassHelper.kind, PriorityClassHelper.apiVersion)
     }
 
-    _description: any;
-    get description(): any /*string*/ {
+    _description: string;
+    get description(): string {
         return this._description
     }
-    set description(x: any /*string*/) {
+    set description(x: string) {
         this._description = x
     }
-    setDescription(x: any /*string*/) {
+    $Description(x: string) {
         this.description = x; return this
     }
 
-    _globalDefault: any;
-    get globalDefault(): any /*boolean*/ {
+    _globalDefault: boolean;
+    get globalDefault(): boolean {
         return this._globalDefault
     }
-    set globalDefault(x: any /*boolean*/) {
+    set globalDefault(x: boolean) {
         this._globalDefault = x
     }
-    setGlobalDefault(x: any /*boolean*/) {
+    $GlobalDefault(x: boolean) {
         this.globalDefault = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _preemptionPolicy: any;
-    get preemptionPolicy(): any /*string*/ {
+    _preemptionPolicy: string;
+    get preemptionPolicy(): string {
         return this._preemptionPolicy
     }
-    set preemptionPolicy(x: any /*string*/) {
+    set preemptionPolicy(x: string) {
         this._preemptionPolicy = x
     }
-    setPreemptionPolicy(x: any /*string*/) {
+    $PreemptionPolicy(x: string) {
         this.preemptionPolicy = x; return this
     }
 
-    _value: any;
-    get value(): any /*number*/ {
+    _value: number;
+    get value(): number {
         return this._value
     }
-    set value(x: any /*number*/) {
+    set value(x: number) {
         this._value = x
     }
-    setValue(x: any /*number*/) {
+    $Value(x: number) {
         this.value = x; return this
     }
 }
 
 export interface PriorityClassListHelper extends PriorityClassList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<PriorityClass>): PriorityClassListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): PriorityClassListHelper;
 }
 
 /** PriorityClassList is a collection of priority classes. */
@@ -89,25 +91,25 @@ export class PriorityClassListHelper extends ResourceTemplate implements Priorit
         super(nameOrObject, namespace, PriorityClassListHelper.kind, PriorityClassListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<PriorityClass>*/ {
+    _items: Array<PriorityClass>;
+    get items(): Array<PriorityClass> {
         return this._items
     }
-    set items(x: any /*Array<PriorityClass>*/) {
+    set items(x: Array<PriorityClass>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<PriorityClass>*/) {
+    $Items(x: Array<PriorityClass>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }

@@ -3,11 +3,11 @@ import { CustomResourceColumnDefinition, CustomResourceConversion, CustomResourc
 import { ListMeta, ObjectMeta, Time } from "../meta/v1";
 
 export interface CustomResourceColumnDefinitionHelper extends CustomResourceColumnDefinition {
-    $description(x: any): any;
-    $format(x: any): any;
-    $jsonPath(x: any): any;
-    $priority(x: any): any;
-    $type(x: any): any;
+    $description(x: string): CustomResourceColumnDefinitionHelper;
+    $format(x: string): CustomResourceColumnDefinitionHelper;
+    $jsonPath(x: string): CustomResourceColumnDefinitionHelper;
+    $priority(x: number): CustomResourceColumnDefinitionHelper;
+    $type(x: string): CustomResourceColumnDefinitionHelper;
 }
 
 /** CustomResourceColumnDefinition specifies a column for server side printing. */
@@ -16,65 +16,66 @@ export class CustomResourceColumnDefinitionHelper extends Template implements Cu
         super(obj)
     }
 
-    _description: any;
-    get description(): any /*string*/ {
+    _description: string;
+    get description(): string {
         return this._description
     }
-    set description(x: any /*string*/) {
+    set description(x: string) {
         this._description = x
     }
-    setDescription(x: any /*string*/) {
+    $Description(x: string) {
         this.description = x; return this
     }
 
-    _format: any;
-    get format(): any /*string*/ {
+    _format: string;
+    get format(): string {
         return this._format
     }
-    set format(x: any /*string*/) {
+    set format(x: string) {
         this._format = x
     }
-    setFormat(x: any /*string*/) {
+    $Format(x: string) {
         this.format = x; return this
     }
 
-    _jsonPath: any;
-    get jsonPath(): any /*string*/ {
+    _jsonPath: string;
+    get jsonPath(): string {
         return this._jsonPath
     }
-    set jsonPath(x: any /*string*/) {
+    set jsonPath(x: string) {
         this._jsonPath = x
     }
-    setJsonPath(x: any /*string*/) {
+    $JsonPath(x: string) {
         this.jsonPath = x; return this
     }
 
-    _priority: any;
-    get priority(): any /*number*/ {
+    _priority: number;
+    get priority(): number {
         return this._priority
     }
-    set priority(x: any /*number*/) {
+    set priority(x: number) {
         this._priority = x
     }
-    setPriority(x: any /*number*/) {
+    $Priority(x: number) {
         this.priority = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }
 
 export interface CustomResourceConversionHelper extends CustomResourceConversion {
-    $strategy(x: any): any;
-    $webhook(x: any): any;
+    $strategy(x: string): CustomResourceConversionHelper;
+    webhook: WebhookConversionHelper;
+    $webhook(x: WebhookConversionHelper): CustomResourceConversionHelper;
 }
 
 /** CustomResourceConversion describes how to convert different versions of a CR. */
@@ -83,33 +84,36 @@ export class CustomResourceConversionHelper extends Template implements CustomRe
         super(obj)
     }
 
-    _strategy: any;
-    get strategy(): any /*string*/ {
+    _strategy: string;
+    get strategy(): string {
         return this._strategy
     }
-    set strategy(x: any /*string*/) {
+    set strategy(x: string) {
         this._strategy = x
     }
-    setStrategy(x: any /*string*/) {
+    $Strategy(x: string) {
         this.strategy = x; return this
     }
 
-    _webhook: any;
-    get webhook(): any /*WebhookConversionHelper*/ {
+    _webhook: WebhookConversionHelper;
+    get webhook(): WebhookConversionHelper {
         return this._webhook
     }
-    set webhook(x: any /*WebhookConversionHelper*/) {
+    set webhook(x: WebhookConversionHelper) {
         this._webhook = x
     }
-    setWebhook(x: any /*WebhookConversionHelper*/) {
+    $Webhook(x: WebhookConversionHelper) {
         this.webhook = x; return this
     }
 }
 
 export interface CustomResourceDefinitionHelper extends CustomResourceDefinition {
-    $metadata(x: any): any;
-    $spec(x: any): any;
-    $status(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): CustomResourceDefinitionHelper;
+    spec: CustomResourceDefinitionSpecHelper;
+    $spec(x: CustomResourceDefinitionSpecHelper): CustomResourceDefinitionHelper;
+    status: CustomResourceDefinitionStatusHelper;
+    $status(x: CustomResourceDefinitionStatusHelper): CustomResourceDefinitionHelper;
 }
 
 /** CustomResourceDefinition represents a resource that should be exposed on the API server.  Its name MUST be in the format <.spec.name>.<.spec.group>. */
@@ -121,46 +125,46 @@ export class CustomResourceDefinitionHelper extends ResourceTemplate implements 
         super(nameOrObject, namespace, CustomResourceDefinitionHelper.kind, CustomResourceDefinitionHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*CustomResourceDefinitionSpecHelper*/ {
+    _spec: CustomResourceDefinitionSpecHelper;
+    get spec(): CustomResourceDefinitionSpecHelper {
         return this._spec
     }
-    set spec(x: any /*CustomResourceDefinitionSpecHelper*/) {
+    set spec(x: CustomResourceDefinitionSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*CustomResourceDefinitionSpecHelper*/) {
+    $Spec(x: CustomResourceDefinitionSpecHelper) {
         this.spec = x; return this
     }
 
-    _status: any;
-    get status(): any /*CustomResourceDefinitionStatusHelper*/ {
+    _status: CustomResourceDefinitionStatusHelper;
+    get status(): CustomResourceDefinitionStatusHelper {
         return this._status
     }
-    set status(x: any /*CustomResourceDefinitionStatusHelper*/) {
+    set status(x: CustomResourceDefinitionStatusHelper) {
         this._status = x
     }
-    setStatus(x: any /*CustomResourceDefinitionStatusHelper*/) {
+    $Status(x: CustomResourceDefinitionStatusHelper) {
         this.status = x; return this
     }
 }
 
 export interface CustomResourceDefinitionConditionHelper extends CustomResourceDefinitionCondition {
-    $lastTransitionTime(x: any): any;
-    $message(x: any): any;
-    $reason(x: any): any;
-    $status(x: any): any;
-    $type(x: any): any;
+    $lastTransitionTime(x: Time): CustomResourceDefinitionConditionHelper;
+    $message(x: string): CustomResourceDefinitionConditionHelper;
+    $reason(x: string): CustomResourceDefinitionConditionHelper;
+    $status(x: string): CustomResourceDefinitionConditionHelper;
+    $type(x: string): CustomResourceDefinitionConditionHelper;
 }
 
 /** CustomResourceDefinitionCondition contains details for the current condition of this pod. */
@@ -169,65 +173,66 @@ export class CustomResourceDefinitionConditionHelper extends Template implements
         super(obj)
     }
 
-    _lastTransitionTime: any;
-    get lastTransitionTime(): any /*Time*/ {
+    _lastTransitionTime: Time;
+    get lastTransitionTime(): Time {
         return this._lastTransitionTime
     }
-    set lastTransitionTime(x: any /*Time*/) {
+    set lastTransitionTime(x: Time) {
         this._lastTransitionTime = x
     }
-    setLastTransitionTime(x: any /*Time*/) {
+    $LastTransitionTime(x: Time) {
         this.lastTransitionTime = x; return this
     }
 
-    _message: any;
-    get message(): any /*string*/ {
+    _message: string;
+    get message(): string {
         return this._message
     }
-    set message(x: any /*string*/) {
+    set message(x: string) {
         this._message = x
     }
-    setMessage(x: any /*string*/) {
+    $Message(x: string) {
         this.message = x; return this
     }
 
-    _reason: any;
-    get reason(): any /*string*/ {
+    _reason: string;
+    get reason(): string {
         return this._reason
     }
-    set reason(x: any /*string*/) {
+    set reason(x: string) {
         this._reason = x
     }
-    setReason(x: any /*string*/) {
+    $Reason(x: string) {
         this.reason = x; return this
     }
 
-    _status: any;
-    get status(): any /*string*/ {
+    _status: string;
+    get status(): string {
         return this._status
     }
-    set status(x: any /*string*/) {
+    set status(x: string) {
         this._status = x
     }
-    setStatus(x: any /*string*/) {
+    $Status(x: string) {
         this.status = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }
 
 export interface CustomResourceDefinitionListHelper extends CustomResourceDefinitionList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<CustomResourceDefinition>): CustomResourceDefinitionListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): CustomResourceDefinitionListHelper;
 }
 
 /** CustomResourceDefinitionList is a list of CustomResourceDefinition objects. */
@@ -239,35 +244,35 @@ export class CustomResourceDefinitionListHelper extends ResourceTemplate impleme
         super(nameOrObject, namespace, CustomResourceDefinitionListHelper.kind, CustomResourceDefinitionListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<CustomResourceDefinition>*/ {
+    _items: Array<CustomResourceDefinition>;
+    get items(): Array<CustomResourceDefinition> {
         return this._items
     }
-    set items(x: any /*Array<CustomResourceDefinition>*/) {
+    set items(x: Array<CustomResourceDefinition>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<CustomResourceDefinition>*/) {
+    $Items(x: Array<CustomResourceDefinition>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface CustomResourceDefinitionNamesHelper extends CustomResourceDefinitionNames {
-    $categories(x: any): any;
-    $listKind(x: any): any;
-    $plural(x: any): any;
-    $shortNames(x: any): any;
-    $singular(x: any): any;
+    $categories(x: Array<string>): CustomResourceDefinitionNamesHelper;
+    $listKind(x: string): CustomResourceDefinitionNamesHelper;
+    $plural(x: string): CustomResourceDefinitionNamesHelper;
+    $shortNames(x: Array<string>): CustomResourceDefinitionNamesHelper;
+    $singular(x: string): CustomResourceDefinitionNamesHelper;
 }
 
 /** CustomResourceDefinitionNames indicates the names to serve this CustomResourceDefinition */
@@ -276,69 +281,71 @@ export class CustomResourceDefinitionNamesHelper extends Template implements Cus
         super(obj)
     }
 
-    _categories: any;
-    get categories(): any /*Array<string>*/ {
+    _categories: Array<string>;
+    get categories(): Array<string> {
         return this._categories
     }
-    set categories(x: any /*Array<string>*/) {
+    set categories(x: Array<string>) {
         this._categories = this.set(this.categories, x)
     }
-    setCategories(x: any /*Array<string>*/) {
+    $Categories(x: Array<string>) {
         this.categories = x; return this
     }
 
-    _listKind: any;
-    get listKind(): any /*string*/ {
+    _listKind: string;
+    get listKind(): string {
         return this._listKind
     }
-    set listKind(x: any /*string*/) {
+    set listKind(x: string) {
         this._listKind = x
     }
-    setListKind(x: any /*string*/) {
+    $ListKind(x: string) {
         this.listKind = x; return this
     }
 
-    _plural: any;
-    get plural(): any /*string*/ {
+    _plural: string;
+    get plural(): string {
         return this._plural
     }
-    set plural(x: any /*string*/) {
+    set plural(x: string) {
         this._plural = x
     }
-    setPlural(x: any /*string*/) {
+    $Plural(x: string) {
         this.plural = x; return this
     }
 
-    _shortNames: any;
-    get shortNames(): any /*Array<string>*/ {
+    _shortNames: Array<string>;
+    get shortNames(): Array<string> {
         return this._shortNames
     }
-    set shortNames(x: any /*Array<string>*/) {
+    set shortNames(x: Array<string>) {
         this._shortNames = this.set(this.shortNames, x)
     }
-    setShortNames(x: any /*Array<string>*/) {
+    $ShortNames(x: Array<string>) {
         this.shortNames = x; return this
     }
 
-    _singular: any;
-    get singular(): any /*string*/ {
+    _singular: string;
+    get singular(): string {
         return this._singular
     }
-    set singular(x: any /*string*/) {
+    set singular(x: string) {
         this._singular = x
     }
-    setSingular(x: any /*string*/) {
+    $Singular(x: string) {
         this.singular = x; return this
     }
 }
 
 export interface CustomResourceDefinitionSpecHelper extends CustomResourceDefinitionSpec {
-    $conversion(x: any): any;
-    $group(x: any): any;
-    $names(x: any): any;
-    $preserveUnknownFields(x: any): any;
-    $scope(x: any): any;
-    $versions(x: any): any;
+    conversion: CustomResourceConversionHelper;
+    $conversion(x: CustomResourceConversionHelper): CustomResourceDefinitionSpecHelper;
+    $group(x: string): CustomResourceDefinitionSpecHelper;
+    names: CustomResourceDefinitionNamesHelper;
+    $names(x: CustomResourceDefinitionNamesHelper): CustomResourceDefinitionSpecHelper;
+    $preserveUnknownFields(x: boolean): CustomResourceDefinitionSpecHelper;
+    $scope(x: string): CustomResourceDefinitionSpecHelper;
+    $versions(x: Array<CustomResourceDefinitionVersion>): CustomResourceDefinitionSpecHelper;
 }
 
 /** CustomResourceDefinitionSpec describes how a user wants their resource to appear */
@@ -347,77 +354,78 @@ export class CustomResourceDefinitionSpecHelper extends Template implements Cust
         super(obj)
     }
 
-    _conversion: any;
-    get conversion(): any /*CustomResourceConversionHelper*/ {
+    _conversion: CustomResourceConversionHelper;
+    get conversion(): CustomResourceConversionHelper {
         return this._conversion
     }
-    set conversion(x: any /*CustomResourceConversionHelper*/) {
+    set conversion(x: CustomResourceConversionHelper) {
         this._conversion = x
     }
-    setConversion(x: any /*CustomResourceConversionHelper*/) {
+    $Conversion(x: CustomResourceConversionHelper) {
         this.conversion = x; return this
     }
 
-    _group: any;
-    get group(): any /*string*/ {
+    _group: string;
+    get group(): string {
         return this._group
     }
-    set group(x: any /*string*/) {
+    set group(x: string) {
         this._group = x
     }
-    setGroup(x: any /*string*/) {
+    $Group(x: string) {
         this.group = x; return this
     }
 
-    _names: any;
-    get names(): any /*CustomResourceDefinitionNamesHelper*/ {
+    _names: CustomResourceDefinitionNamesHelper;
+    get names(): CustomResourceDefinitionNamesHelper {
         return this._names
     }
-    set names(x: any /*CustomResourceDefinitionNamesHelper*/) {
+    set names(x: CustomResourceDefinitionNamesHelper) {
         this._names = x
     }
-    setNames(x: any /*CustomResourceDefinitionNamesHelper*/) {
+    $Names(x: CustomResourceDefinitionNamesHelper) {
         this.names = x; return this
     }
 
-    _preserveUnknownFields: any;
-    get preserveUnknownFields(): any /*boolean*/ {
+    _preserveUnknownFields: boolean;
+    get preserveUnknownFields(): boolean {
         return this._preserveUnknownFields
     }
-    set preserveUnknownFields(x: any /*boolean*/) {
+    set preserveUnknownFields(x: boolean) {
         this._preserveUnknownFields = x
     }
-    setPreserveUnknownFields(x: any /*boolean*/) {
+    $PreserveUnknownFields(x: boolean) {
         this.preserveUnknownFields = x; return this
     }
 
-    _scope: any;
-    get scope(): any /*string*/ {
+    _scope: string;
+    get scope(): string {
         return this._scope
     }
-    set scope(x: any /*string*/) {
+    set scope(x: string) {
         this._scope = x
     }
-    setScope(x: any /*string*/) {
+    $Scope(x: string) {
         this.scope = x; return this
     }
 
-    _versions: any;
-    get versions(): any /*Array<CustomResourceDefinitionVersion>*/ {
+    _versions: Array<CustomResourceDefinitionVersion>;
+    get versions(): Array<CustomResourceDefinitionVersion> {
         return this._versions
     }
-    set versions(x: any /*Array<CustomResourceDefinitionVersion>*/) {
+    set versions(x: Array<CustomResourceDefinitionVersion>) {
         this._versions = this.set(this.versions, x)
     }
-    setVersions(x: any /*Array<CustomResourceDefinitionVersion>*/) {
+    $Versions(x: Array<CustomResourceDefinitionVersion>) {
         this.versions = x; return this
     }
 }
 
 export interface CustomResourceDefinitionStatusHelper extends CustomResourceDefinitionStatus {
-    $acceptedNames(x: any): any;
-    $conditions(x: any): any;
-    $storedVersions(x: any): any;
+    acceptedNames: CustomResourceDefinitionNamesHelper;
+    $acceptedNames(x: CustomResourceDefinitionNamesHelper): CustomResourceDefinitionStatusHelper;
+    $conditions(x: Array<CustomResourceDefinitionCondition>): CustomResourceDefinitionStatusHelper;
+    $storedVersions(x: Array<string>): CustomResourceDefinitionStatusHelper;
 }
 
 /** CustomResourceDefinitionStatus indicates the state of the CustomResourceDefinition */
@@ -426,48 +434,50 @@ export class CustomResourceDefinitionStatusHelper extends Template implements Cu
         super(obj)
     }
 
-    _acceptedNames: any;
-    get acceptedNames(): any /*CustomResourceDefinitionNamesHelper*/ {
+    _acceptedNames: CustomResourceDefinitionNamesHelper;
+    get acceptedNames(): CustomResourceDefinitionNamesHelper {
         return this._acceptedNames
     }
-    set acceptedNames(x: any /*CustomResourceDefinitionNamesHelper*/) {
+    set acceptedNames(x: CustomResourceDefinitionNamesHelper) {
         this._acceptedNames = x
     }
-    setAcceptedNames(x: any /*CustomResourceDefinitionNamesHelper*/) {
+    $AcceptedNames(x: CustomResourceDefinitionNamesHelper) {
         this.acceptedNames = x; return this
     }
 
-    _conditions: any;
-    get conditions(): any /*Array<CustomResourceDefinitionCondition>*/ {
+    _conditions: Array<CustomResourceDefinitionCondition>;
+    get conditions(): Array<CustomResourceDefinitionCondition> {
         return this._conditions
     }
-    set conditions(x: any /*Array<CustomResourceDefinitionCondition>*/) {
+    set conditions(x: Array<CustomResourceDefinitionCondition>) {
         this._conditions = this.set(this.conditions, x)
     }
-    setConditions(x: any /*Array<CustomResourceDefinitionCondition>*/) {
+    $Conditions(x: Array<CustomResourceDefinitionCondition>) {
         this.conditions = x; return this
     }
 
-    _storedVersions: any;
-    get storedVersions(): any /*Array<string>*/ {
+    _storedVersions: Array<string>;
+    get storedVersions(): Array<string> {
         return this._storedVersions
     }
-    set storedVersions(x: any /*Array<string>*/) {
+    set storedVersions(x: Array<string>) {
         this._storedVersions = this.set(this.storedVersions, x)
     }
-    setStoredVersions(x: any /*Array<string>*/) {
+    $StoredVersions(x: Array<string>) {
         this.storedVersions = x; return this
     }
 }
 
 export interface CustomResourceDefinitionVersionHelper extends CustomResourceDefinitionVersion {
-    $additionalPrinterColumns(x: any): any;
-    $deprecated(x: any): any;
-    $deprecationWarning(x: any): any;
-    $schema(x: any): any;
-    $served(x: any): any;
-    $storage(x: any): any;
-    $subresources(x: any): any;
+    $additionalPrinterColumns(x: Array<CustomResourceColumnDefinition>): CustomResourceDefinitionVersionHelper;
+    $deprecated(x: boolean): CustomResourceDefinitionVersionHelper;
+    $deprecationWarning(x: string): CustomResourceDefinitionVersionHelper;
+    schema: CustomResourceValidationHelper;
+    $schema(x: CustomResourceValidationHelper): CustomResourceDefinitionVersionHelper;
+    $served(x: boolean): CustomResourceDefinitionVersionHelper;
+    $storage(x: boolean): CustomResourceDefinitionVersionHelper;
+    subresources: CustomResourceSubresourcesHelper;
+    $subresources(x: CustomResourceSubresourcesHelper): CustomResourceDefinitionVersionHelper;
 }
 
 /** CustomResourceDefinitionVersion describes a version for CRD. */
@@ -476,88 +486,88 @@ export class CustomResourceDefinitionVersionHelper extends Template implements C
         super(obj)
     }
 
-    _additionalPrinterColumns: any;
-    get additionalPrinterColumns(): any /*Array<CustomResourceColumnDefinition>*/ {
+    _additionalPrinterColumns: Array<CustomResourceColumnDefinition>;
+    get additionalPrinterColumns(): Array<CustomResourceColumnDefinition> {
         return this._additionalPrinterColumns
     }
-    set additionalPrinterColumns(x: any /*Array<CustomResourceColumnDefinition>*/) {
+    set additionalPrinterColumns(x: Array<CustomResourceColumnDefinition>) {
         this._additionalPrinterColumns = this.set(this.additionalPrinterColumns, x)
     }
-    setAdditionalPrinterColumns(x: any /*Array<CustomResourceColumnDefinition>*/) {
+    $AdditionalPrinterColumns(x: Array<CustomResourceColumnDefinition>) {
         this.additionalPrinterColumns = x; return this
     }
 
-    _deprecated: any;
-    get deprecated(): any /*boolean*/ {
+    _deprecated: boolean;
+    get deprecated(): boolean {
         return this._deprecated
     }
-    set deprecated(x: any /*boolean*/) {
+    set deprecated(x: boolean) {
         this._deprecated = x
     }
-    setDeprecated(x: any /*boolean*/) {
+    $Deprecated(x: boolean) {
         this.deprecated = x; return this
     }
 
-    _deprecationWarning: any;
-    get deprecationWarning(): any /*string*/ {
+    _deprecationWarning: string;
+    get deprecationWarning(): string {
         return this._deprecationWarning
     }
-    set deprecationWarning(x: any /*string*/) {
+    set deprecationWarning(x: string) {
         this._deprecationWarning = x
     }
-    setDeprecationWarning(x: any /*string*/) {
+    $DeprecationWarning(x: string) {
         this.deprecationWarning = x; return this
     }
 
-    _schema: any;
-    get schema(): any /*CustomResourceValidationHelper*/ {
+    _schema: CustomResourceValidationHelper;
+    get schema(): CustomResourceValidationHelper {
         return this._schema
     }
-    set schema(x: any /*CustomResourceValidationHelper*/) {
+    set schema(x: CustomResourceValidationHelper) {
         this._schema = x
     }
-    setSchema(x: any /*CustomResourceValidationHelper*/) {
+    $Schema(x: CustomResourceValidationHelper) {
         this.schema = x; return this
     }
 
-    _served: any;
-    get served(): any /*boolean*/ {
+    _served: boolean;
+    get served(): boolean {
         return this._served
     }
-    set served(x: any /*boolean*/) {
+    set served(x: boolean) {
         this._served = x
     }
-    setServed(x: any /*boolean*/) {
+    $Served(x: boolean) {
         this.served = x; return this
     }
 
-    _storage: any;
-    get storage(): any /*boolean*/ {
+    _storage: boolean;
+    get storage(): boolean {
         return this._storage
     }
-    set storage(x: any /*boolean*/) {
+    set storage(x: boolean) {
         this._storage = x
     }
-    setStorage(x: any /*boolean*/) {
+    $Storage(x: boolean) {
         this.storage = x; return this
     }
 
-    _subresources: any;
-    get subresources(): any /*CustomResourceSubresourcesHelper*/ {
+    _subresources: CustomResourceSubresourcesHelper;
+    get subresources(): CustomResourceSubresourcesHelper {
         return this._subresources
     }
-    set subresources(x: any /*CustomResourceSubresourcesHelper*/) {
+    set subresources(x: CustomResourceSubresourcesHelper) {
         this._subresources = x
     }
-    setSubresources(x: any /*CustomResourceSubresourcesHelper*/) {
+    $Subresources(x: CustomResourceSubresourcesHelper) {
         this.subresources = x; return this
     }
 }
 
 export interface CustomResourceSubresourceScaleHelper extends CustomResourceSubresourceScale {
-    $labelSelectorPath(x: any): any;
-    $specReplicasPath(x: any): any;
-    $statusReplicasPath(x: any): any;
+    $labelSelectorPath(x: string): CustomResourceSubresourceScaleHelper;
+    $specReplicasPath(x: string): CustomResourceSubresourceScaleHelper;
+    $statusReplicasPath(x: string): CustomResourceSubresourceScaleHelper;
 }
 
 /** CustomResourceSubresourceScale defines how to serve the scale subresource for CustomResources. */
@@ -566,36 +576,36 @@ export class CustomResourceSubresourceScaleHelper extends Template implements Cu
         super(obj)
     }
 
-    _labelSelectorPath: any;
-    get labelSelectorPath(): any /*string*/ {
+    _labelSelectorPath: string;
+    get labelSelectorPath(): string {
         return this._labelSelectorPath
     }
-    set labelSelectorPath(x: any /*string*/) {
+    set labelSelectorPath(x: string) {
         this._labelSelectorPath = x
     }
-    setLabelSelectorPath(x: any /*string*/) {
+    $LabelSelectorPath(x: string) {
         this.labelSelectorPath = x; return this
     }
 
-    _specReplicasPath: any;
-    get specReplicasPath(): any /*string*/ {
+    _specReplicasPath: string;
+    get specReplicasPath(): string {
         return this._specReplicasPath
     }
-    set specReplicasPath(x: any /*string*/) {
+    set specReplicasPath(x: string) {
         this._specReplicasPath = x
     }
-    setSpecReplicasPath(x: any /*string*/) {
+    $SpecReplicasPath(x: string) {
         this.specReplicasPath = x; return this
     }
 
-    _statusReplicasPath: any;
-    get statusReplicasPath(): any /*string*/ {
+    _statusReplicasPath: string;
+    get statusReplicasPath(): string {
         return this._statusReplicasPath
     }
-    set statusReplicasPath(x: any /*string*/) {
+    set statusReplicasPath(x: string) {
         this._statusReplicasPath = x
     }
-    setStatusReplicasPath(x: any /*string*/) {
+    $StatusReplicasPath(x: string) {
         this.statusReplicasPath = x; return this
     }
 }
@@ -611,8 +621,10 @@ export class CustomResourceSubresourceStatusHelper extends Template implements C
 }
 
 export interface CustomResourceSubresourcesHelper extends CustomResourceSubresources {
-    $scale(x: any): any;
-    $status(x: any): any;
+    scale: CustomResourceSubresourceScaleHelper;
+    $scale(x: CustomResourceSubresourceScaleHelper): CustomResourceSubresourcesHelper;
+    status: CustomResourceSubresourceStatusHelper;
+    $status(x: CustomResourceSubresourceStatusHelper): CustomResourceSubresourcesHelper;
 }
 
 /** CustomResourceSubresources defines the status and scale subresources for CustomResources. */
@@ -621,31 +633,31 @@ export class CustomResourceSubresourcesHelper extends Template implements Custom
         super(obj)
     }
 
-    _scale: any;
-    get scale(): any /*CustomResourceSubresourceScaleHelper*/ {
+    _scale: CustomResourceSubresourceScaleHelper;
+    get scale(): CustomResourceSubresourceScaleHelper {
         return this._scale
     }
-    set scale(x: any /*CustomResourceSubresourceScaleHelper*/) {
+    set scale(x: CustomResourceSubresourceScaleHelper) {
         this._scale = x
     }
-    setScale(x: any /*CustomResourceSubresourceScaleHelper*/) {
+    $Scale(x: CustomResourceSubresourceScaleHelper) {
         this.scale = x; return this
     }
 
-    _status: any;
-    get status(): any /*CustomResourceSubresourceStatusHelper*/ {
+    _status: CustomResourceSubresourceStatusHelper;
+    get status(): CustomResourceSubresourceStatusHelper {
         return this._status
     }
-    set status(x: any /*CustomResourceSubresourceStatusHelper*/) {
+    set status(x: CustomResourceSubresourceStatusHelper) {
         this._status = x
     }
-    setStatus(x: any /*CustomResourceSubresourceStatusHelper*/) {
+    $Status(x: CustomResourceSubresourceStatusHelper) {
         this.status = x; return this
     }
 }
 
 export interface CustomResourceValidationHelper extends CustomResourceValidation {
-    $openAPIV3Schema(x: any): any;
+    $openAPIV3Schema(x: JSONSchemaProps): CustomResourceValidationHelper;
 }
 
 /** CustomResourceValidation is a list of validation methods for CustomResources. */
@@ -654,21 +666,21 @@ export class CustomResourceValidationHelper extends Template implements CustomRe
         super(obj)
     }
 
-    _openAPIV3Schema: any;
-    get openAPIV3Schema(): any /*JSONSchemaProps*/ {
+    _openAPIV3Schema: JSONSchemaProps;
+    get openAPIV3Schema(): JSONSchemaProps {
         return this._openAPIV3Schema
     }
-    set openAPIV3Schema(x: any /*JSONSchemaProps*/) {
+    set openAPIV3Schema(x: JSONSchemaProps) {
         this._openAPIV3Schema = x
     }
-    setOpenAPIV3Schema(x: any /*JSONSchemaProps*/) {
+    $OpenAPIV3Schema(x: JSONSchemaProps) {
         this.openAPIV3Schema = x; return this
     }
 }
 
 export interface ExternalDocumentationHelper extends ExternalDocumentation {
-    $description(x: any): any;
-    $url(x: any): any;
+    $description(x: string): ExternalDocumentationHelper;
+    $url(x: string): ExternalDocumentationHelper;
 }
 
 /** ExternalDocumentation allows referencing an external resource for extended documentation. */
@@ -677,32 +689,32 @@ export class ExternalDocumentationHelper extends Template implements ExternalDoc
         super(obj)
     }
 
-    _description: any;
-    get description(): any /*string*/ {
+    _description: string;
+    get description(): string {
         return this._description
     }
-    set description(x: any /*string*/) {
+    set description(x: string) {
         this._description = x
     }
-    setDescription(x: any /*string*/) {
+    $Description(x: string) {
         this.description = x; return this
     }
 
-    _url: any;
-    get url(): any /*string*/ {
+    _url: string;
+    get url(): string {
         return this._url
     }
-    set url(x: any /*string*/) {
+    set url(x: string) {
         this._url = x
     }
-    setUrl(x: any /*string*/) {
+    $Url(x: string) {
         this.url = x; return this
     }
 }
 
 export interface ServiceReferenceHelper extends ServiceReference {
-    $path(x: any): any;
-    $port(x: any): any;
+    $path(x: string): ServiceReferenceHelper;
+    $port(x: number): ServiceReferenceHelper;
 }
 
 /** ServiceReference holds a reference to Service.legacy.k8s.io */
@@ -711,33 +723,34 @@ export class ServiceReferenceHelper extends Template implements ServiceReference
         super(obj)
     }
 
-    _path: any;
-    get path(): any /*string*/ {
+    _path: string;
+    get path(): string {
         return this._path
     }
-    set path(x: any /*string*/) {
+    set path(x: string) {
         this._path = x
     }
-    setPath(x: any /*string*/) {
+    $Path(x: string) {
         this.path = x; return this
     }
 
-    _port: any;
-    get port(): any /*number*/ {
+    _port: number;
+    get port(): number {
         return this._port
     }
-    set port(x: any /*number*/) {
+    set port(x: number) {
         this._port = x
     }
-    setPort(x: any /*number*/) {
+    $Port(x: number) {
         this.port = x; return this
     }
 }
 
 export interface WebhookClientConfigHelper extends WebhookClientConfig {
-    $caBundle(x: any): any;
-    $service(x: any): any;
-    $url(x: any): any;
+    $caBundle(x: string): WebhookClientConfigHelper;
+    service: ServiceReferenceHelper;
+    $service(x: ServiceReferenceHelper): WebhookClientConfigHelper;
+    $url(x: string): WebhookClientConfigHelper;
 }
 
 /** WebhookClientConfig contains the information to make a TLS connection with the webhook. */
@@ -746,43 +759,44 @@ export class WebhookClientConfigHelper extends Template implements WebhookClient
         super(obj)
     }
 
-    _caBundle: any;
-    get caBundle(): any /*string*/ {
+    _caBundle: string;
+    get caBundle(): string {
         return this._caBundle
     }
-    set caBundle(x: any /*string*/) {
+    set caBundle(x: string) {
         this._caBundle = x
     }
-    setCaBundle(x: any /*string*/) {
+    $CaBundle(x: string) {
         this.caBundle = x; return this
     }
 
-    _service: any;
-    get service(): any /*ServiceReferenceHelper*/ {
+    _service: ServiceReferenceHelper;
+    get service(): ServiceReferenceHelper {
         return this._service
     }
-    set service(x: any /*ServiceReferenceHelper*/) {
+    set service(x: ServiceReferenceHelper) {
         this._service = x
     }
-    setService(x: any /*ServiceReferenceHelper*/) {
+    $Service(x: ServiceReferenceHelper) {
         this.service = x; return this
     }
 
-    _url: any;
-    get url(): any /*string*/ {
+    _url: string;
+    get url(): string {
         return this._url
     }
-    set url(x: any /*string*/) {
+    set url(x: string) {
         this._url = x
     }
-    setUrl(x: any /*string*/) {
+    $Url(x: string) {
         this.url = x; return this
     }
 }
 
 export interface WebhookConversionHelper extends WebhookConversion {
-    $clientConfig(x: any): any;
-    $conversionReviewVersions(x: any): any;
+    clientConfig: WebhookClientConfigHelper;
+    $clientConfig(x: WebhookClientConfigHelper): WebhookConversionHelper;
+    $conversionReviewVersions(x: Array<string>): WebhookConversionHelper;
 }
 
 /** WebhookConversion describes how to call a conversion webhook */
@@ -791,25 +805,25 @@ export class WebhookConversionHelper extends Template implements WebhookConversi
         super(obj)
     }
 
-    _clientConfig: any;
-    get clientConfig(): any /*WebhookClientConfigHelper*/ {
+    _clientConfig: WebhookClientConfigHelper;
+    get clientConfig(): WebhookClientConfigHelper {
         return this._clientConfig
     }
-    set clientConfig(x: any /*WebhookClientConfigHelper*/) {
+    set clientConfig(x: WebhookClientConfigHelper) {
         this._clientConfig = x
     }
-    setClientConfig(x: any /*WebhookClientConfigHelper*/) {
+    $ClientConfig(x: WebhookClientConfigHelper) {
         this.clientConfig = x; return this
     }
 
-    _conversionReviewVersions: any;
-    get conversionReviewVersions(): any /*Array<string>*/ {
+    _conversionReviewVersions: Array<string>;
+    get conversionReviewVersions(): Array<string> {
         return this._conversionReviewVersions
     }
-    set conversionReviewVersions(x: any /*Array<string>*/) {
+    set conversionReviewVersions(x: Array<string>) {
         this._conversionReviewVersions = this.set(this.conversionReviewVersions, x)
     }
-    setConversionReviewVersions(x: any /*Array<string>*/) {
+    $ConversionReviewVersions(x: Array<string>) {
         this.conversionReviewVersions = x; return this
     }
 }

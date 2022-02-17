@@ -4,13 +4,16 @@ import { ObjectReference } from "../core/v1";
 import { ListMeta, ObjectMeta } from "../meta/v1";
 
 export interface EndpointHelper extends Endpoint {
-    $addresses(x: any): any;
-    $conditions(x: any): any;
-    $hints(x: any): any;
-    $hostname(x: any): any;
-    $nodeName(x: any): any;
-    $targetRef(x: any): any;
-    $topology(x: any): any;
+    $addresses(x: Array<string>): EndpointHelper;
+    conditions: EndpointConditionsHelper;
+    $conditions(x: EndpointConditionsHelper): EndpointHelper;
+    hints: EndpointHintsHelper;
+    $hints(x: EndpointHintsHelper): EndpointHelper;
+    $hostname(x: string): EndpointHelper;
+    $nodeName(x: string): EndpointHelper;
+    targetRef: ObjectReferenceHelper;
+    $targetRef(x: ObjectReferenceHelper): EndpointHelper;
+    $topology(x: any): EndpointHelper;
 }
 
 /** Endpoint represents a single logical "backend" implementing a service. */
@@ -19,88 +22,88 @@ export class EndpointHelper extends Template implements EndpointHelper {
         super(obj)
     }
 
-    _addresses: any;
-    get addresses(): any /*Array<string>*/ {
+    _addresses: Array<string>;
+    get addresses(): Array<string> {
         return this._addresses
     }
-    set addresses(x: any /*Array<string>*/) {
+    set addresses(x: Array<string>) {
         this._addresses = this.set(this.addresses, x)
     }
-    setAddresses(x: any /*Array<string>*/) {
+    $Addresses(x: Array<string>) {
         this.addresses = x; return this
     }
 
-    _conditions: any;
-    get conditions(): any /*EndpointConditionsHelper*/ {
+    _conditions: EndpointConditionsHelper;
+    get conditions(): EndpointConditionsHelper {
         return this._conditions
     }
-    set conditions(x: any /*EndpointConditionsHelper*/) {
+    set conditions(x: EndpointConditionsHelper) {
         this._conditions = x
     }
-    setConditions(x: any /*EndpointConditionsHelper*/) {
+    $Conditions(x: EndpointConditionsHelper) {
         this.conditions = x; return this
     }
 
-    _hints: any;
-    get hints(): any /*EndpointHintsHelper*/ {
+    _hints: EndpointHintsHelper;
+    get hints(): EndpointHintsHelper {
         return this._hints
     }
-    set hints(x: any /*EndpointHintsHelper*/) {
+    set hints(x: EndpointHintsHelper) {
         this._hints = x
     }
-    setHints(x: any /*EndpointHintsHelper*/) {
+    $Hints(x: EndpointHintsHelper) {
         this.hints = x; return this
     }
 
-    _hostname: any;
-    get hostname(): any /*string*/ {
+    _hostname: string;
+    get hostname(): string {
         return this._hostname
     }
-    set hostname(x: any /*string*/) {
+    set hostname(x: string) {
         this._hostname = x
     }
-    setHostname(x: any /*string*/) {
+    $Hostname(x: string) {
         this.hostname = x; return this
     }
 
-    _nodeName: any;
-    get nodeName(): any /*string*/ {
+    _nodeName: string;
+    get nodeName(): string {
         return this._nodeName
     }
-    set nodeName(x: any /*string*/) {
+    set nodeName(x: string) {
         this._nodeName = x
     }
-    setNodeName(x: any /*string*/) {
+    $NodeName(x: string) {
         this.nodeName = x; return this
     }
 
-    _targetRef: any;
-    get targetRef(): any /*ObjectReferenceHelper*/ {
+    _targetRef: ObjectReferenceHelper;
+    get targetRef(): ObjectReferenceHelper {
         return this._targetRef
     }
-    set targetRef(x: any /*ObjectReferenceHelper*/) {
+    set targetRef(x: ObjectReferenceHelper) {
         this._targetRef = x
     }
-    setTargetRef(x: any /*ObjectReferenceHelper*/) {
+    $TargetRef(x: ObjectReferenceHelper) {
         this.targetRef = x; return this
     }
 
     _topology: any;
-    get topology(): any /*any*/ {
+    get topology(): any {
         return this._topology
     }
-    set topology(x: any /*any*/) {
+    set topology(x: any) {
         this._topology = this.set(this.topology, x)
     }
-    setTopology(x: any /*any*/) {
+    $Topology(x: any) {
         this.topology = x; return this
     }
 }
 
 export interface EndpointConditionsHelper extends EndpointConditions {
-    $ready(x: any): any;
-    $serving(x: any): any;
-    $terminating(x: any): any;
+    $ready(x: boolean): EndpointConditionsHelper;
+    $serving(x: boolean): EndpointConditionsHelper;
+    $terminating(x: boolean): EndpointConditionsHelper;
 }
 
 /** EndpointConditions represents the current condition of an endpoint. */
@@ -109,42 +112,42 @@ export class EndpointConditionsHelper extends Template implements EndpointCondit
         super(obj)
     }
 
-    _ready: any;
-    get ready(): any /*boolean*/ {
+    _ready: boolean;
+    get ready(): boolean {
         return this._ready
     }
-    set ready(x: any /*boolean*/) {
+    set ready(x: boolean) {
         this._ready = x
     }
-    setReady(x: any /*boolean*/) {
+    $Ready(x: boolean) {
         this.ready = x; return this
     }
 
-    _serving: any;
-    get serving(): any /*boolean*/ {
+    _serving: boolean;
+    get serving(): boolean {
         return this._serving
     }
-    set serving(x: any /*boolean*/) {
+    set serving(x: boolean) {
         this._serving = x
     }
-    setServing(x: any /*boolean*/) {
+    $Serving(x: boolean) {
         this.serving = x; return this
     }
 
-    _terminating: any;
-    get terminating(): any /*boolean*/ {
+    _terminating: boolean;
+    get terminating(): boolean {
         return this._terminating
     }
-    set terminating(x: any /*boolean*/) {
+    set terminating(x: boolean) {
         this._terminating = x
     }
-    setTerminating(x: any /*boolean*/) {
+    $Terminating(x: boolean) {
         this.terminating = x; return this
     }
 }
 
 export interface EndpointHintsHelper extends EndpointHints {
-    $forZones(x: any): any;
+    $forZones(x: Array<ForZone>): EndpointHintsHelper;
 }
 
 /** EndpointHints provides hints describing how an endpoint should be consumed. */
@@ -153,22 +156,22 @@ export class EndpointHintsHelper extends Template implements EndpointHintsHelper
         super(obj)
     }
 
-    _forZones: any;
-    get forZones(): any /*Array<ForZone>*/ {
+    _forZones: Array<ForZone>;
+    get forZones(): Array<ForZone> {
         return this._forZones
     }
-    set forZones(x: any /*Array<ForZone>*/) {
+    set forZones(x: Array<ForZone>) {
         this._forZones = this.set(this.forZones, x)
     }
-    setForZones(x: any /*Array<ForZone>*/) {
+    $ForZones(x: Array<ForZone>) {
         this.forZones = x; return this
     }
 }
 
 export interface EndpointPortHelper extends EndpointPort {
-    $appProtocol(x: any): any;
-    $port(x: any): any;
-    $protocol(x: any): any;
+    $appProtocol(x: string): EndpointPortHelper;
+    $port(x: number): EndpointPortHelper;
+    $protocol(x: string): EndpointPortHelper;
 }
 
 /** EndpointPort represents a Port used by an EndpointSlice */
@@ -177,45 +180,46 @@ export class EndpointPortHelper extends Template implements EndpointPortHelper {
         super(obj)
     }
 
-    _appProtocol: any;
-    get appProtocol(): any /*string*/ {
+    _appProtocol: string;
+    get appProtocol(): string {
         return this._appProtocol
     }
-    set appProtocol(x: any /*string*/) {
+    set appProtocol(x: string) {
         this._appProtocol = x
     }
-    setAppProtocol(x: any /*string*/) {
+    $AppProtocol(x: string) {
         this.appProtocol = x; return this
     }
 
-    _port: any;
-    get port(): any /*number*/ {
+    _port: number;
+    get port(): number {
         return this._port
     }
-    set port(x: any /*number*/) {
+    set port(x: number) {
         this._port = x
     }
-    setPort(x: any /*number*/) {
+    $Port(x: number) {
         this.port = x; return this
     }
 
-    _protocol: any;
-    get protocol(): any /*string*/ {
+    _protocol: string;
+    get protocol(): string {
         return this._protocol
     }
-    set protocol(x: any /*string*/) {
+    set protocol(x: string) {
         this._protocol = x
     }
-    setProtocol(x: any /*string*/) {
+    $Protocol(x: string) {
         this.protocol = x; return this
     }
 }
 
 export interface EndpointSliceHelper extends EndpointSlice {
-    $addressType(x: any): any;
-    $endpoints(x: any): any;
-    $metadata(x: any): any;
-    $ports(x: any): any;
+    $addressType(x: string): EndpointSliceHelper;
+    $endpoints(x: Array<Endpoint>): EndpointSliceHelper;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): EndpointSliceHelper;
+    $ports(x: Array<EndpointPort>): EndpointSliceHelper;
 }
 
 /** EndpointSlice represents a subset of the endpoints that implement a service. For a given service there may be multiple EndpointSlice objects, selected by labels, which must be joined to produce the full set of endpoints. */
@@ -227,54 +231,55 @@ export class EndpointSliceHelper extends ResourceTemplate implements EndpointSli
         super(nameOrObject, namespace, EndpointSliceHelper.kind, EndpointSliceHelper.apiVersion)
     }
 
-    _addressType: any;
-    get addressType(): any /*string*/ {
+    _addressType: string;
+    get addressType(): string {
         return this._addressType
     }
-    set addressType(x: any /*string*/) {
+    set addressType(x: string) {
         this._addressType = x
     }
-    setAddressType(x: any /*string*/) {
+    $AddressType(x: string) {
         this.addressType = x; return this
     }
 
-    _endpoints: any;
-    get endpoints(): any /*Array<Endpoint>*/ {
+    _endpoints: Array<Endpoint>;
+    get endpoints(): Array<Endpoint> {
         return this._endpoints
     }
-    set endpoints(x: any /*Array<Endpoint>*/) {
+    set endpoints(x: Array<Endpoint>) {
         this._endpoints = this.set(this.endpoints, x)
     }
-    setEndpoints(x: any /*Array<Endpoint>*/) {
+    $Endpoints(x: Array<Endpoint>) {
         this.endpoints = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _ports: any;
-    get ports(): any /*Array<EndpointPort>*/ {
+    _ports: Array<EndpointPort>;
+    get ports(): Array<EndpointPort> {
         return this._ports
     }
-    set ports(x: any /*Array<EndpointPort>*/) {
+    set ports(x: Array<EndpointPort>) {
         this._ports = this.set(this.ports, x)
     }
-    setPorts(x: any /*Array<EndpointPort>*/) {
+    $Ports(x: Array<EndpointPort>) {
         this.ports = x; return this
     }
 }
 
 export interface EndpointSliceListHelper extends EndpointSliceList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<EndpointSlice>): EndpointSliceListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): EndpointSliceListHelper;
 }
 
 /** EndpointSliceList represents a list of endpoint slices */
@@ -286,25 +291,25 @@ export class EndpointSliceListHelper extends ResourceTemplate implements Endpoin
         super(nameOrObject, namespace, EndpointSliceListHelper.kind, EndpointSliceListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<EndpointSlice>*/ {
+    _items: Array<EndpointSlice>;
+    get items(): Array<EndpointSlice> {
         return this._items
     }
-    set items(x: any /*Array<EndpointSlice>*/) {
+    set items(x: Array<EndpointSlice>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<EndpointSlice>*/) {
+    $Items(x: Array<EndpointSlice>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }

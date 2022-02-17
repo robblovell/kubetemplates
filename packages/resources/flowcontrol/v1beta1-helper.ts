@@ -3,7 +3,7 @@ import { FlowDistinguisherMethod, FlowSchema, FlowSchemaCondition, FlowSchemaLis
 import { ListMeta, ObjectMeta, Time } from "../meta/v1";
 
 export interface FlowDistinguisherMethodHelper extends FlowDistinguisherMethod {
-    $type(x: any): any;
+    $type(x: string): FlowDistinguisherMethodHelper;
 }
 
 /** FlowDistinguisherMethod specifies the method of a flow distinguisher. */
@@ -12,22 +12,25 @@ export class FlowDistinguisherMethodHelper extends Template implements FlowDisti
         super(obj)
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }
 
 export interface FlowSchemaHelper extends FlowSchema {
-    $metadata(x: any): any;
-    $spec(x: any): any;
-    $status(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): FlowSchemaHelper;
+    spec: FlowSchemaSpecHelper;
+    $spec(x: FlowSchemaSpecHelper): FlowSchemaHelper;
+    status: FlowSchemaStatusHelper;
+    $status(x: FlowSchemaStatusHelper): FlowSchemaHelper;
 }
 
 /** FlowSchema defines the schema of a group of flows. Note that a flow is made up of a set of inbound API requests with similar attributes and is identified by a pair of strings: the name of the FlowSchema and a "flow distinguisher". */
@@ -39,46 +42,46 @@ export class FlowSchemaHelper extends ResourceTemplate implements FlowSchemaHelp
         super(nameOrObject, namespace, FlowSchemaHelper.kind, FlowSchemaHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*FlowSchemaSpecHelper*/ {
+    _spec: FlowSchemaSpecHelper;
+    get spec(): FlowSchemaSpecHelper {
         return this._spec
     }
-    set spec(x: any /*FlowSchemaSpecHelper*/) {
+    set spec(x: FlowSchemaSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*FlowSchemaSpecHelper*/) {
+    $Spec(x: FlowSchemaSpecHelper) {
         this.spec = x; return this
     }
 
-    _status: any;
-    get status(): any /*FlowSchemaStatusHelper*/ {
+    _status: FlowSchemaStatusHelper;
+    get status(): FlowSchemaStatusHelper {
         return this._status
     }
-    set status(x: any /*FlowSchemaStatusHelper*/) {
+    set status(x: FlowSchemaStatusHelper) {
         this._status = x
     }
-    setStatus(x: any /*FlowSchemaStatusHelper*/) {
+    $Status(x: FlowSchemaStatusHelper) {
         this.status = x; return this
     }
 }
 
 export interface FlowSchemaConditionHelper extends FlowSchemaCondition {
-    $lastTransitionTime(x: any): any;
-    $message(x: any): any;
-    $reason(x: any): any;
-    $status(x: any): any;
-    $type(x: any): any;
+    $lastTransitionTime(x: Time): FlowSchemaConditionHelper;
+    $message(x: string): FlowSchemaConditionHelper;
+    $reason(x: string): FlowSchemaConditionHelper;
+    $status(x: string): FlowSchemaConditionHelper;
+    $type(x: string): FlowSchemaConditionHelper;
 }
 
 /** FlowSchemaCondition describes conditions for a FlowSchema. */
@@ -87,65 +90,66 @@ export class FlowSchemaConditionHelper extends Template implements FlowSchemaCon
         super(obj)
     }
 
-    _lastTransitionTime: any;
-    get lastTransitionTime(): any /*Time*/ {
+    _lastTransitionTime: Time;
+    get lastTransitionTime(): Time {
         return this._lastTransitionTime
     }
-    set lastTransitionTime(x: any /*Time*/) {
+    set lastTransitionTime(x: Time) {
         this._lastTransitionTime = x
     }
-    setLastTransitionTime(x: any /*Time*/) {
+    $LastTransitionTime(x: Time) {
         this.lastTransitionTime = x; return this
     }
 
-    _message: any;
-    get message(): any /*string*/ {
+    _message: string;
+    get message(): string {
         return this._message
     }
-    set message(x: any /*string*/) {
+    set message(x: string) {
         this._message = x
     }
-    setMessage(x: any /*string*/) {
+    $Message(x: string) {
         this.message = x; return this
     }
 
-    _reason: any;
-    get reason(): any /*string*/ {
+    _reason: string;
+    get reason(): string {
         return this._reason
     }
-    set reason(x: any /*string*/) {
+    set reason(x: string) {
         this._reason = x
     }
-    setReason(x: any /*string*/) {
+    $Reason(x: string) {
         this.reason = x; return this
     }
 
-    _status: any;
-    get status(): any /*string*/ {
+    _status: string;
+    get status(): string {
         return this._status
     }
-    set status(x: any /*string*/) {
+    set status(x: string) {
         this._status = x
     }
-    setStatus(x: any /*string*/) {
+    $Status(x: string) {
         this.status = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }
 
 export interface FlowSchemaListHelper extends FlowSchemaList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<FlowSchema>): FlowSchemaListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): FlowSchemaListHelper;
 }
 
 /** FlowSchemaList is a list of FlowSchema objects. */
@@ -157,34 +161,36 @@ export class FlowSchemaListHelper extends ResourceTemplate implements FlowSchema
         super(nameOrObject, namespace, FlowSchemaListHelper.kind, FlowSchemaListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<FlowSchema>*/ {
+    _items: Array<FlowSchema>;
+    get items(): Array<FlowSchema> {
         return this._items
     }
-    set items(x: any /*Array<FlowSchema>*/) {
+    set items(x: Array<FlowSchema>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<FlowSchema>*/) {
+    $Items(x: Array<FlowSchema>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface FlowSchemaSpecHelper extends FlowSchemaSpec {
-    $distinguisherMethod(x: any): any;
-    $matchingPrecedence(x: any): any;
-    $priorityLevelConfiguration(x: any): any;
-    $rules(x: any): any;
+    distinguisherMethod: FlowDistinguisherMethodHelper;
+    $distinguisherMethod(x: FlowDistinguisherMethodHelper): FlowSchemaSpecHelper;
+    $matchingPrecedence(x: number): FlowSchemaSpecHelper;
+    priorityLevelConfiguration: PriorityLevelConfigurationReferenceHelper;
+    $priorityLevelConfiguration(x: PriorityLevelConfigurationReferenceHelper): FlowSchemaSpecHelper;
+    $rules(x: Array<PolicyRulesWithSubjects>): FlowSchemaSpecHelper;
 }
 
 /** FlowSchemaSpec describes how the FlowSchema's specification looks like. */
@@ -193,53 +199,53 @@ export class FlowSchemaSpecHelper extends Template implements FlowSchemaSpecHelp
         super(obj)
     }
 
-    _distinguisherMethod: any;
-    get distinguisherMethod(): any /*FlowDistinguisherMethodHelper*/ {
+    _distinguisherMethod: FlowDistinguisherMethodHelper;
+    get distinguisherMethod(): FlowDistinguisherMethodHelper {
         return this._distinguisherMethod
     }
-    set distinguisherMethod(x: any /*FlowDistinguisherMethodHelper*/) {
+    set distinguisherMethod(x: FlowDistinguisherMethodHelper) {
         this._distinguisherMethod = x
     }
-    setDistinguisherMethod(x: any /*FlowDistinguisherMethodHelper*/) {
+    $DistinguisherMethod(x: FlowDistinguisherMethodHelper) {
         this.distinguisherMethod = x; return this
     }
 
-    _matchingPrecedence: any;
-    get matchingPrecedence(): any /*number*/ {
+    _matchingPrecedence: number;
+    get matchingPrecedence(): number {
         return this._matchingPrecedence
     }
-    set matchingPrecedence(x: any /*number*/) {
+    set matchingPrecedence(x: number) {
         this._matchingPrecedence = x
     }
-    setMatchingPrecedence(x: any /*number*/) {
+    $MatchingPrecedence(x: number) {
         this.matchingPrecedence = x; return this
     }
 
-    _priorityLevelConfiguration: any;
-    get priorityLevelConfiguration(): any /*PriorityLevelConfigurationReferenceHelper*/ {
+    _priorityLevelConfiguration: PriorityLevelConfigurationReferenceHelper;
+    get priorityLevelConfiguration(): PriorityLevelConfigurationReferenceHelper {
         return this._priorityLevelConfiguration
     }
-    set priorityLevelConfiguration(x: any /*PriorityLevelConfigurationReferenceHelper*/) {
+    set priorityLevelConfiguration(x: PriorityLevelConfigurationReferenceHelper) {
         this._priorityLevelConfiguration = x
     }
-    setPriorityLevelConfiguration(x: any /*PriorityLevelConfigurationReferenceHelper*/) {
+    $PriorityLevelConfiguration(x: PriorityLevelConfigurationReferenceHelper) {
         this.priorityLevelConfiguration = x; return this
     }
 
-    _rules: any;
-    get rules(): any /*Array<PolicyRulesWithSubjects>*/ {
+    _rules: Array<PolicyRulesWithSubjects>;
+    get rules(): Array<PolicyRulesWithSubjects> {
         return this._rules
     }
-    set rules(x: any /*Array<PolicyRulesWithSubjects>*/) {
+    set rules(x: Array<PolicyRulesWithSubjects>) {
         this._rules = this.set(this.rules, x)
     }
-    setRules(x: any /*Array<PolicyRulesWithSubjects>*/) {
+    $Rules(x: Array<PolicyRulesWithSubjects>) {
         this.rules = x; return this
     }
 }
 
 export interface FlowSchemaStatusHelper extends FlowSchemaStatus {
-    $conditions(x: any): any;
+    $conditions(x: Array<FlowSchemaCondition>): FlowSchemaStatusHelper;
 }
 
 /** FlowSchemaStatus represents the current state of a FlowSchema. */
@@ -248,14 +254,14 @@ export class FlowSchemaStatusHelper extends Template implements FlowSchemaStatus
         super(obj)
     }
 
-    _conditions: any;
-    get conditions(): any /*Array<FlowSchemaCondition>*/ {
+    _conditions: Array<FlowSchemaCondition>;
+    get conditions(): Array<FlowSchemaCondition> {
         return this._conditions
     }
-    set conditions(x: any /*Array<FlowSchemaCondition>*/) {
+    set conditions(x: Array<FlowSchemaCondition>) {
         this._conditions = this.set(this.conditions, x)
     }
-    setConditions(x: any /*Array<FlowSchemaCondition>*/) {
+    $Conditions(x: Array<FlowSchemaCondition>) {
         this.conditions = x; return this
     }
 }
@@ -271,8 +277,9 @@ export class GroupSubjectHelper extends Template implements GroupSubjectHelper {
 }
 
 export interface LimitResponseHelper extends LimitResponse {
-    $queuing(x: any): any;
-    $type(x: any): any;
+    queuing: QueuingConfigurationHelper;
+    $queuing(x: QueuingConfigurationHelper): LimitResponseHelper;
+    $type(x: string): LimitResponseHelper;
 }
 
 /** LimitResponse defines how to handle requests that can not be executed right now. */
@@ -281,32 +288,33 @@ export class LimitResponseHelper extends Template implements LimitResponseHelper
         super(obj)
     }
 
-    _queuing: any;
-    get queuing(): any /*QueuingConfigurationHelper*/ {
+    _queuing: QueuingConfigurationHelper;
+    get queuing(): QueuingConfigurationHelper {
         return this._queuing
     }
-    set queuing(x: any /*QueuingConfigurationHelper*/) {
+    set queuing(x: QueuingConfigurationHelper) {
         this._queuing = x
     }
-    setQueuing(x: any /*QueuingConfigurationHelper*/) {
+    $Queuing(x: QueuingConfigurationHelper) {
         this.queuing = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }
 
 export interface LimitedPriorityLevelConfigurationHelper extends LimitedPriorityLevelConfiguration {
-    $assuredConcurrencyShares(x: any): any;
-    $limitResponse(x: any): any;
+    $assuredConcurrencyShares(x: number): LimitedPriorityLevelConfigurationHelper;
+    limitResponse: LimitResponseHelper;
+    $limitResponse(x: LimitResponseHelper): LimitedPriorityLevelConfigurationHelper;
 }
 
 /**
@@ -319,32 +327,32 @@ export class LimitedPriorityLevelConfigurationHelper extends Template implements
         super(obj)
     }
 
-    _assuredConcurrencyShares: any;
-    get assuredConcurrencyShares(): any /*number*/ {
+    _assuredConcurrencyShares: number;
+    get assuredConcurrencyShares(): number {
         return this._assuredConcurrencyShares
     }
-    set assuredConcurrencyShares(x: any /*number*/) {
+    set assuredConcurrencyShares(x: number) {
         this._assuredConcurrencyShares = x
     }
-    setAssuredConcurrencyShares(x: any /*number*/) {
+    $AssuredConcurrencyShares(x: number) {
         this.assuredConcurrencyShares = x; return this
     }
 
-    _limitResponse: any;
-    get limitResponse(): any /*LimitResponseHelper*/ {
+    _limitResponse: LimitResponseHelper;
+    get limitResponse(): LimitResponseHelper {
         return this._limitResponse
     }
-    set limitResponse(x: any /*LimitResponseHelper*/) {
+    set limitResponse(x: LimitResponseHelper) {
         this._limitResponse = x
     }
-    setLimitResponse(x: any /*LimitResponseHelper*/) {
+    $LimitResponse(x: LimitResponseHelper) {
         this.limitResponse = x; return this
     }
 }
 
 export interface NonResourcePolicyRuleHelper extends NonResourcePolicyRule {
-    $nonResourceURLs(x: any): any;
-    $verbs(x: any): any;
+    $nonResourceURLs(x: Array<string>): NonResourcePolicyRuleHelper;
+    $verbs(x: Array<string>): NonResourcePolicyRuleHelper;
 }
 
 /** NonResourcePolicyRule is a predicate that matches non-resource requests according to their verb and the target non-resource URL. A NonResourcePolicyRule matches a request if and only if both (a) at least one member of verbs matches the request and (b) at least one member of nonResourceURLs matches the request. */
@@ -353,33 +361,33 @@ export class NonResourcePolicyRuleHelper extends Template implements NonResource
         super(obj)
     }
 
-    _nonResourceURLs: any;
-    get nonResourceURLs(): any /*Array<string>*/ {
+    _nonResourceURLs: Array<string>;
+    get nonResourceURLs(): Array<string> {
         return this._nonResourceURLs
     }
-    set nonResourceURLs(x: any /*Array<string>*/) {
+    set nonResourceURLs(x: Array<string>) {
         this._nonResourceURLs = this.set(this.nonResourceURLs, x)
     }
-    setNonResourceURLs(x: any /*Array<string>*/) {
+    $NonResourceURLs(x: Array<string>) {
         this.nonResourceURLs = x; return this
     }
 
-    _verbs: any;
-    get verbs(): any /*Array<string>*/ {
+    _verbs: Array<string>;
+    get verbs(): Array<string> {
         return this._verbs
     }
-    set verbs(x: any /*Array<string>*/) {
+    set verbs(x: Array<string>) {
         this._verbs = this.set(this.verbs, x)
     }
-    setVerbs(x: any /*Array<string>*/) {
+    $Verbs(x: Array<string>) {
         this.verbs = x; return this
     }
 }
 
 export interface PolicyRulesWithSubjectsHelper extends PolicyRulesWithSubjects {
-    $nonResourceRules(x: any): any;
-    $resourceRules(x: any): any;
-    $subjects(x: any): any;
+    $nonResourceRules(x: Array<NonResourcePolicyRule>): PolicyRulesWithSubjectsHelper;
+    $resourceRules(x: Array<ResourcePolicyRule>): PolicyRulesWithSubjectsHelper;
+    $subjects(x: Array<Subject>): PolicyRulesWithSubjectsHelper;
 }
 
 /** PolicyRulesWithSubjects prescribes a test that applies to a request to an apiserver. The test considers the subject making the request, the verb being requested, and the resource to be acted upon. This PolicyRulesWithSubjects matches a request if and only if both (a) at least one member of subjects matches the request and (b) at least one member of resourceRules or nonResourceRules matches the request. */
@@ -388,44 +396,47 @@ export class PolicyRulesWithSubjectsHelper extends Template implements PolicyRul
         super(obj)
     }
 
-    _nonResourceRules: any;
-    get nonResourceRules(): any /*Array<NonResourcePolicyRule>*/ {
+    _nonResourceRules: Array<NonResourcePolicyRule>;
+    get nonResourceRules(): Array<NonResourcePolicyRule> {
         return this._nonResourceRules
     }
-    set nonResourceRules(x: any /*Array<NonResourcePolicyRule>*/) {
+    set nonResourceRules(x: Array<NonResourcePolicyRule>) {
         this._nonResourceRules = this.set(this.nonResourceRules, x)
     }
-    setNonResourceRules(x: any /*Array<NonResourcePolicyRule>*/) {
+    $NonResourceRules(x: Array<NonResourcePolicyRule>) {
         this.nonResourceRules = x; return this
     }
 
-    _resourceRules: any;
-    get resourceRules(): any /*Array<ResourcePolicyRule>*/ {
+    _resourceRules: Array<ResourcePolicyRule>;
+    get resourceRules(): Array<ResourcePolicyRule> {
         return this._resourceRules
     }
-    set resourceRules(x: any /*Array<ResourcePolicyRule>*/) {
+    set resourceRules(x: Array<ResourcePolicyRule>) {
         this._resourceRules = this.set(this.resourceRules, x)
     }
-    setResourceRules(x: any /*Array<ResourcePolicyRule>*/) {
+    $ResourceRules(x: Array<ResourcePolicyRule>) {
         this.resourceRules = x; return this
     }
 
-    _subjects: any;
-    get subjects(): any /*Array<Subject>*/ {
+    _subjects: Array<Subject>;
+    get subjects(): Array<Subject> {
         return this._subjects
     }
-    set subjects(x: any /*Array<Subject>*/) {
+    set subjects(x: Array<Subject>) {
         this._subjects = this.set(this.subjects, x)
     }
-    setSubjects(x: any /*Array<Subject>*/) {
+    $Subjects(x: Array<Subject>) {
         this.subjects = x; return this
     }
 }
 
 export interface PriorityLevelConfigurationHelper extends PriorityLevelConfiguration {
-    $metadata(x: any): any;
-    $spec(x: any): any;
-    $status(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): PriorityLevelConfigurationHelper;
+    spec: PriorityLevelConfigurationSpecHelper;
+    $spec(x: PriorityLevelConfigurationSpecHelper): PriorityLevelConfigurationHelper;
+    status: PriorityLevelConfigurationStatusHelper;
+    $status(x: PriorityLevelConfigurationStatusHelper): PriorityLevelConfigurationHelper;
 }
 
 /** PriorityLevelConfiguration represents the configuration of a priority level. */
@@ -437,46 +448,46 @@ export class PriorityLevelConfigurationHelper extends ResourceTemplate implement
         super(nameOrObject, namespace, PriorityLevelConfigurationHelper.kind, PriorityLevelConfigurationHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*PriorityLevelConfigurationSpecHelper*/ {
+    _spec: PriorityLevelConfigurationSpecHelper;
+    get spec(): PriorityLevelConfigurationSpecHelper {
         return this._spec
     }
-    set spec(x: any /*PriorityLevelConfigurationSpecHelper*/) {
+    set spec(x: PriorityLevelConfigurationSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*PriorityLevelConfigurationSpecHelper*/) {
+    $Spec(x: PriorityLevelConfigurationSpecHelper) {
         this.spec = x; return this
     }
 
-    _status: any;
-    get status(): any /*PriorityLevelConfigurationStatusHelper*/ {
+    _status: PriorityLevelConfigurationStatusHelper;
+    get status(): PriorityLevelConfigurationStatusHelper {
         return this._status
     }
-    set status(x: any /*PriorityLevelConfigurationStatusHelper*/) {
+    set status(x: PriorityLevelConfigurationStatusHelper) {
         this._status = x
     }
-    setStatus(x: any /*PriorityLevelConfigurationStatusHelper*/) {
+    $Status(x: PriorityLevelConfigurationStatusHelper) {
         this.status = x; return this
     }
 }
 
 export interface PriorityLevelConfigurationConditionHelper extends PriorityLevelConfigurationCondition {
-    $lastTransitionTime(x: any): any;
-    $message(x: any): any;
-    $reason(x: any): any;
-    $status(x: any): any;
-    $type(x: any): any;
+    $lastTransitionTime(x: Time): PriorityLevelConfigurationConditionHelper;
+    $message(x: string): PriorityLevelConfigurationConditionHelper;
+    $reason(x: string): PriorityLevelConfigurationConditionHelper;
+    $status(x: string): PriorityLevelConfigurationConditionHelper;
+    $type(x: string): PriorityLevelConfigurationConditionHelper;
 }
 
 /** PriorityLevelConfigurationCondition defines the condition of priority level. */
@@ -485,65 +496,66 @@ export class PriorityLevelConfigurationConditionHelper extends Template implemen
         super(obj)
     }
 
-    _lastTransitionTime: any;
-    get lastTransitionTime(): any /*Time*/ {
+    _lastTransitionTime: Time;
+    get lastTransitionTime(): Time {
         return this._lastTransitionTime
     }
-    set lastTransitionTime(x: any /*Time*/) {
+    set lastTransitionTime(x: Time) {
         this._lastTransitionTime = x
     }
-    setLastTransitionTime(x: any /*Time*/) {
+    $LastTransitionTime(x: Time) {
         this.lastTransitionTime = x; return this
     }
 
-    _message: any;
-    get message(): any /*string*/ {
+    _message: string;
+    get message(): string {
         return this._message
     }
-    set message(x: any /*string*/) {
+    set message(x: string) {
         this._message = x
     }
-    setMessage(x: any /*string*/) {
+    $Message(x: string) {
         this.message = x; return this
     }
 
-    _reason: any;
-    get reason(): any /*string*/ {
+    _reason: string;
+    get reason(): string {
         return this._reason
     }
-    set reason(x: any /*string*/) {
+    set reason(x: string) {
         this._reason = x
     }
-    setReason(x: any /*string*/) {
+    $Reason(x: string) {
         this.reason = x; return this
     }
 
-    _status: any;
-    get status(): any /*string*/ {
+    _status: string;
+    get status(): string {
         return this._status
     }
-    set status(x: any /*string*/) {
+    set status(x: string) {
         this._status = x
     }
-    setStatus(x: any /*string*/) {
+    $Status(x: string) {
         this.status = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }
 
 export interface PriorityLevelConfigurationListHelper extends PriorityLevelConfigurationList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<PriorityLevelConfiguration>): PriorityLevelConfigurationListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): PriorityLevelConfigurationListHelper;
 }
 
 /** PriorityLevelConfigurationList is a list of PriorityLevelConfiguration objects. */
@@ -555,25 +567,25 @@ export class PriorityLevelConfigurationListHelper extends ResourceTemplate imple
         super(nameOrObject, namespace, PriorityLevelConfigurationListHelper.kind, PriorityLevelConfigurationListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<PriorityLevelConfiguration>*/ {
+    _items: Array<PriorityLevelConfiguration>;
+    get items(): Array<PriorityLevelConfiguration> {
         return this._items
     }
-    set items(x: any /*Array<PriorityLevelConfiguration>*/) {
+    set items(x: Array<PriorityLevelConfiguration>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<PriorityLevelConfiguration>*/) {
+    $Items(x: Array<PriorityLevelConfiguration>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
@@ -589,8 +601,9 @@ export class PriorityLevelConfigurationReferenceHelper extends Template implemen
 }
 
 export interface PriorityLevelConfigurationSpecHelper extends PriorityLevelConfigurationSpec {
-    $limited(x: any): any;
-    $type(x: any): any;
+    limited: LimitedPriorityLevelConfigurationHelper;
+    $limited(x: LimitedPriorityLevelConfigurationHelper): PriorityLevelConfigurationSpecHelper;
+    $type(x: string): PriorityLevelConfigurationSpecHelper;
 }
 
 /** PriorityLevelConfigurationSpec specifies the configuration of a priority level. */
@@ -599,31 +612,31 @@ export class PriorityLevelConfigurationSpecHelper extends Template implements Pr
         super(obj)
     }
 
-    _limited: any;
-    get limited(): any /*LimitedPriorityLevelConfigurationHelper*/ {
+    _limited: LimitedPriorityLevelConfigurationHelper;
+    get limited(): LimitedPriorityLevelConfigurationHelper {
         return this._limited
     }
-    set limited(x: any /*LimitedPriorityLevelConfigurationHelper*/) {
+    set limited(x: LimitedPriorityLevelConfigurationHelper) {
         this._limited = x
     }
-    setLimited(x: any /*LimitedPriorityLevelConfigurationHelper*/) {
+    $Limited(x: LimitedPriorityLevelConfigurationHelper) {
         this.limited = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }
 
 export interface PriorityLevelConfigurationStatusHelper extends PriorityLevelConfigurationStatus {
-    $conditions(x: any): any;
+    $conditions(x: Array<PriorityLevelConfigurationCondition>): PriorityLevelConfigurationStatusHelper;
 }
 
 /** PriorityLevelConfigurationStatus represents the current state of a "request-priority". */
@@ -632,22 +645,22 @@ export class PriorityLevelConfigurationStatusHelper extends Template implements 
         super(obj)
     }
 
-    _conditions: any;
-    get conditions(): any /*Array<PriorityLevelConfigurationCondition>*/ {
+    _conditions: Array<PriorityLevelConfigurationCondition>;
+    get conditions(): Array<PriorityLevelConfigurationCondition> {
         return this._conditions
     }
-    set conditions(x: any /*Array<PriorityLevelConfigurationCondition>*/) {
+    set conditions(x: Array<PriorityLevelConfigurationCondition>) {
         this._conditions = this.set(this.conditions, x)
     }
-    setConditions(x: any /*Array<PriorityLevelConfigurationCondition>*/) {
+    $Conditions(x: Array<PriorityLevelConfigurationCondition>) {
         this.conditions = x; return this
     }
 }
 
 export interface QueuingConfigurationHelper extends QueuingConfiguration {
-    $handSize(x: any): any;
-    $queueLengthLimit(x: any): any;
-    $queues(x: any): any;
+    $handSize(x: number): QueuingConfigurationHelper;
+    $queueLengthLimit(x: number): QueuingConfigurationHelper;
+    $queues(x: number): QueuingConfigurationHelper;
 }
 
 /** QueuingConfiguration holds the configuration parameters for queuing */
@@ -656,46 +669,46 @@ export class QueuingConfigurationHelper extends Template implements QueuingConfi
         super(obj)
     }
 
-    _handSize: any;
-    get handSize(): any /*number*/ {
+    _handSize: number;
+    get handSize(): number {
         return this._handSize
     }
-    set handSize(x: any /*number*/) {
+    set handSize(x: number) {
         this._handSize = x
     }
-    setHandSize(x: any /*number*/) {
+    $HandSize(x: number) {
         this.handSize = x; return this
     }
 
-    _queueLengthLimit: any;
-    get queueLengthLimit(): any /*number*/ {
+    _queueLengthLimit: number;
+    get queueLengthLimit(): number {
         return this._queueLengthLimit
     }
-    set queueLengthLimit(x: any /*number*/) {
+    set queueLengthLimit(x: number) {
         this._queueLengthLimit = x
     }
-    setQueueLengthLimit(x: any /*number*/) {
+    $QueueLengthLimit(x: number) {
         this.queueLengthLimit = x; return this
     }
 
-    _queues: any;
-    get queues(): any /*number*/ {
+    _queues: number;
+    get queues(): number {
         return this._queues
     }
-    set queues(x: any /*number*/) {
+    set queues(x: number) {
         this._queues = x
     }
-    setQueues(x: any /*number*/) {
+    $Queues(x: number) {
         this.queues = x; return this
     }
 }
 
 export interface ResourcePolicyRuleHelper extends ResourcePolicyRule {
-    $apiGroups(x: any): any;
-    $clusterScope(x: any): any;
-    $namespaces(x: any): any;
-    $resources(x: any): any;
-    $verbs(x: any): any;
+    $apiGroups(x: Array<string>): ResourcePolicyRuleHelper;
+    $clusterScope(x: boolean): ResourcePolicyRuleHelper;
+    $namespaces(x: Array<string>): ResourcePolicyRuleHelper;
+    $resources(x: Array<string>): ResourcePolicyRuleHelper;
+    $verbs(x: Array<string>): ResourcePolicyRuleHelper;
 }
 
 /** ResourcePolicyRule is a predicate that matches some resource requests, testing the request's verb and the target resource. A ResourcePolicyRule matches a resource request if and only if: (a) at least one member of verbs matches the request, (b) at least one member of apiGroups matches the request, (c) at least one member of resources matches the request, and (d) least one member of namespaces matches the request. */
@@ -704,58 +717,58 @@ export class ResourcePolicyRuleHelper extends Template implements ResourcePolicy
         super(obj)
     }
 
-    _apiGroups: any;
-    get apiGroups(): any /*Array<string>*/ {
+    _apiGroups: Array<string>;
+    get apiGroups(): Array<string> {
         return this._apiGroups
     }
-    set apiGroups(x: any /*Array<string>*/) {
+    set apiGroups(x: Array<string>) {
         this._apiGroups = this.set(this.apiGroups, x)
     }
-    setApiGroups(x: any /*Array<string>*/) {
+    $ApiGroups(x: Array<string>) {
         this.apiGroups = x; return this
     }
 
-    _clusterScope: any;
-    get clusterScope(): any /*boolean*/ {
+    _clusterScope: boolean;
+    get clusterScope(): boolean {
         return this._clusterScope
     }
-    set clusterScope(x: any /*boolean*/) {
+    set clusterScope(x: boolean) {
         this._clusterScope = x
     }
-    setClusterScope(x: any /*boolean*/) {
+    $ClusterScope(x: boolean) {
         this.clusterScope = x; return this
     }
 
-    _namespaces: any;
-    get namespaces(): any /*Array<string>*/ {
+    _namespaces: Array<string>;
+    get namespaces(): Array<string> {
         return this._namespaces
     }
-    set namespaces(x: any /*Array<string>*/) {
+    set namespaces(x: Array<string>) {
         this._namespaces = this.set(this.namespaces, x)
     }
-    setNamespaces(x: any /*Array<string>*/) {
+    $Namespaces(x: Array<string>) {
         this.namespaces = x; return this
     }
 
-    _resources: any;
-    get resources(): any /*Array<string>*/ {
+    _resources: Array<string>;
+    get resources(): Array<string> {
         return this._resources
     }
-    set resources(x: any /*Array<string>*/) {
+    set resources(x: Array<string>) {
         this._resources = this.set(this.resources, x)
     }
-    setResources(x: any /*Array<string>*/) {
+    $Resources(x: Array<string>) {
         this.resources = x; return this
     }
 
-    _verbs: any;
-    get verbs(): any /*Array<string>*/ {
+    _verbs: Array<string>;
+    get verbs(): Array<string> {
         return this._verbs
     }
-    set verbs(x: any /*Array<string>*/) {
+    set verbs(x: Array<string>) {
         this._verbs = this.set(this.verbs, x)
     }
-    setVerbs(x: any /*Array<string>*/) {
+    $Verbs(x: Array<string>) {
         this.verbs = x; return this
     }
 }
@@ -771,9 +784,12 @@ export class ServiceAccountSubjectHelper extends Template implements ServiceAcco
 }
 
 export interface SubjectHelper extends Subject {
-    $group(x: any): any;
-    $serviceAccount(x: any): any;
-    $user(x: any): any;
+    group: GroupSubjectHelper;
+    $group(x: GroupSubjectHelper): SubjectHelper;
+    serviceAccount: ServiceAccountSubjectHelper;
+    $serviceAccount(x: ServiceAccountSubjectHelper): SubjectHelper;
+    user: UserSubjectHelper;
+    $user(x: UserSubjectHelper): SubjectHelper;
 }
 
 /** Subject matches the originator of a request, as identified by the request authentication system. There are three ways of matching an originator; by user, group, or service account. */
@@ -782,36 +798,36 @@ export class SubjectHelper extends Template implements SubjectHelper {
         super(obj)
     }
 
-    _group: any;
-    get group(): any /*GroupSubjectHelper*/ {
+    _group: GroupSubjectHelper;
+    get group(): GroupSubjectHelper {
         return this._group
     }
-    set group(x: any /*GroupSubjectHelper*/) {
+    set group(x: GroupSubjectHelper) {
         this._group = x
     }
-    setGroup(x: any /*GroupSubjectHelper*/) {
+    $Group(x: GroupSubjectHelper) {
         this.group = x; return this
     }
 
-    _serviceAccount: any;
-    get serviceAccount(): any /*ServiceAccountSubjectHelper*/ {
+    _serviceAccount: ServiceAccountSubjectHelper;
+    get serviceAccount(): ServiceAccountSubjectHelper {
         return this._serviceAccount
     }
-    set serviceAccount(x: any /*ServiceAccountSubjectHelper*/) {
+    set serviceAccount(x: ServiceAccountSubjectHelper) {
         this._serviceAccount = x
     }
-    setServiceAccount(x: any /*ServiceAccountSubjectHelper*/) {
+    $ServiceAccount(x: ServiceAccountSubjectHelper) {
         this.serviceAccount = x; return this
     }
 
-    _user: any;
-    get user(): any /*UserSubjectHelper*/ {
+    _user: UserSubjectHelper;
+    get user(): UserSubjectHelper {
         return this._user
     }
-    set user(x: any /*UserSubjectHelper*/) {
+    set user(x: UserSubjectHelper) {
         this._user = x
     }
-    setUser(x: any /*UserSubjectHelper*/) {
+    $User(x: UserSubjectHelper) {
         this.user = x; return this
     }
 }

@@ -2,15 +2,15 @@ import { ResourceTemplate, Template } from "./resourceTemplate";
 import { Info } from "./version";
 
 export interface InfoHelper extends Info {
-    $buildDate(x: any): any;
-    $compiler(x: any): any;
-    $gitCommit(x: any): any;
-    $gitTreeState(x: any): any;
-    $gitVersion(x: any): any;
-    $goVersion(x: any): any;
-    $major(x: any): any;
-    $minor(x: any): any;
-    $platform(x: any): any;
+    $buildDate(x: string): InfoHelper;
+    $compiler(x: string): InfoHelper;
+    $gitCommit(x: string): InfoHelper;
+    $gitTreeState(x: string): InfoHelper;
+    $gitVersion(x: string): InfoHelper;
+    $goVersion(x: string): InfoHelper;
+    $major(x: string): InfoHelper;
+    $minor(x: string): InfoHelper;
+    $platform(x: string): InfoHelper;
 }
 
 /** Info contains versioning information. how we'll want to distribute that information. */
@@ -19,102 +19,102 @@ export class InfoHelper extends Template implements InfoHelper {
         super(obj)
     }
 
-    _buildDate: any;
-    get buildDate(): any /*string*/ {
+    _buildDate: string;
+    get buildDate(): string {
         return this._buildDate
     }
-    set buildDate(x: any /*string*/) {
+    set buildDate(x: string) {
         this._buildDate = x
     }
-    setBuildDate(x: any /*string*/) {
+    $BuildDate(x: string) {
         this.buildDate = x; return this
     }
 
-    _compiler: any;
-    get compiler(): any /*string*/ {
+    _compiler: string;
+    get compiler(): string {
         return this._compiler
     }
-    set compiler(x: any /*string*/) {
+    set compiler(x: string) {
         this._compiler = x
     }
-    setCompiler(x: any /*string*/) {
+    $Compiler(x: string) {
         this.compiler = x; return this
     }
 
-    _gitCommit: any;
-    get gitCommit(): any /*string*/ {
+    _gitCommit: string;
+    get gitCommit(): string {
         return this._gitCommit
     }
-    set gitCommit(x: any /*string*/) {
+    set gitCommit(x: string) {
         this._gitCommit = x
     }
-    setGitCommit(x: any /*string*/) {
+    $GitCommit(x: string) {
         this.gitCommit = x; return this
     }
 
-    _gitTreeState: any;
-    get gitTreeState(): any /*string*/ {
+    _gitTreeState: string;
+    get gitTreeState(): string {
         return this._gitTreeState
     }
-    set gitTreeState(x: any /*string*/) {
+    set gitTreeState(x: string) {
         this._gitTreeState = x
     }
-    setGitTreeState(x: any /*string*/) {
+    $GitTreeState(x: string) {
         this.gitTreeState = x; return this
     }
 
-    _gitVersion: any;
-    get gitVersion(): any /*string*/ {
+    _gitVersion: string;
+    get gitVersion(): string {
         return this._gitVersion
     }
-    set gitVersion(x: any /*string*/) {
+    set gitVersion(x: string) {
         this._gitVersion = x
     }
-    setGitVersion(x: any /*string*/) {
+    $GitVersion(x: string) {
         this.gitVersion = x; return this
     }
 
-    _goVersion: any;
-    get goVersion(): any /*string*/ {
+    _goVersion: string;
+    get goVersion(): string {
         return this._goVersion
     }
-    set goVersion(x: any /*string*/) {
+    set goVersion(x: string) {
         this._goVersion = x
     }
-    setGoVersion(x: any /*string*/) {
+    $GoVersion(x: string) {
         this.goVersion = x; return this
     }
 
-    _major: any;
-    get major(): any /*string*/ {
+    _major: string;
+    get major(): string {
         return this._major
     }
-    set major(x: any /*string*/) {
+    set major(x: string) {
         this._major = x
     }
-    setMajor(x: any /*string*/) {
+    $Major(x: string) {
         this.major = x; return this
     }
 
-    _minor: any;
-    get minor(): any /*string*/ {
+    _minor: string;
+    get minor(): string {
         return this._minor
     }
-    set minor(x: any /*string*/) {
+    set minor(x: string) {
         this._minor = x
     }
-    setMinor(x: any /*string*/) {
+    $Minor(x: string) {
         this.minor = x; return this
     }
 
-    _platform: any;
-    get platform(): any /*string*/ {
+    _platform: string;
+    get platform(): string {
         return this._platform
     }
-    set platform(x: any /*string*/) {
+    set platform(x: string) {
         this._platform = x
     }
-    setPlatform(x: any /*string*/) {
+    $Platform(x: string) {
         this.platform = x; return this
     }
 }

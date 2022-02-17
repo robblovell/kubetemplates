@@ -3,9 +3,12 @@ import { CertificateSigningRequest, CertificateSigningRequestCondition, Certific
 import { ListMeta, ObjectMeta, Time } from "../meta/v1";
 
 export interface CertificateSigningRequestHelper extends CertificateSigningRequest {
-    $metadata(x: any): any;
-    $spec(x: any): any;
-    $status(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): CertificateSigningRequestHelper;
+    spec: CertificateSigningRequestSpecHelper;
+    $spec(x: CertificateSigningRequestSpecHelper): CertificateSigningRequestHelper;
+    status: CertificateSigningRequestStatusHelper;
+    $status(x: CertificateSigningRequestStatusHelper): CertificateSigningRequestHelper;
 }
 
 /**
@@ -25,47 +28,47 @@ export class CertificateSigningRequestHelper extends ResourceTemplate implements
         super(nameOrObject, namespace, CertificateSigningRequestHelper.kind, CertificateSigningRequestHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*CertificateSigningRequestSpecHelper*/ {
+    _spec: CertificateSigningRequestSpecHelper;
+    get spec(): CertificateSigningRequestSpecHelper {
         return this._spec
     }
-    set spec(x: any /*CertificateSigningRequestSpecHelper*/) {
+    set spec(x: CertificateSigningRequestSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*CertificateSigningRequestSpecHelper*/) {
+    $Spec(x: CertificateSigningRequestSpecHelper) {
         this.spec = x; return this
     }
 
-    _status: any;
-    get status(): any /*CertificateSigningRequestStatusHelper*/ {
+    _status: CertificateSigningRequestStatusHelper;
+    get status(): CertificateSigningRequestStatusHelper {
         return this._status
     }
-    set status(x: any /*CertificateSigningRequestStatusHelper*/) {
+    set status(x: CertificateSigningRequestStatusHelper) {
         this._status = x
     }
-    setStatus(x: any /*CertificateSigningRequestStatusHelper*/) {
+    $Status(x: CertificateSigningRequestStatusHelper) {
         this.status = x; return this
     }
 }
 
 export interface CertificateSigningRequestConditionHelper extends CertificateSigningRequestCondition {
-    $lastTransitionTime(x: any): any;
-    $lastUpdateTime(x: any): any;
-    $message(x: any): any;
-    $reason(x: any): any;
-    $status(x: any): any;
-    $type(x: any): any;
+    $lastTransitionTime(x: Time): CertificateSigningRequestConditionHelper;
+    $lastUpdateTime(x: Time): CertificateSigningRequestConditionHelper;
+    $message(x: string): CertificateSigningRequestConditionHelper;
+    $reason(x: string): CertificateSigningRequestConditionHelper;
+    $status(x: string): CertificateSigningRequestConditionHelper;
+    $type(x: string): CertificateSigningRequestConditionHelper;
 }
 
 /** CertificateSigningRequestCondition describes a condition of a CertificateSigningRequest object */
@@ -74,76 +77,77 @@ export class CertificateSigningRequestConditionHelper extends Template implement
         super(obj)
     }
 
-    _lastTransitionTime: any;
-    get lastTransitionTime(): any /*Time*/ {
+    _lastTransitionTime: Time;
+    get lastTransitionTime(): Time {
         return this._lastTransitionTime
     }
-    set lastTransitionTime(x: any /*Time*/) {
+    set lastTransitionTime(x: Time) {
         this._lastTransitionTime = x
     }
-    setLastTransitionTime(x: any /*Time*/) {
+    $LastTransitionTime(x: Time) {
         this.lastTransitionTime = x; return this
     }
 
-    _lastUpdateTime: any;
-    get lastUpdateTime(): any /*Time*/ {
+    _lastUpdateTime: Time;
+    get lastUpdateTime(): Time {
         return this._lastUpdateTime
     }
-    set lastUpdateTime(x: any /*Time*/) {
+    set lastUpdateTime(x: Time) {
         this._lastUpdateTime = x
     }
-    setLastUpdateTime(x: any /*Time*/) {
+    $LastUpdateTime(x: Time) {
         this.lastUpdateTime = x; return this
     }
 
-    _message: any;
-    get message(): any /*string*/ {
+    _message: string;
+    get message(): string {
         return this._message
     }
-    set message(x: any /*string*/) {
+    set message(x: string) {
         this._message = x
     }
-    setMessage(x: any /*string*/) {
+    $Message(x: string) {
         this.message = x; return this
     }
 
-    _reason: any;
-    get reason(): any /*string*/ {
+    _reason: string;
+    get reason(): string {
         return this._reason
     }
-    set reason(x: any /*string*/) {
+    set reason(x: string) {
         this._reason = x
     }
-    setReason(x: any /*string*/) {
+    $Reason(x: string) {
         this.reason = x; return this
     }
 
-    _status: any;
-    get status(): any /*string*/ {
+    _status: string;
+    get status(): string {
         return this._status
     }
-    set status(x: any /*string*/) {
+    set status(x: string) {
         this._status = x
     }
-    setStatus(x: any /*string*/) {
+    $Status(x: string) {
         this.status = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }
 
 export interface CertificateSigningRequestListHelper extends CertificateSigningRequestList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<CertificateSigningRequest>): CertificateSigningRequestListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): CertificateSigningRequestListHelper;
 }
 
 /** CertificateSigningRequestList is a collection of CertificateSigningRequest objects */
@@ -155,37 +159,37 @@ export class CertificateSigningRequestListHelper extends ResourceTemplate implem
         super(nameOrObject, namespace, CertificateSigningRequestListHelper.kind, CertificateSigningRequestListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<CertificateSigningRequest>*/ {
+    _items: Array<CertificateSigningRequest>;
+    get items(): Array<CertificateSigningRequest> {
         return this._items
     }
-    set items(x: any /*Array<CertificateSigningRequest>*/) {
+    set items(x: Array<CertificateSigningRequest>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<CertificateSigningRequest>*/) {
+    $Items(x: Array<CertificateSigningRequest>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface CertificateSigningRequestSpecHelper extends CertificateSigningRequestSpec {
-    $extra(x: any): any;
-    $groups(x: any): any;
-    $request(x: any): any;
-    $signerName(x: any): any;
-    $uid(x: any): any;
-    $usages(x: any): any;
-    $username(x: any): any;
+    $extra(x: {[name: string]: Array<string>}): CertificateSigningRequestSpecHelper;
+    $groups(x: Array<string>): CertificateSigningRequestSpecHelper;
+    $request(x: string): CertificateSigningRequestSpecHelper;
+    $signerName(x: string): CertificateSigningRequestSpecHelper;
+    $uid(x: string): CertificateSigningRequestSpecHelper;
+    $usages(x: Array<string>): CertificateSigningRequestSpecHelper;
+    $username(x: string): CertificateSigningRequestSpecHelper;
 }
 
 /** CertificateSigningRequestSpec contains the certificate request. */
@@ -194,87 +198,87 @@ export class CertificateSigningRequestSpecHelper extends Template implements Cer
         super(obj)
     }
 
-    _extra: any;
-    get extra(): any /*{[name: string]: Array<string>}Helper*/ {
+    _extra: {[name: string]: Array<string>};
+    get extra(): {[name: string]: Array<string>} {
         return this._extra
     }
-    set extra(x: any /*{[name: string]: Array<string>}Helper*/) {
+    set extra(x: {[name: string]: Array<string>}) {
         this._extra = this.set(this.extra, x)
     }
-    setExtra(x: any /*{[name: string]: Array<string>}Helper*/) {
+    $Extra(x: {[name: string]: Array<string>}) {
         this.extra = x; return this
     }
 
-    _groups: any;
-    get groups(): any /*Array<string>*/ {
+    _groups: Array<string>;
+    get groups(): Array<string> {
         return this._groups
     }
-    set groups(x: any /*Array<string>*/) {
+    set groups(x: Array<string>) {
         this._groups = this.set(this.groups, x)
     }
-    setGroups(x: any /*Array<string>*/) {
+    $Groups(x: Array<string>) {
         this.groups = x; return this
     }
 
-    _request: any;
-    get request(): any /*string*/ {
+    _request: string;
+    get request(): string {
         return this._request
     }
-    set request(x: any /*string*/) {
+    set request(x: string) {
         this._request = x
     }
-    setRequest(x: any /*string*/) {
+    $Request(x: string) {
         this.request = x; return this
     }
 
-    _signerName: any;
-    get signerName(): any /*string*/ {
+    _signerName: string;
+    get signerName(): string {
         return this._signerName
     }
-    set signerName(x: any /*string*/) {
+    set signerName(x: string) {
         this._signerName = x
     }
-    setSignerName(x: any /*string*/) {
+    $SignerName(x: string) {
         this.signerName = x; return this
     }
 
-    _uid: any;
-    get uid(): any /*string*/ {
+    _uid: string;
+    get uid(): string {
         return this._uid
     }
-    set uid(x: any /*string*/) {
+    set uid(x: string) {
         this._uid = x
     }
-    setUid(x: any /*string*/) {
+    $Uid(x: string) {
         this.uid = x; return this
     }
 
-    _usages: any;
-    get usages(): any /*Array<string>*/ {
+    _usages: Array<string>;
+    get usages(): Array<string> {
         return this._usages
     }
-    set usages(x: any /*Array<string>*/) {
+    set usages(x: Array<string>) {
         this._usages = this.set(this.usages, x)
     }
-    setUsages(x: any /*Array<string>*/) {
+    $Usages(x: Array<string>) {
         this.usages = x; return this
     }
 
-    _username: any;
-    get username(): any /*string*/ {
+    _username: string;
+    get username(): string {
         return this._username
     }
-    set username(x: any /*string*/) {
+    set username(x: string) {
         this._username = x
     }
-    setUsername(x: any /*string*/) {
+    $Username(x: string) {
         this.username = x; return this
     }
 }
 
 export interface CertificateSigningRequestStatusHelper extends CertificateSigningRequestStatus {
-    $certificate(x: any): any;
-    $conditions(x: any): any;
+    $certificate(x: string): CertificateSigningRequestStatusHelper;
+    $conditions(x: Array<CertificateSigningRequestCondition>): CertificateSigningRequestStatusHelper;
 }
 
 /** CertificateSigningRequestStatus contains conditions used to indicate approved/denied/failed status of the request, and the issued certificate. */
@@ -283,25 +287,25 @@ export class CertificateSigningRequestStatusHelper extends Template implements C
         super(obj)
     }
 
-    _certificate: any;
-    get certificate(): any /*string*/ {
+    _certificate: string;
+    get certificate(): string {
         return this._certificate
     }
-    set certificate(x: any /*string*/) {
+    set certificate(x: string) {
         this._certificate = x
     }
-    setCertificate(x: any /*string*/) {
+    $Certificate(x: string) {
         this.certificate = x; return this
     }
 
-    _conditions: any;
-    get conditions(): any /*Array<CertificateSigningRequestCondition>*/ {
+    _conditions: Array<CertificateSigningRequestCondition>;
+    get conditions(): Array<CertificateSigningRequestCondition> {
         return this._conditions
     }
-    set conditions(x: any /*Array<CertificateSigningRequestCondition>*/) {
+    set conditions(x: Array<CertificateSigningRequestCondition>) {
         this._conditions = this.set(this.conditions, x)
     }
-    setConditions(x: any /*Array<CertificateSigningRequestCondition>*/) {
+    $Conditions(x: Array<CertificateSigningRequestCondition>) {
         this.conditions = x; return this
     }
 }

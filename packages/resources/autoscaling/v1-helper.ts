@@ -13,9 +13,12 @@ export class CrossVersionObjectReferenceHelper extends Template implements Cross
 }
 
 export interface HorizontalPodAutoscalerHelper extends HorizontalPodAutoscaler {
-    $metadata(x: any): any;
-    $spec(x: any): any;
-    $status(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): HorizontalPodAutoscalerHelper;
+    spec: HorizontalPodAutoscalerSpecHelper;
+    $spec(x: HorizontalPodAutoscalerSpecHelper): HorizontalPodAutoscalerHelper;
+    status: HorizontalPodAutoscalerStatusHelper;
+    $status(x: HorizontalPodAutoscalerStatusHelper): HorizontalPodAutoscalerHelper;
 }
 
 /** configuration of a horizontal pod autoscaler. */
@@ -27,43 +30,44 @@ export class HorizontalPodAutoscalerHelper extends ResourceTemplate implements H
         super(nameOrObject, namespace, HorizontalPodAutoscalerHelper.kind, HorizontalPodAutoscalerHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*HorizontalPodAutoscalerSpecHelper*/ {
+    _spec: HorizontalPodAutoscalerSpecHelper;
+    get spec(): HorizontalPodAutoscalerSpecHelper {
         return this._spec
     }
-    set spec(x: any /*HorizontalPodAutoscalerSpecHelper*/) {
+    set spec(x: HorizontalPodAutoscalerSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*HorizontalPodAutoscalerSpecHelper*/) {
+    $Spec(x: HorizontalPodAutoscalerSpecHelper) {
         this.spec = x; return this
     }
 
-    _status: any;
-    get status(): any /*HorizontalPodAutoscalerStatusHelper*/ {
+    _status: HorizontalPodAutoscalerStatusHelper;
+    get status(): HorizontalPodAutoscalerStatusHelper {
         return this._status
     }
-    set status(x: any /*HorizontalPodAutoscalerStatusHelper*/) {
+    set status(x: HorizontalPodAutoscalerStatusHelper) {
         this._status = x
     }
-    setStatus(x: any /*HorizontalPodAutoscalerStatusHelper*/) {
+    $Status(x: HorizontalPodAutoscalerStatusHelper) {
         this.status = x; return this
     }
 }
 
 export interface HorizontalPodAutoscalerListHelper extends HorizontalPodAutoscalerList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<HorizontalPodAutoscaler>): HorizontalPodAutoscalerListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): HorizontalPodAutoscalerListHelper;
 }
 
 /** list of horizontal pod autoscaler objects. */
@@ -75,34 +79,35 @@ export class HorizontalPodAutoscalerListHelper extends ResourceTemplate implemen
         super(nameOrObject, namespace, HorizontalPodAutoscalerListHelper.kind, HorizontalPodAutoscalerListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<HorizontalPodAutoscaler>*/ {
+    _items: Array<HorizontalPodAutoscaler>;
+    get items(): Array<HorizontalPodAutoscaler> {
         return this._items
     }
-    set items(x: any /*Array<HorizontalPodAutoscaler>*/) {
+    set items(x: Array<HorizontalPodAutoscaler>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<HorizontalPodAutoscaler>*/) {
+    $Items(x: Array<HorizontalPodAutoscaler>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface HorizontalPodAutoscalerSpecHelper extends HorizontalPodAutoscalerSpec {
-    $maxReplicas(x: any): any;
-    $minReplicas(x: any): any;
-    $scaleTargetRef(x: any): any;
-    $targetCPUUtilizationPercentage(x: any): any;
+    $maxReplicas(x: number): HorizontalPodAutoscalerSpecHelper;
+    $minReplicas(x: number): HorizontalPodAutoscalerSpecHelper;
+    scaleTargetRef: CrossVersionObjectReferenceHelper;
+    $scaleTargetRef(x: CrossVersionObjectReferenceHelper): HorizontalPodAutoscalerSpecHelper;
+    $targetCPUUtilizationPercentage(x: number): HorizontalPodAutoscalerSpecHelper;
 }
 
 /** specification of a horizontal pod autoscaler. */
@@ -111,57 +116,57 @@ export class HorizontalPodAutoscalerSpecHelper extends Template implements Horiz
         super(obj)
     }
 
-    _maxReplicas: any;
-    get maxReplicas(): any /*number*/ {
+    _maxReplicas: number;
+    get maxReplicas(): number {
         return this._maxReplicas
     }
-    set maxReplicas(x: any /*number*/) {
+    set maxReplicas(x: number) {
         this._maxReplicas = x
     }
-    setMaxReplicas(x: any /*number*/) {
+    $MaxReplicas(x: number) {
         this.maxReplicas = x; return this
     }
 
-    _minReplicas: any;
-    get minReplicas(): any /*number*/ {
+    _minReplicas: number;
+    get minReplicas(): number {
         return this._minReplicas
     }
-    set minReplicas(x: any /*number*/) {
+    set minReplicas(x: number) {
         this._minReplicas = x
     }
-    setMinReplicas(x: any /*number*/) {
+    $MinReplicas(x: number) {
         this.minReplicas = x; return this
     }
 
-    _scaleTargetRef: any;
-    get scaleTargetRef(): any /*CrossVersionObjectReferenceHelper*/ {
+    _scaleTargetRef: CrossVersionObjectReferenceHelper;
+    get scaleTargetRef(): CrossVersionObjectReferenceHelper {
         return this._scaleTargetRef
     }
-    set scaleTargetRef(x: any /*CrossVersionObjectReferenceHelper*/) {
+    set scaleTargetRef(x: CrossVersionObjectReferenceHelper) {
         this._scaleTargetRef = x
     }
-    setScaleTargetRef(x: any /*CrossVersionObjectReferenceHelper*/) {
+    $ScaleTargetRef(x: CrossVersionObjectReferenceHelper) {
         this.scaleTargetRef = x; return this
     }
 
-    _targetCPUUtilizationPercentage: any;
-    get targetCPUUtilizationPercentage(): any /*number*/ {
+    _targetCPUUtilizationPercentage: number;
+    get targetCPUUtilizationPercentage(): number {
         return this._targetCPUUtilizationPercentage
     }
-    set targetCPUUtilizationPercentage(x: any /*number*/) {
+    set targetCPUUtilizationPercentage(x: number) {
         this._targetCPUUtilizationPercentage = x
     }
-    setTargetCPUUtilizationPercentage(x: any /*number*/) {
+    $TargetCPUUtilizationPercentage(x: number) {
         this.targetCPUUtilizationPercentage = x; return this
     }
 }
 
 export interface HorizontalPodAutoscalerStatusHelper extends HorizontalPodAutoscalerStatus {
-    $currentCPUUtilizationPercentage(x: any): any;
-    $currentReplicas(x: any): any;
-    $desiredReplicas(x: any): any;
-    $lastScaleTime(x: any): any;
-    $observedGeneration(x: any): any;
+    $currentCPUUtilizationPercentage(x: number): HorizontalPodAutoscalerStatusHelper;
+    $currentReplicas(x: number): HorizontalPodAutoscalerStatusHelper;
+    $desiredReplicas(x: number): HorizontalPodAutoscalerStatusHelper;
+    $lastScaleTime(x: Time): HorizontalPodAutoscalerStatusHelper;
+    $observedGeneration(x: number): HorizontalPodAutoscalerStatusHelper;
 }
 
 /** current status of a horizontal pod autoscaler */
@@ -170,66 +175,69 @@ export class HorizontalPodAutoscalerStatusHelper extends Template implements Hor
         super(obj)
     }
 
-    _currentCPUUtilizationPercentage: any;
-    get currentCPUUtilizationPercentage(): any /*number*/ {
+    _currentCPUUtilizationPercentage: number;
+    get currentCPUUtilizationPercentage(): number {
         return this._currentCPUUtilizationPercentage
     }
-    set currentCPUUtilizationPercentage(x: any /*number*/) {
+    set currentCPUUtilizationPercentage(x: number) {
         this._currentCPUUtilizationPercentage = x
     }
-    setCurrentCPUUtilizationPercentage(x: any /*number*/) {
+    $CurrentCPUUtilizationPercentage(x: number) {
         this.currentCPUUtilizationPercentage = x; return this
     }
 
-    _currentReplicas: any;
-    get currentReplicas(): any /*number*/ {
+    _currentReplicas: number;
+    get currentReplicas(): number {
         return this._currentReplicas
     }
-    set currentReplicas(x: any /*number*/) {
+    set currentReplicas(x: number) {
         this._currentReplicas = x
     }
-    setCurrentReplicas(x: any /*number*/) {
+    $CurrentReplicas(x: number) {
         this.currentReplicas = x; return this
     }
 
-    _desiredReplicas: any;
-    get desiredReplicas(): any /*number*/ {
+    _desiredReplicas: number;
+    get desiredReplicas(): number {
         return this._desiredReplicas
     }
-    set desiredReplicas(x: any /*number*/) {
+    set desiredReplicas(x: number) {
         this._desiredReplicas = x
     }
-    setDesiredReplicas(x: any /*number*/) {
+    $DesiredReplicas(x: number) {
         this.desiredReplicas = x; return this
     }
 
-    _lastScaleTime: any;
-    get lastScaleTime(): any /*Time*/ {
+    _lastScaleTime: Time;
+    get lastScaleTime(): Time {
         return this._lastScaleTime
     }
-    set lastScaleTime(x: any /*Time*/) {
+    set lastScaleTime(x: Time) {
         this._lastScaleTime = x
     }
-    setLastScaleTime(x: any /*Time*/) {
+    $LastScaleTime(x: Time) {
         this.lastScaleTime = x; return this
     }
 
-    _observedGeneration: any;
-    get observedGeneration(): any /*number*/ {
+    _observedGeneration: number;
+    get observedGeneration(): number {
         return this._observedGeneration
     }
-    set observedGeneration(x: any /*number*/) {
+    set observedGeneration(x: number) {
         this._observedGeneration = x
     }
-    setObservedGeneration(x: any /*number*/) {
+    $ObservedGeneration(x: number) {
         this.observedGeneration = x; return this
     }
 }
 
 export interface ScaleHelper extends Scale {
-    $metadata(x: any): any;
-    $spec(x: any): any;
-    $status(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): ScaleHelper;
+    spec: ScaleSpecHelper;
+    $spec(x: ScaleSpecHelper): ScaleHelper;
+    status: ScaleStatusHelper;
+    $status(x: ScaleStatusHelper): ScaleHelper;
 }
 
 /** Scale represents a scaling request for a resource. */
@@ -241,42 +249,42 @@ export class ScaleHelper extends ResourceTemplate implements ScaleHelper {
         super(nameOrObject, namespace, ScaleHelper.kind, ScaleHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*ScaleSpecHelper*/ {
+    _spec: ScaleSpecHelper;
+    get spec(): ScaleSpecHelper {
         return this._spec
     }
-    set spec(x: any /*ScaleSpecHelper*/) {
+    set spec(x: ScaleSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*ScaleSpecHelper*/) {
+    $Spec(x: ScaleSpecHelper) {
         this.spec = x; return this
     }
 
-    _status: any;
-    get status(): any /*ScaleStatusHelper*/ {
+    _status: ScaleStatusHelper;
+    get status(): ScaleStatusHelper {
         return this._status
     }
-    set status(x: any /*ScaleStatusHelper*/) {
+    set status(x: ScaleStatusHelper) {
         this._status = x
     }
-    setStatus(x: any /*ScaleStatusHelper*/) {
+    $Status(x: ScaleStatusHelper) {
         this.status = x; return this
     }
 }
 
 export interface ScaleSpecHelper extends ScaleSpec {
-    $replicas(x: any): any;
+    $replicas(x: number): ScaleSpecHelper;
 }
 
 /** ScaleSpec describes the attributes of a scale subresource. */
@@ -285,21 +293,21 @@ export class ScaleSpecHelper extends Template implements ScaleSpecHelper {
         super(obj)
     }
 
-    _replicas: any;
-    get replicas(): any /*number*/ {
+    _replicas: number;
+    get replicas(): number {
         return this._replicas
     }
-    set replicas(x: any /*number*/) {
+    set replicas(x: number) {
         this._replicas = x
     }
-    setReplicas(x: any /*number*/) {
+    $Replicas(x: number) {
         this.replicas = x; return this
     }
 }
 
 export interface ScaleStatusHelper extends ScaleStatus {
-    $replicas(x: any): any;
-    $selector(x: any): any;
+    $replicas(x: number): ScaleStatusHelper;
+    $selector(x: string): ScaleStatusHelper;
 }
 
 /** ScaleStatus represents the current status of a scale subresource. */
@@ -308,25 +316,25 @@ export class ScaleStatusHelper extends Template implements ScaleStatusHelper {
         super(obj)
     }
 
-    _replicas: any;
-    get replicas(): any /*number*/ {
+    _replicas: number;
+    get replicas(): number {
         return this._replicas
     }
-    set replicas(x: any /*number*/) {
+    set replicas(x: number) {
         this._replicas = x
     }
-    setReplicas(x: any /*number*/) {
+    $Replicas(x: number) {
         this.replicas = x; return this
     }
 
-    _selector: any;
-    get selector(): any /*string*/ {
+    _selector: string;
+    get selector(): string {
         return this._selector
     }
-    set selector(x: any /*string*/) {
+    set selector(x: string) {
         this._selector = x
     }
-    setSelector(x: any /*string*/) {
+    $Selector(x: string) {
         this.selector = x; return this
     }
 }

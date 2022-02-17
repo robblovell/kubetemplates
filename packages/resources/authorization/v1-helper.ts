@@ -3,9 +3,12 @@ import { LocalSubjectAccessReview, NonResourceAttributes, NonResourceRule, Resou
 import { ObjectMeta } from "../meta/v1";
 
 export interface LocalSubjectAccessReviewHelper extends LocalSubjectAccessReview {
-    $metadata(x: any): any;
-    $spec(x: any): any;
-    $status(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): LocalSubjectAccessReviewHelper;
+    spec: SubjectAccessReviewSpecHelper;
+    $spec(x: SubjectAccessReviewSpecHelper): LocalSubjectAccessReviewHelper;
+    status: SubjectAccessReviewStatusHelper;
+    $status(x: SubjectAccessReviewStatusHelper): LocalSubjectAccessReviewHelper;
 }
 
 /** LocalSubjectAccessReview checks whether or not a user or group can perform an action in a given namespace. Having a namespace scoped resource makes it much easier to grant namespace scoped policy that includes permissions checking. */
@@ -17,43 +20,43 @@ export class LocalSubjectAccessReviewHelper extends ResourceTemplate implements 
         super(nameOrObject, namespace, LocalSubjectAccessReviewHelper.kind, LocalSubjectAccessReviewHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*SubjectAccessReviewSpecHelper*/ {
+    _spec: SubjectAccessReviewSpecHelper;
+    get spec(): SubjectAccessReviewSpecHelper {
         return this._spec
     }
-    set spec(x: any /*SubjectAccessReviewSpecHelper*/) {
+    set spec(x: SubjectAccessReviewSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*SubjectAccessReviewSpecHelper*/) {
+    $Spec(x: SubjectAccessReviewSpecHelper) {
         this.spec = x; return this
     }
 
-    _status: any;
-    get status(): any /*SubjectAccessReviewStatusHelper*/ {
+    _status: SubjectAccessReviewStatusHelper;
+    get status(): SubjectAccessReviewStatusHelper {
         return this._status
     }
-    set status(x: any /*SubjectAccessReviewStatusHelper*/) {
+    set status(x: SubjectAccessReviewStatusHelper) {
         this._status = x
     }
-    setStatus(x: any /*SubjectAccessReviewStatusHelper*/) {
+    $Status(x: SubjectAccessReviewStatusHelper) {
         this.status = x; return this
     }
 }
 
 export interface NonResourceAttributesHelper extends NonResourceAttributes {
-    $path(x: any): any;
-    $verb(x: any): any;
+    $path(x: string): NonResourceAttributesHelper;
+    $verb(x: string): NonResourceAttributesHelper;
 }
 
 /** NonResourceAttributes includes the authorization attributes available for non-resource requests to the Authorizer interface */
@@ -62,32 +65,32 @@ export class NonResourceAttributesHelper extends Template implements NonResource
         super(obj)
     }
 
-    _path: any;
-    get path(): any /*string*/ {
+    _path: string;
+    get path(): string {
         return this._path
     }
-    set path(x: any /*string*/) {
+    set path(x: string) {
         this._path = x
     }
-    setPath(x: any /*string*/) {
+    $Path(x: string) {
         this.path = x; return this
     }
 
-    _verb: any;
-    get verb(): any /*string*/ {
+    _verb: string;
+    get verb(): string {
         return this._verb
     }
-    set verb(x: any /*string*/) {
+    set verb(x: string) {
         this._verb = x
     }
-    setVerb(x: any /*string*/) {
+    $Verb(x: string) {
         this.verb = x; return this
     }
 }
 
 export interface NonResourceRuleHelper extends NonResourceRule {
-    $nonResourceURLs(x: any): any;
-    $verbs(x: any): any;
+    $nonResourceURLs(x: Array<string>): NonResourceRuleHelper;
+    $verbs(x: Array<string>): NonResourceRuleHelper;
 }
 
 /** NonResourceRule holds information that describes a rule for the non-resource */
@@ -96,35 +99,35 @@ export class NonResourceRuleHelper extends Template implements NonResourceRuleHe
         super(obj)
     }
 
-    _nonResourceURLs: any;
-    get nonResourceURLs(): any /*Array<string>*/ {
+    _nonResourceURLs: Array<string>;
+    get nonResourceURLs(): Array<string> {
         return this._nonResourceURLs
     }
-    set nonResourceURLs(x: any /*Array<string>*/) {
+    set nonResourceURLs(x: Array<string>) {
         this._nonResourceURLs = this.set(this.nonResourceURLs, x)
     }
-    setNonResourceURLs(x: any /*Array<string>*/) {
+    $NonResourceURLs(x: Array<string>) {
         this.nonResourceURLs = x; return this
     }
 
-    _verbs: any;
-    get verbs(): any /*Array<string>*/ {
+    _verbs: Array<string>;
+    get verbs(): Array<string> {
         return this._verbs
     }
-    set verbs(x: any /*Array<string>*/) {
+    set verbs(x: Array<string>) {
         this._verbs = this.set(this.verbs, x)
     }
-    setVerbs(x: any /*Array<string>*/) {
+    $Verbs(x: Array<string>) {
         this.verbs = x; return this
     }
 }
 
 export interface ResourceAttributesHelper extends ResourceAttributes {
-    $group(x: any): any;
-    $resource(x: any): any;
-    $subresource(x: any): any;
-    $verb(x: any): any;
-    $version(x: any): any;
+    $group(x: string): ResourceAttributesHelper;
+    $resource(x: string): ResourceAttributesHelper;
+    $subresource(x: string): ResourceAttributesHelper;
+    $verb(x: string): ResourceAttributesHelper;
+    $version(x: string): ResourceAttributesHelper;
 }
 
 /** ResourceAttributes includes the authorization attributes available for resource requests to the Authorizer interface */
@@ -133,67 +136,67 @@ export class ResourceAttributesHelper extends Template implements ResourceAttrib
         super(obj)
     }
 
-    _group: any;
-    get group(): any /*string*/ {
+    _group: string;
+    get group(): string {
         return this._group
     }
-    set group(x: any /*string*/) {
+    set group(x: string) {
         this._group = x
     }
-    setGroup(x: any /*string*/) {
+    $Group(x: string) {
         this.group = x; return this
     }
 
-    _resource: any;
-    get resource(): any /*string*/ {
+    _resource: string;
+    get resource(): string {
         return this._resource
     }
-    set resource(x: any /*string*/) {
+    set resource(x: string) {
         this._resource = x
     }
-    setResource(x: any /*string*/) {
+    $Resource(x: string) {
         this.resource = x; return this
     }
 
-    _subresource: any;
-    get subresource(): any /*string*/ {
+    _subresource: string;
+    get subresource(): string {
         return this._subresource
     }
-    set subresource(x: any /*string*/) {
+    set subresource(x: string) {
         this._subresource = x
     }
-    setSubresource(x: any /*string*/) {
+    $Subresource(x: string) {
         this.subresource = x; return this
     }
 
-    _verb: any;
-    get verb(): any /*string*/ {
+    _verb: string;
+    get verb(): string {
         return this._verb
     }
-    set verb(x: any /*string*/) {
+    set verb(x: string) {
         this._verb = x
     }
-    setVerb(x: any /*string*/) {
+    $Verb(x: string) {
         this.verb = x; return this
     }
 
-    _version: any;
-    get version(): any /*string*/ {
+    _version: string;
+    get version(): string {
         return this._version
     }
-    set version(x: any /*string*/) {
+    set version(x: string) {
         this._version = x
     }
-    setVersion(x: any /*string*/) {
+    $Version(x: string) {
         this.version = x; return this
     }
 }
 
 export interface ResourceRuleHelper extends ResourceRule {
-    $apiGroups(x: any): any;
-    $resourceNames(x: any): any;
-    $resources(x: any): any;
-    $verbs(x: any): any;
+    $apiGroups(x: Array<string>): ResourceRuleHelper;
+    $resourceNames(x: Array<string>): ResourceRuleHelper;
+    $resources(x: Array<string>): ResourceRuleHelper;
+    $verbs(x: Array<string>): ResourceRuleHelper;
 }
 
 /** ResourceRule is the list of actions the subject is allowed to perform on resources. The list ordering isn't significant, may contain duplicates, and possibly be incomplete. */
@@ -202,55 +205,58 @@ export class ResourceRuleHelper extends Template implements ResourceRuleHelper {
         super(obj)
     }
 
-    _apiGroups: any;
-    get apiGroups(): any /*Array<string>*/ {
+    _apiGroups: Array<string>;
+    get apiGroups(): Array<string> {
         return this._apiGroups
     }
-    set apiGroups(x: any /*Array<string>*/) {
+    set apiGroups(x: Array<string>) {
         this._apiGroups = this.set(this.apiGroups, x)
     }
-    setApiGroups(x: any /*Array<string>*/) {
+    $ApiGroups(x: Array<string>) {
         this.apiGroups = x; return this
     }
 
-    _resourceNames: any;
-    get resourceNames(): any /*Array<string>*/ {
+    _resourceNames: Array<string>;
+    get resourceNames(): Array<string> {
         return this._resourceNames
     }
-    set resourceNames(x: any /*Array<string>*/) {
+    set resourceNames(x: Array<string>) {
         this._resourceNames = this.set(this.resourceNames, x)
     }
-    setResourceNames(x: any /*Array<string>*/) {
+    $ResourceNames(x: Array<string>) {
         this.resourceNames = x; return this
     }
 
-    _resources: any;
-    get resources(): any /*Array<string>*/ {
+    _resources: Array<string>;
+    get resources(): Array<string> {
         return this._resources
     }
-    set resources(x: any /*Array<string>*/) {
+    set resources(x: Array<string>) {
         this._resources = this.set(this.resources, x)
     }
-    setResources(x: any /*Array<string>*/) {
+    $Resources(x: Array<string>) {
         this.resources = x; return this
     }
 
-    _verbs: any;
-    get verbs(): any /*Array<string>*/ {
+    _verbs: Array<string>;
+    get verbs(): Array<string> {
         return this._verbs
     }
-    set verbs(x: any /*Array<string>*/) {
+    set verbs(x: Array<string>) {
         this._verbs = this.set(this.verbs, x)
     }
-    setVerbs(x: any /*Array<string>*/) {
+    $Verbs(x: Array<string>) {
         this.verbs = x; return this
     }
 }
 
 export interface SelfSubjectAccessReviewHelper extends SelfSubjectAccessReview {
-    $metadata(x: any): any;
-    $spec(x: any): any;
-    $status(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): SelfSubjectAccessReviewHelper;
+    spec: SelfSubjectAccessReviewSpecHelper;
+    $spec(x: SelfSubjectAccessReviewSpecHelper): SelfSubjectAccessReviewHelper;
+    status: SubjectAccessReviewStatusHelper;
+    $status(x: SubjectAccessReviewStatusHelper): SelfSubjectAccessReviewHelper;
 }
 
 /** SelfSubjectAccessReview checks whether or the current user can perform an action.  Not filling in a spec.namespace means "in all namespaces".  Self is a special case, because users should always be able to check whether they can perform an action */
@@ -262,43 +268,45 @@ export class SelfSubjectAccessReviewHelper extends ResourceTemplate implements S
         super(nameOrObject, namespace, SelfSubjectAccessReviewHelper.kind, SelfSubjectAccessReviewHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*SelfSubjectAccessReviewSpecHelper*/ {
+    _spec: SelfSubjectAccessReviewSpecHelper;
+    get spec(): SelfSubjectAccessReviewSpecHelper {
         return this._spec
     }
-    set spec(x: any /*SelfSubjectAccessReviewSpecHelper*/) {
+    set spec(x: SelfSubjectAccessReviewSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*SelfSubjectAccessReviewSpecHelper*/) {
+    $Spec(x: SelfSubjectAccessReviewSpecHelper) {
         this.spec = x; return this
     }
 
-    _status: any;
-    get status(): any /*SubjectAccessReviewStatusHelper*/ {
+    _status: SubjectAccessReviewStatusHelper;
+    get status(): SubjectAccessReviewStatusHelper {
         return this._status
     }
-    set status(x: any /*SubjectAccessReviewStatusHelper*/) {
+    set status(x: SubjectAccessReviewStatusHelper) {
         this._status = x
     }
-    setStatus(x: any /*SubjectAccessReviewStatusHelper*/) {
+    $Status(x: SubjectAccessReviewStatusHelper) {
         this.status = x; return this
     }
 }
 
 export interface SelfSubjectAccessReviewSpecHelper extends SelfSubjectAccessReviewSpec {
-    $nonResourceAttributes(x: any): any;
-    $resourceAttributes(x: any): any;
+    nonResourceAttributes: NonResourceAttributesHelper;
+    $nonResourceAttributes(x: NonResourceAttributesHelper): SelfSubjectAccessReviewSpecHelper;
+    resourceAttributes: ResourceAttributesHelper;
+    $resourceAttributes(x: ResourceAttributesHelper): SelfSubjectAccessReviewSpecHelper;
 }
 
 /** SelfSubjectAccessReviewSpec is a description of the access request.  Exactly one of ResourceAuthorizationAttributes and NonResourceAuthorizationAttributes must be set */
@@ -307,33 +315,36 @@ export class SelfSubjectAccessReviewSpecHelper extends Template implements SelfS
         super(obj)
     }
 
-    _nonResourceAttributes: any;
-    get nonResourceAttributes(): any /*NonResourceAttributesHelper*/ {
+    _nonResourceAttributes: NonResourceAttributesHelper;
+    get nonResourceAttributes(): NonResourceAttributesHelper {
         return this._nonResourceAttributes
     }
-    set nonResourceAttributes(x: any /*NonResourceAttributesHelper*/) {
+    set nonResourceAttributes(x: NonResourceAttributesHelper) {
         this._nonResourceAttributes = x
     }
-    setNonResourceAttributes(x: any /*NonResourceAttributesHelper*/) {
+    $NonResourceAttributes(x: NonResourceAttributesHelper) {
         this.nonResourceAttributes = x; return this
     }
 
-    _resourceAttributes: any;
-    get resourceAttributes(): any /*ResourceAttributesHelper*/ {
+    _resourceAttributes: ResourceAttributesHelper;
+    get resourceAttributes(): ResourceAttributesHelper {
         return this._resourceAttributes
     }
-    set resourceAttributes(x: any /*ResourceAttributesHelper*/) {
+    set resourceAttributes(x: ResourceAttributesHelper) {
         this._resourceAttributes = x
     }
-    setResourceAttributes(x: any /*ResourceAttributesHelper*/) {
+    $ResourceAttributes(x: ResourceAttributesHelper) {
         this.resourceAttributes = x; return this
     }
 }
 
 export interface SelfSubjectRulesReviewHelper extends SelfSubjectRulesReview {
-    $metadata(x: any): any;
-    $spec(x: any): any;
-    $status(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): SelfSubjectRulesReviewHelper;
+    spec: SelfSubjectRulesReviewSpecHelper;
+    $spec(x: SelfSubjectRulesReviewSpecHelper): SelfSubjectRulesReviewHelper;
+    status: SubjectRulesReviewStatusHelper;
+    $status(x: SubjectRulesReviewStatusHelper): SelfSubjectRulesReviewHelper;
 }
 
 /** SelfSubjectRulesReview enumerates the set of actions the current user can perform within a namespace. The returned list of actions may be incomplete depending on the server's authorization mode, and any errors experienced during the evaluation. SelfSubjectRulesReview should be used by UIs to show/hide actions, or to quickly let an end user reason about their permissions. It should NOT Be used by external systems to drive authorization decisions as this raises confused deputy, cache lifetime/revocation, and correctness concerns. SubjectAccessReview, and LocalAccessReview are the correct way to defer authorization decisions to the API server. */
@@ -345,36 +356,36 @@ export class SelfSubjectRulesReviewHelper extends ResourceTemplate implements Se
         super(nameOrObject, namespace, SelfSubjectRulesReviewHelper.kind, SelfSubjectRulesReviewHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*SelfSubjectRulesReviewSpecHelper*/ {
+    _spec: SelfSubjectRulesReviewSpecHelper;
+    get spec(): SelfSubjectRulesReviewSpecHelper {
         return this._spec
     }
-    set spec(x: any /*SelfSubjectRulesReviewSpecHelper*/) {
+    set spec(x: SelfSubjectRulesReviewSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*SelfSubjectRulesReviewSpecHelper*/) {
+    $Spec(x: SelfSubjectRulesReviewSpecHelper) {
         this.spec = x; return this
     }
 
-    _status: any;
-    get status(): any /*SubjectRulesReviewStatusHelper*/ {
+    _status: SubjectRulesReviewStatusHelper;
+    get status(): SubjectRulesReviewStatusHelper {
         return this._status
     }
-    set status(x: any /*SubjectRulesReviewStatusHelper*/) {
+    set status(x: SubjectRulesReviewStatusHelper) {
         this._status = x
     }
-    setStatus(x: any /*SubjectRulesReviewStatusHelper*/) {
+    $Status(x: SubjectRulesReviewStatusHelper) {
         this.status = x; return this
     }
 }
@@ -389,9 +400,12 @@ export class SelfSubjectRulesReviewSpecHelper extends Template implements SelfSu
 }
 
 export interface SubjectAccessReviewHelper extends SubjectAccessReview {
-    $metadata(x: any): any;
-    $spec(x: any): any;
-    $status(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): SubjectAccessReviewHelper;
+    spec: SubjectAccessReviewSpecHelper;
+    $spec(x: SubjectAccessReviewSpecHelper): SubjectAccessReviewHelper;
+    status: SubjectAccessReviewStatusHelper;
+    $status(x: SubjectAccessReviewStatusHelper): SubjectAccessReviewHelper;
 }
 
 /** SubjectAccessReview checks whether or not a user or group can perform an action. */
@@ -403,47 +417,49 @@ export class SubjectAccessReviewHelper extends ResourceTemplate implements Subje
         super(nameOrObject, namespace, SubjectAccessReviewHelper.kind, SubjectAccessReviewHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*SubjectAccessReviewSpecHelper*/ {
+    _spec: SubjectAccessReviewSpecHelper;
+    get spec(): SubjectAccessReviewSpecHelper {
         return this._spec
     }
-    set spec(x: any /*SubjectAccessReviewSpecHelper*/) {
+    set spec(x: SubjectAccessReviewSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*SubjectAccessReviewSpecHelper*/) {
+    $Spec(x: SubjectAccessReviewSpecHelper) {
         this.spec = x; return this
     }
 
-    _status: any;
-    get status(): any /*SubjectAccessReviewStatusHelper*/ {
+    _status: SubjectAccessReviewStatusHelper;
+    get status(): SubjectAccessReviewStatusHelper {
         return this._status
     }
-    set status(x: any /*SubjectAccessReviewStatusHelper*/) {
+    set status(x: SubjectAccessReviewStatusHelper) {
         this._status = x
     }
-    setStatus(x: any /*SubjectAccessReviewStatusHelper*/) {
+    $Status(x: SubjectAccessReviewStatusHelper) {
         this.status = x; return this
     }
 }
 
 export interface SubjectAccessReviewSpecHelper extends SubjectAccessReviewSpec {
-    $extra(x: any): any;
-    $groups(x: any): any;
-    $nonResourceAttributes(x: any): any;
-    $resourceAttributes(x: any): any;
-    $uid(x: any): any;
-    $user(x: any): any;
+    $extra(x: {[name: string]: Array<string>}): SubjectAccessReviewSpecHelper;
+    $groups(x: Array<string>): SubjectAccessReviewSpecHelper;
+    nonResourceAttributes: NonResourceAttributesHelper;
+    $nonResourceAttributes(x: NonResourceAttributesHelper): SubjectAccessReviewSpecHelper;
+    resourceAttributes: ResourceAttributesHelper;
+    $resourceAttributes(x: ResourceAttributesHelper): SubjectAccessReviewSpecHelper;
+    $uid(x: string): SubjectAccessReviewSpecHelper;
+    $user(x: string): SubjectAccessReviewSpecHelper;
 }
 
 /** SubjectAccessReviewSpec is a description of the access request.  Exactly one of ResourceAuthorizationAttributes and NonResourceAuthorizationAttributes must be set */
@@ -452,78 +468,78 @@ export class SubjectAccessReviewSpecHelper extends Template implements SubjectAc
         super(obj)
     }
 
-    _extra: any;
-    get extra(): any /*{[name: string]: Array<string>}Helper*/ {
+    _extra: {[name: string]: Array<string>};
+    get extra(): {[name: string]: Array<string>} {
         return this._extra
     }
-    set extra(x: any /*{[name: string]: Array<string>}Helper*/) {
+    set extra(x: {[name: string]: Array<string>}) {
         this._extra = this.set(this.extra, x)
     }
-    setExtra(x: any /*{[name: string]: Array<string>}Helper*/) {
+    $Extra(x: {[name: string]: Array<string>}) {
         this.extra = x; return this
     }
 
-    _groups: any;
-    get groups(): any /*Array<string>*/ {
+    _groups: Array<string>;
+    get groups(): Array<string> {
         return this._groups
     }
-    set groups(x: any /*Array<string>*/) {
+    set groups(x: Array<string>) {
         this._groups = this.set(this.groups, x)
     }
-    setGroups(x: any /*Array<string>*/) {
+    $Groups(x: Array<string>) {
         this.groups = x; return this
     }
 
-    _nonResourceAttributes: any;
-    get nonResourceAttributes(): any /*NonResourceAttributesHelper*/ {
+    _nonResourceAttributes: NonResourceAttributesHelper;
+    get nonResourceAttributes(): NonResourceAttributesHelper {
         return this._nonResourceAttributes
     }
-    set nonResourceAttributes(x: any /*NonResourceAttributesHelper*/) {
+    set nonResourceAttributes(x: NonResourceAttributesHelper) {
         this._nonResourceAttributes = x
     }
-    setNonResourceAttributes(x: any /*NonResourceAttributesHelper*/) {
+    $NonResourceAttributes(x: NonResourceAttributesHelper) {
         this.nonResourceAttributes = x; return this
     }
 
-    _resourceAttributes: any;
-    get resourceAttributes(): any /*ResourceAttributesHelper*/ {
+    _resourceAttributes: ResourceAttributesHelper;
+    get resourceAttributes(): ResourceAttributesHelper {
         return this._resourceAttributes
     }
-    set resourceAttributes(x: any /*ResourceAttributesHelper*/) {
+    set resourceAttributes(x: ResourceAttributesHelper) {
         this._resourceAttributes = x
     }
-    setResourceAttributes(x: any /*ResourceAttributesHelper*/) {
+    $ResourceAttributes(x: ResourceAttributesHelper) {
         this.resourceAttributes = x; return this
     }
 
-    _uid: any;
-    get uid(): any /*string*/ {
+    _uid: string;
+    get uid(): string {
         return this._uid
     }
-    set uid(x: any /*string*/) {
+    set uid(x: string) {
         this._uid = x
     }
-    setUid(x: any /*string*/) {
+    $Uid(x: string) {
         this.uid = x; return this
     }
 
-    _user: any;
-    get user(): any /*string*/ {
+    _user: string;
+    get user(): string {
         return this._user
     }
-    set user(x: any /*string*/) {
+    set user(x: string) {
         this._user = x
     }
-    setUser(x: any /*string*/) {
+    $User(x: string) {
         this.user = x; return this
     }
 }
 
 export interface SubjectAccessReviewStatusHelper extends SubjectAccessReviewStatus {
-    $allowed(x: any): any;
-    $denied(x: any): any;
-    $evaluationError(x: any): any;
-    $reason(x: any): any;
+    $allowed(x: boolean): SubjectAccessReviewStatusHelper;
+    $denied(x: boolean): SubjectAccessReviewStatusHelper;
+    $evaluationError(x: string): SubjectAccessReviewStatusHelper;
+    $reason(x: string): SubjectAccessReviewStatusHelper;
 }
 
 /** SubjectAccessReviewStatus */
@@ -532,56 +548,56 @@ export class SubjectAccessReviewStatusHelper extends Template implements Subject
         super(obj)
     }
 
-    _allowed: any;
-    get allowed(): any /*boolean*/ {
+    _allowed: boolean;
+    get allowed(): boolean {
         return this._allowed
     }
-    set allowed(x: any /*boolean*/) {
+    set allowed(x: boolean) {
         this._allowed = x
     }
-    setAllowed(x: any /*boolean*/) {
+    $Allowed(x: boolean) {
         this.allowed = x; return this
     }
 
-    _denied: any;
-    get denied(): any /*boolean*/ {
+    _denied: boolean;
+    get denied(): boolean {
         return this._denied
     }
-    set denied(x: any /*boolean*/) {
+    set denied(x: boolean) {
         this._denied = x
     }
-    setDenied(x: any /*boolean*/) {
+    $Denied(x: boolean) {
         this.denied = x; return this
     }
 
-    _evaluationError: any;
-    get evaluationError(): any /*string*/ {
+    _evaluationError: string;
+    get evaluationError(): string {
         return this._evaluationError
     }
-    set evaluationError(x: any /*string*/) {
+    set evaluationError(x: string) {
         this._evaluationError = x
     }
-    setEvaluationError(x: any /*string*/) {
+    $EvaluationError(x: string) {
         this.evaluationError = x; return this
     }
 
-    _reason: any;
-    get reason(): any /*string*/ {
+    _reason: string;
+    get reason(): string {
         return this._reason
     }
-    set reason(x: any /*string*/) {
+    set reason(x: string) {
         this._reason = x
     }
-    setReason(x: any /*string*/) {
+    $Reason(x: string) {
         this.reason = x; return this
     }
 }
 
 export interface SubjectRulesReviewStatusHelper extends SubjectRulesReviewStatus {
-    $evaluationError(x: any): any;
-    $incomplete(x: any): any;
-    $nonResourceRules(x: any): any;
-    $resourceRules(x: any): any;
+    $evaluationError(x: string): SubjectRulesReviewStatusHelper;
+    $incomplete(x: boolean): SubjectRulesReviewStatusHelper;
+    $nonResourceRules(x: Array<NonResourceRule>): SubjectRulesReviewStatusHelper;
+    $resourceRules(x: Array<ResourceRule>): SubjectRulesReviewStatusHelper;
 }
 
 /** SubjectRulesReviewStatus contains the result of a rules check. This check can be incomplete depending on the set of authorizers the server is configured with and any errors experienced during evaluation. Because authorization rules are additive, if a rule appears in a list it's safe to assume the subject has that permission, even if that list is incomplete. */
@@ -590,47 +606,47 @@ export class SubjectRulesReviewStatusHelper extends Template implements SubjectR
         super(obj)
     }
 
-    _evaluationError: any;
-    get evaluationError(): any /*string*/ {
+    _evaluationError: string;
+    get evaluationError(): string {
         return this._evaluationError
     }
-    set evaluationError(x: any /*string*/) {
+    set evaluationError(x: string) {
         this._evaluationError = x
     }
-    setEvaluationError(x: any /*string*/) {
+    $EvaluationError(x: string) {
         this.evaluationError = x; return this
     }
 
-    _incomplete: any;
-    get incomplete(): any /*boolean*/ {
+    _incomplete: boolean;
+    get incomplete(): boolean {
         return this._incomplete
     }
-    set incomplete(x: any /*boolean*/) {
+    set incomplete(x: boolean) {
         this._incomplete = x
     }
-    setIncomplete(x: any /*boolean*/) {
+    $Incomplete(x: boolean) {
         this.incomplete = x; return this
     }
 
-    _nonResourceRules: any;
-    get nonResourceRules(): any /*Array<NonResourceRule>*/ {
+    _nonResourceRules: Array<NonResourceRule>;
+    get nonResourceRules(): Array<NonResourceRule> {
         return this._nonResourceRules
     }
-    set nonResourceRules(x: any /*Array<NonResourceRule>*/) {
+    set nonResourceRules(x: Array<NonResourceRule>) {
         this._nonResourceRules = this.set(this.nonResourceRules, x)
     }
-    setNonResourceRules(x: any /*Array<NonResourceRule>*/) {
+    $NonResourceRules(x: Array<NonResourceRule>) {
         this.nonResourceRules = x; return this
     }
 
-    _resourceRules: any;
-    get resourceRules(): any /*Array<ResourceRule>*/ {
+    _resourceRules: Array<ResourceRule>;
+    get resourceRules(): Array<ResourceRule> {
         return this._resourceRules
     }
-    set resourceRules(x: any /*Array<ResourceRule>*/) {
+    set resourceRules(x: Array<ResourceRule>) {
         this._resourceRules = this.set(this.resourceRules, x)
     }
-    setResourceRules(x: any /*Array<ResourceRule>*/) {
+    $ResourceRules(x: Array<ResourceRule>) {
         this.resourceRules = x; return this
     }
 }

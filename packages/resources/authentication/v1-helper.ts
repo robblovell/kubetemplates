@@ -3,7 +3,7 @@ import { BoundObjectReference, TokenRequest, TokenRequestSpec, TokenRequestStatu
 import { ObjectMeta, Time } from "../meta/v1";
 
 export interface BoundObjectReferenceHelper extends BoundObjectReference {
-    $uid(x: any): any;
+    $uid(x: string): BoundObjectReferenceHelper;
 }
 
 /** BoundObjectReference is a reference to an object that a token is bound to. */
@@ -12,22 +12,25 @@ export class BoundObjectReferenceHelper extends Template implements BoundObjectR
         super(obj)
     }
 
-    _uid: any;
-    get uid(): any /*string*/ {
+    _uid: string;
+    get uid(): string {
         return this._uid
     }
-    set uid(x: any /*string*/) {
+    set uid(x: string) {
         this._uid = x
     }
-    setUid(x: any /*string*/) {
+    $Uid(x: string) {
         this.uid = x; return this
     }
 }
 
 export interface TokenRequestHelper extends TokenRequest {
-    $metadata(x: any): any;
-    $spec(x: any): any;
-    $status(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): TokenRequestHelper;
+    spec: TokenRequestSpecHelper;
+    $spec(x: TokenRequestSpecHelper): TokenRequestHelper;
+    status: TokenRequestStatusHelper;
+    $status(x: TokenRequestStatusHelper): TokenRequestHelper;
 }
 
 /** TokenRequest requests a token for a given service account. */
@@ -39,44 +42,45 @@ export class TokenRequestHelper extends ResourceTemplate implements TokenRequest
         super(nameOrObject, namespace, TokenRequestHelper.kind, TokenRequestHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*TokenRequestSpecHelper*/ {
+    _spec: TokenRequestSpecHelper;
+    get spec(): TokenRequestSpecHelper {
         return this._spec
     }
-    set spec(x: any /*TokenRequestSpecHelper*/) {
+    set spec(x: TokenRequestSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*TokenRequestSpecHelper*/) {
+    $Spec(x: TokenRequestSpecHelper) {
         this.spec = x; return this
     }
 
-    _status: any;
-    get status(): any /*TokenRequestStatusHelper*/ {
+    _status: TokenRequestStatusHelper;
+    get status(): TokenRequestStatusHelper {
         return this._status
     }
-    set status(x: any /*TokenRequestStatusHelper*/) {
+    set status(x: TokenRequestStatusHelper) {
         this._status = x
     }
-    setStatus(x: any /*TokenRequestStatusHelper*/) {
+    $Status(x: TokenRequestStatusHelper) {
         this.status = x; return this
     }
 }
 
 export interface TokenRequestSpecHelper extends TokenRequestSpec {
-    $audiences(x: any): any;
-    $boundObjectRef(x: any): any;
-    $expirationSeconds(x: any): any;
+    $audiences(x: Array<string>): TokenRequestSpecHelper;
+    boundObjectRef: BoundObjectReferenceHelper;
+    $boundObjectRef(x: BoundObjectReferenceHelper): TokenRequestSpecHelper;
+    $expirationSeconds(x: number): TokenRequestSpecHelper;
 }
 
 /** TokenRequestSpec contains client provided parameters of a token request. */
@@ -85,43 +89,43 @@ export class TokenRequestSpecHelper extends Template implements TokenRequestSpec
         super(obj)
     }
 
-    _audiences: any;
-    get audiences(): any /*Array<string>*/ {
+    _audiences: Array<string>;
+    get audiences(): Array<string> {
         return this._audiences
     }
-    set audiences(x: any /*Array<string>*/) {
+    set audiences(x: Array<string>) {
         this._audiences = this.set(this.audiences, x)
     }
-    setAudiences(x: any /*Array<string>*/) {
+    $Audiences(x: Array<string>) {
         this.audiences = x; return this
     }
 
-    _boundObjectRef: any;
-    get boundObjectRef(): any /*BoundObjectReferenceHelper*/ {
+    _boundObjectRef: BoundObjectReferenceHelper;
+    get boundObjectRef(): BoundObjectReferenceHelper {
         return this._boundObjectRef
     }
-    set boundObjectRef(x: any /*BoundObjectReferenceHelper*/) {
+    set boundObjectRef(x: BoundObjectReferenceHelper) {
         this._boundObjectRef = x
     }
-    setBoundObjectRef(x: any /*BoundObjectReferenceHelper*/) {
+    $BoundObjectRef(x: BoundObjectReferenceHelper) {
         this.boundObjectRef = x; return this
     }
 
-    _expirationSeconds: any;
-    get expirationSeconds(): any /*number*/ {
+    _expirationSeconds: number;
+    get expirationSeconds(): number {
         return this._expirationSeconds
     }
-    set expirationSeconds(x: any /*number*/) {
+    set expirationSeconds(x: number) {
         this._expirationSeconds = x
     }
-    setExpirationSeconds(x: any /*number*/) {
+    $ExpirationSeconds(x: number) {
         this.expirationSeconds = x; return this
     }
 }
 
 export interface TokenRequestStatusHelper extends TokenRequestStatus {
-    $expirationTimestamp(x: any): any;
-    $token(x: any): any;
+    $expirationTimestamp(x: Time): TokenRequestStatusHelper;
+    $token(x: string): TokenRequestStatusHelper;
 }
 
 /** TokenRequestStatus is the result of a token request. */
@@ -130,33 +134,36 @@ export class TokenRequestStatusHelper extends Template implements TokenRequestSt
         super(obj)
     }
 
-    _expirationTimestamp: any;
-    get expirationTimestamp(): any /*Time*/ {
+    _expirationTimestamp: Time;
+    get expirationTimestamp(): Time {
         return this._expirationTimestamp
     }
-    set expirationTimestamp(x: any /*Time*/) {
+    set expirationTimestamp(x: Time) {
         this._expirationTimestamp = x
     }
-    setExpirationTimestamp(x: any /*Time*/) {
+    $ExpirationTimestamp(x: Time) {
         this.expirationTimestamp = x; return this
     }
 
-    _token: any;
-    get token(): any /*string*/ {
+    _token: string;
+    get token(): string {
         return this._token
     }
-    set token(x: any /*string*/) {
+    set token(x: string) {
         this._token = x
     }
-    setToken(x: any /*string*/) {
+    $Token(x: string) {
         this.token = x; return this
     }
 }
 
 export interface TokenReviewHelper extends TokenReview {
-    $metadata(x: any): any;
-    $spec(x: any): any;
-    $status(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): TokenReviewHelper;
+    spec: TokenReviewSpecHelper;
+    $spec(x: TokenReviewSpecHelper): TokenReviewHelper;
+    status: TokenReviewStatusHelper;
+    $status(x: TokenReviewStatusHelper): TokenReviewHelper;
 }
 
 /** TokenReview attempts to authenticate a token to a known user. Note: TokenReview requests may be cached by the webhook token authenticator plugin in the kube-apiserver. */
@@ -168,43 +175,43 @@ export class TokenReviewHelper extends ResourceTemplate implements TokenReviewHe
         super(nameOrObject, namespace, TokenReviewHelper.kind, TokenReviewHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*TokenReviewSpecHelper*/ {
+    _spec: TokenReviewSpecHelper;
+    get spec(): TokenReviewSpecHelper {
         return this._spec
     }
-    set spec(x: any /*TokenReviewSpecHelper*/) {
+    set spec(x: TokenReviewSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*TokenReviewSpecHelper*/) {
+    $Spec(x: TokenReviewSpecHelper) {
         this.spec = x; return this
     }
 
-    _status: any;
-    get status(): any /*TokenReviewStatusHelper*/ {
+    _status: TokenReviewStatusHelper;
+    get status(): TokenReviewStatusHelper {
         return this._status
     }
-    set status(x: any /*TokenReviewStatusHelper*/) {
+    set status(x: TokenReviewStatusHelper) {
         this._status = x
     }
-    setStatus(x: any /*TokenReviewStatusHelper*/) {
+    $Status(x: TokenReviewStatusHelper) {
         this.status = x; return this
     }
 }
 
 export interface TokenReviewSpecHelper extends TokenReviewSpec {
-    $audiences(x: any): any;
-    $token(x: any): any;
+    $audiences(x: Array<string>): TokenReviewSpecHelper;
+    $token(x: string): TokenReviewSpecHelper;
 }
 
 /** TokenReviewSpec is a description of the token authentication request. */
@@ -213,34 +220,35 @@ export class TokenReviewSpecHelper extends Template implements TokenReviewSpecHe
         super(obj)
     }
 
-    _audiences: any;
-    get audiences(): any /*Array<string>*/ {
+    _audiences: Array<string>;
+    get audiences(): Array<string> {
         return this._audiences
     }
-    set audiences(x: any /*Array<string>*/) {
+    set audiences(x: Array<string>) {
         this._audiences = this.set(this.audiences, x)
     }
-    setAudiences(x: any /*Array<string>*/) {
+    $Audiences(x: Array<string>) {
         this.audiences = x; return this
     }
 
-    _token: any;
-    get token(): any /*string*/ {
+    _token: string;
+    get token(): string {
         return this._token
     }
-    set token(x: any /*string*/) {
+    set token(x: string) {
         this._token = x
     }
-    setToken(x: any /*string*/) {
+    $Token(x: string) {
         this.token = x; return this
     }
 }
 
 export interface TokenReviewStatusHelper extends TokenReviewStatus {
-    $audiences(x: any): any;
-    $authenticated(x: any): any;
-    $error(x: any): any;
-    $user(x: any): any;
+    $audiences(x: Array<string>): TokenReviewStatusHelper;
+    $authenticated(x: boolean): TokenReviewStatusHelper;
+    $error(x: string): TokenReviewStatusHelper;
+    user: UserInfoHelper;
+    $user(x: UserInfoHelper): TokenReviewStatusHelper;
 }
 
 /** TokenReviewStatus is the result of the token authentication request. */
@@ -249,56 +257,56 @@ export class TokenReviewStatusHelper extends Template implements TokenReviewStat
         super(obj)
     }
 
-    _audiences: any;
-    get audiences(): any /*Array<string>*/ {
+    _audiences: Array<string>;
+    get audiences(): Array<string> {
         return this._audiences
     }
-    set audiences(x: any /*Array<string>*/) {
+    set audiences(x: Array<string>) {
         this._audiences = this.set(this.audiences, x)
     }
-    setAudiences(x: any /*Array<string>*/) {
+    $Audiences(x: Array<string>) {
         this.audiences = x; return this
     }
 
-    _authenticated: any;
-    get authenticated(): any /*boolean*/ {
+    _authenticated: boolean;
+    get authenticated(): boolean {
         return this._authenticated
     }
-    set authenticated(x: any /*boolean*/) {
+    set authenticated(x: boolean) {
         this._authenticated = x
     }
-    setAuthenticated(x: any /*boolean*/) {
+    $Authenticated(x: boolean) {
         this.authenticated = x; return this
     }
 
-    _error: any;
-    get error(): any /*string*/ {
+    _error: string;
+    get error(): string {
         return this._error
     }
-    set error(x: any /*string*/) {
+    set error(x: string) {
         this._error = x
     }
-    setError(x: any /*string*/) {
+    $Error(x: string) {
         this.error = x; return this
     }
 
-    _user: any;
-    get user(): any /*UserInfoHelper*/ {
+    _user: UserInfoHelper;
+    get user(): UserInfoHelper {
         return this._user
     }
-    set user(x: any /*UserInfoHelper*/) {
+    set user(x: UserInfoHelper) {
         this._user = x
     }
-    setUser(x: any /*UserInfoHelper*/) {
+    $User(x: UserInfoHelper) {
         this.user = x; return this
     }
 }
 
 export interface UserInfoHelper extends UserInfo {
-    $extra(x: any): any;
-    $groups(x: any): any;
-    $uid(x: any): any;
-    $username(x: any): any;
+    $extra(x: {[name: string]: Array<string>}): UserInfoHelper;
+    $groups(x: Array<string>): UserInfoHelper;
+    $uid(x: string): UserInfoHelper;
+    $username(x: string): UserInfoHelper;
 }
 
 /** UserInfo holds the information about the user needed to implement the user.Info interface. */
@@ -307,47 +315,47 @@ export class UserInfoHelper extends Template implements UserInfoHelper {
         super(obj)
     }
 
-    _extra: any;
-    get extra(): any /*{[name: string]: Array<string>}Helper*/ {
+    _extra: {[name: string]: Array<string>};
+    get extra(): {[name: string]: Array<string>} {
         return this._extra
     }
-    set extra(x: any /*{[name: string]: Array<string>}Helper*/) {
+    set extra(x: {[name: string]: Array<string>}) {
         this._extra = this.set(this.extra, x)
     }
-    setExtra(x: any /*{[name: string]: Array<string>}Helper*/) {
+    $Extra(x: {[name: string]: Array<string>}) {
         this.extra = x; return this
     }
 
-    _groups: any;
-    get groups(): any /*Array<string>*/ {
+    _groups: Array<string>;
+    get groups(): Array<string> {
         return this._groups
     }
-    set groups(x: any /*Array<string>*/) {
+    set groups(x: Array<string>) {
         this._groups = this.set(this.groups, x)
     }
-    setGroups(x: any /*Array<string>*/) {
+    $Groups(x: Array<string>) {
         this.groups = x; return this
     }
 
-    _uid: any;
-    get uid(): any /*string*/ {
+    _uid: string;
+    get uid(): string {
         return this._uid
     }
-    set uid(x: any /*string*/) {
+    set uid(x: string) {
         this._uid = x
     }
-    setUid(x: any /*string*/) {
+    $Uid(x: string) {
         this.uid = x; return this
     }
 
-    _username: any;
-    get username(): any /*string*/ {
+    _username: string;
+    get username(): string {
         return this._username
     }
-    set username(x: any /*string*/) {
+    set username(x: string) {
         this._username = x
     }
-    setUsername(x: any /*string*/) {
+    $Username(x: string) {
         this.username = x; return this
     }
 }

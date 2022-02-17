@@ -4,9 +4,12 @@ import { LabelSelector, ListMeta, ObjectMeta, Time } from "../meta/v1";
 import { ObjectReference, PodTemplateSpec } from "../core/v1";
 
 export interface CronJobHelper extends CronJob {
-    $metadata(x: any): any;
-    $spec(x: any): any;
-    $status(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): CronJobHelper;
+    spec: CronJobSpecHelper;
+    $spec(x: CronJobSpecHelper): CronJobHelper;
+    status: CronJobStatusHelper;
+    $status(x: CronJobStatusHelper): CronJobHelper;
 }
 
 /** CronJob represents the configuration of a single cron job. */
@@ -18,43 +21,44 @@ export class CronJobHelper extends ResourceTemplate implements CronJobHelper {
         super(nameOrObject, namespace, CronJobHelper.kind, CronJobHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*CronJobSpecHelper*/ {
+    _spec: CronJobSpecHelper;
+    get spec(): CronJobSpecHelper {
         return this._spec
     }
-    set spec(x: any /*CronJobSpecHelper*/) {
+    set spec(x: CronJobSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*CronJobSpecHelper*/) {
+    $Spec(x: CronJobSpecHelper) {
         this.spec = x; return this
     }
 
-    _status: any;
-    get status(): any /*CronJobStatusHelper*/ {
+    _status: CronJobStatusHelper;
+    get status(): CronJobStatusHelper {
         return this._status
     }
-    set status(x: any /*CronJobStatusHelper*/) {
+    set status(x: CronJobStatusHelper) {
         this._status = x
     }
-    setStatus(x: any /*CronJobStatusHelper*/) {
+    $Status(x: CronJobStatusHelper) {
         this.status = x; return this
     }
 }
 
 export interface CronJobListHelper extends CronJobList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<CronJob>): CronJobListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): CronJobListHelper;
 }
 
 /** CronJobList is a collection of cron jobs. */
@@ -66,37 +70,38 @@ export class CronJobListHelper extends ResourceTemplate implements CronJobListHe
         super(nameOrObject, namespace, CronJobListHelper.kind, CronJobListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<CronJob>*/ {
+    _items: Array<CronJob>;
+    get items(): Array<CronJob> {
         return this._items
     }
-    set items(x: any /*Array<CronJob>*/) {
+    set items(x: Array<CronJob>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<CronJob>*/) {
+    $Items(x: Array<CronJob>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface CronJobSpecHelper extends CronJobSpec {
-    $concurrencyPolicy(x: any): any;
-    $failedJobsHistoryLimit(x: any): any;
-    $jobTemplate(x: any): any;
-    $schedule(x: any): any;
-    $startingDeadlineSeconds(x: any): any;
-    $successfulJobsHistoryLimit(x: any): any;
-    $suspend(x: any): any;
+    $concurrencyPolicy(x: string): CronJobSpecHelper;
+    $failedJobsHistoryLimit(x: number): CronJobSpecHelper;
+    jobTemplate: JobTemplateSpecHelper;
+    $jobTemplate(x: JobTemplateSpecHelper): CronJobSpecHelper;
+    $schedule(x: string): CronJobSpecHelper;
+    $startingDeadlineSeconds(x: number): CronJobSpecHelper;
+    $successfulJobsHistoryLimit(x: number): CronJobSpecHelper;
+    $suspend(x: boolean): CronJobSpecHelper;
 }
 
 /** CronJobSpec describes how the job execution will look like and when it will actually run. */
@@ -105,88 +110,88 @@ export class CronJobSpecHelper extends Template implements CronJobSpecHelper {
         super(obj)
     }
 
-    _concurrencyPolicy: any;
-    get concurrencyPolicy(): any /*string*/ {
+    _concurrencyPolicy: string;
+    get concurrencyPolicy(): string {
         return this._concurrencyPolicy
     }
-    set concurrencyPolicy(x: any /*string*/) {
+    set concurrencyPolicy(x: string) {
         this._concurrencyPolicy = x
     }
-    setConcurrencyPolicy(x: any /*string*/) {
+    $ConcurrencyPolicy(x: string) {
         this.concurrencyPolicy = x; return this
     }
 
-    _failedJobsHistoryLimit: any;
-    get failedJobsHistoryLimit(): any /*number*/ {
+    _failedJobsHistoryLimit: number;
+    get failedJobsHistoryLimit(): number {
         return this._failedJobsHistoryLimit
     }
-    set failedJobsHistoryLimit(x: any /*number*/) {
+    set failedJobsHistoryLimit(x: number) {
         this._failedJobsHistoryLimit = x
     }
-    setFailedJobsHistoryLimit(x: any /*number*/) {
+    $FailedJobsHistoryLimit(x: number) {
         this.failedJobsHistoryLimit = x; return this
     }
 
-    _jobTemplate: any;
-    get jobTemplate(): any /*JobTemplateSpecHelper*/ {
+    _jobTemplate: JobTemplateSpecHelper;
+    get jobTemplate(): JobTemplateSpecHelper {
         return this._jobTemplate
     }
-    set jobTemplate(x: any /*JobTemplateSpecHelper*/) {
+    set jobTemplate(x: JobTemplateSpecHelper) {
         this._jobTemplate = x
     }
-    setJobTemplate(x: any /*JobTemplateSpecHelper*/) {
+    $JobTemplate(x: JobTemplateSpecHelper) {
         this.jobTemplate = x; return this
     }
 
-    _schedule: any;
-    get schedule(): any /*string*/ {
+    _schedule: string;
+    get schedule(): string {
         return this._schedule
     }
-    set schedule(x: any /*string*/) {
+    set schedule(x: string) {
         this._schedule = x
     }
-    setSchedule(x: any /*string*/) {
+    $Schedule(x: string) {
         this.schedule = x; return this
     }
 
-    _startingDeadlineSeconds: any;
-    get startingDeadlineSeconds(): any /*number*/ {
+    _startingDeadlineSeconds: number;
+    get startingDeadlineSeconds(): number {
         return this._startingDeadlineSeconds
     }
-    set startingDeadlineSeconds(x: any /*number*/) {
+    set startingDeadlineSeconds(x: number) {
         this._startingDeadlineSeconds = x
     }
-    setStartingDeadlineSeconds(x: any /*number*/) {
+    $StartingDeadlineSeconds(x: number) {
         this.startingDeadlineSeconds = x; return this
     }
 
-    _successfulJobsHistoryLimit: any;
-    get successfulJobsHistoryLimit(): any /*number*/ {
+    _successfulJobsHistoryLimit: number;
+    get successfulJobsHistoryLimit(): number {
         return this._successfulJobsHistoryLimit
     }
-    set successfulJobsHistoryLimit(x: any /*number*/) {
+    set successfulJobsHistoryLimit(x: number) {
         this._successfulJobsHistoryLimit = x
     }
-    setSuccessfulJobsHistoryLimit(x: any /*number*/) {
+    $SuccessfulJobsHistoryLimit(x: number) {
         this.successfulJobsHistoryLimit = x; return this
     }
 
-    _suspend: any;
-    get suspend(): any /*boolean*/ {
+    _suspend: boolean;
+    get suspend(): boolean {
         return this._suspend
     }
-    set suspend(x: any /*boolean*/) {
+    set suspend(x: boolean) {
         this._suspend = x
     }
-    setSuspend(x: any /*boolean*/) {
+    $Suspend(x: boolean) {
         this.suspend = x; return this
     }
 }
 
 export interface CronJobStatusHelper extends CronJobStatus {
-    $active(x: any): any;
-    $lastScheduleTime(x: any): any;
-    $lastSuccessfulTime(x: any): any;
+    $active(x: Array<ObjectReference>): CronJobStatusHelper;
+    $lastScheduleTime(x: Time): CronJobStatusHelper;
+    $lastSuccessfulTime(x: Time): CronJobStatusHelper;
 }
 
 /** CronJobStatus represents the current state of a cron job. */
@@ -195,44 +200,47 @@ export class CronJobStatusHelper extends Template implements CronJobStatusHelper
         super(obj)
     }
 
-    _active: any;
-    get active(): any /*Array<ObjectReference>*/ {
+    _active: Array<ObjectReference>;
+    get active(): Array<ObjectReference> {
         return this._active
     }
-    set active(x: any /*Array<ObjectReference>*/) {
+    set active(x: Array<ObjectReference>) {
         this._active = this.set(this.active, x)
     }
-    setActive(x: any /*Array<ObjectReference>*/) {
+    $Active(x: Array<ObjectReference>) {
         this.active = x; return this
     }
 
-    _lastScheduleTime: any;
-    get lastScheduleTime(): any /*Time*/ {
+    _lastScheduleTime: Time;
+    get lastScheduleTime(): Time {
         return this._lastScheduleTime
     }
-    set lastScheduleTime(x: any /*Time*/) {
+    set lastScheduleTime(x: Time) {
         this._lastScheduleTime = x
     }
-    setLastScheduleTime(x: any /*Time*/) {
+    $LastScheduleTime(x: Time) {
         this.lastScheduleTime = x; return this
     }
 
-    _lastSuccessfulTime: any;
-    get lastSuccessfulTime(): any /*Time*/ {
+    _lastSuccessfulTime: Time;
+    get lastSuccessfulTime(): Time {
         return this._lastSuccessfulTime
     }
-    set lastSuccessfulTime(x: any /*Time*/) {
+    set lastSuccessfulTime(x: Time) {
         this._lastSuccessfulTime = x
     }
-    setLastSuccessfulTime(x: any /*Time*/) {
+    $LastSuccessfulTime(x: Time) {
         this.lastSuccessfulTime = x; return this
     }
 }
 
 export interface JobHelper extends Job {
-    $metadata(x: any): any;
-    $spec(x: any): any;
-    $status(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): JobHelper;
+    spec: JobSpecHelper;
+    $spec(x: JobSpecHelper): JobHelper;
+    status: JobStatusHelper;
+    $status(x: JobStatusHelper): JobHelper;
 }
 
 /** Job represents the configuration of a single job. */
@@ -244,47 +252,47 @@ export class JobHelper extends ResourceTemplate implements JobHelper {
         super(nameOrObject, namespace, JobHelper.kind, JobHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*JobSpecHelper*/ {
+    _spec: JobSpecHelper;
+    get spec(): JobSpecHelper {
         return this._spec
     }
-    set spec(x: any /*JobSpecHelper*/) {
+    set spec(x: JobSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*JobSpecHelper*/) {
+    $Spec(x: JobSpecHelper) {
         this.spec = x; return this
     }
 
-    _status: any;
-    get status(): any /*JobStatusHelper*/ {
+    _status: JobStatusHelper;
+    get status(): JobStatusHelper {
         return this._status
     }
-    set status(x: any /*JobStatusHelper*/) {
+    set status(x: JobStatusHelper) {
         this._status = x
     }
-    setStatus(x: any /*JobStatusHelper*/) {
+    $Status(x: JobStatusHelper) {
         this.status = x; return this
     }
 }
 
 export interface JobConditionHelper extends JobCondition {
-    $lastProbeTime(x: any): any;
-    $lastTransitionTime(x: any): any;
-    $message(x: any): any;
-    $reason(x: any): any;
-    $status(x: any): any;
-    $type(x: any): any;
+    $lastProbeTime(x: Time): JobConditionHelper;
+    $lastTransitionTime(x: Time): JobConditionHelper;
+    $message(x: string): JobConditionHelper;
+    $reason(x: string): JobConditionHelper;
+    $status(x: string): JobConditionHelper;
+    $type(x: string): JobConditionHelper;
 }
 
 /** JobCondition describes current state of a job. */
@@ -293,76 +301,77 @@ export class JobConditionHelper extends Template implements JobConditionHelper {
         super(obj)
     }
 
-    _lastProbeTime: any;
-    get lastProbeTime(): any /*Time*/ {
+    _lastProbeTime: Time;
+    get lastProbeTime(): Time {
         return this._lastProbeTime
     }
-    set lastProbeTime(x: any /*Time*/) {
+    set lastProbeTime(x: Time) {
         this._lastProbeTime = x
     }
-    setLastProbeTime(x: any /*Time*/) {
+    $LastProbeTime(x: Time) {
         this.lastProbeTime = x; return this
     }
 
-    _lastTransitionTime: any;
-    get lastTransitionTime(): any /*Time*/ {
+    _lastTransitionTime: Time;
+    get lastTransitionTime(): Time {
         return this._lastTransitionTime
     }
-    set lastTransitionTime(x: any /*Time*/) {
+    set lastTransitionTime(x: Time) {
         this._lastTransitionTime = x
     }
-    setLastTransitionTime(x: any /*Time*/) {
+    $LastTransitionTime(x: Time) {
         this.lastTransitionTime = x; return this
     }
 
-    _message: any;
-    get message(): any /*string*/ {
+    _message: string;
+    get message(): string {
         return this._message
     }
-    set message(x: any /*string*/) {
+    set message(x: string) {
         this._message = x
     }
-    setMessage(x: any /*string*/) {
+    $Message(x: string) {
         this.message = x; return this
     }
 
-    _reason: any;
-    get reason(): any /*string*/ {
+    _reason: string;
+    get reason(): string {
         return this._reason
     }
-    set reason(x: any /*string*/) {
+    set reason(x: string) {
         this._reason = x
     }
-    setReason(x: any /*string*/) {
+    $Reason(x: string) {
         this.reason = x; return this
     }
 
-    _status: any;
-    get status(): any /*string*/ {
+    _status: string;
+    get status(): string {
         return this._status
     }
-    set status(x: any /*string*/) {
+    set status(x: string) {
         this._status = x
     }
-    setStatus(x: any /*string*/) {
+    $Status(x: string) {
         this.status = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }
 
 export interface JobListHelper extends JobList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<Job>): JobListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): JobListHelper;
 }
 
 /** JobList is a collection of jobs. */
@@ -374,40 +383,42 @@ export class JobListHelper extends ResourceTemplate implements JobListHelper {
         super(nameOrObject, namespace, JobListHelper.kind, JobListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<Job>*/ {
+    _items: Array<Job>;
+    get items(): Array<Job> {
         return this._items
     }
-    set items(x: any /*Array<Job>*/) {
+    set items(x: Array<Job>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<Job>*/) {
+    $Items(x: Array<Job>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface JobSpecHelper extends JobSpec {
-    $activeDeadlineSeconds(x: any): any;
-    $backoffLimit(x: any): any;
-    $completionMode(x: any): any;
-    $completions(x: any): any;
-    $manualSelector(x: any): any;
-    $parallelism(x: any): any;
-    $selector(x: any): any;
-    $suspend(x: any): any;
-    $template(x: any): any;
-    $ttlSecondsAfterFinished(x: any): any;
+    $activeDeadlineSeconds(x: number): JobSpecHelper;
+    $backoffLimit(x: number): JobSpecHelper;
+    $completionMode(x: string): JobSpecHelper;
+    $completions(x: number): JobSpecHelper;
+    $manualSelector(x: boolean): JobSpecHelper;
+    $parallelism(x: number): JobSpecHelper;
+    selector: LabelSelectorHelper;
+    $selector(x: LabelSelectorHelper): JobSpecHelper;
+    $suspend(x: boolean): JobSpecHelper;
+    template: PodTemplateSpecHelper;
+    $template(x: PodTemplateSpecHelper): JobSpecHelper;
+    $ttlSecondsAfterFinished(x: number): JobSpecHelper;
 }
 
 /** JobSpec describes how the job execution will look like. */
@@ -416,125 +427,125 @@ export class JobSpecHelper extends Template implements JobSpecHelper {
         super(obj)
     }
 
-    _activeDeadlineSeconds: any;
-    get activeDeadlineSeconds(): any /*number*/ {
+    _activeDeadlineSeconds: number;
+    get activeDeadlineSeconds(): number {
         return this._activeDeadlineSeconds
     }
-    set activeDeadlineSeconds(x: any /*number*/) {
+    set activeDeadlineSeconds(x: number) {
         this._activeDeadlineSeconds = x
     }
-    setActiveDeadlineSeconds(x: any /*number*/) {
+    $ActiveDeadlineSeconds(x: number) {
         this.activeDeadlineSeconds = x; return this
     }
 
-    _backoffLimit: any;
-    get backoffLimit(): any /*number*/ {
+    _backoffLimit: number;
+    get backoffLimit(): number {
         return this._backoffLimit
     }
-    set backoffLimit(x: any /*number*/) {
+    set backoffLimit(x: number) {
         this._backoffLimit = x
     }
-    setBackoffLimit(x: any /*number*/) {
+    $BackoffLimit(x: number) {
         this.backoffLimit = x; return this
     }
 
-    _completionMode: any;
-    get completionMode(): any /*string*/ {
+    _completionMode: string;
+    get completionMode(): string {
         return this._completionMode
     }
-    set completionMode(x: any /*string*/) {
+    set completionMode(x: string) {
         this._completionMode = x
     }
-    setCompletionMode(x: any /*string*/) {
+    $CompletionMode(x: string) {
         this.completionMode = x; return this
     }
 
-    _completions: any;
-    get completions(): any /*number*/ {
+    _completions: number;
+    get completions(): number {
         return this._completions
     }
-    set completions(x: any /*number*/) {
+    set completions(x: number) {
         this._completions = x
     }
-    setCompletions(x: any /*number*/) {
+    $Completions(x: number) {
         this.completions = x; return this
     }
 
-    _manualSelector: any;
-    get manualSelector(): any /*boolean*/ {
+    _manualSelector: boolean;
+    get manualSelector(): boolean {
         return this._manualSelector
     }
-    set manualSelector(x: any /*boolean*/) {
+    set manualSelector(x: boolean) {
         this._manualSelector = x
     }
-    setManualSelector(x: any /*boolean*/) {
+    $ManualSelector(x: boolean) {
         this.manualSelector = x; return this
     }
 
-    _parallelism: any;
-    get parallelism(): any /*number*/ {
+    _parallelism: number;
+    get parallelism(): number {
         return this._parallelism
     }
-    set parallelism(x: any /*number*/) {
+    set parallelism(x: number) {
         this._parallelism = x
     }
-    setParallelism(x: any /*number*/) {
+    $Parallelism(x: number) {
         this.parallelism = x; return this
     }
 
-    _selector: any;
-    get selector(): any /*LabelSelectorHelper*/ {
+    _selector: LabelSelectorHelper;
+    get selector(): LabelSelectorHelper {
         return this._selector
     }
-    set selector(x: any /*LabelSelectorHelper*/) {
+    set selector(x: LabelSelectorHelper) {
         this._selector = x
     }
-    setSelector(x: any /*LabelSelectorHelper*/) {
+    $Selector(x: LabelSelectorHelper) {
         this.selector = x; return this
     }
 
-    _suspend: any;
-    get suspend(): any /*boolean*/ {
+    _suspend: boolean;
+    get suspend(): boolean {
         return this._suspend
     }
-    set suspend(x: any /*boolean*/) {
+    set suspend(x: boolean) {
         this._suspend = x
     }
-    setSuspend(x: any /*boolean*/) {
+    $Suspend(x: boolean) {
         this.suspend = x; return this
     }
 
-    _template: any;
-    get template(): any /*PodTemplateSpecHelper*/ {
+    _template: PodTemplateSpecHelper;
+    get template(): PodTemplateSpecHelper {
         return this._template
     }
-    set template(x: any /*PodTemplateSpecHelper*/) {
+    set template(x: PodTemplateSpecHelper) {
         this._template = x
     }
-    setTemplate(x: any /*PodTemplateSpecHelper*/) {
+    $Template(x: PodTemplateSpecHelper) {
         this.template = x; return this
     }
 
-    _ttlSecondsAfterFinished: any;
-    get ttlSecondsAfterFinished(): any /*number*/ {
+    _ttlSecondsAfterFinished: number;
+    get ttlSecondsAfterFinished(): number {
         return this._ttlSecondsAfterFinished
     }
-    set ttlSecondsAfterFinished(x: any /*number*/) {
+    set ttlSecondsAfterFinished(x: number) {
         this._ttlSecondsAfterFinished = x
     }
-    setTtlSecondsAfterFinished(x: any /*number*/) {
+    $TtlSecondsAfterFinished(x: number) {
         this.ttlSecondsAfterFinished = x; return this
     }
 }
 
 export interface JobStatusHelper extends JobStatus {
-    $active(x: any): any;
-    $completedIndexes(x: any): any;
-    $completionTime(x: any): any;
-    $conditions(x: any): any;
-    $failed(x: any): any;
-    $startTime(x: any): any;
-    $succeeded(x: any): any;
+    $active(x: number): JobStatusHelper;
+    $completedIndexes(x: string): JobStatusHelper;
+    $completionTime(x: Time): JobStatusHelper;
+    $conditions(x: Array<JobCondition>): JobStatusHelper;
+    $failed(x: number): JobStatusHelper;
+    $startTime(x: Time): JobStatusHelper;
+    $succeeded(x: number): JobStatusHelper;
 }
 
 /** JobStatus represents the current state of a Job. */
@@ -543,87 +554,89 @@ export class JobStatusHelper extends Template implements JobStatusHelper {
         super(obj)
     }
 
-    _active: any;
-    get active(): any /*number*/ {
+    _active: number;
+    get active(): number {
         return this._active
     }
-    set active(x: any /*number*/) {
+    set active(x: number) {
         this._active = x
     }
-    setActive(x: any /*number*/) {
+    $Active(x: number) {
         this.active = x; return this
     }
 
-    _completedIndexes: any;
-    get completedIndexes(): any /*string*/ {
+    _completedIndexes: string;
+    get completedIndexes(): string {
         return this._completedIndexes
     }
-    set completedIndexes(x: any /*string*/) {
+    set completedIndexes(x: string) {
         this._completedIndexes = x
     }
-    setCompletedIndexes(x: any /*string*/) {
+    $CompletedIndexes(x: string) {
         this.completedIndexes = x; return this
     }
 
-    _completionTime: any;
-    get completionTime(): any /*Time*/ {
+    _completionTime: Time;
+    get completionTime(): Time {
         return this._completionTime
     }
-    set completionTime(x: any /*Time*/) {
+    set completionTime(x: Time) {
         this._completionTime = x
     }
-    setCompletionTime(x: any /*Time*/) {
+    $CompletionTime(x: Time) {
         this.completionTime = x; return this
     }
 
-    _conditions: any;
-    get conditions(): any /*Array<JobCondition>*/ {
+    _conditions: Array<JobCondition>;
+    get conditions(): Array<JobCondition> {
         return this._conditions
     }
-    set conditions(x: any /*Array<JobCondition>*/) {
+    set conditions(x: Array<JobCondition>) {
         this._conditions = this.set(this.conditions, x)
     }
-    setConditions(x: any /*Array<JobCondition>*/) {
+    $Conditions(x: Array<JobCondition>) {
         this.conditions = x; return this
     }
 
-    _failed: any;
-    get failed(): any /*number*/ {
+    _failed: number;
+    get failed(): number {
         return this._failed
     }
-    set failed(x: any /*number*/) {
+    set failed(x: number) {
         this._failed = x
     }
-    setFailed(x: any /*number*/) {
+    $Failed(x: number) {
         this.failed = x; return this
     }
 
-    _startTime: any;
-    get startTime(): any /*Time*/ {
+    _startTime: Time;
+    get startTime(): Time {
         return this._startTime
     }
-    set startTime(x: any /*Time*/) {
+    set startTime(x: Time) {
         this._startTime = x
     }
-    setStartTime(x: any /*Time*/) {
+    $StartTime(x: Time) {
         this.startTime = x; return this
     }
 
-    _succeeded: any;
-    get succeeded(): any /*number*/ {
+    _succeeded: number;
+    get succeeded(): number {
         return this._succeeded
     }
-    set succeeded(x: any /*number*/) {
+    set succeeded(x: number) {
         this._succeeded = x
     }
-    setSucceeded(x: any /*number*/) {
+    $Succeeded(x: number) {
         this.succeeded = x; return this
     }
 }
 
 export interface JobTemplateSpecHelper extends JobTemplateSpec {
-    $metadata(x: any): any;
-    $spec(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): JobTemplateSpecHelper;
+    spec: JobSpecHelper;
+    $spec(x: JobSpecHelper): JobTemplateSpecHelper;
 }
 
 /** JobTemplateSpec describes the data a Job should have when created from a template */
@@ -632,25 +645,25 @@ export class JobTemplateSpecHelper extends Template implements JobTemplateSpecHe
         super(obj)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*JobSpecHelper*/ {
+    _spec: JobSpecHelper;
+    get spec(): JobSpecHelper {
         return this._spec
     }
-    set spec(x: any /*JobSpecHelper*/) {
+    set spec(x: JobSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*JobSpecHelper*/) {
+    $Spec(x: JobSpecHelper) {
         this.spec = x; return this
     }
 }

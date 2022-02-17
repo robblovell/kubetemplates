@@ -3,9 +3,9 @@ import { ServerStorageVersion, StorageVersion, StorageVersionCondition, StorageV
 import { ListMeta, ObjectMeta, Time } from "../meta/v1";
 
 export interface ServerStorageVersionHelper extends ServerStorageVersion {
-    $apiServerID(x: any): any;
-    $decodableVersions(x: any): any;
-    $encodingVersion(x: any): any;
+    $apiServerID(x: string): ServerStorageVersionHelper;
+    $decodableVersions(x: Array<string>): ServerStorageVersionHelper;
+    $encodingVersion(x: string): ServerStorageVersionHelper;
 }
 
 /** An API server instance reports the version it can decode and the version it encodes objects to when persisting objects in the backend. */
@@ -14,44 +14,47 @@ export class ServerStorageVersionHelper extends Template implements ServerStorag
         super(obj)
     }
 
-    _apiServerID: any;
-    get apiServerID(): any /*string*/ {
+    _apiServerID: string;
+    get apiServerID(): string {
         return this._apiServerID
     }
-    set apiServerID(x: any /*string*/) {
+    set apiServerID(x: string) {
         this._apiServerID = x
     }
-    setApiServerID(x: any /*string*/) {
+    $ApiServerID(x: string) {
         this.apiServerID = x; return this
     }
 
-    _decodableVersions: any;
-    get decodableVersions(): any /*Array<string>*/ {
+    _decodableVersions: Array<string>;
+    get decodableVersions(): Array<string> {
         return this._decodableVersions
     }
-    set decodableVersions(x: any /*Array<string>*/) {
+    set decodableVersions(x: Array<string>) {
         this._decodableVersions = this.set(this.decodableVersions, x)
     }
-    setDecodableVersions(x: any /*Array<string>*/) {
+    $DecodableVersions(x: Array<string>) {
         this.decodableVersions = x; return this
     }
 
-    _encodingVersion: any;
-    get encodingVersion(): any /*string*/ {
+    _encodingVersion: string;
+    get encodingVersion(): string {
         return this._encodingVersion
     }
-    set encodingVersion(x: any /*string*/) {
+    set encodingVersion(x: string) {
         this._encodingVersion = x
     }
-    setEncodingVersion(x: any /*string*/) {
+    $EncodingVersion(x: string) {
         this.encodingVersion = x; return this
     }
 }
 
 export interface StorageVersionHelper extends StorageVersion {
-    $metadata(x: any): any;
-    $spec(x: any): any;
-    $status(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): StorageVersionHelper;
+    spec: StorageVersionSpecHelper;
+    $spec(x: StorageVersionSpecHelper): StorageVersionHelper;
+    status: StorageVersionStatusHelper;
+    $status(x: StorageVersionStatusHelper): StorageVersionHelper;
 }
 
 /**
@@ -65,47 +68,47 @@ export class StorageVersionHelper extends ResourceTemplate implements StorageVer
         super(nameOrObject, namespace, StorageVersionHelper.kind, StorageVersionHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*StorageVersionSpecHelper*/ {
+    _spec: StorageVersionSpecHelper;
+    get spec(): StorageVersionSpecHelper {
         return this._spec
     }
-    set spec(x: any /*StorageVersionSpecHelper*/) {
+    set spec(x: StorageVersionSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*StorageVersionSpecHelper*/) {
+    $Spec(x: StorageVersionSpecHelper) {
         this.spec = x; return this
     }
 
-    _status: any;
-    get status(): any /*StorageVersionStatusHelper*/ {
+    _status: StorageVersionStatusHelper;
+    get status(): StorageVersionStatusHelper {
         return this._status
     }
-    set status(x: any /*StorageVersionStatusHelper*/) {
+    set status(x: StorageVersionStatusHelper) {
         this._status = x
     }
-    setStatus(x: any /*StorageVersionStatusHelper*/) {
+    $Status(x: StorageVersionStatusHelper) {
         this.status = x; return this
     }
 }
 
 export interface StorageVersionConditionHelper extends StorageVersionCondition {
-    $lastTransitionTime(x: any): any;
-    $message(x: any): any;
-    $observedGeneration(x: any): any;
-    $reason(x: any): any;
-    $status(x: any): any;
-    $type(x: any): any;
+    $lastTransitionTime(x: Time): StorageVersionConditionHelper;
+    $message(x: string): StorageVersionConditionHelper;
+    $observedGeneration(x: number): StorageVersionConditionHelper;
+    $reason(x: string): StorageVersionConditionHelper;
+    $status(x: string): StorageVersionConditionHelper;
+    $type(x: string): StorageVersionConditionHelper;
 }
 
 /** Describes the state of the storageVersion at a certain point. */
@@ -114,76 +117,77 @@ export class StorageVersionConditionHelper extends Template implements StorageVe
         super(obj)
     }
 
-    _lastTransitionTime: any;
-    get lastTransitionTime(): any /*Time*/ {
+    _lastTransitionTime: Time;
+    get lastTransitionTime(): Time {
         return this._lastTransitionTime
     }
-    set lastTransitionTime(x: any /*Time*/) {
+    set lastTransitionTime(x: Time) {
         this._lastTransitionTime = x
     }
-    setLastTransitionTime(x: any /*Time*/) {
+    $LastTransitionTime(x: Time) {
         this.lastTransitionTime = x; return this
     }
 
-    _message: any;
-    get message(): any /*string*/ {
+    _message: string;
+    get message(): string {
         return this._message
     }
-    set message(x: any /*string*/) {
+    set message(x: string) {
         this._message = x
     }
-    setMessage(x: any /*string*/) {
+    $Message(x: string) {
         this.message = x; return this
     }
 
-    _observedGeneration: any;
-    get observedGeneration(): any /*number*/ {
+    _observedGeneration: number;
+    get observedGeneration(): number {
         return this._observedGeneration
     }
-    set observedGeneration(x: any /*number*/) {
+    set observedGeneration(x: number) {
         this._observedGeneration = x
     }
-    setObservedGeneration(x: any /*number*/) {
+    $ObservedGeneration(x: number) {
         this.observedGeneration = x; return this
     }
 
-    _reason: any;
-    get reason(): any /*string*/ {
+    _reason: string;
+    get reason(): string {
         return this._reason
     }
-    set reason(x: any /*string*/) {
+    set reason(x: string) {
         this._reason = x
     }
-    setReason(x: any /*string*/) {
+    $Reason(x: string) {
         this.reason = x; return this
     }
 
-    _status: any;
-    get status(): any /*string*/ {
+    _status: string;
+    get status(): string {
         return this._status
     }
-    set status(x: any /*string*/) {
+    set status(x: string) {
         this._status = x
     }
-    setStatus(x: any /*string*/) {
+    $Status(x: string) {
         this.status = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }
 
 export interface StorageVersionListHelper extends StorageVersionList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<StorageVersion>): StorageVersionListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): StorageVersionListHelper;
 }
 
 /** A list of StorageVersions. */
@@ -195,25 +199,25 @@ export class StorageVersionListHelper extends ResourceTemplate implements Storag
         super(nameOrObject, namespace, StorageVersionListHelper.kind, StorageVersionListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<StorageVersion>*/ {
+    _items: Array<StorageVersion>;
+    get items(): Array<StorageVersion> {
         return this._items
     }
-    set items(x: any /*Array<StorageVersion>*/) {
+    set items(x: Array<StorageVersion>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<StorageVersion>*/) {
+    $Items(x: Array<StorageVersion>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
@@ -229,9 +233,9 @@ export class StorageVersionSpecHelper extends Template implements StorageVersion
 }
 
 export interface StorageVersionStatusHelper extends StorageVersionStatus {
-    $commonEncodingVersion(x: any): any;
-    $conditions(x: any): any;
-    $storageVersions(x: any): any;
+    $commonEncodingVersion(x: string): StorageVersionStatusHelper;
+    $conditions(x: Array<StorageVersionCondition>): StorageVersionStatusHelper;
+    $storageVersions(x: Array<ServerStorageVersion>): StorageVersionStatusHelper;
 }
 
 /** API server instances report the versions they can decode and the version they encode objects to when persisting objects in the backend. */
@@ -240,36 +244,36 @@ export class StorageVersionStatusHelper extends Template implements StorageVersi
         super(obj)
     }
 
-    _commonEncodingVersion: any;
-    get commonEncodingVersion(): any /*string*/ {
+    _commonEncodingVersion: string;
+    get commonEncodingVersion(): string {
         return this._commonEncodingVersion
     }
-    set commonEncodingVersion(x: any /*string*/) {
+    set commonEncodingVersion(x: string) {
         this._commonEncodingVersion = x
     }
-    setCommonEncodingVersion(x: any /*string*/) {
+    $CommonEncodingVersion(x: string) {
         this.commonEncodingVersion = x; return this
     }
 
-    _conditions: any;
-    get conditions(): any /*Array<StorageVersionCondition>*/ {
+    _conditions: Array<StorageVersionCondition>;
+    get conditions(): Array<StorageVersionCondition> {
         return this._conditions
     }
-    set conditions(x: any /*Array<StorageVersionCondition>*/) {
+    set conditions(x: Array<StorageVersionCondition>) {
         this._conditions = this.set(this.conditions, x)
     }
-    setConditions(x: any /*Array<StorageVersionCondition>*/) {
+    $Conditions(x: Array<StorageVersionCondition>) {
         this.conditions = x; return this
     }
 
-    _storageVersions: any;
-    get storageVersions(): any /*Array<ServerStorageVersion>*/ {
+    _storageVersions: Array<ServerStorageVersion>;
+    get storageVersions(): Array<ServerStorageVersion> {
         return this._storageVersions
     }
-    set storageVersions(x: any /*Array<ServerStorageVersion>*/) {
+    set storageVersions(x: Array<ServerStorageVersion>) {
         this._storageVersions = this.set(this.storageVersions, x)
     }
-    setStorageVersions(x: any /*Array<ServerStorageVersion>*/) {
+    $StorageVersions(x: Array<ServerStorageVersion>) {
         this.storageVersions = x; return this
     }
 }

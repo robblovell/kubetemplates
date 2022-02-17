@@ -4,10 +4,10 @@ import { Condition, LabelSelector, ListMeta, MicroTime, ObjectMeta, Time } from 
 import { Quantity } from "../api/resource";
 
 export interface AWSElasticBlockStoreVolumeSourceHelper extends AWSElasticBlockStoreVolumeSource {
-    $fsType(x: any): any;
-    $partition(x: any): any;
-    $readOnly(x: any): any;
-    $volumeID(x: any): any;
+    $fsType(x: string): AWSElasticBlockStoreVolumeSourceHelper;
+    $partition(x: number): AWSElasticBlockStoreVolumeSourceHelper;
+    $readOnly(x: boolean): AWSElasticBlockStoreVolumeSourceHelper;
+    $volumeID(x: string): AWSElasticBlockStoreVolumeSourceHelper;
 }
 
 /**
@@ -20,55 +20,58 @@ export class AWSElasticBlockStoreVolumeSourceHelper extends Template implements 
         super(obj)
     }
 
-    _fsType: any;
-    get fsType(): any /*string*/ {
+    _fsType: string;
+    get fsType(): string {
         return this._fsType
     }
-    set fsType(x: any /*string*/) {
+    set fsType(x: string) {
         this._fsType = x
     }
-    setFsType(x: any /*string*/) {
+    $FsType(x: string) {
         this.fsType = x; return this
     }
 
-    _partition: any;
-    get partition(): any /*number*/ {
+    _partition: number;
+    get partition(): number {
         return this._partition
     }
-    set partition(x: any /*number*/) {
+    set partition(x: number) {
         this._partition = x
     }
-    setPartition(x: any /*number*/) {
+    $Partition(x: number) {
         this.partition = x; return this
     }
 
-    _readOnly: any;
-    get readOnly(): any /*boolean*/ {
+    _readOnly: boolean;
+    get readOnly(): boolean {
         return this._readOnly
     }
-    set readOnly(x: any /*boolean*/) {
+    set readOnly(x: boolean) {
         this._readOnly = x
     }
-    setReadOnly(x: any /*boolean*/) {
+    $ReadOnly(x: boolean) {
         this.readOnly = x; return this
     }
 
-    _volumeID: any;
-    get volumeID(): any /*string*/ {
+    _volumeID: string;
+    get volumeID(): string {
         return this._volumeID
     }
-    set volumeID(x: any /*string*/) {
+    set volumeID(x: string) {
         this._volumeID = x
     }
-    setVolumeID(x: any /*string*/) {
+    $VolumeID(x: string) {
         this.volumeID = x; return this
     }
 }
 
 export interface AffinityHelper extends Affinity {
-    $nodeAffinity(x: any): any;
-    $podAffinity(x: any): any;
-    $podAntiAffinity(x: any): any;
+    nodeAffinity: NodeAffinityHelper;
+    $nodeAffinity(x: NodeAffinityHelper): AffinityHelper;
+    podAffinity: PodAffinityHelper;
+    $podAffinity(x: PodAffinityHelper): AffinityHelper;
+    podAntiAffinity: PodAntiAffinityHelper;
+    $podAntiAffinity(x: PodAntiAffinityHelper): AffinityHelper;
 }
 
 /** Affinity is a group of affinity scheduling rules. */
@@ -77,42 +80,42 @@ export class AffinityHelper extends Template implements AffinityHelper {
         super(obj)
     }
 
-    _nodeAffinity: any;
-    get nodeAffinity(): any /*NodeAffinityHelper*/ {
+    _nodeAffinity: NodeAffinityHelper;
+    get nodeAffinity(): NodeAffinityHelper {
         return this._nodeAffinity
     }
-    set nodeAffinity(x: any /*NodeAffinityHelper*/) {
+    set nodeAffinity(x: NodeAffinityHelper) {
         this._nodeAffinity = x
     }
-    setNodeAffinity(x: any /*NodeAffinityHelper*/) {
+    $NodeAffinity(x: NodeAffinityHelper) {
         this.nodeAffinity = x; return this
     }
 
-    _podAffinity: any;
-    get podAffinity(): any /*PodAffinityHelper*/ {
+    _podAffinity: PodAffinityHelper;
+    get podAffinity(): PodAffinityHelper {
         return this._podAffinity
     }
-    set podAffinity(x: any /*PodAffinityHelper*/) {
+    set podAffinity(x: PodAffinityHelper) {
         this._podAffinity = x
     }
-    setPodAffinity(x: any /*PodAffinityHelper*/) {
+    $PodAffinity(x: PodAffinityHelper) {
         this.podAffinity = x; return this
     }
 
-    _podAntiAffinity: any;
-    get podAntiAffinity(): any /*PodAntiAffinityHelper*/ {
+    _podAntiAffinity: PodAntiAffinityHelper;
+    get podAntiAffinity(): PodAntiAffinityHelper {
         return this._podAntiAffinity
     }
-    set podAntiAffinity(x: any /*PodAntiAffinityHelper*/) {
+    set podAntiAffinity(x: PodAntiAffinityHelper) {
         this._podAntiAffinity = x
     }
-    setPodAntiAffinity(x: any /*PodAntiAffinityHelper*/) {
+    $PodAntiAffinity(x: PodAntiAffinityHelper) {
         this.podAntiAffinity = x; return this
     }
 }
 
 export interface AttachedVolumeHelper extends AttachedVolume {
-    $devicePath(x: any): any;
+    $devicePath(x: string): AttachedVolumeHelper;
 }
 
 /** AttachedVolume describes a volume attached to a node */
@@ -121,24 +124,24 @@ export class AttachedVolumeHelper extends Template implements AttachedVolumeHelp
         super(obj)
     }
 
-    _devicePath: any;
-    get devicePath(): any /*string*/ {
+    _devicePath: string;
+    get devicePath(): string {
         return this._devicePath
     }
-    set devicePath(x: any /*string*/) {
+    set devicePath(x: string) {
         this._devicePath = x
     }
-    setDevicePath(x: any /*string*/) {
+    $DevicePath(x: string) {
         this.devicePath = x; return this
     }
 }
 
 export interface AzureDiskVolumeSourceHelper extends AzureDiskVolumeSource {
-    $cachingMode(x: any): any;
-    $diskName(x: any): any;
-    $diskURI(x: any): any;
-    $fsType(x: any): any;
-    $readOnly(x: any): any;
+    $cachingMode(x: string): AzureDiskVolumeSourceHelper;
+    $diskName(x: string): AzureDiskVolumeSourceHelper;
+    $diskURI(x: string): AzureDiskVolumeSourceHelper;
+    $fsType(x: string): AzureDiskVolumeSourceHelper;
+    $readOnly(x: boolean): AzureDiskVolumeSourceHelper;
 }
 
 /** AzureDisk represents an Azure Data Disk mount on the host and bind mount to the pod. */
@@ -147,67 +150,67 @@ export class AzureDiskVolumeSourceHelper extends Template implements AzureDiskVo
         super(obj)
     }
 
-    _cachingMode: any;
-    get cachingMode(): any /*string*/ {
+    _cachingMode: string;
+    get cachingMode(): string {
         return this._cachingMode
     }
-    set cachingMode(x: any /*string*/) {
+    set cachingMode(x: string) {
         this._cachingMode = x
     }
-    setCachingMode(x: any /*string*/) {
+    $CachingMode(x: string) {
         this.cachingMode = x; return this
     }
 
-    _diskName: any;
-    get diskName(): any /*string*/ {
+    _diskName: string;
+    get diskName(): string {
         return this._diskName
     }
-    set diskName(x: any /*string*/) {
+    set diskName(x: string) {
         this._diskName = x
     }
-    setDiskName(x: any /*string*/) {
+    $DiskName(x: string) {
         this.diskName = x; return this
     }
 
-    _diskURI: any;
-    get diskURI(): any /*string*/ {
+    _diskURI: string;
+    get diskURI(): string {
         return this._diskURI
     }
-    set diskURI(x: any /*string*/) {
+    set diskURI(x: string) {
         this._diskURI = x
     }
-    setDiskURI(x: any /*string*/) {
+    $DiskURI(x: string) {
         this.diskURI = x; return this
     }
 
-    _fsType: any;
-    get fsType(): any /*string*/ {
+    _fsType: string;
+    get fsType(): string {
         return this._fsType
     }
-    set fsType(x: any /*string*/) {
+    set fsType(x: string) {
         this._fsType = x
     }
-    setFsType(x: any /*string*/) {
+    $FsType(x: string) {
         this.fsType = x; return this
     }
 
-    _readOnly: any;
-    get readOnly(): any /*boolean*/ {
+    _readOnly: boolean;
+    get readOnly(): boolean {
         return this._readOnly
     }
-    set readOnly(x: any /*boolean*/) {
+    set readOnly(x: boolean) {
         this._readOnly = x
     }
-    setReadOnly(x: any /*boolean*/) {
+    $ReadOnly(x: boolean) {
         this.readOnly = x; return this
     }
 }
 
 export interface AzureFilePersistentVolumeSourceHelper extends AzureFilePersistentVolumeSource {
-    $readOnly(x: any): any;
-    $secretName(x: any): any;
-    $secretNamespace(x: any): any;
-    $shareName(x: any): any;
+    $readOnly(x: boolean): AzureFilePersistentVolumeSourceHelper;
+    $secretName(x: string): AzureFilePersistentVolumeSourceHelper;
+    $secretNamespace(x: string): AzureFilePersistentVolumeSourceHelper;
+    $shareName(x: string): AzureFilePersistentVolumeSourceHelper;
 }
 
 /** AzureFile represents an Azure File Service mount on the host and bind mount to the pod. */
@@ -216,55 +219,55 @@ export class AzureFilePersistentVolumeSourceHelper extends Template implements A
         super(obj)
     }
 
-    _readOnly: any;
-    get readOnly(): any /*boolean*/ {
+    _readOnly: boolean;
+    get readOnly(): boolean {
         return this._readOnly
     }
-    set readOnly(x: any /*boolean*/) {
+    set readOnly(x: boolean) {
         this._readOnly = x
     }
-    setReadOnly(x: any /*boolean*/) {
+    $ReadOnly(x: boolean) {
         this.readOnly = x; return this
     }
 
-    _secretName: any;
-    get secretName(): any /*string*/ {
+    _secretName: string;
+    get secretName(): string {
         return this._secretName
     }
-    set secretName(x: any /*string*/) {
+    set secretName(x: string) {
         this._secretName = x
     }
-    setSecretName(x: any /*string*/) {
+    $SecretName(x: string) {
         this.secretName = x; return this
     }
 
-    _secretNamespace: any;
-    get secretNamespace(): any /*string*/ {
+    _secretNamespace: string;
+    get secretNamespace(): string {
         return this._secretNamespace
     }
-    set secretNamespace(x: any /*string*/) {
+    set secretNamespace(x: string) {
         this._secretNamespace = x
     }
-    setSecretNamespace(x: any /*string*/) {
+    $SecretNamespace(x: string) {
         this.secretNamespace = x; return this
     }
 
-    _shareName: any;
-    get shareName(): any /*string*/ {
+    _shareName: string;
+    get shareName(): string {
         return this._shareName
     }
-    set shareName(x: any /*string*/) {
+    set shareName(x: string) {
         this._shareName = x
     }
-    setShareName(x: any /*string*/) {
+    $ShareName(x: string) {
         this.shareName = x; return this
     }
 }
 
 export interface AzureFileVolumeSourceHelper extends AzureFileVolumeSource {
-    $readOnly(x: any): any;
-    $secretName(x: any): any;
-    $shareName(x: any): any;
+    $readOnly(x: boolean): AzureFileVolumeSourceHelper;
+    $secretName(x: string): AzureFileVolumeSourceHelper;
+    $shareName(x: string): AzureFileVolumeSourceHelper;
 }
 
 /** AzureFile represents an Azure File Service mount on the host and bind mount to the pod. */
@@ -273,43 +276,45 @@ export class AzureFileVolumeSourceHelper extends Template implements AzureFileVo
         super(obj)
     }
 
-    _readOnly: any;
-    get readOnly(): any /*boolean*/ {
+    _readOnly: boolean;
+    get readOnly(): boolean {
         return this._readOnly
     }
-    set readOnly(x: any /*boolean*/) {
+    set readOnly(x: boolean) {
         this._readOnly = x
     }
-    setReadOnly(x: any /*boolean*/) {
+    $ReadOnly(x: boolean) {
         this.readOnly = x; return this
     }
 
-    _secretName: any;
-    get secretName(): any /*string*/ {
+    _secretName: string;
+    get secretName(): string {
         return this._secretName
     }
-    set secretName(x: any /*string*/) {
+    set secretName(x: string) {
         this._secretName = x
     }
-    setSecretName(x: any /*string*/) {
+    $SecretName(x: string) {
         this.secretName = x; return this
     }
 
-    _shareName: any;
-    get shareName(): any /*string*/ {
+    _shareName: string;
+    get shareName(): string {
         return this._shareName
     }
-    set shareName(x: any /*string*/) {
+    set shareName(x: string) {
         this._shareName = x
     }
-    setShareName(x: any /*string*/) {
+    $ShareName(x: string) {
         this.shareName = x; return this
     }
 }
 
 export interface BindingHelper extends Binding {
-    $metadata(x: any): any;
-    $target(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): BindingHelper;
+    target: ObjectReferenceHelper;
+    $target(x: ObjectReferenceHelper): BindingHelper;
 }
 
 /** Binding ties one object to another; for example, a pod is bound to a node by a scheduler. Deprecated in 1.7, please use the bindings subresource of pods instead. */
@@ -321,39 +326,43 @@ export class BindingHelper extends ResourceTemplate implements BindingHelper {
         super(nameOrObject, namespace, BindingHelper.kind, BindingHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _target: any;
-    get target(): any /*ObjectReferenceHelper*/ {
+    _target: ObjectReferenceHelper;
+    get target(): ObjectReferenceHelper {
         return this._target
     }
-    set target(x: any /*ObjectReferenceHelper*/) {
+    set target(x: ObjectReferenceHelper) {
         this._target = x
     }
-    setTarget(x: any /*ObjectReferenceHelper*/) {
+    $Target(x: ObjectReferenceHelper) {
         this.target = x; return this
     }
 }
 
 export interface CSIPersistentVolumeSourceHelper extends CSIPersistentVolumeSource {
-    $controllerExpandSecretRef(x: any): any;
-    $controllerPublishSecretRef(x: any): any;
-    $driver(x: any): any;
-    $fsType(x: any): any;
-    $nodePublishSecretRef(x: any): any;
-    $nodeStageSecretRef(x: any): any;
-    $readOnly(x: any): any;
-    $volumeAttributes(x: any): any;
-    $volumeHandle(x: any): any;
+    controllerExpandSecretRef: SecretReferenceHelper;
+    $controllerExpandSecretRef(x: SecretReferenceHelper): CSIPersistentVolumeSourceHelper;
+    controllerPublishSecretRef: SecretReferenceHelper;
+    $controllerPublishSecretRef(x: SecretReferenceHelper): CSIPersistentVolumeSourceHelper;
+    $driver(x: string): CSIPersistentVolumeSourceHelper;
+    $fsType(x: string): CSIPersistentVolumeSourceHelper;
+    nodePublishSecretRef: SecretReferenceHelper;
+    $nodePublishSecretRef(x: SecretReferenceHelper): CSIPersistentVolumeSourceHelper;
+    nodeStageSecretRef: SecretReferenceHelper;
+    $nodeStageSecretRef(x: SecretReferenceHelper): CSIPersistentVolumeSourceHelper;
+    $readOnly(x: boolean): CSIPersistentVolumeSourceHelper;
+    $volumeAttributes(x: any): CSIPersistentVolumeSourceHelper;
+    $volumeHandle(x: string): CSIPersistentVolumeSourceHelper;
 }
 
 /** Represents storage that is managed by an external CSI volume driver (Beta feature) */
@@ -362,112 +371,113 @@ export class CSIPersistentVolumeSourceHelper extends Template implements CSIPers
         super(obj)
     }
 
-    _controllerExpandSecretRef: any;
-    get controllerExpandSecretRef(): any /*SecretReferenceHelper*/ {
+    _controllerExpandSecretRef: SecretReferenceHelper;
+    get controllerExpandSecretRef(): SecretReferenceHelper {
         return this._controllerExpandSecretRef
     }
-    set controllerExpandSecretRef(x: any /*SecretReferenceHelper*/) {
+    set controllerExpandSecretRef(x: SecretReferenceHelper) {
         this._controllerExpandSecretRef = x
     }
-    setControllerExpandSecretRef(x: any /*SecretReferenceHelper*/) {
+    $ControllerExpandSecretRef(x: SecretReferenceHelper) {
         this.controllerExpandSecretRef = x; return this
     }
 
-    _controllerPublishSecretRef: any;
-    get controllerPublishSecretRef(): any /*SecretReferenceHelper*/ {
+    _controllerPublishSecretRef: SecretReferenceHelper;
+    get controllerPublishSecretRef(): SecretReferenceHelper {
         return this._controllerPublishSecretRef
     }
-    set controllerPublishSecretRef(x: any /*SecretReferenceHelper*/) {
+    set controllerPublishSecretRef(x: SecretReferenceHelper) {
         this._controllerPublishSecretRef = x
     }
-    setControllerPublishSecretRef(x: any /*SecretReferenceHelper*/) {
+    $ControllerPublishSecretRef(x: SecretReferenceHelper) {
         this.controllerPublishSecretRef = x; return this
     }
 
-    _driver: any;
-    get driver(): any /*string*/ {
+    _driver: string;
+    get driver(): string {
         return this._driver
     }
-    set driver(x: any /*string*/) {
+    set driver(x: string) {
         this._driver = x
     }
-    setDriver(x: any /*string*/) {
+    $Driver(x: string) {
         this.driver = x; return this
     }
 
-    _fsType: any;
-    get fsType(): any /*string*/ {
+    _fsType: string;
+    get fsType(): string {
         return this._fsType
     }
-    set fsType(x: any /*string*/) {
+    set fsType(x: string) {
         this._fsType = x
     }
-    setFsType(x: any /*string*/) {
+    $FsType(x: string) {
         this.fsType = x; return this
     }
 
-    _nodePublishSecretRef: any;
-    get nodePublishSecretRef(): any /*SecretReferenceHelper*/ {
+    _nodePublishSecretRef: SecretReferenceHelper;
+    get nodePublishSecretRef(): SecretReferenceHelper {
         return this._nodePublishSecretRef
     }
-    set nodePublishSecretRef(x: any /*SecretReferenceHelper*/) {
+    set nodePublishSecretRef(x: SecretReferenceHelper) {
         this._nodePublishSecretRef = x
     }
-    setNodePublishSecretRef(x: any /*SecretReferenceHelper*/) {
+    $NodePublishSecretRef(x: SecretReferenceHelper) {
         this.nodePublishSecretRef = x; return this
     }
 
-    _nodeStageSecretRef: any;
-    get nodeStageSecretRef(): any /*SecretReferenceHelper*/ {
+    _nodeStageSecretRef: SecretReferenceHelper;
+    get nodeStageSecretRef(): SecretReferenceHelper {
         return this._nodeStageSecretRef
     }
-    set nodeStageSecretRef(x: any /*SecretReferenceHelper*/) {
+    set nodeStageSecretRef(x: SecretReferenceHelper) {
         this._nodeStageSecretRef = x
     }
-    setNodeStageSecretRef(x: any /*SecretReferenceHelper*/) {
+    $NodeStageSecretRef(x: SecretReferenceHelper) {
         this.nodeStageSecretRef = x; return this
     }
 
-    _readOnly: any;
-    get readOnly(): any /*boolean*/ {
+    _readOnly: boolean;
+    get readOnly(): boolean {
         return this._readOnly
     }
-    set readOnly(x: any /*boolean*/) {
+    set readOnly(x: boolean) {
         this._readOnly = x
     }
-    setReadOnly(x: any /*boolean*/) {
+    $ReadOnly(x: boolean) {
         this.readOnly = x; return this
     }
 
     _volumeAttributes: any;
-    get volumeAttributes(): any /*any*/ {
+    get volumeAttributes(): any {
         return this._volumeAttributes
     }
-    set volumeAttributes(x: any /*any*/) {
+    set volumeAttributes(x: any) {
         this._volumeAttributes = this.set(this.volumeAttributes, x)
     }
-    setVolumeAttributes(x: any /*any*/) {
+    $VolumeAttributes(x: any) {
         this.volumeAttributes = x; return this
     }
 
-    _volumeHandle: any;
-    get volumeHandle(): any /*string*/ {
+    _volumeHandle: string;
+    get volumeHandle(): string {
         return this._volumeHandle
     }
-    set volumeHandle(x: any /*string*/) {
+    set volumeHandle(x: string) {
         this._volumeHandle = x
     }
-    setVolumeHandle(x: any /*string*/) {
+    $VolumeHandle(x: string) {
         this.volumeHandle = x; return this
     }
 }
 
 export interface CSIVolumeSourceHelper extends CSIVolumeSource {
-    $driver(x: any): any;
-    $fsType(x: any): any;
-    $nodePublishSecretRef(x: any): any;
-    $readOnly(x: any): any;
-    $volumeAttributes(x: any): any;
+    $driver(x: string): CSIVolumeSourceHelper;
+    $fsType(x: string): CSIVolumeSourceHelper;
+    nodePublishSecretRef: LocalObjectReferenceHelper;
+    $nodePublishSecretRef(x: LocalObjectReferenceHelper): CSIVolumeSourceHelper;
+    $readOnly(x: boolean): CSIVolumeSourceHelper;
+    $volumeAttributes(x: any): CSIVolumeSourceHelper;
 }
 
 /** Represents a source location of a volume to mount, managed by an external CSI driver */
@@ -476,65 +486,65 @@ export class CSIVolumeSourceHelper extends Template implements CSIVolumeSourceHe
         super(obj)
     }
 
-    _driver: any;
-    get driver(): any /*string*/ {
+    _driver: string;
+    get driver(): string {
         return this._driver
     }
-    set driver(x: any /*string*/) {
+    set driver(x: string) {
         this._driver = x
     }
-    setDriver(x: any /*string*/) {
+    $Driver(x: string) {
         this.driver = x; return this
     }
 
-    _fsType: any;
-    get fsType(): any /*string*/ {
+    _fsType: string;
+    get fsType(): string {
         return this._fsType
     }
-    set fsType(x: any /*string*/) {
+    set fsType(x: string) {
         this._fsType = x
     }
-    setFsType(x: any /*string*/) {
+    $FsType(x: string) {
         this.fsType = x; return this
     }
 
-    _nodePublishSecretRef: any;
-    get nodePublishSecretRef(): any /*LocalObjectReferenceHelper*/ {
+    _nodePublishSecretRef: LocalObjectReferenceHelper;
+    get nodePublishSecretRef(): LocalObjectReferenceHelper {
         return this._nodePublishSecretRef
     }
-    set nodePublishSecretRef(x: any /*LocalObjectReferenceHelper*/) {
+    set nodePublishSecretRef(x: LocalObjectReferenceHelper) {
         this._nodePublishSecretRef = x
     }
-    setNodePublishSecretRef(x: any /*LocalObjectReferenceHelper*/) {
+    $NodePublishSecretRef(x: LocalObjectReferenceHelper) {
         this.nodePublishSecretRef = x; return this
     }
 
-    _readOnly: any;
-    get readOnly(): any /*boolean*/ {
+    _readOnly: boolean;
+    get readOnly(): boolean {
         return this._readOnly
     }
-    set readOnly(x: any /*boolean*/) {
+    set readOnly(x: boolean) {
         this._readOnly = x
     }
-    setReadOnly(x: any /*boolean*/) {
+    $ReadOnly(x: boolean) {
         this.readOnly = x; return this
     }
 
     _volumeAttributes: any;
-    get volumeAttributes(): any /*any*/ {
+    get volumeAttributes(): any {
         return this._volumeAttributes
     }
-    set volumeAttributes(x: any /*any*/) {
+    set volumeAttributes(x: any) {
         this._volumeAttributes = this.set(this.volumeAttributes, x)
     }
-    setVolumeAttributes(x: any /*any*/) {
+    $VolumeAttributes(x: any) {
         this.volumeAttributes = x; return this
     }
 }
 
 export interface CapabilitiesHelper extends Capabilities {
-    $add(x: any): any;
-    $drop(x: any): any;
+    $add(x: Array<string>): CapabilitiesHelper;
+    $drop(x: Array<string>): CapabilitiesHelper;
 }
 
 /** Adds and removes POSIX capabilities from running containers. */
@@ -543,36 +553,37 @@ export class CapabilitiesHelper extends Template implements CapabilitiesHelper {
         super(obj)
     }
 
-    _add: any;
-    get add(): any /*Array<string>*/ {
+    _add: Array<string>;
+    get add(): Array<string> {
         return this._add
     }
-    set add(x: any /*Array<string>*/) {
+    set add(x: Array<string>) {
         this._add = this.set(this.add, x)
     }
-    setAdd(x: any /*Array<string>*/) {
+    $Add(x: Array<string>) {
         this.add = x; return this
     }
 
-    _drop: any;
-    get drop(): any /*Array<string>*/ {
+    _drop: Array<string>;
+    get drop(): Array<string> {
         return this._drop
     }
-    set drop(x: any /*Array<string>*/) {
+    set drop(x: Array<string>) {
         this._drop = this.set(this.drop, x)
     }
-    setDrop(x: any /*Array<string>*/) {
+    $Drop(x: Array<string>) {
         this.drop = x; return this
     }
 }
 
 export interface CephFSPersistentVolumeSourceHelper extends CephFSPersistentVolumeSource {
-    $monitors(x: any): any;
-    $path(x: any): any;
-    $readOnly(x: any): any;
-    $secretFile(x: any): any;
-    $secretRef(x: any): any;
-    $user(x: any): any;
+    $monitors(x: Array<string>): CephFSPersistentVolumeSourceHelper;
+    $path(x: string): CephFSPersistentVolumeSourceHelper;
+    $readOnly(x: boolean): CephFSPersistentVolumeSourceHelper;
+    $secretFile(x: string): CephFSPersistentVolumeSourceHelper;
+    secretRef: SecretReferenceHelper;
+    $secretRef(x: SecretReferenceHelper): CephFSPersistentVolumeSourceHelper;
+    $user(x: string): CephFSPersistentVolumeSourceHelper;
 }
 
 /** Represents a Ceph Filesystem mount that lasts the lifetime of a pod Cephfs volumes do not support ownership management or SELinux relabeling. */
@@ -581,80 +592,81 @@ export class CephFSPersistentVolumeSourceHelper extends Template implements Ceph
         super(obj)
     }
 
-    _monitors: any;
-    get monitors(): any /*Array<string>*/ {
+    _monitors: Array<string>;
+    get monitors(): Array<string> {
         return this._monitors
     }
-    set monitors(x: any /*Array<string>*/) {
+    set monitors(x: Array<string>) {
         this._monitors = this.set(this.monitors, x)
     }
-    setMonitors(x: any /*Array<string>*/) {
+    $Monitors(x: Array<string>) {
         this.monitors = x; return this
     }
 
-    _path: any;
-    get path(): any /*string*/ {
+    _path: string;
+    get path(): string {
         return this._path
     }
-    set path(x: any /*string*/) {
+    set path(x: string) {
         this._path = x
     }
-    setPath(x: any /*string*/) {
+    $Path(x: string) {
         this.path = x; return this
     }
 
-    _readOnly: any;
-    get readOnly(): any /*boolean*/ {
+    _readOnly: boolean;
+    get readOnly(): boolean {
         return this._readOnly
     }
-    set readOnly(x: any /*boolean*/) {
+    set readOnly(x: boolean) {
         this._readOnly = x
     }
-    setReadOnly(x: any /*boolean*/) {
+    $ReadOnly(x: boolean) {
         this.readOnly = x; return this
     }
 
-    _secretFile: any;
-    get secretFile(): any /*string*/ {
+    _secretFile: string;
+    get secretFile(): string {
         return this._secretFile
     }
-    set secretFile(x: any /*string*/) {
+    set secretFile(x: string) {
         this._secretFile = x
     }
-    setSecretFile(x: any /*string*/) {
+    $SecretFile(x: string) {
         this.secretFile = x; return this
     }
 
-    _secretRef: any;
-    get secretRef(): any /*SecretReferenceHelper*/ {
+    _secretRef: SecretReferenceHelper;
+    get secretRef(): SecretReferenceHelper {
         return this._secretRef
     }
-    set secretRef(x: any /*SecretReferenceHelper*/) {
+    set secretRef(x: SecretReferenceHelper) {
         this._secretRef = x
     }
-    setSecretRef(x: any /*SecretReferenceHelper*/) {
+    $SecretRef(x: SecretReferenceHelper) {
         this.secretRef = x; return this
     }
 
-    _user: any;
-    get user(): any /*string*/ {
+    _user: string;
+    get user(): string {
         return this._user
     }
-    set user(x: any /*string*/) {
+    set user(x: string) {
         this._user = x
     }
-    setUser(x: any /*string*/) {
+    $User(x: string) {
         this.user = x; return this
     }
 }
 
 export interface CephFSVolumeSourceHelper extends CephFSVolumeSource {
-    $monitors(x: any): any;
-    $path(x: any): any;
-    $readOnly(x: any): any;
-    $secretFile(x: any): any;
-    $secretRef(x: any): any;
-    $user(x: any): any;
+    $monitors(x: Array<string>): CephFSVolumeSourceHelper;
+    $path(x: string): CephFSVolumeSourceHelper;
+    $readOnly(x: boolean): CephFSVolumeSourceHelper;
+    $secretFile(x: string): CephFSVolumeSourceHelper;
+    secretRef: LocalObjectReferenceHelper;
+    $secretRef(x: LocalObjectReferenceHelper): CephFSVolumeSourceHelper;
+    $user(x: string): CephFSVolumeSourceHelper;
 }
 
 /** Represents a Ceph Filesystem mount that lasts the lifetime of a pod Cephfs volumes do not support ownership management or SELinux relabeling. */
@@ -663,78 +675,79 @@ export class CephFSVolumeSourceHelper extends Template implements CephFSVolumeSo
         super(obj)
     }
 
-    _monitors: any;
-    get monitors(): any /*Array<string>*/ {
+    _monitors: Array<string>;
+    get monitors(): Array<string> {
         return this._monitors
     }
-    set monitors(x: any /*Array<string>*/) {
+    set monitors(x: Array<string>) {
         this._monitors = this.set(this.monitors, x)
     }
-    setMonitors(x: any /*Array<string>*/) {
+    $Monitors(x: Array<string>) {
         this.monitors = x; return this
     }
 
-    _path: any;
-    get path(): any /*string*/ {
+    _path: string;
+    get path(): string {
         return this._path
     }
-    set path(x: any /*string*/) {
+    set path(x: string) {
         this._path = x
     }
-    setPath(x: any /*string*/) {
+    $Path(x: string) {
         this.path = x; return this
     }
 
-    _readOnly: any;
-    get readOnly(): any /*boolean*/ {
+    _readOnly: boolean;
+    get readOnly(): boolean {
         return this._readOnly
     }
-    set readOnly(x: any /*boolean*/) {
+    set readOnly(x: boolean) {
         this._readOnly = x
     }
-    setReadOnly(x: any /*boolean*/) {
+    $ReadOnly(x: boolean) {
         this.readOnly = x; return this
     }
 
-    _secretFile: any;
-    get secretFile(): any /*string*/ {
+    _secretFile: string;
+    get secretFile(): string {
         return this._secretFile
     }
-    set secretFile(x: any /*string*/) {
+    set secretFile(x: string) {
         this._secretFile = x
     }
-    setSecretFile(x: any /*string*/) {
+    $SecretFile(x: string) {
         this.secretFile = x; return this
     }
 
-    _secretRef: any;
-    get secretRef(): any /*LocalObjectReferenceHelper*/ {
+    _secretRef: LocalObjectReferenceHelper;
+    get secretRef(): LocalObjectReferenceHelper {
         return this._secretRef
     }
-    set secretRef(x: any /*LocalObjectReferenceHelper*/) {
+    set secretRef(x: LocalObjectReferenceHelper) {
         this._secretRef = x
     }
-    setSecretRef(x: any /*LocalObjectReferenceHelper*/) {
+    $SecretRef(x: LocalObjectReferenceHelper) {
         this.secretRef = x; return this
     }
 
-    _user: any;
-    get user(): any /*string*/ {
+    _user: string;
+    get user(): string {
         return this._user
     }
-    set user(x: any /*string*/) {
+    set user(x: string) {
         this._user = x
     }
-    setUser(x: any /*string*/) {
+    $User(x: string) {
         this.user = x; return this
     }
 }
 
 export interface CinderPersistentVolumeSourceHelper extends CinderPersistentVolumeSource {
-    $fsType(x: any): any;
-    $readOnly(x: any): any;
-    $secretRef(x: any): any;
-    $volumeID(x: any): any;
+    $fsType(x: string): CinderPersistentVolumeSourceHelper;
+    $readOnly(x: boolean): CinderPersistentVolumeSourceHelper;
+    secretRef: SecretReferenceHelper;
+    $secretRef(x: SecretReferenceHelper): CinderPersistentVolumeSourceHelper;
+    $volumeID(x: string): CinderPersistentVolumeSourceHelper;
 }
 
 /** Represents a cinder volume resource in Openstack. A Cinder volume must exist before mounting to a container. The volume must also be in the same region as the kubelet. Cinder volumes support ownership management and SELinux relabeling. */
@@ -743,56 +756,57 @@ export class CinderPersistentVolumeSourceHelper extends Template implements Cind
         super(obj)
     }
 
-    _fsType: any;
-    get fsType(): any /*string*/ {
+    _fsType: string;
+    get fsType(): string {
         return this._fsType
     }
-    set fsType(x: any /*string*/) {
+    set fsType(x: string) {
         this._fsType = x
     }
-    setFsType(x: any /*string*/) {
+    $FsType(x: string) {
         this.fsType = x; return this
     }
 
-    _readOnly: any;
-    get readOnly(): any /*boolean*/ {
+    _readOnly: boolean;
+    get readOnly(): boolean {
         return this._readOnly
     }
-    set readOnly(x: any /*boolean*/) {
+    set readOnly(x: boolean) {
         this._readOnly = x
     }
-    setReadOnly(x: any /*boolean*/) {
+    $ReadOnly(x: boolean) {
         this.readOnly = x; return this
     }
 
-    _secretRef: any;
-    get secretRef(): any /*SecretReferenceHelper*/ {
+    _secretRef: SecretReferenceHelper;
+    get secretRef(): SecretReferenceHelper {
         return this._secretRef
     }
-    set secretRef(x: any /*SecretReferenceHelper*/) {
+    set secretRef(x: SecretReferenceHelper) {
         this._secretRef = x
     }
-    setSecretRef(x: any /*SecretReferenceHelper*/) {
+    $SecretRef(x: SecretReferenceHelper) {
         this.secretRef = x; return this
     }
 
-    _volumeID: any;
-    get volumeID(): any /*string*/ {
+    _volumeID: string;
+    get volumeID(): string {
         return this._volumeID
     }
-    set volumeID(x: any /*string*/) {
+    set volumeID(x: string) {
         this._volumeID = x
     }
-    setVolumeID(x: any /*string*/) {
+    $VolumeID(x: string) {
         this.volumeID = x; return this
     }
 }
 
 export interface CinderVolumeSourceHelper extends CinderVolumeSource {
-    $fsType(x: any): any;
-    $readOnly(x: any): any;
-    $secretRef(x: any): any;
-    $volumeID(x: any): any;
+    $fsType(x: string): CinderVolumeSourceHelper;
+    $readOnly(x: boolean): CinderVolumeSourceHelper;
+    secretRef: LocalObjectReferenceHelper;
+    $secretRef(x: LocalObjectReferenceHelper): CinderVolumeSourceHelper;
+    $volumeID(x: string): CinderVolumeSourceHelper;
 }
 
 /** Represents a cinder volume resource in Openstack. A Cinder volume must exist before mounting to a container. The volume must also be in the same region as the kubelet. Cinder volumes support ownership management and SELinux relabeling. */
@@ -801,53 +815,53 @@ export class CinderVolumeSourceHelper extends Template implements CinderVolumeSo
         super(obj)
     }
 
-    _fsType: any;
-    get fsType(): any /*string*/ {
+    _fsType: string;
+    get fsType(): string {
         return this._fsType
     }
-    set fsType(x: any /*string*/) {
+    set fsType(x: string) {
         this._fsType = x
     }
-    setFsType(x: any /*string*/) {
+    $FsType(x: string) {
         this.fsType = x; return this
     }
 
-    _readOnly: any;
-    get readOnly(): any /*boolean*/ {
+    _readOnly: boolean;
+    get readOnly(): boolean {
         return this._readOnly
     }
-    set readOnly(x: any /*boolean*/) {
+    set readOnly(x: boolean) {
         this._readOnly = x
     }
-    setReadOnly(x: any /*boolean*/) {
+    $ReadOnly(x: boolean) {
         this.readOnly = x; return this
     }
 
-    _secretRef: any;
-    get secretRef(): any /*LocalObjectReferenceHelper*/ {
+    _secretRef: LocalObjectReferenceHelper;
+    get secretRef(): LocalObjectReferenceHelper {
         return this._secretRef
     }
-    set secretRef(x: any /*LocalObjectReferenceHelper*/) {
+    set secretRef(x: LocalObjectReferenceHelper) {
         this._secretRef = x
     }
-    setSecretRef(x: any /*LocalObjectReferenceHelper*/) {
+    $SecretRef(x: LocalObjectReferenceHelper) {
         this.secretRef = x; return this
     }
 
-    _volumeID: any;
-    get volumeID(): any /*string*/ {
+    _volumeID: string;
+    get volumeID(): string {
         return this._volumeID
     }
-    set volumeID(x: any /*string*/) {
+    set volumeID(x: string) {
         this._volumeID = x
     }
-    setVolumeID(x: any /*string*/) {
+    $VolumeID(x: string) {
         this.volumeID = x; return this
     }
 }
 
 export interface ClientIPConfigHelper extends ClientIPConfig {
-    $timeoutSeconds(x: any): any;
+    $timeoutSeconds(x: number): ClientIPConfigHelper;
 }
 
 /** ClientIPConfig represents the configurations of Client IP based session affinity. */
@@ -856,23 +870,23 @@ export class ClientIPConfigHelper extends Template implements ClientIPConfigHelp
         super(obj)
     }
 
-    _timeoutSeconds: any;
-    get timeoutSeconds(): any /*number*/ {
+    _timeoutSeconds: number;
+    get timeoutSeconds(): number {
         return this._timeoutSeconds
     }
-    set timeoutSeconds(x: any /*number*/) {
+    set timeoutSeconds(x: number) {
         this._timeoutSeconds = x
     }
-    setTimeoutSeconds(x: any /*number*/) {
+    $TimeoutSeconds(x: number) {
         this.timeoutSeconds = x; return this
     }
 }
 
 export interface ComponentConditionHelper extends ComponentCondition {
-    $error(x: any): any;
-    $message(x: any): any;
-    $status(x: any): any;
-    $type(x: any): any;
+    $error(x: string): ComponentConditionHelper;
+    $message(x: string): ComponentConditionHelper;
+    $status(x: string): ComponentConditionHelper;
+    $type(x: string): ComponentConditionHelper;
 }
 
 /** Information about the condition of a component. */
@@ -881,54 +895,55 @@ export class ComponentConditionHelper extends Template implements ComponentCondi
         super(obj)
     }
 
-    _error: any;
-    get error(): any /*string*/ {
+    _error: string;
+    get error(): string {
         return this._error
     }
-    set error(x: any /*string*/) {
+    set error(x: string) {
         this._error = x
     }
-    setError(x: any /*string*/) {
+    $Error(x: string) {
         this.error = x; return this
     }
 
-    _message: any;
-    get message(): any /*string*/ {
+    _message: string;
+    get message(): string {
         return this._message
     }
-    set message(x: any /*string*/) {
+    set message(x: string) {
         this._message = x
     }
-    setMessage(x: any /*string*/) {
+    $Message(x: string) {
         this.message = x; return this
     }
 
-    _status: any;
-    get status(): any /*string*/ {
+    _status: string;
+    get status(): string {
         return this._status
     }
-    set status(x: any /*string*/) {
+    set status(x: string) {
         this._status = x
     }
-    setStatus(x: any /*string*/) {
+    $Status(x: string) {
         this.status = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }
 
 export interface ComponentStatusHelper extends ComponentStatus {
-    $conditions(x: any): any;
-    $metadata(x: any): any;
+    $conditions(x: Array<ComponentCondition>): ComponentStatusHelper;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): ComponentStatusHelper;
 }
 
 /** ComponentStatus (and ComponentStatusList) holds the cluster validation info. Deprecated: This API is deprecated in v1.19+ */
@@ -940,32 +955,33 @@ export class ComponentStatusHelper extends ResourceTemplate implements Component
         super(nameOrObject, namespace, ComponentStatusHelper.kind, ComponentStatusHelper.apiVersion)
     }
 
-    _conditions: any;
-    get conditions(): any /*Array<ComponentCondition>*/ {
+    _conditions: Array<ComponentCondition>;
+    get conditions(): Array<ComponentCondition> {
         return this._conditions
     }
-    set conditions(x: any /*Array<ComponentCondition>*/) {
+    set conditions(x: Array<ComponentCondition>) {
         this._conditions = this.set(this.conditions, x)
     }
-    setConditions(x: any /*Array<ComponentCondition>*/) {
+    $Conditions(x: Array<ComponentCondition>) {
         this.conditions = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface ComponentStatusListHelper extends ComponentStatusList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<ComponentStatus>): ComponentStatusListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): ComponentStatusListHelper;
 }
 
 /** Status of all the conditions for the component as a list of ComponentStatus objects. Deprecated: This API is deprecated in v1.19+ */
@@ -977,34 +993,35 @@ export class ComponentStatusListHelper extends ResourceTemplate implements Compo
         super(nameOrObject, namespace, ComponentStatusListHelper.kind, ComponentStatusListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<ComponentStatus>*/ {
+    _items: Array<ComponentStatus>;
+    get items(): Array<ComponentStatus> {
         return this._items
     }
-    set items(x: any /*Array<ComponentStatus>*/) {
+    set items(x: Array<ComponentStatus>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<ComponentStatus>*/) {
+    $Items(x: Array<ComponentStatus>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface ConfigMapHelper extends ConfigMap {
-    $binaryData(x: any): any;
-    $data(x: any): any;
-    $immutable(x: any): any;
-    $metadata(x: any): any;
+    $binaryData(x: any): ConfigMapHelper;
+    $data(x: any): ConfigMapHelper;
+    $immutable(x: boolean): ConfigMapHelper;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): ConfigMapHelper;
 }
 
 /** ConfigMap holds configuration data for pods to consume. */
@@ -1017,52 +1034,52 @@ export class ConfigMapHelper extends ResourceTemplate implements ConfigMapHelper
     }
 
     _binaryData: any;
-    get binaryData(): any /*any*/ {
+    get binaryData(): any {
         return this._binaryData
     }
-    set binaryData(x: any /*any*/) {
+    set binaryData(x: any) {
         this._binaryData = this.set(this.binaryData, x)
     }
-    setBinaryData(x: any /*any*/) {
+    $BinaryData(x: any) {
         this.binaryData = x; return this
     }
 
     _data: any;
-    get data(): any /*any*/ {
+    get data(): any {
         return this._data
     }
-    set data(x: any /*any*/) {
+    set data(x: any) {
         this._data = this.set(this.data, x)
     }
-    setData(x: any /*any*/) {
+    $Data(x: any) {
         this.data = x; return this
     }
 
-    _immutable: any;
-    get immutable(): any /*boolean*/ {
+    _immutable: boolean;
+    get immutable(): boolean {
         return this._immutable
     }
-    set immutable(x: any /*boolean*/) {
+    set immutable(x: boolean) {
         this._immutable = x
     }
-    setImmutable(x: any /*boolean*/) {
+    $Immutable(x: boolean) {
         this.immutable = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface ConfigMapEnvSourceHelper extends ConfigMapEnvSource {
-    $optional(x: any): any;
+    $optional(x: boolean): ConfigMapEnvSourceHelper;
 }
 
 /**
@@ -1075,21 +1092,21 @@ export class ConfigMapEnvSourceHelper extends Template implements ConfigMapEnvSo
         super(obj)
     }
 
-    _optional: any;
-    get optional(): any /*boolean*/ {
+    _optional: boolean;
+    get optional(): boolean {
         return this._optional
     }
-    set optional(x: any /*boolean*/) {
+    set optional(x: boolean) {
         this._optional = x
     }
-    setOptional(x: any /*boolean*/) {
+    $Optional(x: boolean) {
         this.optional = x; return this
     }
 }
 
 export interface ConfigMapKeySelectorHelper extends ConfigMapKeySelector {
-    $key(x: any): any;
-    $optional(x: any): any;
+    $key(x: string): ConfigMapKeySelectorHelper;
+    $optional(x: boolean): ConfigMapKeySelectorHelper;
 }
 
 /** Selects a key from a ConfigMap. */
@@ -1098,32 +1115,33 @@ export class ConfigMapKeySelectorHelper extends Template implements ConfigMapKey
         super(obj)
     }
 
-    _key: any;
-    get key(): any /*string*/ {
+    _key: string;
+    get key(): string {
         return this._key
     }
-    set key(x: any /*string*/) {
+    set key(x: string) {
         this._key = x
     }
-    setKey(x: any /*string*/) {
+    $Key(x: string) {
         this.key = x; return this
     }
 
-    _optional: any;
-    get optional(): any /*boolean*/ {
+    _optional: boolean;
+    get optional(): boolean {
         return this._optional
     }
-    set optional(x: any /*boolean*/) {
+    set optional(x: boolean) {
         this._optional = x
     }
-    setOptional(x: any /*boolean*/) {
+    $Optional(x: boolean) {
         this.optional = x; return this
     }
 }
 
 export interface ConfigMapListHelper extends ConfigMapList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<ConfigMap>): ConfigMapListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): ConfigMapListHelper;
 }
 
 /** ConfigMapList is a resource containing a list of ConfigMap objects. */
@@ -1135,33 +1153,33 @@ export class ConfigMapListHelper extends ResourceTemplate implements ConfigMapLi
         super(nameOrObject, namespace, ConfigMapListHelper.kind, ConfigMapListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<ConfigMap>*/ {
+    _items: Array<ConfigMap>;
+    get items(): Array<ConfigMap> {
         return this._items
     }
-    set items(x: any /*Array<ConfigMap>*/) {
+    set items(x: Array<ConfigMap>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<ConfigMap>*/) {
+    $Items(x: Array<ConfigMap>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface ConfigMapNodeConfigSourceHelper extends ConfigMapNodeConfigSource {
-    $kubeletConfigKey(x: any): any;
-    $resourceVersion(x: any): any;
-    $uid(x: any): any;
+    $kubeletConfigKey(x: string): ConfigMapNodeConfigSourceHelper;
+    $resourceVersion(x: string): ConfigMapNodeConfigSourceHelper;
+    $uid(x: string): ConfigMapNodeConfigSourceHelper;
 }
 
 /** ConfigMapNodeConfigSource contains the information to reference a ConfigMap as a config source for the Node. */
@@ -1170,43 +1188,43 @@ export class ConfigMapNodeConfigSourceHelper extends Template implements ConfigM
         super(obj)
     }
 
-    _kubeletConfigKey: any;
-    get kubeletConfigKey(): any /*string*/ {
+    _kubeletConfigKey: string;
+    get kubeletConfigKey(): string {
         return this._kubeletConfigKey
     }
-    set kubeletConfigKey(x: any /*string*/) {
+    set kubeletConfigKey(x: string) {
         this._kubeletConfigKey = x
     }
-    setKubeletConfigKey(x: any /*string*/) {
+    $KubeletConfigKey(x: string) {
         this.kubeletConfigKey = x; return this
     }
 
-    _resourceVersion: any;
-    get resourceVersion(): any /*string*/ {
+    _resourceVersion: string;
+    get resourceVersion(): string {
         return this._resourceVersion
     }
-    set resourceVersion(x: any /*string*/) {
+    set resourceVersion(x: string) {
         this._resourceVersion = x
     }
-    setResourceVersion(x: any /*string*/) {
+    $ResourceVersion(x: string) {
         this.resourceVersion = x; return this
     }
 
-    _uid: any;
-    get uid(): any /*string*/ {
+    _uid: string;
+    get uid(): string {
         return this._uid
     }
-    set uid(x: any /*string*/) {
+    set uid(x: string) {
         this._uid = x
     }
-    setUid(x: any /*string*/) {
+    $Uid(x: string) {
         this.uid = x; return this
     }
 }
 
 export interface ConfigMapProjectionHelper extends ConfigMapProjection {
-    $items(x: any): any;
-    $optional(x: any): any;
+    $items(x: Array<KeyToPath>): ConfigMapProjectionHelper;
+    $optional(x: boolean): ConfigMapProjectionHelper;
 }
 
 /**
@@ -1219,33 +1237,33 @@ export class ConfigMapProjectionHelper extends Template implements ConfigMapProj
         super(obj)
     }
 
-    _items: any;
-    get items(): any /*Array<KeyToPath>*/ {
+    _items: Array<KeyToPath>;
+    get items(): Array<KeyToPath> {
         return this._items
     }
-    set items(x: any /*Array<KeyToPath>*/) {
+    set items(x: Array<KeyToPath>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<KeyToPath>*/) {
+    $Items(x: Array<KeyToPath>) {
         this.items = x; return this
     }
 
-    _optional: any;
-    get optional(): any /*boolean*/ {
+    _optional: boolean;
+    get optional(): boolean {
         return this._optional
     }
-    set optional(x: any /*boolean*/) {
+    set optional(x: boolean) {
         this._optional = x
     }
-    setOptional(x: any /*boolean*/) {
+    $Optional(x: boolean) {
         this.optional = x; return this
     }
 }
 
 export interface ConfigMapVolumeSourceHelper extends ConfigMapVolumeSource {
-    $defaultMode(x: any): any;
-    $items(x: any): any;
-    $optional(x: any): any;
+    $defaultMode(x: number): ConfigMapVolumeSourceHelper;
+    $items(x: Array<KeyToPath>): ConfigMapVolumeSourceHelper;
+    $optional(x: boolean): ConfigMapVolumeSourceHelper;
 }
 
 /**
@@ -1258,62 +1276,68 @@ export class ConfigMapVolumeSourceHelper extends Template implements ConfigMapVo
         super(obj)
     }
 
-    _defaultMode: any;
-    get defaultMode(): any /*number*/ {
+    _defaultMode: number;
+    get defaultMode(): number {
         return this._defaultMode
     }
-    set defaultMode(x: any /*number*/) {
+    set defaultMode(x: number) {
         this._defaultMode = x
     }
-    setDefaultMode(x: any /*number*/) {
+    $DefaultMode(x: number) {
         this.defaultMode = x; return this
     }
 
-    _items: any;
-    get items(): any /*Array<KeyToPath>*/ {
+    _items: Array<KeyToPath>;
+    get items(): Array<KeyToPath> {
         return this._items
     }
-    set items(x: any /*Array<KeyToPath>*/) {
+    set items(x: Array<KeyToPath>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<KeyToPath>*/) {
+    $Items(x: Array<KeyToPath>) {
         this.items = x; return this
     }
 
-    _optional: any;
-    get optional(): any /*boolean*/ {
+    _optional: boolean;
+    get optional(): boolean {
         return this._optional
     }
-    set optional(x: any /*boolean*/) {
+    set optional(x: boolean) {
         this._optional = x
     }
-    setOptional(x: any /*boolean*/) {
+    $Optional(x: boolean) {
         this.optional = x; return this
     }
 }
 
 export interface ContainerHelper extends Container {
-    $args(x: any): any;
-    $command(x: any): any;
-    $env(x: any): any;
-    $envFrom(x: any): any;
-    $image(x: any): any;
-    $imagePullPolicy(x: any): any;
-    $lifecycle(x: any): any;
-    $livenessProbe(x: any): any;
-    $ports(x: any): any;
-    $readinessProbe(x: any): any;
-    $resources(x: any): any;
-    $securityContext(x: any): any;
-    $startupProbe(x: any): any;
-    $stdin(x: any): any;
-    $stdinOnce(x: any): any;
-    $terminationMessagePath(x: any): any;
-    $terminationMessagePolicy(x: any): any;
-    $tty(x: any): any;
-    $volumeDevices(x: any): any;
-    $volumeMounts(x: any): any;
-    $workingDir(x: any): any;
+    $args(x: Array<string>): ContainerHelper;
+    $command(x: Array<string>): ContainerHelper;
+    $env(x: Array<EnvVar>): ContainerHelper;
+    $envFrom(x: Array<EnvFromSource>): ContainerHelper;
+    $image(x: string): ContainerHelper;
+    $imagePullPolicy(x: string): ContainerHelper;
+    lifecycle: LifecycleHelper;
+    $lifecycle(x: LifecycleHelper): ContainerHelper;
+    livenessProbe: ProbeHelper;
+    $livenessProbe(x: ProbeHelper): ContainerHelper;
+    $ports(x: Array<ContainerPort>): ContainerHelper;
+    readinessProbe: ProbeHelper;
+    $readinessProbe(x: ProbeHelper): ContainerHelper;
+    resources: ResourceRequirementsHelper;
+    $resources(x: ResourceRequirementsHelper): ContainerHelper;
+    securityContext: SecurityContextHelper;
+    $securityContext(x: SecurityContextHelper): ContainerHelper;
+    startupProbe: ProbeHelper;
+    $startupProbe(x: ProbeHelper): ContainerHelper;
+    $stdin(x: boolean): ContainerHelper;
+    $stdinOnce(x: boolean): ContainerHelper;
+    $terminationMessagePath(x: string): ContainerHelper;
+    $terminationMessagePolicy(x: string): ContainerHelper;
+    $tty(x: boolean): ContainerHelper;
+    $volumeDevices(x: Array<VolumeDevice>): ContainerHelper;
+    $volumeMounts(x: Array<VolumeMount>): ContainerHelper;
+    $workingDir(x: string): ContainerHelper;
 }
 
 /** A single application container that you want to run within a pod. */
@@ -1322,241 +1346,241 @@ export class ContainerHelper extends Template implements ContainerHelper {
         super(obj)
     }
 
-    _args: any;
-    get args(): any /*Array<string>*/ {
+    _args: Array<string>;
+    get args(): Array<string> {
         return this._args
     }
-    set args(x: any /*Array<string>*/) {
+    set args(x: Array<string>) {
         this._args = this.set(this.args, x)
     }
-    setArgs(x: any /*Array<string>*/) {
+    $Args(x: Array<string>) {
         this.args = x; return this
     }
 
-    _command: any;
-    get command(): any /*Array<string>*/ {
+    _command: Array<string>;
+    get command(): Array<string> {
         return this._command
     }
-    set command(x: any /*Array<string>*/) {
+    set command(x: Array<string>) {
         this._command = this.set(this.command, x)
     }
-    setCommand(x: any /*Array<string>*/) {
+    $Command(x: Array<string>) {
         this.command = x; return this
     }
 
-    _env: any;
-    get env(): any /*Array<EnvVar>*/ {
+    _env: Array<EnvVar>;
+    get env(): Array<EnvVar> {
         return this._env
     }
-    set env(x: any /*Array<EnvVar>*/) {
+    set env(x: Array<EnvVar>) {
         this._env = this.set(this.env, x)
     }
-    setEnv(x: any /*Array<EnvVar>*/) {
+    $Env(x: Array<EnvVar>) {
         this.env = x; return this
     }
 
-    _envFrom: any;
-    get envFrom(): any /*Array<EnvFromSource>*/ {
+    _envFrom: Array<EnvFromSource>;
+    get envFrom(): Array<EnvFromSource> {
         return this._envFrom
     }
-    set envFrom(x: any /*Array<EnvFromSource>*/) {
+    set envFrom(x: Array<EnvFromSource>) {
         this._envFrom = this.set(this.envFrom, x)
     }
-    setEnvFrom(x: any /*Array<EnvFromSource>*/) {
+    $EnvFrom(x: Array<EnvFromSource>) {
         this.envFrom = x; return this
     }
 
-    _image: any;
-    get image(): any /*string*/ {
+    _image: string;
+    get image(): string {
         return this._image
     }
-    set image(x: any /*string*/) {
+    set image(x: string) {
         this._image = x
     }
-    setImage(x: any /*string*/) {
+    $Image(x: string) {
         this.image = x; return this
     }
 
-    _imagePullPolicy: any;
-    get imagePullPolicy(): any /*string*/ {
+    _imagePullPolicy: string;
+    get imagePullPolicy(): string {
         return this._imagePullPolicy
     }
-    set imagePullPolicy(x: any /*string*/) {
+    set imagePullPolicy(x: string) {
         this._imagePullPolicy = x
     }
-    setImagePullPolicy(x: any /*string*/) {
+    $ImagePullPolicy(x: string) {
         this.imagePullPolicy = x; return this
     }
 
-    _lifecycle: any;
-    get lifecycle(): any /*LifecycleHelper*/ {
+    _lifecycle: LifecycleHelper;
+    get lifecycle(): LifecycleHelper {
         return this._lifecycle
     }
-    set lifecycle(x: any /*LifecycleHelper*/) {
+    set lifecycle(x: LifecycleHelper) {
         this._lifecycle = x
     }
-    setLifecycle(x: any /*LifecycleHelper*/) {
+    $Lifecycle(x: LifecycleHelper) {
         this.lifecycle = x; return this
     }
 
-    _livenessProbe: any;
-    get livenessProbe(): any /*ProbeHelper*/ {
+    _livenessProbe: ProbeHelper;
+    get livenessProbe(): ProbeHelper {
         return this._livenessProbe
     }
-    set livenessProbe(x: any /*ProbeHelper*/) {
+    set livenessProbe(x: ProbeHelper) {
         this._livenessProbe = x
     }
-    setLivenessProbe(x: any /*ProbeHelper*/) {
+    $LivenessProbe(x: ProbeHelper) {
         this.livenessProbe = x; return this
     }
 
-    _ports: any;
-    get ports(): any /*Array<ContainerPort>*/ {
+    _ports: Array<ContainerPort>;
+    get ports(): Array<ContainerPort> {
         return this._ports
     }
-    set ports(x: any /*Array<ContainerPort>*/) {
+    set ports(x: Array<ContainerPort>) {
         this._ports = this.set(this.ports, x)
     }
-    setPorts(x: any /*Array<ContainerPort>*/) {
+    $Ports(x: Array<ContainerPort>) {
         this.ports = x; return this
     }
 
-    _readinessProbe: any;
-    get readinessProbe(): any /*ProbeHelper*/ {
+    _readinessProbe: ProbeHelper;
+    get readinessProbe(): ProbeHelper {
         return this._readinessProbe
     }
-    set readinessProbe(x: any /*ProbeHelper*/) {
+    set readinessProbe(x: ProbeHelper) {
         this._readinessProbe = x
     }
-    setReadinessProbe(x: any /*ProbeHelper*/) {
+    $ReadinessProbe(x: ProbeHelper) {
         this.readinessProbe = x; return this
     }
 
-    _resources: any;
-    get resources(): any /*ResourceRequirementsHelper*/ {
+    _resources: ResourceRequirementsHelper;
+    get resources(): ResourceRequirementsHelper {
         return this._resources
     }
-    set resources(x: any /*ResourceRequirementsHelper*/) {
+    set resources(x: ResourceRequirementsHelper) {
         this._resources = x
     }
-    setResources(x: any /*ResourceRequirementsHelper*/) {
+    $Resources(x: ResourceRequirementsHelper) {
         this.resources = x; return this
     }
 
-    _securityContext: any;
-    get securityContext(): any /*SecurityContextHelper*/ {
+    _securityContext: SecurityContextHelper;
+    get securityContext(): SecurityContextHelper {
         return this._securityContext
     }
-    set securityContext(x: any /*SecurityContextHelper*/) {
+    set securityContext(x: SecurityContextHelper) {
         this._securityContext = x
     }
-    setSecurityContext(x: any /*SecurityContextHelper*/) {
+    $SecurityContext(x: SecurityContextHelper) {
         this.securityContext = x; return this
     }
 
-    _startupProbe: any;
-    get startupProbe(): any /*ProbeHelper*/ {
+    _startupProbe: ProbeHelper;
+    get startupProbe(): ProbeHelper {
         return this._startupProbe
     }
-    set startupProbe(x: any /*ProbeHelper*/) {
+    set startupProbe(x: ProbeHelper) {
         this._startupProbe = x
     }
-    setStartupProbe(x: any /*ProbeHelper*/) {
+    $StartupProbe(x: ProbeHelper) {
         this.startupProbe = x; return this
     }
 
-    _stdin: any;
-    get stdin(): any /*boolean*/ {
+    _stdin: boolean;
+    get stdin(): boolean {
         return this._stdin
     }
-    set stdin(x: any /*boolean*/) {
+    set stdin(x: boolean) {
         this._stdin = x
     }
-    setStdin(x: any /*boolean*/) {
+    $Stdin(x: boolean) {
         this.stdin = x; return this
     }
 
-    _stdinOnce: any;
-    get stdinOnce(): any /*boolean*/ {
+    _stdinOnce: boolean;
+    get stdinOnce(): boolean {
         return this._stdinOnce
     }
-    set stdinOnce(x: any /*boolean*/) {
+    set stdinOnce(x: boolean) {
         this._stdinOnce = x
     }
-    setStdinOnce(x: any /*boolean*/) {
+    $StdinOnce(x: boolean) {
         this.stdinOnce = x; return this
     }
 
-    _terminationMessagePath: any;
-    get terminationMessagePath(): any /*string*/ {
+    _terminationMessagePath: string;
+    get terminationMessagePath(): string {
         return this._terminationMessagePath
     }
-    set terminationMessagePath(x: any /*string*/) {
+    set terminationMessagePath(x: string) {
         this._terminationMessagePath = x
     }
-    setTerminationMessagePath(x: any /*string*/) {
+    $TerminationMessagePath(x: string) {
         this.terminationMessagePath = x; return this
     }
 
-    _terminationMessagePolicy: any;
-    get terminationMessagePolicy(): any /*string*/ {
+    _terminationMessagePolicy: string;
+    get terminationMessagePolicy(): string {
         return this._terminationMessagePolicy
     }
-    set terminationMessagePolicy(x: any /*string*/) {
+    set terminationMessagePolicy(x: string) {
         this._terminationMessagePolicy = x
     }
-    setTerminationMessagePolicy(x: any /*string*/) {
+    $TerminationMessagePolicy(x: string) {
         this.terminationMessagePolicy = x; return this
     }
 
-    _tty: any;
-    get tty(): any /*boolean*/ {
+    _tty: boolean;
+    get tty(): boolean {
         return this._tty
     }
-    set tty(x: any /*boolean*/) {
+    set tty(x: boolean) {
         this._tty = x
     }
-    setTty(x: any /*boolean*/) {
+    $Tty(x: boolean) {
         this.tty = x; return this
     }
 
-    _volumeDevices: any;
-    get volumeDevices(): any /*Array<VolumeDevice>*/ {
+    _volumeDevices: Array<VolumeDevice>;
+    get volumeDevices(): Array<VolumeDevice> {
         return this._volumeDevices
     }
-    set volumeDevices(x: any /*Array<VolumeDevice>*/) {
+    set volumeDevices(x: Array<VolumeDevice>) {
         this._volumeDevices = this.set(this.volumeDevices, x)
     }
-    setVolumeDevices(x: any /*Array<VolumeDevice>*/) {
+    $VolumeDevices(x: Array<VolumeDevice>) {
         this.volumeDevices = x; return this
     }
 
-    _volumeMounts: any;
-    get volumeMounts(): any /*Array<VolumeMount>*/ {
+    _volumeMounts: Array<VolumeMount>;
+    get volumeMounts(): Array<VolumeMount> {
         return this._volumeMounts
     }
-    set volumeMounts(x: any /*Array<VolumeMount>*/) {
+    set volumeMounts(x: Array<VolumeMount>) {
         this._volumeMounts = this.set(this.volumeMounts, x)
     }
-    setVolumeMounts(x: any /*Array<VolumeMount>*/) {
+    $VolumeMounts(x: Array<VolumeMount>) {
         this.volumeMounts = x; return this
     }
 
-    _workingDir: any;
-    get workingDir(): any /*string*/ {
+    _workingDir: string;
+    get workingDir(): string {
         return this._workingDir
     }
-    set workingDir(x: any /*string*/) {
+    set workingDir(x: string) {
         this._workingDir = x
     }
-    setWorkingDir(x: any /*string*/) {
+    $WorkingDir(x: string) {
         this.workingDir = x; return this
     }
 }
 
 export interface ContainerImageHelper extends ContainerImage {
-    $names(x: any): any;
-    $sizeBytes(x: any): any;
+    $names(x: Array<string>): ContainerImageHelper;
+    $sizeBytes(x: number): ContainerImageHelper;
 }
 
 /** Describe a container image */
@@ -1565,34 +1589,34 @@ export class ContainerImageHelper extends Template implements ContainerImageHelp
         super(obj)
     }
 
-    _names: any;
-    get names(): any /*Array<string>*/ {
+    _names: Array<string>;
+    get names(): Array<string> {
         return this._names
     }
-    set names(x: any /*Array<string>*/) {
+    set names(x: Array<string>) {
         this._names = this.set(this.names, x)
     }
-    setNames(x: any /*Array<string>*/) {
+    $Names(x: Array<string>) {
         this.names = x; return this
     }
 
-    _sizeBytes: any;
-    get sizeBytes(): any /*number*/ {
+    _sizeBytes: number;
+    get sizeBytes(): number {
         return this._sizeBytes
     }
-    set sizeBytes(x: any /*number*/) {
+    set sizeBytes(x: number) {
         this._sizeBytes = x
     }
-    setSizeBytes(x: any /*number*/) {
+    $SizeBytes(x: number) {
         this.sizeBytes = x; return this
     }
 }
 
 export interface ContainerPortHelper extends ContainerPort {
-    $containerPort(x: any): any;
-    $hostIP(x: any): any;
-    $hostPort(x: any): any;
-    $protocol(x: any): any;
+    $containerPort(x: number): ContainerPortHelper;
+    $hostIP(x: string): ContainerPortHelper;
+    $hostPort(x: number): ContainerPortHelper;
+    $protocol(x: string): ContainerPortHelper;
 }
 
 /** ContainerPort represents a network port in a single container. */
@@ -1601,55 +1625,58 @@ export class ContainerPortHelper extends Template implements ContainerPortHelper
         super(obj)
     }
 
-    _containerPort: any;
-    get containerPort(): any /*number*/ {
+    _containerPort: number;
+    get containerPort(): number {
         return this._containerPort
     }
-    set containerPort(x: any /*number*/) {
+    set containerPort(x: number) {
         this._containerPort = x
     }
-    setContainerPort(x: any /*number*/) {
+    $ContainerPort(x: number) {
         this.containerPort = x; return this
     }
 
-    _hostIP: any;
-    get hostIP(): any /*string*/ {
+    _hostIP: string;
+    get hostIP(): string {
         return this._hostIP
     }
-    set hostIP(x: any /*string*/) {
+    set hostIP(x: string) {
         this._hostIP = x
     }
-    setHostIP(x: any /*string*/) {
+    $HostIP(x: string) {
         this.hostIP = x; return this
     }
 
-    _hostPort: any;
-    get hostPort(): any /*number*/ {
+    _hostPort: number;
+    get hostPort(): number {
         return this._hostPort
     }
-    set hostPort(x: any /*number*/) {
+    set hostPort(x: number) {
         this._hostPort = x
     }
-    setHostPort(x: any /*number*/) {
+    $HostPort(x: number) {
         this.hostPort = x; return this
     }
 
-    _protocol: any;
-    get protocol(): any /*string*/ {
+    _protocol: string;
+    get protocol(): string {
         return this._protocol
     }
-    set protocol(x: any /*string*/) {
+    set protocol(x: string) {
         this._protocol = x
     }
-    setProtocol(x: any /*string*/) {
+    $Protocol(x: string) {
         this.protocol = x; return this
     }
 }
 
 export interface ContainerStateHelper extends ContainerState {
-    $running(x: any): any;
-    $terminated(x: any): any;
-    $waiting(x: any): any;
+    running: ContainerStateRunningHelper;
+    $running(x: ContainerStateRunningHelper): ContainerStateHelper;
+    terminated: ContainerStateTerminatedHelper;
+    $terminated(x: ContainerStateTerminatedHelper): ContainerStateHelper;
+    waiting: ContainerStateWaitingHelper;
+    $waiting(x: ContainerStateWaitingHelper): ContainerStateHelper;
 }
 
 /** ContainerState holds a possible state of container. Only one of its members may be specified. If none of them is specified, the default one is ContainerStateWaiting. */
@@ -1658,42 +1685,42 @@ export class ContainerStateHelper extends Template implements ContainerStateHelp
         super(obj)
     }
 
-    _running: any;
-    get running(): any /*ContainerStateRunningHelper*/ {
+    _running: ContainerStateRunningHelper;
+    get running(): ContainerStateRunningHelper {
         return this._running
     }
-    set running(x: any /*ContainerStateRunningHelper*/) {
+    set running(x: ContainerStateRunningHelper) {
         this._running = x
     }
-    setRunning(x: any /*ContainerStateRunningHelper*/) {
+    $Running(x: ContainerStateRunningHelper) {
         this.running = x; return this
     }
 
-    _terminated: any;
-    get terminated(): any /*ContainerStateTerminatedHelper*/ {
+    _terminated: ContainerStateTerminatedHelper;
+    get terminated(): ContainerStateTerminatedHelper {
         return this._terminated
     }
-    set terminated(x: any /*ContainerStateTerminatedHelper*/) {
+    set terminated(x: ContainerStateTerminatedHelper) {
         this._terminated = x
     }
-    setTerminated(x: any /*ContainerStateTerminatedHelper*/) {
+    $Terminated(x: ContainerStateTerminatedHelper) {
         this.terminated = x; return this
     }
 
-    _waiting: any;
-    get waiting(): any /*ContainerStateWaitingHelper*/ {
+    _waiting: ContainerStateWaitingHelper;
+    get waiting(): ContainerStateWaitingHelper {
         return this._waiting
     }
-    set waiting(x: any /*ContainerStateWaitingHelper*/) {
+    set waiting(x: ContainerStateWaitingHelper) {
         this._waiting = x
     }
-    setWaiting(x: any /*ContainerStateWaitingHelper*/) {
+    $Waiting(x: ContainerStateWaitingHelper) {
         this.waiting = x; return this
     }
 }
 
 export interface ContainerStateRunningHelper extends ContainerStateRunning {
-    $startedAt(x: any): any;
+    $startedAt(x: Time): ContainerStateRunningHelper;
 }
 
 /** ContainerStateRunning is a running state of a container. */
@@ -1702,26 +1729,26 @@ export class ContainerStateRunningHelper extends Template implements ContainerSt
         super(obj)
     }
 
-    _startedAt: any;
-    get startedAt(): any /*Time*/ {
+    _startedAt: Time;
+    get startedAt(): Time {
         return this._startedAt
     }
-    set startedAt(x: any /*Time*/) {
+    set startedAt(x: Time) {
         this._startedAt = x
     }
-    setStartedAt(x: any /*Time*/) {
+    $StartedAt(x: Time) {
         this.startedAt = x; return this
     }
 }
 
 export interface ContainerStateTerminatedHelper extends ContainerStateTerminated {
-    $containerID(x: any): any;
-    $exitCode(x: any): any;
-    $finishedAt(x: any): any;
-    $message(x: any): any;
-    $reason(x: any): any;
-    $signal(x: any): any;
-    $startedAt(x: any): any;
+    $containerID(x: string): ContainerStateTerminatedHelper;
+    $exitCode(x: number): ContainerStateTerminatedHelper;
+    $finishedAt(x: Time): ContainerStateTerminatedHelper;
+    $message(x: string): ContainerStateTerminatedHelper;
+    $reason(x: string): ContainerStateTerminatedHelper;
+    $signal(x: number): ContainerStateTerminatedHelper;
+    $startedAt(x: Time): ContainerStateTerminatedHelper;
 }
 
 /** ContainerStateTerminated is a terminated state of a container. */
@@ -1730,87 +1757,87 @@ export class ContainerStateTerminatedHelper extends Template implements Containe
         super(obj)
     }
 
-    _containerID: any;
-    get containerID(): any /*string*/ {
+    _containerID: string;
+    get containerID(): string {
         return this._containerID
     }
-    set containerID(x: any /*string*/) {
+    set containerID(x: string) {
         this._containerID = x
     }
-    setContainerID(x: any /*string*/) {
+    $ContainerID(x: string) {
         this.containerID = x; return this
     }
 
-    _exitCode: any;
-    get exitCode(): any /*number*/ {
+    _exitCode: number;
+    get exitCode(): number {
         return this._exitCode
     }
-    set exitCode(x: any /*number*/) {
+    set exitCode(x: number) {
         this._exitCode = x
     }
-    setExitCode(x: any /*number*/) {
+    $ExitCode(x: number) {
         this.exitCode = x; return this
     }
 
-    _finishedAt: any;
-    get finishedAt(): any /*Time*/ {
+    _finishedAt: Time;
+    get finishedAt(): Time {
         return this._finishedAt
     }
-    set finishedAt(x: any /*Time*/) {
+    set finishedAt(x: Time) {
         this._finishedAt = x
     }
-    setFinishedAt(x: any /*Time*/) {
+    $FinishedAt(x: Time) {
         this.finishedAt = x; return this
     }
 
-    _message: any;
-    get message(): any /*string*/ {
+    _message: string;
+    get message(): string {
         return this._message
     }
-    set message(x: any /*string*/) {
+    set message(x: string) {
         this._message = x
     }
-    setMessage(x: any /*string*/) {
+    $Message(x: string) {
         this.message = x; return this
     }
 
-    _reason: any;
-    get reason(): any /*string*/ {
+    _reason: string;
+    get reason(): string {
         return this._reason
     }
-    set reason(x: any /*string*/) {
+    set reason(x: string) {
         this._reason = x
     }
-    setReason(x: any /*string*/) {
+    $Reason(x: string) {
         this.reason = x; return this
     }
 
-    _signal: any;
-    get signal(): any /*number*/ {
+    _signal: number;
+    get signal(): number {
         return this._signal
     }
-    set signal(x: any /*number*/) {
+    set signal(x: number) {
         this._signal = x
     }
-    setSignal(x: any /*number*/) {
+    $Signal(x: number) {
         this.signal = x; return this
     }
 
-    _startedAt: any;
-    get startedAt(): any /*Time*/ {
+    _startedAt: Time;
+    get startedAt(): Time {
         return this._startedAt
     }
-    set startedAt(x: any /*Time*/) {
+    set startedAt(x: Time) {
         this._startedAt = x
     }
-    setStartedAt(x: any /*Time*/) {
+    $StartedAt(x: Time) {
         this.startedAt = x; return this
     }
 }
 
 export interface ContainerStateWaitingHelper extends ContainerStateWaiting {
-    $message(x: any): any;
-    $reason(x: any): any;
+    $message(x: string): ContainerStateWaitingHelper;
+    $reason(x: string): ContainerStateWaitingHelper;
 }
 
 /** ContainerStateWaiting is a waiting state of a container. */
@@ -1819,38 +1846,40 @@ export class ContainerStateWaitingHelper extends Template implements ContainerSt
         super(obj)
     }
 
-    _message: any;
-    get message(): any /*string*/ {
+    _message: string;
+    get message(): string {
         return this._message
     }
-    set message(x: any /*string*/) {
+    set message(x: string) {
         this._message = x
     }
-    setMessage(x: any /*string*/) {
+    $Message(x: string) {
         this.message = x; return this
     }
 
-    _reason: any;
-    get reason(): any /*string*/ {
+    _reason: string;
+    get reason(): string {
         return this._reason
     }
-    set reason(x: any /*string*/) {
+    set reason(x: string) {
         this._reason = x
     }
-    setReason(x: any /*string*/) {
+    $Reason(x: string) {
         this.reason = x; return this
     }
 }
 
 export interface ContainerStatusHelper extends ContainerStatus {
-    $containerID(x: any): any;
-    $image(x: any): any;
-    $imageID(x: any): any;
-    $lastState(x: any): any;
-    $ready(x: any): any;
-    $restartCount(x: any): any;
-    $started(x: any): any;
-    $state(x: any): any;
+    $containerID(x: string): ContainerStatusHelper;
+    $image(x: string): ContainerStatusHelper;
+    $imageID(x: string): ContainerStatusHelper;
+    lastState: ContainerStateHelper;
+    $lastState(x: ContainerStateHelper): ContainerStatusHelper;
+    $ready(x: boolean): ContainerStatusHelper;
+    $restartCount(x: number): ContainerStatusHelper;
+    $started(x: boolean): ContainerStatusHelper;
+    state: ContainerStateHelper;
+    $state(x: ContainerStateHelper): ContainerStatusHelper;
 }
 
 /** ContainerStatus contains details for the current status of this container. */
@@ -1859,97 +1888,97 @@ export class ContainerStatusHelper extends Template implements ContainerStatusHe
         super(obj)
     }
 
-    _containerID: any;
-    get containerID(): any /*string*/ {
+    _containerID: string;
+    get containerID(): string {
         return this._containerID
     }
-    set containerID(x: any /*string*/) {
+    set containerID(x: string) {
         this._containerID = x
     }
-    setContainerID(x: any /*string*/) {
+    $ContainerID(x: string) {
         this.containerID = x; return this
     }
 
-    _image: any;
-    get image(): any /*string*/ {
+    _image: string;
+    get image(): string {
         return this._image
     }
-    set image(x: any /*string*/) {
+    set image(x: string) {
         this._image = x
     }
-    setImage(x: any /*string*/) {
+    $Image(x: string) {
         this.image = x; return this
     }
 
-    _imageID: any;
-    get imageID(): any /*string*/ {
+    _imageID: string;
+    get imageID(): string {
         return this._imageID
     }
-    set imageID(x: any /*string*/) {
+    set imageID(x: string) {
         this._imageID = x
     }
-    setImageID(x: any /*string*/) {
+    $ImageID(x: string) {
         this.imageID = x; return this
     }
 
-    _lastState: any;
-    get lastState(): any /*ContainerStateHelper*/ {
+    _lastState: ContainerStateHelper;
+    get lastState(): ContainerStateHelper {
         return this._lastState
     }
-    set lastState(x: any /*ContainerStateHelper*/) {
+    set lastState(x: ContainerStateHelper) {
         this._lastState = x
     }
-    setLastState(x: any /*ContainerStateHelper*/) {
+    $LastState(x: ContainerStateHelper) {
         this.lastState = x; return this
     }
 
-    _ready: any;
-    get ready(): any /*boolean*/ {
+    _ready: boolean;
+    get ready(): boolean {
         return this._ready
     }
-    set ready(x: any /*boolean*/) {
+    set ready(x: boolean) {
         this._ready = x
     }
-    setReady(x: any /*boolean*/) {
+    $Ready(x: boolean) {
         this.ready = x; return this
     }
 
-    _restartCount: any;
-    get restartCount(): any /*number*/ {
+    _restartCount: number;
+    get restartCount(): number {
         return this._restartCount
     }
-    set restartCount(x: any /*number*/) {
+    set restartCount(x: number) {
         this._restartCount = x
     }
-    setRestartCount(x: any /*number*/) {
+    $RestartCount(x: number) {
         this.restartCount = x; return this
     }
 
-    _started: any;
-    get started(): any /*boolean*/ {
+    _started: boolean;
+    get started(): boolean {
         return this._started
     }
-    set started(x: any /*boolean*/) {
+    set started(x: boolean) {
         this._started = x
     }
-    setStarted(x: any /*boolean*/) {
+    $Started(x: boolean) {
         this.started = x; return this
     }
 
-    _state: any;
-    get state(): any /*ContainerStateHelper*/ {
+    _state: ContainerStateHelper;
+    get state(): ContainerStateHelper {
         return this._state
     }
-    set state(x: any /*ContainerStateHelper*/) {
+    set state(x: ContainerStateHelper) {
         this._state = x
     }
-    setState(x: any /*ContainerStateHelper*/) {
+    $State(x: ContainerStateHelper) {
         this.state = x; return this
     }
 }
 
 export interface DaemonEndpointHelper extends DaemonEndpoint {
-    $Port(x: any): any;
+    $Port(x: number): DaemonEndpointHelper;
 }
 
 /** DaemonEndpoint contains information about a single Daemon endpoint. */
@@ -1958,20 +1987,20 @@ export class DaemonEndpointHelper extends Template implements DaemonEndpointHelp
         super(obj)
     }
 
-    _Port: any;
-    get Port(): any /*number*/ {
+    _Port: number;
+    get Port(): number {
         return this._Port
     }
-    set Port(x: any /*number*/) {
+    set Port(x: number) {
         this._Port = x
     }
-    setPort(x: any /*number*/) {
+    $Port(x: number) {
         this.Port = x; return this
     }
 }
 
 export interface DownwardAPIProjectionHelper extends DownwardAPIProjection {
-    $items(x: any): any;
+    $items(x: Array<DownwardAPIVolumeFile>): DownwardAPIProjectionHelper;
 }
 
 /** Represents downward API info for projecting into a projected volume. Note that this is identical to a downwardAPI volume source without the default mode. */
@@ -1980,23 +2009,25 @@ export class DownwardAPIProjectionHelper extends Template implements DownwardAPI
         super(obj)
     }
 
-    _items: any;
-    get items(): any /*Array<DownwardAPIVolumeFile>*/ {
+    _items: Array<DownwardAPIVolumeFile>;
+    get items(): Array<DownwardAPIVolumeFile> {
         return this._items
     }
-    set items(x: any /*Array<DownwardAPIVolumeFile>*/) {
+    set items(x: Array<DownwardAPIVolumeFile>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<DownwardAPIVolumeFile>*/) {
+    $Items(x: Array<DownwardAPIVolumeFile>) {
         this.items = x; return this
     }
 }
 
 export interface DownwardAPIVolumeFileHelper extends DownwardAPIVolumeFile {
-    $fieldRef(x: any): any;
-    $mode(x: any): any;
-    $path(x: any): any;
-    $resourceFieldRef(x: any): any;
+    fieldRef: ObjectFieldSelectorHelper;
+    $fieldRef(x: ObjectFieldSelectorHelper): DownwardAPIVolumeFileHelper;
+    $mode(x: number): DownwardAPIVolumeFileHelper;
+    $path(x: string): DownwardAPIVolumeFileHelper;
+    resourceFieldRef: ResourceFieldSelectorHelper;
+    $resourceFieldRef(x: ResourceFieldSelectorHelper): DownwardAPIVolumeFileHelper;
 }
 
 /** DownwardAPIVolumeFile represents information to create the file containing the pod field */
@@ -2005,54 +2036,54 @@ export class DownwardAPIVolumeFileHelper extends Template implements DownwardAPI
         super(obj)
     }
 
-    _fieldRef: any;
-    get fieldRef(): any /*ObjectFieldSelectorHelper*/ {
+    _fieldRef: ObjectFieldSelectorHelper;
+    get fieldRef(): ObjectFieldSelectorHelper {
         return this._fieldRef
     }
-    set fieldRef(x: any /*ObjectFieldSelectorHelper*/) {
+    set fieldRef(x: ObjectFieldSelectorHelper) {
         this._fieldRef = x
     }
-    setFieldRef(x: any /*ObjectFieldSelectorHelper*/) {
+    $FieldRef(x: ObjectFieldSelectorHelper) {
         this.fieldRef = x; return this
     }
 
-    _mode: any;
-    get mode(): any /*number*/ {
+    _mode: number;
+    get mode(): number {
         return this._mode
     }
-    set mode(x: any /*number*/) {
+    set mode(x: number) {
         this._mode = x
     }
-    setMode(x: any /*number*/) {
+    $Mode(x: number) {
         this.mode = x; return this
     }
 
-    _path: any;
-    get path(): any /*string*/ {
+    _path: string;
+    get path(): string {
         return this._path
     }
-    set path(x: any /*string*/) {
+    set path(x: string) {
         this._path = x
     }
-    setPath(x: any /*string*/) {
+    $Path(x: string) {
         this.path = x; return this
     }
 
-    _resourceFieldRef: any;
-    get resourceFieldRef(): any /*ResourceFieldSelectorHelper*/ {
+    _resourceFieldRef: ResourceFieldSelectorHelper;
+    get resourceFieldRef(): ResourceFieldSelectorHelper {
         return this._resourceFieldRef
     }
-    set resourceFieldRef(x: any /*ResourceFieldSelectorHelper*/) {
+    set resourceFieldRef(x: ResourceFieldSelectorHelper) {
         this._resourceFieldRef = x
     }
-    setResourceFieldRef(x: any /*ResourceFieldSelectorHelper*/) {
+    $ResourceFieldRef(x: ResourceFieldSelectorHelper) {
         this.resourceFieldRef = x; return this
     }
 }
 
 export interface DownwardAPIVolumeSourceHelper extends DownwardAPIVolumeSource {
-    $defaultMode(x: any): any;
-    $items(x: any): any;
+    $defaultMode(x: number): DownwardAPIVolumeSourceHelper;
+    $items(x: Array<DownwardAPIVolumeFile>): DownwardAPIVolumeSourceHelper;
 }
 
 /** DownwardAPIVolumeSource represents a volume containing downward API info. Downward API volumes support ownership management and SELinux relabeling. */
@@ -2061,32 +2092,32 @@ export class DownwardAPIVolumeSourceHelper extends Template implements DownwardA
         super(obj)
     }
 
-    _defaultMode: any;
-    get defaultMode(): any /*number*/ {
+    _defaultMode: number;
+    get defaultMode(): number {
         return this._defaultMode
     }
-    set defaultMode(x: any /*number*/) {
+    set defaultMode(x: number) {
         this._defaultMode = x
     }
-    setDefaultMode(x: any /*number*/) {
+    $DefaultMode(x: number) {
         this.defaultMode = x; return this
     }
 
-    _items: any;
-    get items(): any /*Array<DownwardAPIVolumeFile>*/ {
+    _items: Array<DownwardAPIVolumeFile>;
+    get items(): Array<DownwardAPIVolumeFile> {
         return this._items
     }
-    set items(x: any /*Array<DownwardAPIVolumeFile>*/) {
+    set items(x: Array<DownwardAPIVolumeFile>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<DownwardAPIVolumeFile>*/) {
+    $Items(x: Array<DownwardAPIVolumeFile>) {
         this.items = x; return this
     }
 }
 
 export interface EmptyDirVolumeSourceHelper extends EmptyDirVolumeSource {
-    $medium(x: any): any;
-    $sizeLimit(x: any): any;
+    $medium(x: string): EmptyDirVolumeSourceHelper;
+    $sizeLimit(x: Quantity): EmptyDirVolumeSourceHelper;
 }
 
 /** Represents an empty directory for a pod. Empty directory volumes support ownership management and SELinux relabeling. */
@@ -2095,34 +2126,35 @@ export class EmptyDirVolumeSourceHelper extends Template implements EmptyDirVolu
         super(obj)
     }
 
-    _medium: any;
-    get medium(): any /*string*/ {
+    _medium: string;
+    get medium(): string {
         return this._medium
     }
-    set medium(x: any /*string*/) {
+    set medium(x: string) {
         this._medium = x
     }
-    setMedium(x: any /*string*/) {
+    $Medium(x: string) {
         this.medium = x; return this
     }
 
-    _sizeLimit: any;
-    get sizeLimit(): any /*Quantity*/ {
+    _sizeLimit: Quantity;
+    get sizeLimit(): Quantity {
         return this._sizeLimit
     }
-    set sizeLimit(x: any /*Quantity*/) {
+    set sizeLimit(x: Quantity) {
         this._sizeLimit = x
     }
-    setSizeLimit(x: any /*Quantity*/) {
+    $SizeLimit(x: Quantity) {
         this.sizeLimit = x; return this
     }
 }
 
 export interface EndpointAddressHelper extends EndpointAddress {
-    $hostname(x: any): any;
-    $ip(x: any): any;
-    $nodeName(x: any): any;
-    $targetRef(x: any): any;
+    $hostname(x: string): EndpointAddressHelper;
+    $ip(x: string): EndpointAddressHelper;
+    $nodeName(x: string): EndpointAddressHelper;
+    targetRef: ObjectReferenceHelper;
+    $targetRef(x: ObjectReferenceHelper): EndpointAddressHelper;
 }
 
 /** EndpointAddress is a tuple that describes single IP address. */
@@ -2131,55 +2163,55 @@ export class EndpointAddressHelper extends Template implements EndpointAddressHe
         super(obj)
     }
 
-    _hostname: any;
-    get hostname(): any /*string*/ {
+    _hostname: string;
+    get hostname(): string {
         return this._hostname
     }
-    set hostname(x: any /*string*/) {
+    set hostname(x: string) {
         this._hostname = x
     }
-    setHostname(x: any /*string*/) {
+    $Hostname(x: string) {
         this.hostname = x; return this
     }
 
-    _ip: any;
-    get ip(): any /*string*/ {
+    _ip: string;
+    get ip(): string {
         return this._ip
     }
-    set ip(x: any /*string*/) {
+    set ip(x: string) {
         this._ip = x
     }
-    setIp(x: any /*string*/) {
+    $Ip(x: string) {
         this.ip = x; return this
     }
 
-    _nodeName: any;
-    get nodeName(): any /*string*/ {
+    _nodeName: string;
+    get nodeName(): string {
         return this._nodeName
     }
-    set nodeName(x: any /*string*/) {
+    set nodeName(x: string) {
         this._nodeName = x
     }
-    setNodeName(x: any /*string*/) {
+    $NodeName(x: string) {
         this.nodeName = x; return this
     }
 
-    _targetRef: any;
-    get targetRef(): any /*ObjectReferenceHelper*/ {
+    _targetRef: ObjectReferenceHelper;
+    get targetRef(): ObjectReferenceHelper {
         return this._targetRef
     }
-    set targetRef(x: any /*ObjectReferenceHelper*/) {
+    set targetRef(x: ObjectReferenceHelper) {
         this._targetRef = x
     }
-    setTargetRef(x: any /*ObjectReferenceHelper*/) {
+    $TargetRef(x: ObjectReferenceHelper) {
         this.targetRef = x; return this
     }
 }
 
 export interface EndpointPortHelper extends EndpointPort {
-    $appProtocol(x: any): any;
-    $port(x: any): any;
-    $protocol(x: any): any;
+    $appProtocol(x: string): EndpointPortHelper;
+    $port(x: number): EndpointPortHelper;
+    $protocol(x: string): EndpointPortHelper;
 }
 
 /** EndpointPort is a tuple that describes a single port. */
@@ -2188,44 +2220,44 @@ export class EndpointPortHelper extends Template implements EndpointPortHelper {
         super(obj)
     }
 
-    _appProtocol: any;
-    get appProtocol(): any /*string*/ {
+    _appProtocol: string;
+    get appProtocol(): string {
         return this._appProtocol
     }
-    set appProtocol(x: any /*string*/) {
+    set appProtocol(x: string) {
         this._appProtocol = x
     }
-    setAppProtocol(x: any /*string*/) {
+    $AppProtocol(x: string) {
         this.appProtocol = x; return this
     }
 
-    _port: any;
-    get port(): any /*number*/ {
+    _port: number;
+    get port(): number {
         return this._port
     }
-    set port(x: any /*number*/) {
+    set port(x: number) {
         this._port = x
     }
-    setPort(x: any /*number*/) {
+    $Port(x: number) {
         this.port = x; return this
     }
 
-    _protocol: any;
-    get protocol(): any /*string*/ {
+    _protocol: string;
+    get protocol(): string {
         return this._protocol
     }
-    set protocol(x: any /*string*/) {
+    set protocol(x: string) {
         this._protocol = x
     }
-    setProtocol(x: any /*string*/) {
+    $Protocol(x: string) {
         this.protocol = x; return this
     }
 }
 
 export interface EndpointSubsetHelper extends EndpointSubset {
-    $addresses(x: any): any;
-    $notReadyAddresses(x: any): any;
-    $ports(x: any): any;
+    $addresses(x: Array<EndpointAddress>): EndpointSubsetHelper;
+    $notReadyAddresses(x: Array<EndpointAddress>): EndpointSubsetHelper;
+    $ports(x: Array<EndpointPort>): EndpointSubsetHelper;
 }
 
 /**
@@ -2243,43 +2275,44 @@ export class EndpointSubsetHelper extends Template implements EndpointSubsetHelp
         super(obj)
     }
 
-    _addresses: any;
-    get addresses(): any /*Array<EndpointAddress>*/ {
+    _addresses: Array<EndpointAddress>;
+    get addresses(): Array<EndpointAddress> {
         return this._addresses
     }
-    set addresses(x: any /*Array<EndpointAddress>*/) {
+    set addresses(x: Array<EndpointAddress>) {
         this._addresses = this.set(this.addresses, x)
     }
-    setAddresses(x: any /*Array<EndpointAddress>*/) {
+    $Addresses(x: Array<EndpointAddress>) {
         this.addresses = x; return this
     }
 
-    _notReadyAddresses: any;
-    get notReadyAddresses(): any /*Array<EndpointAddress>*/ {
+    _notReadyAddresses: Array<EndpointAddress>;
+    get notReadyAddresses(): Array<EndpointAddress> {
         return this._notReadyAddresses
     }
-    set notReadyAddresses(x: any /*Array<EndpointAddress>*/) {
+    set notReadyAddresses(x: Array<EndpointAddress>) {
         this._notReadyAddresses = this.set(this.notReadyAddresses, x)
     }
-    setNotReadyAddresses(x: any /*Array<EndpointAddress>*/) {
+    $NotReadyAddresses(x: Array<EndpointAddress>) {
         this.notReadyAddresses = x; return this
     }
 
-    _ports: any;
-    get ports(): any /*Array<EndpointPort>*/ {
+    _ports: Array<EndpointPort>;
+    get ports(): Array<EndpointPort> {
         return this._ports
     }
-    set ports(x: any /*Array<EndpointPort>*/) {
+    set ports(x: Array<EndpointPort>) {
         this._ports = this.set(this.ports, x)
     }
-    setPorts(x: any /*Array<EndpointPort>*/) {
+    $Ports(x: Array<EndpointPort>) {
         this.ports = x; return this
     }
 }
 
 export interface EndpointsHelper extends Endpoints {
-    $metadata(x: any): any;
-    $subsets(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): EndpointsHelper;
+    $subsets(x: Array<EndpointSubset>): EndpointsHelper;
 }
 
 /**
@@ -2304,32 +2337,33 @@ export class EndpointsHelper extends ResourceTemplate implements EndpointsHelper
         super(nameOrObject, namespace, EndpointsHelper.kind, EndpointsHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _subsets: any;
-    get subsets(): any /*Array<EndpointSubset>*/ {
+    _subsets: Array<EndpointSubset>;
+    get subsets(): Array<EndpointSubset> {
         return this._subsets
     }
-    set subsets(x: any /*Array<EndpointSubset>*/) {
+    set subsets(x: Array<EndpointSubset>) {
         this._subsets = this.set(this.subsets, x)
     }
-    setSubsets(x: any /*Array<EndpointSubset>*/) {
+    $Subsets(x: Array<EndpointSubset>) {
         this.subsets = x; return this
     }
 }
 
 export interface EndpointsListHelper extends EndpointsList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<Endpoints>): EndpointsListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): EndpointsListHelper;
 }
 
 /** EndpointsList is a list of endpoints. */
@@ -2341,33 +2375,35 @@ export class EndpointsListHelper extends ResourceTemplate implements EndpointsLi
         super(nameOrObject, namespace, EndpointsListHelper.kind, EndpointsListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<Endpoints>*/ {
+    _items: Array<Endpoints>;
+    get items(): Array<Endpoints> {
         return this._items
     }
-    set items(x: any /*Array<Endpoints>*/) {
+    set items(x: Array<Endpoints>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<Endpoints>*/) {
+    $Items(x: Array<Endpoints>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface EnvFromSourceHelper extends EnvFromSource {
-    $configMapRef(x: any): any;
-    $prefix(x: any): any;
-    $secretRef(x: any): any;
+    configMapRef: ConfigMapEnvSourceHelper;
+    $configMapRef(x: ConfigMapEnvSourceHelper): EnvFromSourceHelper;
+    $prefix(x: string): EnvFromSourceHelper;
+    secretRef: SecretEnvSourceHelper;
+    $secretRef(x: SecretEnvSourceHelper): EnvFromSourceHelper;
 }
 
 /** EnvFromSource represents the source of a set of ConfigMaps */
@@ -2376,43 +2412,44 @@ export class EnvFromSourceHelper extends Template implements EnvFromSourceHelper
         super(obj)
     }
 
-    _configMapRef: any;
-    get configMapRef(): any /*ConfigMapEnvSourceHelper*/ {
+    _configMapRef: ConfigMapEnvSourceHelper;
+    get configMapRef(): ConfigMapEnvSourceHelper {
         return this._configMapRef
     }
-    set configMapRef(x: any /*ConfigMapEnvSourceHelper*/) {
+    set configMapRef(x: ConfigMapEnvSourceHelper) {
         this._configMapRef = x
     }
-    setConfigMapRef(x: any /*ConfigMapEnvSourceHelper*/) {
+    $ConfigMapRef(x: ConfigMapEnvSourceHelper) {
         this.configMapRef = x; return this
     }
 
-    _prefix: any;
-    get prefix(): any /*string*/ {
+    _prefix: string;
+    get prefix(): string {
         return this._prefix
     }
-    set prefix(x: any /*string*/) {
+    set prefix(x: string) {
         this._prefix = x
     }
-    setPrefix(x: any /*string*/) {
+    $Prefix(x: string) {
         this.prefix = x; return this
     }
 
-    _secretRef: any;
-    get secretRef(): any /*SecretEnvSourceHelper*/ {
+    _secretRef: SecretEnvSourceHelper;
+    get secretRef(): SecretEnvSourceHelper {
         return this._secretRef
     }
-    set secretRef(x: any /*SecretEnvSourceHelper*/) {
+    set secretRef(x: SecretEnvSourceHelper) {
         this._secretRef = x
     }
-    setSecretRef(x: any /*SecretEnvSourceHelper*/) {
+    $SecretRef(x: SecretEnvSourceHelper) {
         this.secretRef = x; return this
     }
 }
 
 export interface EnvVarHelper extends EnvVar {
-    $value(x: any): any;
-    $valueFrom(x: any): any;
+    $value(x: string): EnvVarHelper;
+    valueFrom: EnvVarSourceHelper;
+    $valueFrom(x: EnvVarSourceHelper): EnvVarHelper;
 }
 
 /** EnvVar represents an environment variable present in a Container. */
@@ -2421,34 +2458,38 @@ export class EnvVarHelper extends Template implements EnvVarHelper {
         super(obj)
     }
 
-    _value: any;
-    get value(): any /*string*/ {
+    _value: string;
+    get value(): string {
         return this._value
     }
-    set value(x: any /*string*/) {
+    set value(x: string) {
         this._value = x
     }
-    setValue(x: any /*string*/) {
+    $Value(x: string) {
         this.value = x; return this
     }
 
-    _valueFrom: any;
-    get valueFrom(): any /*EnvVarSourceHelper*/ {
+    _valueFrom: EnvVarSourceHelper;
+    get valueFrom(): EnvVarSourceHelper {
         return this._valueFrom
     }
-    set valueFrom(x: any /*EnvVarSourceHelper*/) {
+    set valueFrom(x: EnvVarSourceHelper) {
         this._valueFrom = x
     }
-    setValueFrom(x: any /*EnvVarSourceHelper*/) {
+    $ValueFrom(x: EnvVarSourceHelper) {
         this.valueFrom = x; return this
     }
 }
 
 export interface EnvVarSourceHelper extends EnvVarSource {
-    $configMapKeyRef(x: any): any;
-    $fieldRef(x: any): any;
-    $resourceFieldRef(x: any): any;
-    $secretKeyRef(x: any): any;
+    configMapKeyRef: ConfigMapKeySelectorHelper;
+    $configMapKeyRef(x: ConfigMapKeySelectorHelper): EnvVarSourceHelper;
+    fieldRef: ObjectFieldSelectorHelper;
+    $fieldRef(x: ObjectFieldSelectorHelper): EnvVarSourceHelper;
+    resourceFieldRef: ResourceFieldSelectorHelper;
+    $resourceFieldRef(x: ResourceFieldSelectorHelper): EnvVarSourceHelper;
+    secretKeyRef: SecretKeySelectorHelper;
+    $secretKeyRef(x: SecretKeySelectorHelper): EnvVarSourceHelper;
 }
 
 /** EnvVarSource represents a source for the value of an EnvVar. */
@@ -2457,74 +2498,80 @@ export class EnvVarSourceHelper extends Template implements EnvVarSourceHelper {
         super(obj)
     }
 
-    _configMapKeyRef: any;
-    get configMapKeyRef(): any /*ConfigMapKeySelectorHelper*/ {
+    _configMapKeyRef: ConfigMapKeySelectorHelper;
+    get configMapKeyRef(): ConfigMapKeySelectorHelper {
         return this._configMapKeyRef
     }
-    set configMapKeyRef(x: any /*ConfigMapKeySelectorHelper*/) {
+    set configMapKeyRef(x: ConfigMapKeySelectorHelper) {
         this._configMapKeyRef = x
     }
-    setConfigMapKeyRef(x: any /*ConfigMapKeySelectorHelper*/) {
+    $ConfigMapKeyRef(x: ConfigMapKeySelectorHelper) {
         this.configMapKeyRef = x; return this
     }
 
-    _fieldRef: any;
-    get fieldRef(): any /*ObjectFieldSelectorHelper*/ {
+    _fieldRef: ObjectFieldSelectorHelper;
+    get fieldRef(): ObjectFieldSelectorHelper {
         return this._fieldRef
     }
-    set fieldRef(x: any /*ObjectFieldSelectorHelper*/) {
+    set fieldRef(x: ObjectFieldSelectorHelper) {
         this._fieldRef = x
     }
-    setFieldRef(x: any /*ObjectFieldSelectorHelper*/) {
+    $FieldRef(x: ObjectFieldSelectorHelper) {
         this.fieldRef = x; return this
     }
 
-    _resourceFieldRef: any;
-    get resourceFieldRef(): any /*ResourceFieldSelectorHelper*/ {
+    _resourceFieldRef: ResourceFieldSelectorHelper;
+    get resourceFieldRef(): ResourceFieldSelectorHelper {
         return this._resourceFieldRef
     }
-    set resourceFieldRef(x: any /*ResourceFieldSelectorHelper*/) {
+    set resourceFieldRef(x: ResourceFieldSelectorHelper) {
         this._resourceFieldRef = x
     }
-    setResourceFieldRef(x: any /*ResourceFieldSelectorHelper*/) {
+    $ResourceFieldRef(x: ResourceFieldSelectorHelper) {
         this.resourceFieldRef = x; return this
     }
 
-    _secretKeyRef: any;
-    get secretKeyRef(): any /*SecretKeySelectorHelper*/ {
+    _secretKeyRef: SecretKeySelectorHelper;
+    get secretKeyRef(): SecretKeySelectorHelper {
         return this._secretKeyRef
     }
-    set secretKeyRef(x: any /*SecretKeySelectorHelper*/) {
+    set secretKeyRef(x: SecretKeySelectorHelper) {
         this._secretKeyRef = x
     }
-    setSecretKeyRef(x: any /*SecretKeySelectorHelper*/) {
+    $SecretKeyRef(x: SecretKeySelectorHelper) {
         this.secretKeyRef = x; return this
     }
 }
 
 export interface EphemeralContainerHelper extends EphemeralContainer {
-    $args(x: any): any;
-    $command(x: any): any;
-    $env(x: any): any;
-    $envFrom(x: any): any;
-    $image(x: any): any;
-    $imagePullPolicy(x: any): any;
-    $lifecycle(x: any): any;
-    $livenessProbe(x: any): any;
-    $ports(x: any): any;
-    $readinessProbe(x: any): any;
-    $resources(x: any): any;
-    $securityContext(x: any): any;
-    $startupProbe(x: any): any;
-    $stdin(x: any): any;
-    $stdinOnce(x: any): any;
-    $targetContainerName(x: any): any;
-    $terminationMessagePath(x: any): any;
-    $terminationMessagePolicy(x: any): any;
-    $tty(x: any): any;
-    $volumeDevices(x: any): any;
-    $volumeMounts(x: any): any;
-    $workingDir(x: any): any;
+    $args(x: Array<string>): EphemeralContainerHelper;
+    $command(x: Array<string>): EphemeralContainerHelper;
+    $env(x: Array<EnvVar>): EphemeralContainerHelper;
+    $envFrom(x: Array<EnvFromSource>): EphemeralContainerHelper;
+    $image(x: string): EphemeralContainerHelper;
+    $imagePullPolicy(x: string): EphemeralContainerHelper;
+    lifecycle: LifecycleHelper;
+    $lifecycle(x: LifecycleHelper): EphemeralContainerHelper;
+    livenessProbe: ProbeHelper;
+    $livenessProbe(x: ProbeHelper): EphemeralContainerHelper;
+    $ports(x: Array<ContainerPort>): EphemeralContainerHelper;
+    readinessProbe: ProbeHelper;
+    $readinessProbe(x: ProbeHelper): EphemeralContainerHelper;
+    resources: ResourceRequirementsHelper;
+    $resources(x: ResourceRequirementsHelper): EphemeralContainerHelper;
+    securityContext: SecurityContextHelper;
+    $securityContext(x: SecurityContextHelper): EphemeralContainerHelper;
+    startupProbe: ProbeHelper;
+    $startupProbe(x: ProbeHelper): EphemeralContainerHelper;
+    $stdin(x: boolean): EphemeralContainerHelper;
+    $stdinOnce(x: boolean): EphemeralContainerHelper;
+    $targetContainerName(x: string): EphemeralContainerHelper;
+    $terminationMessagePath(x: string): EphemeralContainerHelper;
+    $terminationMessagePolicy(x: string): EphemeralContainerHelper;
+    $tty(x: boolean): EphemeralContainerHelper;
+    $volumeDevices(x: Array<VolumeDevice>): EphemeralContainerHelper;
+    $volumeMounts(x: Array<VolumeMount>): EphemeralContainerHelper;
+    $workingDir(x: string): EphemeralContainerHelper;
 }
 
 /** An EphemeralContainer is a container that may be added temporarily to an existing pod for user-initiated activities such as debugging. Ephemeral containers have no resource or scheduling guarantees, and they will not be restarted when they exit or when a pod is removed or restarted. If an ephemeral container causes a pod to exceed its resource allocation, the pod may be evicted. Ephemeral containers may not be added by directly updating the pod spec. They must be added via the pod's ephemeralcontainers subresource, and they will appear in the pod spec once added. This is an alpha feature enabled by the EphemeralContainers feature flag. */
@@ -2533,252 +2580,253 @@ export class EphemeralContainerHelper extends Template implements EphemeralConta
         super(obj)
     }
 
-    _args: any;
-    get args(): any /*Array<string>*/ {
+    _args: Array<string>;
+    get args(): Array<string> {
         return this._args
     }
-    set args(x: any /*Array<string>*/) {
+    set args(x: Array<string>) {
         this._args = this.set(this.args, x)
     }
-    setArgs(x: any /*Array<string>*/) {
+    $Args(x: Array<string>) {
         this.args = x; return this
     }
 
-    _command: any;
-    get command(): any /*Array<string>*/ {
+    _command: Array<string>;
+    get command(): Array<string> {
         return this._command
     }
-    set command(x: any /*Array<string>*/) {
+    set command(x: Array<string>) {
         this._command = this.set(this.command, x)
     }
-    setCommand(x: any /*Array<string>*/) {
+    $Command(x: Array<string>) {
         this.command = x; return this
     }
 
-    _env: any;
-    get env(): any /*Array<EnvVar>*/ {
+    _env: Array<EnvVar>;
+    get env(): Array<EnvVar> {
         return this._env
     }
-    set env(x: any /*Array<EnvVar>*/) {
+    set env(x: Array<EnvVar>) {
         this._env = this.set(this.env, x)
     }
-    setEnv(x: any /*Array<EnvVar>*/) {
+    $Env(x: Array<EnvVar>) {
         this.env = x; return this
     }
 
-    _envFrom: any;
-    get envFrom(): any /*Array<EnvFromSource>*/ {
+    _envFrom: Array<EnvFromSource>;
+    get envFrom(): Array<EnvFromSource> {
         return this._envFrom
     }
-    set envFrom(x: any /*Array<EnvFromSource>*/) {
+    set envFrom(x: Array<EnvFromSource>) {
         this._envFrom = this.set(this.envFrom, x)
     }
-    setEnvFrom(x: any /*Array<EnvFromSource>*/) {
+    $EnvFrom(x: Array<EnvFromSource>) {
         this.envFrom = x; return this
     }
 
-    _image: any;
-    get image(): any /*string*/ {
+    _image: string;
+    get image(): string {
         return this._image
     }
-    set image(x: any /*string*/) {
+    set image(x: string) {
         this._image = x
     }
-    setImage(x: any /*string*/) {
+    $Image(x: string) {
         this.image = x; return this
     }
 
-    _imagePullPolicy: any;
-    get imagePullPolicy(): any /*string*/ {
+    _imagePullPolicy: string;
+    get imagePullPolicy(): string {
         return this._imagePullPolicy
     }
-    set imagePullPolicy(x: any /*string*/) {
+    set imagePullPolicy(x: string) {
         this._imagePullPolicy = x
     }
-    setImagePullPolicy(x: any /*string*/) {
+    $ImagePullPolicy(x: string) {
         this.imagePullPolicy = x; return this
     }
 
-    _lifecycle: any;
-    get lifecycle(): any /*LifecycleHelper*/ {
+    _lifecycle: LifecycleHelper;
+    get lifecycle(): LifecycleHelper {
         return this._lifecycle
     }
-    set lifecycle(x: any /*LifecycleHelper*/) {
+    set lifecycle(x: LifecycleHelper) {
         this._lifecycle = x
     }
-    setLifecycle(x: any /*LifecycleHelper*/) {
+    $Lifecycle(x: LifecycleHelper) {
         this.lifecycle = x; return this
     }
 
-    _livenessProbe: any;
-    get livenessProbe(): any /*ProbeHelper*/ {
+    _livenessProbe: ProbeHelper;
+    get livenessProbe(): ProbeHelper {
         return this._livenessProbe
     }
-    set livenessProbe(x: any /*ProbeHelper*/) {
+    set livenessProbe(x: ProbeHelper) {
         this._livenessProbe = x
     }
-    setLivenessProbe(x: any /*ProbeHelper*/) {
+    $LivenessProbe(x: ProbeHelper) {
         this.livenessProbe = x; return this
     }
 
-    _ports: any;
-    get ports(): any /*Array<ContainerPort>*/ {
+    _ports: Array<ContainerPort>;
+    get ports(): Array<ContainerPort> {
         return this._ports
     }
-    set ports(x: any /*Array<ContainerPort>*/) {
+    set ports(x: Array<ContainerPort>) {
         this._ports = this.set(this.ports, x)
     }
-    setPorts(x: any /*Array<ContainerPort>*/) {
+    $Ports(x: Array<ContainerPort>) {
         this.ports = x; return this
     }
 
-    _readinessProbe: any;
-    get readinessProbe(): any /*ProbeHelper*/ {
+    _readinessProbe: ProbeHelper;
+    get readinessProbe(): ProbeHelper {
         return this._readinessProbe
     }
-    set readinessProbe(x: any /*ProbeHelper*/) {
+    set readinessProbe(x: ProbeHelper) {
         this._readinessProbe = x
     }
-    setReadinessProbe(x: any /*ProbeHelper*/) {
+    $ReadinessProbe(x: ProbeHelper) {
         this.readinessProbe = x; return this
     }
 
-    _resources: any;
-    get resources(): any /*ResourceRequirementsHelper*/ {
+    _resources: ResourceRequirementsHelper;
+    get resources(): ResourceRequirementsHelper {
         return this._resources
     }
-    set resources(x: any /*ResourceRequirementsHelper*/) {
+    set resources(x: ResourceRequirementsHelper) {
         this._resources = x
     }
-    setResources(x: any /*ResourceRequirementsHelper*/) {
+    $Resources(x: ResourceRequirementsHelper) {
         this.resources = x; return this
     }
 
-    _securityContext: any;
-    get securityContext(): any /*SecurityContextHelper*/ {
+    _securityContext: SecurityContextHelper;
+    get securityContext(): SecurityContextHelper {
         return this._securityContext
     }
-    set securityContext(x: any /*SecurityContextHelper*/) {
+    set securityContext(x: SecurityContextHelper) {
         this._securityContext = x
     }
-    setSecurityContext(x: any /*SecurityContextHelper*/) {
+    $SecurityContext(x: SecurityContextHelper) {
         this.securityContext = x; return this
     }
 
-    _startupProbe: any;
-    get startupProbe(): any /*ProbeHelper*/ {
+    _startupProbe: ProbeHelper;
+    get startupProbe(): ProbeHelper {
         return this._startupProbe
     }
-    set startupProbe(x: any /*ProbeHelper*/) {
+    set startupProbe(x: ProbeHelper) {
         this._startupProbe = x
     }
-    setStartupProbe(x: any /*ProbeHelper*/) {
+    $StartupProbe(x: ProbeHelper) {
         this.startupProbe = x; return this
     }
 
-    _stdin: any;
-    get stdin(): any /*boolean*/ {
+    _stdin: boolean;
+    get stdin(): boolean {
         return this._stdin
     }
-    set stdin(x: any /*boolean*/) {
+    set stdin(x: boolean) {
         this._stdin = x
     }
-    setStdin(x: any /*boolean*/) {
+    $Stdin(x: boolean) {
         this.stdin = x; return this
     }
 
-    _stdinOnce: any;
-    get stdinOnce(): any /*boolean*/ {
+    _stdinOnce: boolean;
+    get stdinOnce(): boolean {
         return this._stdinOnce
     }
-    set stdinOnce(x: any /*boolean*/) {
+    set stdinOnce(x: boolean) {
         this._stdinOnce = x
     }
-    setStdinOnce(x: any /*boolean*/) {
+    $StdinOnce(x: boolean) {
         this.stdinOnce = x; return this
     }
 
-    _targetContainerName: any;
-    get targetContainerName(): any /*string*/ {
+    _targetContainerName: string;
+    get targetContainerName(): string {
         return this._targetContainerName
     }
-    set targetContainerName(x: any /*string*/) {
+    set targetContainerName(x: string) {
         this._targetContainerName = x
     }
-    setTargetContainerName(x: any /*string*/) {
+    $TargetContainerName(x: string) {
         this.targetContainerName = x; return this
     }
 
-    _terminationMessagePath: any;
-    get terminationMessagePath(): any /*string*/ {
+    _terminationMessagePath: string;
+    get terminationMessagePath(): string {
         return this._terminationMessagePath
     }
-    set terminationMessagePath(x: any /*string*/) {
+    set terminationMessagePath(x: string) {
         this._terminationMessagePath = x
     }
-    setTerminationMessagePath(x: any /*string*/) {
+    $TerminationMessagePath(x: string) {
         this.terminationMessagePath = x; return this
     }
 
-    _terminationMessagePolicy: any;
-    get terminationMessagePolicy(): any /*string*/ {
+    _terminationMessagePolicy: string;
+    get terminationMessagePolicy(): string {
         return this._terminationMessagePolicy
     }
-    set terminationMessagePolicy(x: any /*string*/) {
+    set terminationMessagePolicy(x: string) {
         this._terminationMessagePolicy = x
     }
-    setTerminationMessagePolicy(x: any /*string*/) {
+    $TerminationMessagePolicy(x: string) {
         this.terminationMessagePolicy = x; return this
     }
 
-    _tty: any;
-    get tty(): any /*boolean*/ {
+    _tty: boolean;
+    get tty(): boolean {
         return this._tty
     }
-    set tty(x: any /*boolean*/) {
+    set tty(x: boolean) {
         this._tty = x
     }
-    setTty(x: any /*boolean*/) {
+    $Tty(x: boolean) {
         this.tty = x; return this
     }
 
-    _volumeDevices: any;
-    get volumeDevices(): any /*Array<VolumeDevice>*/ {
+    _volumeDevices: Array<VolumeDevice>;
+    get volumeDevices(): Array<VolumeDevice> {
         return this._volumeDevices
     }
-    set volumeDevices(x: any /*Array<VolumeDevice>*/) {
+    set volumeDevices(x: Array<VolumeDevice>) {
         this._volumeDevices = this.set(this.volumeDevices, x)
     }
-    setVolumeDevices(x: any /*Array<VolumeDevice>*/) {
+    $VolumeDevices(x: Array<VolumeDevice>) {
         this.volumeDevices = x; return this
     }
 
-    _volumeMounts: any;
-    get volumeMounts(): any /*Array<VolumeMount>*/ {
+    _volumeMounts: Array<VolumeMount>;
+    get volumeMounts(): Array<VolumeMount> {
         return this._volumeMounts
     }
-    set volumeMounts(x: any /*Array<VolumeMount>*/) {
+    set volumeMounts(x: Array<VolumeMount>) {
         this._volumeMounts = this.set(this.volumeMounts, x)
     }
-    setVolumeMounts(x: any /*Array<VolumeMount>*/) {
+    $VolumeMounts(x: Array<VolumeMount>) {
         this.volumeMounts = x; return this
     }
 
-    _workingDir: any;
-    get workingDir(): any /*string*/ {
+    _workingDir: string;
+    get workingDir(): string {
         return this._workingDir
     }
-    set workingDir(x: any /*string*/) {
+    set workingDir(x: string) {
         this._workingDir = x
     }
-    setWorkingDir(x: any /*string*/) {
+    $WorkingDir(x: string) {
         this.workingDir = x; return this
     }
 }
 
 export interface EphemeralContainersHelper extends EphemeralContainers {
-    $ephemeralContainers(x: any): any;
-    $metadata(x: any): any;
+    $ephemeralContainers(x: Array<EphemeralContainer>): EphemeralContainersHelper;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): EphemeralContainersHelper;
 }
 
 /** A list of ephemeral containers used with the Pod ephemeralcontainers subresource. */
@@ -2790,31 +2838,32 @@ export class EphemeralContainersHelper extends ResourceTemplate implements Ephem
         super(nameOrObject, namespace, EphemeralContainersHelper.kind, EphemeralContainersHelper.apiVersion)
     }
 
-    _ephemeralContainers: any;
-    get ephemeralContainers(): any /*Array<EphemeralContainer>*/ {
+    _ephemeralContainers: Array<EphemeralContainer>;
+    get ephemeralContainers(): Array<EphemeralContainer> {
         return this._ephemeralContainers
     }
-    set ephemeralContainers(x: any /*Array<EphemeralContainer>*/) {
+    set ephemeralContainers(x: Array<EphemeralContainer>) {
         this._ephemeralContainers = this.set(this.ephemeralContainers, x)
     }
-    setEphemeralContainers(x: any /*Array<EphemeralContainer>*/) {
+    $EphemeralContainers(x: Array<EphemeralContainer>) {
         this.ephemeralContainers = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface EphemeralVolumeSourceHelper extends EphemeralVolumeSource {
-    $volumeClaimTemplate(x: any): any;
+    volumeClaimTemplate: PersistentVolumeClaimTemplateHelper;
+    $volumeClaimTemplate(x: PersistentVolumeClaimTemplateHelper): EphemeralVolumeSourceHelper;
 }
 
 /** Represents an ephemeral volume that is handled by a normal storage driver. */
@@ -2823,34 +2872,39 @@ export class EphemeralVolumeSourceHelper extends Template implements EphemeralVo
         super(obj)
     }
 
-    _volumeClaimTemplate: any;
-    get volumeClaimTemplate(): any /*PersistentVolumeClaimTemplateHelper*/ {
+    _volumeClaimTemplate: PersistentVolumeClaimTemplateHelper;
+    get volumeClaimTemplate(): PersistentVolumeClaimTemplateHelper {
         return this._volumeClaimTemplate
     }
-    set volumeClaimTemplate(x: any /*PersistentVolumeClaimTemplateHelper*/) {
+    set volumeClaimTemplate(x: PersistentVolumeClaimTemplateHelper) {
         this._volumeClaimTemplate = x
     }
-    setVolumeClaimTemplate(x: any /*PersistentVolumeClaimTemplateHelper*/) {
+    $VolumeClaimTemplate(x: PersistentVolumeClaimTemplateHelper) {
         this.volumeClaimTemplate = x; return this
     }
 }
 
 export interface EventHelper extends Event {
-    $action(x: any): any;
-    $count(x: any): any;
-    $eventTime(x: any): any;
-    $firstTimestamp(x: any): any;
-    $involvedObject(x: any): any;
-    $lastTimestamp(x: any): any;
-    $message(x: any): any;
-    $metadata(x: any): any;
-    $reason(x: any): any;
-    $related(x: any): any;
-    $reportingComponent(x: any): any;
-    $reportingInstance(x: any): any;
-    $series(x: any): any;
-    $source(x: any): any;
-    $type(x: any): any;
+    $action(x: string): EventHelper;
+    $count(x: number): EventHelper;
+    $eventTime(x: MicroTime): EventHelper;
+    $firstTimestamp(x: Time): EventHelper;
+    involvedObject: ObjectReferenceHelper;
+    $involvedObject(x: ObjectReferenceHelper): EventHelper;
+    $lastTimestamp(x: Time): EventHelper;
+    $message(x: string): EventHelper;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): EventHelper;
+    $reason(x: string): EventHelper;
+    related: ObjectReferenceHelper;
+    $related(x: ObjectReferenceHelper): EventHelper;
+    $reportingComponent(x: string): EventHelper;
+    $reportingInstance(x: string): EventHelper;
+    series: EventSeriesHelper;
+    $series(x: EventSeriesHelper): EventHelper;
+    source: EventSourceHelper;
+    $source(x: EventSourceHelper): EventHelper;
+    $type(x: string): EventHelper;
 }
 
 /** Event is a report of an event somewhere in the cluster.  Events have a limited retention time and triggers and messages may evolve with time.  Event consumers should not rely on the timing of an event with a given Reason reflecting a consistent underlying trigger, or the continued existence of events with that Reason.  Events should be treated as informative, best-effort, supplemental data. */
@@ -2862,175 +2916,176 @@ export class EventHelper extends ResourceTemplate implements EventHelper {
         super(nameOrObject, namespace, EventHelper.kind, EventHelper.apiVersion)
     }
 
-    _action: any;
-    get action(): any /*string*/ {
+    _action: string;
+    get action(): string {
         return this._action
     }
-    set action(x: any /*string*/) {
+    set action(x: string) {
         this._action = x
     }
-    setAction(x: any /*string*/) {
+    $Action(x: string) {
         this.action = x; return this
     }
 
-    _count: any;
-    get count(): any /*number*/ {
+    _count: number;
+    get count(): number {
         return this._count
     }
-    set count(x: any /*number*/) {
+    set count(x: number) {
         this._count = x
     }
-    setCount(x: any /*number*/) {
+    $Count(x: number) {
         this.count = x; return this
     }
 
-    _eventTime: any;
-    get eventTime(): any /*MicroTime*/ {
+    _eventTime: MicroTime;
+    get eventTime(): MicroTime {
         return this._eventTime
     }
-    set eventTime(x: any /*MicroTime*/) {
+    set eventTime(x: MicroTime) {
         this._eventTime = x
     }
-    setEventTime(x: any /*MicroTime*/) {
+    $EventTime(x: MicroTime) {
         this.eventTime = x; return this
     }
 
-    _firstTimestamp: any;
-    get firstTimestamp(): any /*Time*/ {
+    _firstTimestamp: Time;
+    get firstTimestamp(): Time {
         return this._firstTimestamp
     }
-    set firstTimestamp(x: any /*Time*/) {
+    set firstTimestamp(x: Time) {
         this._firstTimestamp = x
     }
-    setFirstTimestamp(x: any /*Time*/) {
+    $FirstTimestamp(x: Time) {
         this.firstTimestamp = x; return this
     }
 
-    _involvedObject: any;
-    get involvedObject(): any /*ObjectReferenceHelper*/ {
+    _involvedObject: ObjectReferenceHelper;
+    get involvedObject(): ObjectReferenceHelper {
         return this._involvedObject
     }
-    set involvedObject(x: any /*ObjectReferenceHelper*/) {
+    set involvedObject(x: ObjectReferenceHelper) {
         this._involvedObject = x
     }
-    setInvolvedObject(x: any /*ObjectReferenceHelper*/) {
+    $InvolvedObject(x: ObjectReferenceHelper) {
         this.involvedObject = x; return this
     }
 
-    _lastTimestamp: any;
-    get lastTimestamp(): any /*Time*/ {
+    _lastTimestamp: Time;
+    get lastTimestamp(): Time {
         return this._lastTimestamp
     }
-    set lastTimestamp(x: any /*Time*/) {
+    set lastTimestamp(x: Time) {
         this._lastTimestamp = x
     }
-    setLastTimestamp(x: any /*Time*/) {
+    $LastTimestamp(x: Time) {
         this.lastTimestamp = x; return this
     }
 
-    _message: any;
-    get message(): any /*string*/ {
+    _message: string;
+    get message(): string {
         return this._message
     }
-    set message(x: any /*string*/) {
+    set message(x: string) {
         this._message = x
     }
-    setMessage(x: any /*string*/) {
+    $Message(x: string) {
         this.message = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _reason: any;
-    get reason(): any /*string*/ {
+    _reason: string;
+    get reason(): string {
         return this._reason
     }
-    set reason(x: any /*string*/) {
+    set reason(x: string) {
         this._reason = x
     }
-    setReason(x: any /*string*/) {
+    $Reason(x: string) {
         this.reason = x; return this
     }
 
-    _related: any;
-    get related(): any /*ObjectReferenceHelper*/ {
+    _related: ObjectReferenceHelper;
+    get related(): ObjectReferenceHelper {
         return this._related
     }
-    set related(x: any /*ObjectReferenceHelper*/) {
+    set related(x: ObjectReferenceHelper) {
         this._related = x
     }
-    setRelated(x: any /*ObjectReferenceHelper*/) {
+    $Related(x: ObjectReferenceHelper) {
         this.related = x; return this
     }
 
-    _reportingComponent: any;
-    get reportingComponent(): any /*string*/ {
+    _reportingComponent: string;
+    get reportingComponent(): string {
         return this._reportingComponent
     }
-    set reportingComponent(x: any /*string*/) {
+    set reportingComponent(x: string) {
         this._reportingComponent = x
     }
-    setReportingComponent(x: any /*string*/) {
+    $ReportingComponent(x: string) {
         this.reportingComponent = x; return this
     }
 
-    _reportingInstance: any;
-    get reportingInstance(): any /*string*/ {
+    _reportingInstance: string;
+    get reportingInstance(): string {
         return this._reportingInstance
     }
-    set reportingInstance(x: any /*string*/) {
+    set reportingInstance(x: string) {
         this._reportingInstance = x
     }
-    setReportingInstance(x: any /*string*/) {
+    $ReportingInstance(x: string) {
         this.reportingInstance = x; return this
     }
 
-    _series: any;
-    get series(): any /*EventSeriesHelper*/ {
+    _series: EventSeriesHelper;
+    get series(): EventSeriesHelper {
         return this._series
     }
-    set series(x: any /*EventSeriesHelper*/) {
+    set series(x: EventSeriesHelper) {
         this._series = x
     }
-    setSeries(x: any /*EventSeriesHelper*/) {
+    $Series(x: EventSeriesHelper) {
         this.series = x; return this
     }
 
-    _source: any;
-    get source(): any /*EventSourceHelper*/ {
+    _source: EventSourceHelper;
+    get source(): EventSourceHelper {
         return this._source
     }
-    set source(x: any /*EventSourceHelper*/) {
+    set source(x: EventSourceHelper) {
         this._source = x
     }
-    setSource(x: any /*EventSourceHelper*/) {
+    $Source(x: EventSourceHelper) {
         this.source = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }
 
 export interface EventListHelper extends EventList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<Event>): EventListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): EventListHelper;
 }
 
 /** EventList is a list of events. */
@@ -3042,32 +3097,32 @@ export class EventListHelper extends ResourceTemplate implements EventListHelper
         super(nameOrObject, namespace, EventListHelper.kind, EventListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<Event>*/ {
+    _items: Array<Event>;
+    get items(): Array<Event> {
         return this._items
     }
-    set items(x: any /*Array<Event>*/) {
+    set items(x: Array<Event>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<Event>*/) {
+    $Items(x: Array<Event>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface EventSeriesHelper extends EventSeries {
-    $count(x: any): any;
-    $lastObservedTime(x: any): any;
+    $count(x: number): EventSeriesHelper;
+    $lastObservedTime(x: MicroTime): EventSeriesHelper;
 }
 
 /** EventSeries contain information on series of events, i.e. thing that was/is happening continuously for some time. */
@@ -3076,32 +3131,32 @@ export class EventSeriesHelper extends Template implements EventSeriesHelper {
         super(obj)
     }
 
-    _count: any;
-    get count(): any /*number*/ {
+    _count: number;
+    get count(): number {
         return this._count
     }
-    set count(x: any /*number*/) {
+    set count(x: number) {
         this._count = x
     }
-    setCount(x: any /*number*/) {
+    $Count(x: number) {
         this.count = x; return this
     }
 
-    _lastObservedTime: any;
-    get lastObservedTime(): any /*MicroTime*/ {
+    _lastObservedTime: MicroTime;
+    get lastObservedTime(): MicroTime {
         return this._lastObservedTime
     }
-    set lastObservedTime(x: any /*MicroTime*/) {
+    set lastObservedTime(x: MicroTime) {
         this._lastObservedTime = x
     }
-    setLastObservedTime(x: any /*MicroTime*/) {
+    $LastObservedTime(x: MicroTime) {
         this.lastObservedTime = x; return this
     }
 }
 
 export interface EventSourceHelper extends EventSource {
-    $component(x: any): any;
-    $host(x: any): any;
+    $component(x: string): EventSourceHelper;
+    $host(x: string): EventSourceHelper;
 }
 
 /** EventSource contains information for an event. */
@@ -3110,31 +3165,31 @@ export class EventSourceHelper extends Template implements EventSourceHelper {
         super(obj)
     }
 
-    _component: any;
-    get component(): any /*string*/ {
+    _component: string;
+    get component(): string {
         return this._component
     }
-    set component(x: any /*string*/) {
+    set component(x: string) {
         this._component = x
     }
-    setComponent(x: any /*string*/) {
+    $Component(x: string) {
         this.component = x; return this
     }
 
-    _host: any;
-    get host(): any /*string*/ {
+    _host: string;
+    get host(): string {
         return this._host
     }
-    set host(x: any /*string*/) {
+    set host(x: string) {
         this._host = x
     }
-    setHost(x: any /*string*/) {
+    $Host(x: string) {
         this.host = x; return this
     }
 }
 
 export interface ExecActionHelper extends ExecAction {
-    $command(x: any): any;
+    $command(x: Array<string>): ExecActionHelper;
 }
 
 /** ExecAction describes a "run in container" action. */
@@ -3143,24 +3198,24 @@ export class ExecActionHelper extends Template implements ExecActionHelper {
         super(obj)
     }
 
-    _command: any;
-    get command(): any /*Array<string>*/ {
+    _command: Array<string>;
+    get command(): Array<string> {
         return this._command
     }
-    set command(x: any /*Array<string>*/) {
+    set command(x: Array<string>) {
         this._command = this.set(this.command, x)
     }
-    setCommand(x: any /*Array<string>*/) {
+    $Command(x: Array<string>) {
         this.command = x; return this
     }
 }
 
 export interface FCVolumeSourceHelper extends FCVolumeSource {
-    $fsType(x: any): any;
-    $lun(x: any): any;
-    $readOnly(x: any): any;
-    $targetWWNs(x: any): any;
-    $wwids(x: any): any;
+    $fsType(x: string): FCVolumeSourceHelper;
+    $lun(x: number): FCVolumeSourceHelper;
+    $readOnly(x: boolean): FCVolumeSourceHelper;
+    $targetWWNs(x: Array<string>): FCVolumeSourceHelper;
+    $wwids(x: Array<string>): FCVolumeSourceHelper;
 }
 
 /** Represents a Fibre Channel volume. Fibre Channel volumes can only be mounted as read/write once. Fibre Channel volumes support ownership management and SELinux relabeling. */
@@ -3169,68 +3224,69 @@ export class FCVolumeSourceHelper extends Template implements FCVolumeSourceHelp
         super(obj)
     }
 
-    _fsType: any;
-    get fsType(): any /*string*/ {
+    _fsType: string;
+    get fsType(): string {
         return this._fsType
     }
-    set fsType(x: any /*string*/) {
+    set fsType(x: string) {
         this._fsType = x
     }
-    setFsType(x: any /*string*/) {
+    $FsType(x: string) {
         this.fsType = x; return this
     }
 
-    _lun: any;
-    get lun(): any /*number*/ {
+    _lun: number;
+    get lun(): number {
         return this._lun
     }
-    set lun(x: any /*number*/) {
+    set lun(x: number) {
         this._lun = x
     }
-    setLun(x: any /*number*/) {
+    $Lun(x: number) {
         this.lun = x; return this
     }
 
-    _readOnly: any;
-    get readOnly(): any /*boolean*/ {
+    _readOnly: boolean;
+    get readOnly(): boolean {
         return this._readOnly
     }
-    set readOnly(x: any /*boolean*/) {
+    set readOnly(x: boolean) {
         this._readOnly = x
     }
-    setReadOnly(x: any /*boolean*/) {
+    $ReadOnly(x: boolean) {
         this.readOnly = x; return this
     }
 
-    _targetWWNs: any;
-    get targetWWNs(): any /*Array<string>*/ {
+    _targetWWNs: Array<string>;
+    get targetWWNs(): Array<string> {
         return this._targetWWNs
     }
-    set targetWWNs(x: any /*Array<string>*/) {
+    set targetWWNs(x: Array<string>) {
         this._targetWWNs = this.set(this.targetWWNs, x)
     }
-    setTargetWWNs(x: any /*Array<string>*/) {
+    $TargetWWNs(x: Array<string>) {
         this.targetWWNs = x; return this
     }
 
-    _wwids: any;
-    get wwids(): any /*Array<string>*/ {
+    _wwids: Array<string>;
+    get wwids(): Array<string> {
         return this._wwids
     }
-    set wwids(x: any /*Array<string>*/) {
+    set wwids(x: Array<string>) {
         this._wwids = this.set(this.wwids, x)
     }
-    setWwids(x: any /*Array<string>*/) {
+    $Wwids(x: Array<string>) {
         this.wwids = x; return this
     }
 }
 
 export interface FlexPersistentVolumeSourceHelper extends FlexPersistentVolumeSource {
-    $driver(x: any): any;
-    $fsType(x: any): any;
-    $options(x: any): any;
-    $readOnly(x: any): any;
-    $secretRef(x: any): any;
+    $driver(x: string): FlexPersistentVolumeSourceHelper;
+    $fsType(x: string): FlexPersistentVolumeSourceHelper;
+    $options(x: any): FlexPersistentVolumeSourceHelper;
+    $readOnly(x: boolean): FlexPersistentVolumeSourceHelper;
+    secretRef: SecretReferenceHelper;
+    $secretRef(x: SecretReferenceHelper): FlexPersistentVolumeSourceHelper;
 }
 
 /** FlexPersistentVolumeSource represents a generic persistent volume resource that is provisioned/attached using an exec based plugin. */
@@ -3239,68 +3295,69 @@ export class FlexPersistentVolumeSourceHelper extends Template implements FlexPe
         super(obj)
     }
 
-    _driver: any;
-    get driver(): any /*string*/ {
+    _driver: string;
+    get driver(): string {
         return this._driver
     }
-    set driver(x: any /*string*/) {
+    set driver(x: string) {
         this._driver = x
     }
-    setDriver(x: any /*string*/) {
+    $Driver(x: string) {
         this.driver = x; return this
     }
 
-    _fsType: any;
-    get fsType(): any /*string*/ {
+    _fsType: string;
+    get fsType(): string {
         return this._fsType
     }
-    set fsType(x: any /*string*/) {
+    set fsType(x: string) {
         this._fsType = x
     }
-    setFsType(x: any /*string*/) {
+    $FsType(x: string) {
         this.fsType = x; return this
     }
 
     _options: any;
-    get options(): any /*any*/ {
+    get options(): any {
         return this._options
     }
-    set options(x: any /*any*/) {
+    set options(x: any) {
         this._options = this.set(this.options, x)
     }
-    setOptions(x: any /*any*/) {
+    $Options(x: any) {
         this.options = x; return this
     }
 
-    _readOnly: any;
-    get readOnly(): any /*boolean*/ {
+    _readOnly: boolean;
+    get readOnly(): boolean {
         return this._readOnly
     }
-    set readOnly(x: any /*boolean*/) {
+    set readOnly(x: boolean) {
         this._readOnly = x
     }
-    setReadOnly(x: any /*boolean*/) {
+    $ReadOnly(x: boolean) {
         this.readOnly = x; return this
     }
 
-    _secretRef: any;
-    get secretRef(): any /*SecretReferenceHelper*/ {
+    _secretRef: SecretReferenceHelper;
+    get secretRef(): SecretReferenceHelper {
         return this._secretRef
     }
-    set secretRef(x: any /*SecretReferenceHelper*/) {
+    set secretRef(x: SecretReferenceHelper) {
         this._secretRef = x
     }
-    setSecretRef(x: any /*SecretReferenceHelper*/) {
+    $SecretRef(x: SecretReferenceHelper) {
         this.secretRef = x; return this
     }
 }
 
 export interface FlexVolumeSourceHelper extends FlexVolumeSource {
-    $driver(x: any): any;
-    $fsType(x: any): any;
-    $options(x: any): any;
-    $readOnly(x: any): any;
-    $secretRef(x: any): any;
+    $driver(x: string): FlexVolumeSourceHelper;
+    $fsType(x: string): FlexVolumeSourceHelper;
+    $options(x: any): FlexVolumeSourceHelper;
+    $readOnly(x: boolean): FlexVolumeSourceHelper;
+    secretRef: LocalObjectReferenceHelper;
+    $secretRef(x: LocalObjectReferenceHelper): FlexVolumeSourceHelper;
 }
 
 /** FlexVolume represents a generic volume resource that is provisioned/attached using an exec based plugin. */
@@ -3309,65 +3366,65 @@ export class FlexVolumeSourceHelper extends Template implements FlexVolumeSource
         super(obj)
     }
 
-    _driver: any;
-    get driver(): any /*string*/ {
+    _driver: string;
+    get driver(): string {
         return this._driver
     }
-    set driver(x: any /*string*/) {
+    set driver(x: string) {
         this._driver = x
     }
-    setDriver(x: any /*string*/) {
+    $Driver(x: string) {
         this.driver = x; return this
     }
 
-    _fsType: any;
-    get fsType(): any /*string*/ {
+    _fsType: string;
+    get fsType(): string {
         return this._fsType
     }
-    set fsType(x: any /*string*/) {
+    set fsType(x: string) {
         this._fsType = x
     }
-    setFsType(x: any /*string*/) {
+    $FsType(x: string) {
         this.fsType = x; return this
     }
 
     _options: any;
-    get options(): any /*any*/ {
+    get options(): any {
         return this._options
     }
-    set options(x: any /*any*/) {
+    set options(x: any) {
         this._options = this.set(this.options, x)
     }
-    setOptions(x: any /*any*/) {
+    $Options(x: any) {
         this.options = x; return this
     }
 
-    _readOnly: any;
-    get readOnly(): any /*boolean*/ {
+    _readOnly: boolean;
+    get readOnly(): boolean {
         return this._readOnly
     }
-    set readOnly(x: any /*boolean*/) {
+    set readOnly(x: boolean) {
         this._readOnly = x
     }
-    setReadOnly(x: any /*boolean*/) {
+    $ReadOnly(x: boolean) {
         this.readOnly = x; return this
     }
 
-    _secretRef: any;
-    get secretRef(): any /*LocalObjectReferenceHelper*/ {
+    _secretRef: LocalObjectReferenceHelper;
+    get secretRef(): LocalObjectReferenceHelper {
         return this._secretRef
     }
-    set secretRef(x: any /*LocalObjectReferenceHelper*/) {
+    set secretRef(x: LocalObjectReferenceHelper) {
         this._secretRef = x
     }
-    setSecretRef(x: any /*LocalObjectReferenceHelper*/) {
+    $SecretRef(x: LocalObjectReferenceHelper) {
         this.secretRef = x; return this
     }
 }
 
 export interface FlockerVolumeSourceHelper extends FlockerVolumeSource {
-    $datasetName(x: any): any;
-    $datasetUUID(x: any): any;
+    $datasetName(x: string): FlockerVolumeSourceHelper;
+    $datasetUUID(x: string): FlockerVolumeSourceHelper;
 }
 
 /** Represents a Flocker volume mounted by the Flocker agent. One and only one of datasetName and datasetUUID should be set. Flocker volumes do not support ownership management or SELinux relabeling. */
@@ -3376,34 +3433,34 @@ export class FlockerVolumeSourceHelper extends Template implements FlockerVolume
         super(obj)
     }
 
-    _datasetName: any;
-    get datasetName(): any /*string*/ {
+    _datasetName: string;
+    get datasetName(): string {
         return this._datasetName
     }
-    set datasetName(x: any /*string*/) {
+    set datasetName(x: string) {
         this._datasetName = x
     }
-    setDatasetName(x: any /*string*/) {
+    $DatasetName(x: string) {
         this.datasetName = x; return this
     }
 
-    _datasetUUID: any;
-    get datasetUUID(): any /*string*/ {
+    _datasetUUID: string;
+    get datasetUUID(): string {
         return this._datasetUUID
     }
-    set datasetUUID(x: any /*string*/) {
+    set datasetUUID(x: string) {
         this._datasetUUID = x
     }
-    setDatasetUUID(x: any /*string*/) {
+    $DatasetUUID(x: string) {
         this.datasetUUID = x; return this
     }
 }
 
 export interface GCEPersistentDiskVolumeSourceHelper extends GCEPersistentDiskVolumeSource {
-    $fsType(x: any): any;
-    $partition(x: any): any;
-    $pdName(x: any): any;
-    $readOnly(x: any): any;
+    $fsType(x: string): GCEPersistentDiskVolumeSourceHelper;
+    $partition(x: number): GCEPersistentDiskVolumeSourceHelper;
+    $pdName(x: string): GCEPersistentDiskVolumeSourceHelper;
+    $readOnly(x: boolean): GCEPersistentDiskVolumeSourceHelper;
 }
 
 /**
@@ -3416,55 +3473,55 @@ export class GCEPersistentDiskVolumeSourceHelper extends Template implements GCE
         super(obj)
     }
 
-    _fsType: any;
-    get fsType(): any /*string*/ {
+    _fsType: string;
+    get fsType(): string {
         return this._fsType
     }
-    set fsType(x: any /*string*/) {
+    set fsType(x: string) {
         this._fsType = x
     }
-    setFsType(x: any /*string*/) {
+    $FsType(x: string) {
         this.fsType = x; return this
     }
 
-    _partition: any;
-    get partition(): any /*number*/ {
+    _partition: number;
+    get partition(): number {
         return this._partition
     }
-    set partition(x: any /*number*/) {
+    set partition(x: number) {
         this._partition = x
     }
-    setPartition(x: any /*number*/) {
+    $Partition(x: number) {
         this.partition = x; return this
     }
 
-    _pdName: any;
-    get pdName(): any /*string*/ {
+    _pdName: string;
+    get pdName(): string {
         return this._pdName
     }
-    set pdName(x: any /*string*/) {
+    set pdName(x: string) {
         this._pdName = x
     }
-    setPdName(x: any /*string*/) {
+    $PdName(x: string) {
         this.pdName = x; return this
     }
 
-    _readOnly: any;
-    get readOnly(): any /*boolean*/ {
+    _readOnly: boolean;
+    get readOnly(): boolean {
         return this._readOnly
     }
-    set readOnly(x: any /*boolean*/) {
+    set readOnly(x: boolean) {
         this._readOnly = x
     }
-    setReadOnly(x: any /*boolean*/) {
+    $ReadOnly(x: boolean) {
         this.readOnly = x; return this
     }
 }
 
 export interface GitRepoVolumeSourceHelper extends GitRepoVolumeSource {
-    $directory(x: any): any;
-    $repository(x: any): any;
-    $revision(x: any): any;
+    $directory(x: string): GitRepoVolumeSourceHelper;
+    $repository(x: string): GitRepoVolumeSourceHelper;
+    $revision(x: string): GitRepoVolumeSourceHelper;
 }
 
 /**
@@ -3477,45 +3534,45 @@ export class GitRepoVolumeSourceHelper extends Template implements GitRepoVolume
         super(obj)
     }
 
-    _directory: any;
-    get directory(): any /*string*/ {
+    _directory: string;
+    get directory(): string {
         return this._directory
     }
-    set directory(x: any /*string*/) {
+    set directory(x: string) {
         this._directory = x
     }
-    setDirectory(x: any /*string*/) {
+    $Directory(x: string) {
         this.directory = x; return this
     }
 
-    _repository: any;
-    get repository(): any /*string*/ {
+    _repository: string;
+    get repository(): string {
         return this._repository
     }
-    set repository(x: any /*string*/) {
+    set repository(x: string) {
         this._repository = x
     }
-    setRepository(x: any /*string*/) {
+    $Repository(x: string) {
         this.repository = x; return this
     }
 
-    _revision: any;
-    get revision(): any /*string*/ {
+    _revision: string;
+    get revision(): string {
         return this._revision
     }
-    set revision(x: any /*string*/) {
+    set revision(x: string) {
         this._revision = x
     }
-    setRevision(x: any /*string*/) {
+    $Revision(x: string) {
         this.revision = x; return this
     }
 }
 
 export interface GlusterfsPersistentVolumeSourceHelper extends GlusterfsPersistentVolumeSource {
-    $endpoints(x: any): any;
-    $endpointsNamespace(x: any): any;
-    $path(x: any): any;
-    $readOnly(x: any): any;
+    $endpoints(x: string): GlusterfsPersistentVolumeSourceHelper;
+    $endpointsNamespace(x: string): GlusterfsPersistentVolumeSourceHelper;
+    $path(x: string): GlusterfsPersistentVolumeSourceHelper;
+    $readOnly(x: boolean): GlusterfsPersistentVolumeSourceHelper;
 }
 
 /** Represents a Glusterfs mount that lasts the lifetime of a pod. Glusterfs volumes do not support ownership management or SELinux relabeling. */
@@ -3524,55 +3581,55 @@ export class GlusterfsPersistentVolumeSourceHelper extends Template implements G
         super(obj)
     }
 
-    _endpoints: any;
-    get endpoints(): any /*string*/ {
+    _endpoints: string;
+    get endpoints(): string {
         return this._endpoints
     }
-    set endpoints(x: any /*string*/) {
+    set endpoints(x: string) {
         this._endpoints = x
     }
-    setEndpoints(x: any /*string*/) {
+    $Endpoints(x: string) {
         this.endpoints = x; return this
     }
 
-    _endpointsNamespace: any;
-    get endpointsNamespace(): any /*string*/ {
+    _endpointsNamespace: string;
+    get endpointsNamespace(): string {
         return this._endpointsNamespace
     }
-    set endpointsNamespace(x: any /*string*/) {
+    set endpointsNamespace(x: string) {
         this._endpointsNamespace = x
     }
-    setEndpointsNamespace(x: any /*string*/) {
+    $EndpointsNamespace(x: string) {
         this.endpointsNamespace = x; return this
     }
 
-    _path: any;
-    get path(): any /*string*/ {
+    _path: string;
+    get path(): string {
         return this._path
     }
-    set path(x: any /*string*/) {
+    set path(x: string) {
         this._path = x
     }
-    setPath(x: any /*string*/) {
+    $Path(x: string) {
         this.path = x; return this
     }
 
-    _readOnly: any;
-    get readOnly(): any /*boolean*/ {
+    _readOnly: boolean;
+    get readOnly(): boolean {
         return this._readOnly
     }
-    set readOnly(x: any /*boolean*/) {
+    set readOnly(x: boolean) {
         this._readOnly = x
     }
-    setReadOnly(x: any /*boolean*/) {
+    $ReadOnly(x: boolean) {
         this.readOnly = x; return this
     }
 }
 
 export interface GlusterfsVolumeSourceHelper extends GlusterfsVolumeSource {
-    $endpoints(x: any): any;
-    $path(x: any): any;
-    $readOnly(x: any): any;
+    $endpoints(x: string): GlusterfsVolumeSourceHelper;
+    $path(x: string): GlusterfsVolumeSourceHelper;
+    $readOnly(x: boolean): GlusterfsVolumeSourceHelper;
 }
 
 /** Represents a Glusterfs mount that lasts the lifetime of a pod. Glusterfs volumes do not support ownership management or SELinux relabeling. */
@@ -3581,46 +3638,47 @@ export class GlusterfsVolumeSourceHelper extends Template implements GlusterfsVo
         super(obj)
     }
 
-    _endpoints: any;
-    get endpoints(): any /*string*/ {
+    _endpoints: string;
+    get endpoints(): string {
         return this._endpoints
     }
-    set endpoints(x: any /*string*/) {
+    set endpoints(x: string) {
         this._endpoints = x
     }
-    setEndpoints(x: any /*string*/) {
+    $Endpoints(x: string) {
         this.endpoints = x; return this
     }
 
-    _path: any;
-    get path(): any /*string*/ {
+    _path: string;
+    get path(): string {
         return this._path
     }
-    set path(x: any /*string*/) {
+    set path(x: string) {
         this._path = x
     }
-    setPath(x: any /*string*/) {
+    $Path(x: string) {
         this.path = x; return this
     }
 
-    _readOnly: any;
-    get readOnly(): any /*boolean*/ {
+    _readOnly: boolean;
+    get readOnly(): boolean {
         return this._readOnly
     }
-    set readOnly(x: any /*boolean*/) {
+    set readOnly(x: boolean) {
         this._readOnly = x
     }
-    setReadOnly(x: any /*boolean*/) {
+    $ReadOnly(x: boolean) {
         this.readOnly = x; return this
     }
 }
 
 export interface HTTPGetActionHelper extends HTTPGetAction {
-    $host(x: any): any;
-    $httpHeaders(x: any): any;
-    $path(x: any): any;
-    $port(x: any): any;
-    $scheme(x: any): any;
+    $host(x: string): HTTPGetActionHelper;
+    $httpHeaders(x: Array<HTTPHeader>): HTTPGetActionHelper;
+    $path(x: string): HTTPGetActionHelper;
+    port: number | stringHelper;
+    $port(x: number | stringHelper): HTTPGetActionHelper;
+    $scheme(x: string): HTTPGetActionHelper;
 }
 
 /** HTTPGetAction describes an action based on HTTP Get requests. */
@@ -3629,64 +3687,64 @@ export class HTTPGetActionHelper extends Template implements HTTPGetActionHelper
         super(obj)
     }
 
-    _host: any;
-    get host(): any /*string*/ {
+    _host: string;
+    get host(): string {
         return this._host
     }
-    set host(x: any /*string*/) {
+    set host(x: string) {
         this._host = x
     }
-    setHost(x: any /*string*/) {
+    $Host(x: string) {
         this.host = x; return this
     }
 
-    _httpHeaders: any;
-    get httpHeaders(): any /*Array<HTTPHeader>*/ {
+    _httpHeaders: Array<HTTPHeader>;
+    get httpHeaders(): Array<HTTPHeader> {
         return this._httpHeaders
     }
-    set httpHeaders(x: any /*Array<HTTPHeader>*/) {
+    set httpHeaders(x: Array<HTTPHeader>) {
         this._httpHeaders = this.set(this.httpHeaders, x)
     }
-    setHttpHeaders(x: any /*Array<HTTPHeader>*/) {
+    $HttpHeaders(x: Array<HTTPHeader>) {
         this.httpHeaders = x; return this
     }
 
-    _path: any;
-    get path(): any /*string*/ {
+    _path: string;
+    get path(): string {
         return this._path
     }
-    set path(x: any /*string*/) {
+    set path(x: string) {
         this._path = x
     }
-    setPath(x: any /*string*/) {
+    $Path(x: string) {
         this.path = x; return this
     }
 
-    _port: any;
-    get port(): any /*number | stringHelper*/ {
+    _port: number | stringHelper;
+    get port(): number | stringHelper {
         return this._port
     }
-    set port(x: any /*number | stringHelper*/) {
+    set port(x: number | stringHelper) {
         this._port = x
     }
-    setPort(x: any /*number | stringHelper*/) {
+    $Port(x: number | stringHelper) {
         this.port = x; return this
     }
 
-    _scheme: any;
-    get scheme(): any /*string*/ {
+    _scheme: string;
+    get scheme(): string {
         return this._scheme
     }
-    set scheme(x: any /*string*/) {
+    set scheme(x: string) {
         this._scheme = x
     }
-    setScheme(x: any /*string*/) {
+    $Scheme(x: string) {
         this.scheme = x; return this
     }
 }
 
 export interface HTTPHeaderHelper extends HTTPHeader {
-    $value(x: any): any;
+    $value(x: string): HTTPHeaderHelper;
 }
 
 /** HTTPHeader describes a custom header to be used in HTTP probes */
@@ -3695,22 +3753,25 @@ export class HTTPHeaderHelper extends Template implements HTTPHeaderHelper {
         super(obj)
     }
 
-    _value: any;
-    get value(): any /*string*/ {
+    _value: string;
+    get value(): string {
         return this._value
     }
-    set value(x: any /*string*/) {
+    set value(x: string) {
         this._value = x
     }
-    setValue(x: any /*string*/) {
+    $Value(x: string) {
         this.value = x; return this
     }
 }
 
 export interface HandlerHelper extends Handler {
-    $exec(x: any): any;
-    $httpGet(x: any): any;
-    $tcpSocket(x: any): any;
+    exec: ExecActionHelper;
+    $exec(x: ExecActionHelper): HandlerHelper;
+    httpGet: HTTPGetActionHelper;
+    $httpGet(x: HTTPGetActionHelper): HandlerHelper;
+    tcpSocket: TCPSocketActionHelper;
+    $tcpSocket(x: TCPSocketActionHelper): HandlerHelper;
 }
 
 /** Handler defines a specific action that should be taken */
@@ -3719,43 +3780,43 @@ export class HandlerHelper extends Template implements HandlerHelper {
         super(obj)
     }
 
-    _exec: any;
-    get exec(): any /*ExecActionHelper*/ {
+    _exec: ExecActionHelper;
+    get exec(): ExecActionHelper {
         return this._exec
     }
-    set exec(x: any /*ExecActionHelper*/) {
+    set exec(x: ExecActionHelper) {
         this._exec = x
     }
-    setExec(x: any /*ExecActionHelper*/) {
+    $Exec(x: ExecActionHelper) {
         this.exec = x; return this
     }
 
-    _httpGet: any;
-    get httpGet(): any /*HTTPGetActionHelper*/ {
+    _httpGet: HTTPGetActionHelper;
+    get httpGet(): HTTPGetActionHelper {
         return this._httpGet
     }
-    set httpGet(x: any /*HTTPGetActionHelper*/) {
+    set httpGet(x: HTTPGetActionHelper) {
         this._httpGet = x
     }
-    setHttpGet(x: any /*HTTPGetActionHelper*/) {
+    $HttpGet(x: HTTPGetActionHelper) {
         this.httpGet = x; return this
     }
 
-    _tcpSocket: any;
-    get tcpSocket(): any /*TCPSocketActionHelper*/ {
+    _tcpSocket: TCPSocketActionHelper;
+    get tcpSocket(): TCPSocketActionHelper {
         return this._tcpSocket
     }
-    set tcpSocket(x: any /*TCPSocketActionHelper*/) {
+    set tcpSocket(x: TCPSocketActionHelper) {
         this._tcpSocket = x
     }
-    setTcpSocket(x: any /*TCPSocketActionHelper*/) {
+    $TcpSocket(x: TCPSocketActionHelper) {
         this.tcpSocket = x; return this
     }
 }
 
 export interface HostAliasHelper extends HostAlias {
-    $hostnames(x: any): any;
-    $ip(x: any): any;
+    $hostnames(x: Array<string>): HostAliasHelper;
+    $ip(x: string): HostAliasHelper;
 }
 
 /** HostAlias holds the mapping between IP and hostnames that will be injected as an entry in the pod's hosts file. */
@@ -3764,32 +3825,32 @@ export class HostAliasHelper extends Template implements HostAliasHelper {
         super(obj)
     }
 
-    _hostnames: any;
-    get hostnames(): any /*Array<string>*/ {
+    _hostnames: Array<string>;
+    get hostnames(): Array<string> {
         return this._hostnames
     }
-    set hostnames(x: any /*Array<string>*/) {
+    set hostnames(x: Array<string>) {
         this._hostnames = this.set(this.hostnames, x)
     }
-    setHostnames(x: any /*Array<string>*/) {
+    $Hostnames(x: Array<string>) {
         this.hostnames = x; return this
     }
 
-    _ip: any;
-    get ip(): any /*string*/ {
+    _ip: string;
+    get ip(): string {
         return this._ip
     }
-    set ip(x: any /*string*/) {
+    set ip(x: string) {
         this._ip = x
     }
-    setIp(x: any /*string*/) {
+    $Ip(x: string) {
         this.ip = x; return this
     }
 }
 
 export interface HostPathVolumeSourceHelper extends HostPathVolumeSource {
-    $path(x: any): any;
-    $type(x: any): any;
+    $path(x: string): HostPathVolumeSourceHelper;
+    $type(x: string): HostPathVolumeSourceHelper;
 }
 
 /** Represents a host path mapped into a pod. Host path volumes do not support ownership management or SELinux relabeling. */
@@ -3798,41 +3859,42 @@ export class HostPathVolumeSourceHelper extends Template implements HostPathVolu
         super(obj)
     }
 
-    _path: any;
-    get path(): any /*string*/ {
+    _path: string;
+    get path(): string {
         return this._path
     }
-    set path(x: any /*string*/) {
+    set path(x: string) {
         this._path = x
     }
-    setPath(x: any /*string*/) {
+    $Path(x: string) {
         this.path = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }
 
 export interface ISCSIPersistentVolumeSourceHelper extends ISCSIPersistentVolumeSource {
-    $chapAuthDiscovery(x: any): any;
-    $chapAuthSession(x: any): any;
-    $fsType(x: any): any;
-    $initiatorName(x: any): any;
-    $iqn(x: any): any;
-    $iscsiInterface(x: any): any;
-    $lun(x: any): any;
-    $portals(x: any): any;
-    $readOnly(x: any): any;
-    $secretRef(x: any): any;
-    $targetPortal(x: any): any;
+    $chapAuthDiscovery(x: boolean): ISCSIPersistentVolumeSourceHelper;
+    $chapAuthSession(x: boolean): ISCSIPersistentVolumeSourceHelper;
+    $fsType(x: string): ISCSIPersistentVolumeSourceHelper;
+    $initiatorName(x: string): ISCSIPersistentVolumeSourceHelper;
+    $iqn(x: string): ISCSIPersistentVolumeSourceHelper;
+    $iscsiInterface(x: string): ISCSIPersistentVolumeSourceHelper;
+    $lun(x: number): ISCSIPersistentVolumeSourceHelper;
+    $portals(x: Array<string>): ISCSIPersistentVolumeSourceHelper;
+    $readOnly(x: boolean): ISCSIPersistentVolumeSourceHelper;
+    secretRef: SecretReferenceHelper;
+    $secretRef(x: SecretReferenceHelper): ISCSIPersistentVolumeSourceHelper;
+    $targetPortal(x: string): ISCSIPersistentVolumeSourceHelper;
 }
 
 /** ISCSIPersistentVolumeSource represents an ISCSI disk. ISCSI volumes can only be mounted as read/write once. ISCSI volumes support ownership management and SELinux relabeling. */
@@ -3841,140 +3903,141 @@ export class ISCSIPersistentVolumeSourceHelper extends Template implements ISCSI
         super(obj)
     }
 
-    _chapAuthDiscovery: any;
-    get chapAuthDiscovery(): any /*boolean*/ {
+    _chapAuthDiscovery: boolean;
+    get chapAuthDiscovery(): boolean {
         return this._chapAuthDiscovery
     }
-    set chapAuthDiscovery(x: any /*boolean*/) {
+    set chapAuthDiscovery(x: boolean) {
         this._chapAuthDiscovery = x
     }
-    setChapAuthDiscovery(x: any /*boolean*/) {
+    $ChapAuthDiscovery(x: boolean) {
         this.chapAuthDiscovery = x; return this
     }
 
-    _chapAuthSession: any;
-    get chapAuthSession(): any /*boolean*/ {
+    _chapAuthSession: boolean;
+    get chapAuthSession(): boolean {
         return this._chapAuthSession
     }
-    set chapAuthSession(x: any /*boolean*/) {
+    set chapAuthSession(x: boolean) {
         this._chapAuthSession = x
     }
-    setChapAuthSession(x: any /*boolean*/) {
+    $ChapAuthSession(x: boolean) {
         this.chapAuthSession = x; return this
     }
 
-    _fsType: any;
-    get fsType(): any /*string*/ {
+    _fsType: string;
+    get fsType(): string {
         return this._fsType
     }
-    set fsType(x: any /*string*/) {
+    set fsType(x: string) {
         this._fsType = x
     }
-    setFsType(x: any /*string*/) {
+    $FsType(x: string) {
         this.fsType = x; return this
     }
 
-    _initiatorName: any;
-    get initiatorName(): any /*string*/ {
+    _initiatorName: string;
+    get initiatorName(): string {
         return this._initiatorName
     }
-    set initiatorName(x: any /*string*/) {
+    set initiatorName(x: string) {
         this._initiatorName = x
     }
-    setInitiatorName(x: any /*string*/) {
+    $InitiatorName(x: string) {
         this.initiatorName = x; return this
     }
 
-    _iqn: any;
-    get iqn(): any /*string*/ {
+    _iqn: string;
+    get iqn(): string {
         return this._iqn
     }
-    set iqn(x: any /*string*/) {
+    set iqn(x: string) {
         this._iqn = x
     }
-    setIqn(x: any /*string*/) {
+    $Iqn(x: string) {
         this.iqn = x; return this
     }
 
-    _iscsiInterface: any;
-    get iscsiInterface(): any /*string*/ {
+    _iscsiInterface: string;
+    get iscsiInterface(): string {
         return this._iscsiInterface
     }
-    set iscsiInterface(x: any /*string*/) {
+    set iscsiInterface(x: string) {
         this._iscsiInterface = x
     }
-    setIscsiInterface(x: any /*string*/) {
+    $IscsiInterface(x: string) {
         this.iscsiInterface = x; return this
     }
 
-    _lun: any;
-    get lun(): any /*number*/ {
+    _lun: number;
+    get lun(): number {
         return this._lun
     }
-    set lun(x: any /*number*/) {
+    set lun(x: number) {
         this._lun = x
     }
-    setLun(x: any /*number*/) {
+    $Lun(x: number) {
         this.lun = x; return this
     }
 
-    _portals: any;
-    get portals(): any /*Array<string>*/ {
+    _portals: Array<string>;
+    get portals(): Array<string> {
         return this._portals
     }
-    set portals(x: any /*Array<string>*/) {
+    set portals(x: Array<string>) {
         this._portals = this.set(this.portals, x)
     }
-    setPortals(x: any /*Array<string>*/) {
+    $Portals(x: Array<string>) {
         this.portals = x; return this
     }
 
-    _readOnly: any;
-    get readOnly(): any /*boolean*/ {
+    _readOnly: boolean;
+    get readOnly(): boolean {
         return this._readOnly
     }
-    set readOnly(x: any /*boolean*/) {
+    set readOnly(x: boolean) {
         this._readOnly = x
     }
-    setReadOnly(x: any /*boolean*/) {
+    $ReadOnly(x: boolean) {
         this.readOnly = x; return this
     }
 
-    _secretRef: any;
-    get secretRef(): any /*SecretReferenceHelper*/ {
+    _secretRef: SecretReferenceHelper;
+    get secretRef(): SecretReferenceHelper {
         return this._secretRef
     }
-    set secretRef(x: any /*SecretReferenceHelper*/) {
+    set secretRef(x: SecretReferenceHelper) {
         this._secretRef = x
     }
-    setSecretRef(x: any /*SecretReferenceHelper*/) {
+    $SecretRef(x: SecretReferenceHelper) {
         this.secretRef = x; return this
     }
 
-    _targetPortal: any;
-    get targetPortal(): any /*string*/ {
+    _targetPortal: string;
+    get targetPortal(): string {
         return this._targetPortal
     }
-    set targetPortal(x: any /*string*/) {
+    set targetPortal(x: string) {
         this._targetPortal = x
     }
-    setTargetPortal(x: any /*string*/) {
+    $TargetPortal(x: string) {
         this.targetPortal = x; return this
     }
 }
 
 export interface ISCSIVolumeSourceHelper extends ISCSIVolumeSource {
-    $chapAuthDiscovery(x: any): any;
-    $chapAuthSession(x: any): any;
-    $fsType(x: any): any;
-    $initiatorName(x: any): any;
-    $iqn(x: any): any;
-    $iscsiInterface(x: any): any;
-    $lun(x: any): any;
-    $portals(x: any): any;
-    $readOnly(x: any): any;
-    $secretRef(x: any): any;
-    $targetPortal(x: any): any;
+    $chapAuthDiscovery(x: boolean): ISCSIVolumeSourceHelper;
+    $chapAuthSession(x: boolean): ISCSIVolumeSourceHelper;
+    $fsType(x: string): ISCSIVolumeSourceHelper;
+    $initiatorName(x: string): ISCSIVolumeSourceHelper;
+    $iqn(x: string): ISCSIVolumeSourceHelper;
+    $iscsiInterface(x: string): ISCSIVolumeSourceHelper;
+    $lun(x: number): ISCSIVolumeSourceHelper;
+    $portals(x: Array<string>): ISCSIVolumeSourceHelper;
+    $readOnly(x: boolean): ISCSIVolumeSourceHelper;
+    secretRef: LocalObjectReferenceHelper;
+    $secretRef(x: LocalObjectReferenceHelper): ISCSIVolumeSourceHelper;
+    $targetPortal(x: string): ISCSIVolumeSourceHelper;
 }
 
 /** Represents an ISCSI disk. ISCSI volumes can only be mounted as read/write once. ISCSI volumes support ownership management and SELinux relabeling. */
@@ -3983,132 +4046,132 @@ export class ISCSIVolumeSourceHelper extends Template implements ISCSIVolumeSour
         super(obj)
     }
 
-    _chapAuthDiscovery: any;
-    get chapAuthDiscovery(): any /*boolean*/ {
+    _chapAuthDiscovery: boolean;
+    get chapAuthDiscovery(): boolean {
         return this._chapAuthDiscovery
     }
-    set chapAuthDiscovery(x: any /*boolean*/) {
+    set chapAuthDiscovery(x: boolean) {
         this._chapAuthDiscovery = x
     }
-    setChapAuthDiscovery(x: any /*boolean*/) {
+    $ChapAuthDiscovery(x: boolean) {
         this.chapAuthDiscovery = x; return this
     }
 
-    _chapAuthSession: any;
-    get chapAuthSession(): any /*boolean*/ {
+    _chapAuthSession: boolean;
+    get chapAuthSession(): boolean {
         return this._chapAuthSession
     }
-    set chapAuthSession(x: any /*boolean*/) {
+    set chapAuthSession(x: boolean) {
         this._chapAuthSession = x
     }
-    setChapAuthSession(x: any /*boolean*/) {
+    $ChapAuthSession(x: boolean) {
         this.chapAuthSession = x; return this
     }
 
-    _fsType: any;
-    get fsType(): any /*string*/ {
+    _fsType: string;
+    get fsType(): string {
         return this._fsType
     }
-    set fsType(x: any /*string*/) {
+    set fsType(x: string) {
         this._fsType = x
     }
-    setFsType(x: any /*string*/) {
+    $FsType(x: string) {
         this.fsType = x; return this
     }
 
-    _initiatorName: any;
-    get initiatorName(): any /*string*/ {
+    _initiatorName: string;
+    get initiatorName(): string {
         return this._initiatorName
     }
-    set initiatorName(x: any /*string*/) {
+    set initiatorName(x: string) {
         this._initiatorName = x
     }
-    setInitiatorName(x: any /*string*/) {
+    $InitiatorName(x: string) {
         this.initiatorName = x; return this
     }
 
-    _iqn: any;
-    get iqn(): any /*string*/ {
+    _iqn: string;
+    get iqn(): string {
         return this._iqn
     }
-    set iqn(x: any /*string*/) {
+    set iqn(x: string) {
         this._iqn = x
     }
-    setIqn(x: any /*string*/) {
+    $Iqn(x: string) {
         this.iqn = x; return this
     }
 
-    _iscsiInterface: any;
-    get iscsiInterface(): any /*string*/ {
+    _iscsiInterface: string;
+    get iscsiInterface(): string {
         return this._iscsiInterface
     }
-    set iscsiInterface(x: any /*string*/) {
+    set iscsiInterface(x: string) {
         this._iscsiInterface = x
     }
-    setIscsiInterface(x: any /*string*/) {
+    $IscsiInterface(x: string) {
         this.iscsiInterface = x; return this
     }
 
-    _lun: any;
-    get lun(): any /*number*/ {
+    _lun: number;
+    get lun(): number {
         return this._lun
     }
-    set lun(x: any /*number*/) {
+    set lun(x: number) {
         this._lun = x
     }
-    setLun(x: any /*number*/) {
+    $Lun(x: number) {
         this.lun = x; return this
     }
 
-    _portals: any;
-    get portals(): any /*Array<string>*/ {
+    _portals: Array<string>;
+    get portals(): Array<string> {
         return this._portals
     }
-    set portals(x: any /*Array<string>*/) {
+    set portals(x: Array<string>) {
         this._portals = this.set(this.portals, x)
     }
-    setPortals(x: any /*Array<string>*/) {
+    $Portals(x: Array<string>) {
         this.portals = x; return this
     }
 
-    _readOnly: any;
-    get readOnly(): any /*boolean*/ {
+    _readOnly: boolean;
+    get readOnly(): boolean {
         return this._readOnly
     }
-    set readOnly(x: any /*boolean*/) {
+    set readOnly(x: boolean) {
         this._readOnly = x
     }
-    setReadOnly(x: any /*boolean*/) {
+    $ReadOnly(x: boolean) {
         this.readOnly = x; return this
     }
 
-    _secretRef: any;
-    get secretRef(): any /*LocalObjectReferenceHelper*/ {
+    _secretRef: LocalObjectReferenceHelper;
+    get secretRef(): LocalObjectReferenceHelper {
         return this._secretRef
     }
-    set secretRef(x: any /*LocalObjectReferenceHelper*/) {
+    set secretRef(x: LocalObjectReferenceHelper) {
         this._secretRef = x
     }
-    setSecretRef(x: any /*LocalObjectReferenceHelper*/) {
+    $SecretRef(x: LocalObjectReferenceHelper) {
         this.secretRef = x; return this
     }
 
-    _targetPortal: any;
-    get targetPortal(): any /*string*/ {
+    _targetPortal: string;
+    get targetPortal(): string {
         return this._targetPortal
     }
-    set targetPortal(x: any /*string*/) {
+    set targetPortal(x: string) {
         this._targetPortal = x
     }
-    setTargetPortal(x: any /*string*/) {
+    $TargetPortal(x: string) {
         this.targetPortal = x; return this
     }
 }
 
 export interface KeyToPathHelper extends KeyToPath {
-    $key(x: any): any;
-    $mode(x: any): any;
-    $path(x: any): any;
+    $key(x: string): KeyToPathHelper;
+    $mode(x: number): KeyToPathHelper;
+    $path(x: string): KeyToPathHelper;
 }
 
 /** Maps a string key to a path within a volume. */
@@ -4117,43 +4180,45 @@ export class KeyToPathHelper extends Template implements KeyToPathHelper {
         super(obj)
     }
 
-    _key: any;
-    get key(): any /*string*/ {
+    _key: string;
+    get key(): string {
         return this._key
     }
-    set key(x: any /*string*/) {
+    set key(x: string) {
         this._key = x
     }
-    setKey(x: any /*string*/) {
+    $Key(x: string) {
         this.key = x; return this
     }
 
-    _mode: any;
-    get mode(): any /*number*/ {
+    _mode: number;
+    get mode(): number {
         return this._mode
     }
-    set mode(x: any /*number*/) {
+    set mode(x: number) {
         this._mode = x
     }
-    setMode(x: any /*number*/) {
+    $Mode(x: number) {
         this.mode = x; return this
     }
 
-    _path: any;
-    get path(): any /*string*/ {
+    _path: string;
+    get path(): string {
         return this._path
     }
-    set path(x: any /*string*/) {
+    set path(x: string) {
         this._path = x
     }
-    setPath(x: any /*string*/) {
+    $Path(x: string) {
         this.path = x; return this
     }
 }
 
 export interface LifecycleHelper extends Lifecycle {
-    $postStart(x: any): any;
-    $preStop(x: any): any;
+    postStart: HandlerHelper;
+    $postStart(x: HandlerHelper): LifecycleHelper;
+    preStop: HandlerHelper;
+    $preStop(x: HandlerHelper): LifecycleHelper;
 }
 
 /** Lifecycle describes actions that the management system should take in response to container lifecycle events. For the PostStart and PreStop lifecycle handlers, management of the container blocks until the action is complete, unless the container process fails, in which case the handler is aborted. */
@@ -4162,32 +4227,34 @@ export class LifecycleHelper extends Template implements LifecycleHelper {
         super(obj)
     }
 
-    _postStart: any;
-    get postStart(): any /*HandlerHelper*/ {
+    _postStart: HandlerHelper;
+    get postStart(): HandlerHelper {
         return this._postStart
     }
-    set postStart(x: any /*HandlerHelper*/) {
+    set postStart(x: HandlerHelper) {
         this._postStart = x
     }
-    setPostStart(x: any /*HandlerHelper*/) {
+    $PostStart(x: HandlerHelper) {
         this.postStart = x; return this
     }
 
-    _preStop: any;
-    get preStop(): any /*HandlerHelper*/ {
+    _preStop: HandlerHelper;
+    get preStop(): HandlerHelper {
         return this._preStop
     }
-    set preStop(x: any /*HandlerHelper*/) {
+    set preStop(x: HandlerHelper) {
         this._preStop = x
     }
-    setPreStop(x: any /*HandlerHelper*/) {
+    $PreStop(x: HandlerHelper) {
         this.preStop = x; return this
     }
 }
 
 export interface LimitRangeHelper extends LimitRange {
-    $metadata(x: any): any;
-    $spec(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): LimitRangeHelper;
+    spec: LimitRangeSpecHelper;
+    $spec(x: LimitRangeSpecHelper): LimitRangeHelper;
 }
 
 /** LimitRange sets resource usage limits for each kind of resource in a Namespace. */
@@ -4199,36 +4266,36 @@ export class LimitRangeHelper extends ResourceTemplate implements LimitRangeHelp
         super(nameOrObject, namespace, LimitRangeHelper.kind, LimitRangeHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*LimitRangeSpecHelper*/ {
+    _spec: LimitRangeSpecHelper;
+    get spec(): LimitRangeSpecHelper {
         return this._spec
     }
-    set spec(x: any /*LimitRangeSpecHelper*/) {
+    set spec(x: LimitRangeSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*LimitRangeSpecHelper*/) {
+    $Spec(x: LimitRangeSpecHelper) {
         this.spec = x; return this
     }
 }
 
 export interface LimitRangeItemHelper extends LimitRangeItem {
-    $default_(x: any): any;
-    $defaultRequest(x: any): any;
-    $max(x: any): any;
-    $maxLimitRequestRatio(x: any): any;
-    $min(x: any): any;
-    $type(x: any): any;
+    $default_(x: {[name: string]: Quantity}): LimitRangeItemHelper;
+    $defaultRequest(x: {[name: string]: Quantity}): LimitRangeItemHelper;
+    $max(x: {[name: string]: Quantity}): LimitRangeItemHelper;
+    $maxLimitRequestRatio(x: {[name: string]: Quantity}): LimitRangeItemHelper;
+    $min(x: {[name: string]: Quantity}): LimitRangeItemHelper;
+    $type(x: string): LimitRangeItemHelper;
 }
 
 /** LimitRangeItem defines a min/max usage limit for any resource that matches on kind. */
@@ -4237,76 +4304,77 @@ export class LimitRangeItemHelper extends Template implements LimitRangeItemHelp
         super(obj)
     }
 
-    _default_: any;
-    get default_(): any /*{[name: string]: Quantity}Helper*/ {
+    _default_: {[name: string]: Quantity};
+    get default_(): {[name: string]: Quantity} {
         return this._default_
     }
-    set default_(x: any /*{[name: string]: Quantity}Helper*/) {
+    set default_(x: {[name: string]: Quantity}) {
         this._default_ = this.set(this.default_, x)
     }
-    setDefault_(x: any /*{[name: string]: Quantity}Helper*/) {
+    $Default_(x: {[name: string]: Quantity}) {
         this.default_ = x; return this
     }
 
-    _defaultRequest: any;
-    get defaultRequest(): any /*{[name: string]: Quantity}Helper*/ {
+    _defaultRequest: {[name: string]: Quantity};
+    get defaultRequest(): {[name: string]: Quantity} {
         return this._defaultRequest
     }
-    set defaultRequest(x: any /*{[name: string]: Quantity}Helper*/) {
+    set defaultRequest(x: {[name: string]: Quantity}) {
         this._defaultRequest = this.set(this.defaultRequest, x)
     }
-    setDefaultRequest(x: any /*{[name: string]: Quantity}Helper*/) {
+    $DefaultRequest(x: {[name: string]: Quantity}) {
         this.defaultRequest = x; return this
     }
 
-    _max: any;
-    get max(): any /*{[name: string]: Quantity}Helper*/ {
+    _max: {[name: string]: Quantity};
+    get max(): {[name: string]: Quantity} {
         return this._max
     }
-    set max(x: any /*{[name: string]: Quantity}Helper*/) {
+    set max(x: {[name: string]: Quantity}) {
         this._max = this.set(this.max, x)
     }
-    setMax(x: any /*{[name: string]: Quantity}Helper*/) {
+    $Max(x: {[name: string]: Quantity}) {
         this.max = x; return this
     }
 
-    _maxLimitRequestRatio: any;
-    get maxLimitRequestRatio(): any /*{[name: string]: Quantity}Helper*/ {
+    _maxLimitRequestRatio: {[name: string]: Quantity};
+    get maxLimitRequestRatio(): {[name: string]: Quantity} {
         return this._maxLimitRequestRatio
     }
-    set maxLimitRequestRatio(x: any /*{[name: string]: Quantity}Helper*/) {
+    set maxLimitRequestRatio(x: {[name: string]: Quantity}) {
         this._maxLimitRequestRatio = this.set(this.maxLimitRequestRatio, x)
     }
-    setMaxLimitRequestRatio(x: any /*{[name: string]: Quantity}Helper*/) {
+    $MaxLimitRequestRatio(x: {[name: string]: Quantity}) {
         this.maxLimitRequestRatio = x; return this
     }
 
-    _min: any;
-    get min(): any /*{[name: string]: Quantity}Helper*/ {
+    _min: {[name: string]: Quantity};
+    get min(): {[name: string]: Quantity} {
         return this._min
     }
-    set min(x: any /*{[name: string]: Quantity}Helper*/) {
+    set min(x: {[name: string]: Quantity}) {
         this._min = this.set(this.min, x)
     }
-    setMin(x: any /*{[name: string]: Quantity}Helper*/) {
+    $Min(x: {[name: string]: Quantity}) {
         this.min = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }
 
 export interface LimitRangeListHelper extends LimitRangeList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<LimitRange>): LimitRangeListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): LimitRangeListHelper;
 }
 
 /** LimitRangeList is a list of LimitRange items. */
@@ -4318,31 +4386,31 @@ export class LimitRangeListHelper extends ResourceTemplate implements LimitRange
         super(nameOrObject, namespace, LimitRangeListHelper.kind, LimitRangeListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<LimitRange>*/ {
+    _items: Array<LimitRange>;
+    get items(): Array<LimitRange> {
         return this._items
     }
-    set items(x: any /*Array<LimitRange>*/) {
+    set items(x: Array<LimitRange>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<LimitRange>*/) {
+    $Items(x: Array<LimitRange>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface LimitRangeSpecHelper extends LimitRangeSpec {
-    $limits(x: any): any;
+    $limits(x: Array<LimitRangeItem>): LimitRangeSpecHelper;
 }
 
 /** LimitRangeSpec defines a min/max usage limit for resources that match on kind. */
@@ -4351,22 +4419,22 @@ export class LimitRangeSpecHelper extends Template implements LimitRangeSpecHelp
         super(obj)
     }
 
-    _limits: any;
-    get limits(): any /*Array<LimitRangeItem>*/ {
+    _limits: Array<LimitRangeItem>;
+    get limits(): Array<LimitRangeItem> {
         return this._limits
     }
-    set limits(x: any /*Array<LimitRangeItem>*/) {
+    set limits(x: Array<LimitRangeItem>) {
         this._limits = this.set(this.limits, x)
     }
-    setLimits(x: any /*Array<LimitRangeItem>*/) {
+    $Limits(x: Array<LimitRangeItem>) {
         this.limits = x; return this
     }
 }
 
 export interface LoadBalancerIngressHelper extends LoadBalancerIngress {
-    $hostname(x: any): any;
-    $ip(x: any): any;
-    $ports(x: any): any;
+    $hostname(x: string): LoadBalancerIngressHelper;
+    $ip(x: string): LoadBalancerIngressHelper;
+    $ports(x: Array<PortStatus>): LoadBalancerIngressHelper;
 }
 
 /** LoadBalancerIngress represents the status of a load-balancer ingress point: traffic intended for the service should be sent to an ingress point. */
@@ -4375,42 +4443,42 @@ export class LoadBalancerIngressHelper extends Template implements LoadBalancerI
         super(obj)
     }
 
-    _hostname: any;
-    get hostname(): any /*string*/ {
+    _hostname: string;
+    get hostname(): string {
         return this._hostname
     }
-    set hostname(x: any /*string*/) {
+    set hostname(x: string) {
         this._hostname = x
     }
-    setHostname(x: any /*string*/) {
+    $Hostname(x: string) {
         this.hostname = x; return this
     }
 
-    _ip: any;
-    get ip(): any /*string*/ {
+    _ip: string;
+    get ip(): string {
         return this._ip
     }
-    set ip(x: any /*string*/) {
+    set ip(x: string) {
         this._ip = x
     }
-    setIp(x: any /*string*/) {
+    $Ip(x: string) {
         this.ip = x; return this
     }
 
-    _ports: any;
-    get ports(): any /*Array<PortStatus>*/ {
+    _ports: Array<PortStatus>;
+    get ports(): Array<PortStatus> {
         return this._ports
     }
-    set ports(x: any /*Array<PortStatus>*/) {
+    set ports(x: Array<PortStatus>) {
         this._ports = this.set(this.ports, x)
     }
-    setPorts(x: any /*Array<PortStatus>*/) {
+    $Ports(x: Array<PortStatus>) {
         this.ports = x; return this
     }
 }
 
 export interface LoadBalancerStatusHelper extends LoadBalancerStatus {
-    $ingress(x: any): any;
+    $ingress(x: Array<LoadBalancerIngress>): LoadBalancerStatusHelper;
 }
 
 /** LoadBalancerStatus represents the status of a load-balancer. */
@@ -4419,14 +4487,14 @@ export class LoadBalancerStatusHelper extends Template implements LoadBalancerSt
         super(obj)
     }
 
-    _ingress: any;
-    get ingress(): any /*Array<LoadBalancerIngress>*/ {
+    _ingress: Array<LoadBalancerIngress>;
+    get ingress(): Array<LoadBalancerIngress> {
         return this._ingress
     }
-    set ingress(x: any /*Array<LoadBalancerIngress>*/) {
+    set ingress(x: Array<LoadBalancerIngress>) {
         this._ingress = this.set(this.ingress, x)
     }
-    setIngress(x: any /*Array<LoadBalancerIngress>*/) {
+    $Ingress(x: Array<LoadBalancerIngress>) {
         this.ingress = x; return this
     }
 }
@@ -4442,8 +4510,8 @@ export class LocalObjectReferenceHelper extends Template implements LocalObjectR
 }
 
 export interface LocalVolumeSourceHelper extends LocalVolumeSource {
-    $fsType(x: any): any;
-    $path(x: any): any;
+    $fsType(x: string): LocalVolumeSourceHelper;
+    $path(x: string): LocalVolumeSourceHelper;
 }
 
 /** Local represents directly-attached storage with node affinity (Beta feature) */
@@ -4452,33 +4520,33 @@ export class LocalVolumeSourceHelper extends Template implements LocalVolumeSour
         super(obj)
     }
 
-    _fsType: any;
-    get fsType(): any /*string*/ {
+    _fsType: string;
+    get fsType(): string {
         return this._fsType
     }
-    set fsType(x: any /*string*/) {
+    set fsType(x: string) {
         this._fsType = x
     }
-    setFsType(x: any /*string*/) {
+    $FsType(x: string) {
         this.fsType = x; return this
     }
 
-    _path: any;
-    get path(): any /*string*/ {
+    _path: string;
+    get path(): string {
         return this._path
     }
-    set path(x: any /*string*/) {
+    set path(x: string) {
         this._path = x
     }
-    setPath(x: any /*string*/) {
+    $Path(x: string) {
         this.path = x; return this
     }
 }
 
 export interface NFSVolumeSourceHelper extends NFSVolumeSource {
-    $path(x: any): any;
-    $readOnly(x: any): any;
-    $server(x: any): any;
+    $path(x: string): NFSVolumeSourceHelper;
+    $readOnly(x: boolean): NFSVolumeSourceHelper;
+    $server(x: string): NFSVolumeSourceHelper;
 }
 
 /** Represents an NFS mount that lasts the lifetime of a pod. NFS volumes do not support ownership management or SELinux relabeling. */
@@ -4487,44 +4555,47 @@ export class NFSVolumeSourceHelper extends Template implements NFSVolumeSourceHe
         super(obj)
     }
 
-    _path: any;
-    get path(): any /*string*/ {
+    _path: string;
+    get path(): string {
         return this._path
     }
-    set path(x: any /*string*/) {
+    set path(x: string) {
         this._path = x
     }
-    setPath(x: any /*string*/) {
+    $Path(x: string) {
         this.path = x; return this
     }
 
-    _readOnly: any;
-    get readOnly(): any /*boolean*/ {
+    _readOnly: boolean;
+    get readOnly(): boolean {
         return this._readOnly
     }
-    set readOnly(x: any /*boolean*/) {
+    set readOnly(x: boolean) {
         this._readOnly = x
     }
-    setReadOnly(x: any /*boolean*/) {
+    $ReadOnly(x: boolean) {
         this.readOnly = x; return this
     }
 
-    _server: any;
-    get server(): any /*string*/ {
+    _server: string;
+    get server(): string {
         return this._server
     }
-    set server(x: any /*string*/) {
+    set server(x: string) {
         this._server = x
     }
-    setServer(x: any /*string*/) {
+    $Server(x: string) {
         this.server = x; return this
     }
 }
 
 export interface NamespaceHelper extends Namespace {
-    $metadata(x: any): any;
-    $spec(x: any): any;
-    $status(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): NamespaceHelper;
+    spec: NamespaceSpecHelper;
+    $spec(x: NamespaceSpecHelper): NamespaceHelper;
+    status: NamespaceStatusHelper;
+    $status(x: NamespaceStatusHelper): NamespaceHelper;
 }
 
 /** Namespace provides a scope for Names. Use of multiple namespaces is optional. */
@@ -4536,46 +4607,46 @@ export class NamespaceHelper extends ResourceTemplate implements NamespaceHelper
         super(nameOrObject, namespace, NamespaceHelper.kind, NamespaceHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*NamespaceSpecHelper*/ {
+    _spec: NamespaceSpecHelper;
+    get spec(): NamespaceSpecHelper {
         return this._spec
     }
-    set spec(x: any /*NamespaceSpecHelper*/) {
+    set spec(x: NamespaceSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*NamespaceSpecHelper*/) {
+    $Spec(x: NamespaceSpecHelper) {
         this.spec = x; return this
     }
 
-    _status: any;
-    get status(): any /*NamespaceStatusHelper*/ {
+    _status: NamespaceStatusHelper;
+    get status(): NamespaceStatusHelper {
         return this._status
     }
-    set status(x: any /*NamespaceStatusHelper*/) {
+    set status(x: NamespaceStatusHelper) {
         this._status = x
     }
-    setStatus(x: any /*NamespaceStatusHelper*/) {
+    $Status(x: NamespaceStatusHelper) {
         this.status = x; return this
     }
 }
 
 export interface NamespaceConditionHelper extends NamespaceCondition {
-    $lastTransitionTime(x: any): any;
-    $message(x: any): any;
-    $reason(x: any): any;
-    $status(x: any): any;
-    $type(x: any): any;
+    $lastTransitionTime(x: Time): NamespaceConditionHelper;
+    $message(x: string): NamespaceConditionHelper;
+    $reason(x: string): NamespaceConditionHelper;
+    $status(x: string): NamespaceConditionHelper;
+    $type(x: string): NamespaceConditionHelper;
 }
 
 /** NamespaceCondition contains details about state of namespace. */
@@ -4584,65 +4655,66 @@ export class NamespaceConditionHelper extends Template implements NamespaceCondi
         super(obj)
     }
 
-    _lastTransitionTime: any;
-    get lastTransitionTime(): any /*Time*/ {
+    _lastTransitionTime: Time;
+    get lastTransitionTime(): Time {
         return this._lastTransitionTime
     }
-    set lastTransitionTime(x: any /*Time*/) {
+    set lastTransitionTime(x: Time) {
         this._lastTransitionTime = x
     }
-    setLastTransitionTime(x: any /*Time*/) {
+    $LastTransitionTime(x: Time) {
         this.lastTransitionTime = x; return this
     }
 
-    _message: any;
-    get message(): any /*string*/ {
+    _message: string;
+    get message(): string {
         return this._message
     }
-    set message(x: any /*string*/) {
+    set message(x: string) {
         this._message = x
     }
-    setMessage(x: any /*string*/) {
+    $Message(x: string) {
         this.message = x; return this
     }
 
-    _reason: any;
-    get reason(): any /*string*/ {
+    _reason: string;
+    get reason(): string {
         return this._reason
     }
-    set reason(x: any /*string*/) {
+    set reason(x: string) {
         this._reason = x
     }
-    setReason(x: any /*string*/) {
+    $Reason(x: string) {
         this.reason = x; return this
     }
 
-    _status: any;
-    get status(): any /*string*/ {
+    _status: string;
+    get status(): string {
         return this._status
     }
-    set status(x: any /*string*/) {
+    set status(x: string) {
         this._status = x
     }
-    setStatus(x: any /*string*/) {
+    $Status(x: string) {
         this.status = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }
 
 export interface NamespaceListHelper extends NamespaceList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<Namespace>): NamespaceListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): NamespaceListHelper;
 }
 
 /** NamespaceList is a list of Namespaces. */
@@ -4654,31 +4726,31 @@ export class NamespaceListHelper extends ResourceTemplate implements NamespaceLi
         super(nameOrObject, namespace, NamespaceListHelper.kind, NamespaceListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<Namespace>*/ {
+    _items: Array<Namespace>;
+    get items(): Array<Namespace> {
         return this._items
     }
-    set items(x: any /*Array<Namespace>*/) {
+    set items(x: Array<Namespace>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<Namespace>*/) {
+    $Items(x: Array<Namespace>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface NamespaceSpecHelper extends NamespaceSpec {
-    $finalizers(x: any): any;
+    $finalizers(x: Array<string>): NamespaceSpecHelper;
 }
 
 /** NamespaceSpec describes the attributes on a Namespace. */
@@ -4687,21 +4759,21 @@ export class NamespaceSpecHelper extends Template implements NamespaceSpecHelper
         super(obj)
     }
 
-    _finalizers: any;
-    get finalizers(): any /*Array<string>*/ {
+    _finalizers: Array<string>;
+    get finalizers(): Array<string> {
         return this._finalizers
     }
-    set finalizers(x: any /*Array<string>*/) {
+    set finalizers(x: Array<string>) {
         this._finalizers = this.set(this.finalizers, x)
     }
-    setFinalizers(x: any /*Array<string>*/) {
+    $Finalizers(x: Array<string>) {
         this.finalizers = x; return this
     }
 }
 
 export interface NamespaceStatusHelper extends NamespaceStatus {
-    $conditions(x: any): any;
-    $phase(x: any): any;
+    $conditions(x: Array<NamespaceCondition>): NamespaceStatusHelper;
+    $phase(x: string): NamespaceStatusHelper;
 }
 
 /** NamespaceStatus is information about the current status of a Namespace. */
@@ -4710,33 +4782,36 @@ export class NamespaceStatusHelper extends Template implements NamespaceStatusHe
         super(obj)
     }
 
-    _conditions: any;
-    get conditions(): any /*Array<NamespaceCondition>*/ {
+    _conditions: Array<NamespaceCondition>;
+    get conditions(): Array<NamespaceCondition> {
         return this._conditions
     }
-    set conditions(x: any /*Array<NamespaceCondition>*/) {
+    set conditions(x: Array<NamespaceCondition>) {
         this._conditions = this.set(this.conditions, x)
     }
-    setConditions(x: any /*Array<NamespaceCondition>*/) {
+    $Conditions(x: Array<NamespaceCondition>) {
         this.conditions = x; return this
     }
 
-    _phase: any;
-    get phase(): any /*string*/ {
+    _phase: string;
+    get phase(): string {
         return this._phase
     }
-    set phase(x: any /*string*/) {
+    set phase(x: string) {
         this._phase = x
     }
-    setPhase(x: any /*string*/) {
+    $Phase(x: string) {
         this.phase = x; return this
     }
 }
 
 export interface NodeHelper extends Node {
-    $metadata(x: any): any;
-    $spec(x: any): any;
-    $status(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): NodeHelper;
+    spec: NodeSpecHelper;
+    $spec(x: NodeSpecHelper): NodeHelper;
+    status: NodeStatusHelper;
+    $status(x: NodeStatusHelper): NodeHelper;
 }
 
 /** Node is a worker node in Kubernetes. Each node will have a unique identifier in the cache (i.e. in etcd). */
@@ -4748,43 +4823,43 @@ export class NodeHelper extends ResourceTemplate implements NodeHelper {
         super(nameOrObject, namespace, NodeHelper.kind, NodeHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*NodeSpecHelper*/ {
+    _spec: NodeSpecHelper;
+    get spec(): NodeSpecHelper {
         return this._spec
     }
-    set spec(x: any /*NodeSpecHelper*/) {
+    set spec(x: NodeSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*NodeSpecHelper*/) {
+    $Spec(x: NodeSpecHelper) {
         this.spec = x; return this
     }
 
-    _status: any;
-    get status(): any /*NodeStatusHelper*/ {
+    _status: NodeStatusHelper;
+    get status(): NodeStatusHelper {
         return this._status
     }
-    set status(x: any /*NodeStatusHelper*/) {
+    set status(x: NodeStatusHelper) {
         this._status = x
     }
-    setStatus(x: any /*NodeStatusHelper*/) {
+    $Status(x: NodeStatusHelper) {
         this.status = x; return this
     }
 }
 
 export interface NodeAddressHelper extends NodeAddress {
-    $address(x: any): any;
-    $type(x: any): any;
+    $address(x: string): NodeAddressHelper;
+    $type(x: string): NodeAddressHelper;
 }
 
 /** NodeAddress contains information for the node's address. */
@@ -4793,32 +4868,33 @@ export class NodeAddressHelper extends Template implements NodeAddressHelper {
         super(obj)
     }
 
-    _address: any;
-    get address(): any /*string*/ {
+    _address: string;
+    get address(): string {
         return this._address
     }
-    set address(x: any /*string*/) {
+    set address(x: string) {
         this._address = x
     }
-    setAddress(x: any /*string*/) {
+    $Address(x: string) {
         this.address = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }
 
 export interface NodeAffinityHelper extends NodeAffinity {
-    $preferredDuringSchedulingIgnoredDuringExecution(x: any): any;
-    $requiredDuringSchedulingIgnoredDuringExecution(x: any): any;
+    $preferredDuringSchedulingIgnoredDuringExecution(x: Array<PreferredSchedulingTerm>): NodeAffinityHelper;
+    requiredDuringSchedulingIgnoredDuringExecution: NodeSelectorHelper;
+    $requiredDuringSchedulingIgnoredDuringExecution(x: NodeSelectorHelper): NodeAffinityHelper;
 }
 
 /** Node affinity is a group of node affinity scheduling rules. */
@@ -4827,36 +4903,36 @@ export class NodeAffinityHelper extends Template implements NodeAffinityHelper {
         super(obj)
     }
 
-    _preferredDuringSchedulingIgnoredDuringExecution: any;
-    get preferredDuringSchedulingIgnoredDuringExecution(): any /*Array<PreferredSchedulingTerm>*/ {
+    _preferredDuringSchedulingIgnoredDuringExecution: Array<PreferredSchedulingTerm>;
+    get preferredDuringSchedulingIgnoredDuringExecution(): Array<PreferredSchedulingTerm> {
         return this._preferredDuringSchedulingIgnoredDuringExecution
     }
-    set preferredDuringSchedulingIgnoredDuringExecution(x: any /*Array<PreferredSchedulingTerm>*/) {
+    set preferredDuringSchedulingIgnoredDuringExecution(x: Array<PreferredSchedulingTerm>) {
         this._preferredDuringSchedulingIgnoredDuringExecution = this.set(this.preferredDuringSchedulingIgnoredDuringExecution, x)
     }
-    setPreferredDuringSchedulingIgnoredDuringExecution(x: any /*Array<PreferredSchedulingTerm>*/) {
+    $PreferredDuringSchedulingIgnoredDuringExecution(x: Array<PreferredSchedulingTerm>) {
         this.preferredDuringSchedulingIgnoredDuringExecution = x; return this
     }
 
-    _requiredDuringSchedulingIgnoredDuringExecution: any;
-    get requiredDuringSchedulingIgnoredDuringExecution(): any /*NodeSelectorHelper*/ {
+    _requiredDuringSchedulingIgnoredDuringExecution: NodeSelectorHelper;
+    get requiredDuringSchedulingIgnoredDuringExecution(): NodeSelectorHelper {
         return this._requiredDuringSchedulingIgnoredDuringExecution
     }
-    set requiredDuringSchedulingIgnoredDuringExecution(x: any /*NodeSelectorHelper*/) {
+    set requiredDuringSchedulingIgnoredDuringExecution(x: NodeSelectorHelper) {
         this._requiredDuringSchedulingIgnoredDuringExecution = x
     }
-    setRequiredDuringSchedulingIgnoredDuringExecution(x: any /*NodeSelectorHelper*/) {
+    $RequiredDuringSchedulingIgnoredDuringExecution(x: NodeSelectorHelper) {
         this.requiredDuringSchedulingIgnoredDuringExecution = x; return this
     }
 }
 
 export interface NodeConditionHelper extends NodeCondition {
-    $lastHeartbeatTime(x: any): any;
-    $lastTransitionTime(x: any): any;
-    $message(x: any): any;
-    $reason(x: any): any;
-    $status(x: any): any;
-    $type(x: any): any;
+    $lastHeartbeatTime(x: Time): NodeConditionHelper;
+    $lastTransitionTime(x: Time): NodeConditionHelper;
+    $message(x: string): NodeConditionHelper;
+    $reason(x: string): NodeConditionHelper;
+    $status(x: string): NodeConditionHelper;
+    $type(x: string): NodeConditionHelper;
 }
 
 /** NodeCondition contains condition information for a node. */
@@ -4865,75 +4941,76 @@ export class NodeConditionHelper extends Template implements NodeConditionHelper
         super(obj)
     }
 
-    _lastHeartbeatTime: any;
-    get lastHeartbeatTime(): any /*Time*/ {
+    _lastHeartbeatTime: Time;
+    get lastHeartbeatTime(): Time {
         return this._lastHeartbeatTime
     }
-    set lastHeartbeatTime(x: any /*Time*/) {
+    set lastHeartbeatTime(x: Time) {
         this._lastHeartbeatTime = x
     }
-    setLastHeartbeatTime(x: any /*Time*/) {
+    $LastHeartbeatTime(x: Time) {
         this.lastHeartbeatTime = x; return this
     }
 
-    _lastTransitionTime: any;
-    get lastTransitionTime(): any /*Time*/ {
+    _lastTransitionTime: Time;
+    get lastTransitionTime(): Time {
         return this._lastTransitionTime
     }
-    set lastTransitionTime(x: any /*Time*/) {
+    set lastTransitionTime(x: Time) {
         this._lastTransitionTime = x
     }
-    setLastTransitionTime(x: any /*Time*/) {
+    $LastTransitionTime(x: Time) {
         this.lastTransitionTime = x; return this
     }
 
-    _message: any;
-    get message(): any /*string*/ {
+    _message: string;
+    get message(): string {
         return this._message
     }
-    set message(x: any /*string*/) {
+    set message(x: string) {
         this._message = x
     }
-    setMessage(x: any /*string*/) {
+    $Message(x: string) {
         this.message = x; return this
     }
 
-    _reason: any;
-    get reason(): any /*string*/ {
+    _reason: string;
+    get reason(): string {
         return this._reason
     }
-    set reason(x: any /*string*/) {
+    set reason(x: string) {
         this._reason = x
     }
-    setReason(x: any /*string*/) {
+    $Reason(x: string) {
         this.reason = x; return this
     }
 
-    _status: any;
-    get status(): any /*string*/ {
+    _status: string;
+    get status(): string {
         return this._status
     }
-    set status(x: any /*string*/) {
+    set status(x: string) {
         this._status = x
     }
-    setStatus(x: any /*string*/) {
+    $Status(x: string) {
         this.status = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }
 
 export interface NodeConfigSourceHelper extends NodeConfigSource {
-    $configMap(x: any): any;
+    configMap: ConfigMapNodeConfigSourceHelper;
+    $configMap(x: ConfigMapNodeConfigSourceHelper): NodeConfigSourceHelper;
 }
 
 /** NodeConfigSource specifies a source of node configuration. Exactly one subfield (excluding metadata) must be non-nil. */
@@ -4942,23 +5019,26 @@ export class NodeConfigSourceHelper extends Template implements NodeConfigSource
         super(obj)
     }
 
-    _configMap: any;
-    get configMap(): any /*ConfigMapNodeConfigSourceHelper*/ {
+    _configMap: ConfigMapNodeConfigSourceHelper;
+    get configMap(): ConfigMapNodeConfigSourceHelper {
         return this._configMap
     }
-    set configMap(x: any /*ConfigMapNodeConfigSourceHelper*/) {
+    set configMap(x: ConfigMapNodeConfigSourceHelper) {
         this._configMap = x
     }
-    setConfigMap(x: any /*ConfigMapNodeConfigSourceHelper*/) {
+    $ConfigMap(x: ConfigMapNodeConfigSourceHelper) {
         this.configMap = x; return this
     }
 }
 
 export interface NodeConfigStatusHelper extends NodeConfigStatus {
-    $active(x: any): any;
-    $assigned(x: any): any;
-    $error(x: any): any;
-    $lastKnownGood(x: any): any;
+    active: NodeConfigSourceHelper;
+    $active(x: NodeConfigSourceHelper): NodeConfigStatusHelper;
+    assigned: NodeConfigSourceHelper;
+    $assigned(x: NodeConfigSourceHelper): NodeConfigStatusHelper;
+    $error(x: string): NodeConfigStatusHelper;
+    lastKnownGood: NodeConfigSourceHelper;
+    $lastKnownGood(x: NodeConfigSourceHelper): NodeConfigStatusHelper;
 }
 
 /** NodeConfigStatus describes the status of the config assigned by Node.Spec.ConfigSource. */
@@ -4967,53 +5047,54 @@ export class NodeConfigStatusHelper extends Template implements NodeConfigStatus
         super(obj)
     }
 
-    _active: any;
-    get active(): any /*NodeConfigSourceHelper*/ {
+    _active: NodeConfigSourceHelper;
+    get active(): NodeConfigSourceHelper {
         return this._active
     }
-    set active(x: any /*NodeConfigSourceHelper*/) {
+    set active(x: NodeConfigSourceHelper) {
         this._active = x
     }
-    setActive(x: any /*NodeConfigSourceHelper*/) {
+    $Active(x: NodeConfigSourceHelper) {
         this.active = x; return this
     }
 
-    _assigned: any;
-    get assigned(): any /*NodeConfigSourceHelper*/ {
+    _assigned: NodeConfigSourceHelper;
+    get assigned(): NodeConfigSourceHelper {
         return this._assigned
     }
-    set assigned(x: any /*NodeConfigSourceHelper*/) {
+    set assigned(x: NodeConfigSourceHelper) {
         this._assigned = x
     }
-    setAssigned(x: any /*NodeConfigSourceHelper*/) {
+    $Assigned(x: NodeConfigSourceHelper) {
         this.assigned = x; return this
     }
 
-    _error: any;
-    get error(): any /*string*/ {
+    _error: string;
+    get error(): string {
         return this._error
     }
-    set error(x: any /*string*/) {
+    set error(x: string) {
         this._error = x
     }
-    setError(x: any /*string*/) {
+    $Error(x: string) {
         this.error = x; return this
     }
 
-    _lastKnownGood: any;
-    get lastKnownGood(): any /*NodeConfigSourceHelper*/ {
+    _lastKnownGood: NodeConfigSourceHelper;
+    get lastKnownGood(): NodeConfigSourceHelper {
         return this._lastKnownGood
     }
-    set lastKnownGood(x: any /*NodeConfigSourceHelper*/) {
+    set lastKnownGood(x: NodeConfigSourceHelper) {
         this._lastKnownGood = x
     }
-    setLastKnownGood(x: any /*NodeConfigSourceHelper*/) {
+    $LastKnownGood(x: NodeConfigSourceHelper) {
         this.lastKnownGood = x; return this
     }
 }
 
 export interface NodeDaemonEndpointsHelper extends NodeDaemonEndpoints {
-    $kubeletEndpoint(x: any): any;
+    kubeletEndpoint: DaemonEndpointHelper;
+    $kubeletEndpoint(x: DaemonEndpointHelper): NodeDaemonEndpointsHelper;
 }
 
 /** NodeDaemonEndpoints lists ports opened by daemons running on the Node. */
@@ -5022,21 +5103,22 @@ export class NodeDaemonEndpointsHelper extends Template implements NodeDaemonEnd
         super(obj)
     }
 
-    _kubeletEndpoint: any;
-    get kubeletEndpoint(): any /*DaemonEndpointHelper*/ {
+    _kubeletEndpoint: DaemonEndpointHelper;
+    get kubeletEndpoint(): DaemonEndpointHelper {
         return this._kubeletEndpoint
     }
-    set kubeletEndpoint(x: any /*DaemonEndpointHelper*/) {
+    set kubeletEndpoint(x: DaemonEndpointHelper) {
         this._kubeletEndpoint = x
     }
-    setKubeletEndpoint(x: any /*DaemonEndpointHelper*/) {
+    $KubeletEndpoint(x: DaemonEndpointHelper) {
         this.kubeletEndpoint = x; return this
     }
 }
 
 export interface NodeListHelper extends NodeList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<Node>): NodeListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): NodeListHelper;
 }
 
 /** NodeList is the whole list of all Nodes which have been registered with master. */
@@ -5048,31 +5130,31 @@ export class NodeListHelper extends ResourceTemplate implements NodeListHelper {
         super(nameOrObject, namespace, NodeListHelper.kind, NodeListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<Node>*/ {
+    _items: Array<Node>;
+    get items(): Array<Node> {
         return this._items
     }
-    set items(x: any /*Array<Node>*/) {
+    set items(x: Array<Node>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<Node>*/) {
+    $Items(x: Array<Node>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface NodeSelectorHelper extends NodeSelector {
-    $nodeSelectorTerms(x: any): any;
+    $nodeSelectorTerms(x: Array<NodeSelectorTerm>): NodeSelectorHelper;
 }
 
 /** A node selector represents the union of the results of one or more label queries over a set of nodes; that is, it represents the OR of the selectors represented by the node selector terms. */
@@ -5081,22 +5163,22 @@ export class NodeSelectorHelper extends Template implements NodeSelectorHelper {
         super(obj)
     }
 
-    _nodeSelectorTerms: any;
-    get nodeSelectorTerms(): any /*Array<NodeSelectorTerm>*/ {
+    _nodeSelectorTerms: Array<NodeSelectorTerm>;
+    get nodeSelectorTerms(): Array<NodeSelectorTerm> {
         return this._nodeSelectorTerms
     }
-    set nodeSelectorTerms(x: any /*Array<NodeSelectorTerm>*/) {
+    set nodeSelectorTerms(x: Array<NodeSelectorTerm>) {
         this._nodeSelectorTerms = this.set(this.nodeSelectorTerms, x)
     }
-    setNodeSelectorTerms(x: any /*Array<NodeSelectorTerm>*/) {
+    $NodeSelectorTerms(x: Array<NodeSelectorTerm>) {
         this.nodeSelectorTerms = x; return this
     }
 }
 
 export interface NodeSelectorRequirementHelper extends NodeSelectorRequirement {
-    $key(x: any): any;
-    $operator(x: any): any;
-    $values(x: any): any;
+    $key(x: string): NodeSelectorRequirementHelper;
+    $operator(x: string): NodeSelectorRequirementHelper;
+    $values(x: Array<string>): NodeSelectorRequirementHelper;
 }
 
 /** A node selector requirement is a selector that contains values, a key, and an operator that relates the key and values. */
@@ -5105,43 +5187,43 @@ export class NodeSelectorRequirementHelper extends Template implements NodeSelec
         super(obj)
     }
 
-    _key: any;
-    get key(): any /*string*/ {
+    _key: string;
+    get key(): string {
         return this._key
     }
-    set key(x: any /*string*/) {
+    set key(x: string) {
         this._key = x
     }
-    setKey(x: any /*string*/) {
+    $Key(x: string) {
         this.key = x; return this
     }
 
-    _operator: any;
-    get operator(): any /*string*/ {
+    _operator: string;
+    get operator(): string {
         return this._operator
     }
-    set operator(x: any /*string*/) {
+    set operator(x: string) {
         this._operator = x
     }
-    setOperator(x: any /*string*/) {
+    $Operator(x: string) {
         this.operator = x; return this
     }
 
-    _values: any;
-    get values(): any /*Array<string>*/ {
+    _values: Array<string>;
+    get values(): Array<string> {
         return this._values
     }
-    set values(x: any /*Array<string>*/) {
+    set values(x: Array<string>) {
         this._values = this.set(this.values, x)
     }
-    setValues(x: any /*Array<string>*/) {
+    $Values(x: Array<string>) {
         this.values = x; return this
     }
 }
 
 export interface NodeSelectorTermHelper extends NodeSelectorTerm {
-    $matchExpressions(x: any): any;
-    $matchFields(x: any): any;
+    $matchExpressions(x: Array<NodeSelectorRequirement>): NodeSelectorTermHelper;
+    $matchFields(x: Array<NodeSelectorRequirement>): NodeSelectorTermHelper;
 }
 
 /** A null or empty node selector term matches no objects. The requirements of them are ANDed. The TopologySelectorTerm type implements a subset of the NodeSelectorTerm. */
@@ -5150,37 +5232,38 @@ export class NodeSelectorTermHelper extends Template implements NodeSelectorTerm
         super(obj)
     }
 
-    _matchExpressions: any;
-    get matchExpressions(): any /*Array<NodeSelectorRequirement>*/ {
+    _matchExpressions: Array<NodeSelectorRequirement>;
+    get matchExpressions(): Array<NodeSelectorRequirement> {
         return this._matchExpressions
     }
-    set matchExpressions(x: any /*Array<NodeSelectorRequirement>*/) {
+    set matchExpressions(x: Array<NodeSelectorRequirement>) {
         this._matchExpressions = this.set(this.matchExpressions, x)
     }
-    setMatchExpressions(x: any /*Array<NodeSelectorRequirement>*/) {
+    $MatchExpressions(x: Array<NodeSelectorRequirement>) {
         this.matchExpressions = x; return this
     }
 
-    _matchFields: any;
-    get matchFields(): any /*Array<NodeSelectorRequirement>*/ {
+    _matchFields: Array<NodeSelectorRequirement>;
+    get matchFields(): Array<NodeSelectorRequirement> {
         return this._matchFields
     }
-    set matchFields(x: any /*Array<NodeSelectorRequirement>*/) {
+    set matchFields(x: Array<NodeSelectorRequirement>) {
         this._matchFields = this.set(this.matchFields, x)
     }
-    setMatchFields(x: any /*Array<NodeSelectorRequirement>*/) {
+    $MatchFields(x: Array<NodeSelectorRequirement>) {
         this.matchFields = x; return this
     }
 }
 
 export interface NodeSpecHelper extends NodeSpec {
-    $configSource(x: any): any;
-    $externalID(x: any): any;
-    $podCIDR(x: any): any;
-    $podCIDRs(x: any): any;
-    $providerID(x: any): any;
-    $taints(x: any): any;
-    $unschedulable(x: any): any;
+    configSource: NodeConfigSourceHelper;
+    $configSource(x: NodeConfigSourceHelper): NodeSpecHelper;
+    $externalID(x: string): NodeSpecHelper;
+    $podCIDR(x: string): NodeSpecHelper;
+    $podCIDRs(x: Array<string>): NodeSpecHelper;
+    $providerID(x: string): NodeSpecHelper;
+    $taints(x: Array<Taint>): NodeSpecHelper;
+    $unschedulable(x: boolean): NodeSpecHelper;
 }
 
 /** NodeSpec describes the attributes that a node is created with. */
@@ -5189,96 +5272,99 @@ export class NodeSpecHelper extends Template implements NodeSpecHelper {
         super(obj)
     }
 
-    _configSource: any;
-    get configSource(): any /*NodeConfigSourceHelper*/ {
+    _configSource: NodeConfigSourceHelper;
+    get configSource(): NodeConfigSourceHelper {
         return this._configSource
     }
-    set configSource(x: any /*NodeConfigSourceHelper*/) {
+    set configSource(x: NodeConfigSourceHelper) {
         this._configSource = x
     }
-    setConfigSource(x: any /*NodeConfigSourceHelper*/) {
+    $ConfigSource(x: NodeConfigSourceHelper) {
         this.configSource = x; return this
     }
 
-    _externalID: any;
-    get externalID(): any /*string*/ {
+    _externalID: string;
+    get externalID(): string {
         return this._externalID
     }
-    set externalID(x: any /*string*/) {
+    set externalID(x: string) {
         this._externalID = x
     }
-    setExternalID(x: any /*string*/) {
+    $ExternalID(x: string) {
         this.externalID = x; return this
     }
 
-    _podCIDR: any;
-    get podCIDR(): any /*string*/ {
+    _podCIDR: string;
+    get podCIDR(): string {
         return this._podCIDR
     }
-    set podCIDR(x: any /*string*/) {
+    set podCIDR(x: string) {
         this._podCIDR = x
     }
-    setPodCIDR(x: any /*string*/) {
+    $PodCIDR(x: string) {
         this.podCIDR = x; return this
     }
 
-    _podCIDRs: any;
-    get podCIDRs(): any /*Array<string>*/ {
+    _podCIDRs: Array<string>;
+    get podCIDRs(): Array<string> {
         return this._podCIDRs
     }
-    set podCIDRs(x: any /*Array<string>*/) {
+    set podCIDRs(x: Array<string>) {
         this._podCIDRs = this.set(this.podCIDRs, x)
     }
-    setPodCIDRs(x: any /*Array<string>*/) {
+    $PodCIDRs(x: Array<string>) {
         this.podCIDRs = x; return this
     }
 
-    _providerID: any;
-    get providerID(): any /*string*/ {
+    _providerID: string;
+    get providerID(): string {
         return this._providerID
     }
-    set providerID(x: any /*string*/) {
+    set providerID(x: string) {
         this._providerID = x
     }
-    setProviderID(x: any /*string*/) {
+    $ProviderID(x: string) {
         this.providerID = x; return this
     }
 
-    _taints: any;
-    get taints(): any /*Array<Taint>*/ {
+    _taints: Array<Taint>;
+    get taints(): Array<Taint> {
         return this._taints
     }
-    set taints(x: any /*Array<Taint>*/) {
+    set taints(x: Array<Taint>) {
         this._taints = this.set(this.taints, x)
     }
-    setTaints(x: any /*Array<Taint>*/) {
+    $Taints(x: Array<Taint>) {
         this.taints = x; return this
     }
 
-    _unschedulable: any;
-    get unschedulable(): any /*boolean*/ {
+    _unschedulable: boolean;
+    get unschedulable(): boolean {
         return this._unschedulable
     }
-    set unschedulable(x: any /*boolean*/) {
+    set unschedulable(x: boolean) {
         this._unschedulable = x
     }
-    setUnschedulable(x: any /*boolean*/) {
+    $Unschedulable(x: boolean) {
         this.unschedulable = x; return this
     }
 }
 
 export interface NodeStatusHelper extends NodeStatus {
-    $addresses(x: any): any;
-    $allocatable(x: any): any;
-    $capacity(x: any): any;
-    $conditions(x: any): any;
-    $config(x: any): any;
-    $daemonEndpoints(x: any): any;
-    $images(x: any): any;
-    $nodeInfo(x: any): any;
-    $phase(x: any): any;
-    $volumesAttached(x: any): any;
-    $volumesInUse(x: any): any;
+    $addresses(x: Array<NodeAddress>): NodeStatusHelper;
+    $allocatable(x: {[name: string]: Quantity}): NodeStatusHelper;
+    $capacity(x: {[name: string]: Quantity}): NodeStatusHelper;
+    $conditions(x: Array<NodeCondition>): NodeStatusHelper;
+    config: NodeConfigStatusHelper;
+    $config(x: NodeConfigStatusHelper): NodeStatusHelper;
+    daemonEndpoints: NodeDaemonEndpointsHelper;
+    $daemonEndpoints(x: NodeDaemonEndpointsHelper): NodeStatusHelper;
+    $images(x: Array<ContainerImage>): NodeStatusHelper;
+    nodeInfo: NodeSystemInfoHelper;
+    $nodeInfo(x: NodeSystemInfoHelper): NodeStatusHelper;
+    $phase(x: string): NodeStatusHelper;
+    $volumesAttached(x: Array<AttachedVolume>): NodeStatusHelper;
+    $volumesInUse(x: Array<string>): NodeStatusHelper;
 }
 
 /** NodeStatus is information about the current status of a node. */
@@ -5287,139 +5373,139 @@ export class NodeStatusHelper extends Template implements NodeStatusHelper {
         super(obj)
     }
 
-    _addresses: any;
-    get addresses(): any /*Array<NodeAddress>*/ {
+    _addresses: Array<NodeAddress>;
+    get addresses(): Array<NodeAddress> {
         return this._addresses
     }
-    set addresses(x: any /*Array<NodeAddress>*/) {
+    set addresses(x: Array<NodeAddress>) {
         this._addresses = this.set(this.addresses, x)
     }
-    setAddresses(x: any /*Array<NodeAddress>*/) {
+    $Addresses(x: Array<NodeAddress>) {
         this.addresses = x; return this
     }
 
-    _allocatable: any;
-    get allocatable(): any /*{[name: string]: Quantity}Helper*/ {
+    _allocatable: {[name: string]: Quantity};
+    get allocatable(): {[name: string]: Quantity} {
         return this._allocatable
     }
-    set allocatable(x: any /*{[name: string]: Quantity}Helper*/) {
+    set allocatable(x: {[name: string]: Quantity}) {
         this._allocatable = this.set(this.allocatable, x)
     }
-    setAllocatable(x: any /*{[name: string]: Quantity}Helper*/) {
+    $Allocatable(x: {[name: string]: Quantity}) {
         this.allocatable = x; return this
     }
 
-    _capacity: any;
-    get capacity(): any /*{[name: string]: Quantity}Helper*/ {
+    _capacity: {[name: string]: Quantity};
+    get capacity(): {[name: string]: Quantity} {
         return this._capacity
     }
-    set capacity(x: any /*{[name: string]: Quantity}Helper*/) {
+    set capacity(x: {[name: string]: Quantity}) {
         this._capacity = this.set(this.capacity, x)
     }
-    setCapacity(x: any /*{[name: string]: Quantity}Helper*/) {
+    $Capacity(x: {[name: string]: Quantity}) {
         this.capacity = x; return this
     }
 
-    _conditions: any;
-    get conditions(): any /*Array<NodeCondition>*/ {
+    _conditions: Array<NodeCondition>;
+    get conditions(): Array<NodeCondition> {
         return this._conditions
     }
-    set conditions(x: any /*Array<NodeCondition>*/) {
+    set conditions(x: Array<NodeCondition>) {
         this._conditions = this.set(this.conditions, x)
     }
-    setConditions(x: any /*Array<NodeCondition>*/) {
+    $Conditions(x: Array<NodeCondition>) {
         this.conditions = x; return this
     }
 
-    _config: any;
-    get config(): any /*NodeConfigStatusHelper*/ {
+    _config: NodeConfigStatusHelper;
+    get config(): NodeConfigStatusHelper {
         return this._config
     }
-    set config(x: any /*NodeConfigStatusHelper*/) {
+    set config(x: NodeConfigStatusHelper) {
         this._config = x
     }
-    setConfig(x: any /*NodeConfigStatusHelper*/) {
+    $Config(x: NodeConfigStatusHelper) {
         this.config = x; return this
     }
 
-    _daemonEndpoints: any;
-    get daemonEndpoints(): any /*NodeDaemonEndpointsHelper*/ {
+    _daemonEndpoints: NodeDaemonEndpointsHelper;
+    get daemonEndpoints(): NodeDaemonEndpointsHelper {
         return this._daemonEndpoints
     }
-    set daemonEndpoints(x: any /*NodeDaemonEndpointsHelper*/) {
+    set daemonEndpoints(x: NodeDaemonEndpointsHelper) {
         this._daemonEndpoints = x
     }
-    setDaemonEndpoints(x: any /*NodeDaemonEndpointsHelper*/) {
+    $DaemonEndpoints(x: NodeDaemonEndpointsHelper) {
         this.daemonEndpoints = x; return this
     }
 
-    _images: any;
-    get images(): any /*Array<ContainerImage>*/ {
+    _images: Array<ContainerImage>;
+    get images(): Array<ContainerImage> {
         return this._images
     }
-    set images(x: any /*Array<ContainerImage>*/) {
+    set images(x: Array<ContainerImage>) {
         this._images = this.set(this.images, x)
     }
-    setImages(x: any /*Array<ContainerImage>*/) {
+    $Images(x: Array<ContainerImage>) {
         this.images = x; return this
     }
 
-    _nodeInfo: any;
-    get nodeInfo(): any /*NodeSystemInfoHelper*/ {
+    _nodeInfo: NodeSystemInfoHelper;
+    get nodeInfo(): NodeSystemInfoHelper {
         return this._nodeInfo
     }
-    set nodeInfo(x: any /*NodeSystemInfoHelper*/) {
+    set nodeInfo(x: NodeSystemInfoHelper) {
         this._nodeInfo = x
     }
-    setNodeInfo(x: any /*NodeSystemInfoHelper*/) {
+    $NodeInfo(x: NodeSystemInfoHelper) {
         this.nodeInfo = x; return this
     }
 
-    _phase: any;
-    get phase(): any /*string*/ {
+    _phase: string;
+    get phase(): string {
         return this._phase
     }
-    set phase(x: any /*string*/) {
+    set phase(x: string) {
         this._phase = x
     }
-    setPhase(x: any /*string*/) {
+    $Phase(x: string) {
         this.phase = x; return this
     }
 
-    _volumesAttached: any;
-    get volumesAttached(): any /*Array<AttachedVolume>*/ {
+    _volumesAttached: Array<AttachedVolume>;
+    get volumesAttached(): Array<AttachedVolume> {
         return this._volumesAttached
     }
-    set volumesAttached(x: any /*Array<AttachedVolume>*/) {
+    set volumesAttached(x: Array<AttachedVolume>) {
         this._volumesAttached = this.set(this.volumesAttached, x)
     }
-    setVolumesAttached(x: any /*Array<AttachedVolume>*/) {
+    $VolumesAttached(x: Array<AttachedVolume>) {
         this.volumesAttached = x; return this
     }
 
-    _volumesInUse: any;
-    get volumesInUse(): any /*Array<string>*/ {
+    _volumesInUse: Array<string>;
+    get volumesInUse(): Array<string> {
         return this._volumesInUse
     }
-    set volumesInUse(x: any /*Array<string>*/) {
+    set volumesInUse(x: Array<string>) {
         this._volumesInUse = this.set(this.volumesInUse, x)
     }
-    setVolumesInUse(x: any /*Array<string>*/) {
+    $VolumesInUse(x: Array<string>) {
         this.volumesInUse = x; return this
     }
 }
 
 export interface NodeSystemInfoHelper extends NodeSystemInfo {
-    $architecture(x: any): any;
-    $bootID(x: any): any;
-    $containerRuntimeVersion(x: any): any;
-    $kernelVersion(x: any): any;
-    $kubeProxyVersion(x: any): any;
-    $kubeletVersion(x: any): any;
-    $machineID(x: any): any;
-    $operatingSystem(x: any): any;
-    $osImage(x: any): any;
-    $systemUUID(x: any): any;
+    $architecture(x: string): NodeSystemInfoHelper;
+    $bootID(x: string): NodeSystemInfoHelper;
+    $containerRuntimeVersion(x: string): NodeSystemInfoHelper;
+    $kernelVersion(x: string): NodeSystemInfoHelper;
+    $kubeProxyVersion(x: string): NodeSystemInfoHelper;
+    $kubeletVersion(x: string): NodeSystemInfoHelper;
+    $machineID(x: string): NodeSystemInfoHelper;
+    $operatingSystem(x: string): NodeSystemInfoHelper;
+    $osImage(x: string): NodeSystemInfoHelper;
+    $systemUUID(x: string): NodeSystemInfoHelper;
 }
 
 /** NodeSystemInfo is a set of ids/uuids to uniquely identify the node. */
@@ -5428,119 +5514,119 @@ export class NodeSystemInfoHelper extends Template implements NodeSystemInfoHelp
         super(obj)
     }
 
-    _architecture: any;
-    get architecture(): any /*string*/ {
+    _architecture: string;
+    get architecture(): string {
         return this._architecture
     }
-    set architecture(x: any /*string*/) {
+    set architecture(x: string) {
         this._architecture = x
     }
-    setArchitecture(x: any /*string*/) {
+    $Architecture(x: string) {
         this.architecture = x; return this
     }
 
-    _bootID: any;
-    get bootID(): any /*string*/ {
+    _bootID: string;
+    get bootID(): string {
         return this._bootID
     }
-    set bootID(x: any /*string*/) {
+    set bootID(x: string) {
         this._bootID = x
     }
-    setBootID(x: any /*string*/) {
+    $BootID(x: string) {
         this.bootID = x; return this
     }
 
-    _containerRuntimeVersion: any;
-    get containerRuntimeVersion(): any /*string*/ {
+    _containerRuntimeVersion: string;
+    get containerRuntimeVersion(): string {
         return this._containerRuntimeVersion
     }
-    set containerRuntimeVersion(x: any /*string*/) {
+    set containerRuntimeVersion(x: string) {
         this._containerRuntimeVersion = x
     }
-    setContainerRuntimeVersion(x: any /*string*/) {
+    $ContainerRuntimeVersion(x: string) {
         this.containerRuntimeVersion = x; return this
     }
 
-    _kernelVersion: any;
-    get kernelVersion(): any /*string*/ {
+    _kernelVersion: string;
+    get kernelVersion(): string {
         return this._kernelVersion
     }
-    set kernelVersion(x: any /*string*/) {
+    set kernelVersion(x: string) {
         this._kernelVersion = x
     }
-    setKernelVersion(x: any /*string*/) {
+    $KernelVersion(x: string) {
         this.kernelVersion = x; return this
     }
 
-    _kubeProxyVersion: any;
-    get kubeProxyVersion(): any /*string*/ {
+    _kubeProxyVersion: string;
+    get kubeProxyVersion(): string {
         return this._kubeProxyVersion
     }
-    set kubeProxyVersion(x: any /*string*/) {
+    set kubeProxyVersion(x: string) {
         this._kubeProxyVersion = x
     }
-    setKubeProxyVersion(x: any /*string*/) {
+    $KubeProxyVersion(x: string) {
         this.kubeProxyVersion = x; return this
     }
 
-    _kubeletVersion: any;
-    get kubeletVersion(): any /*string*/ {
+    _kubeletVersion: string;
+    get kubeletVersion(): string {
         return this._kubeletVersion
     }
-    set kubeletVersion(x: any /*string*/) {
+    set kubeletVersion(x: string) {
         this._kubeletVersion = x
     }
-    setKubeletVersion(x: any /*string*/) {
+    $KubeletVersion(x: string) {
         this.kubeletVersion = x; return this
     }
 
-    _machineID: any;
-    get machineID(): any /*string*/ {
+    _machineID: string;
+    get machineID(): string {
         return this._machineID
     }
-    set machineID(x: any /*string*/) {
+    set machineID(x: string) {
         this._machineID = x
     }
-    setMachineID(x: any /*string*/) {
+    $MachineID(x: string) {
         this.machineID = x; return this
     }
 
-    _operatingSystem: any;
-    get operatingSystem(): any /*string*/ {
+    _operatingSystem: string;
+    get operatingSystem(): string {
         return this._operatingSystem
     }
-    set operatingSystem(x: any /*string*/) {
+    set operatingSystem(x: string) {
         this._operatingSystem = x
     }
-    setOperatingSystem(x: any /*string*/) {
+    $OperatingSystem(x: string) {
         this.operatingSystem = x; return this
     }
 
-    _osImage: any;
-    get osImage(): any /*string*/ {
+    _osImage: string;
+    get osImage(): string {
         return this._osImage
     }
-    set osImage(x: any /*string*/) {
+    set osImage(x: string) {
         this._osImage = x
     }
-    setOsImage(x: any /*string*/) {
+    $OsImage(x: string) {
         this.osImage = x; return this
     }
 
-    _systemUUID: any;
-    get systemUUID(): any /*string*/ {
+    _systemUUID: string;
+    get systemUUID(): string {
         return this._systemUUID
     }
-    set systemUUID(x: any /*string*/) {
+    set systemUUID(x: string) {
         this._systemUUID = x
     }
-    setSystemUUID(x: any /*string*/) {
+    $SystemUUID(x: string) {
         this.systemUUID = x; return this
     }
 }
 
 export interface ObjectFieldSelectorHelper extends ObjectFieldSelector {
-    $fieldPath(x: any): any;
+    $fieldPath(x: string): ObjectFieldSelectorHelper;
 }
 
 /** ObjectFieldSelector selects an APIVersioned field of an object. */
@@ -5549,22 +5635,22 @@ export class ObjectFieldSelectorHelper extends Template implements ObjectFieldSe
         super(obj)
     }
 
-    _fieldPath: any;
-    get fieldPath(): any /*string*/ {
+    _fieldPath: string;
+    get fieldPath(): string {
         return this._fieldPath
     }
-    set fieldPath(x: any /*string*/) {
+    set fieldPath(x: string) {
         this._fieldPath = x
     }
-    setFieldPath(x: any /*string*/) {
+    $FieldPath(x: string) {
         this.fieldPath = x; return this
     }
 }
 
 export interface ObjectReferenceHelper extends ObjectReference {
-    $fieldPath(x: any): any;
-    $resourceVersion(x: any): any;
-    $uid(x: any): any;
+    $fieldPath(x: string): ObjectReferenceHelper;
+    $resourceVersion(x: string): ObjectReferenceHelper;
+    $uid(x: string): ObjectReferenceHelper;
 }
 
 /** ObjectReference contains enough information to let you inspect or modify the referred object. */
@@ -5573,44 +5659,47 @@ export class ObjectReferenceHelper extends Template implements ObjectReferenceHe
         super(obj)
     }
 
-    _fieldPath: any;
-    get fieldPath(): any /*string*/ {
+    _fieldPath: string;
+    get fieldPath(): string {
         return this._fieldPath
     }
-    set fieldPath(x: any /*string*/) {
+    set fieldPath(x: string) {
         this._fieldPath = x
     }
-    setFieldPath(x: any /*string*/) {
+    $FieldPath(x: string) {
         this.fieldPath = x; return this
     }
 
-    _resourceVersion: any;
-    get resourceVersion(): any /*string*/ {
+    _resourceVersion: string;
+    get resourceVersion(): string {
         return this._resourceVersion
     }
-    set resourceVersion(x: any /*string*/) {
+    set resourceVersion(x: string) {
         this._resourceVersion = x
     }
-    setResourceVersion(x: any /*string*/) {
+    $ResourceVersion(x: string) {
         this.resourceVersion = x; return this
     }
 
-    _uid: any;
-    get uid(): any /*string*/ {
+    _uid: string;
+    get uid(): string {
         return this._uid
     }
-    set uid(x: any /*string*/) {
+    set uid(x: string) {
         this._uid = x
     }
-    setUid(x: any /*string*/) {
+    $Uid(x: string) {
         this.uid = x; return this
     }
 }
 
 export interface PersistentVolumeHelper extends PersistentVolume {
-    $metadata(x: any): any;
-    $spec(x: any): any;
-    $status(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): PersistentVolumeHelper;
+    spec: PersistentVolumeSpecHelper;
+    $spec(x: PersistentVolumeSpecHelper): PersistentVolumeHelper;
+    status: PersistentVolumeStatusHelper;
+    $status(x: PersistentVolumeStatusHelper): PersistentVolumeHelper;
 }
 
 /** PersistentVolume (PV) is a storage resource provisioned by an administrator. It is analogous to a node. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes */
@@ -5622,44 +5711,47 @@ export class PersistentVolumeHelper extends ResourceTemplate implements Persiste
         super(nameOrObject, namespace, PersistentVolumeHelper.kind, PersistentVolumeHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*PersistentVolumeSpecHelper*/ {
+    _spec: PersistentVolumeSpecHelper;
+    get spec(): PersistentVolumeSpecHelper {
         return this._spec
     }
-    set spec(x: any /*PersistentVolumeSpecHelper*/) {
+    set spec(x: PersistentVolumeSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*PersistentVolumeSpecHelper*/) {
+    $Spec(x: PersistentVolumeSpecHelper) {
         this.spec = x; return this
     }
 
-    _status: any;
-    get status(): any /*PersistentVolumeStatusHelper*/ {
+    _status: PersistentVolumeStatusHelper;
+    get status(): PersistentVolumeStatusHelper {
         return this._status
     }
-    set status(x: any /*PersistentVolumeStatusHelper*/) {
+    set status(x: PersistentVolumeStatusHelper) {
         this._status = x
     }
-    setStatus(x: any /*PersistentVolumeStatusHelper*/) {
+    $Status(x: PersistentVolumeStatusHelper) {
         this.status = x; return this
     }
 }
 
 export interface PersistentVolumeClaimHelper extends PersistentVolumeClaim {
-    $metadata(x: any): any;
-    $spec(x: any): any;
-    $status(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): PersistentVolumeClaimHelper;
+    spec: PersistentVolumeClaimSpecHelper;
+    $spec(x: PersistentVolumeClaimSpecHelper): PersistentVolumeClaimHelper;
+    status: PersistentVolumeClaimStatusHelper;
+    $status(x: PersistentVolumeClaimStatusHelper): PersistentVolumeClaimHelper;
 }
 
 /** PersistentVolumeClaim is a user's request for and claim to a persistent volume */
@@ -5671,47 +5763,47 @@ export class PersistentVolumeClaimHelper extends ResourceTemplate implements Per
         super(nameOrObject, namespace, PersistentVolumeClaimHelper.kind, PersistentVolumeClaimHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*PersistentVolumeClaimSpecHelper*/ {
+    _spec: PersistentVolumeClaimSpecHelper;
+    get spec(): PersistentVolumeClaimSpecHelper {
         return this._spec
     }
-    set spec(x: any /*PersistentVolumeClaimSpecHelper*/) {
+    set spec(x: PersistentVolumeClaimSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*PersistentVolumeClaimSpecHelper*/) {
+    $Spec(x: PersistentVolumeClaimSpecHelper) {
         this.spec = x; return this
     }
 
-    _status: any;
-    get status(): any /*PersistentVolumeClaimStatusHelper*/ {
+    _status: PersistentVolumeClaimStatusHelper;
+    get status(): PersistentVolumeClaimStatusHelper {
         return this._status
     }
-    set status(x: any /*PersistentVolumeClaimStatusHelper*/) {
+    set status(x: PersistentVolumeClaimStatusHelper) {
         this._status = x
     }
-    setStatus(x: any /*PersistentVolumeClaimStatusHelper*/) {
+    $Status(x: PersistentVolumeClaimStatusHelper) {
         this.status = x; return this
     }
 }
 
 export interface PersistentVolumeClaimConditionHelper extends PersistentVolumeClaimCondition {
-    $lastProbeTime(x: any): any;
-    $lastTransitionTime(x: any): any;
-    $message(x: any): any;
-    $reason(x: any): any;
-    $status(x: any): any;
-    $type(x: any): any;
+    $lastProbeTime(x: Time): PersistentVolumeClaimConditionHelper;
+    $lastTransitionTime(x: Time): PersistentVolumeClaimConditionHelper;
+    $message(x: string): PersistentVolumeClaimConditionHelper;
+    $reason(x: string): PersistentVolumeClaimConditionHelper;
+    $status(x: string): PersistentVolumeClaimConditionHelper;
+    $type(x: string): PersistentVolumeClaimConditionHelper;
 }
 
 /** PersistentVolumeClaimCondition contails details about state of pvc */
@@ -5720,76 +5812,77 @@ export class PersistentVolumeClaimConditionHelper extends Template implements Pe
         super(obj)
     }
 
-    _lastProbeTime: any;
-    get lastProbeTime(): any /*Time*/ {
+    _lastProbeTime: Time;
+    get lastProbeTime(): Time {
         return this._lastProbeTime
     }
-    set lastProbeTime(x: any /*Time*/) {
+    set lastProbeTime(x: Time) {
         this._lastProbeTime = x
     }
-    setLastProbeTime(x: any /*Time*/) {
+    $LastProbeTime(x: Time) {
         this.lastProbeTime = x; return this
     }
 
-    _lastTransitionTime: any;
-    get lastTransitionTime(): any /*Time*/ {
+    _lastTransitionTime: Time;
+    get lastTransitionTime(): Time {
         return this._lastTransitionTime
     }
-    set lastTransitionTime(x: any /*Time*/) {
+    set lastTransitionTime(x: Time) {
         this._lastTransitionTime = x
     }
-    setLastTransitionTime(x: any /*Time*/) {
+    $LastTransitionTime(x: Time) {
         this.lastTransitionTime = x; return this
     }
 
-    _message: any;
-    get message(): any /*string*/ {
+    _message: string;
+    get message(): string {
         return this._message
     }
-    set message(x: any /*string*/) {
+    set message(x: string) {
         this._message = x
     }
-    setMessage(x: any /*string*/) {
+    $Message(x: string) {
         this.message = x; return this
     }
 
-    _reason: any;
-    get reason(): any /*string*/ {
+    _reason: string;
+    get reason(): string {
         return this._reason
     }
-    set reason(x: any /*string*/) {
+    set reason(x: string) {
         this._reason = x
     }
-    setReason(x: any /*string*/) {
+    $Reason(x: string) {
         this.reason = x; return this
     }
 
-    _status: any;
-    get status(): any /*string*/ {
+    _status: string;
+    get status(): string {
         return this._status
     }
-    set status(x: any /*string*/) {
+    set status(x: string) {
         this._status = x
     }
-    setStatus(x: any /*string*/) {
+    $Status(x: string) {
         this.status = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }
 
 export interface PersistentVolumeClaimListHelper extends PersistentVolumeClaimList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<PersistentVolumeClaim>): PersistentVolumeClaimListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): PersistentVolumeClaimListHelper;
 }
 
 /** PersistentVolumeClaimList is a list of PersistentVolumeClaim items. */
@@ -5801,37 +5894,40 @@ export class PersistentVolumeClaimListHelper extends ResourceTemplate implements
         super(nameOrObject, namespace, PersistentVolumeClaimListHelper.kind, PersistentVolumeClaimListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<PersistentVolumeClaim>*/ {
+    _items: Array<PersistentVolumeClaim>;
+    get items(): Array<PersistentVolumeClaim> {
         return this._items
     }
-    set items(x: any /*Array<PersistentVolumeClaim>*/) {
+    set items(x: Array<PersistentVolumeClaim>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<PersistentVolumeClaim>*/) {
+    $Items(x: Array<PersistentVolumeClaim>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface PersistentVolumeClaimSpecHelper extends PersistentVolumeClaimSpec {
-    $accessModes(x: any): any;
-    $dataSource(x: any): any;
-    $resources(x: any): any;
-    $selector(x: any): any;
-    $storageClassName(x: any): any;
-    $volumeMode(x: any): any;
-    $volumeName(x: any): any;
+    $accessModes(x: Array<string>): PersistentVolumeClaimSpecHelper;
+    dataSource: TypedLocalObjectReferenceHelper;
+    $dataSource(x: TypedLocalObjectReferenceHelper): PersistentVolumeClaimSpecHelper;
+    resources: ResourceRequirementsHelper;
+    $resources(x: ResourceRequirementsHelper): PersistentVolumeClaimSpecHelper;
+    selector: LabelSelectorHelper;
+    $selector(x: LabelSelectorHelper): PersistentVolumeClaimSpecHelper;
+    $storageClassName(x: string): PersistentVolumeClaimSpecHelper;
+    $volumeMode(x: string): PersistentVolumeClaimSpecHelper;
+    $volumeName(x: string): PersistentVolumeClaimSpecHelper;
 }
 
 /** PersistentVolumeClaimSpec describes the common attributes of storage devices and allows a Source for provider-specific attributes */
@@ -5840,89 +5936,89 @@ export class PersistentVolumeClaimSpecHelper extends Template implements Persist
         super(obj)
     }
 
-    _accessModes: any;
-    get accessModes(): any /*Array<string>*/ {
+    _accessModes: Array<string>;
+    get accessModes(): Array<string> {
         return this._accessModes
     }
-    set accessModes(x: any /*Array<string>*/) {
+    set accessModes(x: Array<string>) {
         this._accessModes = this.set(this.accessModes, x)
     }
-    setAccessModes(x: any /*Array<string>*/) {
+    $AccessModes(x: Array<string>) {
         this.accessModes = x; return this
     }
 
-    _dataSource: any;
-    get dataSource(): any /*TypedLocalObjectReferenceHelper*/ {
+    _dataSource: TypedLocalObjectReferenceHelper;
+    get dataSource(): TypedLocalObjectReferenceHelper {
         return this._dataSource
     }
-    set dataSource(x: any /*TypedLocalObjectReferenceHelper*/) {
+    set dataSource(x: TypedLocalObjectReferenceHelper) {
         this._dataSource = x
     }
-    setDataSource(x: any /*TypedLocalObjectReferenceHelper*/) {
+    $DataSource(x: TypedLocalObjectReferenceHelper) {
         this.dataSource = x; return this
     }
 
-    _resources: any;
-    get resources(): any /*ResourceRequirementsHelper*/ {
+    _resources: ResourceRequirementsHelper;
+    get resources(): ResourceRequirementsHelper {
         return this._resources
     }
-    set resources(x: any /*ResourceRequirementsHelper*/) {
+    set resources(x: ResourceRequirementsHelper) {
         this._resources = x
     }
-    setResources(x: any /*ResourceRequirementsHelper*/) {
+    $Resources(x: ResourceRequirementsHelper) {
         this.resources = x; return this
     }
 
-    _selector: any;
-    get selector(): any /*LabelSelectorHelper*/ {
+    _selector: LabelSelectorHelper;
+    get selector(): LabelSelectorHelper {
         return this._selector
     }
-    set selector(x: any /*LabelSelectorHelper*/) {
+    set selector(x: LabelSelectorHelper) {
         this._selector = x
     }
-    setSelector(x: any /*LabelSelectorHelper*/) {
+    $Selector(x: LabelSelectorHelper) {
         this.selector = x; return this
     }
 
-    _storageClassName: any;
-    get storageClassName(): any /*string*/ {
+    _storageClassName: string;
+    get storageClassName(): string {
         return this._storageClassName
     }
-    set storageClassName(x: any /*string*/) {
+    set storageClassName(x: string) {
         this._storageClassName = x
     }
-    setStorageClassName(x: any /*string*/) {
+    $StorageClassName(x: string) {
         this.storageClassName = x; return this
     }
 
-    _volumeMode: any;
-    get volumeMode(): any /*string*/ {
+    _volumeMode: string;
+    get volumeMode(): string {
         return this._volumeMode
     }
-    set volumeMode(x: any /*string*/) {
+    set volumeMode(x: string) {
         this._volumeMode = x
     }
-    setVolumeMode(x: any /*string*/) {
+    $VolumeMode(x: string) {
         this.volumeMode = x; return this
     }
 
-    _volumeName: any;
-    get volumeName(): any /*string*/ {
+    _volumeName: string;
+    get volumeName(): string {
         return this._volumeName
     }
-    set volumeName(x: any /*string*/) {
+    set volumeName(x: string) {
         this._volumeName = x
     }
-    setVolumeName(x: any /*string*/) {
+    $VolumeName(x: string) {
         this.volumeName = x; return this
     }
 }
 
 export interface PersistentVolumeClaimStatusHelper extends PersistentVolumeClaimStatus {
-    $accessModes(x: any): any;
-    $capacity(x: any): any;
-    $conditions(x: any): any;
-    $phase(x: any): any;
+    $accessModes(x: Array<string>): PersistentVolumeClaimStatusHelper;
+    $capacity(x: {[name: string]: Quantity}): PersistentVolumeClaimStatusHelper;
+    $conditions(x: Array<PersistentVolumeClaimCondition>): PersistentVolumeClaimStatusHelper;
+    $phase(x: string): PersistentVolumeClaimStatusHelper;
 }
 
 /** PersistentVolumeClaimStatus is the current status of a persistent volume claim. */
@@ -5931,54 +6027,56 @@ export class PersistentVolumeClaimStatusHelper extends Template implements Persi
         super(obj)
     }
 
-    _accessModes: any;
-    get accessModes(): any /*Array<string>*/ {
+    _accessModes: Array<string>;
+    get accessModes(): Array<string> {
         return this._accessModes
     }
-    set accessModes(x: any /*Array<string>*/) {
+    set accessModes(x: Array<string>) {
         this._accessModes = this.set(this.accessModes, x)
     }
-    setAccessModes(x: any /*Array<string>*/) {
+    $AccessModes(x: Array<string>) {
         this.accessModes = x; return this
     }
 
-    _capacity: any;
-    get capacity(): any /*{[name: string]: Quantity}Helper*/ {
+    _capacity: {[name: string]: Quantity};
+    get capacity(): {[name: string]: Quantity} {
         return this._capacity
     }
-    set capacity(x: any /*{[name: string]: Quantity}Helper*/) {
+    set capacity(x: {[name: string]: Quantity}) {
         this._capacity = this.set(this.capacity, x)
     }
-    setCapacity(x: any /*{[name: string]: Quantity}Helper*/) {
+    $Capacity(x: {[name: string]: Quantity}) {
         this.capacity = x; return this
     }
 
-    _conditions: any;
-    get conditions(): any /*Array<PersistentVolumeClaimCondition>*/ {
+    _conditions: Array<PersistentVolumeClaimCondition>;
+    get conditions(): Array<PersistentVolumeClaimCondition> {
         return this._conditions
     }
-    set conditions(x: any /*Array<PersistentVolumeClaimCondition>*/) {
+    set conditions(x: Array<PersistentVolumeClaimCondition>) {
         this._conditions = this.set(this.conditions, x)
     }
-    setConditions(x: any /*Array<PersistentVolumeClaimCondition>*/) {
+    $Conditions(x: Array<PersistentVolumeClaimCondition>) {
         this.conditions = x; return this
     }
 
-    _phase: any;
-    get phase(): any /*string*/ {
+    _phase: string;
+    get phase(): string {
         return this._phase
     }
-    set phase(x: any /*string*/) {
+    set phase(x: string) {
         this._phase = x
     }
-    setPhase(x: any /*string*/) {
+    $Phase(x: string) {
         this.phase = x; return this
     }
 }
 
 export interface PersistentVolumeClaimTemplateHelper extends PersistentVolumeClaimTemplate {
-    $metadata(x: any): any;
-    $spec(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): PersistentVolumeClaimTemplateHelper;
+    spec: PersistentVolumeClaimSpecHelper;
+    $spec(x: PersistentVolumeClaimSpecHelper): PersistentVolumeClaimTemplateHelper;
 }
 
 /** PersistentVolumeClaimTemplate is used to produce PersistentVolumeClaim objects as part of an EphemeralVolumeSource. */
@@ -5987,32 +6085,32 @@ export class PersistentVolumeClaimTemplateHelper extends Template implements Per
         super(obj)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*PersistentVolumeClaimSpecHelper*/ {
+    _spec: PersistentVolumeClaimSpecHelper;
+    get spec(): PersistentVolumeClaimSpecHelper {
         return this._spec
     }
-    set spec(x: any /*PersistentVolumeClaimSpecHelper*/) {
+    set spec(x: PersistentVolumeClaimSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*PersistentVolumeClaimSpecHelper*/) {
+    $Spec(x: PersistentVolumeClaimSpecHelper) {
         this.spec = x; return this
     }
 }
 
 export interface PersistentVolumeClaimVolumeSourceHelper extends PersistentVolumeClaimVolumeSource {
-    $claimName(x: any): any;
-    $readOnly(x: any): any;
+    $claimName(x: string): PersistentVolumeClaimVolumeSourceHelper;
+    $readOnly(x: boolean): PersistentVolumeClaimVolumeSourceHelper;
 }
 
 /** PersistentVolumeClaimVolumeSource references the user's PVC in the same namespace. This volume finds the bound PV and mounts that volume for the pod. A PersistentVolumeClaimVolumeSource is, essentially, a wrapper around another type of volume that is owned by someone else (the system). */
@@ -6021,32 +6119,33 @@ export class PersistentVolumeClaimVolumeSourceHelper extends Template implements
         super(obj)
     }
 
-    _claimName: any;
-    get claimName(): any /*string*/ {
+    _claimName: string;
+    get claimName(): string {
         return this._claimName
     }
-    set claimName(x: any /*string*/) {
+    set claimName(x: string) {
         this._claimName = x
     }
-    setClaimName(x: any /*string*/) {
+    $ClaimName(x: string) {
         this.claimName = x; return this
     }
 
-    _readOnly: any;
-    get readOnly(): any /*boolean*/ {
+    _readOnly: boolean;
+    get readOnly(): boolean {
         return this._readOnly
     }
-    set readOnly(x: any /*boolean*/) {
+    set readOnly(x: boolean) {
         this._readOnly = x
     }
-    setReadOnly(x: any /*boolean*/) {
+    $ReadOnly(x: boolean) {
         this.readOnly = x; return this
     }
 }
 
 export interface PersistentVolumeListHelper extends PersistentVolumeList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<PersistentVolume>): PersistentVolumeListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): PersistentVolumeListHelper;
 }
 
 /** PersistentVolumeList is a list of PersistentVolume items. */
@@ -6058,60 +6157,84 @@ export class PersistentVolumeListHelper extends ResourceTemplate implements Pers
         super(nameOrObject, namespace, PersistentVolumeListHelper.kind, PersistentVolumeListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<PersistentVolume>*/ {
+    _items: Array<PersistentVolume>;
+    get items(): Array<PersistentVolume> {
         return this._items
     }
-    set items(x: any /*Array<PersistentVolume>*/) {
+    set items(x: Array<PersistentVolume>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<PersistentVolume>*/) {
+    $Items(x: Array<PersistentVolume>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface PersistentVolumeSpecHelper extends PersistentVolumeSpec {
-    $accessModes(x: any): any;
-    $awsElasticBlockStore(x: any): any;
-    $azureDisk(x: any): any;
-    $azureFile(x: any): any;
-    $capacity(x: any): any;
-    $cephfs(x: any): any;
-    $cinder(x: any): any;
-    $claimRef(x: any): any;
-    $csi(x: any): any;
-    $fc(x: any): any;
-    $flexVolume(x: any): any;
-    $flocker(x: any): any;
-    $gcePersistentDisk(x: any): any;
-    $glusterfs(x: any): any;
-    $hostPath(x: any): any;
-    $iscsi(x: any): any;
-    $local(x: any): any;
-    $mountOptions(x: any): any;
-    $nfs(x: any): any;
-    $nodeAffinity(x: any): any;
-    $persistentVolumeReclaimPolicy(x: any): any;
-    $photonPersistentDisk(x: any): any;
-    $portworxVolume(x: any): any;
-    $quobyte(x: any): any;
-    $rbd(x: any): any;
-    $scaleIO(x: any): any;
-    $storageClassName(x: any): any;
-    $storageos(x: any): any;
-    $volumeMode(x: any): any;
-    $vsphereVolume(x: any): any;
+    $accessModes(x: Array<string>): PersistentVolumeSpecHelper;
+    awsElasticBlockStore: AWSElasticBlockStoreVolumeSourceHelper;
+    $awsElasticBlockStore(x: AWSElasticBlockStoreVolumeSourceHelper): PersistentVolumeSpecHelper;
+    azureDisk: AzureDiskVolumeSourceHelper;
+    $azureDisk(x: AzureDiskVolumeSourceHelper): PersistentVolumeSpecHelper;
+    azureFile: AzureFilePersistentVolumeSourceHelper;
+    $azureFile(x: AzureFilePersistentVolumeSourceHelper): PersistentVolumeSpecHelper;
+    $capacity(x: {[name: string]: Quantity}): PersistentVolumeSpecHelper;
+    cephfs: CephFSPersistentVolumeSourceHelper;
+    $cephfs(x: CephFSPersistentVolumeSourceHelper): PersistentVolumeSpecHelper;
+    cinder: CinderPersistentVolumeSourceHelper;
+    $cinder(x: CinderPersistentVolumeSourceHelper): PersistentVolumeSpecHelper;
+    claimRef: ObjectReferenceHelper;
+    $claimRef(x: ObjectReferenceHelper): PersistentVolumeSpecHelper;
+    csi: CSIPersistentVolumeSourceHelper;
+    $csi(x: CSIPersistentVolumeSourceHelper): PersistentVolumeSpecHelper;
+    fc: FCVolumeSourceHelper;
+    $fc(x: FCVolumeSourceHelper): PersistentVolumeSpecHelper;
+    flexVolume: FlexPersistentVolumeSourceHelper;
+    $flexVolume(x: FlexPersistentVolumeSourceHelper): PersistentVolumeSpecHelper;
+    flocker: FlockerVolumeSourceHelper;
+    $flocker(x: FlockerVolumeSourceHelper): PersistentVolumeSpecHelper;
+    gcePersistentDisk: GCEPersistentDiskVolumeSourceHelper;
+    $gcePersistentDisk(x: GCEPersistentDiskVolumeSourceHelper): PersistentVolumeSpecHelper;
+    glusterfs: GlusterfsPersistentVolumeSourceHelper;
+    $glusterfs(x: GlusterfsPersistentVolumeSourceHelper): PersistentVolumeSpecHelper;
+    hostPath: HostPathVolumeSourceHelper;
+    $hostPath(x: HostPathVolumeSourceHelper): PersistentVolumeSpecHelper;
+    iscsi: ISCSIPersistentVolumeSourceHelper;
+    $iscsi(x: ISCSIPersistentVolumeSourceHelper): PersistentVolumeSpecHelper;
+    local: LocalVolumeSourceHelper;
+    $local(x: LocalVolumeSourceHelper): PersistentVolumeSpecHelper;
+    $mountOptions(x: Array<string>): PersistentVolumeSpecHelper;
+    nfs: NFSVolumeSourceHelper;
+    $nfs(x: NFSVolumeSourceHelper): PersistentVolumeSpecHelper;
+    nodeAffinity: VolumeNodeAffinityHelper;
+    $nodeAffinity(x: VolumeNodeAffinityHelper): PersistentVolumeSpecHelper;
+    $persistentVolumeReclaimPolicy(x: string): PersistentVolumeSpecHelper;
+    photonPersistentDisk: PhotonPersistentDiskVolumeSourceHelper;
+    $photonPersistentDisk(x: PhotonPersistentDiskVolumeSourceHelper): PersistentVolumeSpecHelper;
+    portworxVolume: PortworxVolumeSourceHelper;
+    $portworxVolume(x: PortworxVolumeSourceHelper): PersistentVolumeSpecHelper;
+    quobyte: QuobyteVolumeSourceHelper;
+    $quobyte(x: QuobyteVolumeSourceHelper): PersistentVolumeSpecHelper;
+    rbd: RBDPersistentVolumeSourceHelper;
+    $rbd(x: RBDPersistentVolumeSourceHelper): PersistentVolumeSpecHelper;
+    scaleIO: ScaleIOPersistentVolumeSourceHelper;
+    $scaleIO(x: ScaleIOPersistentVolumeSourceHelper): PersistentVolumeSpecHelper;
+    $storageClassName(x: string): PersistentVolumeSpecHelper;
+    storageos: StorageOSPersistentVolumeSourceHelper;
+    $storageos(x: StorageOSPersistentVolumeSourceHelper): PersistentVolumeSpecHelper;
+    $volumeMode(x: string): PersistentVolumeSpecHelper;
+    vsphereVolume: VsphereVirtualDiskVolumeSourceHelper;
+    $vsphereVolume(x: VsphereVirtualDiskVolumeSourceHelper): PersistentVolumeSpecHelper;
 }
 
 /** PersistentVolumeSpec is the specification of a persistent volume. */
@@ -6120,341 +6243,341 @@ export class PersistentVolumeSpecHelper extends Template implements PersistentVo
         super(obj)
     }
 
-    _accessModes: any;
-    get accessModes(): any /*Array<string>*/ {
+    _accessModes: Array<string>;
+    get accessModes(): Array<string> {
         return this._accessModes
     }
-    set accessModes(x: any /*Array<string>*/) {
+    set accessModes(x: Array<string>) {
         this._accessModes = this.set(this.accessModes, x)
     }
-    setAccessModes(x: any /*Array<string>*/) {
+    $AccessModes(x: Array<string>) {
         this.accessModes = x; return this
     }
 
-    _awsElasticBlockStore: any;
-    get awsElasticBlockStore(): any /*AWSElasticBlockStoreVolumeSourceHelper*/ {
+    _awsElasticBlockStore: AWSElasticBlockStoreVolumeSourceHelper;
+    get awsElasticBlockStore(): AWSElasticBlockStoreVolumeSourceHelper {
         return this._awsElasticBlockStore
     }
-    set awsElasticBlockStore(x: any /*AWSElasticBlockStoreVolumeSourceHelper*/) {
+    set awsElasticBlockStore(x: AWSElasticBlockStoreVolumeSourceHelper) {
         this._awsElasticBlockStore = x
     }
-    setAwsElasticBlockStore(x: any /*AWSElasticBlockStoreVolumeSourceHelper*/) {
+    $AwsElasticBlockStore(x: AWSElasticBlockStoreVolumeSourceHelper) {
         this.awsElasticBlockStore = x; return this
     }
 
-    _azureDisk: any;
-    get azureDisk(): any /*AzureDiskVolumeSourceHelper*/ {
+    _azureDisk: AzureDiskVolumeSourceHelper;
+    get azureDisk(): AzureDiskVolumeSourceHelper {
         return this._azureDisk
     }
-    set azureDisk(x: any /*AzureDiskVolumeSourceHelper*/) {
+    set azureDisk(x: AzureDiskVolumeSourceHelper) {
         this._azureDisk = x
     }
-    setAzureDisk(x: any /*AzureDiskVolumeSourceHelper*/) {
+    $AzureDisk(x: AzureDiskVolumeSourceHelper) {
         this.azureDisk = x; return this
     }
 
-    _azureFile: any;
-    get azureFile(): any /*AzureFilePersistentVolumeSourceHelper*/ {
+    _azureFile: AzureFilePersistentVolumeSourceHelper;
+    get azureFile(): AzureFilePersistentVolumeSourceHelper {
         return this._azureFile
     }
-    set azureFile(x: any /*AzureFilePersistentVolumeSourceHelper*/) {
+    set azureFile(x: AzureFilePersistentVolumeSourceHelper) {
         this._azureFile = x
     }
-    setAzureFile(x: any /*AzureFilePersistentVolumeSourceHelper*/) {
+    $AzureFile(x: AzureFilePersistentVolumeSourceHelper) {
         this.azureFile = x; return this
     }
 
-    _capacity: any;
-    get capacity(): any /*{[name: string]: Quantity}Helper*/ {
+    _capacity: {[name: string]: Quantity};
+    get capacity(): {[name: string]: Quantity} {
         return this._capacity
     }
-    set capacity(x: any /*{[name: string]: Quantity}Helper*/) {
+    set capacity(x: {[name: string]: Quantity}) {
         this._capacity = this.set(this.capacity, x)
     }
-    setCapacity(x: any /*{[name: string]: Quantity}Helper*/) {
+    $Capacity(x: {[name: string]: Quantity}) {
         this.capacity = x; return this
     }
 
-    _cephfs: any;
-    get cephfs(): any /*CephFSPersistentVolumeSourceHelper*/ {
+    _cephfs: CephFSPersistentVolumeSourceHelper;
+    get cephfs(): CephFSPersistentVolumeSourceHelper {
         return this._cephfs
     }
-    set cephfs(x: any /*CephFSPersistentVolumeSourceHelper*/) {
+    set cephfs(x: CephFSPersistentVolumeSourceHelper) {
         this._cephfs = x
     }
-    setCephfs(x: any /*CephFSPersistentVolumeSourceHelper*/) {
+    $Cephfs(x: CephFSPersistentVolumeSourceHelper) {
         this.cephfs = x; return this
     }
 
-    _cinder: any;
-    get cinder(): any /*CinderPersistentVolumeSourceHelper*/ {
+    _cinder: CinderPersistentVolumeSourceHelper;
+    get cinder(): CinderPersistentVolumeSourceHelper {
         return this._cinder
     }
-    set cinder(x: any /*CinderPersistentVolumeSourceHelper*/) {
+    set cinder(x: CinderPersistentVolumeSourceHelper) {
         this._cinder = x
     }
-    setCinder(x: any /*CinderPersistentVolumeSourceHelper*/) {
+    $Cinder(x: CinderPersistentVolumeSourceHelper) {
         this.cinder = x; return this
     }
 
-    _claimRef: any;
-    get claimRef(): any /*ObjectReferenceHelper*/ {
+    _claimRef: ObjectReferenceHelper;
+    get claimRef(): ObjectReferenceHelper {
         return this._claimRef
     }
-    set claimRef(x: any /*ObjectReferenceHelper*/) {
+    set claimRef(x: ObjectReferenceHelper) {
         this._claimRef = x
     }
-    setClaimRef(x: any /*ObjectReferenceHelper*/) {
+    $ClaimRef(x: ObjectReferenceHelper) {
         this.claimRef = x; return this
     }
 
-    _csi: any;
-    get csi(): any /*CSIPersistentVolumeSourceHelper*/ {
+    _csi: CSIPersistentVolumeSourceHelper;
+    get csi(): CSIPersistentVolumeSourceHelper {
         return this._csi
     }
-    set csi(x: any /*CSIPersistentVolumeSourceHelper*/) {
+    set csi(x: CSIPersistentVolumeSourceHelper) {
         this._csi = x
     }
-    setCsi(x: any /*CSIPersistentVolumeSourceHelper*/) {
+    $Csi(x: CSIPersistentVolumeSourceHelper) {
         this.csi = x; return this
     }
 
-    _fc: any;
-    get fc(): any /*FCVolumeSourceHelper*/ {
+    _fc: FCVolumeSourceHelper;
+    get fc(): FCVolumeSourceHelper {
         return this._fc
     }
-    set fc(x: any /*FCVolumeSourceHelper*/) {
+    set fc(x: FCVolumeSourceHelper) {
         this._fc = x
     }
-    setFc(x: any /*FCVolumeSourceHelper*/) {
+    $Fc(x: FCVolumeSourceHelper) {
         this.fc = x; return this
     }
 
-    _flexVolume: any;
-    get flexVolume(): any /*FlexPersistentVolumeSourceHelper*/ {
+    _flexVolume: FlexPersistentVolumeSourceHelper;
+    get flexVolume(): FlexPersistentVolumeSourceHelper {
         return this._flexVolume
     }
-    set flexVolume(x: any /*FlexPersistentVolumeSourceHelper*/) {
+    set flexVolume(x: FlexPersistentVolumeSourceHelper) {
         this._flexVolume = x
     }
-    setFlexVolume(x: any /*FlexPersistentVolumeSourceHelper*/) {
+    $FlexVolume(x: FlexPersistentVolumeSourceHelper) {
         this.flexVolume = x; return this
     }
 
-    _flocker: any;
-    get flocker(): any /*FlockerVolumeSourceHelper*/ {
+    _flocker: FlockerVolumeSourceHelper;
+    get flocker(): FlockerVolumeSourceHelper {
         return this._flocker
     }
-    set flocker(x: any /*FlockerVolumeSourceHelper*/) {
+    set flocker(x: FlockerVolumeSourceHelper) {
         this._flocker = x
     }
-    setFlocker(x: any /*FlockerVolumeSourceHelper*/) {
+    $Flocker(x: FlockerVolumeSourceHelper) {
         this.flocker = x; return this
     }
 
-    _gcePersistentDisk: any;
-    get gcePersistentDisk(): any /*GCEPersistentDiskVolumeSourceHelper*/ {
+    _gcePersistentDisk: GCEPersistentDiskVolumeSourceHelper;
+    get gcePersistentDisk(): GCEPersistentDiskVolumeSourceHelper {
         return this._gcePersistentDisk
     }
-    set gcePersistentDisk(x: any /*GCEPersistentDiskVolumeSourceHelper*/) {
+    set gcePersistentDisk(x: GCEPersistentDiskVolumeSourceHelper) {
         this._gcePersistentDisk = x
     }
-    setGcePersistentDisk(x: any /*GCEPersistentDiskVolumeSourceHelper*/) {
+    $GcePersistentDisk(x: GCEPersistentDiskVolumeSourceHelper) {
         this.gcePersistentDisk = x; return this
     }
 
-    _glusterfs: any;
-    get glusterfs(): any /*GlusterfsPersistentVolumeSourceHelper*/ {
+    _glusterfs: GlusterfsPersistentVolumeSourceHelper;
+    get glusterfs(): GlusterfsPersistentVolumeSourceHelper {
         return this._glusterfs
     }
-    set glusterfs(x: any /*GlusterfsPersistentVolumeSourceHelper*/) {
+    set glusterfs(x: GlusterfsPersistentVolumeSourceHelper) {
         this._glusterfs = x
     }
-    setGlusterfs(x: any /*GlusterfsPersistentVolumeSourceHelper*/) {
+    $Glusterfs(x: GlusterfsPersistentVolumeSourceHelper) {
         this.glusterfs = x; return this
     }
 
-    _hostPath: any;
-    get hostPath(): any /*HostPathVolumeSourceHelper*/ {
+    _hostPath: HostPathVolumeSourceHelper;
+    get hostPath(): HostPathVolumeSourceHelper {
         return this._hostPath
     }
-    set hostPath(x: any /*HostPathVolumeSourceHelper*/) {
+    set hostPath(x: HostPathVolumeSourceHelper) {
         this._hostPath = x
     }
-    setHostPath(x: any /*HostPathVolumeSourceHelper*/) {
+    $HostPath(x: HostPathVolumeSourceHelper) {
         this.hostPath = x; return this
     }
 
-    _iscsi: any;
-    get iscsi(): any /*ISCSIPersistentVolumeSourceHelper*/ {
+    _iscsi: ISCSIPersistentVolumeSourceHelper;
+    get iscsi(): ISCSIPersistentVolumeSourceHelper {
         return this._iscsi
     }
-    set iscsi(x: any /*ISCSIPersistentVolumeSourceHelper*/) {
+    set iscsi(x: ISCSIPersistentVolumeSourceHelper) {
         this._iscsi = x
     }
-    setIscsi(x: any /*ISCSIPersistentVolumeSourceHelper*/) {
+    $Iscsi(x: ISCSIPersistentVolumeSourceHelper) {
         this.iscsi = x; return this
     }
 
-    _local: any;
-    get local(): any /*LocalVolumeSourceHelper*/ {
+    _local: LocalVolumeSourceHelper;
+    get local(): LocalVolumeSourceHelper {
         return this._local
     }
-    set local(x: any /*LocalVolumeSourceHelper*/) {
+    set local(x: LocalVolumeSourceHelper) {
         this._local = x
     }
-    setLocal(x: any /*LocalVolumeSourceHelper*/) {
+    $Local(x: LocalVolumeSourceHelper) {
         this.local = x; return this
     }
 
-    _mountOptions: any;
-    get mountOptions(): any /*Array<string>*/ {
+    _mountOptions: Array<string>;
+    get mountOptions(): Array<string> {
         return this._mountOptions
     }
-    set mountOptions(x: any /*Array<string>*/) {
+    set mountOptions(x: Array<string>) {
         this._mountOptions = this.set(this.mountOptions, x)
     }
-    setMountOptions(x: any /*Array<string>*/) {
+    $MountOptions(x: Array<string>) {
         this.mountOptions = x; return this
     }
 
-    _nfs: any;
-    get nfs(): any /*NFSVolumeSourceHelper*/ {
+    _nfs: NFSVolumeSourceHelper;
+    get nfs(): NFSVolumeSourceHelper {
         return this._nfs
     }
-    set nfs(x: any /*NFSVolumeSourceHelper*/) {
+    set nfs(x: NFSVolumeSourceHelper) {
         this._nfs = x
     }
-    setNfs(x: any /*NFSVolumeSourceHelper*/) {
+    $Nfs(x: NFSVolumeSourceHelper) {
         this.nfs = x; return this
     }
 
-    _nodeAffinity: any;
-    get nodeAffinity(): any /*VolumeNodeAffinityHelper*/ {
+    _nodeAffinity: VolumeNodeAffinityHelper;
+    get nodeAffinity(): VolumeNodeAffinityHelper {
         return this._nodeAffinity
     }
-    set nodeAffinity(x: any /*VolumeNodeAffinityHelper*/) {
+    set nodeAffinity(x: VolumeNodeAffinityHelper) {
         this._nodeAffinity = x
     }
-    setNodeAffinity(x: any /*VolumeNodeAffinityHelper*/) {
+    $NodeAffinity(x: VolumeNodeAffinityHelper) {
         this.nodeAffinity = x; return this
     }
 
-    _persistentVolumeReclaimPolicy: any;
-    get persistentVolumeReclaimPolicy(): any /*string*/ {
+    _persistentVolumeReclaimPolicy: string;
+    get persistentVolumeReclaimPolicy(): string {
         return this._persistentVolumeReclaimPolicy
     }
-    set persistentVolumeReclaimPolicy(x: any /*string*/) {
+    set persistentVolumeReclaimPolicy(x: string) {
         this._persistentVolumeReclaimPolicy = x
     }
-    setPersistentVolumeReclaimPolicy(x: any /*string*/) {
+    $PersistentVolumeReclaimPolicy(x: string) {
         this.persistentVolumeReclaimPolicy = x; return this
     }
 
-    _photonPersistentDisk: any;
-    get photonPersistentDisk(): any /*PhotonPersistentDiskVolumeSourceHelper*/ {
+    _photonPersistentDisk: PhotonPersistentDiskVolumeSourceHelper;
+    get photonPersistentDisk(): PhotonPersistentDiskVolumeSourceHelper {
         return this._photonPersistentDisk
     }
-    set photonPersistentDisk(x: any /*PhotonPersistentDiskVolumeSourceHelper*/) {
+    set photonPersistentDisk(x: PhotonPersistentDiskVolumeSourceHelper) {
         this._photonPersistentDisk = x
     }
-    setPhotonPersistentDisk(x: any /*PhotonPersistentDiskVolumeSourceHelper*/) {
+    $PhotonPersistentDisk(x: PhotonPersistentDiskVolumeSourceHelper) {
         this.photonPersistentDisk = x; return this
     }
 
-    _portworxVolume: any;
-    get portworxVolume(): any /*PortworxVolumeSourceHelper*/ {
+    _portworxVolume: PortworxVolumeSourceHelper;
+    get portworxVolume(): PortworxVolumeSourceHelper {
         return this._portworxVolume
     }
-    set portworxVolume(x: any /*PortworxVolumeSourceHelper*/) {
+    set portworxVolume(x: PortworxVolumeSourceHelper) {
         this._portworxVolume = x
     }
-    setPortworxVolume(x: any /*PortworxVolumeSourceHelper*/) {
+    $PortworxVolume(x: PortworxVolumeSourceHelper) {
         this.portworxVolume = x; return this
     }
 
-    _quobyte: any;
-    get quobyte(): any /*QuobyteVolumeSourceHelper*/ {
+    _quobyte: QuobyteVolumeSourceHelper;
+    get quobyte(): QuobyteVolumeSourceHelper {
         return this._quobyte
     }
-    set quobyte(x: any /*QuobyteVolumeSourceHelper*/) {
+    set quobyte(x: QuobyteVolumeSourceHelper) {
         this._quobyte = x
     }
-    setQuobyte(x: any /*QuobyteVolumeSourceHelper*/) {
+    $Quobyte(x: QuobyteVolumeSourceHelper) {
         this.quobyte = x; return this
     }
 
-    _rbd: any;
-    get rbd(): any /*RBDPersistentVolumeSourceHelper*/ {
+    _rbd: RBDPersistentVolumeSourceHelper;
+    get rbd(): RBDPersistentVolumeSourceHelper {
         return this._rbd
     }
-    set rbd(x: any /*RBDPersistentVolumeSourceHelper*/) {
+    set rbd(x: RBDPersistentVolumeSourceHelper) {
         this._rbd = x
     }
-    setRbd(x: any /*RBDPersistentVolumeSourceHelper*/) {
+    $Rbd(x: RBDPersistentVolumeSourceHelper) {
         this.rbd = x; return this
     }
 
-    _scaleIO: any;
-    get scaleIO(): any /*ScaleIOPersistentVolumeSourceHelper*/ {
+    _scaleIO: ScaleIOPersistentVolumeSourceHelper;
+    get scaleIO(): ScaleIOPersistentVolumeSourceHelper {
         return this._scaleIO
     }
-    set scaleIO(x: any /*ScaleIOPersistentVolumeSourceHelper*/) {
+    set scaleIO(x: ScaleIOPersistentVolumeSourceHelper) {
         this._scaleIO = x
     }
-    setScaleIO(x: any /*ScaleIOPersistentVolumeSourceHelper*/) {
+    $ScaleIO(x: ScaleIOPersistentVolumeSourceHelper) {
         this.scaleIO = x; return this
     }
 
-    _storageClassName: any;
-    get storageClassName(): any /*string*/ {
+    _storageClassName: string;
+    get storageClassName(): string {
         return this._storageClassName
     }
-    set storageClassName(x: any /*string*/) {
+    set storageClassName(x: string) {
         this._storageClassName = x
     }
-    setStorageClassName(x: any /*string*/) {
+    $StorageClassName(x: string) {
         this.storageClassName = x; return this
     }
 
-    _storageos: any;
-    get storageos(): any /*StorageOSPersistentVolumeSourceHelper*/ {
+    _storageos: StorageOSPersistentVolumeSourceHelper;
+    get storageos(): StorageOSPersistentVolumeSourceHelper {
         return this._storageos
     }
-    set storageos(x: any /*StorageOSPersistentVolumeSourceHelper*/) {
+    set storageos(x: StorageOSPersistentVolumeSourceHelper) {
         this._storageos = x
     }
-    setStorageos(x: any /*StorageOSPersistentVolumeSourceHelper*/) {
+    $Storageos(x: StorageOSPersistentVolumeSourceHelper) {
         this.storageos = x; return this
     }
 
-    _volumeMode: any;
-    get volumeMode(): any /*string*/ {
+    _volumeMode: string;
+    get volumeMode(): string {
         return this._volumeMode
     }
-    set volumeMode(x: any /*string*/) {
+    set volumeMode(x: string) {
         this._volumeMode = x
     }
-    setVolumeMode(x: any /*string*/) {
+    $VolumeMode(x: string) {
         this.volumeMode = x; return this
     }
 
-    _vsphereVolume: any;
-    get vsphereVolume(): any /*VsphereVirtualDiskVolumeSourceHelper*/ {
+    _vsphereVolume: VsphereVirtualDiskVolumeSourceHelper;
+    get vsphereVolume(): VsphereVirtualDiskVolumeSourceHelper {
         return this._vsphereVolume
     }
-    set vsphereVolume(x: any /*VsphereVirtualDiskVolumeSourceHelper*/) {
+    set vsphereVolume(x: VsphereVirtualDiskVolumeSourceHelper) {
         this._vsphereVolume = x
     }
-    setVsphereVolume(x: any /*VsphereVirtualDiskVolumeSourceHelper*/) {
+    $VsphereVolume(x: VsphereVirtualDiskVolumeSourceHelper) {
         this.vsphereVolume = x; return this
     }
 }
 
 export interface PersistentVolumeStatusHelper extends PersistentVolumeStatus {
-    $message(x: any): any;
-    $phase(x: any): any;
-    $reason(x: any): any;
+    $message(x: string): PersistentVolumeStatusHelper;
+    $phase(x: string): PersistentVolumeStatusHelper;
+    $reason(x: string): PersistentVolumeStatusHelper;
 }
 
 /** PersistentVolumeStatus is the current status of a persistent volume. */
@@ -6463,43 +6586,43 @@ export class PersistentVolumeStatusHelper extends Template implements Persistent
         super(obj)
     }
 
-    _message: any;
-    get message(): any /*string*/ {
+    _message: string;
+    get message(): string {
         return this._message
     }
-    set message(x: any /*string*/) {
+    set message(x: string) {
         this._message = x
     }
-    setMessage(x: any /*string*/) {
+    $Message(x: string) {
         this.message = x; return this
     }
 
-    _phase: any;
-    get phase(): any /*string*/ {
+    _phase: string;
+    get phase(): string {
         return this._phase
     }
-    set phase(x: any /*string*/) {
+    set phase(x: string) {
         this._phase = x
     }
-    setPhase(x: any /*string*/) {
+    $Phase(x: string) {
         this.phase = x; return this
     }
 
-    _reason: any;
-    get reason(): any /*string*/ {
+    _reason: string;
+    get reason(): string {
         return this._reason
     }
-    set reason(x: any /*string*/) {
+    set reason(x: string) {
         this._reason = x
     }
-    setReason(x: any /*string*/) {
+    $Reason(x: string) {
         this.reason = x; return this
     }
 }
 
 export interface PhotonPersistentDiskVolumeSourceHelper extends PhotonPersistentDiskVolumeSource {
-    $fsType(x: any): any;
-    $pdID(x: any): any;
+    $fsType(x: string): PhotonPersistentDiskVolumeSourceHelper;
+    $pdID(x: string): PhotonPersistentDiskVolumeSourceHelper;
 }
 
 /** Represents a Photon Controller persistent disk resource. */
@@ -6508,33 +6631,36 @@ export class PhotonPersistentDiskVolumeSourceHelper extends Template implements 
         super(obj)
     }
 
-    _fsType: any;
-    get fsType(): any /*string*/ {
+    _fsType: string;
+    get fsType(): string {
         return this._fsType
     }
-    set fsType(x: any /*string*/) {
+    set fsType(x: string) {
         this._fsType = x
     }
-    setFsType(x: any /*string*/) {
+    $FsType(x: string) {
         this.fsType = x; return this
     }
 
-    _pdID: any;
-    get pdID(): any /*string*/ {
+    _pdID: string;
+    get pdID(): string {
         return this._pdID
     }
-    set pdID(x: any /*string*/) {
+    set pdID(x: string) {
         this._pdID = x
     }
-    setPdID(x: any /*string*/) {
+    $PdID(x: string) {
         this.pdID = x; return this
     }
 }
 
 export interface PodHelper extends Pod {
-    $metadata(x: any): any;
-    $spec(x: any): any;
-    $status(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): PodHelper;
+    spec: PodSpecHelper;
+    $spec(x: PodSpecHelper): PodHelper;
+    status: PodStatusHelper;
+    $status(x: PodStatusHelper): PodHelper;
 }
 
 /** Pod is a collection of containers that can run on a host. This resource is created by clients and scheduled onto hosts. */
@@ -6546,43 +6672,43 @@ export class PodHelper extends ResourceTemplate implements PodHelper {
         super(nameOrObject, namespace, PodHelper.kind, PodHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*PodSpecHelper*/ {
+    _spec: PodSpecHelper;
+    get spec(): PodSpecHelper {
         return this._spec
     }
-    set spec(x: any /*PodSpecHelper*/) {
+    set spec(x: PodSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*PodSpecHelper*/) {
+    $Spec(x: PodSpecHelper) {
         this.spec = x; return this
     }
 
-    _status: any;
-    get status(): any /*PodStatusHelper*/ {
+    _status: PodStatusHelper;
+    get status(): PodStatusHelper {
         return this._status
     }
-    set status(x: any /*PodStatusHelper*/) {
+    set status(x: PodStatusHelper) {
         this._status = x
     }
-    setStatus(x: any /*PodStatusHelper*/) {
+    $Status(x: PodStatusHelper) {
         this.status = x; return this
     }
 }
 
 export interface PodAffinityHelper extends PodAffinity {
-    $preferredDuringSchedulingIgnoredDuringExecution(x: any): any;
-    $requiredDuringSchedulingIgnoredDuringExecution(x: any): any;
+    $preferredDuringSchedulingIgnoredDuringExecution(x: Array<WeightedPodAffinityTerm>): PodAffinityHelper;
+    $requiredDuringSchedulingIgnoredDuringExecution(x: Array<PodAffinityTerm>): PodAffinityHelper;
 }
 
 /** Pod affinity is a group of inter pod affinity scheduling rules. */
@@ -6591,34 +6717,36 @@ export class PodAffinityHelper extends Template implements PodAffinityHelper {
         super(obj)
     }
 
-    _preferredDuringSchedulingIgnoredDuringExecution: any;
-    get preferredDuringSchedulingIgnoredDuringExecution(): any /*Array<WeightedPodAffinityTerm>*/ {
+    _preferredDuringSchedulingIgnoredDuringExecution: Array<WeightedPodAffinityTerm>;
+    get preferredDuringSchedulingIgnoredDuringExecution(): Array<WeightedPodAffinityTerm> {
         return this._preferredDuringSchedulingIgnoredDuringExecution
     }
-    set preferredDuringSchedulingIgnoredDuringExecution(x: any /*Array<WeightedPodAffinityTerm>*/) {
+    set preferredDuringSchedulingIgnoredDuringExecution(x: Array<WeightedPodAffinityTerm>) {
         this._preferredDuringSchedulingIgnoredDuringExecution = this.set(this.preferredDuringSchedulingIgnoredDuringExecution, x)
     }
-    setPreferredDuringSchedulingIgnoredDuringExecution(x: any /*Array<WeightedPodAffinityTerm>*/) {
+    $PreferredDuringSchedulingIgnoredDuringExecution(x: Array<WeightedPodAffinityTerm>) {
         this.preferredDuringSchedulingIgnoredDuringExecution = x; return this
     }
 
-    _requiredDuringSchedulingIgnoredDuringExecution: any;
-    get requiredDuringSchedulingIgnoredDuringExecution(): any /*Array<PodAffinityTerm>*/ {
+    _requiredDuringSchedulingIgnoredDuringExecution: Array<PodAffinityTerm>;
+    get requiredDuringSchedulingIgnoredDuringExecution(): Array<PodAffinityTerm> {
         return this._requiredDuringSchedulingIgnoredDuringExecution
     }
-    set requiredDuringSchedulingIgnoredDuringExecution(x: any /*Array<PodAffinityTerm>*/) {
+    set requiredDuringSchedulingIgnoredDuringExecution(x: Array<PodAffinityTerm>) {
         this._requiredDuringSchedulingIgnoredDuringExecution = this.set(this.requiredDuringSchedulingIgnoredDuringExecution, x)
     }
-    setRequiredDuringSchedulingIgnoredDuringExecution(x: any /*Array<PodAffinityTerm>*/) {
+    $RequiredDuringSchedulingIgnoredDuringExecution(x: Array<PodAffinityTerm>) {
         this.requiredDuringSchedulingIgnoredDuringExecution = x; return this
     }
 }
 
 export interface PodAffinityTermHelper extends PodAffinityTerm {
-    $labelSelector(x: any): any;
-    $namespaceSelector(x: any): any;
-    $namespaces(x: any): any;
-    $topologyKey(x: any): any;
+    labelSelector: LabelSelectorHelper;
+    $labelSelector(x: LabelSelectorHelper): PodAffinityTermHelper;
+    namespaceSelector: LabelSelectorHelper;
+    $namespaceSelector(x: LabelSelectorHelper): PodAffinityTermHelper;
+    $namespaces(x: Array<string>): PodAffinityTermHelper;
+    $topologyKey(x: string): PodAffinityTermHelper;
 }
 
 /** Defines a set of pods (namely those matching the labelSelector relative to the given namespace(s)) that this pod should be co-located (affinity) or not co-located (anti-affinity) with, where co-located is defined as running on a node whose value of the label with key <topologyKey> matches that of any node on which a pod of the set of pods is running */
@@ -6627,54 +6755,54 @@ export class PodAffinityTermHelper extends Template implements PodAffinityTermHe
         super(obj)
     }
 
-    _labelSelector: any;
-    get labelSelector(): any /*LabelSelectorHelper*/ {
+    _labelSelector: LabelSelectorHelper;
+    get labelSelector(): LabelSelectorHelper {
         return this._labelSelector
     }
-    set labelSelector(x: any /*LabelSelectorHelper*/) {
+    set labelSelector(x: LabelSelectorHelper) {
         this._labelSelector = x
     }
-    setLabelSelector(x: any /*LabelSelectorHelper*/) {
+    $LabelSelector(x: LabelSelectorHelper) {
         this.labelSelector = x; return this
     }
 
-    _namespaceSelector: any;
-    get namespaceSelector(): any /*LabelSelectorHelper*/ {
+    _namespaceSelector: LabelSelectorHelper;
+    get namespaceSelector(): LabelSelectorHelper {
         return this._namespaceSelector
     }
-    set namespaceSelector(x: any /*LabelSelectorHelper*/) {
+    set namespaceSelector(x: LabelSelectorHelper) {
         this._namespaceSelector = x
     }
-    setNamespaceSelector(x: any /*LabelSelectorHelper*/) {
+    $NamespaceSelector(x: LabelSelectorHelper) {
         this.namespaceSelector = x; return this
     }
 
-    _namespaces: any;
-    get namespaces(): any /*Array<string>*/ {
+    _namespaces: Array<string>;
+    get namespaces(): Array<string> {
         return this._namespaces
     }
-    set namespaces(x: any /*Array<string>*/) {
+    set namespaces(x: Array<string>) {
         this._namespaces = this.set(this.namespaces, x)
     }
-    setNamespaces(x: any /*Array<string>*/) {
+    $Namespaces(x: Array<string>) {
         this.namespaces = x; return this
     }
 
-    _topologyKey: any;
-    get topologyKey(): any /*string*/ {
+    _topologyKey: string;
+    get topologyKey(): string {
         return this._topologyKey
     }
-    set topologyKey(x: any /*string*/) {
+    set topologyKey(x: string) {
         this._topologyKey = x
     }
-    setTopologyKey(x: any /*string*/) {
+    $TopologyKey(x: string) {
         this.topologyKey = x; return this
     }
 }
 
 export interface PodAntiAffinityHelper extends PodAntiAffinity {
-    $preferredDuringSchedulingIgnoredDuringExecution(x: any): any;
-    $requiredDuringSchedulingIgnoredDuringExecution(x: any): any;
+    $preferredDuringSchedulingIgnoredDuringExecution(x: Array<WeightedPodAffinityTerm>): PodAntiAffinityHelper;
+    $requiredDuringSchedulingIgnoredDuringExecution(x: Array<PodAffinityTerm>): PodAntiAffinityHelper;
 }
 
 /** Pod anti affinity is a group of inter pod anti affinity scheduling rules. */
@@ -6683,36 +6811,36 @@ export class PodAntiAffinityHelper extends Template implements PodAntiAffinityHe
         super(obj)
     }
 
-    _preferredDuringSchedulingIgnoredDuringExecution: any;
-    get preferredDuringSchedulingIgnoredDuringExecution(): any /*Array<WeightedPodAffinityTerm>*/ {
+    _preferredDuringSchedulingIgnoredDuringExecution: Array<WeightedPodAffinityTerm>;
+    get preferredDuringSchedulingIgnoredDuringExecution(): Array<WeightedPodAffinityTerm> {
         return this._preferredDuringSchedulingIgnoredDuringExecution
     }
-    set preferredDuringSchedulingIgnoredDuringExecution(x: any /*Array<WeightedPodAffinityTerm>*/) {
+    set preferredDuringSchedulingIgnoredDuringExecution(x: Array<WeightedPodAffinityTerm>) {
         this._preferredDuringSchedulingIgnoredDuringExecution = this.set(this.preferredDuringSchedulingIgnoredDuringExecution, x)
     }
-    setPreferredDuringSchedulingIgnoredDuringExecution(x: any /*Array<WeightedPodAffinityTerm>*/) {
+    $PreferredDuringSchedulingIgnoredDuringExecution(x: Array<WeightedPodAffinityTerm>) {
         this.preferredDuringSchedulingIgnoredDuringExecution = x; return this
     }
 
-    _requiredDuringSchedulingIgnoredDuringExecution: any;
-    get requiredDuringSchedulingIgnoredDuringExecution(): any /*Array<PodAffinityTerm>*/ {
+    _requiredDuringSchedulingIgnoredDuringExecution: Array<PodAffinityTerm>;
+    get requiredDuringSchedulingIgnoredDuringExecution(): Array<PodAffinityTerm> {
         return this._requiredDuringSchedulingIgnoredDuringExecution
     }
-    set requiredDuringSchedulingIgnoredDuringExecution(x: any /*Array<PodAffinityTerm>*/) {
+    set requiredDuringSchedulingIgnoredDuringExecution(x: Array<PodAffinityTerm>) {
         this._requiredDuringSchedulingIgnoredDuringExecution = this.set(this.requiredDuringSchedulingIgnoredDuringExecution, x)
     }
-    setRequiredDuringSchedulingIgnoredDuringExecution(x: any /*Array<PodAffinityTerm>*/) {
+    $RequiredDuringSchedulingIgnoredDuringExecution(x: Array<PodAffinityTerm>) {
         this.requiredDuringSchedulingIgnoredDuringExecution = x; return this
     }
 }
 
 export interface PodConditionHelper extends PodCondition {
-    $lastProbeTime(x: any): any;
-    $lastTransitionTime(x: any): any;
-    $message(x: any): any;
-    $reason(x: any): any;
-    $status(x: any): any;
-    $type(x: any): any;
+    $lastProbeTime(x: Time): PodConditionHelper;
+    $lastTransitionTime(x: Time): PodConditionHelper;
+    $message(x: string): PodConditionHelper;
+    $reason(x: string): PodConditionHelper;
+    $status(x: string): PodConditionHelper;
+    $type(x: string): PodConditionHelper;
 }
 
 /** PodCondition contains details for the current condition of this pod. */
@@ -6721,77 +6849,77 @@ export class PodConditionHelper extends Template implements PodConditionHelper {
         super(obj)
     }
 
-    _lastProbeTime: any;
-    get lastProbeTime(): any /*Time*/ {
+    _lastProbeTime: Time;
+    get lastProbeTime(): Time {
         return this._lastProbeTime
     }
-    set lastProbeTime(x: any /*Time*/) {
+    set lastProbeTime(x: Time) {
         this._lastProbeTime = x
     }
-    setLastProbeTime(x: any /*Time*/) {
+    $LastProbeTime(x: Time) {
         this.lastProbeTime = x; return this
     }
 
-    _lastTransitionTime: any;
-    get lastTransitionTime(): any /*Time*/ {
+    _lastTransitionTime: Time;
+    get lastTransitionTime(): Time {
         return this._lastTransitionTime
     }
-    set lastTransitionTime(x: any /*Time*/) {
+    set lastTransitionTime(x: Time) {
         this._lastTransitionTime = x
     }
-    setLastTransitionTime(x: any /*Time*/) {
+    $LastTransitionTime(x: Time) {
         this.lastTransitionTime = x; return this
     }
 
-    _message: any;
-    get message(): any /*string*/ {
+    _message: string;
+    get message(): string {
         return this._message
     }
-    set message(x: any /*string*/) {
+    set message(x: string) {
         this._message = x
     }
-    setMessage(x: any /*string*/) {
+    $Message(x: string) {
         this.message = x; return this
     }
 
-    _reason: any;
-    get reason(): any /*string*/ {
+    _reason: string;
+    get reason(): string {
         return this._reason
     }
-    set reason(x: any /*string*/) {
+    set reason(x: string) {
         this._reason = x
     }
-    setReason(x: any /*string*/) {
+    $Reason(x: string) {
         this.reason = x; return this
     }
 
-    _status: any;
-    get status(): any /*string*/ {
+    _status: string;
+    get status(): string {
         return this._status
     }
-    set status(x: any /*string*/) {
+    set status(x: string) {
         this._status = x
     }
-    setStatus(x: any /*string*/) {
+    $Status(x: string) {
         this.status = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }
 
 export interface PodDNSConfigHelper extends PodDNSConfig {
-    $nameservers(x: any): any;
-    $options(x: any): any;
-    $searches(x: any): any;
+    $nameservers(x: Array<string>): PodDNSConfigHelper;
+    $options(x: Array<PodDNSConfigOption>): PodDNSConfigHelper;
+    $searches(x: Array<string>): PodDNSConfigHelper;
 }
 
 /** PodDNSConfig defines the DNS parameters of a pod in addition to those generated from DNSPolicy. */
@@ -6800,42 +6928,42 @@ export class PodDNSConfigHelper extends Template implements PodDNSConfigHelper {
         super(obj)
     }
 
-    _nameservers: any;
-    get nameservers(): any /*Array<string>*/ {
+    _nameservers: Array<string>;
+    get nameservers(): Array<string> {
         return this._nameservers
     }
-    set nameservers(x: any /*Array<string>*/) {
+    set nameservers(x: Array<string>) {
         this._nameservers = this.set(this.nameservers, x)
     }
-    setNameservers(x: any /*Array<string>*/) {
+    $Nameservers(x: Array<string>) {
         this.nameservers = x; return this
     }
 
-    _options: any;
-    get options(): any /*Array<PodDNSConfigOption>*/ {
+    _options: Array<PodDNSConfigOption>;
+    get options(): Array<PodDNSConfigOption> {
         return this._options
     }
-    set options(x: any /*Array<PodDNSConfigOption>*/) {
+    set options(x: Array<PodDNSConfigOption>) {
         this._options = this.set(this.options, x)
     }
-    setOptions(x: any /*Array<PodDNSConfigOption>*/) {
+    $Options(x: Array<PodDNSConfigOption>) {
         this.options = x; return this
     }
 
-    _searches: any;
-    get searches(): any /*Array<string>*/ {
+    _searches: Array<string>;
+    get searches(): Array<string> {
         return this._searches
     }
-    set searches(x: any /*Array<string>*/) {
+    set searches(x: Array<string>) {
         this._searches = this.set(this.searches, x)
     }
-    setSearches(x: any /*Array<string>*/) {
+    $Searches(x: Array<string>) {
         this.searches = x; return this
     }
 }
 
 export interface PodDNSConfigOptionHelper extends PodDNSConfigOption {
-    $value(x: any): any;
+    $value(x: string): PodDNSConfigOptionHelper;
 }
 
 /** PodDNSConfigOption defines DNS resolver options of a pod. */
@@ -6844,20 +6972,20 @@ export class PodDNSConfigOptionHelper extends Template implements PodDNSConfigOp
         super(obj)
     }
 
-    _value: any;
-    get value(): any /*string*/ {
+    _value: string;
+    get value(): string {
         return this._value
     }
-    set value(x: any /*string*/) {
+    set value(x: string) {
         this._value = x
     }
-    setValue(x: any /*string*/) {
+    $Value(x: string) {
         this.value = x; return this
     }
 }
 
 export interface PodIPHelper extends PodIP {
-    $ip(x: any): any;
+    $ip(x: string): PodIPHelper;
 }
 
 /**
@@ -6869,21 +6997,22 @@ export class PodIPHelper extends Template implements PodIPHelper {
         super(obj)
     }
 
-    _ip: any;
-    get ip(): any /*string*/ {
+    _ip: string;
+    get ip(): string {
         return this._ip
     }
-    set ip(x: any /*string*/) {
+    set ip(x: string) {
         this._ip = x
     }
-    setIp(x: any /*string*/) {
+    $Ip(x: string) {
         this.ip = x; return this
     }
 }
 
 export interface PodListHelper extends PodList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<Pod>): PodListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): PodListHelper;
 }
 
 /** PodList is a list of Pods. */
@@ -6895,31 +7024,31 @@ export class PodListHelper extends ResourceTemplate implements PodListHelper {
         super(nameOrObject, namespace, PodListHelper.kind, PodListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<Pod>*/ {
+    _items: Array<Pod>;
+    get items(): Array<Pod> {
         return this._items
     }
-    set items(x: any /*Array<Pod>*/) {
+    set items(x: Array<Pod>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<Pod>*/) {
+    $Items(x: Array<Pod>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface PodReadinessGateHelper extends PodReadinessGate {
-    $conditionType(x: any): any;
+    $conditionType(x: string): PodReadinessGateHelper;
 }
 
 /** PodReadinessGate contains the reference to a pod condition */
@@ -6928,29 +7057,32 @@ export class PodReadinessGateHelper extends Template implements PodReadinessGate
         super(obj)
     }
 
-    _conditionType: any;
-    get conditionType(): any /*string*/ {
+    _conditionType: string;
+    get conditionType(): string {
         return this._conditionType
     }
-    set conditionType(x: any /*string*/) {
+    set conditionType(x: string) {
         this._conditionType = x
     }
-    setConditionType(x: any /*string*/) {
+    $ConditionType(x: string) {
         this.conditionType = x; return this
     }
 }
 
 export interface PodSecurityContextHelper extends PodSecurityContext {
-    $fsGroup(x: any): any;
-    $fsGroupChangePolicy(x: any): any;
-    $runAsGroup(x: any): any;
-    $runAsNonRoot(x: any): any;
-    $runAsUser(x: any): any;
-    $seLinuxOptions(x: any): any;
-    $seccompProfile(x: any): any;
-    $supplementalGroups(x: any): any;
-    $sysctls(x: any): any;
-    $windowsOptions(x: any): any;
+    $fsGroup(x: number): PodSecurityContextHelper;
+    $fsGroupChangePolicy(x: string): PodSecurityContextHelper;
+    $runAsGroup(x: number): PodSecurityContextHelper;
+    $runAsNonRoot(x: boolean): PodSecurityContextHelper;
+    $runAsUser(x: number): PodSecurityContextHelper;
+    seLinuxOptions: SELinuxOptionsHelper;
+    $seLinuxOptions(x: SELinuxOptionsHelper): PodSecurityContextHelper;
+    seccompProfile: SeccompProfileHelper;
+    $seccompProfile(x: SeccompProfileHelper): PodSecurityContextHelper;
+    $supplementalGroups(x: Array<number>): PodSecurityContextHelper;
+    $sysctls(x: Array<Sysctl>): PodSecurityContextHelper;
+    windowsOptions: WindowsSecurityContextOptionsHelper;
+    $windowsOptions(x: WindowsSecurityContextOptionsHelper): PodSecurityContextHelper;
 }
 
 /** PodSecurityContext holds pod-level security attributes and common container settings. Some fields are also present in container.securityContext.  Field values of container.securityContext take precedence over field values of PodSecurityContext. */
@@ -6959,153 +7091,156 @@ export class PodSecurityContextHelper extends Template implements PodSecurityCon
         super(obj)
     }
 
-    _fsGroup: any;
-    get fsGroup(): any /*number*/ {
+    _fsGroup: number;
+    get fsGroup(): number {
         return this._fsGroup
     }
-    set fsGroup(x: any /*number*/) {
+    set fsGroup(x: number) {
         this._fsGroup = x
     }
-    setFsGroup(x: any /*number*/) {
+    $FsGroup(x: number) {
         this.fsGroup = x; return this
     }
 
-    _fsGroupChangePolicy: any;
-    get fsGroupChangePolicy(): any /*string*/ {
+    _fsGroupChangePolicy: string;
+    get fsGroupChangePolicy(): string {
         return this._fsGroupChangePolicy
     }
-    set fsGroupChangePolicy(x: any /*string*/) {
+    set fsGroupChangePolicy(x: string) {
         this._fsGroupChangePolicy = x
     }
-    setFsGroupChangePolicy(x: any /*string*/) {
+    $FsGroupChangePolicy(x: string) {
         this.fsGroupChangePolicy = x; return this
     }
 
-    _runAsGroup: any;
-    get runAsGroup(): any /*number*/ {
+    _runAsGroup: number;
+    get runAsGroup(): number {
         return this._runAsGroup
     }
-    set runAsGroup(x: any /*number*/) {
+    set runAsGroup(x: number) {
         this._runAsGroup = x
     }
-    setRunAsGroup(x: any /*number*/) {
+    $RunAsGroup(x: number) {
         this.runAsGroup = x; return this
     }
 
-    _runAsNonRoot: any;
-    get runAsNonRoot(): any /*boolean*/ {
+    _runAsNonRoot: boolean;
+    get runAsNonRoot(): boolean {
         return this._runAsNonRoot
     }
-    set runAsNonRoot(x: any /*boolean*/) {
+    set runAsNonRoot(x: boolean) {
         this._runAsNonRoot = x
     }
-    setRunAsNonRoot(x: any /*boolean*/) {
+    $RunAsNonRoot(x: boolean) {
         this.runAsNonRoot = x; return this
     }
 
-    _runAsUser: any;
-    get runAsUser(): any /*number*/ {
+    _runAsUser: number;
+    get runAsUser(): number {
         return this._runAsUser
     }
-    set runAsUser(x: any /*number*/) {
+    set runAsUser(x: number) {
         this._runAsUser = x
     }
-    setRunAsUser(x: any /*number*/) {
+    $RunAsUser(x: number) {
         this.runAsUser = x; return this
     }
 
-    _seLinuxOptions: any;
-    get seLinuxOptions(): any /*SELinuxOptionsHelper*/ {
+    _seLinuxOptions: SELinuxOptionsHelper;
+    get seLinuxOptions(): SELinuxOptionsHelper {
         return this._seLinuxOptions
     }
-    set seLinuxOptions(x: any /*SELinuxOptionsHelper*/) {
+    set seLinuxOptions(x: SELinuxOptionsHelper) {
         this._seLinuxOptions = x
     }
-    setSeLinuxOptions(x: any /*SELinuxOptionsHelper*/) {
+    $SeLinuxOptions(x: SELinuxOptionsHelper) {
         this.seLinuxOptions = x; return this
     }
 
-    _seccompProfile: any;
-    get seccompProfile(): any /*SeccompProfileHelper*/ {
+    _seccompProfile: SeccompProfileHelper;
+    get seccompProfile(): SeccompProfileHelper {
         return this._seccompProfile
     }
-    set seccompProfile(x: any /*SeccompProfileHelper*/) {
+    set seccompProfile(x: SeccompProfileHelper) {
         this._seccompProfile = x
     }
-    setSeccompProfile(x: any /*SeccompProfileHelper*/) {
+    $SeccompProfile(x: SeccompProfileHelper) {
         this.seccompProfile = x; return this
     }
 
-    _supplementalGroups: any;
-    get supplementalGroups(): any /*Array<number>*/ {
+    _supplementalGroups: Array<number>;
+    get supplementalGroups(): Array<number> {
         return this._supplementalGroups
     }
-    set supplementalGroups(x: any /*Array<number>*/) {
+    set supplementalGroups(x: Array<number>) {
         this._supplementalGroups = this.set(this.supplementalGroups, x)
     }
-    setSupplementalGroups(x: any /*Array<number>*/) {
+    $SupplementalGroups(x: Array<number>) {
         this.supplementalGroups = x; return this
     }
 
-    _sysctls: any;
-    get sysctls(): any /*Array<Sysctl>*/ {
+    _sysctls: Array<Sysctl>;
+    get sysctls(): Array<Sysctl> {
         return this._sysctls
     }
-    set sysctls(x: any /*Array<Sysctl>*/) {
+    set sysctls(x: Array<Sysctl>) {
         this._sysctls = this.set(this.sysctls, x)
     }
-    setSysctls(x: any /*Array<Sysctl>*/) {
+    $Sysctls(x: Array<Sysctl>) {
         this.sysctls = x; return this
     }
 
-    _windowsOptions: any;
-    get windowsOptions(): any /*WindowsSecurityContextOptionsHelper*/ {
+    _windowsOptions: WindowsSecurityContextOptionsHelper;
+    get windowsOptions(): WindowsSecurityContextOptionsHelper {
         return this._windowsOptions
     }
-    set windowsOptions(x: any /*WindowsSecurityContextOptionsHelper*/) {
+    set windowsOptions(x: WindowsSecurityContextOptionsHelper) {
         this._windowsOptions = x
     }
-    setWindowsOptions(x: any /*WindowsSecurityContextOptionsHelper*/) {
+    $WindowsOptions(x: WindowsSecurityContextOptionsHelper) {
         this.windowsOptions = x; return this
     }
 }
 
 export interface PodSpecHelper extends PodSpec {
-    $activeDeadlineSeconds(x: any): any;
-    $affinity(x: any): any;
-    $automountServiceAccountToken(x: any): any;
-    $containers(x: any): any;
-    $dnsConfig(x: any): any;
-    $dnsPolicy(x: any): any;
-    $enableServiceLinks(x: any): any;
-    $ephemeralContainers(x: any): any;
-    $hostAliases(x: any): any;
-    $hostIPC(x: any): any;
-    $hostNetwork(x: any): any;
-    $hostPID(x: any): any;
-    $hostname(x: any): any;
-    $imagePullSecrets(x: any): any;
-    $initContainers(x: any): any;
-    $nodeName(x: any): any;
-    $nodeSelector(x: any): any;
-    $overhead(x: any): any;
-    $preemptionPolicy(x: any): any;
-    $priority(x: any): any;
-    $priorityClassName(x: any): any;
-    $readinessGates(x: any): any;
-    $restartPolicy(x: any): any;
-    $runtimeClassName(x: any): any;
-    $schedulerName(x: any): any;
-    $securityContext(x: any): any;
-    $serviceAccount(x: any): any;
-    $serviceAccountName(x: any): any;
-    $setHostnameAsFQDN(x: any): any;
-    $shareProcessNamespace(x: any): any;
-    $subdomain(x: any): any;
-    $terminationGracePeriodSeconds(x: any): any;
-    $tolerations(x: any): any;
-    $topologySpreadConstraints(x: any): any;
-    $volumes(x: any): any;
+    $activeDeadlineSeconds(x: number): PodSpecHelper;
+    affinity: AffinityHelper;
+    $affinity(x: AffinityHelper): PodSpecHelper;
+    $automountServiceAccountToken(x: boolean): PodSpecHelper;
+    $containers(x: Array<Container>): PodSpecHelper;
+    dnsConfig: PodDNSConfigHelper;
+    $dnsConfig(x: PodDNSConfigHelper): PodSpecHelper;
+    $dnsPolicy(x: string): PodSpecHelper;
+    $enableServiceLinks(x: boolean): PodSpecHelper;
+    $ephemeralContainers(x: Array<EphemeralContainer>): PodSpecHelper;
+    $hostAliases(x: Array<HostAlias>): PodSpecHelper;
+    $hostIPC(x: boolean): PodSpecHelper;
+    $hostNetwork(x: boolean): PodSpecHelper;
+    $hostPID(x: boolean): PodSpecHelper;
+    $hostname(x: string): PodSpecHelper;
+    $imagePullSecrets(x: Array<LocalObjectReference>): PodSpecHelper;
+    $initContainers(x: Array<Container>): PodSpecHelper;
+    $nodeName(x: string): PodSpecHelper;
+    $nodeSelector(x: any): PodSpecHelper;
+    $overhead(x: {[name: string]: Quantity}): PodSpecHelper;
+    $preemptionPolicy(x: string): PodSpecHelper;
+    $priority(x: number): PodSpecHelper;
+    $priorityClassName(x: string): PodSpecHelper;
+    $readinessGates(x: Array<PodReadinessGate>): PodSpecHelper;
+    $restartPolicy(x: string): PodSpecHelper;
+    $runtimeClassName(x: string): PodSpecHelper;
+    $schedulerName(x: string): PodSpecHelper;
+    securityContext: PodSecurityContextHelper;
+    $securityContext(x: PodSecurityContextHelper): PodSpecHelper;
+    $serviceAccount(x: string): PodSpecHelper;
+    $serviceAccountName(x: string): PodSpecHelper;
+    $setHostnameAsFQDN(x: boolean): PodSpecHelper;
+    $shareProcessNamespace(x: boolean): PodSpecHelper;
+    $subdomain(x: string): PodSpecHelper;
+    $terminationGracePeriodSeconds(x: number): PodSpecHelper;
+    $tolerations(x: Array<Toleration>): PodSpecHelper;
+    $topologySpreadConstraints(x: Array<TopologySpreadConstraint>): PodSpecHelper;
+    $volumes(x: Array<Volume>): PodSpecHelper;
 }
 
 /** PodSpec is a description of a pod. */
@@ -7114,406 +7249,406 @@ export class PodSpecHelper extends Template implements PodSpecHelper {
         super(obj)
     }
 
-    _activeDeadlineSeconds: any;
-    get activeDeadlineSeconds(): any /*number*/ {
+    _activeDeadlineSeconds: number;
+    get activeDeadlineSeconds(): number {
         return this._activeDeadlineSeconds
     }
-    set activeDeadlineSeconds(x: any /*number*/) {
+    set activeDeadlineSeconds(x: number) {
         this._activeDeadlineSeconds = x
     }
-    setActiveDeadlineSeconds(x: any /*number*/) {
+    $ActiveDeadlineSeconds(x: number) {
         this.activeDeadlineSeconds = x; return this
     }
 
-    _affinity: any;
-    get affinity(): any /*AffinityHelper*/ {
+    _affinity: AffinityHelper;
+    get affinity(): AffinityHelper {
         return this._affinity
     }
-    set affinity(x: any /*AffinityHelper*/) {
+    set affinity(x: AffinityHelper) {
         this._affinity = x
     }
-    setAffinity(x: any /*AffinityHelper*/) {
+    $Affinity(x: AffinityHelper) {
         this.affinity = x; return this
     }
 
-    _automountServiceAccountToken: any;
-    get automountServiceAccountToken(): any /*boolean*/ {
+    _automountServiceAccountToken: boolean;
+    get automountServiceAccountToken(): boolean {
         return this._automountServiceAccountToken
     }
-    set automountServiceAccountToken(x: any /*boolean*/) {
+    set automountServiceAccountToken(x: boolean) {
         this._automountServiceAccountToken = x
     }
-    setAutomountServiceAccountToken(x: any /*boolean*/) {
+    $AutomountServiceAccountToken(x: boolean) {
         this.automountServiceAccountToken = x; return this
     }
 
-    _containers: any;
-    get containers(): any /*Array<Container>*/ {
+    _containers: Array<Container>;
+    get containers(): Array<Container> {
         return this._containers
     }
-    set containers(x: any /*Array<Container>*/) {
+    set containers(x: Array<Container>) {
         this._containers = this.set(this.containers, x)
     }
-    setContainers(x: any /*Array<Container>*/) {
+    $Containers(x: Array<Container>) {
         this.containers = x; return this
     }
 
-    _dnsConfig: any;
-    get dnsConfig(): any /*PodDNSConfigHelper*/ {
+    _dnsConfig: PodDNSConfigHelper;
+    get dnsConfig(): PodDNSConfigHelper {
         return this._dnsConfig
     }
-    set dnsConfig(x: any /*PodDNSConfigHelper*/) {
+    set dnsConfig(x: PodDNSConfigHelper) {
         this._dnsConfig = x
     }
-    setDnsConfig(x: any /*PodDNSConfigHelper*/) {
+    $DnsConfig(x: PodDNSConfigHelper) {
         this.dnsConfig = x; return this
     }
 
-    _dnsPolicy: any;
-    get dnsPolicy(): any /*string*/ {
+    _dnsPolicy: string;
+    get dnsPolicy(): string {
         return this._dnsPolicy
     }
-    set dnsPolicy(x: any /*string*/) {
+    set dnsPolicy(x: string) {
         this._dnsPolicy = x
     }
-    setDnsPolicy(x: any /*string*/) {
+    $DnsPolicy(x: string) {
         this.dnsPolicy = x; return this
     }
 
-    _enableServiceLinks: any;
-    get enableServiceLinks(): any /*boolean*/ {
+    _enableServiceLinks: boolean;
+    get enableServiceLinks(): boolean {
         return this._enableServiceLinks
     }
-    set enableServiceLinks(x: any /*boolean*/) {
+    set enableServiceLinks(x: boolean) {
         this._enableServiceLinks = x
     }
-    setEnableServiceLinks(x: any /*boolean*/) {
+    $EnableServiceLinks(x: boolean) {
         this.enableServiceLinks = x; return this
     }
 
-    _ephemeralContainers: any;
-    get ephemeralContainers(): any /*Array<EphemeralContainer>*/ {
+    _ephemeralContainers: Array<EphemeralContainer>;
+    get ephemeralContainers(): Array<EphemeralContainer> {
         return this._ephemeralContainers
     }
-    set ephemeralContainers(x: any /*Array<EphemeralContainer>*/) {
+    set ephemeralContainers(x: Array<EphemeralContainer>) {
         this._ephemeralContainers = this.set(this.ephemeralContainers, x)
     }
-    setEphemeralContainers(x: any /*Array<EphemeralContainer>*/) {
+    $EphemeralContainers(x: Array<EphemeralContainer>) {
         this.ephemeralContainers = x; return this
     }
 
-    _hostAliases: any;
-    get hostAliases(): any /*Array<HostAlias>*/ {
+    _hostAliases: Array<HostAlias>;
+    get hostAliases(): Array<HostAlias> {
         return this._hostAliases
     }
-    set hostAliases(x: any /*Array<HostAlias>*/) {
+    set hostAliases(x: Array<HostAlias>) {
         this._hostAliases = this.set(this.hostAliases, x)
     }
-    setHostAliases(x: any /*Array<HostAlias>*/) {
+    $HostAliases(x: Array<HostAlias>) {
         this.hostAliases = x; return this
     }
 
-    _hostIPC: any;
-    get hostIPC(): any /*boolean*/ {
+    _hostIPC: boolean;
+    get hostIPC(): boolean {
         return this._hostIPC
     }
-    set hostIPC(x: any /*boolean*/) {
+    set hostIPC(x: boolean) {
         this._hostIPC = x
     }
-    setHostIPC(x: any /*boolean*/) {
+    $HostIPC(x: boolean) {
         this.hostIPC = x; return this
     }
 
-    _hostNetwork: any;
-    get hostNetwork(): any /*boolean*/ {
+    _hostNetwork: boolean;
+    get hostNetwork(): boolean {
         return this._hostNetwork
     }
-    set hostNetwork(x: any /*boolean*/) {
+    set hostNetwork(x: boolean) {
         this._hostNetwork = x
     }
-    setHostNetwork(x: any /*boolean*/) {
+    $HostNetwork(x: boolean) {
         this.hostNetwork = x; return this
     }
 
-    _hostPID: any;
-    get hostPID(): any /*boolean*/ {
+    _hostPID: boolean;
+    get hostPID(): boolean {
         return this._hostPID
     }
-    set hostPID(x: any /*boolean*/) {
+    set hostPID(x: boolean) {
         this._hostPID = x
     }
-    setHostPID(x: any /*boolean*/) {
+    $HostPID(x: boolean) {
         this.hostPID = x; return this
     }
 
-    _hostname: any;
-    get hostname(): any /*string*/ {
+    _hostname: string;
+    get hostname(): string {
         return this._hostname
     }
-    set hostname(x: any /*string*/) {
+    set hostname(x: string) {
         this._hostname = x
     }
-    setHostname(x: any /*string*/) {
+    $Hostname(x: string) {
         this.hostname = x; return this
     }
 
-    _imagePullSecrets: any;
-    get imagePullSecrets(): any /*Array<LocalObjectReference>*/ {
+    _imagePullSecrets: Array<LocalObjectReference>;
+    get imagePullSecrets(): Array<LocalObjectReference> {
         return this._imagePullSecrets
     }
-    set imagePullSecrets(x: any /*Array<LocalObjectReference>*/) {
+    set imagePullSecrets(x: Array<LocalObjectReference>) {
         this._imagePullSecrets = this.set(this.imagePullSecrets, x)
     }
-    setImagePullSecrets(x: any /*Array<LocalObjectReference>*/) {
+    $ImagePullSecrets(x: Array<LocalObjectReference>) {
         this.imagePullSecrets = x; return this
     }
 
-    _initContainers: any;
-    get initContainers(): any /*Array<Container>*/ {
+    _initContainers: Array<Container>;
+    get initContainers(): Array<Container> {
         return this._initContainers
     }
-    set initContainers(x: any /*Array<Container>*/) {
+    set initContainers(x: Array<Container>) {
         this._initContainers = this.set(this.initContainers, x)
     }
-    setInitContainers(x: any /*Array<Container>*/) {
+    $InitContainers(x: Array<Container>) {
         this.initContainers = x; return this
     }
 
-    _nodeName: any;
-    get nodeName(): any /*string*/ {
+    _nodeName: string;
+    get nodeName(): string {
         return this._nodeName
     }
-    set nodeName(x: any /*string*/) {
+    set nodeName(x: string) {
         this._nodeName = x
     }
-    setNodeName(x: any /*string*/) {
+    $NodeName(x: string) {
         this.nodeName = x; return this
     }
 
     _nodeSelector: any;
-    get nodeSelector(): any /*any*/ {
+    get nodeSelector(): any {
         return this._nodeSelector
     }
-    set nodeSelector(x: any /*any*/) {
+    set nodeSelector(x: any) {
         this._nodeSelector = this.set(this.nodeSelector, x)
     }
-    setNodeSelector(x: any /*any*/) {
+    $NodeSelector(x: any) {
         this.nodeSelector = x; return this
     }
 
-    _overhead: any;
-    get overhead(): any /*{[name: string]: Quantity}Helper*/ {
+    _overhead: {[name: string]: Quantity};
+    get overhead(): {[name: string]: Quantity} {
         return this._overhead
     }
-    set overhead(x: any /*{[name: string]: Quantity}Helper*/) {
+    set overhead(x: {[name: string]: Quantity}) {
         this._overhead = this.set(this.overhead, x)
     }
-    setOverhead(x: any /*{[name: string]: Quantity}Helper*/) {
+    $Overhead(x: {[name: string]: Quantity}) {
         this.overhead = x; return this
     }
 
-    _preemptionPolicy: any;
-    get preemptionPolicy(): any /*string*/ {
+    _preemptionPolicy: string;
+    get preemptionPolicy(): string {
         return this._preemptionPolicy
     }
-    set preemptionPolicy(x: any /*string*/) {
+    set preemptionPolicy(x: string) {
         this._preemptionPolicy = x
     }
-    setPreemptionPolicy(x: any /*string*/) {
+    $PreemptionPolicy(x: string) {
         this.preemptionPolicy = x; return this
     }
 
-    _priority: any;
-    get priority(): any /*number*/ {
+    _priority: number;
+    get priority(): number {
         return this._priority
     }
-    set priority(x: any /*number*/) {
+    set priority(x: number) {
         this._priority = x
     }
-    setPriority(x: any /*number*/) {
+    $Priority(x: number) {
         this.priority = x; return this
     }
 
-    _priorityClassName: any;
-    get priorityClassName(): any /*string*/ {
+    _priorityClassName: string;
+    get priorityClassName(): string {
         return this._priorityClassName
     }
-    set priorityClassName(x: any /*string*/) {
+    set priorityClassName(x: string) {
         this._priorityClassName = x
     }
-    setPriorityClassName(x: any /*string*/) {
+    $PriorityClassName(x: string) {
         this.priorityClassName = x; return this
     }
 
-    _readinessGates: any;
-    get readinessGates(): any /*Array<PodReadinessGate>*/ {
+    _readinessGates: Array<PodReadinessGate>;
+    get readinessGates(): Array<PodReadinessGate> {
         return this._readinessGates
     }
-    set readinessGates(x: any /*Array<PodReadinessGate>*/) {
+    set readinessGates(x: Array<PodReadinessGate>) {
         this._readinessGates = this.set(this.readinessGates, x)
     }
-    setReadinessGates(x: any /*Array<PodReadinessGate>*/) {
+    $ReadinessGates(x: Array<PodReadinessGate>) {
         this.readinessGates = x; return this
     }
 
-    _restartPolicy: any;
-    get restartPolicy(): any /*string*/ {
+    _restartPolicy: string;
+    get restartPolicy(): string {
         return this._restartPolicy
     }
-    set restartPolicy(x: any /*string*/) {
+    set restartPolicy(x: string) {
         this._restartPolicy = x
     }
-    setRestartPolicy(x: any /*string*/) {
+    $RestartPolicy(x: string) {
         this.restartPolicy = x; return this
     }
 
-    _runtimeClassName: any;
-    get runtimeClassName(): any /*string*/ {
+    _runtimeClassName: string;
+    get runtimeClassName(): string {
         return this._runtimeClassName
     }
-    set runtimeClassName(x: any /*string*/) {
+    set runtimeClassName(x: string) {
         this._runtimeClassName = x
     }
-    setRuntimeClassName(x: any /*string*/) {
+    $RuntimeClassName(x: string) {
         this.runtimeClassName = x; return this
     }
 
-    _schedulerName: any;
-    get schedulerName(): any /*string*/ {
+    _schedulerName: string;
+    get schedulerName(): string {
         return this._schedulerName
     }
-    set schedulerName(x: any /*string*/) {
+    set schedulerName(x: string) {
         this._schedulerName = x
     }
-    setSchedulerName(x: any /*string*/) {
+    $SchedulerName(x: string) {
         this.schedulerName = x; return this
     }
 
-    _securityContext: any;
-    get securityContext(): any /*PodSecurityContextHelper*/ {
+    _securityContext: PodSecurityContextHelper;
+    get securityContext(): PodSecurityContextHelper {
         return this._securityContext
     }
-    set securityContext(x: any /*PodSecurityContextHelper*/) {
+    set securityContext(x: PodSecurityContextHelper) {
         this._securityContext = x
     }
-    setSecurityContext(x: any /*PodSecurityContextHelper*/) {
+    $SecurityContext(x: PodSecurityContextHelper) {
         this.securityContext = x; return this
     }
 
-    _serviceAccount: any;
-    get serviceAccount(): any /*string*/ {
+    _serviceAccount: string;
+    get serviceAccount(): string {
         return this._serviceAccount
     }
-    set serviceAccount(x: any /*string*/) {
+    set serviceAccount(x: string) {
         this._serviceAccount = x
     }
-    setServiceAccount(x: any /*string*/) {
+    $ServiceAccount(x: string) {
         this.serviceAccount = x; return this
     }
 
-    _serviceAccountName: any;
-    get serviceAccountName(): any /*string*/ {
+    _serviceAccountName: string;
+    get serviceAccountName(): string {
         return this._serviceAccountName
     }
-    set serviceAccountName(x: any /*string*/) {
+    set serviceAccountName(x: string) {
         this._serviceAccountName = x
     }
-    setServiceAccountName(x: any /*string*/) {
+    $ServiceAccountName(x: string) {
         this.serviceAccountName = x; return this
     }
 
-    _setHostnameAsFQDN: any;
-    get setHostnameAsFQDN(): any /*boolean*/ {
+    _setHostnameAsFQDN: boolean;
+    get setHostnameAsFQDN(): boolean {
         return this._setHostnameAsFQDN
     }
-    set setHostnameAsFQDN(x: any /*boolean*/) {
+    set setHostnameAsFQDN(x: boolean) {
         this._setHostnameAsFQDN = x
     }
-    setSetHostnameAsFQDN(x: any /*boolean*/) {
+    $SetHostnameAsFQDN(x: boolean) {
         this.setHostnameAsFQDN = x; return this
     }
 
-    _shareProcessNamespace: any;
-    get shareProcessNamespace(): any /*boolean*/ {
+    _shareProcessNamespace: boolean;
+    get shareProcessNamespace(): boolean {
         return this._shareProcessNamespace
     }
-    set shareProcessNamespace(x: any /*boolean*/) {
+    set shareProcessNamespace(x: boolean) {
         this._shareProcessNamespace = x
     }
-    setShareProcessNamespace(x: any /*boolean*/) {
+    $ShareProcessNamespace(x: boolean) {
         this.shareProcessNamespace = x; return this
     }
 
-    _subdomain: any;
-    get subdomain(): any /*string*/ {
+    _subdomain: string;
+    get subdomain(): string {
         return this._subdomain
     }
-    set subdomain(x: any /*string*/) {
+    set subdomain(x: string) {
         this._subdomain = x
     }
-    setSubdomain(x: any /*string*/) {
+    $Subdomain(x: string) {
         this.subdomain = x; return this
     }
 
-    _terminationGracePeriodSeconds: any;
-    get terminationGracePeriodSeconds(): any /*number*/ {
+    _terminationGracePeriodSeconds: number;
+    get terminationGracePeriodSeconds(): number {
         return this._terminationGracePeriodSeconds
     }
-    set terminationGracePeriodSeconds(x: any /*number*/) {
+    set terminationGracePeriodSeconds(x: number) {
         this._terminationGracePeriodSeconds = x
     }
-    setTerminationGracePeriodSeconds(x: any /*number*/) {
+    $TerminationGracePeriodSeconds(x: number) {
         this.terminationGracePeriodSeconds = x; return this
     }
 
-    _tolerations: any;
-    get tolerations(): any /*Array<Toleration>*/ {
+    _tolerations: Array<Toleration>;
+    get tolerations(): Array<Toleration> {
         return this._tolerations
     }
-    set tolerations(x: any /*Array<Toleration>*/) {
+    set tolerations(x: Array<Toleration>) {
         this._tolerations = this.set(this.tolerations, x)
     }
-    setTolerations(x: any /*Array<Toleration>*/) {
+    $Tolerations(x: Array<Toleration>) {
         this.tolerations = x; return this
     }
 
-    _topologySpreadConstraints: any;
-    get topologySpreadConstraints(): any /*Array<TopologySpreadConstraint>*/ {
+    _topologySpreadConstraints: Array<TopologySpreadConstraint>;
+    get topologySpreadConstraints(): Array<TopologySpreadConstraint> {
         return this._topologySpreadConstraints
     }
-    set topologySpreadConstraints(x: any /*Array<TopologySpreadConstraint>*/) {
+    set topologySpreadConstraints(x: Array<TopologySpreadConstraint>) {
         this._topologySpreadConstraints = this.set(this.topologySpreadConstraints, x)
     }
-    setTopologySpreadConstraints(x: any /*Array<TopologySpreadConstraint>*/) {
+    $TopologySpreadConstraints(x: Array<TopologySpreadConstraint>) {
         this.topologySpreadConstraints = x; return this
     }
 
-    _volumes: any;
-    get volumes(): any /*Array<Volume>*/ {
+    _volumes: Array<Volume>;
+    get volumes(): Array<Volume> {
         return this._volumes
     }
-    set volumes(x: any /*Array<Volume>*/) {
+    set volumes(x: Array<Volume>) {
         this._volumes = this.set(this.volumes, x)
     }
-    setVolumes(x: any /*Array<Volume>*/) {
+    $Volumes(x: Array<Volume>) {
         this.volumes = x; return this
     }
 }
 
 export interface PodStatusHelper extends PodStatus {
-    $conditions(x: any): any;
-    $containerStatuses(x: any): any;
-    $ephemeralContainerStatuses(x: any): any;
-    $hostIP(x: any): any;
-    $initContainerStatuses(x: any): any;
-    $message(x: any): any;
-    $nominatedNodeName(x: any): any;
-    $phase(x: any): any;
-    $podIP(x: any): any;
-    $podIPs(x: any): any;
-    $qosClass(x: any): any;
-    $reason(x: any): any;
-    $startTime(x: any): any;
+    $conditions(x: Array<PodCondition>): PodStatusHelper;
+    $containerStatuses(x: Array<ContainerStatus>): PodStatusHelper;
+    $ephemeralContainerStatuses(x: Array<ContainerStatus>): PodStatusHelper;
+    $hostIP(x: string): PodStatusHelper;
+    $initContainerStatuses(x: Array<ContainerStatus>): PodStatusHelper;
+    $message(x: string): PodStatusHelper;
+    $nominatedNodeName(x: string): PodStatusHelper;
+    $phase(x: string): PodStatusHelper;
+    $podIP(x: string): PodStatusHelper;
+    $podIPs(x: Array<PodIP>): PodStatusHelper;
+    $qosClass(x: string): PodStatusHelper;
+    $reason(x: string): PodStatusHelper;
+    $startTime(x: Time): PodStatusHelper;
 }
 
 /** PodStatus represents information about the status of a pod. Status may trail the actual state of a system, especially if the node that hosts the pod cannot contact the control plane. */
@@ -7522,153 +7657,155 @@ export class PodStatusHelper extends Template implements PodStatusHelper {
         super(obj)
     }
 
-    _conditions: any;
-    get conditions(): any /*Array<PodCondition>*/ {
+    _conditions: Array<PodCondition>;
+    get conditions(): Array<PodCondition> {
         return this._conditions
     }
-    set conditions(x: any /*Array<PodCondition>*/) {
+    set conditions(x: Array<PodCondition>) {
         this._conditions = this.set(this.conditions, x)
     }
-    setConditions(x: any /*Array<PodCondition>*/) {
+    $Conditions(x: Array<PodCondition>) {
         this.conditions = x; return this
     }
 
-    _containerStatuses: any;
-    get containerStatuses(): any /*Array<ContainerStatus>*/ {
+    _containerStatuses: Array<ContainerStatus>;
+    get containerStatuses(): Array<ContainerStatus> {
         return this._containerStatuses
     }
-    set containerStatuses(x: any /*Array<ContainerStatus>*/) {
+    set containerStatuses(x: Array<ContainerStatus>) {
         this._containerStatuses = this.set(this.containerStatuses, x)
     }
-    setContainerStatuses(x: any /*Array<ContainerStatus>*/) {
+    $ContainerStatuses(x: Array<ContainerStatus>) {
         this.containerStatuses = x; return this
     }
 
-    _ephemeralContainerStatuses: any;
-    get ephemeralContainerStatuses(): any /*Array<ContainerStatus>*/ {
+    _ephemeralContainerStatuses: Array<ContainerStatus>;
+    get ephemeralContainerStatuses(): Array<ContainerStatus> {
         return this._ephemeralContainerStatuses
     }
-    set ephemeralContainerStatuses(x: any /*Array<ContainerStatus>*/) {
+    set ephemeralContainerStatuses(x: Array<ContainerStatus>) {
         this._ephemeralContainerStatuses = this.set(this.ephemeralContainerStatuses, x)
     }
-    setEphemeralContainerStatuses(x: any /*Array<ContainerStatus>*/) {
+    $EphemeralContainerStatuses(x: Array<ContainerStatus>) {
         this.ephemeralContainerStatuses = x; return this
     }
 
-    _hostIP: any;
-    get hostIP(): any /*string*/ {
+    _hostIP: string;
+    get hostIP(): string {
         return this._hostIP
     }
-    set hostIP(x: any /*string*/) {
+    set hostIP(x: string) {
         this._hostIP = x
     }
-    setHostIP(x: any /*string*/) {
+    $HostIP(x: string) {
         this.hostIP = x; return this
     }
 
-    _initContainerStatuses: any;
-    get initContainerStatuses(): any /*Array<ContainerStatus>*/ {
+    _initContainerStatuses: Array<ContainerStatus>;
+    get initContainerStatuses(): Array<ContainerStatus> {
         return this._initContainerStatuses
     }
-    set initContainerStatuses(x: any /*Array<ContainerStatus>*/) {
+    set initContainerStatuses(x: Array<ContainerStatus>) {
         this._initContainerStatuses = this.set(this.initContainerStatuses, x)
     }
-    setInitContainerStatuses(x: any /*Array<ContainerStatus>*/) {
+    $InitContainerStatuses(x: Array<ContainerStatus>) {
         this.initContainerStatuses = x; return this
     }
 
-    _message: any;
-    get message(): any /*string*/ {
+    _message: string;
+    get message(): string {
         return this._message
     }
-    set message(x: any /*string*/) {
+    set message(x: string) {
         this._message = x
     }
-    setMessage(x: any /*string*/) {
+    $Message(x: string) {
         this.message = x; return this
     }
 
-    _nominatedNodeName: any;
-    get nominatedNodeName(): any /*string*/ {
+    _nominatedNodeName: string;
+    get nominatedNodeName(): string {
         return this._nominatedNodeName
     }
-    set nominatedNodeName(x: any /*string*/) {
+    set nominatedNodeName(x: string) {
         this._nominatedNodeName = x
     }
-    setNominatedNodeName(x: any /*string*/) {
+    $NominatedNodeName(x: string) {
         this.nominatedNodeName = x; return this
     }
 
-    _phase: any;
-    get phase(): any /*string*/ {
+    _phase: string;
+    get phase(): string {
         return this._phase
     }
-    set phase(x: any /*string*/) {
+    set phase(x: string) {
         this._phase = x
     }
-    setPhase(x: any /*string*/) {
+    $Phase(x: string) {
         this.phase = x; return this
     }
 
-    _podIP: any;
-    get podIP(): any /*string*/ {
+    _podIP: string;
+    get podIP(): string {
         return this._podIP
     }
-    set podIP(x: any /*string*/) {
+    set podIP(x: string) {
         this._podIP = x
     }
-    setPodIP(x: any /*string*/) {
+    $PodIP(x: string) {
         this.podIP = x; return this
     }
 
-    _podIPs: any;
-    get podIPs(): any /*Array<PodIP>*/ {
+    _podIPs: Array<PodIP>;
+    get podIPs(): Array<PodIP> {
         return this._podIPs
     }
-    set podIPs(x: any /*Array<PodIP>*/) {
+    set podIPs(x: Array<PodIP>) {
         this._podIPs = this.set(this.podIPs, x)
     }
-    setPodIPs(x: any /*Array<PodIP>*/) {
+    $PodIPs(x: Array<PodIP>) {
         this.podIPs = x; return this
     }
 
-    _qosClass: any;
-    get qosClass(): any /*string*/ {
+    _qosClass: string;
+    get qosClass(): string {
         return this._qosClass
     }
-    set qosClass(x: any /*string*/) {
+    set qosClass(x: string) {
         this._qosClass = x
     }
-    setQosClass(x: any /*string*/) {
+    $QosClass(x: string) {
         this.qosClass = x; return this
     }
 
-    _reason: any;
-    get reason(): any /*string*/ {
+    _reason: string;
+    get reason(): string {
         return this._reason
     }
-    set reason(x: any /*string*/) {
+    set reason(x: string) {
         this._reason = x
     }
-    setReason(x: any /*string*/) {
+    $Reason(x: string) {
         this.reason = x; return this
     }
 
-    _startTime: any;
-    get startTime(): any /*Time*/ {
+    _startTime: Time;
+    get startTime(): Time {
         return this._startTime
     }
-    set startTime(x: any /*Time*/) {
+    set startTime(x: Time) {
         this._startTime = x
     }
-    setStartTime(x: any /*Time*/) {
+    $StartTime(x: Time) {
         this.startTime = x; return this
     }
 }
 
 export interface PodTemplateHelper extends PodTemplate {
-    $metadata(x: any): any;
-    $template(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): PodTemplateHelper;
+    template: PodTemplateSpecHelper;
+    $template(x: PodTemplateSpecHelper): PodTemplateHelper;
 }
 
 /** PodTemplate describes a template for creating copies of a predefined pod. */
@@ -7680,32 +7817,33 @@ export class PodTemplateHelper extends ResourceTemplate implements PodTemplateHe
         super(nameOrObject, namespace, PodTemplateHelper.kind, PodTemplateHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _template: any;
-    get template(): any /*PodTemplateSpecHelper*/ {
+    _template: PodTemplateSpecHelper;
+    get template(): PodTemplateSpecHelper {
         return this._template
     }
-    set template(x: any /*PodTemplateSpecHelper*/) {
+    set template(x: PodTemplateSpecHelper) {
         this._template = x
     }
-    setTemplate(x: any /*PodTemplateSpecHelper*/) {
+    $Template(x: PodTemplateSpecHelper) {
         this.template = x; return this
     }
 }
 
 export interface PodTemplateListHelper extends PodTemplateList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<PodTemplate>): PodTemplateListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): PodTemplateListHelper;
 }
 
 /** PodTemplateList is a list of PodTemplates. */
@@ -7717,32 +7855,34 @@ export class PodTemplateListHelper extends ResourceTemplate implements PodTempla
         super(nameOrObject, namespace, PodTemplateListHelper.kind, PodTemplateListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<PodTemplate>*/ {
+    _items: Array<PodTemplate>;
+    get items(): Array<PodTemplate> {
         return this._items
     }
-    set items(x: any /*Array<PodTemplate>*/) {
+    set items(x: Array<PodTemplate>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<PodTemplate>*/) {
+    $Items(x: Array<PodTemplate>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface PodTemplateSpecHelper extends PodTemplateSpec {
-    $metadata(x: any): any;
-    $spec(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): PodTemplateSpecHelper;
+    spec: PodSpecHelper;
+    $spec(x: PodSpecHelper): PodTemplateSpecHelper;
 }
 
 /** PodTemplateSpec describes the data a pod should have when created from a template */
@@ -7751,33 +7891,33 @@ export class PodTemplateSpecHelper extends Template implements PodTemplateSpecHe
         super(obj)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*PodSpecHelper*/ {
+    _spec: PodSpecHelper;
+    get spec(): PodSpecHelper {
         return this._spec
     }
-    set spec(x: any /*PodSpecHelper*/) {
+    set spec(x: PodSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*PodSpecHelper*/) {
+    $Spec(x: PodSpecHelper) {
         this.spec = x; return this
     }
 }
 
 export interface PortStatusHelper extends PortStatus {
-    $error(x: any): any;
-    $port(x: any): any;
-    $protocol(x: any): any;
+    $error(x: string): PortStatusHelper;
+    $port(x: number): PortStatusHelper;
+    $protocol(x: string): PortStatusHelper;
 }
 
 export class PortStatusHelper extends Template implements PortStatusHelper {
@@ -7785,44 +7925,44 @@ export class PortStatusHelper extends Template implements PortStatusHelper {
         super(obj)
     }
 
-    _error: any;
-    get error(): any /*string*/ {
+    _error: string;
+    get error(): string {
         return this._error
     }
-    set error(x: any /*string*/) {
+    set error(x: string) {
         this._error = x
     }
-    setError(x: any /*string*/) {
+    $Error(x: string) {
         this.error = x; return this
     }
 
-    _port: any;
-    get port(): any /*number*/ {
+    _port: number;
+    get port(): number {
         return this._port
     }
-    set port(x: any /*number*/) {
+    set port(x: number) {
         this._port = x
     }
-    setPort(x: any /*number*/) {
+    $Port(x: number) {
         this.port = x; return this
     }
 
-    _protocol: any;
-    get protocol(): any /*string*/ {
+    _protocol: string;
+    get protocol(): string {
         return this._protocol
     }
-    set protocol(x: any /*string*/) {
+    set protocol(x: string) {
         this._protocol = x
     }
-    setProtocol(x: any /*string*/) {
+    $Protocol(x: string) {
         this.protocol = x; return this
     }
 }
 
 export interface PortworxVolumeSourceHelper extends PortworxVolumeSource {
-    $fsType(x: any): any;
-    $readOnly(x: any): any;
-    $volumeID(x: any): any;
+    $fsType(x: string): PortworxVolumeSourceHelper;
+    $readOnly(x: boolean): PortworxVolumeSourceHelper;
+    $volumeID(x: string): PortworxVolumeSourceHelper;
 }
 
 /** PortworxVolumeSource represents a Portworx volume resource. */
@@ -7831,43 +7971,44 @@ export class PortworxVolumeSourceHelper extends Template implements PortworxVolu
         super(obj)
     }
 
-    _fsType: any;
-    get fsType(): any /*string*/ {
+    _fsType: string;
+    get fsType(): string {
         return this._fsType
     }
-    set fsType(x: any /*string*/) {
+    set fsType(x: string) {
         this._fsType = x
     }
-    setFsType(x: any /*string*/) {
+    $FsType(x: string) {
         this.fsType = x; return this
     }
 
-    _readOnly: any;
-    get readOnly(): any /*boolean*/ {
+    _readOnly: boolean;
+    get readOnly(): boolean {
         return this._readOnly
     }
-    set readOnly(x: any /*boolean*/) {
+    set readOnly(x: boolean) {
         this._readOnly = x
     }
-    setReadOnly(x: any /*boolean*/) {
+    $ReadOnly(x: boolean) {
         this.readOnly = x; return this
     }
 
-    _volumeID: any;
-    get volumeID(): any /*string*/ {
+    _volumeID: string;
+    get volumeID(): string {
         return this._volumeID
     }
-    set volumeID(x: any /*string*/) {
+    set volumeID(x: string) {
         this._volumeID = x
     }
-    setVolumeID(x: any /*string*/) {
+    $VolumeID(x: string) {
         this.volumeID = x; return this
     }
 }
 
 export interface PreferredSchedulingTermHelper extends PreferredSchedulingTerm {
-    $preference(x: any): any;
-    $weight(x: any): any;
+    preference: NodeSelectorTermHelper;
+    $preference(x: NodeSelectorTermHelper): PreferredSchedulingTermHelper;
+    $weight(x: number): PreferredSchedulingTermHelper;
 }
 
 /** An empty preferred scheduling term matches all objects with implicit weight 0 (i.e. it's a no-op). A null preferred scheduling term matches no objects (i.e. is also a no-op). */
@@ -7876,39 +8017,42 @@ export class PreferredSchedulingTermHelper extends Template implements Preferred
         super(obj)
     }
 
-    _preference: any;
-    get preference(): any /*NodeSelectorTermHelper*/ {
+    _preference: NodeSelectorTermHelper;
+    get preference(): NodeSelectorTermHelper {
         return this._preference
     }
-    set preference(x: any /*NodeSelectorTermHelper*/) {
+    set preference(x: NodeSelectorTermHelper) {
         this._preference = x
     }
-    setPreference(x: any /*NodeSelectorTermHelper*/) {
+    $Preference(x: NodeSelectorTermHelper) {
         this.preference = x; return this
     }
 
-    _weight: any;
-    get weight(): any /*number*/ {
+    _weight: number;
+    get weight(): number {
         return this._weight
     }
-    set weight(x: any /*number*/) {
+    set weight(x: number) {
         this._weight = x
     }
-    setWeight(x: any /*number*/) {
+    $Weight(x: number) {
         this.weight = x; return this
     }
 }
 
 export interface ProbeHelper extends Probe {
-    $exec(x: any): any;
-    $failureThreshold(x: any): any;
-    $httpGet(x: any): any;
-    $initialDelaySeconds(x: any): any;
-    $periodSeconds(x: any): any;
-    $successThreshold(x: any): any;
-    $tcpSocket(x: any): any;
-    $terminationGracePeriodSeconds(x: any): any;
-    $timeoutSeconds(x: any): any;
+    exec: ExecActionHelper;
+    $exec(x: ExecActionHelper): ProbeHelper;
+    $failureThreshold(x: number): ProbeHelper;
+    httpGet: HTTPGetActionHelper;
+    $httpGet(x: HTTPGetActionHelper): ProbeHelper;
+    $initialDelaySeconds(x: number): ProbeHelper;
+    $periodSeconds(x: number): ProbeHelper;
+    $successThreshold(x: number): ProbeHelper;
+    tcpSocket: TCPSocketActionHelper;
+    $tcpSocket(x: TCPSocketActionHelper): ProbeHelper;
+    $terminationGracePeriodSeconds(x: number): ProbeHelper;
+    $timeoutSeconds(x: number): ProbeHelper;
 }
 
 /** Probe describes a health check to be performed against a container to determine whether it is alive or ready to receive traffic. */
@@ -7917,109 +8061,109 @@ export class ProbeHelper extends Template implements ProbeHelper {
         super(obj)
     }
 
-    _exec: any;
-    get exec(): any /*ExecActionHelper*/ {
+    _exec: ExecActionHelper;
+    get exec(): ExecActionHelper {
         return this._exec
     }
-    set exec(x: any /*ExecActionHelper*/) {
+    set exec(x: ExecActionHelper) {
         this._exec = x
     }
-    setExec(x: any /*ExecActionHelper*/) {
+    $Exec(x: ExecActionHelper) {
         this.exec = x; return this
     }
 
-    _failureThreshold: any;
-    get failureThreshold(): any /*number*/ {
+    _failureThreshold: number;
+    get failureThreshold(): number {
         return this._failureThreshold
     }
-    set failureThreshold(x: any /*number*/) {
+    set failureThreshold(x: number) {
         this._failureThreshold = x
     }
-    setFailureThreshold(x: any /*number*/) {
+    $FailureThreshold(x: number) {
         this.failureThreshold = x; return this
     }
 
-    _httpGet: any;
-    get httpGet(): any /*HTTPGetActionHelper*/ {
+    _httpGet: HTTPGetActionHelper;
+    get httpGet(): HTTPGetActionHelper {
         return this._httpGet
     }
-    set httpGet(x: any /*HTTPGetActionHelper*/) {
+    set httpGet(x: HTTPGetActionHelper) {
         this._httpGet = x
     }
-    setHttpGet(x: any /*HTTPGetActionHelper*/) {
+    $HttpGet(x: HTTPGetActionHelper) {
         this.httpGet = x; return this
     }
 
-    _initialDelaySeconds: any;
-    get initialDelaySeconds(): any /*number*/ {
+    _initialDelaySeconds: number;
+    get initialDelaySeconds(): number {
         return this._initialDelaySeconds
     }
-    set initialDelaySeconds(x: any /*number*/) {
+    set initialDelaySeconds(x: number) {
         this._initialDelaySeconds = x
     }
-    setInitialDelaySeconds(x: any /*number*/) {
+    $InitialDelaySeconds(x: number) {
         this.initialDelaySeconds = x; return this
     }
 
-    _periodSeconds: any;
-    get periodSeconds(): any /*number*/ {
+    _periodSeconds: number;
+    get periodSeconds(): number {
         return this._periodSeconds
     }
-    set periodSeconds(x: any /*number*/) {
+    set periodSeconds(x: number) {
         this._periodSeconds = x
     }
-    setPeriodSeconds(x: any /*number*/) {
+    $PeriodSeconds(x: number) {
         this.periodSeconds = x; return this
     }
 
-    _successThreshold: any;
-    get successThreshold(): any /*number*/ {
+    _successThreshold: number;
+    get successThreshold(): number {
         return this._successThreshold
     }
-    set successThreshold(x: any /*number*/) {
+    set successThreshold(x: number) {
         this._successThreshold = x
     }
-    setSuccessThreshold(x: any /*number*/) {
+    $SuccessThreshold(x: number) {
         this.successThreshold = x; return this
     }
 
-    _tcpSocket: any;
-    get tcpSocket(): any /*TCPSocketActionHelper*/ {
+    _tcpSocket: TCPSocketActionHelper;
+    get tcpSocket(): TCPSocketActionHelper {
         return this._tcpSocket
     }
-    set tcpSocket(x: any /*TCPSocketActionHelper*/) {
+    set tcpSocket(x: TCPSocketActionHelper) {
         this._tcpSocket = x
     }
-    setTcpSocket(x: any /*TCPSocketActionHelper*/) {
+    $TcpSocket(x: TCPSocketActionHelper) {
         this.tcpSocket = x; return this
     }
 
-    _terminationGracePeriodSeconds: any;
-    get terminationGracePeriodSeconds(): any /*number*/ {
+    _terminationGracePeriodSeconds: number;
+    get terminationGracePeriodSeconds(): number {
         return this._terminationGracePeriodSeconds
     }
-    set terminationGracePeriodSeconds(x: any /*number*/) {
+    set terminationGracePeriodSeconds(x: number) {
         this._terminationGracePeriodSeconds = x
     }
-    setTerminationGracePeriodSeconds(x: any /*number*/) {
+    $TerminationGracePeriodSeconds(x: number) {
         this.terminationGracePeriodSeconds = x; return this
     }
 
-    _timeoutSeconds: any;
-    get timeoutSeconds(): any /*number*/ {
+    _timeoutSeconds: number;
+    get timeoutSeconds(): number {
         return this._timeoutSeconds
     }
-    set timeoutSeconds(x: any /*number*/) {
+    set timeoutSeconds(x: number) {
         this._timeoutSeconds = x
     }
-    setTimeoutSeconds(x: any /*number*/) {
+    $TimeoutSeconds(x: number) {
         this.timeoutSeconds = x; return this
     }
 }
 
 export interface ProjectedVolumeSourceHelper extends ProjectedVolumeSource {
-    $defaultMode(x: any): any;
-    $sources(x: any): any;
+    $defaultMode(x: number): ProjectedVolumeSourceHelper;
+    $sources(x: Array<VolumeProjection>): ProjectedVolumeSourceHelper;
 }
 
 /** Represents a projected volume source */
@@ -8028,36 +8172,36 @@ export class ProjectedVolumeSourceHelper extends Template implements ProjectedVo
         super(obj)
     }
 
-    _defaultMode: any;
-    get defaultMode(): any /*number*/ {
+    _defaultMode: number;
+    get defaultMode(): number {
         return this._defaultMode
     }
-    set defaultMode(x: any /*number*/) {
+    set defaultMode(x: number) {
         this._defaultMode = x
     }
-    setDefaultMode(x: any /*number*/) {
+    $DefaultMode(x: number) {
         this.defaultMode = x; return this
     }
 
-    _sources: any;
-    get sources(): any /*Array<VolumeProjection>*/ {
+    _sources: Array<VolumeProjection>;
+    get sources(): Array<VolumeProjection> {
         return this._sources
     }
-    set sources(x: any /*Array<VolumeProjection>*/) {
+    set sources(x: Array<VolumeProjection>) {
         this._sources = this.set(this.sources, x)
     }
-    setSources(x: any /*Array<VolumeProjection>*/) {
+    $Sources(x: Array<VolumeProjection>) {
         this.sources = x; return this
     }
 }
 
 export interface QuobyteVolumeSourceHelper extends QuobyteVolumeSource {
-    $group(x: any): any;
-    $readOnly(x: any): any;
-    $registry(x: any): any;
-    $tenant(x: any): any;
-    $user(x: any): any;
-    $volume(x: any): any;
+    $group(x: string): QuobyteVolumeSourceHelper;
+    $readOnly(x: boolean): QuobyteVolumeSourceHelper;
+    $registry(x: string): QuobyteVolumeSourceHelper;
+    $tenant(x: string): QuobyteVolumeSourceHelper;
+    $user(x: string): QuobyteVolumeSourceHelper;
+    $volume(x: string): QuobyteVolumeSourceHelper;
 }
 
 /** Represents a Quobyte mount that lasts the lifetime of a pod. Quobyte volumes do not support ownership management or SELinux relabeling. */
@@ -8066,82 +8210,83 @@ export class QuobyteVolumeSourceHelper extends Template implements QuobyteVolume
         super(obj)
     }
 
-    _group: any;
-    get group(): any /*string*/ {
+    _group: string;
+    get group(): string {
         return this._group
     }
-    set group(x: any /*string*/) {
+    set group(x: string) {
         this._group = x
     }
-    setGroup(x: any /*string*/) {
+    $Group(x: string) {
         this.group = x; return this
     }
 
-    _readOnly: any;
-    get readOnly(): any /*boolean*/ {
+    _readOnly: boolean;
+    get readOnly(): boolean {
         return this._readOnly
     }
-    set readOnly(x: any /*boolean*/) {
+    set readOnly(x: boolean) {
         this._readOnly = x
     }
-    setReadOnly(x: any /*boolean*/) {
+    $ReadOnly(x: boolean) {
         this.readOnly = x; return this
     }
 
-    _registry: any;
-    get registry(): any /*string*/ {
+    _registry: string;
+    get registry(): string {
         return this._registry
     }
-    set registry(x: any /*string*/) {
+    set registry(x: string) {
         this._registry = x
     }
-    setRegistry(x: any /*string*/) {
+    $Registry(x: string) {
         this.registry = x; return this
     }
 
-    _tenant: any;
-    get tenant(): any /*string*/ {
+    _tenant: string;
+    get tenant(): string {
         return this._tenant
     }
-    set tenant(x: any /*string*/) {
+    set tenant(x: string) {
         this._tenant = x
     }
-    setTenant(x: any /*string*/) {
+    $Tenant(x: string) {
         this.tenant = x; return this
     }
 
-    _user: any;
-    get user(): any /*string*/ {
+    _user: string;
+    get user(): string {
         return this._user
     }
-    set user(x: any /*string*/) {
+    set user(x: string) {
         this._user = x
     }
-    setUser(x: any /*string*/) {
+    $User(x: string) {
         this.user = x; return this
     }
 
-    _volume: any;
-    get volume(): any /*string*/ {
+    _volume: string;
+    get volume(): string {
         return this._volume
     }
-    set volume(x: any /*string*/) {
+    set volume(x: string) {
         this._volume = x
     }
-    setVolume(x: any /*string*/) {
+    $Volume(x: string) {
         this.volume = x; return this
     }
 }
 
 export interface RBDPersistentVolumeSourceHelper extends RBDPersistentVolumeSource {
-    $fsType(x: any): any;
-    $image(x: any): any;
-    $keyring(x: any): any;
-    $monitors(x: any): any;
-    $pool(x: any): any;
-    $readOnly(x: any): any;
-    $secretRef(x: any): any;
-    $user(x: any): any;
+    $fsType(x: string): RBDPersistentVolumeSourceHelper;
+    $image(x: string): RBDPersistentVolumeSourceHelper;
+    $keyring(x: string): RBDPersistentVolumeSourceHelper;
+    $monitors(x: Array<string>): RBDPersistentVolumeSourceHelper;
+    $pool(x: string): RBDPersistentVolumeSourceHelper;
+    $readOnly(x: boolean): RBDPersistentVolumeSourceHelper;
+    secretRef: SecretReferenceHelper;
+    $secretRef(x: SecretReferenceHelper): RBDPersistentVolumeSourceHelper;
+    $user(x: string): RBDPersistentVolumeSourceHelper;
 }
 
 /** Represents a Rados Block Device mount that lasts the lifetime of a pod. RBD volumes support ownership management and SELinux relabeling. */
@@ -8150,104 +8295,105 @@ export class RBDPersistentVolumeSourceHelper extends Template implements RBDPers
         super(obj)
     }
 
-    _fsType: any;
-    get fsType(): any /*string*/ {
+    _fsType: string;
+    get fsType(): string {
         return this._fsType
     }
-    set fsType(x: any /*string*/) {
+    set fsType(x: string) {
         this._fsType = x
     }
-    setFsType(x: any /*string*/) {
+    $FsType(x: string) {
         this.fsType = x; return this
     }
 
-    _image: any;
-    get image(): any /*string*/ {
+    _image: string;
+    get image(): string {
         return this._image
     }
-    set image(x: any /*string*/) {
+    set image(x: string) {
         this._image = x
     }
-    setImage(x: any /*string*/) {
+    $Image(x: string) {
         this.image = x; return this
     }
 
-    _keyring: any;
-    get keyring(): any /*string*/ {
+    _keyring: string;
+    get keyring(): string {
         return this._keyring
     }
-    set keyring(x: any /*string*/) {
+    set keyring(x: string) {
         this._keyring = x
     }
-    setKeyring(x: any /*string*/) {
+    $Keyring(x: string) {
         this.keyring = x; return this
     }
 
-    _monitors: any;
-    get monitors(): any /*Array<string>*/ {
+    _monitors: Array<string>;
+    get monitors(): Array<string> {
         return this._monitors
     }
-    set monitors(x: any /*Array<string>*/) {
+    set monitors(x: Array<string>) {
         this._monitors = this.set(this.monitors, x)
     }
-    setMonitors(x: any /*Array<string>*/) {
+    $Monitors(x: Array<string>) {
         this.monitors = x; return this
     }
 
-    _pool: any;
-    get pool(): any /*string*/ {
+    _pool: string;
+    get pool(): string {
         return this._pool
     }
-    set pool(x: any /*string*/) {
+    set pool(x: string) {
         this._pool = x
     }
-    setPool(x: any /*string*/) {
+    $Pool(x: string) {
         this.pool = x; return this
     }
 
-    _readOnly: any;
-    get readOnly(): any /*boolean*/ {
+    _readOnly: boolean;
+    get readOnly(): boolean {
         return this._readOnly
     }
-    set readOnly(x: any /*boolean*/) {
+    set readOnly(x: boolean) {
         this._readOnly = x
     }
-    setReadOnly(x: any /*boolean*/) {
+    $ReadOnly(x: boolean) {
         this.readOnly = x; return this
     }
 
-    _secretRef: any;
-    get secretRef(): any /*SecretReferenceHelper*/ {
+    _secretRef: SecretReferenceHelper;
+    get secretRef(): SecretReferenceHelper {
         return this._secretRef
     }
-    set secretRef(x: any /*SecretReferenceHelper*/) {
+    set secretRef(x: SecretReferenceHelper) {
         this._secretRef = x
     }
-    setSecretRef(x: any /*SecretReferenceHelper*/) {
+    $SecretRef(x: SecretReferenceHelper) {
         this.secretRef = x; return this
     }
 
-    _user: any;
-    get user(): any /*string*/ {
+    _user: string;
+    get user(): string {
         return this._user
     }
-    set user(x: any /*string*/) {
+    set user(x: string) {
         this._user = x
     }
-    setUser(x: any /*string*/) {
+    $User(x: string) {
         this.user = x; return this
     }
 }
 
 export interface RBDVolumeSourceHelper extends RBDVolumeSource {
-    $fsType(x: any): any;
-    $image(x: any): any;
-    $keyring(x: any): any;
-    $monitors(x: any): any;
-    $pool(x: any): any;
-    $readOnly(x: any): any;
-    $secretRef(x: any): any;
-    $user(x: any): any;
+    $fsType(x: string): RBDVolumeSourceHelper;
+    $image(x: string): RBDVolumeSourceHelper;
+    $keyring(x: string): RBDVolumeSourceHelper;
+    $monitors(x: Array<string>): RBDVolumeSourceHelper;
+    $pool(x: string): RBDVolumeSourceHelper;
+    $readOnly(x: boolean): RBDVolumeSourceHelper;
+    secretRef: LocalObjectReferenceHelper;
+    $secretRef(x: LocalObjectReferenceHelper): RBDVolumeSourceHelper;
+    $user(x: string): RBDVolumeSourceHelper;
 }
 
 /** Represents a Rados Block Device mount that lasts the lifetime of a pod. RBD volumes support ownership management and SELinux relabeling. */
@@ -8256,99 +8402,102 @@ export class RBDVolumeSourceHelper extends Template implements RBDVolumeSourceHe
         super(obj)
     }
 
-    _fsType: any;
-    get fsType(): any /*string*/ {
+    _fsType: string;
+    get fsType(): string {
         return this._fsType
     }
-    set fsType(x: any /*string*/) {
+    set fsType(x: string) {
         this._fsType = x
     }
-    setFsType(x: any /*string*/) {
+    $FsType(x: string) {
         this.fsType = x; return this
     }
 
-    _image: any;
-    get image(): any /*string*/ {
+    _image: string;
+    get image(): string {
         return this._image
     }
-    set image(x: any /*string*/) {
+    set image(x: string) {
         this._image = x
     }
-    setImage(x: any /*string*/) {
+    $Image(x: string) {
         this.image = x; return this
     }
 
-    _keyring: any;
-    get keyring(): any /*string*/ {
+    _keyring: string;
+    get keyring(): string {
         return this._keyring
     }
-    set keyring(x: any /*string*/) {
+    set keyring(x: string) {
         this._keyring = x
     }
-    setKeyring(x: any /*string*/) {
+    $Keyring(x: string) {
         this.keyring = x; return this
     }
 
-    _monitors: any;
-    get monitors(): any /*Array<string>*/ {
+    _monitors: Array<string>;
+    get monitors(): Array<string> {
         return this._monitors
     }
-    set monitors(x: any /*Array<string>*/) {
+    set monitors(x: Array<string>) {
         this._monitors = this.set(this.monitors, x)
     }
-    setMonitors(x: any /*Array<string>*/) {
+    $Monitors(x: Array<string>) {
         this.monitors = x; return this
     }
 
-    _pool: any;
-    get pool(): any /*string*/ {
+    _pool: string;
+    get pool(): string {
         return this._pool
     }
-    set pool(x: any /*string*/) {
+    set pool(x: string) {
         this._pool = x
     }
-    setPool(x: any /*string*/) {
+    $Pool(x: string) {
         this.pool = x; return this
     }
 
-    _readOnly: any;
-    get readOnly(): any /*boolean*/ {
+    _readOnly: boolean;
+    get readOnly(): boolean {
         return this._readOnly
     }
-    set readOnly(x: any /*boolean*/) {
+    set readOnly(x: boolean) {
         this._readOnly = x
     }
-    setReadOnly(x: any /*boolean*/) {
+    $ReadOnly(x: boolean) {
         this.readOnly = x; return this
     }
 
-    _secretRef: any;
-    get secretRef(): any /*LocalObjectReferenceHelper*/ {
+    _secretRef: LocalObjectReferenceHelper;
+    get secretRef(): LocalObjectReferenceHelper {
         return this._secretRef
     }
-    set secretRef(x: any /*LocalObjectReferenceHelper*/) {
+    set secretRef(x: LocalObjectReferenceHelper) {
         this._secretRef = x
     }
-    setSecretRef(x: any /*LocalObjectReferenceHelper*/) {
+    $SecretRef(x: LocalObjectReferenceHelper) {
         this.secretRef = x; return this
     }
 
-    _user: any;
-    get user(): any /*string*/ {
+    _user: string;
+    get user(): string {
         return this._user
     }
-    set user(x: any /*string*/) {
+    set user(x: string) {
         this._user = x
     }
-    setUser(x: any /*string*/) {
+    $User(x: string) {
         this.user = x; return this
     }
 }
 
 export interface ReplicationControllerHelper extends ReplicationController {
-    $metadata(x: any): any;
-    $spec(x: any): any;
-    $status(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): ReplicationControllerHelper;
+    spec: ReplicationControllerSpecHelper;
+    $spec(x: ReplicationControllerSpecHelper): ReplicationControllerHelper;
+    status: ReplicationControllerStatusHelper;
+    $status(x: ReplicationControllerStatusHelper): ReplicationControllerHelper;
 }
 
 /** ReplicationController represents the configuration of a replication controller. */
@@ -8360,46 +8509,46 @@ export class ReplicationControllerHelper extends ResourceTemplate implements Rep
         super(nameOrObject, namespace, ReplicationControllerHelper.kind, ReplicationControllerHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*ReplicationControllerSpecHelper*/ {
+    _spec: ReplicationControllerSpecHelper;
+    get spec(): ReplicationControllerSpecHelper {
         return this._spec
     }
-    set spec(x: any /*ReplicationControllerSpecHelper*/) {
+    set spec(x: ReplicationControllerSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*ReplicationControllerSpecHelper*/) {
+    $Spec(x: ReplicationControllerSpecHelper) {
         this.spec = x; return this
     }
 
-    _status: any;
-    get status(): any /*ReplicationControllerStatusHelper*/ {
+    _status: ReplicationControllerStatusHelper;
+    get status(): ReplicationControllerStatusHelper {
         return this._status
     }
-    set status(x: any /*ReplicationControllerStatusHelper*/) {
+    set status(x: ReplicationControllerStatusHelper) {
         this._status = x
     }
-    setStatus(x: any /*ReplicationControllerStatusHelper*/) {
+    $Status(x: ReplicationControllerStatusHelper) {
         this.status = x; return this
     }
 }
 
 export interface ReplicationControllerConditionHelper extends ReplicationControllerCondition {
-    $lastTransitionTime(x: any): any;
-    $message(x: any): any;
-    $reason(x: any): any;
-    $status(x: any): any;
-    $type(x: any): any;
+    $lastTransitionTime(x: Time): ReplicationControllerConditionHelper;
+    $message(x: string): ReplicationControllerConditionHelper;
+    $reason(x: string): ReplicationControllerConditionHelper;
+    $status(x: string): ReplicationControllerConditionHelper;
+    $type(x: string): ReplicationControllerConditionHelper;
 }
 
 /** ReplicationControllerCondition describes the state of a replication controller at a certain point. */
@@ -8408,65 +8557,66 @@ export class ReplicationControllerConditionHelper extends Template implements Re
         super(obj)
     }
 
-    _lastTransitionTime: any;
-    get lastTransitionTime(): any /*Time*/ {
+    _lastTransitionTime: Time;
+    get lastTransitionTime(): Time {
         return this._lastTransitionTime
     }
-    set lastTransitionTime(x: any /*Time*/) {
+    set lastTransitionTime(x: Time) {
         this._lastTransitionTime = x
     }
-    setLastTransitionTime(x: any /*Time*/) {
+    $LastTransitionTime(x: Time) {
         this.lastTransitionTime = x; return this
     }
 
-    _message: any;
-    get message(): any /*string*/ {
+    _message: string;
+    get message(): string {
         return this._message
     }
-    set message(x: any /*string*/) {
+    set message(x: string) {
         this._message = x
     }
-    setMessage(x: any /*string*/) {
+    $Message(x: string) {
         this.message = x; return this
     }
 
-    _reason: any;
-    get reason(): any /*string*/ {
+    _reason: string;
+    get reason(): string {
         return this._reason
     }
-    set reason(x: any /*string*/) {
+    set reason(x: string) {
         this._reason = x
     }
-    setReason(x: any /*string*/) {
+    $Reason(x: string) {
         this.reason = x; return this
     }
 
-    _status: any;
-    get status(): any /*string*/ {
+    _status: string;
+    get status(): string {
         return this._status
     }
-    set status(x: any /*string*/) {
+    set status(x: string) {
         this._status = x
     }
-    setStatus(x: any /*string*/) {
+    $Status(x: string) {
         this.status = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }
 
 export interface ReplicationControllerListHelper extends ReplicationControllerList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<ReplicationController>): ReplicationControllerListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): ReplicationControllerListHelper;
 }
 
 /** ReplicationControllerList is a collection of replication controllers. */
@@ -8478,34 +8628,35 @@ export class ReplicationControllerListHelper extends ResourceTemplate implements
         super(nameOrObject, namespace, ReplicationControllerListHelper.kind, ReplicationControllerListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<ReplicationController>*/ {
+    _items: Array<ReplicationController>;
+    get items(): Array<ReplicationController> {
         return this._items
     }
-    set items(x: any /*Array<ReplicationController>*/) {
+    set items(x: Array<ReplicationController>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<ReplicationController>*/) {
+    $Items(x: Array<ReplicationController>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface ReplicationControllerSpecHelper extends ReplicationControllerSpec {
-    $minReadySeconds(x: any): any;
-    $replicas(x: any): any;
-    $selector(x: any): any;
-    $template(x: any): any;
+    $minReadySeconds(x: number): ReplicationControllerSpecHelper;
+    $replicas(x: number): ReplicationControllerSpecHelper;
+    $selector(x: any): ReplicationControllerSpecHelper;
+    template: PodTemplateSpecHelper;
+    $template(x: PodTemplateSpecHelper): ReplicationControllerSpecHelper;
 }
 
 /** ReplicationControllerSpec is the specification of a replication controller. */
@@ -8514,58 +8665,58 @@ export class ReplicationControllerSpecHelper extends Template implements Replica
         super(obj)
     }
 
-    _minReadySeconds: any;
-    get minReadySeconds(): any /*number*/ {
+    _minReadySeconds: number;
+    get minReadySeconds(): number {
         return this._minReadySeconds
     }
-    set minReadySeconds(x: any /*number*/) {
+    set minReadySeconds(x: number) {
         this._minReadySeconds = x
     }
-    setMinReadySeconds(x: any /*number*/) {
+    $MinReadySeconds(x: number) {
         this.minReadySeconds = x; return this
     }
 
-    _replicas: any;
-    get replicas(): any /*number*/ {
+    _replicas: number;
+    get replicas(): number {
         return this._replicas
     }
-    set replicas(x: any /*number*/) {
+    set replicas(x: number) {
         this._replicas = x
     }
-    setReplicas(x: any /*number*/) {
+    $Replicas(x: number) {
         this.replicas = x; return this
     }
 
     _selector: any;
-    get selector(): any /*any*/ {
+    get selector(): any {
         return this._selector
     }
-    set selector(x: any /*any*/) {
+    set selector(x: any) {
         this._selector = this.set(this.selector, x)
     }
-    setSelector(x: any /*any*/) {
+    $Selector(x: any) {
         this.selector = x; return this
     }
 
-    _template: any;
-    get template(): any /*PodTemplateSpecHelper*/ {
+    _template: PodTemplateSpecHelper;
+    get template(): PodTemplateSpecHelper {
         return this._template
     }
-    set template(x: any /*PodTemplateSpecHelper*/) {
+    set template(x: PodTemplateSpecHelper) {
         this._template = x
     }
-    setTemplate(x: any /*PodTemplateSpecHelper*/) {
+    $Template(x: PodTemplateSpecHelper) {
         this.template = x; return this
     }
 }
 
 export interface ReplicationControllerStatusHelper extends ReplicationControllerStatus {
-    $availableReplicas(x: any): any;
-    $conditions(x: any): any;
-    $fullyLabeledReplicas(x: any): any;
-    $observedGeneration(x: any): any;
-    $readyReplicas(x: any): any;
-    $replicas(x: any): any;
+    $availableReplicas(x: number): ReplicationControllerStatusHelper;
+    $conditions(x: Array<ReplicationControllerCondition>): ReplicationControllerStatusHelper;
+    $fullyLabeledReplicas(x: number): ReplicationControllerStatusHelper;
+    $observedGeneration(x: number): ReplicationControllerStatusHelper;
+    $readyReplicas(x: number): ReplicationControllerStatusHelper;
+    $replicas(x: number): ReplicationControllerStatusHelper;
 }
 
 /** ReplicationControllerStatus represents the current status of a replication controller. */
@@ -8574,77 +8725,77 @@ export class ReplicationControllerStatusHelper extends Template implements Repli
         super(obj)
     }
 
-    _availableReplicas: any;
-    get availableReplicas(): any /*number*/ {
+    _availableReplicas: number;
+    get availableReplicas(): number {
         return this._availableReplicas
     }
-    set availableReplicas(x: any /*number*/) {
+    set availableReplicas(x: number) {
         this._availableReplicas = x
     }
-    setAvailableReplicas(x: any /*number*/) {
+    $AvailableReplicas(x: number) {
         this.availableReplicas = x; return this
     }
 
-    _conditions: any;
-    get conditions(): any /*Array<ReplicationControllerCondition>*/ {
+    _conditions: Array<ReplicationControllerCondition>;
+    get conditions(): Array<ReplicationControllerCondition> {
         return this._conditions
     }
-    set conditions(x: any /*Array<ReplicationControllerCondition>*/) {
+    set conditions(x: Array<ReplicationControllerCondition>) {
         this._conditions = this.set(this.conditions, x)
     }
-    setConditions(x: any /*Array<ReplicationControllerCondition>*/) {
+    $Conditions(x: Array<ReplicationControllerCondition>) {
         this.conditions = x; return this
     }
 
-    _fullyLabeledReplicas: any;
-    get fullyLabeledReplicas(): any /*number*/ {
+    _fullyLabeledReplicas: number;
+    get fullyLabeledReplicas(): number {
         return this._fullyLabeledReplicas
     }
-    set fullyLabeledReplicas(x: any /*number*/) {
+    set fullyLabeledReplicas(x: number) {
         this._fullyLabeledReplicas = x
     }
-    setFullyLabeledReplicas(x: any /*number*/) {
+    $FullyLabeledReplicas(x: number) {
         this.fullyLabeledReplicas = x; return this
     }
 
-    _observedGeneration: any;
-    get observedGeneration(): any /*number*/ {
+    _observedGeneration: number;
+    get observedGeneration(): number {
         return this._observedGeneration
     }
-    set observedGeneration(x: any /*number*/) {
+    set observedGeneration(x: number) {
         this._observedGeneration = x
     }
-    setObservedGeneration(x: any /*number*/) {
+    $ObservedGeneration(x: number) {
         this.observedGeneration = x; return this
     }
 
-    _readyReplicas: any;
-    get readyReplicas(): any /*number*/ {
+    _readyReplicas: number;
+    get readyReplicas(): number {
         return this._readyReplicas
     }
-    set readyReplicas(x: any /*number*/) {
+    set readyReplicas(x: number) {
         this._readyReplicas = x
     }
-    setReadyReplicas(x: any /*number*/) {
+    $ReadyReplicas(x: number) {
         this.readyReplicas = x; return this
     }
 
-    _replicas: any;
-    get replicas(): any /*number*/ {
+    _replicas: number;
+    get replicas(): number {
         return this._replicas
     }
-    set replicas(x: any /*number*/) {
+    set replicas(x: number) {
         this._replicas = x
     }
-    setReplicas(x: any /*number*/) {
+    $Replicas(x: number) {
         this.replicas = x; return this
     }
 }
 
 export interface ResourceFieldSelectorHelper extends ResourceFieldSelector {
-    $containerName(x: any): any;
-    $divisor(x: any): any;
-    $resource(x: any): any;
+    $containerName(x: string): ResourceFieldSelectorHelper;
+    $divisor(x: Quantity): ResourceFieldSelectorHelper;
+    $resource(x: string): ResourceFieldSelectorHelper;
 }
 
 /** ResourceFieldSelector represents container resources (cpu, memory) and their output format */
@@ -8653,44 +8804,47 @@ export class ResourceFieldSelectorHelper extends Template implements ResourceFie
         super(obj)
     }
 
-    _containerName: any;
-    get containerName(): any /*string*/ {
+    _containerName: string;
+    get containerName(): string {
         return this._containerName
     }
-    set containerName(x: any /*string*/) {
+    set containerName(x: string) {
         this._containerName = x
     }
-    setContainerName(x: any /*string*/) {
+    $ContainerName(x: string) {
         this.containerName = x; return this
     }
 
-    _divisor: any;
-    get divisor(): any /*Quantity*/ {
+    _divisor: Quantity;
+    get divisor(): Quantity {
         return this._divisor
     }
-    set divisor(x: any /*Quantity*/) {
+    set divisor(x: Quantity) {
         this._divisor = x
     }
-    setDivisor(x: any /*Quantity*/) {
+    $Divisor(x: Quantity) {
         this.divisor = x; return this
     }
 
-    _resource: any;
-    get resource(): any /*string*/ {
+    _resource: string;
+    get resource(): string {
         return this._resource
     }
-    set resource(x: any /*string*/) {
+    set resource(x: string) {
         this._resource = x
     }
-    setResource(x: any /*string*/) {
+    $Resource(x: string) {
         this.resource = x; return this
     }
 }
 
 export interface ResourceQuotaHelper extends ResourceQuota {
-    $metadata(x: any): any;
-    $spec(x: any): any;
-    $status(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): ResourceQuotaHelper;
+    spec: ResourceQuotaSpecHelper;
+    $spec(x: ResourceQuotaSpecHelper): ResourceQuotaHelper;
+    status: ResourceQuotaStatusHelper;
+    $status(x: ResourceQuotaStatusHelper): ResourceQuotaHelper;
 }
 
 /** ResourceQuota sets aggregate quota restrictions enforced per namespace */
@@ -8702,43 +8856,44 @@ export class ResourceQuotaHelper extends ResourceTemplate implements ResourceQuo
         super(nameOrObject, namespace, ResourceQuotaHelper.kind, ResourceQuotaHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*ResourceQuotaSpecHelper*/ {
+    _spec: ResourceQuotaSpecHelper;
+    get spec(): ResourceQuotaSpecHelper {
         return this._spec
     }
-    set spec(x: any /*ResourceQuotaSpecHelper*/) {
+    set spec(x: ResourceQuotaSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*ResourceQuotaSpecHelper*/) {
+    $Spec(x: ResourceQuotaSpecHelper) {
         this.spec = x; return this
     }
 
-    _status: any;
-    get status(): any /*ResourceQuotaStatusHelper*/ {
+    _status: ResourceQuotaStatusHelper;
+    get status(): ResourceQuotaStatusHelper {
         return this._status
     }
-    set status(x: any /*ResourceQuotaStatusHelper*/) {
+    set status(x: ResourceQuotaStatusHelper) {
         this._status = x
     }
-    setStatus(x: any /*ResourceQuotaStatusHelper*/) {
+    $Status(x: ResourceQuotaStatusHelper) {
         this.status = x; return this
     }
 }
 
 export interface ResourceQuotaListHelper extends ResourceQuotaList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<ResourceQuota>): ResourceQuotaListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): ResourceQuotaListHelper;
 }
 
 /** ResourceQuotaList is a list of ResourceQuota items. */
@@ -8750,33 +8905,34 @@ export class ResourceQuotaListHelper extends ResourceTemplate implements Resourc
         super(nameOrObject, namespace, ResourceQuotaListHelper.kind, ResourceQuotaListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<ResourceQuota>*/ {
+    _items: Array<ResourceQuota>;
+    get items(): Array<ResourceQuota> {
         return this._items
     }
-    set items(x: any /*Array<ResourceQuota>*/) {
+    set items(x: Array<ResourceQuota>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<ResourceQuota>*/) {
+    $Items(x: Array<ResourceQuota>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface ResourceQuotaSpecHelper extends ResourceQuotaSpec {
-    $hard(x: any): any;
-    $scopeSelector(x: any): any;
-    $scopes(x: any): any;
+    $hard(x: {[name: string]: Quantity}): ResourceQuotaSpecHelper;
+    scopeSelector: ScopeSelectorHelper;
+    $scopeSelector(x: ScopeSelectorHelper): ResourceQuotaSpecHelper;
+    $scopes(x: Array<string>): ResourceQuotaSpecHelper;
 }
 
 /** ResourceQuotaSpec defines the desired hard limits to enforce for Quota. */
@@ -8785,43 +8941,43 @@ export class ResourceQuotaSpecHelper extends Template implements ResourceQuotaSp
         super(obj)
     }
 
-    _hard: any;
-    get hard(): any /*{[name: string]: Quantity}Helper*/ {
+    _hard: {[name: string]: Quantity};
+    get hard(): {[name: string]: Quantity} {
         return this._hard
     }
-    set hard(x: any /*{[name: string]: Quantity}Helper*/) {
+    set hard(x: {[name: string]: Quantity}) {
         this._hard = this.set(this.hard, x)
     }
-    setHard(x: any /*{[name: string]: Quantity}Helper*/) {
+    $Hard(x: {[name: string]: Quantity}) {
         this.hard = x; return this
     }
 
-    _scopeSelector: any;
-    get scopeSelector(): any /*ScopeSelectorHelper*/ {
+    _scopeSelector: ScopeSelectorHelper;
+    get scopeSelector(): ScopeSelectorHelper {
         return this._scopeSelector
     }
-    set scopeSelector(x: any /*ScopeSelectorHelper*/) {
+    set scopeSelector(x: ScopeSelectorHelper) {
         this._scopeSelector = x
     }
-    setScopeSelector(x: any /*ScopeSelectorHelper*/) {
+    $ScopeSelector(x: ScopeSelectorHelper) {
         this.scopeSelector = x; return this
     }
 
-    _scopes: any;
-    get scopes(): any /*Array<string>*/ {
+    _scopes: Array<string>;
+    get scopes(): Array<string> {
         return this._scopes
     }
-    set scopes(x: any /*Array<string>*/) {
+    set scopes(x: Array<string>) {
         this._scopes = this.set(this.scopes, x)
     }
-    setScopes(x: any /*Array<string>*/) {
+    $Scopes(x: Array<string>) {
         this.scopes = x; return this
     }
 }
 
 export interface ResourceQuotaStatusHelper extends ResourceQuotaStatus {
-    $hard(x: any): any;
-    $used(x: any): any;
+    $hard(x: {[name: string]: Quantity}): ResourceQuotaStatusHelper;
+    $used(x: {[name: string]: Quantity}): ResourceQuotaStatusHelper;
 }
 
 /** ResourceQuotaStatus defines the enforced hard limits and observed use. */
@@ -8830,32 +8986,32 @@ export class ResourceQuotaStatusHelper extends Template implements ResourceQuota
         super(obj)
     }
 
-    _hard: any;
-    get hard(): any /*{[name: string]: Quantity}Helper*/ {
+    _hard: {[name: string]: Quantity};
+    get hard(): {[name: string]: Quantity} {
         return this._hard
     }
-    set hard(x: any /*{[name: string]: Quantity}Helper*/) {
+    set hard(x: {[name: string]: Quantity}) {
         this._hard = this.set(this.hard, x)
     }
-    setHard(x: any /*{[name: string]: Quantity}Helper*/) {
+    $Hard(x: {[name: string]: Quantity}) {
         this.hard = x; return this
     }
 
-    _used: any;
-    get used(): any /*{[name: string]: Quantity}Helper*/ {
+    _used: {[name: string]: Quantity};
+    get used(): {[name: string]: Quantity} {
         return this._used
     }
-    set used(x: any /*{[name: string]: Quantity}Helper*/) {
+    set used(x: {[name: string]: Quantity}) {
         this._used = this.set(this.used, x)
     }
-    setUsed(x: any /*{[name: string]: Quantity}Helper*/) {
+    $Used(x: {[name: string]: Quantity}) {
         this.used = x; return this
     }
 }
 
 export interface ResourceRequirementsHelper extends ResourceRequirements {
-    $limits(x: any): any;
-    $requests(x: any): any;
+    $limits(x: {[name: string]: Quantity}): ResourceRequirementsHelper;
+    $requests(x: {[name: string]: Quantity}): ResourceRequirementsHelper;
 }
 
 /** ResourceRequirements describes the compute resource requirements. */
@@ -8864,34 +9020,34 @@ export class ResourceRequirementsHelper extends Template implements ResourceRequ
         super(obj)
     }
 
-    _limits: any;
-    get limits(): any /*{[name: string]: Quantity}Helper*/ {
+    _limits: {[name: string]: Quantity};
+    get limits(): {[name: string]: Quantity} {
         return this._limits
     }
-    set limits(x: any /*{[name: string]: Quantity}Helper*/) {
+    set limits(x: {[name: string]: Quantity}) {
         this._limits = this.set(this.limits, x)
     }
-    setLimits(x: any /*{[name: string]: Quantity}Helper*/) {
+    $Limits(x: {[name: string]: Quantity}) {
         this.limits = x; return this
     }
 
-    _requests: any;
-    get requests(): any /*{[name: string]: Quantity}Helper*/ {
+    _requests: {[name: string]: Quantity};
+    get requests(): {[name: string]: Quantity} {
         return this._requests
     }
-    set requests(x: any /*{[name: string]: Quantity}Helper*/) {
+    set requests(x: {[name: string]: Quantity}) {
         this._requests = this.set(this.requests, x)
     }
-    setRequests(x: any /*{[name: string]: Quantity}Helper*/) {
+    $Requests(x: {[name: string]: Quantity}) {
         this.requests = x; return this
     }
 }
 
 export interface SELinuxOptionsHelper extends SELinuxOptions {
-    $level(x: any): any;
-    $role(x: any): any;
-    $type(x: any): any;
-    $user(x: any): any;
+    $level(x: string): SELinuxOptionsHelper;
+    $role(x: string): SELinuxOptionsHelper;
+    $type(x: string): SELinuxOptionsHelper;
+    $user(x: string): SELinuxOptionsHelper;
 }
 
 /** SELinuxOptions are the labels to be applied to the container */
@@ -8900,62 +9056,63 @@ export class SELinuxOptionsHelper extends Template implements SELinuxOptionsHelp
         super(obj)
     }
 
-    _level: any;
-    get level(): any /*string*/ {
+    _level: string;
+    get level(): string {
         return this._level
     }
-    set level(x: any /*string*/) {
+    set level(x: string) {
         this._level = x
     }
-    setLevel(x: any /*string*/) {
+    $Level(x: string) {
         this.level = x; return this
     }
 
-    _role: any;
-    get role(): any /*string*/ {
+    _role: string;
+    get role(): string {
         return this._role
     }
-    set role(x: any /*string*/) {
+    set role(x: string) {
         this._role = x
     }
-    setRole(x: any /*string*/) {
+    $Role(x: string) {
         this.role = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 
-    _user: any;
-    get user(): any /*string*/ {
+    _user: string;
+    get user(): string {
         return this._user
     }
-    set user(x: any /*string*/) {
+    set user(x: string) {
         this._user = x
     }
-    setUser(x: any /*string*/) {
+    $User(x: string) {
         this.user = x; return this
     }
 }
 
 export interface ScaleIOPersistentVolumeSourceHelper extends ScaleIOPersistentVolumeSource {
-    $fsType(x: any): any;
-    $gateway(x: any): any;
-    $protectionDomain(x: any): any;
-    $readOnly(x: any): any;
-    $secretRef(x: any): any;
-    $sslEnabled(x: any): any;
-    $storageMode(x: any): any;
-    $storagePool(x: any): any;
-    $system(x: any): any;
-    $volumeName(x: any): any;
+    $fsType(x: string): ScaleIOPersistentVolumeSourceHelper;
+    $gateway(x: string): ScaleIOPersistentVolumeSourceHelper;
+    $protectionDomain(x: string): ScaleIOPersistentVolumeSourceHelper;
+    $readOnly(x: boolean): ScaleIOPersistentVolumeSourceHelper;
+    secretRef: SecretReferenceHelper;
+    $secretRef(x: SecretReferenceHelper): ScaleIOPersistentVolumeSourceHelper;
+    $sslEnabled(x: boolean): ScaleIOPersistentVolumeSourceHelper;
+    $storageMode(x: string): ScaleIOPersistentVolumeSourceHelper;
+    $storagePool(x: string): ScaleIOPersistentVolumeSourceHelper;
+    $system(x: string): ScaleIOPersistentVolumeSourceHelper;
+    $volumeName(x: string): ScaleIOPersistentVolumeSourceHelper;
 }
 
 /** ScaleIOPersistentVolumeSource represents a persistent ScaleIO volume */
@@ -8964,128 +9121,129 @@ export class ScaleIOPersistentVolumeSourceHelper extends Template implements Sca
         super(obj)
     }
 
-    _fsType: any;
-    get fsType(): any /*string*/ {
+    _fsType: string;
+    get fsType(): string {
         return this._fsType
     }
-    set fsType(x: any /*string*/) {
+    set fsType(x: string) {
         this._fsType = x
     }
-    setFsType(x: any /*string*/) {
+    $FsType(x: string) {
         this.fsType = x; return this
     }
 
-    _gateway: any;
-    get gateway(): any /*string*/ {
+    _gateway: string;
+    get gateway(): string {
         return this._gateway
     }
-    set gateway(x: any /*string*/) {
+    set gateway(x: string) {
         this._gateway = x
     }
-    setGateway(x: any /*string*/) {
+    $Gateway(x: string) {
         this.gateway = x; return this
     }
 
-    _protectionDomain: any;
-    get protectionDomain(): any /*string*/ {
+    _protectionDomain: string;
+    get protectionDomain(): string {
         return this._protectionDomain
     }
-    set protectionDomain(x: any /*string*/) {
+    set protectionDomain(x: string) {
         this._protectionDomain = x
     }
-    setProtectionDomain(x: any /*string*/) {
+    $ProtectionDomain(x: string) {
         this.protectionDomain = x; return this
     }
 
-    _readOnly: any;
-    get readOnly(): any /*boolean*/ {
+    _readOnly: boolean;
+    get readOnly(): boolean {
         return this._readOnly
     }
-    set readOnly(x: any /*boolean*/) {
+    set readOnly(x: boolean) {
         this._readOnly = x
     }
-    setReadOnly(x: any /*boolean*/) {
+    $ReadOnly(x: boolean) {
         this.readOnly = x; return this
     }
 
-    _secretRef: any;
-    get secretRef(): any /*SecretReferenceHelper*/ {
+    _secretRef: SecretReferenceHelper;
+    get secretRef(): SecretReferenceHelper {
         return this._secretRef
     }
-    set secretRef(x: any /*SecretReferenceHelper*/) {
+    set secretRef(x: SecretReferenceHelper) {
         this._secretRef = x
     }
-    setSecretRef(x: any /*SecretReferenceHelper*/) {
+    $SecretRef(x: SecretReferenceHelper) {
         this.secretRef = x; return this
     }
 
-    _sslEnabled: any;
-    get sslEnabled(): any /*boolean*/ {
+    _sslEnabled: boolean;
+    get sslEnabled(): boolean {
         return this._sslEnabled
     }
-    set sslEnabled(x: any /*boolean*/) {
+    set sslEnabled(x: boolean) {
         this._sslEnabled = x
     }
-    setSslEnabled(x: any /*boolean*/) {
+    $SslEnabled(x: boolean) {
         this.sslEnabled = x; return this
     }
 
-    _storageMode: any;
-    get storageMode(): any /*string*/ {
+    _storageMode: string;
+    get storageMode(): string {
         return this._storageMode
     }
-    set storageMode(x: any /*string*/) {
+    set storageMode(x: string) {
         this._storageMode = x
     }
-    setStorageMode(x: any /*string*/) {
+    $StorageMode(x: string) {
         this.storageMode = x; return this
     }
 
-    _storagePool: any;
-    get storagePool(): any /*string*/ {
+    _storagePool: string;
+    get storagePool(): string {
         return this._storagePool
     }
-    set storagePool(x: any /*string*/) {
+    set storagePool(x: string) {
         this._storagePool = x
     }
-    setStoragePool(x: any /*string*/) {
+    $StoragePool(x: string) {
         this.storagePool = x; return this
     }
 
-    _system: any;
-    get system(): any /*string*/ {
+    _system: string;
+    get system(): string {
         return this._system
     }
-    set system(x: any /*string*/) {
+    set system(x: string) {
         this._system = x
     }
-    setSystem(x: any /*string*/) {
+    $System(x: string) {
         this.system = x; return this
     }
 
-    _volumeName: any;
-    get volumeName(): any /*string*/ {
+    _volumeName: string;
+    get volumeName(): string {
         return this._volumeName
     }
-    set volumeName(x: any /*string*/) {
+    set volumeName(x: string) {
         this._volumeName = x
     }
-    setVolumeName(x: any /*string*/) {
+    $VolumeName(x: string) {
         this.volumeName = x; return this
     }
 }
 
 export interface ScaleIOVolumeSourceHelper extends ScaleIOVolumeSource {
-    $fsType(x: any): any;
-    $gateway(x: any): any;
-    $protectionDomain(x: any): any;
-    $readOnly(x: any): any;
-    $secretRef(x: any): any;
-    $sslEnabled(x: any): any;
-    $storageMode(x: any): any;
-    $storagePool(x: any): any;
-    $system(x: any): any;
-    $volumeName(x: any): any;
+    $fsType(x: string): ScaleIOVolumeSourceHelper;
+    $gateway(x: string): ScaleIOVolumeSourceHelper;
+    $protectionDomain(x: string): ScaleIOVolumeSourceHelper;
+    $readOnly(x: boolean): ScaleIOVolumeSourceHelper;
+    secretRef: LocalObjectReferenceHelper;
+    $secretRef(x: LocalObjectReferenceHelper): ScaleIOVolumeSourceHelper;
+    $sslEnabled(x: boolean): ScaleIOVolumeSourceHelper;
+    $storageMode(x: string): ScaleIOVolumeSourceHelper;
+    $storagePool(x: string): ScaleIOVolumeSourceHelper;
+    $system(x: string): ScaleIOVolumeSourceHelper;
+    $volumeName(x: string): ScaleIOVolumeSourceHelper;
 }
 
 /** ScaleIOVolumeSource represents a persistent ScaleIO volume */
@@ -9094,119 +9252,119 @@ export class ScaleIOVolumeSourceHelper extends Template implements ScaleIOVolume
         super(obj)
     }
 
-    _fsType: any;
-    get fsType(): any /*string*/ {
+    _fsType: string;
+    get fsType(): string {
         return this._fsType
     }
-    set fsType(x: any /*string*/) {
+    set fsType(x: string) {
         this._fsType = x
     }
-    setFsType(x: any /*string*/) {
+    $FsType(x: string) {
         this.fsType = x; return this
     }
 
-    _gateway: any;
-    get gateway(): any /*string*/ {
+    _gateway: string;
+    get gateway(): string {
         return this._gateway
     }
-    set gateway(x: any /*string*/) {
+    set gateway(x: string) {
         this._gateway = x
     }
-    setGateway(x: any /*string*/) {
+    $Gateway(x: string) {
         this.gateway = x; return this
     }
 
-    _protectionDomain: any;
-    get protectionDomain(): any /*string*/ {
+    _protectionDomain: string;
+    get protectionDomain(): string {
         return this._protectionDomain
     }
-    set protectionDomain(x: any /*string*/) {
+    set protectionDomain(x: string) {
         this._protectionDomain = x
     }
-    setProtectionDomain(x: any /*string*/) {
+    $ProtectionDomain(x: string) {
         this.protectionDomain = x; return this
     }
 
-    _readOnly: any;
-    get readOnly(): any /*boolean*/ {
+    _readOnly: boolean;
+    get readOnly(): boolean {
         return this._readOnly
     }
-    set readOnly(x: any /*boolean*/) {
+    set readOnly(x: boolean) {
         this._readOnly = x
     }
-    setReadOnly(x: any /*boolean*/) {
+    $ReadOnly(x: boolean) {
         this.readOnly = x; return this
     }
 
-    _secretRef: any;
-    get secretRef(): any /*LocalObjectReferenceHelper*/ {
+    _secretRef: LocalObjectReferenceHelper;
+    get secretRef(): LocalObjectReferenceHelper {
         return this._secretRef
     }
-    set secretRef(x: any /*LocalObjectReferenceHelper*/) {
+    set secretRef(x: LocalObjectReferenceHelper) {
         this._secretRef = x
     }
-    setSecretRef(x: any /*LocalObjectReferenceHelper*/) {
+    $SecretRef(x: LocalObjectReferenceHelper) {
         this.secretRef = x; return this
     }
 
-    _sslEnabled: any;
-    get sslEnabled(): any /*boolean*/ {
+    _sslEnabled: boolean;
+    get sslEnabled(): boolean {
         return this._sslEnabled
     }
-    set sslEnabled(x: any /*boolean*/) {
+    set sslEnabled(x: boolean) {
         this._sslEnabled = x
     }
-    setSslEnabled(x: any /*boolean*/) {
+    $SslEnabled(x: boolean) {
         this.sslEnabled = x; return this
     }
 
-    _storageMode: any;
-    get storageMode(): any /*string*/ {
+    _storageMode: string;
+    get storageMode(): string {
         return this._storageMode
     }
-    set storageMode(x: any /*string*/) {
+    set storageMode(x: string) {
         this._storageMode = x
     }
-    setStorageMode(x: any /*string*/) {
+    $StorageMode(x: string) {
         this.storageMode = x; return this
     }
 
-    _storagePool: any;
-    get storagePool(): any /*string*/ {
+    _storagePool: string;
+    get storagePool(): string {
         return this._storagePool
     }
-    set storagePool(x: any /*string*/) {
+    set storagePool(x: string) {
         this._storagePool = x
     }
-    setStoragePool(x: any /*string*/) {
+    $StoragePool(x: string) {
         this.storagePool = x; return this
     }
 
-    _system: any;
-    get system(): any /*string*/ {
+    _system: string;
+    get system(): string {
         return this._system
     }
-    set system(x: any /*string*/) {
+    set system(x: string) {
         this._system = x
     }
-    setSystem(x: any /*string*/) {
+    $System(x: string) {
         this.system = x; return this
     }
 
-    _volumeName: any;
-    get volumeName(): any /*string*/ {
+    _volumeName: string;
+    get volumeName(): string {
         return this._volumeName
     }
-    set volumeName(x: any /*string*/) {
+    set volumeName(x: string) {
         this._volumeName = x
     }
-    setVolumeName(x: any /*string*/) {
+    $VolumeName(x: string) {
         this.volumeName = x; return this
     }
 }
 
 export interface ScopeSelectorHelper extends ScopeSelector {
-    $matchExpressions(x: any): any;
+    $matchExpressions(x: Array<ScopedResourceSelectorRequirement>): ScopeSelectorHelper;
 }
 
 /** A scope selector represents the AND of the selectors represented by the scoped-resource selector requirements. */
@@ -9215,22 +9373,22 @@ export class ScopeSelectorHelper extends Template implements ScopeSelectorHelper
         super(obj)
     }
 
-    _matchExpressions: any;
-    get matchExpressions(): any /*Array<ScopedResourceSelectorRequirement>*/ {
+    _matchExpressions: Array<ScopedResourceSelectorRequirement>;
+    get matchExpressions(): Array<ScopedResourceSelectorRequirement> {
         return this._matchExpressions
     }
-    set matchExpressions(x: any /*Array<ScopedResourceSelectorRequirement>*/) {
+    set matchExpressions(x: Array<ScopedResourceSelectorRequirement>) {
         this._matchExpressions = this.set(this.matchExpressions, x)
     }
-    setMatchExpressions(x: any /*Array<ScopedResourceSelectorRequirement>*/) {
+    $MatchExpressions(x: Array<ScopedResourceSelectorRequirement>) {
         this.matchExpressions = x; return this
     }
 }
 
 export interface ScopedResourceSelectorRequirementHelper extends ScopedResourceSelectorRequirement {
-    $operator(x: any): any;
-    $scopeName(x: any): any;
-    $values(x: any): any;
+    $operator(x: string): ScopedResourceSelectorRequirementHelper;
+    $scopeName(x: string): ScopedResourceSelectorRequirementHelper;
+    $values(x: Array<string>): ScopedResourceSelectorRequirementHelper;
 }
 
 /** A scoped-resource selector requirement is a selector that contains values, a scope name, and an operator that relates the scope name and values. */
@@ -9239,43 +9397,43 @@ export class ScopedResourceSelectorRequirementHelper extends Template implements
         super(obj)
     }
 
-    _operator: any;
-    get operator(): any /*string*/ {
+    _operator: string;
+    get operator(): string {
         return this._operator
     }
-    set operator(x: any /*string*/) {
+    set operator(x: string) {
         this._operator = x
     }
-    setOperator(x: any /*string*/) {
+    $Operator(x: string) {
         this.operator = x; return this
     }
 
-    _scopeName: any;
-    get scopeName(): any /*string*/ {
+    _scopeName: string;
+    get scopeName(): string {
         return this._scopeName
     }
-    set scopeName(x: any /*string*/) {
+    set scopeName(x: string) {
         this._scopeName = x
     }
-    setScopeName(x: any /*string*/) {
+    $ScopeName(x: string) {
         this.scopeName = x; return this
     }
 
-    _values: any;
-    get values(): any /*Array<string>*/ {
+    _values: Array<string>;
+    get values(): Array<string> {
         return this._values
     }
-    set values(x: any /*Array<string>*/) {
+    set values(x: Array<string>) {
         this._values = this.set(this.values, x)
     }
-    setValues(x: any /*Array<string>*/) {
+    $Values(x: Array<string>) {
         this.values = x; return this
     }
 }
 
 export interface SeccompProfileHelper extends SeccompProfile {
-    $localhostProfile(x: any): any;
-    $type(x: any): any;
+    $localhostProfile(x: string): SeccompProfileHelper;
+    $type(x: string): SeccompProfileHelper;
 }
 
 /** SeccompProfile defines a pod/container's seccomp profile settings. Only one profile source may be set. */
@@ -9284,35 +9442,36 @@ export class SeccompProfileHelper extends Template implements SeccompProfileHelp
         super(obj)
     }
 
-    _localhostProfile: any;
-    get localhostProfile(): any /*string*/ {
+    _localhostProfile: string;
+    get localhostProfile(): string {
         return this._localhostProfile
     }
-    set localhostProfile(x: any /*string*/) {
+    set localhostProfile(x: string) {
         this._localhostProfile = x
     }
-    setLocalhostProfile(x: any /*string*/) {
+    $LocalhostProfile(x: string) {
         this.localhostProfile = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }
 
 export interface SecretHelper extends Secret {
-    $data(x: any): any;
-    $immutable(x: any): any;
-    $metadata(x: any): any;
-    $stringData(x: any): any;
-    $type(x: any): any;
+    $data(x: any): SecretHelper;
+    $immutable(x: boolean): SecretHelper;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): SecretHelper;
+    $stringData(x: any): SecretHelper;
+    $type(x: string): SecretHelper;
 }
 
 /** Secret holds secret data of a certain type. The total bytes of the values in the Data field must be less than MaxSecretSize bytes. */
@@ -9325,63 +9484,63 @@ export class SecretHelper extends ResourceTemplate implements SecretHelper {
     }
 
     _data: any;
-    get data(): any /*any*/ {
+    get data(): any {
         return this._data
     }
-    set data(x: any /*any*/) {
+    set data(x: any) {
         this._data = this.set(this.data, x)
     }
-    setData(x: any /*any*/) {
+    $Data(x: any) {
         this.data = x; return this
     }
 
-    _immutable: any;
-    get immutable(): any /*boolean*/ {
+    _immutable: boolean;
+    get immutable(): boolean {
         return this._immutable
     }
-    set immutable(x: any /*boolean*/) {
+    set immutable(x: boolean) {
         this._immutable = x
     }
-    setImmutable(x: any /*boolean*/) {
+    $Immutable(x: boolean) {
         this.immutable = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
     _stringData: any;
-    get stringData(): any /*any*/ {
+    get stringData(): any {
         return this._stringData
     }
-    set stringData(x: any /*any*/) {
+    set stringData(x: any) {
         this._stringData = this.set(this.stringData, x)
     }
-    setStringData(x: any /*any*/) {
+    $StringData(x: any) {
         this.stringData = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }
 
 export interface SecretEnvSourceHelper extends SecretEnvSource {
-    $optional(x: any): any;
+    $optional(x: boolean): SecretEnvSourceHelper;
 }
 
 /**
@@ -9394,21 +9553,21 @@ export class SecretEnvSourceHelper extends Template implements SecretEnvSourceHe
         super(obj)
     }
 
-    _optional: any;
-    get optional(): any /*boolean*/ {
+    _optional: boolean;
+    get optional(): boolean {
         return this._optional
     }
-    set optional(x: any /*boolean*/) {
+    set optional(x: boolean) {
         this._optional = x
     }
-    setOptional(x: any /*boolean*/) {
+    $Optional(x: boolean) {
         this.optional = x; return this
     }
 }
 
 export interface SecretKeySelectorHelper extends SecretKeySelector {
-    $key(x: any): any;
-    $optional(x: any): any;
+    $key(x: string): SecretKeySelectorHelper;
+    $optional(x: boolean): SecretKeySelectorHelper;
 }
 
 /** SecretKeySelector selects a key of a Secret. */
@@ -9417,32 +9576,33 @@ export class SecretKeySelectorHelper extends Template implements SecretKeySelect
         super(obj)
     }
 
-    _key: any;
-    get key(): any /*string*/ {
+    _key: string;
+    get key(): string {
         return this._key
     }
-    set key(x: any /*string*/) {
+    set key(x: string) {
         this._key = x
     }
-    setKey(x: any /*string*/) {
+    $Key(x: string) {
         this.key = x; return this
     }
 
-    _optional: any;
-    get optional(): any /*boolean*/ {
+    _optional: boolean;
+    get optional(): boolean {
         return this._optional
     }
-    set optional(x: any /*boolean*/) {
+    set optional(x: boolean) {
         this._optional = x
     }
-    setOptional(x: any /*boolean*/) {
+    $Optional(x: boolean) {
         this.optional = x; return this
     }
 }
 
 export interface SecretListHelper extends SecretList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<Secret>): SecretListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): SecretListHelper;
 }
 
 /** SecretList is a list of Secret. */
@@ -9454,32 +9614,32 @@ export class SecretListHelper extends ResourceTemplate implements SecretListHelp
         super(nameOrObject, namespace, SecretListHelper.kind, SecretListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<Secret>*/ {
+    _items: Array<Secret>;
+    get items(): Array<Secret> {
         return this._items
     }
-    set items(x: any /*Array<Secret>*/) {
+    set items(x: Array<Secret>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<Secret>*/) {
+    $Items(x: Array<Secret>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface SecretProjectionHelper extends SecretProjection {
-    $items(x: any): any;
-    $optional(x: any): any;
+    $items(x: Array<KeyToPath>): SecretProjectionHelper;
+    $optional(x: boolean): SecretProjectionHelper;
 }
 
 /**
@@ -9492,25 +9652,25 @@ export class SecretProjectionHelper extends Template implements SecretProjection
         super(obj)
     }
 
-    _items: any;
-    get items(): any /*Array<KeyToPath>*/ {
+    _items: Array<KeyToPath>;
+    get items(): Array<KeyToPath> {
         return this._items
     }
-    set items(x: any /*Array<KeyToPath>*/) {
+    set items(x: Array<KeyToPath>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<KeyToPath>*/) {
+    $Items(x: Array<KeyToPath>) {
         this.items = x; return this
     }
 
-    _optional: any;
-    get optional(): any /*boolean*/ {
+    _optional: boolean;
+    get optional(): boolean {
         return this._optional
     }
-    set optional(x: any /*boolean*/) {
+    set optional(x: boolean) {
         this._optional = x
     }
-    setOptional(x: any /*boolean*/) {
+    $Optional(x: boolean) {
         this.optional = x; return this
     }
 }
@@ -9526,10 +9686,10 @@ export class SecretReferenceHelper extends Template implements SecretReferenceHe
 }
 
 export interface SecretVolumeSourceHelper extends SecretVolumeSource {
-    $defaultMode(x: any): any;
-    $items(x: any): any;
-    $optional(x: any): any;
-    $secretName(x: any): any;
+    $defaultMode(x: number): SecretVolumeSourceHelper;
+    $items(x: Array<KeyToPath>): SecretVolumeSourceHelper;
+    $optional(x: boolean): SecretVolumeSourceHelper;
+    $secretName(x: string): SecretVolumeSourceHelper;
 }
 
 /**
@@ -9542,63 +9702,67 @@ export class SecretVolumeSourceHelper extends Template implements SecretVolumeSo
         super(obj)
     }
 
-    _defaultMode: any;
-    get defaultMode(): any /*number*/ {
+    _defaultMode: number;
+    get defaultMode(): number {
         return this._defaultMode
     }
-    set defaultMode(x: any /*number*/) {
+    set defaultMode(x: number) {
         this._defaultMode = x
     }
-    setDefaultMode(x: any /*number*/) {
+    $DefaultMode(x: number) {
         this.defaultMode = x; return this
     }
 
-    _items: any;
-    get items(): any /*Array<KeyToPath>*/ {
+    _items: Array<KeyToPath>;
+    get items(): Array<KeyToPath> {
         return this._items
     }
-    set items(x: any /*Array<KeyToPath>*/) {
+    set items(x: Array<KeyToPath>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<KeyToPath>*/) {
+    $Items(x: Array<KeyToPath>) {
         this.items = x; return this
     }
 
-    _optional: any;
-    get optional(): any /*boolean*/ {
+    _optional: boolean;
+    get optional(): boolean {
         return this._optional
     }
-    set optional(x: any /*boolean*/) {
+    set optional(x: boolean) {
         this._optional = x
     }
-    setOptional(x: any /*boolean*/) {
+    $Optional(x: boolean) {
         this.optional = x; return this
     }
 
-    _secretName: any;
-    get secretName(): any /*string*/ {
+    _secretName: string;
+    get secretName(): string {
         return this._secretName
     }
-    set secretName(x: any /*string*/) {
+    set secretName(x: string) {
         this._secretName = x
     }
-    setSecretName(x: any /*string*/) {
+    $SecretName(x: string) {
         this.secretName = x; return this
     }
 }
 
 export interface SecurityContextHelper extends SecurityContext {
-    $allowPrivilegeEscalation(x: any): any;
-    $capabilities(x: any): any;
-    $privileged(x: any): any;
-    $procMount(x: any): any;
-    $readOnlyRootFilesystem(x: any): any;
-    $runAsGroup(x: any): any;
-    $runAsNonRoot(x: any): any;
-    $runAsUser(x: any): any;
-    $seLinuxOptions(x: any): any;
-    $seccompProfile(x: any): any;
-    $windowsOptions(x: any): any;
+    $allowPrivilegeEscalation(x: boolean): SecurityContextHelper;
+    capabilities: CapabilitiesHelper;
+    $capabilities(x: CapabilitiesHelper): SecurityContextHelper;
+    $privileged(x: boolean): SecurityContextHelper;
+    $procMount(x: string): SecurityContextHelper;
+    $readOnlyRootFilesystem(x: boolean): SecurityContextHelper;
+    $runAsGroup(x: number): SecurityContextHelper;
+    $runAsNonRoot(x: boolean): SecurityContextHelper;
+    $runAsUser(x: number): SecurityContextHelper;
+    seLinuxOptions: SELinuxOptionsHelper;
+    $seLinuxOptions(x: SELinuxOptionsHelper): SecurityContextHelper;
+    seccompProfile: SeccompProfileHelper;
+    $seccompProfile(x: SeccompProfileHelper): SecurityContextHelper;
+    windowsOptions: WindowsSecurityContextOptionsHelper;
+    $windowsOptions(x: WindowsSecurityContextOptionsHelper): SecurityContextHelper;
 }
 
 /** SecurityContext holds security configuration that will be applied to a container. Some fields are present in both SecurityContext and PodSecurityContext.  When both are set, the values in SecurityContext take precedence. */
@@ -9607,132 +9771,135 @@ export class SecurityContextHelper extends Template implements SecurityContextHe
         super(obj)
     }
 
-    _allowPrivilegeEscalation: any;
-    get allowPrivilegeEscalation(): any /*boolean*/ {
+    _allowPrivilegeEscalation: boolean;
+    get allowPrivilegeEscalation(): boolean {
         return this._allowPrivilegeEscalation
     }
-    set allowPrivilegeEscalation(x: any /*boolean*/) {
+    set allowPrivilegeEscalation(x: boolean) {
         this._allowPrivilegeEscalation = x
     }
-    setAllowPrivilegeEscalation(x: any /*boolean*/) {
+    $AllowPrivilegeEscalation(x: boolean) {
         this.allowPrivilegeEscalation = x; return this
     }
 
-    _capabilities: any;
-    get capabilities(): any /*CapabilitiesHelper*/ {
+    _capabilities: CapabilitiesHelper;
+    get capabilities(): CapabilitiesHelper {
         return this._capabilities
     }
-    set capabilities(x: any /*CapabilitiesHelper*/) {
+    set capabilities(x: CapabilitiesHelper) {
         this._capabilities = x
     }
-    setCapabilities(x: any /*CapabilitiesHelper*/) {
+    $Capabilities(x: CapabilitiesHelper) {
         this.capabilities = x; return this
     }
 
-    _privileged: any;
-    get privileged(): any /*boolean*/ {
+    _privileged: boolean;
+    get privileged(): boolean {
         return this._privileged
     }
-    set privileged(x: any /*boolean*/) {
+    set privileged(x: boolean) {
         this._privileged = x
     }
-    setPrivileged(x: any /*boolean*/) {
+    $Privileged(x: boolean) {
         this.privileged = x; return this
     }
 
-    _procMount: any;
-    get procMount(): any /*string*/ {
+    _procMount: string;
+    get procMount(): string {
         return this._procMount
     }
-    set procMount(x: any /*string*/) {
+    set procMount(x: string) {
         this._procMount = x
     }
-    setProcMount(x: any /*string*/) {
+    $ProcMount(x: string) {
         this.procMount = x; return this
     }
 
-    _readOnlyRootFilesystem: any;
-    get readOnlyRootFilesystem(): any /*boolean*/ {
+    _readOnlyRootFilesystem: boolean;
+    get readOnlyRootFilesystem(): boolean {
         return this._readOnlyRootFilesystem
     }
-    set readOnlyRootFilesystem(x: any /*boolean*/) {
+    set readOnlyRootFilesystem(x: boolean) {
         this._readOnlyRootFilesystem = x
     }
-    setReadOnlyRootFilesystem(x: any /*boolean*/) {
+    $ReadOnlyRootFilesystem(x: boolean) {
         this.readOnlyRootFilesystem = x; return this
     }
 
-    _runAsGroup: any;
-    get runAsGroup(): any /*number*/ {
+    _runAsGroup: number;
+    get runAsGroup(): number {
         return this._runAsGroup
     }
-    set runAsGroup(x: any /*number*/) {
+    set runAsGroup(x: number) {
         this._runAsGroup = x
     }
-    setRunAsGroup(x: any /*number*/) {
+    $RunAsGroup(x: number) {
         this.runAsGroup = x; return this
     }
 
-    _runAsNonRoot: any;
-    get runAsNonRoot(): any /*boolean*/ {
+    _runAsNonRoot: boolean;
+    get runAsNonRoot(): boolean {
         return this._runAsNonRoot
     }
-    set runAsNonRoot(x: any /*boolean*/) {
+    set runAsNonRoot(x: boolean) {
         this._runAsNonRoot = x
     }
-    setRunAsNonRoot(x: any /*boolean*/) {
+    $RunAsNonRoot(x: boolean) {
         this.runAsNonRoot = x; return this
     }
 
-    _runAsUser: any;
-    get runAsUser(): any /*number*/ {
+    _runAsUser: number;
+    get runAsUser(): number {
         return this._runAsUser
     }
-    set runAsUser(x: any /*number*/) {
+    set runAsUser(x: number) {
         this._runAsUser = x
     }
-    setRunAsUser(x: any /*number*/) {
+    $RunAsUser(x: number) {
         this.runAsUser = x; return this
     }
 
-    _seLinuxOptions: any;
-    get seLinuxOptions(): any /*SELinuxOptionsHelper*/ {
+    _seLinuxOptions: SELinuxOptionsHelper;
+    get seLinuxOptions(): SELinuxOptionsHelper {
         return this._seLinuxOptions
     }
-    set seLinuxOptions(x: any /*SELinuxOptionsHelper*/) {
+    set seLinuxOptions(x: SELinuxOptionsHelper) {
         this._seLinuxOptions = x
     }
-    setSeLinuxOptions(x: any /*SELinuxOptionsHelper*/) {
+    $SeLinuxOptions(x: SELinuxOptionsHelper) {
         this.seLinuxOptions = x; return this
     }
 
-    _seccompProfile: any;
-    get seccompProfile(): any /*SeccompProfileHelper*/ {
+    _seccompProfile: SeccompProfileHelper;
+    get seccompProfile(): SeccompProfileHelper {
         return this._seccompProfile
     }
-    set seccompProfile(x: any /*SeccompProfileHelper*/) {
+    set seccompProfile(x: SeccompProfileHelper) {
         this._seccompProfile = x
     }
-    setSeccompProfile(x: any /*SeccompProfileHelper*/) {
+    $SeccompProfile(x: SeccompProfileHelper) {
         this.seccompProfile = x; return this
     }
 
-    _windowsOptions: any;
-    get windowsOptions(): any /*WindowsSecurityContextOptionsHelper*/ {
+    _windowsOptions: WindowsSecurityContextOptionsHelper;
+    get windowsOptions(): WindowsSecurityContextOptionsHelper {
         return this._windowsOptions
     }
-    set windowsOptions(x: any /*WindowsSecurityContextOptionsHelper*/) {
+    set windowsOptions(x: WindowsSecurityContextOptionsHelper) {
         this._windowsOptions = x
     }
-    setWindowsOptions(x: any /*WindowsSecurityContextOptionsHelper*/) {
+    $WindowsOptions(x: WindowsSecurityContextOptionsHelper) {
         this.windowsOptions = x; return this
     }
 }
 
 export interface ServiceHelper extends Service {
-    $metadata(x: any): any;
-    $spec(x: any): any;
-    $status(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): ServiceHelper;
+    spec: ServiceSpecHelper;
+    $spec(x: ServiceSpecHelper): ServiceHelper;
+    status: ServiceStatusHelper;
+    $status(x: ServiceStatusHelper): ServiceHelper;
 }
 
 /** Service is a named abstraction of software service (for example, mysql) consisting of local port (for example 3306) that the proxy listens on, and the selector that determines which pods will answer requests sent through the proxy. */
@@ -9744,45 +9911,46 @@ export class ServiceHelper extends ResourceTemplate implements ServiceHelper {
         super(nameOrObject, namespace, ServiceHelper.kind, ServiceHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*ServiceSpecHelper*/ {
+    _spec: ServiceSpecHelper;
+    get spec(): ServiceSpecHelper {
         return this._spec
     }
-    set spec(x: any /*ServiceSpecHelper*/) {
+    set spec(x: ServiceSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*ServiceSpecHelper*/) {
+    $Spec(x: ServiceSpecHelper) {
         this.spec = x; return this
     }
 
-    _status: any;
-    get status(): any /*ServiceStatusHelper*/ {
+    _status: ServiceStatusHelper;
+    get status(): ServiceStatusHelper {
         return this._status
     }
-    set status(x: any /*ServiceStatusHelper*/) {
+    set status(x: ServiceStatusHelper) {
         this._status = x
     }
-    setStatus(x: any /*ServiceStatusHelper*/) {
+    $Status(x: ServiceStatusHelper) {
         this.status = x; return this
     }
 }
 
 export interface ServiceAccountHelper extends ServiceAccount {
-    $automountServiceAccountToken(x: any): any;
-    $imagePullSecrets(x: any): any;
-    $metadata(x: any): any;
-    $secrets(x: any): any;
+    $automountServiceAccountToken(x: boolean): ServiceAccountHelper;
+    $imagePullSecrets(x: Array<LocalObjectReference>): ServiceAccountHelper;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): ServiceAccountHelper;
+    $secrets(x: Array<ObjectReference>): ServiceAccountHelper;
 }
 
 /** ServiceAccount binds together: * a name, understood by users, and perhaps by peripheral systems, for an identity * a principal that can be authenticated and authorized * a set of secrets */
@@ -9794,54 +9962,55 @@ export class ServiceAccountHelper extends ResourceTemplate implements ServiceAcc
         super(nameOrObject, namespace, ServiceAccountHelper.kind, ServiceAccountHelper.apiVersion)
     }
 
-    _automountServiceAccountToken: any;
-    get automountServiceAccountToken(): any /*boolean*/ {
+    _automountServiceAccountToken: boolean;
+    get automountServiceAccountToken(): boolean {
         return this._automountServiceAccountToken
     }
-    set automountServiceAccountToken(x: any /*boolean*/) {
+    set automountServiceAccountToken(x: boolean) {
         this._automountServiceAccountToken = x
     }
-    setAutomountServiceAccountToken(x: any /*boolean*/) {
+    $AutomountServiceAccountToken(x: boolean) {
         this.automountServiceAccountToken = x; return this
     }
 
-    _imagePullSecrets: any;
-    get imagePullSecrets(): any /*Array<LocalObjectReference>*/ {
+    _imagePullSecrets: Array<LocalObjectReference>;
+    get imagePullSecrets(): Array<LocalObjectReference> {
         return this._imagePullSecrets
     }
-    set imagePullSecrets(x: any /*Array<LocalObjectReference>*/) {
+    set imagePullSecrets(x: Array<LocalObjectReference>) {
         this._imagePullSecrets = this.set(this.imagePullSecrets, x)
     }
-    setImagePullSecrets(x: any /*Array<LocalObjectReference>*/) {
+    $ImagePullSecrets(x: Array<LocalObjectReference>) {
         this.imagePullSecrets = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _secrets: any;
-    get secrets(): any /*Array<ObjectReference>*/ {
+    _secrets: Array<ObjectReference>;
+    get secrets(): Array<ObjectReference> {
         return this._secrets
     }
-    set secrets(x: any /*Array<ObjectReference>*/) {
+    set secrets(x: Array<ObjectReference>) {
         this._secrets = this.set(this.secrets, x)
     }
-    setSecrets(x: any /*Array<ObjectReference>*/) {
+    $Secrets(x: Array<ObjectReference>) {
         this.secrets = x; return this
     }
 }
 
 export interface ServiceAccountListHelper extends ServiceAccountList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<ServiceAccount>): ServiceAccountListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): ServiceAccountListHelper;
 }
 
 /** ServiceAccountList is a list of ServiceAccount objects */
@@ -9853,33 +10022,33 @@ export class ServiceAccountListHelper extends ResourceTemplate implements Servic
         super(nameOrObject, namespace, ServiceAccountListHelper.kind, ServiceAccountListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<ServiceAccount>*/ {
+    _items: Array<ServiceAccount>;
+    get items(): Array<ServiceAccount> {
         return this._items
     }
-    set items(x: any /*Array<ServiceAccount>*/) {
+    set items(x: Array<ServiceAccount>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<ServiceAccount>*/) {
+    $Items(x: Array<ServiceAccount>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface ServiceAccountTokenProjectionHelper extends ServiceAccountTokenProjection {
-    $audience(x: any): any;
-    $expirationSeconds(x: any): any;
-    $path(x: any): any;
+    $audience(x: string): ServiceAccountTokenProjectionHelper;
+    $expirationSeconds(x: number): ServiceAccountTokenProjectionHelper;
+    $path(x: string): ServiceAccountTokenProjectionHelper;
 }
 
 /** ServiceAccountTokenProjection represents a projected service account token volume. This projection can be used to insert a service account token into the pods runtime filesystem for use against APIs (Kubernetes API Server or otherwise). */
@@ -9888,43 +10057,44 @@ export class ServiceAccountTokenProjectionHelper extends Template implements Ser
         super(obj)
     }
 
-    _audience: any;
-    get audience(): any /*string*/ {
+    _audience: string;
+    get audience(): string {
         return this._audience
     }
-    set audience(x: any /*string*/) {
+    set audience(x: string) {
         this._audience = x
     }
-    setAudience(x: any /*string*/) {
+    $Audience(x: string) {
         this.audience = x; return this
     }
 
-    _expirationSeconds: any;
-    get expirationSeconds(): any /*number*/ {
+    _expirationSeconds: number;
+    get expirationSeconds(): number {
         return this._expirationSeconds
     }
-    set expirationSeconds(x: any /*number*/) {
+    set expirationSeconds(x: number) {
         this._expirationSeconds = x
     }
-    setExpirationSeconds(x: any /*number*/) {
+    $ExpirationSeconds(x: number) {
         this.expirationSeconds = x; return this
     }
 
-    _path: any;
-    get path(): any /*string*/ {
+    _path: string;
+    get path(): string {
         return this._path
     }
-    set path(x: any /*string*/) {
+    set path(x: string) {
         this._path = x
     }
-    setPath(x: any /*string*/) {
+    $Path(x: string) {
         this.path = x; return this
     }
 }
 
 export interface ServiceListHelper extends ServiceList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<Service>): ServiceListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): ServiceListHelper;
 }
 
 /** ServiceList holds a list of services. */
@@ -9936,35 +10106,36 @@ export class ServiceListHelper extends ResourceTemplate implements ServiceListHe
         super(nameOrObject, namespace, ServiceListHelper.kind, ServiceListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<Service>*/ {
+    _items: Array<Service>;
+    get items(): Array<Service> {
         return this._items
     }
-    set items(x: any /*Array<Service>*/) {
+    set items(x: Array<Service>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<Service>*/) {
+    $Items(x: Array<Service>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface ServicePortHelper extends ServicePort {
-    $appProtocol(x: any): any;
-    $nodePort(x: any): any;
-    $port(x: any): any;
-    $protocol(x: any): any;
-    $targetPort(x: any): any;
+    $appProtocol(x: string): ServicePortHelper;
+    $nodePort(x: number): ServicePortHelper;
+    $port(x: number): ServicePortHelper;
+    $protocol(x: string): ServicePortHelper;
+    targetPort: number | stringHelper;
+    $targetPort(x: number | stringHelper): ServicePortHelper;
 }
 
 /** ServicePort contains information on service's port. */
@@ -9973,83 +10144,84 @@ export class ServicePortHelper extends Template implements ServicePortHelper {
         super(obj)
     }
 
-    _appProtocol: any;
-    get appProtocol(): any /*string*/ {
+    _appProtocol: string;
+    get appProtocol(): string {
         return this._appProtocol
     }
-    set appProtocol(x: any /*string*/) {
+    set appProtocol(x: string) {
         this._appProtocol = x
     }
-    setAppProtocol(x: any /*string*/) {
+    $AppProtocol(x: string) {
         this.appProtocol = x; return this
     }
 
-    _nodePort: any;
-    get nodePort(): any /*number*/ {
+    _nodePort: number;
+    get nodePort(): number {
         return this._nodePort
     }
-    set nodePort(x: any /*number*/) {
+    set nodePort(x: number) {
         this._nodePort = x
     }
-    setNodePort(x: any /*number*/) {
+    $NodePort(x: number) {
         this.nodePort = x; return this
     }
 
-    _port: any;
-    get port(): any /*number*/ {
+    _port: number;
+    get port(): number {
         return this._port
     }
-    set port(x: any /*number*/) {
+    set port(x: number) {
         this._port = x
     }
-    setPort(x: any /*number*/) {
+    $Port(x: number) {
         this.port = x; return this
     }
 
-    _protocol: any;
-    get protocol(): any /*string*/ {
+    _protocol: string;
+    get protocol(): string {
         return this._protocol
     }
-    set protocol(x: any /*string*/) {
+    set protocol(x: string) {
         this._protocol = x
     }
-    setProtocol(x: any /*string*/) {
+    $Protocol(x: string) {
         this.protocol = x; return this
     }
 
-    _targetPort: any;
-    get targetPort(): any /*number | stringHelper*/ {
+    _targetPort: number | stringHelper;
+    get targetPort(): number | stringHelper {
         return this._targetPort
     }
-    set targetPort(x: any /*number | stringHelper*/) {
+    set targetPort(x: number | stringHelper) {
         this._targetPort = x
     }
-    setTargetPort(x: any /*number | stringHelper*/) {
+    $TargetPort(x: number | stringHelper) {
         this.targetPort = x; return this
     }
 }
 
 export interface ServiceSpecHelper extends ServiceSpec {
-    $allocateLoadBalancerNodePorts(x: any): any;
-    $clusterIP(x: any): any;
-    $clusterIPs(x: any): any;
-    $externalIPs(x: any): any;
-    $externalName(x: any): any;
-    $externalTrafficPolicy(x: any): any;
-    $healthCheckNodePort(x: any): any;
-    $internalTrafficPolicy(x: any): any;
-    $ipFamilies(x: any): any;
-    $ipFamilyPolicy(x: any): any;
-    $loadBalancerClass(x: any): any;
-    $loadBalancerIP(x: any): any;
-    $loadBalancerSourceRanges(x: any): any;
-    $ports(x: any): any;
-    $publishNotReadyAddresses(x: any): any;
-    $selector(x: any): any;
-    $sessionAffinity(x: any): any;
-    $sessionAffinityConfig(x: any): any;
-    $topologyKeys(x: any): any;
-    $type(x: any): any;
+    $allocateLoadBalancerNodePorts(x: boolean): ServiceSpecHelper;
+    $clusterIP(x: string): ServiceSpecHelper;
+    $clusterIPs(x: Array<string>): ServiceSpecHelper;
+    $externalIPs(x: Array<string>): ServiceSpecHelper;
+    $externalName(x: string): ServiceSpecHelper;
+    $externalTrafficPolicy(x: string): ServiceSpecHelper;
+    $healthCheckNodePort(x: number): ServiceSpecHelper;
+    $internalTrafficPolicy(x: string): ServiceSpecHelper;
+    $ipFamilies(x: Array<string>): ServiceSpecHelper;
+    $ipFamilyPolicy(x: string): ServiceSpecHelper;
+    $loadBalancerClass(x: string): ServiceSpecHelper;
+    $loadBalancerIP(x: string): ServiceSpecHelper;
+    $loadBalancerSourceRanges(x: Array<string>): ServiceSpecHelper;
+    $ports(x: Array<ServicePort>): ServiceSpecHelper;
+    $publishNotReadyAddresses(x: boolean): ServiceSpecHelper;
+    $selector(x: any): ServiceSpecHelper;
+    $sessionAffinity(x: string): ServiceSpecHelper;
+    sessionAffinityConfig: SessionAffinityConfigHelper;
+    $sessionAffinityConfig(x: SessionAffinityConfigHelper): ServiceSpecHelper;
+    $topologyKeys(x: Array<string>): ServiceSpecHelper;
+    $type(x: string): ServiceSpecHelper;
 }
 
 /** ServiceSpec describes the attributes that a user creates on a service. */
@@ -10058,230 +10230,231 @@ export class ServiceSpecHelper extends Template implements ServiceSpecHelper {
         super(obj)
     }
 
-    _allocateLoadBalancerNodePorts: any;
-    get allocateLoadBalancerNodePorts(): any /*boolean*/ {
+    _allocateLoadBalancerNodePorts: boolean;
+    get allocateLoadBalancerNodePorts(): boolean {
         return this._allocateLoadBalancerNodePorts
     }
-    set allocateLoadBalancerNodePorts(x: any /*boolean*/) {
+    set allocateLoadBalancerNodePorts(x: boolean) {
         this._allocateLoadBalancerNodePorts = x
     }
-    setAllocateLoadBalancerNodePorts(x: any /*boolean*/) {
+    $AllocateLoadBalancerNodePorts(x: boolean) {
         this.allocateLoadBalancerNodePorts = x; return this
     }
 
-    _clusterIP: any;
-    get clusterIP(): any /*string*/ {
+    _clusterIP: string;
+    get clusterIP(): string {
         return this._clusterIP
     }
-    set clusterIP(x: any /*string*/) {
+    set clusterIP(x: string) {
         this._clusterIP = x
     }
-    setClusterIP(x: any /*string*/) {
+    $ClusterIP(x: string) {
         this.clusterIP = x; return this
     }
 
-    _clusterIPs: any;
-    get clusterIPs(): any /*Array<string>*/ {
+    _clusterIPs: Array<string>;
+    get clusterIPs(): Array<string> {
         return this._clusterIPs
     }
-    set clusterIPs(x: any /*Array<string>*/) {
+    set clusterIPs(x: Array<string>) {
         this._clusterIPs = this.set(this.clusterIPs, x)
     }
-    setClusterIPs(x: any /*Array<string>*/) {
+    $ClusterIPs(x: Array<string>) {
         this.clusterIPs = x; return this
     }
 
-    _externalIPs: any;
-    get externalIPs(): any /*Array<string>*/ {
+    _externalIPs: Array<string>;
+    get externalIPs(): Array<string> {
         return this._externalIPs
     }
-    set externalIPs(x: any /*Array<string>*/) {
+    set externalIPs(x: Array<string>) {
         this._externalIPs = this.set(this.externalIPs, x)
     }
-    setExternalIPs(x: any /*Array<string>*/) {
+    $ExternalIPs(x: Array<string>) {
         this.externalIPs = x; return this
     }
 
-    _externalName: any;
-    get externalName(): any /*string*/ {
+    _externalName: string;
+    get externalName(): string {
         return this._externalName
     }
-    set externalName(x: any /*string*/) {
+    set externalName(x: string) {
         this._externalName = x
     }
-    setExternalName(x: any /*string*/) {
+    $ExternalName(x: string) {
         this.externalName = x; return this
     }
 
-    _externalTrafficPolicy: any;
-    get externalTrafficPolicy(): any /*string*/ {
+    _externalTrafficPolicy: string;
+    get externalTrafficPolicy(): string {
         return this._externalTrafficPolicy
     }
-    set externalTrafficPolicy(x: any /*string*/) {
+    set externalTrafficPolicy(x: string) {
         this._externalTrafficPolicy = x
     }
-    setExternalTrafficPolicy(x: any /*string*/) {
+    $ExternalTrafficPolicy(x: string) {
         this.externalTrafficPolicy = x; return this
     }
 
-    _healthCheckNodePort: any;
-    get healthCheckNodePort(): any /*number*/ {
+    _healthCheckNodePort: number;
+    get healthCheckNodePort(): number {
         return this._healthCheckNodePort
     }
-    set healthCheckNodePort(x: any /*number*/) {
+    set healthCheckNodePort(x: number) {
         this._healthCheckNodePort = x
     }
-    setHealthCheckNodePort(x: any /*number*/) {
+    $HealthCheckNodePort(x: number) {
         this.healthCheckNodePort = x; return this
     }
 
-    _internalTrafficPolicy: any;
-    get internalTrafficPolicy(): any /*string*/ {
+    _internalTrafficPolicy: string;
+    get internalTrafficPolicy(): string {
         return this._internalTrafficPolicy
     }
-    set internalTrafficPolicy(x: any /*string*/) {
+    set internalTrafficPolicy(x: string) {
         this._internalTrafficPolicy = x
     }
-    setInternalTrafficPolicy(x: any /*string*/) {
+    $InternalTrafficPolicy(x: string) {
         this.internalTrafficPolicy = x; return this
     }
 
-    _ipFamilies: any;
-    get ipFamilies(): any /*Array<string>*/ {
+    _ipFamilies: Array<string>;
+    get ipFamilies(): Array<string> {
         return this._ipFamilies
     }
-    set ipFamilies(x: any /*Array<string>*/) {
+    set ipFamilies(x: Array<string>) {
         this._ipFamilies = this.set(this.ipFamilies, x)
     }
-    setIpFamilies(x: any /*Array<string>*/) {
+    $IpFamilies(x: Array<string>) {
         this.ipFamilies = x; return this
     }
 
-    _ipFamilyPolicy: any;
-    get ipFamilyPolicy(): any /*string*/ {
+    _ipFamilyPolicy: string;
+    get ipFamilyPolicy(): string {
         return this._ipFamilyPolicy
     }
-    set ipFamilyPolicy(x: any /*string*/) {
+    set ipFamilyPolicy(x: string) {
         this._ipFamilyPolicy = x
     }
-    setIpFamilyPolicy(x: any /*string*/) {
+    $IpFamilyPolicy(x: string) {
         this.ipFamilyPolicy = x; return this
     }
 
-    _loadBalancerClass: any;
-    get loadBalancerClass(): any /*string*/ {
+    _loadBalancerClass: string;
+    get loadBalancerClass(): string {
         return this._loadBalancerClass
     }
-    set loadBalancerClass(x: any /*string*/) {
+    set loadBalancerClass(x: string) {
         this._loadBalancerClass = x
     }
-    setLoadBalancerClass(x: any /*string*/) {
+    $LoadBalancerClass(x: string) {
         this.loadBalancerClass = x; return this
     }
 
-    _loadBalancerIP: any;
-    get loadBalancerIP(): any /*string*/ {
+    _loadBalancerIP: string;
+    get loadBalancerIP(): string {
         return this._loadBalancerIP
     }
-    set loadBalancerIP(x: any /*string*/) {
+    set loadBalancerIP(x: string) {
         this._loadBalancerIP = x
     }
-    setLoadBalancerIP(x: any /*string*/) {
+    $LoadBalancerIP(x: string) {
         this.loadBalancerIP = x; return this
     }
 
-    _loadBalancerSourceRanges: any;
-    get loadBalancerSourceRanges(): any /*Array<string>*/ {
+    _loadBalancerSourceRanges: Array<string>;
+    get loadBalancerSourceRanges(): Array<string> {
         return this._loadBalancerSourceRanges
     }
-    set loadBalancerSourceRanges(x: any /*Array<string>*/) {
+    set loadBalancerSourceRanges(x: Array<string>) {
         this._loadBalancerSourceRanges = this.set(this.loadBalancerSourceRanges, x)
     }
-    setLoadBalancerSourceRanges(x: any /*Array<string>*/) {
+    $LoadBalancerSourceRanges(x: Array<string>) {
         this.loadBalancerSourceRanges = x; return this
     }
 
-    _ports: any;
-    get ports(): any /*Array<ServicePort>*/ {
+    _ports: Array<ServicePort>;
+    get ports(): Array<ServicePort> {
         return this._ports
     }
-    set ports(x: any /*Array<ServicePort>*/) {
+    set ports(x: Array<ServicePort>) {
         this._ports = this.set(this.ports, x)
     }
-    setPorts(x: any /*Array<ServicePort>*/) {
+    $Ports(x: Array<ServicePort>) {
         this.ports = x; return this
     }
 
-    _publishNotReadyAddresses: any;
-    get publishNotReadyAddresses(): any /*boolean*/ {
+    _publishNotReadyAddresses: boolean;
+    get publishNotReadyAddresses(): boolean {
         return this._publishNotReadyAddresses
     }
-    set publishNotReadyAddresses(x: any /*boolean*/) {
+    set publishNotReadyAddresses(x: boolean) {
         this._publishNotReadyAddresses = x
     }
-    setPublishNotReadyAddresses(x: any /*boolean*/) {
+    $PublishNotReadyAddresses(x: boolean) {
         this.publishNotReadyAddresses = x; return this
     }
 
     _selector: any;
-    get selector(): any /*any*/ {
+    get selector(): any {
         return this._selector
     }
-    set selector(x: any /*any*/) {
+    set selector(x: any) {
         this._selector = this.set(this.selector, x)
     }
-    setSelector(x: any /*any*/) {
+    $Selector(x: any) {
         this.selector = x; return this
     }
 
-    _sessionAffinity: any;
-    get sessionAffinity(): any /*string*/ {
+    _sessionAffinity: string;
+    get sessionAffinity(): string {
         return this._sessionAffinity
     }
-    set sessionAffinity(x: any /*string*/) {
+    set sessionAffinity(x: string) {
         this._sessionAffinity = x
     }
-    setSessionAffinity(x: any /*string*/) {
+    $SessionAffinity(x: string) {
         this.sessionAffinity = x; return this
     }
 
-    _sessionAffinityConfig: any;
-    get sessionAffinityConfig(): any /*SessionAffinityConfigHelper*/ {
+    _sessionAffinityConfig: SessionAffinityConfigHelper;
+    get sessionAffinityConfig(): SessionAffinityConfigHelper {
         return this._sessionAffinityConfig
     }
-    set sessionAffinityConfig(x: any /*SessionAffinityConfigHelper*/) {
+    set sessionAffinityConfig(x: SessionAffinityConfigHelper) {
         this._sessionAffinityConfig = x
     }
-    setSessionAffinityConfig(x: any /*SessionAffinityConfigHelper*/) {
+    $SessionAffinityConfig(x: SessionAffinityConfigHelper) {
         this.sessionAffinityConfig = x; return this
     }
 
-    _topologyKeys: any;
-    get topologyKeys(): any /*Array<string>*/ {
+    _topologyKeys: Array<string>;
+    get topologyKeys(): Array<string> {
         return this._topologyKeys
     }
-    set topologyKeys(x: any /*Array<string>*/) {
+    set topologyKeys(x: Array<string>) {
         this._topologyKeys = this.set(this.topologyKeys, x)
     }
-    setTopologyKeys(x: any /*Array<string>*/) {
+    $TopologyKeys(x: Array<string>) {
         this.topologyKeys = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }
 
 export interface ServiceStatusHelper extends ServiceStatus {
-    $conditions(x: any): any;
-    $loadBalancer(x: any): any;
+    $conditions(x: Array<Condition>): ServiceStatusHelper;
+    loadBalancer: LoadBalancerStatusHelper;
+    $loadBalancer(x: LoadBalancerStatusHelper): ServiceStatusHelper;
 }
 
 /** ServiceStatus represents the current status of a service. */
@@ -10290,31 +10463,32 @@ export class ServiceStatusHelper extends Template implements ServiceStatusHelper
         super(obj)
     }
 
-    _conditions: any;
-    get conditions(): any /*Array<Condition>*/ {
+    _conditions: Array<Condition>;
+    get conditions(): Array<Condition> {
         return this._conditions
     }
-    set conditions(x: any /*Array<Condition>*/) {
+    set conditions(x: Array<Condition>) {
         this._conditions = this.set(this.conditions, x)
     }
-    setConditions(x: any /*Array<Condition>*/) {
+    $Conditions(x: Array<Condition>) {
         this.conditions = x; return this
     }
 
-    _loadBalancer: any;
-    get loadBalancer(): any /*LoadBalancerStatusHelper*/ {
+    _loadBalancer: LoadBalancerStatusHelper;
+    get loadBalancer(): LoadBalancerStatusHelper {
         return this._loadBalancer
     }
-    set loadBalancer(x: any /*LoadBalancerStatusHelper*/) {
+    set loadBalancer(x: LoadBalancerStatusHelper) {
         this._loadBalancer = x
     }
-    setLoadBalancer(x: any /*LoadBalancerStatusHelper*/) {
+    $LoadBalancer(x: LoadBalancerStatusHelper) {
         this.loadBalancer = x; return this
     }
 }
 
 export interface SessionAffinityConfigHelper extends SessionAffinityConfig {
-    $clientIP(x: any): any;
+    clientIP: ClientIPConfigHelper;
+    $clientIP(x: ClientIPConfigHelper): SessionAffinityConfigHelper;
 }
 
 /** SessionAffinityConfig represents the configurations of session affinity. */
@@ -10323,24 +10497,25 @@ export class SessionAffinityConfigHelper extends Template implements SessionAffi
         super(obj)
     }
 
-    _clientIP: any;
-    get clientIP(): any /*ClientIPConfigHelper*/ {
+    _clientIP: ClientIPConfigHelper;
+    get clientIP(): ClientIPConfigHelper {
         return this._clientIP
     }
-    set clientIP(x: any /*ClientIPConfigHelper*/) {
+    set clientIP(x: ClientIPConfigHelper) {
         this._clientIP = x
     }
-    setClientIP(x: any /*ClientIPConfigHelper*/) {
+    $ClientIP(x: ClientIPConfigHelper) {
         this.clientIP = x; return this
     }
 }
 
 export interface StorageOSPersistentVolumeSourceHelper extends StorageOSPersistentVolumeSource {
-    $fsType(x: any): any;
-    $readOnly(x: any): any;
-    $secretRef(x: any): any;
-    $volumeName(x: any): any;
-    $volumeNamespace(x: any): any;
+    $fsType(x: string): StorageOSPersistentVolumeSourceHelper;
+    $readOnly(x: boolean): StorageOSPersistentVolumeSourceHelper;
+    secretRef: ObjectReferenceHelper;
+    $secretRef(x: ObjectReferenceHelper): StorageOSPersistentVolumeSourceHelper;
+    $volumeName(x: string): StorageOSPersistentVolumeSourceHelper;
+    $volumeNamespace(x: string): StorageOSPersistentVolumeSourceHelper;
 }
 
 /** Represents a StorageOS persistent volume resource. */
@@ -10349,68 +10524,69 @@ export class StorageOSPersistentVolumeSourceHelper extends Template implements S
         super(obj)
     }
 
-    _fsType: any;
-    get fsType(): any /*string*/ {
+    _fsType: string;
+    get fsType(): string {
         return this._fsType
     }
-    set fsType(x: any /*string*/) {
+    set fsType(x: string) {
         this._fsType = x
     }
-    setFsType(x: any /*string*/) {
+    $FsType(x: string) {
         this.fsType = x; return this
     }
 
-    _readOnly: any;
-    get readOnly(): any /*boolean*/ {
+    _readOnly: boolean;
+    get readOnly(): boolean {
         return this._readOnly
     }
-    set readOnly(x: any /*boolean*/) {
+    set readOnly(x: boolean) {
         this._readOnly = x
     }
-    setReadOnly(x: any /*boolean*/) {
+    $ReadOnly(x: boolean) {
         this.readOnly = x; return this
     }
 
-    _secretRef: any;
-    get secretRef(): any /*ObjectReferenceHelper*/ {
+    _secretRef: ObjectReferenceHelper;
+    get secretRef(): ObjectReferenceHelper {
         return this._secretRef
     }
-    set secretRef(x: any /*ObjectReferenceHelper*/) {
+    set secretRef(x: ObjectReferenceHelper) {
         this._secretRef = x
     }
-    setSecretRef(x: any /*ObjectReferenceHelper*/) {
+    $SecretRef(x: ObjectReferenceHelper) {
         this.secretRef = x; return this
     }
 
-    _volumeName: any;
-    get volumeName(): any /*string*/ {
+    _volumeName: string;
+    get volumeName(): string {
         return this._volumeName
     }
-    set volumeName(x: any /*string*/) {
+    set volumeName(x: string) {
         this._volumeName = x
     }
-    setVolumeName(x: any /*string*/) {
+    $VolumeName(x: string) {
         this.volumeName = x; return this
     }
 
-    _volumeNamespace: any;
-    get volumeNamespace(): any /*string*/ {
+    _volumeNamespace: string;
+    get volumeNamespace(): string {
         return this._volumeNamespace
     }
-    set volumeNamespace(x: any /*string*/) {
+    set volumeNamespace(x: string) {
         this._volumeNamespace = x
     }
-    setVolumeNamespace(x: any /*string*/) {
+    $VolumeNamespace(x: string) {
         this.volumeNamespace = x; return this
     }
 }
 
 export interface StorageOSVolumeSourceHelper extends StorageOSVolumeSource {
-    $fsType(x: any): any;
-    $readOnly(x: any): any;
-    $secretRef(x: any): any;
-    $volumeName(x: any): any;
-    $volumeNamespace(x: any): any;
+    $fsType(x: string): StorageOSVolumeSourceHelper;
+    $readOnly(x: boolean): StorageOSVolumeSourceHelper;
+    secretRef: LocalObjectReferenceHelper;
+    $secretRef(x: LocalObjectReferenceHelper): StorageOSVolumeSourceHelper;
+    $volumeName(x: string): StorageOSVolumeSourceHelper;
+    $volumeNamespace(x: string): StorageOSVolumeSourceHelper;
 }
 
 /** Represents a StorageOS persistent volume resource. */
@@ -10419,64 +10595,64 @@ export class StorageOSVolumeSourceHelper extends Template implements StorageOSVo
         super(obj)
     }
 
-    _fsType: any;
-    get fsType(): any /*string*/ {
+    _fsType: string;
+    get fsType(): string {
         return this._fsType
     }
-    set fsType(x: any /*string*/) {
+    set fsType(x: string) {
         this._fsType = x
     }
-    setFsType(x: any /*string*/) {
+    $FsType(x: string) {
         this.fsType = x; return this
     }
 
-    _readOnly: any;
-    get readOnly(): any /*boolean*/ {
+    _readOnly: boolean;
+    get readOnly(): boolean {
         return this._readOnly
     }
-    set readOnly(x: any /*boolean*/) {
+    set readOnly(x: boolean) {
         this._readOnly = x
     }
-    setReadOnly(x: any /*boolean*/) {
+    $ReadOnly(x: boolean) {
         this.readOnly = x; return this
     }
 
-    _secretRef: any;
-    get secretRef(): any /*LocalObjectReferenceHelper*/ {
+    _secretRef: LocalObjectReferenceHelper;
+    get secretRef(): LocalObjectReferenceHelper {
         return this._secretRef
     }
-    set secretRef(x: any /*LocalObjectReferenceHelper*/) {
+    set secretRef(x: LocalObjectReferenceHelper) {
         this._secretRef = x
     }
-    setSecretRef(x: any /*LocalObjectReferenceHelper*/) {
+    $SecretRef(x: LocalObjectReferenceHelper) {
         this.secretRef = x; return this
     }
 
-    _volumeName: any;
-    get volumeName(): any /*string*/ {
+    _volumeName: string;
+    get volumeName(): string {
         return this._volumeName
     }
-    set volumeName(x: any /*string*/) {
+    set volumeName(x: string) {
         this._volumeName = x
     }
-    setVolumeName(x: any /*string*/) {
+    $VolumeName(x: string) {
         this.volumeName = x; return this
     }
 
-    _volumeNamespace: any;
-    get volumeNamespace(): any /*string*/ {
+    _volumeNamespace: string;
+    get volumeNamespace(): string {
         return this._volumeNamespace
     }
-    set volumeNamespace(x: any /*string*/) {
+    set volumeNamespace(x: string) {
         this._volumeNamespace = x
     }
-    setVolumeNamespace(x: any /*string*/) {
+    $VolumeNamespace(x: string) {
         this.volumeNamespace = x; return this
     }
 }
 
 export interface SysctlHelper extends Sysctl {
-    $value(x: any): any;
+    $value(x: string): SysctlHelper;
 }
 
 /** Sysctl defines a kernel parameter to be set */
@@ -10485,21 +10661,22 @@ export class SysctlHelper extends Template implements SysctlHelper {
         super(obj)
     }
 
-    _value: any;
-    get value(): any /*string*/ {
+    _value: string;
+    get value(): string {
         return this._value
     }
-    set value(x: any /*string*/) {
+    set value(x: string) {
         this._value = x
     }
-    setValue(x: any /*string*/) {
+    $Value(x: string) {
         this.value = x; return this
     }
 }
 
 export interface TCPSocketActionHelper extends TCPSocketAction {
-    $host(x: any): any;
-    $port(x: any): any;
+    $host(x: string): TCPSocketActionHelper;
+    port: number | stringHelper;
+    $port(x: number | stringHelper): TCPSocketActionHelper;
 }
 
 /** TCPSocketAction describes an action based on opening a socket */
@@ -10508,34 +10685,34 @@ export class TCPSocketActionHelper extends Template implements TCPSocketActionHe
         super(obj)
     }
 
-    _host: any;
-    get host(): any /*string*/ {
+    _host: string;
+    get host(): string {
         return this._host
     }
-    set host(x: any /*string*/) {
+    set host(x: string) {
         this._host = x
     }
-    setHost(x: any /*string*/) {
+    $Host(x: string) {
         this.host = x; return this
     }
 
-    _port: any;
-    get port(): any /*number | stringHelper*/ {
+    _port: number | stringHelper;
+    get port(): number | stringHelper {
         return this._port
     }
-    set port(x: any /*number | stringHelper*/) {
+    set port(x: number | stringHelper) {
         this._port = x
     }
-    setPort(x: any /*number | stringHelper*/) {
+    $Port(x: number | stringHelper) {
         this.port = x; return this
     }
 }
 
 export interface TaintHelper extends Taint {
-    $effect(x: any): any;
-    $key(x: any): any;
-    $timeAdded(x: any): any;
-    $value(x: any): any;
+    $effect(x: string): TaintHelper;
+    $key(x: string): TaintHelper;
+    $timeAdded(x: Time): TaintHelper;
+    $value(x: string): TaintHelper;
 }
 
 /** The node this Taint is attached to has the "effect" on any pod that does not tolerate the Taint. */
@@ -10544,57 +10721,57 @@ export class TaintHelper extends Template implements TaintHelper {
         super(obj)
     }
 
-    _effect: any;
-    get effect(): any /*string*/ {
+    _effect: string;
+    get effect(): string {
         return this._effect
     }
-    set effect(x: any /*string*/) {
+    set effect(x: string) {
         this._effect = x
     }
-    setEffect(x: any /*string*/) {
+    $Effect(x: string) {
         this.effect = x; return this
     }
 
-    _key: any;
-    get key(): any /*string*/ {
+    _key: string;
+    get key(): string {
         return this._key
     }
-    set key(x: any /*string*/) {
+    set key(x: string) {
         this._key = x
     }
-    setKey(x: any /*string*/) {
+    $Key(x: string) {
         this.key = x; return this
     }
 
-    _timeAdded: any;
-    get timeAdded(): any /*Time*/ {
+    _timeAdded: Time;
+    get timeAdded(): Time {
         return this._timeAdded
     }
-    set timeAdded(x: any /*Time*/) {
+    set timeAdded(x: Time) {
         this._timeAdded = x
     }
-    setTimeAdded(x: any /*Time*/) {
+    $TimeAdded(x: Time) {
         this.timeAdded = x; return this
     }
 
-    _value: any;
-    get value(): any /*string*/ {
+    _value: string;
+    get value(): string {
         return this._value
     }
-    set value(x: any /*string*/) {
+    set value(x: string) {
         this._value = x
     }
-    setValue(x: any /*string*/) {
+    $Value(x: string) {
         this.value = x; return this
     }
 }
 
 export interface TolerationHelper extends Toleration {
-    $effect(x: any): any;
-    $key(x: any): any;
-    $operator(x: any): any;
-    $tolerationSeconds(x: any): any;
-    $value(x: any): any;
+    $effect(x: string): TolerationHelper;
+    $key(x: string): TolerationHelper;
+    $operator(x: string): TolerationHelper;
+    $tolerationSeconds(x: number): TolerationHelper;
+    $value(x: string): TolerationHelper;
 }
 
 /** The pod this Toleration is attached to tolerates any taint that matches the triple <key,value,effect> using the matching operator <operator>. */
@@ -10603,65 +10780,65 @@ export class TolerationHelper extends Template implements TolerationHelper {
         super(obj)
     }
 
-    _effect: any;
-    get effect(): any /*string*/ {
+    _effect: string;
+    get effect(): string {
         return this._effect
     }
-    set effect(x: any /*string*/) {
+    set effect(x: string) {
         this._effect = x
     }
-    setEffect(x: any /*string*/) {
+    $Effect(x: string) {
         this.effect = x; return this
     }
 
-    _key: any;
-    get key(): any /*string*/ {
+    _key: string;
+    get key(): string {
         return this._key
     }
-    set key(x: any /*string*/) {
+    set key(x: string) {
         this._key = x
     }
-    setKey(x: any /*string*/) {
+    $Key(x: string) {
         this.key = x; return this
     }
 
-    _operator: any;
-    get operator(): any /*string*/ {
+    _operator: string;
+    get operator(): string {
         return this._operator
     }
-    set operator(x: any /*string*/) {
+    set operator(x: string) {
         this._operator = x
     }
-    setOperator(x: any /*string*/) {
+    $Operator(x: string) {
         this.operator = x; return this
     }
 
-    _tolerationSeconds: any;
-    get tolerationSeconds(): any /*number*/ {
+    _tolerationSeconds: number;
+    get tolerationSeconds(): number {
         return this._tolerationSeconds
     }
-    set tolerationSeconds(x: any /*number*/) {
+    set tolerationSeconds(x: number) {
         this._tolerationSeconds = x
     }
-    setTolerationSeconds(x: any /*number*/) {
+    $TolerationSeconds(x: number) {
         this.tolerationSeconds = x; return this
     }
 
-    _value: any;
-    get value(): any /*string*/ {
+    _value: string;
+    get value(): string {
         return this._value
     }
-    set value(x: any /*string*/) {
+    set value(x: string) {
         this._value = x
     }
-    setValue(x: any /*string*/) {
+    $Value(x: string) {
         this.value = x; return this
     }
 }
 
 export interface TopologySelectorLabelRequirementHelper extends TopologySelectorLabelRequirement {
-    $key(x: any): any;
-    $values(x: any): any;
+    $key(x: string): TopologySelectorLabelRequirementHelper;
+    $values(x: Array<string>): TopologySelectorLabelRequirementHelper;
 }
 
 /** A topology selector requirement is a selector that matches given label. This is an alpha feature and may change in the future. */
@@ -10670,31 +10847,31 @@ export class TopologySelectorLabelRequirementHelper extends Template implements 
         super(obj)
     }
 
-    _key: any;
-    get key(): any /*string*/ {
+    _key: string;
+    get key(): string {
         return this._key
     }
-    set key(x: any /*string*/) {
+    set key(x: string) {
         this._key = x
     }
-    setKey(x: any /*string*/) {
+    $Key(x: string) {
         this.key = x; return this
     }
 
-    _values: any;
-    get values(): any /*Array<string>*/ {
+    _values: Array<string>;
+    get values(): Array<string> {
         return this._values
     }
-    set values(x: any /*Array<string>*/) {
+    set values(x: Array<string>) {
         this._values = this.set(this.values, x)
     }
-    setValues(x: any /*Array<string>*/) {
+    $Values(x: Array<string>) {
         this.values = x; return this
     }
 }
 
 export interface TopologySelectorTermHelper extends TopologySelectorTerm {
-    $matchLabelExpressions(x: any): any;
+    $matchLabelExpressions(x: Array<TopologySelectorLabelRequirement>): TopologySelectorTermHelper;
 }
 
 /** A topology selector term represents the result of label queries. A null or empty topology selector term matches no objects. The requirements of them are ANDed. It provides a subset of functionality as NodeSelectorTerm. This is an alpha feature and may change in the future. */
@@ -10703,23 +10880,24 @@ export class TopologySelectorTermHelper extends Template implements TopologySele
         super(obj)
     }
 
-    _matchLabelExpressions: any;
-    get matchLabelExpressions(): any /*Array<TopologySelectorLabelRequirement>*/ {
+    _matchLabelExpressions: Array<TopologySelectorLabelRequirement>;
+    get matchLabelExpressions(): Array<TopologySelectorLabelRequirement> {
         return this._matchLabelExpressions
     }
-    set matchLabelExpressions(x: any /*Array<TopologySelectorLabelRequirement>*/) {
+    set matchLabelExpressions(x: Array<TopologySelectorLabelRequirement>) {
         this._matchLabelExpressions = this.set(this.matchLabelExpressions, x)
     }
-    setMatchLabelExpressions(x: any /*Array<TopologySelectorLabelRequirement>*/) {
+    $MatchLabelExpressions(x: Array<TopologySelectorLabelRequirement>) {
         this.matchLabelExpressions = x; return this
     }
 }
 
 export interface TopologySpreadConstraintHelper extends TopologySpreadConstraint {
-    $labelSelector(x: any): any;
-    $maxSkew(x: any): any;
-    $topologyKey(x: any): any;
-    $whenUnsatisfiable(x: any): any;
+    labelSelector: LabelSelectorHelper;
+    $labelSelector(x: LabelSelectorHelper): TopologySpreadConstraintHelper;
+    $maxSkew(x: number): TopologySpreadConstraintHelper;
+    $topologyKey(x: string): TopologySpreadConstraintHelper;
+    $whenUnsatisfiable(x: string): TopologySpreadConstraintHelper;
 }
 
 /** TopologySpreadConstraint specifies how to spread matching pods among the given topology. */
@@ -10728,53 +10906,53 @@ export class TopologySpreadConstraintHelper extends Template implements Topology
         super(obj)
     }
 
-    _labelSelector: any;
-    get labelSelector(): any /*LabelSelectorHelper*/ {
+    _labelSelector: LabelSelectorHelper;
+    get labelSelector(): LabelSelectorHelper {
         return this._labelSelector
     }
-    set labelSelector(x: any /*LabelSelectorHelper*/) {
+    set labelSelector(x: LabelSelectorHelper) {
         this._labelSelector = x
     }
-    setLabelSelector(x: any /*LabelSelectorHelper*/) {
+    $LabelSelector(x: LabelSelectorHelper) {
         this.labelSelector = x; return this
     }
 
-    _maxSkew: any;
-    get maxSkew(): any /*number*/ {
+    _maxSkew: number;
+    get maxSkew(): number {
         return this._maxSkew
     }
-    set maxSkew(x: any /*number*/) {
+    set maxSkew(x: number) {
         this._maxSkew = x
     }
-    setMaxSkew(x: any /*number*/) {
+    $MaxSkew(x: number) {
         this.maxSkew = x; return this
     }
 
-    _topologyKey: any;
-    get topologyKey(): any /*string*/ {
+    _topologyKey: string;
+    get topologyKey(): string {
         return this._topologyKey
     }
-    set topologyKey(x: any /*string*/) {
+    set topologyKey(x: string) {
         this._topologyKey = x
     }
-    setTopologyKey(x: any /*string*/) {
+    $TopologyKey(x: string) {
         this.topologyKey = x; return this
     }
 
-    _whenUnsatisfiable: any;
-    get whenUnsatisfiable(): any /*string*/ {
+    _whenUnsatisfiable: string;
+    get whenUnsatisfiable(): string {
         return this._whenUnsatisfiable
     }
-    set whenUnsatisfiable(x: any /*string*/) {
+    set whenUnsatisfiable(x: string) {
         this._whenUnsatisfiable = x
     }
-    setWhenUnsatisfiable(x: any /*string*/) {
+    $WhenUnsatisfiable(x: string) {
         this.whenUnsatisfiable = x; return this
     }
 }
 
 export interface TypedLocalObjectReferenceHelper extends TypedLocalObjectReference {
-    $apiGroup(x: any): any;
+    $apiGroup(x: string): TypedLocalObjectReferenceHelper;
 }
 
 /** TypedLocalObjectReference contains enough information to let you locate the typed referenced object inside the same namespace. */
@@ -10783,48 +10961,77 @@ export class TypedLocalObjectReferenceHelper extends Template implements TypedLo
         super(obj)
     }
 
-    _apiGroup: any;
-    get apiGroup(): any /*string*/ {
+    _apiGroup: string;
+    get apiGroup(): string {
         return this._apiGroup
     }
-    set apiGroup(x: any /*string*/) {
+    set apiGroup(x: string) {
         this._apiGroup = x
     }
-    setApiGroup(x: any /*string*/) {
+    $ApiGroup(x: string) {
         this.apiGroup = x; return this
     }
 }
 
 export interface VolumeHelper extends Volume {
-    $awsElasticBlockStore(x: any): any;
-    $azureDisk(x: any): any;
-    $azureFile(x: any): any;
-    $cephfs(x: any): any;
-    $cinder(x: any): any;
-    $configMap(x: any): any;
-    $csi(x: any): any;
-    $downwardAPI(x: any): any;
-    $emptyDir(x: any): any;
-    $ephemeral(x: any): any;
-    $fc(x: any): any;
-    $flexVolume(x: any): any;
-    $flocker(x: any): any;
-    $gcePersistentDisk(x: any): any;
-    $gitRepo(x: any): any;
-    $glusterfs(x: any): any;
-    $hostPath(x: any): any;
-    $iscsi(x: any): any;
-    $nfs(x: any): any;
-    $persistentVolumeClaim(x: any): any;
-    $photonPersistentDisk(x: any): any;
-    $portworxVolume(x: any): any;
-    $projected(x: any): any;
-    $quobyte(x: any): any;
-    $rbd(x: any): any;
-    $scaleIO(x: any): any;
-    $secret(x: any): any;
-    $storageos(x: any): any;
-    $vsphereVolume(x: any): any;
+    awsElasticBlockStore: AWSElasticBlockStoreVolumeSourceHelper;
+    $awsElasticBlockStore(x: AWSElasticBlockStoreVolumeSourceHelper): VolumeHelper;
+    azureDisk: AzureDiskVolumeSourceHelper;
+    $azureDisk(x: AzureDiskVolumeSourceHelper): VolumeHelper;
+    azureFile: AzureFileVolumeSourceHelper;
+    $azureFile(x: AzureFileVolumeSourceHelper): VolumeHelper;
+    cephfs: CephFSVolumeSourceHelper;
+    $cephfs(x: CephFSVolumeSourceHelper): VolumeHelper;
+    cinder: CinderVolumeSourceHelper;
+    $cinder(x: CinderVolumeSourceHelper): VolumeHelper;
+    configMap: ConfigMapVolumeSourceHelper;
+    $configMap(x: ConfigMapVolumeSourceHelper): VolumeHelper;
+    csi: CSIVolumeSourceHelper;
+    $csi(x: CSIVolumeSourceHelper): VolumeHelper;
+    downwardAPI: DownwardAPIVolumeSourceHelper;
+    $downwardAPI(x: DownwardAPIVolumeSourceHelper): VolumeHelper;
+    emptyDir: EmptyDirVolumeSourceHelper;
+    $emptyDir(x: EmptyDirVolumeSourceHelper): VolumeHelper;
+    ephemeral: EphemeralVolumeSourceHelper;
+    $ephemeral(x: EphemeralVolumeSourceHelper): VolumeHelper;
+    fc: FCVolumeSourceHelper;
+    $fc(x: FCVolumeSourceHelper): VolumeHelper;
+    flexVolume: FlexVolumeSourceHelper;
+    $flexVolume(x: FlexVolumeSourceHelper): VolumeHelper;
+    flocker: FlockerVolumeSourceHelper;
+    $flocker(x: FlockerVolumeSourceHelper): VolumeHelper;
+    gcePersistentDisk: GCEPersistentDiskVolumeSourceHelper;
+    $gcePersistentDisk(x: GCEPersistentDiskVolumeSourceHelper): VolumeHelper;
+    gitRepo: GitRepoVolumeSourceHelper;
+    $gitRepo(x: GitRepoVolumeSourceHelper): VolumeHelper;
+    glusterfs: GlusterfsVolumeSourceHelper;
+    $glusterfs(x: GlusterfsVolumeSourceHelper): VolumeHelper;
+    hostPath: HostPathVolumeSourceHelper;
+    $hostPath(x: HostPathVolumeSourceHelper): VolumeHelper;
+    iscsi: ISCSIVolumeSourceHelper;
+    $iscsi(x: ISCSIVolumeSourceHelper): VolumeHelper;
+    nfs: NFSVolumeSourceHelper;
+    $nfs(x: NFSVolumeSourceHelper): VolumeHelper;
+    persistentVolumeClaim: PersistentVolumeClaimVolumeSourceHelper;
+    $persistentVolumeClaim(x: PersistentVolumeClaimVolumeSourceHelper): VolumeHelper;
+    photonPersistentDisk: PhotonPersistentDiskVolumeSourceHelper;
+    $photonPersistentDisk(x: PhotonPersistentDiskVolumeSourceHelper): VolumeHelper;
+    portworxVolume: PortworxVolumeSourceHelper;
+    $portworxVolume(x: PortworxVolumeSourceHelper): VolumeHelper;
+    projected: ProjectedVolumeSourceHelper;
+    $projected(x: ProjectedVolumeSourceHelper): VolumeHelper;
+    quobyte: QuobyteVolumeSourceHelper;
+    $quobyte(x: QuobyteVolumeSourceHelper): VolumeHelper;
+    rbd: RBDVolumeSourceHelper;
+    $rbd(x: RBDVolumeSourceHelper): VolumeHelper;
+    scaleIO: ScaleIOVolumeSourceHelper;
+    $scaleIO(x: ScaleIOVolumeSourceHelper): VolumeHelper;
+    secret: SecretVolumeSourceHelper;
+    $secret(x: SecretVolumeSourceHelper): VolumeHelper;
+    storageos: StorageOSVolumeSourceHelper;
+    $storageos(x: StorageOSVolumeSourceHelper): VolumeHelper;
+    vsphereVolume: VsphereVirtualDiskVolumeSourceHelper;
+    $vsphereVolume(x: VsphereVirtualDiskVolumeSourceHelper): VolumeHelper;
 }
 
 /** Volume represents a named volume in a pod that may be accessed by any container in the pod. */
@@ -10833,328 +11040,328 @@ export class VolumeHelper extends Template implements VolumeHelper {
         super(obj)
     }
 
-    _awsElasticBlockStore: any;
-    get awsElasticBlockStore(): any /*AWSElasticBlockStoreVolumeSourceHelper*/ {
+    _awsElasticBlockStore: AWSElasticBlockStoreVolumeSourceHelper;
+    get awsElasticBlockStore(): AWSElasticBlockStoreVolumeSourceHelper {
         return this._awsElasticBlockStore
     }
-    set awsElasticBlockStore(x: any /*AWSElasticBlockStoreVolumeSourceHelper*/) {
+    set awsElasticBlockStore(x: AWSElasticBlockStoreVolumeSourceHelper) {
         this._awsElasticBlockStore = x
     }
-    setAwsElasticBlockStore(x: any /*AWSElasticBlockStoreVolumeSourceHelper*/) {
+    $AwsElasticBlockStore(x: AWSElasticBlockStoreVolumeSourceHelper) {
         this.awsElasticBlockStore = x; return this
     }
 
-    _azureDisk: any;
-    get azureDisk(): any /*AzureDiskVolumeSourceHelper*/ {
+    _azureDisk: AzureDiskVolumeSourceHelper;
+    get azureDisk(): AzureDiskVolumeSourceHelper {
         return this._azureDisk
     }
-    set azureDisk(x: any /*AzureDiskVolumeSourceHelper*/) {
+    set azureDisk(x: AzureDiskVolumeSourceHelper) {
         this._azureDisk = x
     }
-    setAzureDisk(x: any /*AzureDiskVolumeSourceHelper*/) {
+    $AzureDisk(x: AzureDiskVolumeSourceHelper) {
         this.azureDisk = x; return this
     }
 
-    _azureFile: any;
-    get azureFile(): any /*AzureFileVolumeSourceHelper*/ {
+    _azureFile: AzureFileVolumeSourceHelper;
+    get azureFile(): AzureFileVolumeSourceHelper {
         return this._azureFile
     }
-    set azureFile(x: any /*AzureFileVolumeSourceHelper*/) {
+    set azureFile(x: AzureFileVolumeSourceHelper) {
         this._azureFile = x
     }
-    setAzureFile(x: any /*AzureFileVolumeSourceHelper*/) {
+    $AzureFile(x: AzureFileVolumeSourceHelper) {
         this.azureFile = x; return this
     }
 
-    _cephfs: any;
-    get cephfs(): any /*CephFSVolumeSourceHelper*/ {
+    _cephfs: CephFSVolumeSourceHelper;
+    get cephfs(): CephFSVolumeSourceHelper {
         return this._cephfs
     }
-    set cephfs(x: any /*CephFSVolumeSourceHelper*/) {
+    set cephfs(x: CephFSVolumeSourceHelper) {
         this._cephfs = x
     }
-    setCephfs(x: any /*CephFSVolumeSourceHelper*/) {
+    $Cephfs(x: CephFSVolumeSourceHelper) {
         this.cephfs = x; return this
     }
 
-    _cinder: any;
-    get cinder(): any /*CinderVolumeSourceHelper*/ {
+    _cinder: CinderVolumeSourceHelper;
+    get cinder(): CinderVolumeSourceHelper {
         return this._cinder
     }
-    set cinder(x: any /*CinderVolumeSourceHelper*/) {
+    set cinder(x: CinderVolumeSourceHelper) {
         this._cinder = x
     }
-    setCinder(x: any /*CinderVolumeSourceHelper*/) {
+    $Cinder(x: CinderVolumeSourceHelper) {
         this.cinder = x; return this
     }
 
-    _configMap: any;
-    get configMap(): any /*ConfigMapVolumeSourceHelper*/ {
+    _configMap: ConfigMapVolumeSourceHelper;
+    get configMap(): ConfigMapVolumeSourceHelper {
         return this._configMap
     }
-    set configMap(x: any /*ConfigMapVolumeSourceHelper*/) {
+    set configMap(x: ConfigMapVolumeSourceHelper) {
         this._configMap = x
     }
-    setConfigMap(x: any /*ConfigMapVolumeSourceHelper*/) {
+    $ConfigMap(x: ConfigMapVolumeSourceHelper) {
         this.configMap = x; return this
     }
 
-    _csi: any;
-    get csi(): any /*CSIVolumeSourceHelper*/ {
+    _csi: CSIVolumeSourceHelper;
+    get csi(): CSIVolumeSourceHelper {
         return this._csi
     }
-    set csi(x: any /*CSIVolumeSourceHelper*/) {
+    set csi(x: CSIVolumeSourceHelper) {
         this._csi = x
     }
-    setCsi(x: any /*CSIVolumeSourceHelper*/) {
+    $Csi(x: CSIVolumeSourceHelper) {
         this.csi = x; return this
     }
 
-    _downwardAPI: any;
-    get downwardAPI(): any /*DownwardAPIVolumeSourceHelper*/ {
+    _downwardAPI: DownwardAPIVolumeSourceHelper;
+    get downwardAPI(): DownwardAPIVolumeSourceHelper {
         return this._downwardAPI
     }
-    set downwardAPI(x: any /*DownwardAPIVolumeSourceHelper*/) {
+    set downwardAPI(x: DownwardAPIVolumeSourceHelper) {
         this._downwardAPI = x
     }
-    setDownwardAPI(x: any /*DownwardAPIVolumeSourceHelper*/) {
+    $DownwardAPI(x: DownwardAPIVolumeSourceHelper) {
         this.downwardAPI = x; return this
     }
 
-    _emptyDir: any;
-    get emptyDir(): any /*EmptyDirVolumeSourceHelper*/ {
+    _emptyDir: EmptyDirVolumeSourceHelper;
+    get emptyDir(): EmptyDirVolumeSourceHelper {
         return this._emptyDir
     }
-    set emptyDir(x: any /*EmptyDirVolumeSourceHelper*/) {
+    set emptyDir(x: EmptyDirVolumeSourceHelper) {
         this._emptyDir = x
     }
-    setEmptyDir(x: any /*EmptyDirVolumeSourceHelper*/) {
+    $EmptyDir(x: EmptyDirVolumeSourceHelper) {
         this.emptyDir = x; return this
     }
 
-    _ephemeral: any;
-    get ephemeral(): any /*EphemeralVolumeSourceHelper*/ {
+    _ephemeral: EphemeralVolumeSourceHelper;
+    get ephemeral(): EphemeralVolumeSourceHelper {
         return this._ephemeral
     }
-    set ephemeral(x: any /*EphemeralVolumeSourceHelper*/) {
+    set ephemeral(x: EphemeralVolumeSourceHelper) {
         this._ephemeral = x
     }
-    setEphemeral(x: any /*EphemeralVolumeSourceHelper*/) {
+    $Ephemeral(x: EphemeralVolumeSourceHelper) {
         this.ephemeral = x; return this
     }
 
-    _fc: any;
-    get fc(): any /*FCVolumeSourceHelper*/ {
+    _fc: FCVolumeSourceHelper;
+    get fc(): FCVolumeSourceHelper {
         return this._fc
     }
-    set fc(x: any /*FCVolumeSourceHelper*/) {
+    set fc(x: FCVolumeSourceHelper) {
         this._fc = x
     }
-    setFc(x: any /*FCVolumeSourceHelper*/) {
+    $Fc(x: FCVolumeSourceHelper) {
         this.fc = x; return this
     }
 
-    _flexVolume: any;
-    get flexVolume(): any /*FlexVolumeSourceHelper*/ {
+    _flexVolume: FlexVolumeSourceHelper;
+    get flexVolume(): FlexVolumeSourceHelper {
         return this._flexVolume
     }
-    set flexVolume(x: any /*FlexVolumeSourceHelper*/) {
+    set flexVolume(x: FlexVolumeSourceHelper) {
         this._flexVolume = x
     }
-    setFlexVolume(x: any /*FlexVolumeSourceHelper*/) {
+    $FlexVolume(x: FlexVolumeSourceHelper) {
         this.flexVolume = x; return this
     }
 
-    _flocker: any;
-    get flocker(): any /*FlockerVolumeSourceHelper*/ {
+    _flocker: FlockerVolumeSourceHelper;
+    get flocker(): FlockerVolumeSourceHelper {
         return this._flocker
     }
-    set flocker(x: any /*FlockerVolumeSourceHelper*/) {
+    set flocker(x: FlockerVolumeSourceHelper) {
         this._flocker = x
     }
-    setFlocker(x: any /*FlockerVolumeSourceHelper*/) {
+    $Flocker(x: FlockerVolumeSourceHelper) {
         this.flocker = x; return this
     }
 
-    _gcePersistentDisk: any;
-    get gcePersistentDisk(): any /*GCEPersistentDiskVolumeSourceHelper*/ {
+    _gcePersistentDisk: GCEPersistentDiskVolumeSourceHelper;
+    get gcePersistentDisk(): GCEPersistentDiskVolumeSourceHelper {
         return this._gcePersistentDisk
     }
-    set gcePersistentDisk(x: any /*GCEPersistentDiskVolumeSourceHelper*/) {
+    set gcePersistentDisk(x: GCEPersistentDiskVolumeSourceHelper) {
         this._gcePersistentDisk = x
     }
-    setGcePersistentDisk(x: any /*GCEPersistentDiskVolumeSourceHelper*/) {
+    $GcePersistentDisk(x: GCEPersistentDiskVolumeSourceHelper) {
         this.gcePersistentDisk = x; return this
     }
 
-    _gitRepo: any;
-    get gitRepo(): any /*GitRepoVolumeSourceHelper*/ {
+    _gitRepo: GitRepoVolumeSourceHelper;
+    get gitRepo(): GitRepoVolumeSourceHelper {
         return this._gitRepo
     }
-    set gitRepo(x: any /*GitRepoVolumeSourceHelper*/) {
+    set gitRepo(x: GitRepoVolumeSourceHelper) {
         this._gitRepo = x
     }
-    setGitRepo(x: any /*GitRepoVolumeSourceHelper*/) {
+    $GitRepo(x: GitRepoVolumeSourceHelper) {
         this.gitRepo = x; return this
     }
 
-    _glusterfs: any;
-    get glusterfs(): any /*GlusterfsVolumeSourceHelper*/ {
+    _glusterfs: GlusterfsVolumeSourceHelper;
+    get glusterfs(): GlusterfsVolumeSourceHelper {
         return this._glusterfs
     }
-    set glusterfs(x: any /*GlusterfsVolumeSourceHelper*/) {
+    set glusterfs(x: GlusterfsVolumeSourceHelper) {
         this._glusterfs = x
     }
-    setGlusterfs(x: any /*GlusterfsVolumeSourceHelper*/) {
+    $Glusterfs(x: GlusterfsVolumeSourceHelper) {
         this.glusterfs = x; return this
     }
 
-    _hostPath: any;
-    get hostPath(): any /*HostPathVolumeSourceHelper*/ {
+    _hostPath: HostPathVolumeSourceHelper;
+    get hostPath(): HostPathVolumeSourceHelper {
         return this._hostPath
     }
-    set hostPath(x: any /*HostPathVolumeSourceHelper*/) {
+    set hostPath(x: HostPathVolumeSourceHelper) {
         this._hostPath = x
     }
-    setHostPath(x: any /*HostPathVolumeSourceHelper*/) {
+    $HostPath(x: HostPathVolumeSourceHelper) {
         this.hostPath = x; return this
     }
 
-    _iscsi: any;
-    get iscsi(): any /*ISCSIVolumeSourceHelper*/ {
+    _iscsi: ISCSIVolumeSourceHelper;
+    get iscsi(): ISCSIVolumeSourceHelper {
         return this._iscsi
     }
-    set iscsi(x: any /*ISCSIVolumeSourceHelper*/) {
+    set iscsi(x: ISCSIVolumeSourceHelper) {
         this._iscsi = x
     }
-    setIscsi(x: any /*ISCSIVolumeSourceHelper*/) {
+    $Iscsi(x: ISCSIVolumeSourceHelper) {
         this.iscsi = x; return this
     }
 
-    _nfs: any;
-    get nfs(): any /*NFSVolumeSourceHelper*/ {
+    _nfs: NFSVolumeSourceHelper;
+    get nfs(): NFSVolumeSourceHelper {
         return this._nfs
     }
-    set nfs(x: any /*NFSVolumeSourceHelper*/) {
+    set nfs(x: NFSVolumeSourceHelper) {
         this._nfs = x
     }
-    setNfs(x: any /*NFSVolumeSourceHelper*/) {
+    $Nfs(x: NFSVolumeSourceHelper) {
         this.nfs = x; return this
     }
 
-    _persistentVolumeClaim: any;
-    get persistentVolumeClaim(): any /*PersistentVolumeClaimVolumeSourceHelper*/ {
+    _persistentVolumeClaim: PersistentVolumeClaimVolumeSourceHelper;
+    get persistentVolumeClaim(): PersistentVolumeClaimVolumeSourceHelper {
         return this._persistentVolumeClaim
     }
-    set persistentVolumeClaim(x: any /*PersistentVolumeClaimVolumeSourceHelper*/) {
+    set persistentVolumeClaim(x: PersistentVolumeClaimVolumeSourceHelper) {
         this._persistentVolumeClaim = x
     }
-    setPersistentVolumeClaim(x: any /*PersistentVolumeClaimVolumeSourceHelper*/) {
+    $PersistentVolumeClaim(x: PersistentVolumeClaimVolumeSourceHelper) {
         this.persistentVolumeClaim = x; return this
     }
 
-    _photonPersistentDisk: any;
-    get photonPersistentDisk(): any /*PhotonPersistentDiskVolumeSourceHelper*/ {
+    _photonPersistentDisk: PhotonPersistentDiskVolumeSourceHelper;
+    get photonPersistentDisk(): PhotonPersistentDiskVolumeSourceHelper {
         return this._photonPersistentDisk
     }
-    set photonPersistentDisk(x: any /*PhotonPersistentDiskVolumeSourceHelper*/) {
+    set photonPersistentDisk(x: PhotonPersistentDiskVolumeSourceHelper) {
         this._photonPersistentDisk = x
     }
-    setPhotonPersistentDisk(x: any /*PhotonPersistentDiskVolumeSourceHelper*/) {
+    $PhotonPersistentDisk(x: PhotonPersistentDiskVolumeSourceHelper) {
         this.photonPersistentDisk = x; return this
     }
 
-    _portworxVolume: any;
-    get portworxVolume(): any /*PortworxVolumeSourceHelper*/ {
+    _portworxVolume: PortworxVolumeSourceHelper;
+    get portworxVolume(): PortworxVolumeSourceHelper {
         return this._portworxVolume
     }
-    set portworxVolume(x: any /*PortworxVolumeSourceHelper*/) {
+    set portworxVolume(x: PortworxVolumeSourceHelper) {
         this._portworxVolume = x
     }
-    setPortworxVolume(x: any /*PortworxVolumeSourceHelper*/) {
+    $PortworxVolume(x: PortworxVolumeSourceHelper) {
         this.portworxVolume = x; return this
     }
 
-    _projected: any;
-    get projected(): any /*ProjectedVolumeSourceHelper*/ {
+    _projected: ProjectedVolumeSourceHelper;
+    get projected(): ProjectedVolumeSourceHelper {
         return this._projected
     }
-    set projected(x: any /*ProjectedVolumeSourceHelper*/) {
+    set projected(x: ProjectedVolumeSourceHelper) {
         this._projected = x
     }
-    setProjected(x: any /*ProjectedVolumeSourceHelper*/) {
+    $Projected(x: ProjectedVolumeSourceHelper) {
         this.projected = x; return this
     }
 
-    _quobyte: any;
-    get quobyte(): any /*QuobyteVolumeSourceHelper*/ {
+    _quobyte: QuobyteVolumeSourceHelper;
+    get quobyte(): QuobyteVolumeSourceHelper {
         return this._quobyte
     }
-    set quobyte(x: any /*QuobyteVolumeSourceHelper*/) {
+    set quobyte(x: QuobyteVolumeSourceHelper) {
         this._quobyte = x
     }
-    setQuobyte(x: any /*QuobyteVolumeSourceHelper*/) {
+    $Quobyte(x: QuobyteVolumeSourceHelper) {
         this.quobyte = x; return this
     }
 
-    _rbd: any;
-    get rbd(): any /*RBDVolumeSourceHelper*/ {
+    _rbd: RBDVolumeSourceHelper;
+    get rbd(): RBDVolumeSourceHelper {
         return this._rbd
     }
-    set rbd(x: any /*RBDVolumeSourceHelper*/) {
+    set rbd(x: RBDVolumeSourceHelper) {
         this._rbd = x
     }
-    setRbd(x: any /*RBDVolumeSourceHelper*/) {
+    $Rbd(x: RBDVolumeSourceHelper) {
         this.rbd = x; return this
     }
 
-    _scaleIO: any;
-    get scaleIO(): any /*ScaleIOVolumeSourceHelper*/ {
+    _scaleIO: ScaleIOVolumeSourceHelper;
+    get scaleIO(): ScaleIOVolumeSourceHelper {
         return this._scaleIO
     }
-    set scaleIO(x: any /*ScaleIOVolumeSourceHelper*/) {
+    set scaleIO(x: ScaleIOVolumeSourceHelper) {
         this._scaleIO = x
     }
-    setScaleIO(x: any /*ScaleIOVolumeSourceHelper*/) {
+    $ScaleIO(x: ScaleIOVolumeSourceHelper) {
         this.scaleIO = x; return this
     }
 
-    _secret: any;
-    get secret(): any /*SecretVolumeSourceHelper*/ {
+    _secret: SecretVolumeSourceHelper;
+    get secret(): SecretVolumeSourceHelper {
         return this._secret
     }
-    set secret(x: any /*SecretVolumeSourceHelper*/) {
+    set secret(x: SecretVolumeSourceHelper) {
         this._secret = x
     }
-    setSecret(x: any /*SecretVolumeSourceHelper*/) {
+    $Secret(x: SecretVolumeSourceHelper) {
         this.secret = x; return this
     }
 
-    _storageos: any;
-    get storageos(): any /*StorageOSVolumeSourceHelper*/ {
+    _storageos: StorageOSVolumeSourceHelper;
+    get storageos(): StorageOSVolumeSourceHelper {
         return this._storageos
     }
-    set storageos(x: any /*StorageOSVolumeSourceHelper*/) {
+    set storageos(x: StorageOSVolumeSourceHelper) {
         this._storageos = x
     }
-    setStorageos(x: any /*StorageOSVolumeSourceHelper*/) {
+    $Storageos(x: StorageOSVolumeSourceHelper) {
         this.storageos = x; return this
     }
 
-    _vsphereVolume: any;
-    get vsphereVolume(): any /*VsphereVirtualDiskVolumeSourceHelper*/ {
+    _vsphereVolume: VsphereVirtualDiskVolumeSourceHelper;
+    get vsphereVolume(): VsphereVirtualDiskVolumeSourceHelper {
         return this._vsphereVolume
     }
-    set vsphereVolume(x: any /*VsphereVirtualDiskVolumeSourceHelper*/) {
+    set vsphereVolume(x: VsphereVirtualDiskVolumeSourceHelper) {
         this._vsphereVolume = x
     }
-    setVsphereVolume(x: any /*VsphereVirtualDiskVolumeSourceHelper*/) {
+    $VsphereVolume(x: VsphereVirtualDiskVolumeSourceHelper) {
         this.vsphereVolume = x; return this
     }
 }
 
 export interface VolumeDeviceHelper extends VolumeDevice {
-    $devicePath(x: any): any;
+    $devicePath(x: string): VolumeDeviceHelper;
 }
 
 /** volumeDevice describes a mapping of a raw block device within a container. */
@@ -11163,24 +11370,24 @@ export class VolumeDeviceHelper extends Template implements VolumeDeviceHelper {
         super(obj)
     }
 
-    _devicePath: any;
-    get devicePath(): any /*string*/ {
+    _devicePath: string;
+    get devicePath(): string {
         return this._devicePath
     }
-    set devicePath(x: any /*string*/) {
+    set devicePath(x: string) {
         this._devicePath = x
     }
-    setDevicePath(x: any /*string*/) {
+    $DevicePath(x: string) {
         this.devicePath = x; return this
     }
 }
 
 export interface VolumeMountHelper extends VolumeMount {
-    $mountPath(x: any): any;
-    $mountPropagation(x: any): any;
-    $readOnly(x: any): any;
-    $subPath(x: any): any;
-    $subPathExpr(x: any): any;
+    $mountPath(x: string): VolumeMountHelper;
+    $mountPropagation(x: string): VolumeMountHelper;
+    $readOnly(x: boolean): VolumeMountHelper;
+    $subPath(x: string): VolumeMountHelper;
+    $subPathExpr(x: string): VolumeMountHelper;
 }
 
 /** VolumeMount describes a mounting of a Volume within a container. */
@@ -11189,64 +11396,65 @@ export class VolumeMountHelper extends Template implements VolumeMountHelper {
         super(obj)
     }
 
-    _mountPath: any;
-    get mountPath(): any /*string*/ {
+    _mountPath: string;
+    get mountPath(): string {
         return this._mountPath
     }
-    set mountPath(x: any /*string*/) {
+    set mountPath(x: string) {
         this._mountPath = x
     }
-    setMountPath(x: any /*string*/) {
+    $MountPath(x: string) {
         this.mountPath = x; return this
     }
 
-    _mountPropagation: any;
-    get mountPropagation(): any /*string*/ {
+    _mountPropagation: string;
+    get mountPropagation(): string {
         return this._mountPropagation
     }
-    set mountPropagation(x: any /*string*/) {
+    set mountPropagation(x: string) {
         this._mountPropagation = x
     }
-    setMountPropagation(x: any /*string*/) {
+    $MountPropagation(x: string) {
         this.mountPropagation = x; return this
     }
 
-    _readOnly: any;
-    get readOnly(): any /*boolean*/ {
+    _readOnly: boolean;
+    get readOnly(): boolean {
         return this._readOnly
     }
-    set readOnly(x: any /*boolean*/) {
+    set readOnly(x: boolean) {
         this._readOnly = x
     }
-    setReadOnly(x: any /*boolean*/) {
+    $ReadOnly(x: boolean) {
         this.readOnly = x; return this
     }
 
-    _subPath: any;
-    get subPath(): any /*string*/ {
+    _subPath: string;
+    get subPath(): string {
         return this._subPath
     }
-    set subPath(x: any /*string*/) {
+    set subPath(x: string) {
         this._subPath = x
     }
-    setSubPath(x: any /*string*/) {
+    $SubPath(x: string) {
         this.subPath = x; return this
     }
 
-    _subPathExpr: any;
-    get subPathExpr(): any /*string*/ {
+    _subPathExpr: string;
+    get subPathExpr(): string {
         return this._subPathExpr
     }
-    set subPathExpr(x: any /*string*/) {
+    set subPathExpr(x: string) {
         this._subPathExpr = x
     }
-    setSubPathExpr(x: any /*string*/) {
+    $SubPathExpr(x: string) {
         this.subPathExpr = x; return this
     }
 }
 
 export interface VolumeNodeAffinityHelper extends VolumeNodeAffinity {
-    $required(x: any): any;
+    required: NodeSelectorHelper;
+    $required(x: NodeSelectorHelper): VolumeNodeAffinityHelper;
 }
 
 /** VolumeNodeAffinity defines constraints that limit what nodes this volume can be accessed from. */
@@ -11255,23 +11463,27 @@ export class VolumeNodeAffinityHelper extends Template implements VolumeNodeAffi
         super(obj)
     }
 
-    _required: any;
-    get required(): any /*NodeSelectorHelper*/ {
+    _required: NodeSelectorHelper;
+    get required(): NodeSelectorHelper {
         return this._required
     }
-    set required(x: any /*NodeSelectorHelper*/) {
+    set required(x: NodeSelectorHelper) {
         this._required = x
     }
-    setRequired(x: any /*NodeSelectorHelper*/) {
+    $Required(x: NodeSelectorHelper) {
         this.required = x; return this
     }
 }
 
 export interface VolumeProjectionHelper extends VolumeProjection {
-    $configMap(x: any): any;
-    $downwardAPI(x: any): any;
-    $secret(x: any): any;
-    $serviceAccountToken(x: any): any;
+    configMap: ConfigMapProjectionHelper;
+    $configMap(x: ConfigMapProjectionHelper): VolumeProjectionHelper;
+    downwardAPI: DownwardAPIProjectionHelper;
+    $downwardAPI(x: DownwardAPIProjectionHelper): VolumeProjectionHelper;
+    secret: SecretProjectionHelper;
+    $secret(x: SecretProjectionHelper): VolumeProjectionHelper;
+    serviceAccountToken: ServiceAccountTokenProjectionHelper;
+    $serviceAccountToken(x: ServiceAccountTokenProjectionHelper): VolumeProjectionHelper;
 }
 
 /** Projection that may be projected along with other supported volume types */
@@ -11280,56 +11492,56 @@ export class VolumeProjectionHelper extends Template implements VolumeProjection
         super(obj)
     }
 
-    _configMap: any;
-    get configMap(): any /*ConfigMapProjectionHelper*/ {
+    _configMap: ConfigMapProjectionHelper;
+    get configMap(): ConfigMapProjectionHelper {
         return this._configMap
     }
-    set configMap(x: any /*ConfigMapProjectionHelper*/) {
+    set configMap(x: ConfigMapProjectionHelper) {
         this._configMap = x
     }
-    setConfigMap(x: any /*ConfigMapProjectionHelper*/) {
+    $ConfigMap(x: ConfigMapProjectionHelper) {
         this.configMap = x; return this
     }
 
-    _downwardAPI: any;
-    get downwardAPI(): any /*DownwardAPIProjectionHelper*/ {
+    _downwardAPI: DownwardAPIProjectionHelper;
+    get downwardAPI(): DownwardAPIProjectionHelper {
         return this._downwardAPI
     }
-    set downwardAPI(x: any /*DownwardAPIProjectionHelper*/) {
+    set downwardAPI(x: DownwardAPIProjectionHelper) {
         this._downwardAPI = x
     }
-    setDownwardAPI(x: any /*DownwardAPIProjectionHelper*/) {
+    $DownwardAPI(x: DownwardAPIProjectionHelper) {
         this.downwardAPI = x; return this
     }
 
-    _secret: any;
-    get secret(): any /*SecretProjectionHelper*/ {
+    _secret: SecretProjectionHelper;
+    get secret(): SecretProjectionHelper {
         return this._secret
     }
-    set secret(x: any /*SecretProjectionHelper*/) {
+    set secret(x: SecretProjectionHelper) {
         this._secret = x
     }
-    setSecret(x: any /*SecretProjectionHelper*/) {
+    $Secret(x: SecretProjectionHelper) {
         this.secret = x; return this
     }
 
-    _serviceAccountToken: any;
-    get serviceAccountToken(): any /*ServiceAccountTokenProjectionHelper*/ {
+    _serviceAccountToken: ServiceAccountTokenProjectionHelper;
+    get serviceAccountToken(): ServiceAccountTokenProjectionHelper {
         return this._serviceAccountToken
     }
-    set serviceAccountToken(x: any /*ServiceAccountTokenProjectionHelper*/) {
+    set serviceAccountToken(x: ServiceAccountTokenProjectionHelper) {
         this._serviceAccountToken = x
     }
-    setServiceAccountToken(x: any /*ServiceAccountTokenProjectionHelper*/) {
+    $ServiceAccountToken(x: ServiceAccountTokenProjectionHelper) {
         this.serviceAccountToken = x; return this
     }
 }
 
 export interface VsphereVirtualDiskVolumeSourceHelper extends VsphereVirtualDiskVolumeSource {
-    $fsType(x: any): any;
-    $storagePolicyID(x: any): any;
-    $storagePolicyName(x: any): any;
-    $volumePath(x: any): any;
+    $fsType(x: string): VsphereVirtualDiskVolumeSourceHelper;
+    $storagePolicyID(x: string): VsphereVirtualDiskVolumeSourceHelper;
+    $storagePolicyName(x: string): VsphereVirtualDiskVolumeSourceHelper;
+    $volumePath(x: string): VsphereVirtualDiskVolumeSourceHelper;
 }
 
 /** Represents a vSphere volume resource. */
@@ -11338,54 +11550,55 @@ export class VsphereVirtualDiskVolumeSourceHelper extends Template implements Vs
         super(obj)
     }
 
-    _fsType: any;
-    get fsType(): any /*string*/ {
+    _fsType: string;
+    get fsType(): string {
         return this._fsType
     }
-    set fsType(x: any /*string*/) {
+    set fsType(x: string) {
         this._fsType = x
     }
-    setFsType(x: any /*string*/) {
+    $FsType(x: string) {
         this.fsType = x; return this
     }
 
-    _storagePolicyID: any;
-    get storagePolicyID(): any /*string*/ {
+    _storagePolicyID: string;
+    get storagePolicyID(): string {
         return this._storagePolicyID
     }
-    set storagePolicyID(x: any /*string*/) {
+    set storagePolicyID(x: string) {
         this._storagePolicyID = x
     }
-    setStoragePolicyID(x: any /*string*/) {
+    $StoragePolicyID(x: string) {
         this.storagePolicyID = x; return this
     }
 
-    _storagePolicyName: any;
-    get storagePolicyName(): any /*string*/ {
+    _storagePolicyName: string;
+    get storagePolicyName(): string {
         return this._storagePolicyName
     }
-    set storagePolicyName(x: any /*string*/) {
+    set storagePolicyName(x: string) {
         this._storagePolicyName = x
     }
-    setStoragePolicyName(x: any /*string*/) {
+    $StoragePolicyName(x: string) {
         this.storagePolicyName = x; return this
     }
 
-    _volumePath: any;
-    get volumePath(): any /*string*/ {
+    _volumePath: string;
+    get volumePath(): string {
         return this._volumePath
     }
-    set volumePath(x: any /*string*/) {
+    set volumePath(x: string) {
         this._volumePath = x
     }
-    setVolumePath(x: any /*string*/) {
+    $VolumePath(x: string) {
         this.volumePath = x; return this
     }
 }
 
 export interface WeightedPodAffinityTermHelper extends WeightedPodAffinityTerm {
-    $podAffinityTerm(x: any): any;
-    $weight(x: any): any;
+    podAffinityTerm: PodAffinityTermHelper;
+    $podAffinityTerm(x: PodAffinityTermHelper): WeightedPodAffinityTermHelper;
+    $weight(x: number): WeightedPodAffinityTermHelper;
 }
 
 /** The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s) */
@@ -11394,33 +11607,33 @@ export class WeightedPodAffinityTermHelper extends Template implements WeightedP
         super(obj)
     }
 
-    _podAffinityTerm: any;
-    get podAffinityTerm(): any /*PodAffinityTermHelper*/ {
+    _podAffinityTerm: PodAffinityTermHelper;
+    get podAffinityTerm(): PodAffinityTermHelper {
         return this._podAffinityTerm
     }
-    set podAffinityTerm(x: any /*PodAffinityTermHelper*/) {
+    set podAffinityTerm(x: PodAffinityTermHelper) {
         this._podAffinityTerm = x
     }
-    setPodAffinityTerm(x: any /*PodAffinityTermHelper*/) {
+    $PodAffinityTerm(x: PodAffinityTermHelper) {
         this.podAffinityTerm = x; return this
     }
 
-    _weight: any;
-    get weight(): any /*number*/ {
+    _weight: number;
+    get weight(): number {
         return this._weight
     }
-    set weight(x: any /*number*/) {
+    set weight(x: number) {
         this._weight = x
     }
-    setWeight(x: any /*number*/) {
+    $Weight(x: number) {
         this.weight = x; return this
     }
 }
 
 export interface WindowsSecurityContextOptionsHelper extends WindowsSecurityContextOptions {
-    $gmsaCredentialSpec(x: any): any;
-    $gmsaCredentialSpecName(x: any): any;
-    $runAsUserName(x: any): any;
+    $gmsaCredentialSpec(x: string): WindowsSecurityContextOptionsHelper;
+    $gmsaCredentialSpecName(x: string): WindowsSecurityContextOptionsHelper;
+    $runAsUserName(x: string): WindowsSecurityContextOptionsHelper;
 }
 
 /** WindowsSecurityContextOptions contain Windows-specific options and credentials. */
@@ -11429,36 +11642,36 @@ export class WindowsSecurityContextOptionsHelper extends Template implements Win
         super(obj)
     }
 
-    _gmsaCredentialSpec: any;
-    get gmsaCredentialSpec(): any /*string*/ {
+    _gmsaCredentialSpec: string;
+    get gmsaCredentialSpec(): string {
         return this._gmsaCredentialSpec
     }
-    set gmsaCredentialSpec(x: any /*string*/) {
+    set gmsaCredentialSpec(x: string) {
         this._gmsaCredentialSpec = x
     }
-    setGmsaCredentialSpec(x: any /*string*/) {
+    $GmsaCredentialSpec(x: string) {
         this.gmsaCredentialSpec = x; return this
     }
 
-    _gmsaCredentialSpecName: any;
-    get gmsaCredentialSpecName(): any /*string*/ {
+    _gmsaCredentialSpecName: string;
+    get gmsaCredentialSpecName(): string {
         return this._gmsaCredentialSpecName
     }
-    set gmsaCredentialSpecName(x: any /*string*/) {
+    set gmsaCredentialSpecName(x: string) {
         this._gmsaCredentialSpecName = x
     }
-    setGmsaCredentialSpecName(x: any /*string*/) {
+    $GmsaCredentialSpecName(x: string) {
         this.gmsaCredentialSpecName = x; return this
     }
 
-    _runAsUserName: any;
-    get runAsUserName(): any /*string*/ {
+    _runAsUserName: string;
+    get runAsUserName(): string {
         return this._runAsUserName
     }
-    set runAsUserName(x: any /*string*/) {
+    set runAsUserName(x: string) {
         this._runAsUserName = x
     }
-    setRunAsUserName(x: any /*string*/) {
+    $RunAsUserName(x: string) {
         this.runAsUserName = x; return this
     }
 }

@@ -3,16 +3,19 @@ import { MutatingWebhook, MutatingWebhookConfiguration, MutatingWebhookConfigura
 import { LabelSelector, ListMeta, ObjectMeta } from "../meta/v1";
 
 export interface MutatingWebhookHelper extends MutatingWebhook {
-    $admissionReviewVersions(x: any): any;
-    $clientConfig(x: any): any;
-    $failurePolicy(x: any): any;
-    $matchPolicy(x: any): any;
-    $namespaceSelector(x: any): any;
-    $objectSelector(x: any): any;
-    $reinvocationPolicy(x: any): any;
-    $rules(x: any): any;
-    $sideEffects(x: any): any;
-    $timeoutSeconds(x: any): any;
+    $admissionReviewVersions(x: Array<string>): MutatingWebhookHelper;
+    clientConfig: WebhookClientConfigHelper;
+    $clientConfig(x: WebhookClientConfigHelper): MutatingWebhookHelper;
+    $failurePolicy(x: string): MutatingWebhookHelper;
+    $matchPolicy(x: string): MutatingWebhookHelper;
+    namespaceSelector: LabelSelectorHelper;
+    $namespaceSelector(x: LabelSelectorHelper): MutatingWebhookHelper;
+    objectSelector: LabelSelectorHelper;
+    $objectSelector(x: LabelSelectorHelper): MutatingWebhookHelper;
+    $reinvocationPolicy(x: string): MutatingWebhookHelper;
+    $rules(x: Array<RuleWithOperations>): MutatingWebhookHelper;
+    $sideEffects(x: string): MutatingWebhookHelper;
+    $timeoutSeconds(x: number): MutatingWebhookHelper;
 }
 
 /** MutatingWebhook describes an admission webhook and the resources and operations it applies to. */
@@ -21,120 +24,121 @@ export class MutatingWebhookHelper extends Template implements MutatingWebhookHe
         super(obj)
     }
 
-    _admissionReviewVersions: any;
-    get admissionReviewVersions(): any /*Array<string>*/ {
+    _admissionReviewVersions: Array<string>;
+    get admissionReviewVersions(): Array<string> {
         return this._admissionReviewVersions
     }
-    set admissionReviewVersions(x: any /*Array<string>*/) {
+    set admissionReviewVersions(x: Array<string>) {
         this._admissionReviewVersions = this.set(this.admissionReviewVersions, x)
     }
-    setAdmissionReviewVersions(x: any /*Array<string>*/) {
+    $AdmissionReviewVersions(x: Array<string>) {
         this.admissionReviewVersions = x; return this
     }
 
-    _clientConfig: any;
-    get clientConfig(): any /*WebhookClientConfigHelper*/ {
+    _clientConfig: WebhookClientConfigHelper;
+    get clientConfig(): WebhookClientConfigHelper {
         return this._clientConfig
     }
-    set clientConfig(x: any /*WebhookClientConfigHelper*/) {
+    set clientConfig(x: WebhookClientConfigHelper) {
         this._clientConfig = x
     }
-    setClientConfig(x: any /*WebhookClientConfigHelper*/) {
+    $ClientConfig(x: WebhookClientConfigHelper) {
         this.clientConfig = x; return this
     }
 
-    _failurePolicy: any;
-    get failurePolicy(): any /*string*/ {
+    _failurePolicy: string;
+    get failurePolicy(): string {
         return this._failurePolicy
     }
-    set failurePolicy(x: any /*string*/) {
+    set failurePolicy(x: string) {
         this._failurePolicy = x
     }
-    setFailurePolicy(x: any /*string*/) {
+    $FailurePolicy(x: string) {
         this.failurePolicy = x; return this
     }
 
-    _matchPolicy: any;
-    get matchPolicy(): any /*string*/ {
+    _matchPolicy: string;
+    get matchPolicy(): string {
         return this._matchPolicy
     }
-    set matchPolicy(x: any /*string*/) {
+    set matchPolicy(x: string) {
         this._matchPolicy = x
     }
-    setMatchPolicy(x: any /*string*/) {
+    $MatchPolicy(x: string) {
         this.matchPolicy = x; return this
     }
 
-    _namespaceSelector: any;
-    get namespaceSelector(): any /*LabelSelectorHelper*/ {
+    _namespaceSelector: LabelSelectorHelper;
+    get namespaceSelector(): LabelSelectorHelper {
         return this._namespaceSelector
     }
-    set namespaceSelector(x: any /*LabelSelectorHelper*/) {
+    set namespaceSelector(x: LabelSelectorHelper) {
         this._namespaceSelector = x
     }
-    setNamespaceSelector(x: any /*LabelSelectorHelper*/) {
+    $NamespaceSelector(x: LabelSelectorHelper) {
         this.namespaceSelector = x; return this
     }
 
-    _objectSelector: any;
-    get objectSelector(): any /*LabelSelectorHelper*/ {
+    _objectSelector: LabelSelectorHelper;
+    get objectSelector(): LabelSelectorHelper {
         return this._objectSelector
     }
-    set objectSelector(x: any /*LabelSelectorHelper*/) {
+    set objectSelector(x: LabelSelectorHelper) {
         this._objectSelector = x
     }
-    setObjectSelector(x: any /*LabelSelectorHelper*/) {
+    $ObjectSelector(x: LabelSelectorHelper) {
         this.objectSelector = x; return this
     }
 
-    _reinvocationPolicy: any;
-    get reinvocationPolicy(): any /*string*/ {
+    _reinvocationPolicy: string;
+    get reinvocationPolicy(): string {
         return this._reinvocationPolicy
     }
-    set reinvocationPolicy(x: any /*string*/) {
+    set reinvocationPolicy(x: string) {
         this._reinvocationPolicy = x
     }
-    setReinvocationPolicy(x: any /*string*/) {
+    $ReinvocationPolicy(x: string) {
         this.reinvocationPolicy = x; return this
     }
 
-    _rules: any;
-    get rules(): any /*Array<RuleWithOperations>*/ {
+    _rules: Array<RuleWithOperations>;
+    get rules(): Array<RuleWithOperations> {
         return this._rules
     }
-    set rules(x: any /*Array<RuleWithOperations>*/) {
+    set rules(x: Array<RuleWithOperations>) {
         this._rules = this.set(this.rules, x)
     }
-    setRules(x: any /*Array<RuleWithOperations>*/) {
+    $Rules(x: Array<RuleWithOperations>) {
         this.rules = x; return this
     }
 
-    _sideEffects: any;
-    get sideEffects(): any /*string*/ {
+    _sideEffects: string;
+    get sideEffects(): string {
         return this._sideEffects
     }
-    set sideEffects(x: any /*string*/) {
+    set sideEffects(x: string) {
         this._sideEffects = x
     }
-    setSideEffects(x: any /*string*/) {
+    $SideEffects(x: string) {
         this.sideEffects = x; return this
     }
 
-    _timeoutSeconds: any;
-    get timeoutSeconds(): any /*number*/ {
+    _timeoutSeconds: number;
+    get timeoutSeconds(): number {
         return this._timeoutSeconds
     }
-    set timeoutSeconds(x: any /*number*/) {
+    set timeoutSeconds(x: number) {
         this._timeoutSeconds = x
     }
-    setTimeoutSeconds(x: any /*number*/) {
+    $TimeoutSeconds(x: number) {
         this.timeoutSeconds = x; return this
     }
 }
 
 export interface MutatingWebhookConfigurationHelper extends MutatingWebhookConfiguration {
-    $metadata(x: any): any;
-    $webhooks(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): MutatingWebhookConfigurationHelper;
+    $webhooks(x: Array<MutatingWebhook>): MutatingWebhookConfigurationHelper;
 }
 
 /** MutatingWebhookConfiguration describes the configuration of and admission webhook that accept or reject and may change the object. */
@@ -146,32 +150,33 @@ export class MutatingWebhookConfigurationHelper extends ResourceTemplate impleme
         super(nameOrObject, namespace, MutatingWebhookConfigurationHelper.kind, MutatingWebhookConfigurationHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _webhooks: any;
-    get webhooks(): any /*Array<MutatingWebhook>*/ {
+    _webhooks: Array<MutatingWebhook>;
+    get webhooks(): Array<MutatingWebhook> {
         return this._webhooks
     }
-    set webhooks(x: any /*Array<MutatingWebhook>*/) {
+    set webhooks(x: Array<MutatingWebhook>) {
         this._webhooks = this.set(this.webhooks, x)
     }
-    setWebhooks(x: any /*Array<MutatingWebhook>*/) {
+    $Webhooks(x: Array<MutatingWebhook>) {
         this.webhooks = x; return this
     }
 }
 
 export interface MutatingWebhookConfigurationListHelper extends MutatingWebhookConfigurationList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<MutatingWebhookConfiguration>): MutatingWebhookConfigurationListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): MutatingWebhookConfigurationListHelper;
 }
 
 /** MutatingWebhookConfigurationList is a list of MutatingWebhookConfiguration. */
@@ -183,35 +188,35 @@ export class MutatingWebhookConfigurationListHelper extends ResourceTemplate imp
         super(nameOrObject, namespace, MutatingWebhookConfigurationListHelper.kind, MutatingWebhookConfigurationListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<MutatingWebhookConfiguration>*/ {
+    _items: Array<MutatingWebhookConfiguration>;
+    get items(): Array<MutatingWebhookConfiguration> {
         return this._items
     }
-    set items(x: any /*Array<MutatingWebhookConfiguration>*/) {
+    set items(x: Array<MutatingWebhookConfiguration>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<MutatingWebhookConfiguration>*/) {
+    $Items(x: Array<MutatingWebhookConfiguration>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface RuleWithOperationsHelper extends RuleWithOperations {
-    $apiGroups(x: any): any;
-    $apiVersions(x: any): any;
-    $operations(x: any): any;
-    $resources(x: any): any;
-    $scope(x: any): any;
+    $apiGroups(x: Array<string>): RuleWithOperationsHelper;
+    $apiVersions(x: Array<string>): RuleWithOperationsHelper;
+    $operations(x: Array<string>): RuleWithOperationsHelper;
+    $resources(x: Array<string>): RuleWithOperationsHelper;
+    $scope(x: string): RuleWithOperationsHelper;
 }
 
 /** RuleWithOperations is a tuple of Operations and Resources. It is recommended to make sure that all the tuple expansions are valid. */
@@ -220,65 +225,65 @@ export class RuleWithOperationsHelper extends Template implements RuleWithOperat
         super(obj)
     }
 
-    _apiGroups: any;
-    get apiGroups(): any /*Array<string>*/ {
+    _apiGroups: Array<string>;
+    get apiGroups(): Array<string> {
         return this._apiGroups
     }
-    set apiGroups(x: any /*Array<string>*/) {
+    set apiGroups(x: Array<string>) {
         this._apiGroups = this.set(this.apiGroups, x)
     }
-    setApiGroups(x: any /*Array<string>*/) {
+    $ApiGroups(x: Array<string>) {
         this.apiGroups = x; return this
     }
 
-    _apiVersions: any;
-    get apiVersions(): any /*Array<string>*/ {
+    _apiVersions: Array<string>;
+    get apiVersions(): Array<string> {
         return this._apiVersions
     }
-    set apiVersions(x: any /*Array<string>*/) {
+    set apiVersions(x: Array<string>) {
         this._apiVersions = this.set(this.apiVersions, x)
     }
-    setApiVersions(x: any /*Array<string>*/) {
+    $ApiVersions(x: Array<string>) {
         this.apiVersions = x; return this
     }
 
-    _operations: any;
-    get operations(): any /*Array<string>*/ {
+    _operations: Array<string>;
+    get operations(): Array<string> {
         return this._operations
     }
-    set operations(x: any /*Array<string>*/) {
+    set operations(x: Array<string>) {
         this._operations = this.set(this.operations, x)
     }
-    setOperations(x: any /*Array<string>*/) {
+    $Operations(x: Array<string>) {
         this.operations = x; return this
     }
 
-    _resources: any;
-    get resources(): any /*Array<string>*/ {
+    _resources: Array<string>;
+    get resources(): Array<string> {
         return this._resources
     }
-    set resources(x: any /*Array<string>*/) {
+    set resources(x: Array<string>) {
         this._resources = this.set(this.resources, x)
     }
-    setResources(x: any /*Array<string>*/) {
+    $Resources(x: Array<string>) {
         this.resources = x; return this
     }
 
-    _scope: any;
-    get scope(): any /*string*/ {
+    _scope: string;
+    get scope(): string {
         return this._scope
     }
-    set scope(x: any /*string*/) {
+    set scope(x: string) {
         this._scope = x
     }
-    setScope(x: any /*string*/) {
+    $Scope(x: string) {
         this.scope = x; return this
     }
 }
 
 export interface ServiceReferenceHelper extends ServiceReference {
-    $path(x: any): any;
-    $port(x: any): any;
+    $path(x: string): ServiceReferenceHelper;
+    $port(x: number): ServiceReferenceHelper;
 }
 
 /** ServiceReference holds a reference to Service.legacy.k8s.io */
@@ -287,39 +292,42 @@ export class ServiceReferenceHelper extends Template implements ServiceReference
         super(obj)
     }
 
-    _path: any;
-    get path(): any /*string*/ {
+    _path: string;
+    get path(): string {
         return this._path
     }
-    set path(x: any /*string*/) {
+    set path(x: string) {
         this._path = x
     }
-    setPath(x: any /*string*/) {
+    $Path(x: string) {
         this.path = x; return this
     }
 
-    _port: any;
-    get port(): any /*number*/ {
+    _port: number;
+    get port(): number {
         return this._port
     }
-    set port(x: any /*number*/) {
+    set port(x: number) {
         this._port = x
     }
-    setPort(x: any /*number*/) {
+    $Port(x: number) {
         this.port = x; return this
     }
 }
 
 export interface ValidatingWebhookHelper extends ValidatingWebhook {
-    $admissionReviewVersions(x: any): any;
-    $clientConfig(x: any): any;
-    $failurePolicy(x: any): any;
-    $matchPolicy(x: any): any;
-    $namespaceSelector(x: any): any;
-    $objectSelector(x: any): any;
-    $rules(x: any): any;
-    $sideEffects(x: any): any;
-    $timeoutSeconds(x: any): any;
+    $admissionReviewVersions(x: Array<string>): ValidatingWebhookHelper;
+    clientConfig: WebhookClientConfigHelper;
+    $clientConfig(x: WebhookClientConfigHelper): ValidatingWebhookHelper;
+    $failurePolicy(x: string): ValidatingWebhookHelper;
+    $matchPolicy(x: string): ValidatingWebhookHelper;
+    namespaceSelector: LabelSelectorHelper;
+    $namespaceSelector(x: LabelSelectorHelper): ValidatingWebhookHelper;
+    objectSelector: LabelSelectorHelper;
+    $objectSelector(x: LabelSelectorHelper): ValidatingWebhookHelper;
+    $rules(x: Array<RuleWithOperations>): ValidatingWebhookHelper;
+    $sideEffects(x: string): ValidatingWebhookHelper;
+    $timeoutSeconds(x: number): ValidatingWebhookHelper;
 }
 
 /** ValidatingWebhook describes an admission webhook and the resources and operations it applies to. */
@@ -328,109 +336,110 @@ export class ValidatingWebhookHelper extends Template implements ValidatingWebho
         super(obj)
     }
 
-    _admissionReviewVersions: any;
-    get admissionReviewVersions(): any /*Array<string>*/ {
+    _admissionReviewVersions: Array<string>;
+    get admissionReviewVersions(): Array<string> {
         return this._admissionReviewVersions
     }
-    set admissionReviewVersions(x: any /*Array<string>*/) {
+    set admissionReviewVersions(x: Array<string>) {
         this._admissionReviewVersions = this.set(this.admissionReviewVersions, x)
     }
-    setAdmissionReviewVersions(x: any /*Array<string>*/) {
+    $AdmissionReviewVersions(x: Array<string>) {
         this.admissionReviewVersions = x; return this
     }
 
-    _clientConfig: any;
-    get clientConfig(): any /*WebhookClientConfigHelper*/ {
+    _clientConfig: WebhookClientConfigHelper;
+    get clientConfig(): WebhookClientConfigHelper {
         return this._clientConfig
     }
-    set clientConfig(x: any /*WebhookClientConfigHelper*/) {
+    set clientConfig(x: WebhookClientConfigHelper) {
         this._clientConfig = x
     }
-    setClientConfig(x: any /*WebhookClientConfigHelper*/) {
+    $ClientConfig(x: WebhookClientConfigHelper) {
         this.clientConfig = x; return this
     }
 
-    _failurePolicy: any;
-    get failurePolicy(): any /*string*/ {
+    _failurePolicy: string;
+    get failurePolicy(): string {
         return this._failurePolicy
     }
-    set failurePolicy(x: any /*string*/) {
+    set failurePolicy(x: string) {
         this._failurePolicy = x
     }
-    setFailurePolicy(x: any /*string*/) {
+    $FailurePolicy(x: string) {
         this.failurePolicy = x; return this
     }
 
-    _matchPolicy: any;
-    get matchPolicy(): any /*string*/ {
+    _matchPolicy: string;
+    get matchPolicy(): string {
         return this._matchPolicy
     }
-    set matchPolicy(x: any /*string*/) {
+    set matchPolicy(x: string) {
         this._matchPolicy = x
     }
-    setMatchPolicy(x: any /*string*/) {
+    $MatchPolicy(x: string) {
         this.matchPolicy = x; return this
     }
 
-    _namespaceSelector: any;
-    get namespaceSelector(): any /*LabelSelectorHelper*/ {
+    _namespaceSelector: LabelSelectorHelper;
+    get namespaceSelector(): LabelSelectorHelper {
         return this._namespaceSelector
     }
-    set namespaceSelector(x: any /*LabelSelectorHelper*/) {
+    set namespaceSelector(x: LabelSelectorHelper) {
         this._namespaceSelector = x
     }
-    setNamespaceSelector(x: any /*LabelSelectorHelper*/) {
+    $NamespaceSelector(x: LabelSelectorHelper) {
         this.namespaceSelector = x; return this
     }
 
-    _objectSelector: any;
-    get objectSelector(): any /*LabelSelectorHelper*/ {
+    _objectSelector: LabelSelectorHelper;
+    get objectSelector(): LabelSelectorHelper {
         return this._objectSelector
     }
-    set objectSelector(x: any /*LabelSelectorHelper*/) {
+    set objectSelector(x: LabelSelectorHelper) {
         this._objectSelector = x
     }
-    setObjectSelector(x: any /*LabelSelectorHelper*/) {
+    $ObjectSelector(x: LabelSelectorHelper) {
         this.objectSelector = x; return this
     }
 
-    _rules: any;
-    get rules(): any /*Array<RuleWithOperations>*/ {
+    _rules: Array<RuleWithOperations>;
+    get rules(): Array<RuleWithOperations> {
         return this._rules
     }
-    set rules(x: any /*Array<RuleWithOperations>*/) {
+    set rules(x: Array<RuleWithOperations>) {
         this._rules = this.set(this.rules, x)
     }
-    setRules(x: any /*Array<RuleWithOperations>*/) {
+    $Rules(x: Array<RuleWithOperations>) {
         this.rules = x; return this
     }
 
-    _sideEffects: any;
-    get sideEffects(): any /*string*/ {
+    _sideEffects: string;
+    get sideEffects(): string {
         return this._sideEffects
     }
-    set sideEffects(x: any /*string*/) {
+    set sideEffects(x: string) {
         this._sideEffects = x
     }
-    setSideEffects(x: any /*string*/) {
+    $SideEffects(x: string) {
         this.sideEffects = x; return this
     }
 
-    _timeoutSeconds: any;
-    get timeoutSeconds(): any /*number*/ {
+    _timeoutSeconds: number;
+    get timeoutSeconds(): number {
         return this._timeoutSeconds
     }
-    set timeoutSeconds(x: any /*number*/) {
+    set timeoutSeconds(x: number) {
         this._timeoutSeconds = x
     }
-    setTimeoutSeconds(x: any /*number*/) {
+    $TimeoutSeconds(x: number) {
         this.timeoutSeconds = x; return this
     }
 }
 
 export interface ValidatingWebhookConfigurationHelper extends ValidatingWebhookConfiguration {
-    $metadata(x: any): any;
-    $webhooks(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): ValidatingWebhookConfigurationHelper;
+    $webhooks(x: Array<ValidatingWebhook>): ValidatingWebhookConfigurationHelper;
 }
 
 /** ValidatingWebhookConfiguration describes the configuration of and admission webhook that accept or reject and object without changing it. */
@@ -442,32 +451,33 @@ export class ValidatingWebhookConfigurationHelper extends ResourceTemplate imple
         super(nameOrObject, namespace, ValidatingWebhookConfigurationHelper.kind, ValidatingWebhookConfigurationHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _webhooks: any;
-    get webhooks(): any /*Array<ValidatingWebhook>*/ {
+    _webhooks: Array<ValidatingWebhook>;
+    get webhooks(): Array<ValidatingWebhook> {
         return this._webhooks
     }
-    set webhooks(x: any /*Array<ValidatingWebhook>*/) {
+    set webhooks(x: Array<ValidatingWebhook>) {
         this._webhooks = this.set(this.webhooks, x)
     }
-    setWebhooks(x: any /*Array<ValidatingWebhook>*/) {
+    $Webhooks(x: Array<ValidatingWebhook>) {
         this.webhooks = x; return this
     }
 }
 
 export interface ValidatingWebhookConfigurationListHelper extends ValidatingWebhookConfigurationList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<ValidatingWebhookConfiguration>): ValidatingWebhookConfigurationListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): ValidatingWebhookConfigurationListHelper;
 }
 
 /** ValidatingWebhookConfigurationList is a list of ValidatingWebhookConfiguration. */
@@ -479,33 +489,34 @@ export class ValidatingWebhookConfigurationListHelper extends ResourceTemplate i
         super(nameOrObject, namespace, ValidatingWebhookConfigurationListHelper.kind, ValidatingWebhookConfigurationListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<ValidatingWebhookConfiguration>*/ {
+    _items: Array<ValidatingWebhookConfiguration>;
+    get items(): Array<ValidatingWebhookConfiguration> {
         return this._items
     }
-    set items(x: any /*Array<ValidatingWebhookConfiguration>*/) {
+    set items(x: Array<ValidatingWebhookConfiguration>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<ValidatingWebhookConfiguration>*/) {
+    $Items(x: Array<ValidatingWebhookConfiguration>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface WebhookClientConfigHelper extends WebhookClientConfig {
-    $caBundle(x: any): any;
-    $service(x: any): any;
-    $url(x: any): any;
+    $caBundle(x: string): WebhookClientConfigHelper;
+    service: ServiceReferenceHelper;
+    $service(x: ServiceReferenceHelper): WebhookClientConfigHelper;
+    $url(x: string): WebhookClientConfigHelper;
 }
 
 /** WebhookClientConfig contains the information to make a TLS connection with the webhook */
@@ -514,36 +525,36 @@ export class WebhookClientConfigHelper extends Template implements WebhookClient
         super(obj)
     }
 
-    _caBundle: any;
-    get caBundle(): any /*string*/ {
+    _caBundle: string;
+    get caBundle(): string {
         return this._caBundle
     }
-    set caBundle(x: any /*string*/) {
+    set caBundle(x: string) {
         this._caBundle = x
     }
-    setCaBundle(x: any /*string*/) {
+    $CaBundle(x: string) {
         this.caBundle = x; return this
     }
 
-    _service: any;
-    get service(): any /*ServiceReferenceHelper*/ {
+    _service: ServiceReferenceHelper;
+    get service(): ServiceReferenceHelper {
         return this._service
     }
-    set service(x: any /*ServiceReferenceHelper*/) {
+    set service(x: ServiceReferenceHelper) {
         this._service = x
     }
-    setService(x: any /*ServiceReferenceHelper*/) {
+    $Service(x: ServiceReferenceHelper) {
         this.service = x; return this
     }
 
-    _url: any;
-    get url(): any /*string*/ {
+    _url: string;
+    get url(): string {
         return this._url
     }
-    set url(x: any /*string*/) {
+    set url(x: string) {
         this._url = x
     }
-    setUrl(x: any /*string*/) {
+    $Url(x: string) {
         this.url = x; return this
     }
 }

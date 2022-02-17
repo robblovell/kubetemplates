@@ -3,7 +3,7 @@ import { AggregationRule, ClusterRole, ClusterRoleBinding, ClusterRoleBindingLis
 import { LabelSelector, ListMeta, ObjectMeta } from "../meta/v1";
 
 export interface AggregationRuleHelper extends AggregationRule {
-    $clusterRoleSelectors(x: any): any;
+    $clusterRoleSelectors(x: Array<LabelSelector>): AggregationRuleHelper;
 }
 
 /** AggregationRule describes how to locate ClusterRoles to aggregate into the ClusterRole */
@@ -12,22 +12,24 @@ export class AggregationRuleHelper extends Template implements AggregationRuleHe
         super(obj)
     }
 
-    _clusterRoleSelectors: any;
-    get clusterRoleSelectors(): any /*Array<LabelSelector>*/ {
+    _clusterRoleSelectors: Array<LabelSelector>;
+    get clusterRoleSelectors(): Array<LabelSelector> {
         return this._clusterRoleSelectors
     }
-    set clusterRoleSelectors(x: any /*Array<LabelSelector>*/) {
+    set clusterRoleSelectors(x: Array<LabelSelector>) {
         this._clusterRoleSelectors = this.set(this.clusterRoleSelectors, x)
     }
-    setClusterRoleSelectors(x: any /*Array<LabelSelector>*/) {
+    $ClusterRoleSelectors(x: Array<LabelSelector>) {
         this.clusterRoleSelectors = x; return this
     }
 }
 
 export interface ClusterRoleHelper extends ClusterRole {
-    $aggregationRule(x: any): any;
-    $metadata(x: any): any;
-    $rules(x: any): any;
+    aggregationRule: AggregationRuleHelper;
+    $aggregationRule(x: AggregationRuleHelper): ClusterRoleHelper;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): ClusterRoleHelper;
+    $rules(x: Array<PolicyRule>): ClusterRoleHelper;
 }
 
 /** ClusterRole is a cluster level, logical grouping of PolicyRules that can be referenced as a unit by a RoleBinding or ClusterRoleBinding. Deprecated in v1.17 in favor of rbac.authorization.k8s.io/v1 ClusterRole, and will no longer be served in v1.22. */
@@ -39,44 +41,46 @@ export class ClusterRoleHelper extends ResourceTemplate implements ClusterRoleHe
         super(nameOrObject, namespace, ClusterRoleHelper.kind, ClusterRoleHelper.apiVersion)
     }
 
-    _aggregationRule: any;
-    get aggregationRule(): any /*AggregationRuleHelper*/ {
+    _aggregationRule: AggregationRuleHelper;
+    get aggregationRule(): AggregationRuleHelper {
         return this._aggregationRule
     }
-    set aggregationRule(x: any /*AggregationRuleHelper*/) {
+    set aggregationRule(x: AggregationRuleHelper) {
         this._aggregationRule = x
     }
-    setAggregationRule(x: any /*AggregationRuleHelper*/) {
+    $AggregationRule(x: AggregationRuleHelper) {
         this.aggregationRule = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _rules: any;
-    get rules(): any /*Array<PolicyRule>*/ {
+    _rules: Array<PolicyRule>;
+    get rules(): Array<PolicyRule> {
         return this._rules
     }
-    set rules(x: any /*Array<PolicyRule>*/) {
+    set rules(x: Array<PolicyRule>) {
         this._rules = this.set(this.rules, x)
     }
-    setRules(x: any /*Array<PolicyRule>*/) {
+    $Rules(x: Array<PolicyRule>) {
         this.rules = x; return this
     }
 }
 
 export interface ClusterRoleBindingHelper extends ClusterRoleBinding {
-    $metadata(x: any): any;
-    $roleRef(x: any): any;
-    $subjects(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): ClusterRoleBindingHelper;
+    roleRef: RoleRefHelper;
+    $roleRef(x: RoleRefHelper): ClusterRoleBindingHelper;
+    $subjects(x: Array<Subject>): ClusterRoleBindingHelper;
 }
 
 /** ClusterRoleBinding references a ClusterRole, but not contain it.  It can reference a ClusterRole in the global namespace, and adds who information via Subject. Deprecated in v1.17 in favor of rbac.authorization.k8s.io/v1 ClusterRoleBinding, and will no longer be served in v1.22. */
@@ -88,43 +92,44 @@ export class ClusterRoleBindingHelper extends ResourceTemplate implements Cluste
         super(nameOrObject, namespace, ClusterRoleBindingHelper.kind, ClusterRoleBindingHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _roleRef: any;
-    get roleRef(): any /*RoleRefHelper*/ {
+    _roleRef: RoleRefHelper;
+    get roleRef(): RoleRefHelper {
         return this._roleRef
     }
-    set roleRef(x: any /*RoleRefHelper*/) {
+    set roleRef(x: RoleRefHelper) {
         this._roleRef = x
     }
-    setRoleRef(x: any /*RoleRefHelper*/) {
+    $RoleRef(x: RoleRefHelper) {
         this.roleRef = x; return this
     }
 
-    _subjects: any;
-    get subjects(): any /*Array<Subject>*/ {
+    _subjects: Array<Subject>;
+    get subjects(): Array<Subject> {
         return this._subjects
     }
-    set subjects(x: any /*Array<Subject>*/) {
+    set subjects(x: Array<Subject>) {
         this._subjects = this.set(this.subjects, x)
     }
-    setSubjects(x: any /*Array<Subject>*/) {
+    $Subjects(x: Array<Subject>) {
         this.subjects = x; return this
     }
 }
 
 export interface ClusterRoleBindingListHelper extends ClusterRoleBindingList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<ClusterRoleBinding>): ClusterRoleBindingListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): ClusterRoleBindingListHelper;
 }
 
 /** ClusterRoleBindingList is a collection of ClusterRoleBindings. Deprecated in v1.17 in favor of rbac.authorization.k8s.io/v1 ClusterRoleBindingList, and will no longer be served in v1.22. */
@@ -136,32 +141,33 @@ export class ClusterRoleBindingListHelper extends ResourceTemplate implements Cl
         super(nameOrObject, namespace, ClusterRoleBindingListHelper.kind, ClusterRoleBindingListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<ClusterRoleBinding>*/ {
+    _items: Array<ClusterRoleBinding>;
+    get items(): Array<ClusterRoleBinding> {
         return this._items
     }
-    set items(x: any /*Array<ClusterRoleBinding>*/) {
+    set items(x: Array<ClusterRoleBinding>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<ClusterRoleBinding>*/) {
+    $Items(x: Array<ClusterRoleBinding>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface ClusterRoleListHelper extends ClusterRoleList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<ClusterRole>): ClusterRoleListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): ClusterRoleListHelper;
 }
 
 /** ClusterRoleList is a collection of ClusterRoles. Deprecated in v1.17 in favor of rbac.authorization.k8s.io/v1 ClusterRoles, and will no longer be served in v1.22. */
@@ -173,35 +179,35 @@ export class ClusterRoleListHelper extends ResourceTemplate implements ClusterRo
         super(nameOrObject, namespace, ClusterRoleListHelper.kind, ClusterRoleListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<ClusterRole>*/ {
+    _items: Array<ClusterRole>;
+    get items(): Array<ClusterRole> {
         return this._items
     }
-    set items(x: any /*Array<ClusterRole>*/) {
+    set items(x: Array<ClusterRole>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<ClusterRole>*/) {
+    $Items(x: Array<ClusterRole>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface PolicyRuleHelper extends PolicyRule {
-    $apiGroups(x: any): any;
-    $nonResourceURLs(x: any): any;
-    $resourceNames(x: any): any;
-    $resources(x: any): any;
-    $verbs(x: any): any;
+    $apiGroups(x: Array<string>): PolicyRuleHelper;
+    $nonResourceURLs(x: Array<string>): PolicyRuleHelper;
+    $resourceNames(x: Array<string>): PolicyRuleHelper;
+    $resources(x: Array<string>): PolicyRuleHelper;
+    $verbs(x: Array<string>): PolicyRuleHelper;
 }
 
 /** PolicyRule holds information that describes a policy rule, but does not contain information about who the rule applies to or which namespace the rule applies to. */
@@ -210,65 +216,66 @@ export class PolicyRuleHelper extends Template implements PolicyRuleHelper {
         super(obj)
     }
 
-    _apiGroups: any;
-    get apiGroups(): any /*Array<string>*/ {
+    _apiGroups: Array<string>;
+    get apiGroups(): Array<string> {
         return this._apiGroups
     }
-    set apiGroups(x: any /*Array<string>*/) {
+    set apiGroups(x: Array<string>) {
         this._apiGroups = this.set(this.apiGroups, x)
     }
-    setApiGroups(x: any /*Array<string>*/) {
+    $ApiGroups(x: Array<string>) {
         this.apiGroups = x; return this
     }
 
-    _nonResourceURLs: any;
-    get nonResourceURLs(): any /*Array<string>*/ {
+    _nonResourceURLs: Array<string>;
+    get nonResourceURLs(): Array<string> {
         return this._nonResourceURLs
     }
-    set nonResourceURLs(x: any /*Array<string>*/) {
+    set nonResourceURLs(x: Array<string>) {
         this._nonResourceURLs = this.set(this.nonResourceURLs, x)
     }
-    setNonResourceURLs(x: any /*Array<string>*/) {
+    $NonResourceURLs(x: Array<string>) {
         this.nonResourceURLs = x; return this
     }
 
-    _resourceNames: any;
-    get resourceNames(): any /*Array<string>*/ {
+    _resourceNames: Array<string>;
+    get resourceNames(): Array<string> {
         return this._resourceNames
     }
-    set resourceNames(x: any /*Array<string>*/) {
+    set resourceNames(x: Array<string>) {
         this._resourceNames = this.set(this.resourceNames, x)
     }
-    setResourceNames(x: any /*Array<string>*/) {
+    $ResourceNames(x: Array<string>) {
         this.resourceNames = x; return this
     }
 
-    _resources: any;
-    get resources(): any /*Array<string>*/ {
+    _resources: Array<string>;
+    get resources(): Array<string> {
         return this._resources
     }
-    set resources(x: any /*Array<string>*/) {
+    set resources(x: Array<string>) {
         this._resources = this.set(this.resources, x)
     }
-    setResources(x: any /*Array<string>*/) {
+    $Resources(x: Array<string>) {
         this.resources = x; return this
     }
 
-    _verbs: any;
-    get verbs(): any /*Array<string>*/ {
+    _verbs: Array<string>;
+    get verbs(): Array<string> {
         return this._verbs
     }
-    set verbs(x: any /*Array<string>*/) {
+    set verbs(x: Array<string>) {
         this._verbs = this.set(this.verbs, x)
     }
-    setVerbs(x: any /*Array<string>*/) {
+    $Verbs(x: Array<string>) {
         this.verbs = x; return this
     }
 }
 
 export interface RoleHelper extends Role {
-    $metadata(x: any): any;
-    $rules(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): RoleHelper;
+    $rules(x: Array<PolicyRule>): RoleHelper;
 }
 
 /** Role is a namespaced, logical grouping of PolicyRules that can be referenced as a unit by a RoleBinding. Deprecated in v1.17 in favor of rbac.authorization.k8s.io/v1 Role, and will no longer be served in v1.22. */
@@ -280,33 +287,35 @@ export class RoleHelper extends ResourceTemplate implements RoleHelper {
         super(nameOrObject, namespace, RoleHelper.kind, RoleHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _rules: any;
-    get rules(): any /*Array<PolicyRule>*/ {
+    _rules: Array<PolicyRule>;
+    get rules(): Array<PolicyRule> {
         return this._rules
     }
-    set rules(x: any /*Array<PolicyRule>*/) {
+    set rules(x: Array<PolicyRule>) {
         this._rules = this.set(this.rules, x)
     }
-    setRules(x: any /*Array<PolicyRule>*/) {
+    $Rules(x: Array<PolicyRule>) {
         this.rules = x; return this
     }
 }
 
 export interface RoleBindingHelper extends RoleBinding {
-    $metadata(x: any): any;
-    $roleRef(x: any): any;
-    $subjects(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): RoleBindingHelper;
+    roleRef: RoleRefHelper;
+    $roleRef(x: RoleRefHelper): RoleBindingHelper;
+    $subjects(x: Array<Subject>): RoleBindingHelper;
 }
 
 /** RoleBinding references a role, but does not contain it.  It can reference a Role in the same namespace or a ClusterRole in the global namespace. It adds who information via Subjects and namespace information by which namespace it exists in.  RoleBindings in a given namespace only have effect in that namespace. Deprecated in v1.17 in favor of rbac.authorization.k8s.io/v1 RoleBinding, and will no longer be served in v1.22. */
@@ -318,43 +327,44 @@ export class RoleBindingHelper extends ResourceTemplate implements RoleBindingHe
         super(nameOrObject, namespace, RoleBindingHelper.kind, RoleBindingHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _roleRef: any;
-    get roleRef(): any /*RoleRefHelper*/ {
+    _roleRef: RoleRefHelper;
+    get roleRef(): RoleRefHelper {
         return this._roleRef
     }
-    set roleRef(x: any /*RoleRefHelper*/) {
+    set roleRef(x: RoleRefHelper) {
         this._roleRef = x
     }
-    setRoleRef(x: any /*RoleRefHelper*/) {
+    $RoleRef(x: RoleRefHelper) {
         this.roleRef = x; return this
     }
 
-    _subjects: any;
-    get subjects(): any /*Array<Subject>*/ {
+    _subjects: Array<Subject>;
+    get subjects(): Array<Subject> {
         return this._subjects
     }
-    set subjects(x: any /*Array<Subject>*/) {
+    set subjects(x: Array<Subject>) {
         this._subjects = this.set(this.subjects, x)
     }
-    setSubjects(x: any /*Array<Subject>*/) {
+    $Subjects(x: Array<Subject>) {
         this.subjects = x; return this
     }
 }
 
 export interface RoleBindingListHelper extends RoleBindingList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<RoleBinding>): RoleBindingListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): RoleBindingListHelper;
 }
 
 /** RoleBindingList is a collection of RoleBindings Deprecated in v1.17 in favor of rbac.authorization.k8s.io/v1 RoleBindingList, and will no longer be served in v1.22. */
@@ -366,32 +376,33 @@ export class RoleBindingListHelper extends ResourceTemplate implements RoleBindi
         super(nameOrObject, namespace, RoleBindingListHelper.kind, RoleBindingListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<RoleBinding>*/ {
+    _items: Array<RoleBinding>;
+    get items(): Array<RoleBinding> {
         return this._items
     }
-    set items(x: any /*Array<RoleBinding>*/) {
+    set items(x: Array<RoleBinding>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<RoleBinding>*/) {
+    $Items(x: Array<RoleBinding>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface RoleListHelper extends RoleList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<Role>): RoleListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): RoleListHelper;
 }
 
 /** RoleList is a collection of Roles Deprecated in v1.17 in favor of rbac.authorization.k8s.io/v1 RoleList, and will no longer be served in v1.22. */
@@ -403,31 +414,31 @@ export class RoleListHelper extends ResourceTemplate implements RoleListHelper {
         super(nameOrObject, namespace, RoleListHelper.kind, RoleListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<Role>*/ {
+    _items: Array<Role>;
+    get items(): Array<Role> {
         return this._items
     }
-    set items(x: any /*Array<Role>*/) {
+    set items(x: Array<Role>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<Role>*/) {
+    $Items(x: Array<Role>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface RoleRefHelper extends RoleRef {
-    $apiGroup(x: any): any;
+    $apiGroup(x: string): RoleRefHelper;
 }
 
 /** RoleRef contains information that points to the role being used */
@@ -436,20 +447,20 @@ export class RoleRefHelper extends Template implements RoleRefHelper {
         super(obj)
     }
 
-    _apiGroup: any;
-    get apiGroup(): any /*string*/ {
+    _apiGroup: string;
+    get apiGroup(): string {
         return this._apiGroup
     }
-    set apiGroup(x: any /*string*/) {
+    set apiGroup(x: string) {
         this._apiGroup = x
     }
-    setApiGroup(x: any /*string*/) {
+    $ApiGroup(x: string) {
         this.apiGroup = x; return this
     }
 }
 
 export interface SubjectHelper extends Subject {
-    $apiGroup(x: any): any;
+    $apiGroup(x: string): SubjectHelper;
 }
 
 /** Subject contains a reference to the object or user identities a role binding applies to.  This can either hold a direct API object reference, or a value for non-objects such as user and group names. */
@@ -458,14 +469,14 @@ export class SubjectHelper extends Template implements SubjectHelper {
         super(obj)
     }
 
-    _apiGroup: any;
-    get apiGroup(): any /*string*/ {
+    _apiGroup: string;
+    get apiGroup(): string {
         return this._apiGroup
     }
-    set apiGroup(x: any /*string*/) {
+    set apiGroup(x: string) {
         this._apiGroup = x
     }
-    setApiGroup(x: any /*string*/) {
+    $ApiGroup(x: string) {
         this.apiGroup = x; return this
     }
 }

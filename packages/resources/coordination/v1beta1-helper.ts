@@ -3,8 +3,10 @@ import { Lease, LeaseList, LeaseSpec } from "./v1beta1";
 import { ListMeta, MicroTime, ObjectMeta } from "../meta/v1";
 
 export interface LeaseHelper extends Lease {
-    $metadata(x: any): any;
-    $spec(x: any): any;
+    metadata: ObjectMetaHelper;
+    $metadata(x: ObjectMetaHelper): LeaseHelper;
+    spec: LeaseSpecHelper;
+    $spec(x: LeaseSpecHelper): LeaseHelper;
 }
 
 /** Lease defines a lease concept. */
@@ -16,32 +18,33 @@ export class LeaseHelper extends ResourceTemplate implements LeaseHelper {
         super(nameOrObject, namespace, LeaseHelper.kind, LeaseHelper.apiVersion)
     }
 
-    _metadata: any;
-    get metadata(): any /*ObjectMetaHelper*/ {
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ObjectMetaHelper*/) {
+    set metadata(x: ObjectMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ObjectMetaHelper*/) {
+    $Metadata(x: ObjectMetaHelper) {
         this.metadata = x; return this
     }
 
-    _spec: any;
-    get spec(): any /*LeaseSpecHelper*/ {
+    _spec: LeaseSpecHelper;
+    get spec(): LeaseSpecHelper {
         return this._spec
     }
-    set spec(x: any /*LeaseSpecHelper*/) {
+    set spec(x: LeaseSpecHelper) {
         this._spec = x
     }
-    setSpec(x: any /*LeaseSpecHelper*/) {
+    $Spec(x: LeaseSpecHelper) {
         this.spec = x; return this
     }
 }
 
 export interface LeaseListHelper extends LeaseList {
-    $items(x: any): any;
-    $metadata(x: any): any;
+    $items(x: Array<Lease>): LeaseListHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): LeaseListHelper;
 }
 
 /** LeaseList is a list of Lease objects. */
@@ -53,35 +56,35 @@ export class LeaseListHelper extends ResourceTemplate implements LeaseListHelper
         super(nameOrObject, namespace, LeaseListHelper.kind, LeaseListHelper.apiVersion)
     }
 
-    _items: any;
-    get items(): any /*Array<Lease>*/ {
+    _items: Array<Lease>;
+    get items(): Array<Lease> {
         return this._items
     }
-    set items(x: any /*Array<Lease>*/) {
+    set items(x: Array<Lease>) {
         this._items = this.set(this.items, x)
     }
-    setItems(x: any /*Array<Lease>*/) {
+    $Items(x: Array<Lease>) {
         this.items = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 }
 
 export interface LeaseSpecHelper extends LeaseSpec {
-    $acquireTime(x: any): any;
-    $holderIdentity(x: any): any;
-    $leaseDurationSeconds(x: any): any;
-    $leaseTransitions(x: any): any;
-    $renewTime(x: any): any;
+    $acquireTime(x: MicroTime): LeaseSpecHelper;
+    $holderIdentity(x: string): LeaseSpecHelper;
+    $leaseDurationSeconds(x: number): LeaseSpecHelper;
+    $leaseTransitions(x: number): LeaseSpecHelper;
+    $renewTime(x: MicroTime): LeaseSpecHelper;
 }
 
 /** LeaseSpec is a specification of a Lease. */
@@ -90,58 +93,58 @@ export class LeaseSpecHelper extends Template implements LeaseSpecHelper {
         super(obj)
     }
 
-    _acquireTime: any;
-    get acquireTime(): any /*MicroTime*/ {
+    _acquireTime: MicroTime;
+    get acquireTime(): MicroTime {
         return this._acquireTime
     }
-    set acquireTime(x: any /*MicroTime*/) {
+    set acquireTime(x: MicroTime) {
         this._acquireTime = x
     }
-    setAcquireTime(x: any /*MicroTime*/) {
+    $AcquireTime(x: MicroTime) {
         this.acquireTime = x; return this
     }
 
-    _holderIdentity: any;
-    get holderIdentity(): any /*string*/ {
+    _holderIdentity: string;
+    get holderIdentity(): string {
         return this._holderIdentity
     }
-    set holderIdentity(x: any /*string*/) {
+    set holderIdentity(x: string) {
         this._holderIdentity = x
     }
-    setHolderIdentity(x: any /*string*/) {
+    $HolderIdentity(x: string) {
         this.holderIdentity = x; return this
     }
 
-    _leaseDurationSeconds: any;
-    get leaseDurationSeconds(): any /*number*/ {
+    _leaseDurationSeconds: number;
+    get leaseDurationSeconds(): number {
         return this._leaseDurationSeconds
     }
-    set leaseDurationSeconds(x: any /*number*/) {
+    set leaseDurationSeconds(x: number) {
         this._leaseDurationSeconds = x
     }
-    setLeaseDurationSeconds(x: any /*number*/) {
+    $LeaseDurationSeconds(x: number) {
         this.leaseDurationSeconds = x; return this
     }
 
-    _leaseTransitions: any;
-    get leaseTransitions(): any /*number*/ {
+    _leaseTransitions: number;
+    get leaseTransitions(): number {
         return this._leaseTransitions
     }
-    set leaseTransitions(x: any /*number*/) {
+    set leaseTransitions(x: number) {
         this._leaseTransitions = x
     }
-    setLeaseTransitions(x: any /*number*/) {
+    $LeaseTransitions(x: number) {
         this.leaseTransitions = x; return this
     }
 
-    _renewTime: any;
-    get renewTime(): any /*MicroTime*/ {
+    _renewTime: MicroTime;
+    get renewTime(): MicroTime {
         return this._renewTime
     }
-    set renewTime(x: any /*MicroTime*/) {
+    set renewTime(x: MicroTime) {
         this._renewTime = x
     }
-    setRenewTime(x: any /*MicroTime*/) {
+    $RenewTime(x: MicroTime) {
         this.renewTime = x; return this
     }
 }

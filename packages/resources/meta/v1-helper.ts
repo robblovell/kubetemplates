@@ -3,9 +3,10 @@ import { APIGroup, APIGroupList, APIResource, APIResourceList, APIVersions, Cond
 import { RawExtension } from "../runtime";
 
 export interface APIGroupHelper extends APIGroup {
-    $preferredVersion(x: any): any;
-    $serverAddressByClientCIDRs(x: any): any;
-    $versions(x: any): any;
+    preferredVersion: GroupVersionForDiscoveryHelper;
+    $preferredVersion(x: GroupVersionForDiscoveryHelper): APIGroupHelper;
+    $serverAddressByClientCIDRs(x: Array<ServerAddressByClientCIDR>): APIGroupHelper;
+    $versions(x: Array<GroupVersionForDiscovery>): APIGroupHelper;
 }
 
 /** APIGroup contains the name, the supported versions, and the preferred version of a group. */
@@ -14,42 +15,42 @@ export class APIGroupHelper extends Template implements APIGroupHelper {
         super(obj)
     }
 
-    _preferredVersion: any;
-    get preferredVersion(): any /*GroupVersionForDiscoveryHelper*/ {
+    _preferredVersion: GroupVersionForDiscoveryHelper;
+    get preferredVersion(): GroupVersionForDiscoveryHelper {
         return this._preferredVersion
     }
-    set preferredVersion(x: any /*GroupVersionForDiscoveryHelper*/) {
+    set preferredVersion(x: GroupVersionForDiscoveryHelper) {
         this._preferredVersion = x
     }
-    setPreferredVersion(x: any /*GroupVersionForDiscoveryHelper*/) {
+    $PreferredVersion(x: GroupVersionForDiscoveryHelper) {
         this.preferredVersion = x; return this
     }
 
-    _serverAddressByClientCIDRs: any;
-    get serverAddressByClientCIDRs(): any /*Array<ServerAddressByClientCIDR>*/ {
+    _serverAddressByClientCIDRs: Array<ServerAddressByClientCIDR>;
+    get serverAddressByClientCIDRs(): Array<ServerAddressByClientCIDR> {
         return this._serverAddressByClientCIDRs
     }
-    set serverAddressByClientCIDRs(x: any /*Array<ServerAddressByClientCIDR>*/) {
+    set serverAddressByClientCIDRs(x: Array<ServerAddressByClientCIDR>) {
         this._serverAddressByClientCIDRs = this.set(this.serverAddressByClientCIDRs, x)
     }
-    setServerAddressByClientCIDRs(x: any /*Array<ServerAddressByClientCIDR>*/) {
+    $ServerAddressByClientCIDRs(x: Array<ServerAddressByClientCIDR>) {
         this.serverAddressByClientCIDRs = x; return this
     }
 
-    _versions: any;
-    get versions(): any /*Array<GroupVersionForDiscovery>*/ {
+    _versions: Array<GroupVersionForDiscovery>;
+    get versions(): Array<GroupVersionForDiscovery> {
         return this._versions
     }
-    set versions(x: any /*Array<GroupVersionForDiscovery>*/) {
+    set versions(x: Array<GroupVersionForDiscovery>) {
         this._versions = this.set(this.versions, x)
     }
-    setVersions(x: any /*Array<GroupVersionForDiscovery>*/) {
+    $Versions(x: Array<GroupVersionForDiscovery>) {
         this.versions = x; return this
     }
 }
 
 export interface APIGroupListHelper extends APIGroupList {
-    $groups(x: any): any;
+    $groups(x: Array<APIGroup>): APIGroupListHelper;
 }
 
 /** APIGroupList is a list of APIGroup, to allow clients to discover the API at /apis. */
@@ -58,27 +59,27 @@ export class APIGroupListHelper extends Template implements APIGroupListHelper {
         super(obj)
     }
 
-    _groups: any;
-    get groups(): any /*Array<APIGroup>*/ {
+    _groups: Array<APIGroup>;
+    get groups(): Array<APIGroup> {
         return this._groups
     }
-    set groups(x: any /*Array<APIGroup>*/) {
+    set groups(x: Array<APIGroup>) {
         this._groups = this.set(this.groups, x)
     }
-    setGroups(x: any /*Array<APIGroup>*/) {
+    $Groups(x: Array<APIGroup>) {
         this.groups = x; return this
     }
 }
 
 export interface APIResourceHelper extends APIResource {
-    $categories(x: any): any;
-    $group(x: any): any;
-    $namespaced(x: any): any;
-    $shortNames(x: any): any;
-    $singularName(x: any): any;
-    $storageVersionHash(x: any): any;
-    $verbs(x: any): any;
-    $version(x: any): any;
+    $categories(x: Array<string>): APIResourceHelper;
+    $group(x: string): APIResourceHelper;
+    $namespaced(x: boolean): APIResourceHelper;
+    $shortNames(x: Array<string>): APIResourceHelper;
+    $singularName(x: string): APIResourceHelper;
+    $storageVersionHash(x: string): APIResourceHelper;
+    $verbs(x: Array<string>): APIResourceHelper;
+    $version(x: string): APIResourceHelper;
 }
 
 /** APIResource specifies the name of a resource and whether it is namespaced. */
@@ -87,98 +88,98 @@ export class APIResourceHelper extends Template implements APIResourceHelper {
         super(obj)
     }
 
-    _categories: any;
-    get categories(): any /*Array<string>*/ {
+    _categories: Array<string>;
+    get categories(): Array<string> {
         return this._categories
     }
-    set categories(x: any /*Array<string>*/) {
+    set categories(x: Array<string>) {
         this._categories = this.set(this.categories, x)
     }
-    setCategories(x: any /*Array<string>*/) {
+    $Categories(x: Array<string>) {
         this.categories = x; return this
     }
 
-    _group: any;
-    get group(): any /*string*/ {
+    _group: string;
+    get group(): string {
         return this._group
     }
-    set group(x: any /*string*/) {
+    set group(x: string) {
         this._group = x
     }
-    setGroup(x: any /*string*/) {
+    $Group(x: string) {
         this.group = x; return this
     }
 
-    _namespaced: any;
-    get namespaced(): any /*boolean*/ {
+    _namespaced: boolean;
+    get namespaced(): boolean {
         return this._namespaced
     }
-    set namespaced(x: any /*boolean*/) {
+    set namespaced(x: boolean) {
         this._namespaced = x
     }
-    setNamespaced(x: any /*boolean*/) {
+    $Namespaced(x: boolean) {
         this.namespaced = x; return this
     }
 
-    _shortNames: any;
-    get shortNames(): any /*Array<string>*/ {
+    _shortNames: Array<string>;
+    get shortNames(): Array<string> {
         return this._shortNames
     }
-    set shortNames(x: any /*Array<string>*/) {
+    set shortNames(x: Array<string>) {
         this._shortNames = this.set(this.shortNames, x)
     }
-    setShortNames(x: any /*Array<string>*/) {
+    $ShortNames(x: Array<string>) {
         this.shortNames = x; return this
     }
 
-    _singularName: any;
-    get singularName(): any /*string*/ {
+    _singularName: string;
+    get singularName(): string {
         return this._singularName
     }
-    set singularName(x: any /*string*/) {
+    set singularName(x: string) {
         this._singularName = x
     }
-    setSingularName(x: any /*string*/) {
+    $SingularName(x: string) {
         this.singularName = x; return this
     }
 
-    _storageVersionHash: any;
-    get storageVersionHash(): any /*string*/ {
+    _storageVersionHash: string;
+    get storageVersionHash(): string {
         return this._storageVersionHash
     }
-    set storageVersionHash(x: any /*string*/) {
+    set storageVersionHash(x: string) {
         this._storageVersionHash = x
     }
-    setStorageVersionHash(x: any /*string*/) {
+    $StorageVersionHash(x: string) {
         this.storageVersionHash = x; return this
     }
 
-    _verbs: any;
-    get verbs(): any /*Array<string>*/ {
+    _verbs: Array<string>;
+    get verbs(): Array<string> {
         return this._verbs
     }
-    set verbs(x: any /*Array<string>*/) {
+    set verbs(x: Array<string>) {
         this._verbs = this.set(this.verbs, x)
     }
-    setVerbs(x: any /*Array<string>*/) {
+    $Verbs(x: Array<string>) {
         this.verbs = x; return this
     }
 
-    _version: any;
-    get version(): any /*string*/ {
+    _version: string;
+    get version(): string {
         return this._version
     }
-    set version(x: any /*string*/) {
+    set version(x: string) {
         this._version = x
     }
-    setVersion(x: any /*string*/) {
+    $Version(x: string) {
         this.version = x; return this
     }
 }
 
 export interface APIResourceListHelper extends APIResourceList {
-    $groupVersion(x: any): any;
-    $resources(x: any): any;
+    $groupVersion(x: string): APIResourceListHelper;
+    $resources(x: Array<APIResource>): APIResourceListHelper;
 }
 
 /** APIResourceList is a list of APIResource, it is used to expose the name of the resources supported in a specific group and version, and if the resource is namespaced. */
@@ -187,32 +188,32 @@ export class APIResourceListHelper extends Template implements APIResourceListHe
         super(obj)
     }
 
-    _groupVersion: any;
-    get groupVersion(): any /*string*/ {
+    _groupVersion: string;
+    get groupVersion(): string {
         return this._groupVersion
     }
-    set groupVersion(x: any /*string*/) {
+    set groupVersion(x: string) {
         this._groupVersion = x
     }
-    setGroupVersion(x: any /*string*/) {
+    $GroupVersion(x: string) {
         this.groupVersion = x; return this
     }
 
-    _resources: any;
-    get resources(): any /*Array<APIResource>*/ {
+    _resources: Array<APIResource>;
+    get resources(): Array<APIResource> {
         return this._resources
     }
-    set resources(x: any /*Array<APIResource>*/) {
+    set resources(x: Array<APIResource>) {
         this._resources = this.set(this.resources, x)
     }
-    setResources(x: any /*Array<APIResource>*/) {
+    $Resources(x: Array<APIResource>) {
         this.resources = x; return this
     }
 }
 
 export interface APIVersionsHelper extends APIVersions {
-    $serverAddressByClientCIDRs(x: any): any;
-    $versions(x: any): any;
+    $serverAddressByClientCIDRs(x: Array<ServerAddressByClientCIDR>): APIVersionsHelper;
+    $versions(x: Array<string>): APIVersionsHelper;
 }
 
 /** APIVersions lists the versions that are available, to allow clients to discover the API at /api, which is the root path of the legacy v1 API. */
@@ -221,36 +222,36 @@ export class APIVersionsHelper extends Template implements APIVersionsHelper {
         super(obj)
     }
 
-    _serverAddressByClientCIDRs: any;
-    get serverAddressByClientCIDRs(): any /*Array<ServerAddressByClientCIDR>*/ {
+    _serverAddressByClientCIDRs: Array<ServerAddressByClientCIDR>;
+    get serverAddressByClientCIDRs(): Array<ServerAddressByClientCIDR> {
         return this._serverAddressByClientCIDRs
     }
-    set serverAddressByClientCIDRs(x: any /*Array<ServerAddressByClientCIDR>*/) {
+    set serverAddressByClientCIDRs(x: Array<ServerAddressByClientCIDR>) {
         this._serverAddressByClientCIDRs = this.set(this.serverAddressByClientCIDRs, x)
     }
-    setServerAddressByClientCIDRs(x: any /*Array<ServerAddressByClientCIDR>*/) {
+    $ServerAddressByClientCIDRs(x: Array<ServerAddressByClientCIDR>) {
         this.serverAddressByClientCIDRs = x; return this
     }
 
-    _versions: any;
-    get versions(): any /*Array<string>*/ {
+    _versions: Array<string>;
+    get versions(): Array<string> {
         return this._versions
     }
-    set versions(x: any /*Array<string>*/) {
+    set versions(x: Array<string>) {
         this._versions = this.set(this.versions, x)
     }
-    setVersions(x: any /*Array<string>*/) {
+    $Versions(x: Array<string>) {
         this.versions = x; return this
     }
 }
 
 export interface ConditionHelper extends Condition {
-    $lastTransitionTime(x: any): any;
-    $message(x: any): any;
-    $observedGeneration(x: any): any;
-    $reason(x: any): any;
-    $status(x: any): any;
-    $type(x: any): any;
+    $lastTransitionTime(x: Time): ConditionHelper;
+    $message(x: string): ConditionHelper;
+    $observedGeneration(x: number): ConditionHelper;
+    $reason(x: string): ConditionHelper;
+    $status(x: string): ConditionHelper;
+    $type(x: string): ConditionHelper;
 }
 
 /** Condition contains details for one aspect of the current state of this API Resource. */
@@ -259,79 +260,80 @@ export class ConditionHelper extends Template implements ConditionHelper {
         super(obj)
     }
 
-    _lastTransitionTime: any;
-    get lastTransitionTime(): any /*Time*/ {
+    _lastTransitionTime: Time;
+    get lastTransitionTime(): Time {
         return this._lastTransitionTime
     }
-    set lastTransitionTime(x: any /*Time*/) {
+    set lastTransitionTime(x: Time) {
         this._lastTransitionTime = x
     }
-    setLastTransitionTime(x: any /*Time*/) {
+    $LastTransitionTime(x: Time) {
         this.lastTransitionTime = x; return this
     }
 
-    _message: any;
-    get message(): any /*string*/ {
+    _message: string;
+    get message(): string {
         return this._message
     }
-    set message(x: any /*string*/) {
+    set message(x: string) {
         this._message = x
     }
-    setMessage(x: any /*string*/) {
+    $Message(x: string) {
         this.message = x; return this
     }
 
-    _observedGeneration: any;
-    get observedGeneration(): any /*number*/ {
+    _observedGeneration: number;
+    get observedGeneration(): number {
         return this._observedGeneration
     }
-    set observedGeneration(x: any /*number*/) {
+    set observedGeneration(x: number) {
         this._observedGeneration = x
     }
-    setObservedGeneration(x: any /*number*/) {
+    $ObservedGeneration(x: number) {
         this.observedGeneration = x; return this
     }
 
-    _reason: any;
-    get reason(): any /*string*/ {
+    _reason: string;
+    get reason(): string {
         return this._reason
     }
-    set reason(x: any /*string*/) {
+    set reason(x: string) {
         this._reason = x
     }
-    setReason(x: any /*string*/) {
+    $Reason(x: string) {
         this.reason = x; return this
     }
 
-    _status: any;
-    get status(): any /*string*/ {
+    _status: string;
+    get status(): string {
         return this._status
     }
-    set status(x: any /*string*/) {
+    set status(x: string) {
         this._status = x
     }
-    setStatus(x: any /*string*/) {
+    $Status(x: string) {
         this.status = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }
 
 export interface DeleteOptionsHelper extends DeleteOptions {
-    $dryRun(x: any): any;
-    $gracePeriodSeconds(x: any): any;
-    $orphanDependents(x: any): any;
-    $preconditions(x: any): any;
-    $propagationPolicy(x: any): any;
+    $dryRun(x: Array<string>): DeleteOptionsHelper;
+    $gracePeriodSeconds(x: number): DeleteOptionsHelper;
+    $orphanDependents(x: boolean): DeleteOptionsHelper;
+    preconditions: PreconditionsHelper;
+    $preconditions(x: PreconditionsHelper): DeleteOptionsHelper;
+    $propagationPolicy(x: string): DeleteOptionsHelper;
 }
 
 /** DeleteOptions may be provided when deleting an API object. */
@@ -340,58 +342,58 @@ export class DeleteOptionsHelper extends Template implements DeleteOptionsHelper
         super(obj)
     }
 
-    _dryRun: any;
-    get dryRun(): any /*Array<string>*/ {
+    _dryRun: Array<string>;
+    get dryRun(): Array<string> {
         return this._dryRun
     }
-    set dryRun(x: any /*Array<string>*/) {
+    set dryRun(x: Array<string>) {
         this._dryRun = this.set(this.dryRun, x)
     }
-    setDryRun(x: any /*Array<string>*/) {
+    $DryRun(x: Array<string>) {
         this.dryRun = x; return this
     }
 
-    _gracePeriodSeconds: any;
-    get gracePeriodSeconds(): any /*number*/ {
+    _gracePeriodSeconds: number;
+    get gracePeriodSeconds(): number {
         return this._gracePeriodSeconds
     }
-    set gracePeriodSeconds(x: any /*number*/) {
+    set gracePeriodSeconds(x: number) {
         this._gracePeriodSeconds = x
     }
-    setGracePeriodSeconds(x: any /*number*/) {
+    $GracePeriodSeconds(x: number) {
         this.gracePeriodSeconds = x; return this
     }
 
-    _orphanDependents: any;
-    get orphanDependents(): any /*boolean*/ {
+    _orphanDependents: boolean;
+    get orphanDependents(): boolean {
         return this._orphanDependents
     }
-    set orphanDependents(x: any /*boolean*/) {
+    set orphanDependents(x: boolean) {
         this._orphanDependents = x
     }
-    setOrphanDependents(x: any /*boolean*/) {
+    $OrphanDependents(x: boolean) {
         this.orphanDependents = x; return this
     }
 
-    _preconditions: any;
-    get preconditions(): any /*PreconditionsHelper*/ {
+    _preconditions: PreconditionsHelper;
+    get preconditions(): PreconditionsHelper {
         return this._preconditions
     }
-    set preconditions(x: any /*PreconditionsHelper*/) {
+    set preconditions(x: PreconditionsHelper) {
         this._preconditions = x
     }
-    setPreconditions(x: any /*PreconditionsHelper*/) {
+    $Preconditions(x: PreconditionsHelper) {
         this.preconditions = x; return this
     }
 
-    _propagationPolicy: any;
-    get propagationPolicy(): any /*string*/ {
+    _propagationPolicy: string;
+    get propagationPolicy(): string {
         return this._propagationPolicy
     }
-    set propagationPolicy(x: any /*string*/) {
+    set propagationPolicy(x: string) {
         this._propagationPolicy = x
     }
-    setPropagationPolicy(x: any /*string*/) {
+    $PropagationPolicy(x: string) {
         this.propagationPolicy = x; return this
     }
 }
@@ -413,8 +415,8 @@ export class FieldsV1Helper extends Template implements FieldsV1Helper {
 }
 
 export interface GroupVersionForDiscoveryHelper extends GroupVersionForDiscovery {
-    $groupVersion(x: any): any;
-    $version(x: any): any;
+    $groupVersion(x: string): GroupVersionForDiscoveryHelper;
+    $version(x: string): GroupVersionForDiscoveryHelper;
 }
 
 /** GroupVersion contains the "group/version" and "version" string of a version. It is made a struct to keep extensibility. */
@@ -423,32 +425,32 @@ export class GroupVersionForDiscoveryHelper extends Template implements GroupVer
         super(obj)
     }
 
-    _groupVersion: any;
-    get groupVersion(): any /*string*/ {
+    _groupVersion: string;
+    get groupVersion(): string {
         return this._groupVersion
     }
-    set groupVersion(x: any /*string*/) {
+    set groupVersion(x: string) {
         this._groupVersion = x
     }
-    setGroupVersion(x: any /*string*/) {
+    $GroupVersion(x: string) {
         this.groupVersion = x; return this
     }
 
-    _version: any;
-    get version(): any /*string*/ {
+    _version: string;
+    get version(): string {
         return this._version
     }
-    set version(x: any /*string*/) {
+    set version(x: string) {
         this._version = x
     }
-    setVersion(x: any /*string*/) {
+    $Version(x: string) {
         this.version = x; return this
     }
 }
 
 export interface LabelSelectorHelper extends LabelSelector {
-    $matchExpressions(x: any): any;
-    $matchLabels(x: any): any;
+    $matchExpressions(x: Array<LabelSelectorRequirement>): LabelSelectorHelper;
+    $matchLabels(x: any): LabelSelectorHelper;
 }
 
 /** A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects. */
@@ -457,33 +459,33 @@ export class LabelSelectorHelper extends Template implements LabelSelectorHelper
         super(obj)
     }
 
-    _matchExpressions: any;
-    get matchExpressions(): any /*Array<LabelSelectorRequirement>*/ {
+    _matchExpressions: Array<LabelSelectorRequirement>;
+    get matchExpressions(): Array<LabelSelectorRequirement> {
         return this._matchExpressions
     }
-    set matchExpressions(x: any /*Array<LabelSelectorRequirement>*/) {
+    set matchExpressions(x: Array<LabelSelectorRequirement>) {
         this._matchExpressions = this.set(this.matchExpressions, x)
     }
-    setMatchExpressions(x: any /*Array<LabelSelectorRequirement>*/) {
+    $MatchExpressions(x: Array<LabelSelectorRequirement>) {
         this.matchExpressions = x; return this
     }
 
     _matchLabels: any;
-    get matchLabels(): any /*any*/ {
+    get matchLabels(): any {
         return this._matchLabels
     }
-    set matchLabels(x: any /*any*/) {
+    set matchLabels(x: any) {
         this._matchLabels = this.set(this.matchLabels, x)
     }
-    setMatchLabels(x: any /*any*/) {
+    $MatchLabels(x: any) {
         this.matchLabels = x; return this
     }
 }
 
 export interface LabelSelectorRequirementHelper extends LabelSelectorRequirement {
-    $key(x: any): any;
-    $operator(x: any): any;
-    $values(x: any): any;
+    $key(x: string): LabelSelectorRequirementHelper;
+    $operator(x: string): LabelSelectorRequirementHelper;
+    $values(x: Array<string>): LabelSelectorRequirementHelper;
 }
 
 /** A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values. */
@@ -492,45 +494,45 @@ export class LabelSelectorRequirementHelper extends Template implements LabelSel
         super(obj)
     }
 
-    _key: any;
-    get key(): any /*string*/ {
+    _key: string;
+    get key(): string {
         return this._key
     }
-    set key(x: any /*string*/) {
+    set key(x: string) {
         this._key = x
     }
-    setKey(x: any /*string*/) {
+    $Key(x: string) {
         this.key = x; return this
     }
 
-    _operator: any;
-    get operator(): any /*string*/ {
+    _operator: string;
+    get operator(): string {
         return this._operator
     }
-    set operator(x: any /*string*/) {
+    set operator(x: string) {
         this._operator = x
     }
-    setOperator(x: any /*string*/) {
+    $Operator(x: string) {
         this.operator = x; return this
     }
 
-    _values: any;
-    get values(): any /*Array<string>*/ {
+    _values: Array<string>;
+    get values(): Array<string> {
         return this._values
     }
-    set values(x: any /*Array<string>*/) {
+    set values(x: Array<string>) {
         this._values = this.set(this.values, x)
     }
-    setValues(x: any /*Array<string>*/) {
+    $Values(x: Array<string>) {
         this.values = x; return this
     }
 }
 
 export interface ListMetaHelper extends ListMeta {
-    $continue_(x: any): any;
-    $remainingItemCount(x: any): any;
-    $resourceVersion(x: any): any;
-    $selfLink(x: any): any;
+    $continue_(x: string): ListMetaHelper;
+    $remainingItemCount(x: number): ListMetaHelper;
+    $resourceVersion(x: string): ListMetaHelper;
+    $selfLink(x: string): ListMetaHelper;
 }
 
 /** ListMeta describes metadata that synthetic resources must have, including lists and various status objects. A resource may have only one of {ObjectMeta, ListMeta}. */
@@ -539,57 +541,58 @@ export class ListMetaHelper extends Template implements ListMetaHelper {
         super(obj)
     }
 
-    _continue_: any;
-    get continue_(): any /*string*/ {
+    _continue_: string;
+    get continue_(): string {
         return this._continue_
     }
-    set continue_(x: any /*string*/) {
+    set continue_(x: string) {
         this._continue_ = x
     }
-    setContinue_(x: any /*string*/) {
+    $Continue_(x: string) {
         this.continue_ = x; return this
     }
 
-    _remainingItemCount: any;
-    get remainingItemCount(): any /*number*/ {
+    _remainingItemCount: number;
+    get remainingItemCount(): number {
         return this._remainingItemCount
     }
-    set remainingItemCount(x: any /*number*/) {
+    set remainingItemCount(x: number) {
         this._remainingItemCount = x
     }
-    setRemainingItemCount(x: any /*number*/) {
+    $RemainingItemCount(x: number) {
         this.remainingItemCount = x; return this
     }
 
-    _resourceVersion: any;
-    get resourceVersion(): any /*string*/ {
+    _resourceVersion: string;
+    get resourceVersion(): string {
         return this._resourceVersion
     }
-    set resourceVersion(x: any /*string*/) {
+    set resourceVersion(x: string) {
         this._resourceVersion = x
     }
-    setResourceVersion(x: any /*string*/) {
+    $ResourceVersion(x: string) {
         this.resourceVersion = x; return this
     }
 
-    _selfLink: any;
-    get selfLink(): any /*string*/ {
+    _selfLink: string;
+    get selfLink(): string {
         return this._selfLink
     }
-    set selfLink(x: any /*string*/) {
+    set selfLink(x: string) {
         this._selfLink = x
     }
-    setSelfLink(x: any /*string*/) {
+    $SelfLink(x: string) {
         this.selfLink = x; return this
     }
 }
 
 export interface ManagedFieldsEntryHelper extends ManagedFieldsEntry {
-    $fieldsType(x: any): any;
-    $fieldsV1(x: any): any;
-    $manager(x: any): any;
-    $operation(x: any): any;
-    $time(x: any): any;
+    $fieldsType(x: string): ManagedFieldsEntryHelper;
+    fieldsV1: FieldsV1Helper;
+    $fieldsV1(x: FieldsV1Helper): ManagedFieldsEntryHelper;
+    $manager(x: string): ManagedFieldsEntryHelper;
+    $operation(x: string): ManagedFieldsEntryHelper;
+    $time(x: Time): ManagedFieldsEntryHelper;
 }
 
 /** ManagedFieldsEntry is a workflow-id, a FieldSet and the group version of the resource that the fieldset applies to. */
@@ -598,77 +601,77 @@ export class ManagedFieldsEntryHelper extends Template implements ManagedFieldsE
         super(obj)
     }
 
-    _fieldsType: any;
-    get fieldsType(): any /*string*/ {
+    _fieldsType: string;
+    get fieldsType(): string {
         return this._fieldsType
     }
-    set fieldsType(x: any /*string*/) {
+    set fieldsType(x: string) {
         this._fieldsType = x
     }
-    setFieldsType(x: any /*string*/) {
+    $FieldsType(x: string) {
         this.fieldsType = x; return this
     }
 
-    _fieldsV1: any;
-    get fieldsV1(): any /*FieldsV1Helper*/ {
+    _fieldsV1: FieldsV1Helper;
+    get fieldsV1(): FieldsV1Helper {
         return this._fieldsV1
     }
-    set fieldsV1(x: any /*FieldsV1Helper*/) {
+    set fieldsV1(x: FieldsV1Helper) {
         this._fieldsV1 = x
     }
-    setFieldsV1(x: any /*FieldsV1Helper*/) {
+    $FieldsV1(x: FieldsV1Helper) {
         this.fieldsV1 = x; return this
     }
 
-    _manager: any;
-    get manager(): any /*string*/ {
+    _manager: string;
+    get manager(): string {
         return this._manager
     }
-    set manager(x: any /*string*/) {
+    set manager(x: string) {
         this._manager = x
     }
-    setManager(x: any /*string*/) {
+    $Manager(x: string) {
         this.manager = x; return this
     }
 
-    _operation: any;
-    get operation(): any /*string*/ {
+    _operation: string;
+    get operation(): string {
         return this._operation
     }
-    set operation(x: any /*string*/) {
+    set operation(x: string) {
         this._operation = x
     }
-    setOperation(x: any /*string*/) {
+    $Operation(x: string) {
         this.operation = x; return this
     }
 
-    _time: any;
-    get time(): any /*Time*/ {
+    _time: Time;
+    get time(): Time {
         return this._time
     }
-    set time(x: any /*Time*/) {
+    set time(x: Time) {
         this._time = x
     }
-    setTime(x: any /*Time*/) {
+    $Time(x: Time) {
         this.time = x; return this
     }
 }
 
 export interface ObjectMetaHelper extends ObjectMeta {
-    $annotations(x: any): any;
-    $clusterName(x: any): any;
-    $creationTimestamp(x: any): any;
-    $deletionGracePeriodSeconds(x: any): any;
-    $deletionTimestamp(x: any): any;
-    $finalizers(x: any): any;
-    $generateName(x: any): any;
-    $generation(x: any): any;
-    $labels(x: any): any;
-    $managedFields(x: any): any;
-    $ownerReferences(x: any): any;
-    $resourceVersion(x: any): any;
-    $selfLink(x: any): any;
-    $uid(x: any): any;
+    $annotations(x: any): ObjectMetaHelper;
+    $clusterName(x: string): ObjectMetaHelper;
+    $creationTimestamp(x: Time): ObjectMetaHelper;
+    $deletionGracePeriodSeconds(x: number): ObjectMetaHelper;
+    $deletionTimestamp(x: Time): ObjectMetaHelper;
+    $finalizers(x: Array<string>): ObjectMetaHelper;
+    $generateName(x: string): ObjectMetaHelper;
+    $generation(x: number): ObjectMetaHelper;
+    $labels(x: any): ObjectMetaHelper;
+    $managedFields(x: Array<ManagedFieldsEntry>): ObjectMetaHelper;
+    $ownerReferences(x: Array<OwnerReference>): ObjectMetaHelper;
+    $resourceVersion(x: string): ObjectMetaHelper;
+    $selfLink(x: string): ObjectMetaHelper;
+    $uid(x: string): ObjectMetaHelper;
 }
 
 /** ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create. */
@@ -678,164 +681,164 @@ export class ObjectMetaHelper extends Template implements ObjectMetaHelper {
     }
 
     _annotations: any;
-    get annotations(): any /*any*/ {
+    get annotations(): any {
         return this._annotations
     }
-    set annotations(x: any /*any*/) {
+    set annotations(x: any) {
         this._annotations = this.set(this.annotations, x)
     }
-    setAnnotations(x: any /*any*/) {
+    $Annotations(x: any) {
         this.annotations = x; return this
     }
 
-    _clusterName: any;
-    get clusterName(): any /*string*/ {
+    _clusterName: string;
+    get clusterName(): string {
         return this._clusterName
     }
-    set clusterName(x: any /*string*/) {
+    set clusterName(x: string) {
         this._clusterName = x
     }
-    setClusterName(x: any /*string*/) {
+    $ClusterName(x: string) {
         this.clusterName = x; return this
     }
 
-    _creationTimestamp: any;
-    get creationTimestamp(): any /*Time*/ {
+    _creationTimestamp: Time;
+    get creationTimestamp(): Time {
         return this._creationTimestamp
     }
-    set creationTimestamp(x: any /*Time*/) {
+    set creationTimestamp(x: Time) {
         this._creationTimestamp = x
     }
-    setCreationTimestamp(x: any /*Time*/) {
+    $CreationTimestamp(x: Time) {
         this.creationTimestamp = x; return this
     }
 
-    _deletionGracePeriodSeconds: any;
-    get deletionGracePeriodSeconds(): any /*number*/ {
+    _deletionGracePeriodSeconds: number;
+    get deletionGracePeriodSeconds(): number {
         return this._deletionGracePeriodSeconds
     }
-    set deletionGracePeriodSeconds(x: any /*number*/) {
+    set deletionGracePeriodSeconds(x: number) {
         this._deletionGracePeriodSeconds = x
     }
-    setDeletionGracePeriodSeconds(x: any /*number*/) {
+    $DeletionGracePeriodSeconds(x: number) {
         this.deletionGracePeriodSeconds = x; return this
     }
 
-    _deletionTimestamp: any;
-    get deletionTimestamp(): any /*Time*/ {
+    _deletionTimestamp: Time;
+    get deletionTimestamp(): Time {
         return this._deletionTimestamp
     }
-    set deletionTimestamp(x: any /*Time*/) {
+    set deletionTimestamp(x: Time) {
         this._deletionTimestamp = x
     }
-    setDeletionTimestamp(x: any /*Time*/) {
+    $DeletionTimestamp(x: Time) {
         this.deletionTimestamp = x; return this
     }
 
-    _finalizers: any;
-    get finalizers(): any /*Array<string>*/ {
+    _finalizers: Array<string>;
+    get finalizers(): Array<string> {
         return this._finalizers
     }
-    set finalizers(x: any /*Array<string>*/) {
+    set finalizers(x: Array<string>) {
         this._finalizers = this.set(this.finalizers, x)
     }
-    setFinalizers(x: any /*Array<string>*/) {
+    $Finalizers(x: Array<string>) {
         this.finalizers = x; return this
     }
 
-    _generateName: any;
-    get generateName(): any /*string*/ {
+    _generateName: string;
+    get generateName(): string {
         return this._generateName
     }
-    set generateName(x: any /*string*/) {
+    set generateName(x: string) {
         this._generateName = x
     }
-    setGenerateName(x: any /*string*/) {
+    $GenerateName(x: string) {
         this.generateName = x; return this
     }
 
-    _generation: any;
-    get generation(): any /*number*/ {
+    _generation: number;
+    get generation(): number {
         return this._generation
     }
-    set generation(x: any /*number*/) {
+    set generation(x: number) {
         this._generation = x
     }
-    setGeneration(x: any /*number*/) {
+    $Generation(x: number) {
         this.generation = x; return this
     }
 
     _labels: any;
-    get labels(): any /*any*/ {
+    get labels(): any {
         return this._labels
     }
-    set labels(x: any /*any*/) {
+    set labels(x: any) {
         this._labels = this.set(this.labels, x)
     }
-    setLabels(x: any /*any*/) {
+    $Labels(x: any) {
         this.labels = x; return this
     }
 
-    _managedFields: any;
-    get managedFields(): any /*Array<ManagedFieldsEntry>*/ {
+    _managedFields: Array<ManagedFieldsEntry>;
+    get managedFields(): Array<ManagedFieldsEntry> {
         return this._managedFields
     }
-    set managedFields(x: any /*Array<ManagedFieldsEntry>*/) {
+    set managedFields(x: Array<ManagedFieldsEntry>) {
         this._managedFields = this.set(this.managedFields, x)
     }
-    setManagedFields(x: any /*Array<ManagedFieldsEntry>*/) {
+    $ManagedFields(x: Array<ManagedFieldsEntry>) {
         this.managedFields = x; return this
     }
 
-    _ownerReferences: any;
-    get ownerReferences(): any /*Array<OwnerReference>*/ {
+    _ownerReferences: Array<OwnerReference>;
+    get ownerReferences(): Array<OwnerReference> {
         return this._ownerReferences
     }
-    set ownerReferences(x: any /*Array<OwnerReference>*/) {
+    set ownerReferences(x: Array<OwnerReference>) {
         this._ownerReferences = this.set(this.ownerReferences, x)
     }
-    setOwnerReferences(x: any /*Array<OwnerReference>*/) {
+    $OwnerReferences(x: Array<OwnerReference>) {
         this.ownerReferences = x; return this
     }
 
-    _resourceVersion: any;
-    get resourceVersion(): any /*string*/ {
+    _resourceVersion: string;
+    get resourceVersion(): string {
         return this._resourceVersion
     }
-    set resourceVersion(x: any /*string*/) {
+    set resourceVersion(x: string) {
         this._resourceVersion = x
     }
-    setResourceVersion(x: any /*string*/) {
+    $ResourceVersion(x: string) {
         this.resourceVersion = x; return this
     }
 
-    _selfLink: any;
-    get selfLink(): any /*string*/ {
+    _selfLink: string;
+    get selfLink(): string {
         return this._selfLink
     }
-    set selfLink(x: any /*string*/) {
+    set selfLink(x: string) {
         this._selfLink = x
     }
-    setSelfLink(x: any /*string*/) {
+    $SelfLink(x: string) {
         this.selfLink = x; return this
     }
 
-    _uid: any;
-    get uid(): any /*string*/ {
+    _uid: string;
+    get uid(): string {
         return this._uid
     }
-    set uid(x: any /*string*/) {
+    set uid(x: string) {
         this._uid = x
     }
-    setUid(x: any /*string*/) {
+    $Uid(x: string) {
         this.uid = x; return this
     }
 }
 
 export interface OwnerReferenceHelper extends OwnerReference {
-    $blockOwnerDeletion(x: any): any;
-    $controller(x: any): any;
-    $uid(x: any): any;
+    $blockOwnerDeletion(x: boolean): OwnerReferenceHelper;
+    $controller(x: boolean): OwnerReferenceHelper;
+    $uid(x: string): OwnerReferenceHelper;
 }
 
 /** OwnerReference contains enough information to let you identify an owning object. An owning object must be in the same namespace as the dependent, or be cluster-scoped, so there is no namespace field. */
@@ -844,36 +847,36 @@ export class OwnerReferenceHelper extends Template implements OwnerReferenceHelp
         super(obj)
     }
 
-    _blockOwnerDeletion: any;
-    get blockOwnerDeletion(): any /*boolean*/ {
+    _blockOwnerDeletion: boolean;
+    get blockOwnerDeletion(): boolean {
         return this._blockOwnerDeletion
     }
-    set blockOwnerDeletion(x: any /*boolean*/) {
+    set blockOwnerDeletion(x: boolean) {
         this._blockOwnerDeletion = x
     }
-    setBlockOwnerDeletion(x: any /*boolean*/) {
+    $BlockOwnerDeletion(x: boolean) {
         this.blockOwnerDeletion = x; return this
     }
 
-    _controller: any;
-    get controller(): any /*boolean*/ {
+    _controller: boolean;
+    get controller(): boolean {
         return this._controller
     }
-    set controller(x: any /*boolean*/) {
+    set controller(x: boolean) {
         this._controller = x
     }
-    setController(x: any /*boolean*/) {
+    $Controller(x: boolean) {
         this.controller = x; return this
     }
 
-    _uid: any;
-    get uid(): any /*string*/ {
+    _uid: string;
+    get uid(): string {
         return this._uid
     }
-    set uid(x: any /*string*/) {
+    set uid(x: string) {
         this._uid = x
     }
-    setUid(x: any /*string*/) {
+    $Uid(x: string) {
         this.uid = x; return this
     }
 }
@@ -889,8 +892,8 @@ export class PatchHelper extends Template implements PatchHelper {
 }
 
 export interface PreconditionsHelper extends Preconditions {
-    $resourceVersion(x: any): any;
-    $uid(x: any): any;
+    $resourceVersion(x: string): PreconditionsHelper;
+    $uid(x: string): PreconditionsHelper;
 }
 
 /** Preconditions must be fulfilled before an operation (update, delete, etc.) is carried out. */
@@ -899,32 +902,32 @@ export class PreconditionsHelper extends Template implements PreconditionsHelper
         super(obj)
     }
 
-    _resourceVersion: any;
-    get resourceVersion(): any /*string*/ {
+    _resourceVersion: string;
+    get resourceVersion(): string {
         return this._resourceVersion
     }
-    set resourceVersion(x: any /*string*/) {
+    set resourceVersion(x: string) {
         this._resourceVersion = x
     }
-    setResourceVersion(x: any /*string*/) {
+    $ResourceVersion(x: string) {
         this.resourceVersion = x; return this
     }
 
-    _uid: any;
-    get uid(): any /*string*/ {
+    _uid: string;
+    get uid(): string {
         return this._uid
     }
-    set uid(x: any /*string*/) {
+    set uid(x: string) {
         this._uid = x
     }
-    setUid(x: any /*string*/) {
+    $Uid(x: string) {
         this.uid = x; return this
     }
 }
 
 export interface ServerAddressByClientCIDRHelper extends ServerAddressByClientCIDR {
-    $clientCIDR(x: any): any;
-    $serverAddress(x: any): any;
+    $clientCIDR(x: string): ServerAddressByClientCIDRHelper;
+    $serverAddress(x: string): ServerAddressByClientCIDRHelper;
 }
 
 /** ServerAddressByClientCIDR helps the client to determine the server address that they should use, depending on the clientCIDR that they match. */
@@ -933,36 +936,38 @@ export class ServerAddressByClientCIDRHelper extends Template implements ServerA
         super(obj)
     }
 
-    _clientCIDR: any;
-    get clientCIDR(): any /*string*/ {
+    _clientCIDR: string;
+    get clientCIDR(): string {
         return this._clientCIDR
     }
-    set clientCIDR(x: any /*string*/) {
+    set clientCIDR(x: string) {
         this._clientCIDR = x
     }
-    setClientCIDR(x: any /*string*/) {
+    $ClientCIDR(x: string) {
         this.clientCIDR = x; return this
     }
 
-    _serverAddress: any;
-    get serverAddress(): any /*string*/ {
+    _serverAddress: string;
+    get serverAddress(): string {
         return this._serverAddress
     }
-    set serverAddress(x: any /*string*/) {
+    set serverAddress(x: string) {
         this._serverAddress = x
     }
-    setServerAddress(x: any /*string*/) {
+    $ServerAddress(x: string) {
         this.serverAddress = x; return this
     }
 }
 
 export interface StatusHelper extends Status {
-    $code(x: any): any;
-    $details(x: any): any;
-    $message(x: any): any;
-    $metadata(x: any): any;
-    $reason(x: any): any;
-    $status(x: any): any;
+    $code(x: number): StatusHelper;
+    details: StatusDetailsHelper;
+    $details(x: StatusDetailsHelper): StatusHelper;
+    $message(x: string): StatusHelper;
+    metadata: ListMetaHelper;
+    $metadata(x: ListMetaHelper): StatusHelper;
+    $reason(x: string): StatusHelper;
+    $status(x: string): StatusHelper;
 }
 
 /** Status is a return value for calls that don't return other objects. */
@@ -974,77 +979,77 @@ export class StatusHelper extends ResourceTemplate implements StatusHelper {
         super(nameOrObject, namespace, StatusHelper.kind, StatusHelper.apiVersion)
     }
 
-    _code: any;
-    get code(): any /*number*/ {
+    _code: number;
+    get code(): number {
         return this._code
     }
-    set code(x: any /*number*/) {
+    set code(x: number) {
         this._code = x
     }
-    setCode(x: any /*number*/) {
+    $Code(x: number) {
         this.code = x; return this
     }
 
-    _details: any;
-    get details(): any /*StatusDetailsHelper*/ {
+    _details: StatusDetailsHelper;
+    get details(): StatusDetailsHelper {
         return this._details
     }
-    set details(x: any /*StatusDetailsHelper*/) {
+    set details(x: StatusDetailsHelper) {
         this._details = x
     }
-    setDetails(x: any /*StatusDetailsHelper*/) {
+    $Details(x: StatusDetailsHelper) {
         this.details = x; return this
     }
 
-    _message: any;
-    get message(): any /*string*/ {
+    _message: string;
+    get message(): string {
         return this._message
     }
-    set message(x: any /*string*/) {
+    set message(x: string) {
         this._message = x
     }
-    setMessage(x: any /*string*/) {
+    $Message(x: string) {
         this.message = x; return this
     }
 
-    _metadata: any;
-    get metadata(): any /*ListMetaHelper*/ {
+    _metadata: ListMetaHelper;
+    get metadata(): ListMetaHelper {
         return this._metadata
     }
-    set metadata(x: any /*ListMetaHelper*/) {
+    set metadata(x: ListMetaHelper) {
         this._metadata = x
     }
-    setMetadata(x: any /*ListMetaHelper*/) {
+    $Metadata(x: ListMetaHelper) {
         this.metadata = x; return this
     }
 
-    _reason: any;
-    get reason(): any /*string*/ {
+    _reason: string;
+    get reason(): string {
         return this._reason
     }
-    set reason(x: any /*string*/) {
+    set reason(x: string) {
         this._reason = x
     }
-    setReason(x: any /*string*/) {
+    $Reason(x: string) {
         this.reason = x; return this
     }
 
-    _status: any;
-    get status(): any /*string*/ {
+    _status: string;
+    get status(): string {
         return this._status
     }
-    set status(x: any /*string*/) {
+    set status(x: string) {
         this._status = x
     }
-    setStatus(x: any /*string*/) {
+    $Status(x: string) {
         this.status = x; return this
     }
 }
 
 export interface StatusCauseHelper extends StatusCause {
-    $field(x: any): any;
-    $message(x: any): any;
-    $reason(x: any): any;
+    $field(x: string): StatusCauseHelper;
+    $message(x: string): StatusCauseHelper;
+    $reason(x: string): StatusCauseHelper;
 }
 
 /** StatusCause provides more information about an api.Status failure, including cases when multiple errors are encountered. */
@@ -1053,45 +1058,45 @@ export class StatusCauseHelper extends Template implements StatusCauseHelper {
         super(obj)
     }
 
-    _field: any;
-    get field(): any /*string*/ {
+    _field: string;
+    get field(): string {
         return this._field
     }
-    set field(x: any /*string*/) {
+    set field(x: string) {
         this._field = x
     }
-    setField(x: any /*string*/) {
+    $Field(x: string) {
         this.field = x; return this
     }
 
-    _message: any;
-    get message(): any /*string*/ {
+    _message: string;
+    get message(): string {
         return this._message
     }
-    set message(x: any /*string*/) {
+    set message(x: string) {
         this._message = x
     }
-    setMessage(x: any /*string*/) {
+    $Message(x: string) {
         this.message = x; return this
     }
 
-    _reason: any;
-    get reason(): any /*string*/ {
+    _reason: string;
+    get reason(): string {
         return this._reason
     }
-    set reason(x: any /*string*/) {
+    set reason(x: string) {
         this._reason = x
     }
-    setReason(x: any /*string*/) {
+    $Reason(x: string) {
         this.reason = x; return this
     }
 }
 
 export interface StatusDetailsHelper extends StatusDetails {
-    $causes(x: any): any;
-    $group(x: any): any;
-    $retryAfterSeconds(x: any): any;
-    $uid(x: any): any;
+    $causes(x: Array<StatusCause>): StatusDetailsHelper;
+    $group(x: string): StatusDetailsHelper;
+    $retryAfterSeconds(x: number): StatusDetailsHelper;
+    $uid(x: string): StatusDetailsHelper;
 }
 
 /** StatusDetails is a set of additional properties that MAY be set by the server to provide additional information about a response. The Reason field of a Status object defines what attributes will be set. Clients must ignore fields that do not match the defined type of each attribute, and should assume that any attribute may be empty, invalid, or under defined. */
@@ -1100,54 +1105,55 @@ export class StatusDetailsHelper extends Template implements StatusDetailsHelper
         super(obj)
     }
 
-    _causes: any;
-    get causes(): any /*Array<StatusCause>*/ {
+    _causes: Array<StatusCause>;
+    get causes(): Array<StatusCause> {
         return this._causes
     }
-    set causes(x: any /*Array<StatusCause>*/) {
+    set causes(x: Array<StatusCause>) {
         this._causes = this.set(this.causes, x)
     }
-    setCauses(x: any /*Array<StatusCause>*/) {
+    $Causes(x: Array<StatusCause>) {
         this.causes = x; return this
     }
 
-    _group: any;
-    get group(): any /*string*/ {
+    _group: string;
+    get group(): string {
         return this._group
     }
-    set group(x: any /*string*/) {
+    set group(x: string) {
         this._group = x
     }
-    setGroup(x: any /*string*/) {
+    $Group(x: string) {
         this.group = x; return this
     }
 
-    _retryAfterSeconds: any;
-    get retryAfterSeconds(): any /*number*/ {
+    _retryAfterSeconds: number;
+    get retryAfterSeconds(): number {
         return this._retryAfterSeconds
     }
-    set retryAfterSeconds(x: any /*number*/) {
+    set retryAfterSeconds(x: number) {
         this._retryAfterSeconds = x
     }
-    setRetryAfterSeconds(x: any /*number*/) {
+    $RetryAfterSeconds(x: number) {
         this.retryAfterSeconds = x; return this
     }
 
-    _uid: any;
-    get uid(): any /*string*/ {
+    _uid: string;
+    get uid(): string {
         return this._uid
     }
-    set uid(x: any /*string*/) {
+    set uid(x: string) {
         this._uid = x
     }
-    setUid(x: any /*string*/) {
+    $Uid(x: string) {
         this.uid = x; return this
     }
 }
 
 export interface WatchEventHelper extends WatchEvent {
-    $object(x: any): any;
-    $type(x: any): any;
+    object: RawExtensionHelper;
+    $object(x: RawExtensionHelper): WatchEventHelper;
+    $type(x: string): WatchEventHelper;
 }
 
 /** Event represents a single event to a watched resource. */
@@ -1156,25 +1162,25 @@ export class WatchEventHelper extends Template implements WatchEventHelper {
         super(obj)
     }
 
-    _object: any;
-    get object(): any /*RawExtensionHelper*/ {
+    _object: RawExtensionHelper;
+    get object(): RawExtensionHelper {
         return this._object
     }
-    set object(x: any /*RawExtensionHelper*/) {
+    set object(x: RawExtensionHelper) {
         this._object = x
     }
-    setObject(x: any /*RawExtensionHelper*/) {
+    $Object(x: RawExtensionHelper) {
         this.object = x; return this
     }
 
-    _type: any;
-    get type(): any /*string*/ {
+    _type: string;
+    get type(): string {
         return this._type
     }
-    set type(x: any /*string*/) {
+    set type(x: string) {
         this._type = x
     }
-    setType(x: any /*string*/) {
+    $Type(x: string) {
         this.type = x; return this
     }
 }
