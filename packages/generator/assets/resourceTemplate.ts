@@ -1,13 +1,6 @@
 import { Template } from './template'
-import { Resource, Metadata, Cluster } from '@c6o/kubeclient-contracts'
-// export interface Resource {
-//     apiVersion: string // 'v1' if not specified
-//     kind: string
-//     metadata? : any
-//     spec?: any
-//     status?: any
-//     items? : Array<Omit<Resource, 'apiVersion' | 'kind'>>
-// }
+import { Resource, Cluster } from '@c6o/kubeclient-contracts'
+export { Template }
 
 export interface ResourceTemplate extends Resource {
     $name(x: string): ResourceTemplate
