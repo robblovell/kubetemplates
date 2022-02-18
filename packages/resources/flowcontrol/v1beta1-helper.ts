@@ -33,11 +33,8 @@ export interface FlowSchemaHelper extends FlowSchema {
 
 /** FlowSchema defines the schema of a group of flows. Note that a flow is made up of a set of inbound API requests with similar attributes and is identified by a pair of strings: the name of the FlowSchema and a "flow distinguisher". */
 export class FlowSchemaHelper extends ResourceTemplate implements FlowSchemaHelper {
-    static kind = 'FlowSchema';
-    static apiVersion = 'flowcontrol/v1beta1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, FlowSchemaHelper.kind, FlowSchemaHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "FlowSchema", "flowcontrol.apiserver.k8s.io/v1beta1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -151,11 +148,8 @@ export interface FlowSchemaListHelper extends FlowSchemaList {
 
 /** FlowSchemaList is a list of FlowSchema objects. */
 export class FlowSchemaListHelper extends ResourceTemplate implements FlowSchemaListHelper {
-    static kind = 'FlowSchemaList';
-    static apiVersion = 'flowcontrol/v1beta1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, FlowSchemaListHelper.kind, FlowSchemaListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "FlowSchemaList", "flowcontrol.apiserver.k8s.io/v1beta1")
     }
 
     _items: Array<FlowSchema>;
@@ -431,11 +425,8 @@ export interface PriorityLevelConfigurationHelper extends PriorityLevelConfigura
 
 /** PriorityLevelConfiguration represents the configuration of a priority level. */
 export class PriorityLevelConfigurationHelper extends ResourceTemplate implements PriorityLevelConfigurationHelper {
-    static kind = 'PriorityLevelConfiguration';
-    static apiVersion = 'flowcontrol/v1beta1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, PriorityLevelConfigurationHelper.kind, PriorityLevelConfigurationHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "PriorityLevelConfiguration", "flowcontrol.apiserver.k8s.io/v1beta1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -549,11 +540,8 @@ export interface PriorityLevelConfigurationListHelper extends PriorityLevelConfi
 
 /** PriorityLevelConfigurationList is a list of PriorityLevelConfiguration objects. */
 export class PriorityLevelConfigurationListHelper extends ResourceTemplate implements PriorityLevelConfigurationListHelper {
-    static kind = 'PriorityLevelConfigurationList';
-    static apiVersion = 'flowcontrol/v1beta1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, PriorityLevelConfigurationListHelper.kind, PriorityLevelConfigurationListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "PriorityLevelConfigurationList", "flowcontrol.apiserver.k8s.io/v1beta1")
     }
 
     _items: Array<PriorityLevelConfiguration>;

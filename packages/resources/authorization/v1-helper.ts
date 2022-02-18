@@ -11,11 +11,8 @@ export interface LocalSubjectAccessReviewHelper extends LocalSubjectAccessReview
 
 /** LocalSubjectAccessReview checks whether or not a user or group can perform an action in a given namespace. Having a namespace scoped resource makes it much easier to grant namespace scoped policy that includes permissions checking. */
 export class LocalSubjectAccessReviewHelper extends ResourceTemplate implements LocalSubjectAccessReviewHelper {
-    static kind = 'LocalSubjectAccessReview';
-    static apiVersion = 'authorization/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, LocalSubjectAccessReviewHelper.kind, LocalSubjectAccessReviewHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "LocalSubjectAccessReview", "authorization.k8s.io/v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -256,11 +253,8 @@ export interface SelfSubjectAccessReviewHelper extends SelfSubjectAccessReview {
 
 /** SelfSubjectAccessReview checks whether or the current user can perform an action.  Not filling in a spec.namespace means "in all namespaces".  Self is a special case, because users should always be able to check whether they can perform an action */
 export class SelfSubjectAccessReviewHelper extends ResourceTemplate implements SelfSubjectAccessReviewHelper {
-    static kind = 'SelfSubjectAccessReview';
-    static apiVersion = 'authorization/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, SelfSubjectAccessReviewHelper.kind, SelfSubjectAccessReviewHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "SelfSubjectAccessReview", "authorization.k8s.io/v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -339,11 +333,8 @@ export interface SelfSubjectRulesReviewHelper extends SelfSubjectRulesReview {
 
 /** SelfSubjectRulesReview enumerates the set of actions the current user can perform within a namespace. The returned list of actions may be incomplete depending on the server's authorization mode, and any errors experienced during the evaluation. SelfSubjectRulesReview should be used by UIs to show/hide actions, or to quickly let an end user reason about their permissions. It should NOT Be used by external systems to drive authorization decisions as this raises confused deputy, cache lifetime/revocation, and correctness concerns. SubjectAccessReview, and LocalAccessReview are the correct way to defer authorization decisions to the API server. */
 export class SelfSubjectRulesReviewHelper extends ResourceTemplate implements SelfSubjectRulesReviewHelper {
-    static kind = 'SelfSubjectRulesReview';
-    static apiVersion = 'authorization/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, SelfSubjectRulesReviewHelper.kind, SelfSubjectRulesReviewHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "SelfSubjectRulesReview", "authorization.k8s.io/v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -398,11 +389,8 @@ export interface SubjectAccessReviewHelper extends SubjectAccessReview {
 
 /** SubjectAccessReview checks whether or not a user or group can perform an action. */
 export class SubjectAccessReviewHelper extends ResourceTemplate implements SubjectAccessReviewHelper {
-    static kind = 'SubjectAccessReview';
-    static apiVersion = 'authorization/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, SubjectAccessReviewHelper.kind, SubjectAccessReviewHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "SubjectAccessReview", "authorization.k8s.io/v1")
     }
 
     _metadata: ObjectMetaHelper;

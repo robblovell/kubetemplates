@@ -21,11 +21,8 @@ export interface HorizontalPodAutoscalerHelper extends HorizontalPodAutoscaler {
 
 /** configuration of a horizontal pod autoscaler. */
 export class HorizontalPodAutoscalerHelper extends ResourceTemplate implements HorizontalPodAutoscalerHelper {
-    static kind = 'HorizontalPodAutoscaler';
-    static apiVersion = 'autoscaling/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, HorizontalPodAutoscalerHelper.kind, HorizontalPodAutoscalerHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "HorizontalPodAutoscaler", "autoscaling/v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -69,11 +66,8 @@ export interface HorizontalPodAutoscalerListHelper extends HorizontalPodAutoscal
 
 /** list of horizontal pod autoscaler objects. */
 export class HorizontalPodAutoscalerListHelper extends ResourceTemplate implements HorizontalPodAutoscalerListHelper {
-    static kind = 'HorizontalPodAutoscalerList';
-    static apiVersion = 'autoscaling/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, HorizontalPodAutoscalerListHelper.kind, HorizontalPodAutoscalerListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "HorizontalPodAutoscalerList", "autoscaling/v1")
     }
 
     _items: Array<HorizontalPodAutoscaler>;
@@ -235,11 +229,8 @@ export interface ScaleHelper extends Scale {
 
 /** Scale represents a scaling request for a resource. */
 export class ScaleHelper extends ResourceTemplate implements ScaleHelper {
-    static kind = 'Scale';
-    static apiVersion = 'autoscaling/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, ScaleHelper.kind, ScaleHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "Scale", "autoscaling/v1")
     }
 
     _metadata: ObjectMetaHelper;

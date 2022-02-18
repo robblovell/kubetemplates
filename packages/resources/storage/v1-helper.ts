@@ -12,11 +12,8 @@ export interface CSIDriverHelper extends CSIDriver {
 
 /** CSIDriver captures information about a Container Storage Interface (CSI) volume driver deployed on the cluster. Kubernetes attach detach controller uses this object to determine whether attach is required. Kubelet uses this object to determine whether pod information needs to be passed on mount. CSIDriver objects are non-namespaced. */
 export class CSIDriverHelper extends ResourceTemplate implements CSIDriverHelper {
-    static kind = 'CSIDriver';
-    static apiVersion = 'storage/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, CSIDriverHelper.kind, CSIDriverHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "CSIDriver", "storage.k8s.io/v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -49,11 +46,8 @@ export interface CSIDriverListHelper extends CSIDriverList {
 
 /** CSIDriverList is a collection of CSIDriver objects. */
 export class CSIDriverListHelper extends ResourceTemplate implements CSIDriverListHelper {
-    static kind = 'CSIDriverList';
-    static apiVersion = 'storage/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, CSIDriverListHelper.kind, CSIDriverListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "CSIDriverList", "storage.k8s.io/v1")
     }
 
     _items: Array<CSIDriver>;
@@ -180,11 +174,8 @@ export interface CSINodeHelper extends CSINode {
 
 /** CSINode holds information about all CSI drivers installed on a node. CSI drivers do not need to create the CSINode object directly. As long as they use the node-driver-registrar sidecar container, the kubelet will automatically populate the CSINode object for the CSI driver as part of kubelet plugin registration. CSINode has the same name as a node. If the object is missing, it means either there are no CSI Drivers available on the node, or the Kubelet version is low enough that it doesn't create this object. CSINode has an OwnerReference that points to the corresponding node object. */
 export class CSINodeHelper extends ResourceTemplate implements CSINodeHelper {
-    static kind = 'CSINode';
-    static apiVersion = 'storage/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, CSINodeHelper.kind, CSINodeHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "CSINode", "storage.k8s.io/v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -263,11 +254,8 @@ export interface CSINodeListHelper extends CSINodeList {
 
 /** CSINodeList is a collection of CSINode objects. */
 export class CSINodeListHelper extends ResourceTemplate implements CSINodeListHelper {
-    static kind = 'CSINodeList';
-    static apiVersion = 'storage/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, CSINodeListHelper.kind, CSINodeListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "CSINodeList", "storage.k8s.io/v1")
     }
 
     _items: Array<CSINode>;
@@ -332,11 +320,8 @@ export interface StorageClassHelper extends StorageClass {
  * StorageClasses are non-namespaced; the name of the storage class according to etcd is in ObjectMeta.Name.
  */
 export class StorageClassHelper extends ResourceTemplate implements StorageClassHelper {
-    static kind = 'StorageClass';
-    static apiVersion = 'storage/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, StorageClassHelper.kind, StorageClassHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "StorageClass", "storage.k8s.io/v1")
     }
 
     _allowVolumeExpansion: boolean;
@@ -435,11 +420,8 @@ export interface StorageClassListHelper extends StorageClassList {
 
 /** StorageClassList is a collection of storage classes. */
 export class StorageClassListHelper extends ResourceTemplate implements StorageClassListHelper {
-    static kind = 'StorageClassList';
-    static apiVersion = 'storage/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, StorageClassListHelper.kind, StorageClassListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "StorageClassList", "storage.k8s.io/v1")
     }
 
     _items: Array<StorageClass>;
@@ -511,11 +493,8 @@ export interface VolumeAttachmentHelper extends VolumeAttachment {
  * VolumeAttachment objects are non-namespaced.
  */
 export class VolumeAttachmentHelper extends ResourceTemplate implements VolumeAttachmentHelper {
-    static kind = 'VolumeAttachment';
-    static apiVersion = 'storage/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, VolumeAttachmentHelper.kind, VolumeAttachmentHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "VolumeAttachment", "storage.k8s.io/v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -559,11 +538,8 @@ export interface VolumeAttachmentListHelper extends VolumeAttachmentList {
 
 /** VolumeAttachmentList is a collection of VolumeAttachment objects. */
 export class VolumeAttachmentListHelper extends ResourceTemplate implements VolumeAttachmentListHelper {
-    static kind = 'VolumeAttachmentList';
-    static apiVersion = 'storage/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, VolumeAttachmentListHelper.kind, VolumeAttachmentListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "VolumeAttachmentList", "storage.k8s.io/v1")
     }
 
     _items: Array<VolumeAttachment>;

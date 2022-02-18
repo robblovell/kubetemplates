@@ -315,11 +315,8 @@ export interface BindingHelper extends Binding {
 
 /** Binding ties one object to another; for example, a pod is bound to a node by a scheduler. Deprecated in 1.7, please use the bindings subresource of pods instead. */
 export class BindingHelper extends ResourceTemplate implements BindingHelper {
-    static kind = 'Binding';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, BindingHelper.kind, BindingHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "Binding", "v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -934,11 +931,8 @@ export interface ComponentStatusHelper extends ComponentStatus {
 
 /** ComponentStatus (and ComponentStatusList) holds the cluster validation info. Deprecated: This API is deprecated in v1.19+ */
 export class ComponentStatusHelper extends ResourceTemplate implements ComponentStatusHelper {
-    static kind = 'ComponentStatus';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, ComponentStatusHelper.kind, ComponentStatusHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "ComponentStatus", "v1")
     }
 
     _conditions: Array<ComponentCondition>;
@@ -971,11 +965,8 @@ export interface ComponentStatusListHelper extends ComponentStatusList {
 
 /** Status of all the conditions for the component as a list of ComponentStatus objects. Deprecated: This API is deprecated in v1.19+ */
 export class ComponentStatusListHelper extends ResourceTemplate implements ComponentStatusListHelper {
-    static kind = 'ComponentStatusList';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, ComponentStatusListHelper.kind, ComponentStatusListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "ComponentStatusList", "v1")
     }
 
     _items: Array<ComponentStatus>;
@@ -1010,11 +1001,8 @@ export interface ConfigMapHelper extends ConfigMap {
 
 /** ConfigMap holds configuration data for pods to consume. */
 export class ConfigMapHelper extends ResourceTemplate implements ConfigMapHelper {
-    static kind = 'ConfigMap';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, ConfigMapHelper.kind, ConfigMapHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "ConfigMap", "v1")
     }
 
     _binaryData: any;
@@ -1129,11 +1117,8 @@ export interface ConfigMapListHelper extends ConfigMapList {
 
 /** ConfigMapList is a resource containing a list of ConfigMap objects. */
 export class ConfigMapListHelper extends ResourceTemplate implements ConfigMapListHelper {
-    static kind = 'ConfigMapList';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, ConfigMapListHelper.kind, ConfigMapListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "ConfigMapList", "v1")
     }
 
     _items: Array<ConfigMap>;
@@ -2298,11 +2283,8 @@ export interface EndpointsHelper extends Endpoints {
  *  ]
  */
 export class EndpointsHelper extends ResourceTemplate implements EndpointsHelper {
-    static kind = 'Endpoints';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, EndpointsHelper.kind, EndpointsHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "Endpoints", "v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -2335,11 +2317,8 @@ export interface EndpointsListHelper extends EndpointsList {
 
 /** EndpointsList is a list of endpoints. */
 export class EndpointsListHelper extends ResourceTemplate implements EndpointsListHelper {
-    static kind = 'EndpointsList';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, EndpointsListHelper.kind, EndpointsListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "EndpointsList", "v1")
     }
 
     _items: Array<Endpoints>;
@@ -2825,11 +2804,8 @@ export interface EventHelper extends Event {
 
 /** Event is a report of an event somewhere in the cluster.  Events have a limited retention time and triggers and messages may evolve with time.  Event consumers should not rely on the timing of an event with a given Reason reflecting a consistent underlying trigger, or the continued existence of events with that Reason.  Events should be treated as informative, best-effort, supplemental data. */
 export class EventHelper extends ResourceTemplate implements EventHelper {
-    static kind = 'Event';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, EventHelper.kind, EventHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "Event", "v1")
     }
 
     _action: string;
@@ -3005,11 +2981,8 @@ export interface EventListHelper extends EventList {
 
 /** EventList is a list of events. */
 export class EventListHelper extends ResourceTemplate implements EventListHelper {
-    static kind = 'EventList';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, EventListHelper.kind, EventListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "EventList", "v1")
     }
 
     _items: Array<Event>;
@@ -4195,11 +4168,8 @@ export interface LimitRangeHelper extends LimitRange {
 
 /** LimitRange sets resource usage limits for each kind of resource in a Namespace. */
 export class LimitRangeHelper extends ResourceTemplate implements LimitRangeHelper {
-    static kind = 'LimitRange';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, LimitRangeHelper.kind, LimitRangeHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "LimitRange", "v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -4314,11 +4284,8 @@ export interface LimitRangeListHelper extends LimitRangeList {
 
 /** LimitRangeList is a list of LimitRange items. */
 export class LimitRangeListHelper extends ResourceTemplate implements LimitRangeListHelper {
-    static kind = 'LimitRangeList';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, LimitRangeListHelper.kind, LimitRangeListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "LimitRangeList", "v1")
     }
 
     _items: Array<LimitRange>;
@@ -4532,11 +4499,8 @@ export interface NamespaceHelper extends Namespace {
 
 /** Namespace provides a scope for Names. Use of multiple namespaces is optional. */
 export class NamespaceHelper extends ResourceTemplate implements NamespaceHelper {
-    static kind = 'Namespace';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, NamespaceHelper.kind, NamespaceHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "Namespace", "v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -4650,11 +4614,8 @@ export interface NamespaceListHelper extends NamespaceList {
 
 /** NamespaceList is a list of Namespaces. */
 export class NamespaceListHelper extends ResourceTemplate implements NamespaceListHelper {
-    static kind = 'NamespaceList';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, NamespaceListHelper.kind, NamespaceListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "NamespaceList", "v1")
     }
 
     _items: Array<Namespace>;
@@ -4744,11 +4705,8 @@ export interface NodeHelper extends Node {
 
 /** Node is a worker node in Kubernetes. Each node will have a unique identifier in the cache (i.e. in etcd). */
 export class NodeHelper extends ResourceTemplate implements NodeHelper {
-    static kind = 'Node';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, NodeHelper.kind, NodeHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "Node", "v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -5044,11 +5002,8 @@ export interface NodeListHelper extends NodeList {
 
 /** NodeList is the whole list of all Nodes which have been registered with master. */
 export class NodeListHelper extends ResourceTemplate implements NodeListHelper {
-    static kind = 'NodeList';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, NodeListHelper.kind, NodeListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "NodeList", "v1")
     }
 
     _items: Array<Node>;
@@ -5618,11 +5573,8 @@ export interface PersistentVolumeHelper extends PersistentVolume {
 
 /** PersistentVolume (PV) is a storage resource provisioned by an administrator. It is analogous to a node. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes */
 export class PersistentVolumeHelper extends ResourceTemplate implements PersistentVolumeHelper {
-    static kind = 'PersistentVolume';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, PersistentVolumeHelper.kind, PersistentVolumeHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "PersistentVolume", "v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -5667,11 +5619,8 @@ export interface PersistentVolumeClaimHelper extends PersistentVolumeClaim {
 
 /** PersistentVolumeClaim is a user's request for and claim to a persistent volume */
 export class PersistentVolumeClaimHelper extends ResourceTemplate implements PersistentVolumeClaimHelper {
-    static kind = 'PersistentVolumeClaim';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, PersistentVolumeClaimHelper.kind, PersistentVolumeClaimHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "PersistentVolumeClaim", "v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -5797,11 +5746,8 @@ export interface PersistentVolumeClaimListHelper extends PersistentVolumeClaimLi
 
 /** PersistentVolumeClaimList is a list of PersistentVolumeClaim items. */
 export class PersistentVolumeClaimListHelper extends ResourceTemplate implements PersistentVolumeClaimListHelper {
-    static kind = 'PersistentVolumeClaimList';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, PersistentVolumeClaimListHelper.kind, PersistentVolumeClaimListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "PersistentVolumeClaimList", "v1")
     }
 
     _items: Array<PersistentVolumeClaim>;
@@ -6090,11 +6036,8 @@ export interface PersistentVolumeListHelper extends PersistentVolumeList {
 
 /** PersistentVolumeList is a list of PersistentVolume items. */
 export class PersistentVolumeListHelper extends ResourceTemplate implements PersistentVolumeListHelper {
-    static kind = 'PersistentVolumeList';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, PersistentVolumeListHelper.kind, PersistentVolumeListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "PersistentVolumeList", "v1")
     }
 
     _items: Array<PersistentVolume>;
@@ -6578,11 +6521,8 @@ export interface PodHelper extends Pod {
 
 /** Pod is a collection of containers that can run on a host. This resource is created by clients and scheduled onto hosts. */
 export class PodHelper extends ResourceTemplate implements PodHelper {
-    static kind = 'Pod';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, PodHelper.kind, PodHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "Pod", "v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -6927,11 +6867,8 @@ export interface PodListHelper extends PodList {
 
 /** PodList is a list of Pods. */
 export class PodListHelper extends ResourceTemplate implements PodListHelper {
-    static kind = 'PodList';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, PodListHelper.kind, PodListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "PodList", "v1")
     }
 
     _items: Array<Pod>;
@@ -7734,11 +7671,8 @@ export interface PodTemplateHelper extends PodTemplate {
 
 /** PodTemplate describes a template for creating copies of a predefined pod. */
 export class PodTemplateHelper extends ResourceTemplate implements PodTemplateHelper {
-    static kind = 'PodTemplate';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, PodTemplateHelper.kind, PodTemplateHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "PodTemplate", "v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -7771,11 +7705,8 @@ export interface PodTemplateListHelper extends PodTemplateList {
 
 /** PodTemplateList is a list of PodTemplates. */
 export class PodTemplateListHelper extends ResourceTemplate implements PodTemplateListHelper {
-    static kind = 'PodTemplateList';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, PodTemplateListHelper.kind, PodTemplateListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "PodTemplateList", "v1")
     }
 
     _items: Array<PodTemplate>;
@@ -8426,11 +8357,8 @@ export interface ReplicationControllerHelper extends ReplicationController {
 
 /** ReplicationController represents the configuration of a replication controller. */
 export class ReplicationControllerHelper extends ResourceTemplate implements ReplicationControllerHelper {
-    static kind = 'ReplicationController';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, ReplicationControllerHelper.kind, ReplicationControllerHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "ReplicationController", "v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -8544,11 +8472,8 @@ export interface ReplicationControllerListHelper extends ReplicationControllerLi
 
 /** ReplicationControllerList is a collection of replication controllers. */
 export class ReplicationControllerListHelper extends ResourceTemplate implements ReplicationControllerListHelper {
-    static kind = 'ReplicationControllerList';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, ReplicationControllerListHelper.kind, ReplicationControllerListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "ReplicationControllerList", "v1")
     }
 
     _items: Array<ReplicationController>;
@@ -8768,11 +8693,8 @@ export interface ResourceQuotaHelper extends ResourceQuota {
 
 /** ResourceQuota sets aggregate quota restrictions enforced per namespace */
 export class ResourceQuotaHelper extends ResourceTemplate implements ResourceQuotaHelper {
-    static kind = 'ResourceQuota';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, ResourceQuotaHelper.kind, ResourceQuotaHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "ResourceQuota", "v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -8816,11 +8738,8 @@ export interface ResourceQuotaListHelper extends ResourceQuotaList {
 
 /** ResourceQuotaList is a list of ResourceQuota items. */
 export class ResourceQuotaListHelper extends ResourceTemplate implements ResourceQuotaListHelper {
-    static kind = 'ResourceQuotaList';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, ResourceQuotaListHelper.kind, ResourceQuotaListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "ResourceQuotaList", "v1")
     }
 
     _items: Array<ResourceQuota>;
@@ -9390,11 +9309,8 @@ export interface SecretHelper extends Secret {
 
 /** Secret holds secret data of a certain type. The total bytes of the values in the Data field must be less than MaxSecretSize bytes. */
 export class SecretHelper extends ResourceTemplate implements SecretHelper {
-    static kind = 'Secret';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, SecretHelper.kind, SecretHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "Secret", "v1")
     }
 
     _data: any;
@@ -9520,11 +9436,8 @@ export interface SecretListHelper extends SecretList {
 
 /** SecretList is a list of Secret. */
 export class SecretListHelper extends ResourceTemplate implements SecretListHelper {
-    static kind = 'SecretList';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, SecretListHelper.kind, SecretListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "SecretList", "v1")
     }
 
     _items: Array<Secret>;
@@ -9810,11 +9723,8 @@ export interface ServiceHelper extends Service {
 
 /** Service is a named abstraction of software service (for example, mysql) consisting of local port (for example 3306) that the proxy listens on, and the selector that determines which pods will answer requests sent through the proxy. */
 export class ServiceHelper extends ResourceTemplate implements ServiceHelper {
-    static kind = 'Service';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, ServiceHelper.kind, ServiceHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "Service", "v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -9860,11 +9770,8 @@ export interface ServiceAccountHelper extends ServiceAccount {
 
 /** ServiceAccount binds together: * a name, understood by users, and perhaps by peripheral systems, for an identity * a principal that can be authenticated and authorized * a set of secrets */
 export class ServiceAccountHelper extends ResourceTemplate implements ServiceAccountHelper {
-    static kind = 'ServiceAccount';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, ServiceAccountHelper.kind, ServiceAccountHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "ServiceAccount", "v1")
     }
 
     _automountServiceAccountToken: boolean;
@@ -9919,11 +9826,8 @@ export interface ServiceAccountListHelper extends ServiceAccountList {
 
 /** ServiceAccountList is a list of ServiceAccount objects */
 export class ServiceAccountListHelper extends ResourceTemplate implements ServiceAccountListHelper {
-    static kind = 'ServiceAccountList';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, ServiceAccountListHelper.kind, ServiceAccountListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "ServiceAccountList", "v1")
     }
 
     _items: Array<ServiceAccount>;
@@ -10002,11 +9906,8 @@ export interface ServiceListHelper extends ServiceList {
 
 /** ServiceList holds a list of services. */
 export class ServiceListHelper extends ResourceTemplate implements ServiceListHelper {
-    static kind = 'ServiceList';
-    static apiVersion = 'core/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, ServiceListHelper.kind, ServiceListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "ServiceList", "v1")
     }
 
     _items: Array<Service>;

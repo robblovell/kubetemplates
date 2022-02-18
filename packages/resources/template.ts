@@ -1,3 +1,5 @@
+import { Cluster as iCluster } from '@c6o/kubeclient-contracts/lib/cluster'
+
 const jp = require('jsonpath')
 type basic = string | number | boolean | undefined | null | unknown
 type map = { [name: string]: basic }
@@ -27,26 +29,6 @@ export const Template = class {
         return to
     }
 
-    setArray(to: any[], from: any[]) {
-        if (Array.isArray(from))
-            for (const value of from) {
-                if (!to.includes(value)) {
-                    to.push(value)
-                }
-            }
-        else
-            to.push(from)
-        return to
-    }
-    setObject(to: map | object, from: map | object ) {
-        if (!to) return from
-        const result = from
-        for (const key of Object.keys(to)) {
-            result[key] = to[key]
-        }
-        return result
-    }
-
     string() {
         return JSON.stringify(this, undefined, 2)
             .replace(/_/g,'')
@@ -55,16 +37,18 @@ export const Template = class {
         return this.string()
     }
 
-    toTemplate(): any {
+    toTemplate(exclude: any = { cluster: true }): any {
         let obj = {}
         for (const key of Object.keys(this)) {
+            if (exclude[key])
+                continue
             const value = this[key]
 
             const field = key.replace(/_/g,'')
             if (Array.isArray(value)) {
-                obj[field] = value.map(v => v.toTemplate ? v.toTemplate() : v)
+                obj[field] = value.map(v => v.toTemplate ? v.toTemplate(exclude) : v)
             } else if (value instanceof Object) {
-                obj[field] = value.toTemplate ? value.toTemplate(): value
+                obj[field] = value.toTemplate ? value.toTemplate(exclude): value
             } else {
                 obj[field] = value
             }

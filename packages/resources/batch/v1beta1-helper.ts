@@ -14,11 +14,8 @@ export interface CronJobHelper extends CronJob {
 
 /** CronJob represents the configuration of a single cron job. */
 export class CronJobHelper extends ResourceTemplate implements CronJobHelper {
-    static kind = 'CronJob';
-    static apiVersion = 'batch/v1beta1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, CronJobHelper.kind, CronJobHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "CronJob", "batch/v1beta1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -62,11 +59,8 @@ export interface CronJobListHelper extends CronJobList {
 
 /** CronJobList is a collection of cron jobs. */
 export class CronJobListHelper extends ResourceTemplate implements CronJobListHelper {
-    static kind = 'CronJobList';
-    static apiVersion = 'batch/v1beta1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, CronJobListHelper.kind, CronJobListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "CronJobList", "batch/v1beta1")
     }
 
     _items: Array<CronJob>;

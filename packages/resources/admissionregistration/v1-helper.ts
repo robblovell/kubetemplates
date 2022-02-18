@@ -140,11 +140,8 @@ export interface MutatingWebhookConfigurationHelper extends MutatingWebhookConfi
 
 /** MutatingWebhookConfiguration describes the configuration of and admission webhook that accept or reject and may change the object. */
 export class MutatingWebhookConfigurationHelper extends ResourceTemplate implements MutatingWebhookConfigurationHelper {
-    static kind = 'MutatingWebhookConfiguration';
-    static apiVersion = 'admissionregistration/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, MutatingWebhookConfigurationHelper.kind, MutatingWebhookConfigurationHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "MutatingWebhookConfiguration", "admissionregistration.k8s.io/v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -177,11 +174,8 @@ export interface MutatingWebhookConfigurationListHelper extends MutatingWebhookC
 
 /** MutatingWebhookConfigurationList is a list of MutatingWebhookConfiguration. */
 export class MutatingWebhookConfigurationListHelper extends ResourceTemplate implements MutatingWebhookConfigurationListHelper {
-    static kind = 'MutatingWebhookConfigurationList';
-    static apiVersion = 'admissionregistration/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, MutatingWebhookConfigurationListHelper.kind, MutatingWebhookConfigurationListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "MutatingWebhookConfigurationList", "admissionregistration.k8s.io/v1")
     }
 
     _items: Array<MutatingWebhookConfiguration>;
@@ -436,11 +430,8 @@ export interface ValidatingWebhookConfigurationHelper extends ValidatingWebhookC
 
 /** ValidatingWebhookConfiguration describes the configuration of and admission webhook that accept or reject and object without changing it. */
 export class ValidatingWebhookConfigurationHelper extends ResourceTemplate implements ValidatingWebhookConfigurationHelper {
-    static kind = 'ValidatingWebhookConfiguration';
-    static apiVersion = 'admissionregistration/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, ValidatingWebhookConfigurationHelper.kind, ValidatingWebhookConfigurationHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "ValidatingWebhookConfiguration", "admissionregistration.k8s.io/v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -473,11 +464,8 @@ export interface ValidatingWebhookConfigurationListHelper extends ValidatingWebh
 
 /** ValidatingWebhookConfigurationList is a list of ValidatingWebhookConfiguration. */
 export class ValidatingWebhookConfigurationListHelper extends ResourceTemplate implements ValidatingWebhookConfigurationListHelper {
-    static kind = 'ValidatingWebhookConfigurationList';
-    static apiVersion = 'admissionregistration/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, ValidatingWebhookConfigurationListHelper.kind, ValidatingWebhookConfigurationListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "ValidatingWebhookConfigurationList", "admissionregistration.k8s.io/v1")
     }
 
     _items: Array<ValidatingWebhookConfiguration>;

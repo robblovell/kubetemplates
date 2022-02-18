@@ -59,11 +59,8 @@ export interface StorageVersionHelper extends StorageVersion {
  *  Storage version of a specific resource.
  */
 export class StorageVersionHelper extends ResourceTemplate implements StorageVersionHelper {
-    static kind = 'StorageVersion';
-    static apiVersion = 'apiserverinternal/v1alpha1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, StorageVersionHelper.kind, StorageVersionHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "StorageVersion", "internal.apiserver.k8s.io/v1alpha1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -189,11 +186,8 @@ export interface StorageVersionListHelper extends StorageVersionList {
 
 /** A list of StorageVersions. */
 export class StorageVersionListHelper extends ResourceTemplate implements StorageVersionListHelper {
-    static kind = 'StorageVersionList';
-    static apiVersion = 'apiserverinternal/v1alpha1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, StorageVersionListHelper.kind, StorageVersionListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "StorageVersionList", "internal.apiserver.k8s.io/v1alpha1")
     }
 
     _items: Array<StorageVersion>;

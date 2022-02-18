@@ -250,11 +250,8 @@ export interface HorizontalPodAutoscalerHelper extends HorizontalPodAutoscaler {
 
 /** HorizontalPodAutoscaler is the configuration for a horizontal pod autoscaler, which automatically manages the replica count of any resource implementing the scale subresource based on the metrics specified. */
 export class HorizontalPodAutoscalerHelper extends ResourceTemplate implements HorizontalPodAutoscalerHelper {
-    static kind = 'HorizontalPodAutoscaler';
-    static apiVersion = 'autoscaling/v2';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, HorizontalPodAutoscalerHelper.kind, HorizontalPodAutoscalerHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "HorizontalPodAutoscaler", "autoscaling/v2")
     }
 
     _metadata: ObjectMetaHelper;
@@ -402,11 +399,8 @@ export interface HorizontalPodAutoscalerListHelper extends HorizontalPodAutoscal
 
 /** HorizontalPodAutoscalerList is a list of horizontal pod autoscaler objects. */
 export class HorizontalPodAutoscalerListHelper extends ResourceTemplate implements HorizontalPodAutoscalerListHelper {
-    static kind = 'HorizontalPodAutoscalerList';
-    static apiVersion = 'autoscaling/v2';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, HorizontalPodAutoscalerListHelper.kind, HorizontalPodAutoscalerListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "HorizontalPodAutoscalerList", "autoscaling/v2")
     }
 
     _items: Array<HorizontalPodAutoscaler>;

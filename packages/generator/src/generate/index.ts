@@ -59,9 +59,21 @@ async function main({ api: apiVersion, file, patch, beta }: Arguments) {
   )
 
   writeFileSync(
-    path.join(destPath, 'tsconfig.json'),
-    readFileSync(path.join(assetsPath, 'tsconfig-template.json'), 'utf8'),
-    'utf8'
+      path.join(destPath, 'resourceTemplate.ts'),
+      readFileSync(path.join(assetsPath, 'resourceTemplate.ts'), 'utf8'),
+      'utf8'
+  )
+
+  writeFileSync(
+      path.join(destPath, 'template.ts'),
+      readFileSync(path.join(assetsPath, 'template.ts'), 'utf8'),
+      'utf8'
+  )
+
+  writeFileSync(
+      path.join(destPath, 'tsconfig.json'),
+      readFileSync(path.join(assetsPath, 'tsconfig-template.json'), 'utf8'),
+      'utf8'
   )
 
 }

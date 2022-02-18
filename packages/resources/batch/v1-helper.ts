@@ -13,11 +13,8 @@ export interface CronJobHelper extends CronJob {
 
 /** CronJob represents the configuration of a single cron job. */
 export class CronJobHelper extends ResourceTemplate implements CronJobHelper {
-    static kind = 'CronJob';
-    static apiVersion = 'batch/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, CronJobHelper.kind, CronJobHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "CronJob", "batch/v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -61,11 +58,8 @@ export interface CronJobListHelper extends CronJobList {
 
 /** CronJobList is a collection of cron jobs. */
 export class CronJobListHelper extends ResourceTemplate implements CronJobListHelper {
-    static kind = 'CronJobList';
-    static apiVersion = 'batch/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, CronJobListHelper.kind, CronJobListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "CronJobList", "batch/v1")
     }
 
     _items: Array<CronJob>;
@@ -239,11 +233,8 @@ export interface JobHelper extends Job {
 
 /** Job represents the configuration of a single job. */
 export class JobHelper extends ResourceTemplate implements JobHelper {
-    static kind = 'Job';
-    static apiVersion = 'batch/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, JobHelper.kind, JobHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "Job", "batch/v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -369,11 +360,8 @@ export interface JobListHelper extends JobList {
 
 /** JobList is a collection of jobs. */
 export class JobListHelper extends ResourceTemplate implements JobListHelper {
-    static kind = 'JobList';
-    static apiVersion = 'batch/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, JobListHelper.kind, JobListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "JobList", "batch/v1")
     }
 
     _items: Array<Job>;

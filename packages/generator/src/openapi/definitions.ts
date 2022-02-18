@@ -4,6 +4,7 @@ interface ResolvedDefinition {
     name: string
     path: string
     root: string
+    fullPath: string
     def: Definition
 }
 
@@ -37,11 +38,12 @@ const simplifyDefName = (name: string): string | undefined => {
     return undefined
 }
 
-export function parseDefName(name: string): { name: string; path: string; root: string } | undefined {
+export function parseDefName(name: string): { name: string; path: string; root: string; fullPath:string } | undefined {
     const simplifiedName = simplifyDefName(name)
     if (simplifiedName == null) {
         return undefined
     }
+    const fullPath = name
     name = simplifiedName
 
     const parts = name.split('.')
@@ -50,5 +52,5 @@ export function parseDefName(name: string): { name: string; path: string; root: 
     const root = parts.length > 2 ?
         parts.slice(0, -2).join('/') :
         `./`
-    return { name, path, root }
+    return { name, path, root, fullPath }
 }

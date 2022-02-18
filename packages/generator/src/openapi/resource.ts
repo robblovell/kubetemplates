@@ -5,7 +5,7 @@ import { basicTypes, elidedTypes, emptyTypes, scalarTypes } from './types'
 import { addHelperMethod } from './resourceMethods'
 
 export const addResource = (params) => {
-    const {proj, name, path, def, api, file, fileImports} = params
+    const {proj, name, path, fullPath, def, api, file, fileImports} = params
 
     if (name in scalarTypes || name in elidedTypes || name in basicTypes || name in emptyTypes) {
         console.log("name (Simple): ", name)
@@ -32,35 +32,45 @@ export const addResource = (params) => {
         docs: def.description ? [{description: def.description}] : [],
     })
     classObject.addImplements(helperName)
+    const prop = properties(proj, api, def, fileImports)
 
     // If this is a resource, create a Resource Helper with name, namespace, kind and apiVersion.
     if (isResource) {
-        console.log("name (Resource): ", name)
         // Resources extend ResourceTemplate
         classObject.setExtends('ResourceTemplate')
+        // set kind and apiVersion.
+        let kindVersion: any = {}
+        for (const property of prop) {
+            if (property.name == 'kind' || property.name == 'apiVersion') {
+                // let variable = classObject.addMember({ isStatic: false,
+                //     name: property.name, kind: StructureKind.Property })
+                // variable.setInitializer(property.type)
+                kindVersion[property.name] = property.type
+            }
+        }
+        console.log(`name (Resource): ${name}, ${path}, ${fullPath}, ${kindVersion.kind}, ${kindVersion.apiVersion}`)
 
         // Static members for kind and apiVersion. These are fixed for a resource.
-        let variable = classObject.addMember({ isStatic: true,
-            name: "kind", kind: StructureKind.Property})
-        variable.setInitializer(`'${name}'`)
-        variable = classObject.addMember({ isStatic: true,
-            name: "apiVersion", kind: StructureKind.Property
-        })
-        variable.setInitializer(`'${path}'`)
+        // let variable = classObject.addMember({ isStatic: true,
+        //     name: "kind", kind: StructureKind.Property})
+        // variable.setInitializer(`'${name}'`)
+        // variable = classObject.addMember({ isStatic: true,
+        //     name: "apiVersion", kind: StructureKind.Property
+        // })
+        // variable.setInitializer(`'${path}'`)
 
         // Add the constructor for the Resource class.
         const ctor = classObject.addConstructor({
             /* options like parameters may go here */
             parameters: [
                 { name: 'nameOrObject', type: 'string | any' },
-                { name: 'namespace', type: 'string' },
-                { name: 'kind', type: 'string' },
-                { name: 'apiVersion', type: 'string' }]
+                { name: 'namespace', type: 'string' }]
         })
         ctor.setBodyText(
-`super(nameOrObject, namespace, ${helperName}.kind, ${helperName}.apiVersion)`)
+`super(nameOrObject, namespace, ${kindVersion.kind}, ${kindVersion.apiVersion})`)
+
     } else {
-        console.log("name (Object): ", name)
+        console.log(`name (Object): ${name}, ${path}, ${fullPath}`)
         // Plain objects extend Template
         classObject.setExtends('Template')
         // Add a constructor to the Object class.
@@ -72,7 +82,6 @@ export const addResource = (params) => {
     }
     // for each property, add a getter, setter and fluent ($) setter
     if (def.properties) {
-        const prop = properties(proj, api, def, fileImports)
 
         for (const propertyName of Object.keys(def.properties)) {
             const property = def.properties[propertyName]
@@ -80,6 +89,7 @@ export const addResource = (params) => {
             // Don't add setters for kind and apiVersion
             if (propertyName == 'kind' || propertyName == 'apiVersion')
                 continue
+
             // Don't add setters for name and namespace
             if (propertyName == 'name' || propertyName == 'namespace')
                 continue

@@ -13,11 +13,8 @@ export interface PriorityClassHelper extends PriorityClass {
 
 /** PriorityClass defines mapping from a priority class name to the priority integer value. The value can be any valid integer. */
 export class PriorityClassHelper extends ResourceTemplate implements PriorityClassHelper {
-    static kind = 'PriorityClass';
-    static apiVersion = 'scheduling/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, PriorityClassHelper.kind, PriorityClassHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "PriorityClass", "scheduling.k8s.io/v1")
     }
 
     _description: string;
@@ -83,11 +80,8 @@ export interface PriorityClassListHelper extends PriorityClassList {
 
 /** PriorityClassList is a collection of priority classes. */
 export class PriorityClassListHelper extends ResourceTemplate implements PriorityClassListHelper {
-    static kind = 'PriorityClassList';
-    static apiVersion = 'scheduling/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, PriorityClassListHelper.kind, PriorityClassListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "PriorityClassList", "scheduling.k8s.io/v1")
     }
 
     _items: Array<PriorityClass>;

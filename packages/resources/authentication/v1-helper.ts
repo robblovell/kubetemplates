@@ -33,11 +33,8 @@ export interface TokenRequestHelper extends TokenRequest {
 
 /** TokenRequest requests a token for a given service account. */
 export class TokenRequestHelper extends ResourceTemplate implements TokenRequestHelper {
-    static kind = 'TokenRequest';
-    static apiVersion = 'authentication/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, TokenRequestHelper.kind, TokenRequestHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "TokenRequest", "authentication.k8s.io/v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -162,11 +159,8 @@ export interface TokenReviewHelper extends TokenReview {
 
 /** TokenReview attempts to authenticate a token to a known user. Note: TokenReview requests may be cached by the webhook token authenticator plugin in the kube-apiserver. */
 export class TokenReviewHelper extends ResourceTemplate implements TokenReviewHelper {
-    static kind = 'TokenReview';
-    static apiVersion = 'authentication/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, TokenReviewHelper.kind, TokenReviewHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "TokenReview", "authentication.k8s.io/v1")
     }
 
     _metadata: ObjectMetaHelper;

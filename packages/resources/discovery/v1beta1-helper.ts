@@ -222,11 +222,8 @@ export interface EndpointSliceHelper extends EndpointSlice {
 
 /** EndpointSlice represents a subset of the endpoints that implement a service. For a given service there may be multiple EndpointSlice objects, selected by labels, which must be joined to produce the full set of endpoints. */
 export class EndpointSliceHelper extends ResourceTemplate implements EndpointSliceHelper {
-    static kind = 'EndpointSlice';
-    static apiVersion = 'discovery/v1beta1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, EndpointSliceHelper.kind, EndpointSliceHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "EndpointSlice", "discovery.k8s.io/v1beta1")
     }
 
     _addressType: string;
@@ -281,11 +278,8 @@ export interface EndpointSliceListHelper extends EndpointSliceList {
 
 /** EndpointSliceList represents a list of endpoint slices */
 export class EndpointSliceListHelper extends ResourceTemplate implements EndpointSliceListHelper {
-    static kind = 'EndpointSliceList';
-    static apiVersion = 'discovery/v1beta1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, EndpointSliceListHelper.kind, EndpointSliceListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "EndpointSliceList", "discovery.k8s.io/v1beta1")
     }
 
     _items: Array<EndpointSlice>;

@@ -181,11 +181,8 @@ export interface PodDisruptionBudgetHelper extends PodDisruptionBudget {
 
 /** PodDisruptionBudget is an object to define the max disruption that can be caused to a collection of pods */
 export class PodDisruptionBudgetHelper extends ResourceTemplate implements PodDisruptionBudgetHelper {
-    static kind = 'PodDisruptionBudget';
-    static apiVersion = 'policy/v1beta1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, PodDisruptionBudgetHelper.kind, PodDisruptionBudgetHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "PodDisruptionBudget", "policy/v1beta1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -229,11 +226,8 @@ export interface PodDisruptionBudgetListHelper extends PodDisruptionBudgetList {
 
 /** PodDisruptionBudgetList is a collection of PodDisruptionBudgets. */
 export class PodDisruptionBudgetListHelper extends ResourceTemplate implements PodDisruptionBudgetListHelper {
-    static kind = 'PodDisruptionBudgetList';
-    static apiVersion = 'policy/v1beta1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, PodDisruptionBudgetListHelper.kind, PodDisruptionBudgetListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "PodDisruptionBudgetList", "policy/v1beta1")
     }
 
     _items: Array<PodDisruptionBudget>;
@@ -406,11 +400,8 @@ export interface PodSecurityPolicyHelper extends PodSecurityPolicy {
 
 /** PodSecurityPolicy governs the ability to make requests that affect the Security Context that will be applied to a pod and container. Deprecated in 1.21. */
 export class PodSecurityPolicyHelper extends ResourceTemplate implements PodSecurityPolicyHelper {
-    static kind = 'PodSecurityPolicy';
-    static apiVersion = 'policy/v1beta1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, PodSecurityPolicyHelper.kind, PodSecurityPolicyHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "PodSecurityPolicy", "policy/v1beta1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -443,11 +434,8 @@ export interface PodSecurityPolicyListHelper extends PodSecurityPolicyList {
 
 /** PodSecurityPolicyList is a list of PodSecurityPolicy objects. */
 export class PodSecurityPolicyListHelper extends ResourceTemplate implements PodSecurityPolicyListHelper {
-    static kind = 'PodSecurityPolicyList';
-    static apiVersion = 'policy/v1beta1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, PodSecurityPolicyListHelper.kind, PodSecurityPolicyListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "PodSecurityPolicyList", "policy/v1beta1")
     }
 
     _items: Array<PodSecurityPolicy>;

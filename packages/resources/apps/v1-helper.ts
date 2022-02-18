@@ -15,11 +15,8 @@ export interface ControllerRevisionHelper extends ControllerRevision {
 
 /** ControllerRevision implements an immutable snapshot of state data. Clients are responsible for serializing and deserializing the objects that contain their internal state. Once a ControllerRevision has been successfully created, it can not be updated. The API Server will fail validation of all requests that attempt to mutate the Data field. ControllerRevisions may, however, be deleted. Note that, due to its use by both the DaemonSet and StatefulSet controllers for update and rollback, this object is beta. However, it may be subject to name and representation changes in future releases, and clients should not depend on its stability. It is primarily for internal use by controllers. */
 export class ControllerRevisionHelper extends ResourceTemplate implements ControllerRevisionHelper {
-    static kind = 'ControllerRevision';
-    static apiVersion = 'apps/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, ControllerRevisionHelper.kind, ControllerRevisionHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "ControllerRevision", "apps/v1")
     }
 
     _data: RawExtensionHelper;
@@ -63,11 +60,8 @@ export interface ControllerRevisionListHelper extends ControllerRevisionList {
 
 /** ControllerRevisionList is a resource containing a list of ControllerRevision objects. */
 export class ControllerRevisionListHelper extends ResourceTemplate implements ControllerRevisionListHelper {
-    static kind = 'ControllerRevisionList';
-    static apiVersion = 'apps/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, ControllerRevisionListHelper.kind, ControllerRevisionListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "ControllerRevisionList", "apps/v1")
     }
 
     _items: Array<ControllerRevision>;
@@ -101,11 +95,8 @@ export interface DaemonSetHelper extends DaemonSet {
 
 /** DaemonSet represents the configuration of a daemon set. */
 export class DaemonSetHelper extends ResourceTemplate implements DaemonSetHelper {
-    static kind = 'DaemonSet';
-    static apiVersion = 'apps/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, DaemonSetHelper.kind, DaemonSetHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "DaemonSet", "apps/v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -219,11 +210,8 @@ export interface DaemonSetListHelper extends DaemonSetList {
 
 /** DaemonSetList is a collection of daemon sets. */
 export class DaemonSetListHelper extends ResourceTemplate implements DaemonSetListHelper {
-    static kind = 'DaemonSetList';
-    static apiVersion = 'apps/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, DaemonSetListHelper.kind, DaemonSetListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "DaemonSetList", "apps/v1")
     }
 
     _items: Array<DaemonSet>;
@@ -491,11 +479,8 @@ export interface DeploymentHelper extends Deployment {
 
 /** Deployment enables declarative updates for Pods and ReplicaSets. */
 export class DeploymentHelper extends ResourceTemplate implements DeploymentHelper {
-    static kind = 'Deployment';
-    static apiVersion = 'apps/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, DeploymentHelper.kind, DeploymentHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "Deployment", "apps/v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -621,11 +606,8 @@ export interface DeploymentListHelper extends DeploymentList {
 
 /** DeploymentList is a list of Deployments. */
 export class DeploymentListHelper extends ResourceTemplate implements DeploymentListHelper {
-    static kind = 'DeploymentList';
-    static apiVersion = 'apps/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, DeploymentListHelper.kind, DeploymentListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "DeploymentList", "apps/v1")
     }
 
     _items: Array<Deployment>;
@@ -905,11 +887,8 @@ export interface ReplicaSetHelper extends ReplicaSet {
 
 /** ReplicaSet ensures that a specified number of pod replicas are running at any given time. */
 export class ReplicaSetHelper extends ResourceTemplate implements ReplicaSetHelper {
-    static kind = 'ReplicaSet';
-    static apiVersion = 'apps/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, ReplicaSetHelper.kind, ReplicaSetHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "ReplicaSet", "apps/v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -1023,11 +1002,8 @@ export interface ReplicaSetListHelper extends ReplicaSetList {
 
 /** ReplicaSetList is a collection of ReplicaSets. */
 export class ReplicaSetListHelper extends ResourceTemplate implements ReplicaSetListHelper {
-    static kind = 'ReplicaSetList';
-    static apiVersion = 'apps/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, ReplicaSetListHelper.kind, ReplicaSetListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "ReplicaSetList", "apps/v1")
     }
 
     _items: Array<ReplicaSet>;
@@ -1296,11 +1272,8 @@ export interface StatefulSetHelper extends StatefulSet {
  * The StatefulSet guarantees that a given network identity will always map to the same storage identity.
  */
 export class StatefulSetHelper extends ResourceTemplate implements StatefulSetHelper {
-    static kind = 'StatefulSet';
-    static apiVersion = 'apps/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, StatefulSetHelper.kind, StatefulSetHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "StatefulSet", "apps/v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -1414,11 +1387,8 @@ export interface StatefulSetListHelper extends StatefulSetList {
 
 /** StatefulSetList is a collection of StatefulSets. */
 export class StatefulSetListHelper extends ResourceTemplate implements StatefulSetListHelper {
-    static kind = 'StatefulSetList';
-    static apiVersion = 'apps/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, StatefulSetListHelper.kind, StatefulSetListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "StatefulSetList", "apps/v1")
     }
 
     _items: Array<StatefulSet>;

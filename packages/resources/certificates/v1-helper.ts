@@ -19,11 +19,8 @@ export interface CertificateSigningRequestHelper extends CertificateSigningReque
  * This API can be used to request client certificates to authenticate to kube-apiserver (with the "kubernetes.io/kube-apiserver-client" signerName), or to obtain certificates from custom non-Kubernetes signers.
  */
 export class CertificateSigningRequestHelper extends ResourceTemplate implements CertificateSigningRequestHelper {
-    static kind = 'CertificateSigningRequest';
-    static apiVersion = 'certificates/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, CertificateSigningRequestHelper.kind, CertificateSigningRequestHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "CertificateSigningRequest", "certificates.k8s.io/v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -149,11 +146,8 @@ export interface CertificateSigningRequestListHelper extends CertificateSigningR
 
 /** CertificateSigningRequestList is a collection of CertificateSigningRequest objects */
 export class CertificateSigningRequestListHelper extends ResourceTemplate implements CertificateSigningRequestListHelper {
-    static kind = 'CertificateSigningRequestList';
-    static apiVersion = 'certificates/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, CertificateSigningRequestListHelper.kind, CertificateSigningRequestListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "CertificateSigningRequestList", "certificates.k8s.io/v1")
     }
 
     _items: Array<CertificateSigningRequest>;

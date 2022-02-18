@@ -24,11 +24,8 @@ export interface CSIStorageCapacityHelper extends CSIStorageCapacity {
  * They are consumed by the kube-scheduler if the CSIStorageCapacity beta feature gate is enabled there and a CSI driver opts into capacity-aware scheduling with CSIDriver.StorageCapacity.
  */
 export class CSIStorageCapacityHelper extends ResourceTemplate implements CSIStorageCapacityHelper {
-    static kind = 'CSIStorageCapacity';
-    static apiVersion = 'storage/v1alpha1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, CSIStorageCapacityHelper.kind, CSIStorageCapacityHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "CSIStorageCapacity", "storage.k8s.io/v1alpha1")
     }
 
     _capacity: Quantity;
@@ -94,11 +91,8 @@ export interface CSIStorageCapacityListHelper extends CSIStorageCapacityList {
 
 /** CSIStorageCapacityList is a collection of CSIStorageCapacity objects. */
 export class CSIStorageCapacityListHelper extends ResourceTemplate implements CSIStorageCapacityListHelper {
-    static kind = 'CSIStorageCapacityList';
-    static apiVersion = 'storage/v1alpha1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, CSIStorageCapacityListHelper.kind, CSIStorageCapacityListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "CSIStorageCapacityList", "storage.k8s.io/v1alpha1")
     }
 
     _items: Array<CSIStorageCapacity>;

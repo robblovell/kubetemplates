@@ -115,11 +115,8 @@ export interface IngressHelper extends Ingress {
 
 /** Ingress is a collection of rules that allow inbound connections to reach the endpoints defined by a backend. An Ingress can be configured to give services externally-reachable urls, load balance traffic, terminate SSL, offer name based virtual hosting etc. */
 export class IngressHelper extends ResourceTemplate implements IngressHelper {
-    static kind = 'Ingress';
-    static apiVersion = 'networking/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, IngressHelper.kind, IngressHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "Ingress", "networking.k8s.io/v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -197,11 +194,8 @@ export interface IngressClassHelper extends IngressClass {
 
 /** IngressClass represents the class of the Ingress, referenced by the Ingress Spec. The `ingressclass.kubernetes.io/is-default-class` annotation can be used to indicate that an IngressClass should be considered default. When a single IngressClass resource has this annotation set to true, new Ingress resources without a class specified will be assigned this default class. */
 export class IngressClassHelper extends ResourceTemplate implements IngressClassHelper {
-    static kind = 'IngressClass';
-    static apiVersion = 'networking/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, IngressClassHelper.kind, IngressClassHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "IngressClass", "networking.k8s.io/v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -234,11 +228,8 @@ export interface IngressClassListHelper extends IngressClassList {
 
 /** IngressClassList is a collection of IngressClasses. */
 export class IngressClassListHelper extends ResourceTemplate implements IngressClassListHelper {
-    static kind = 'IngressClassList';
-    static apiVersion = 'networking/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, IngressClassListHelper.kind, IngressClassListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "IngressClassList", "networking.k8s.io/v1")
     }
 
     _items: Array<IngressClass>;
@@ -339,11 +330,8 @@ export interface IngressListHelper extends IngressList {
 
 /** IngressList is a collection of Ingress. */
 export class IngressListHelper extends ResourceTemplate implements IngressListHelper {
-    static kind = 'IngressList';
-    static apiVersion = 'networking/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, IngressListHelper.kind, IngressListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "IngressList", "networking.k8s.io/v1")
     }
 
     _items: Array<Ingress>;
@@ -546,11 +534,8 @@ export interface NetworkPolicyHelper extends NetworkPolicy {
 
 /** NetworkPolicy describes what network traffic is allowed for a set of Pods */
 export class NetworkPolicyHelper extends ResourceTemplate implements NetworkPolicyHelper {
-    static kind = 'NetworkPolicy';
-    static apiVersion = 'networking/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, NetworkPolicyHelper.kind, NetworkPolicyHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "NetworkPolicy", "networking.k8s.io/v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -651,11 +636,8 @@ export interface NetworkPolicyListHelper extends NetworkPolicyList {
 
 /** NetworkPolicyList is a list of NetworkPolicy objects. */
 export class NetworkPolicyListHelper extends ResourceTemplate implements NetworkPolicyListHelper {
-    static kind = 'NetworkPolicyList';
-    static apiVersion = 'networking/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, NetworkPolicyListHelper.kind, NetworkPolicyListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "NetworkPolicyList", "networking.k8s.io/v1")
     }
 
     _items: Array<NetworkPolicy>;

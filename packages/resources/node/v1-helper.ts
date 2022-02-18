@@ -36,11 +36,8 @@ export interface RuntimeClassHelper extends RuntimeClass {
 
 /** RuntimeClass defines a class of container runtime supported in the cluster. The RuntimeClass is used to determine which container runtime is used to run all containers in a pod. RuntimeClasses are manually defined by a user or cluster provisioner, and referenced in the PodSpec. The Kubelet is responsible for resolving the RuntimeClassName reference before running the pod.  For more details, see https://kubernetes.io/docs/concepts/containers/runtime-class/ */
 export class RuntimeClassHelper extends ResourceTemplate implements RuntimeClassHelper {
-    static kind = 'RuntimeClass';
-    static apiVersion = 'node/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, RuntimeClassHelper.kind, RuntimeClassHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "RuntimeClass", "node.k8s.io/v1")
     }
 
     _handler: string;
@@ -95,11 +92,8 @@ export interface RuntimeClassListHelper extends RuntimeClassList {
 
 /** RuntimeClassList is a list of RuntimeClass objects. */
 export class RuntimeClassListHelper extends ResourceTemplate implements RuntimeClassListHelper {
-    static kind = 'RuntimeClassList';
-    static apiVersion = 'node/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, RuntimeClassListHelper.kind, RuntimeClassListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "RuntimeClassList", "node.k8s.io/v1")
     }
 
     _items: Array<RuntimeClass>;

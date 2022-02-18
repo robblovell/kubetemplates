@@ -10,11 +10,8 @@ export interface LeaseHelper extends Lease {
 
 /** Lease defines a lease concept. */
 export class LeaseHelper extends ResourceTemplate implements LeaseHelper {
-    static kind = 'Lease';
-    static apiVersion = 'coordination/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, LeaseHelper.kind, LeaseHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "Lease", "coordination.k8s.io/v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -47,11 +44,8 @@ export interface LeaseListHelper extends LeaseList {
 
 /** LeaseList is a list of Lease objects. */
 export class LeaseListHelper extends ResourceTemplate implements LeaseListHelper {
-    static kind = 'LeaseList';
-    static apiVersion = 'coordination/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, LeaseListHelper.kind, LeaseListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "LeaseList", "coordination.k8s.io/v1")
     }
 
     _items: Array<Lease>;

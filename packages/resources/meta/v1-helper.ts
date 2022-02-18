@@ -980,11 +980,8 @@ export interface StatusHelper extends Status {
 
 /** Status is a return value for calls that don't return other objects. */
 export class StatusHelper extends ResourceTemplate implements StatusHelper {
-    static kind = 'Status';
-    static apiVersion = 'meta/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, StatusHelper.kind, StatusHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "Status", "v1")
     }
 
     _code: number;

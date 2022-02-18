@@ -115,11 +115,8 @@ export interface CustomResourceDefinitionHelper extends CustomResourceDefinition
 
 /** CustomResourceDefinition represents a resource that should be exposed on the API server.  Its name MUST be in the format <.spec.name>.<.spec.group>. */
 export class CustomResourceDefinitionHelper extends ResourceTemplate implements CustomResourceDefinitionHelper {
-    static kind = 'CustomResourceDefinition';
-    static apiVersion = 'apiextensions/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, CustomResourceDefinitionHelper.kind, CustomResourceDefinitionHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "CustomResourceDefinition", "apiextensions.k8s.io/v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -233,11 +230,8 @@ export interface CustomResourceDefinitionListHelper extends CustomResourceDefini
 
 /** CustomResourceDefinitionList is a list of CustomResourceDefinition objects. */
 export class CustomResourceDefinitionListHelper extends ResourceTemplate implements CustomResourceDefinitionListHelper {
-    static kind = 'CustomResourceDefinitionList';
-    static apiVersion = 'apiextensions/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, CustomResourceDefinitionListHelper.kind, CustomResourceDefinitionListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "CustomResourceDefinitionList", "apiextensions.k8s.io/v1")
     }
 
     _items: Array<CustomResourceDefinition>;

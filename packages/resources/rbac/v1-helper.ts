@@ -33,11 +33,8 @@ export interface ClusterRoleHelper extends ClusterRole {
 
 /** ClusterRole is a cluster level, logical grouping of PolicyRules that can be referenced as a unit by a RoleBinding or ClusterRoleBinding. */
 export class ClusterRoleHelper extends ResourceTemplate implements ClusterRoleHelper {
-    static kind = 'ClusterRole';
-    static apiVersion = 'rbac/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, ClusterRoleHelper.kind, ClusterRoleHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "ClusterRole", "rbac.authorization.k8s.io/v1")
     }
 
     _aggregationRule: AggregationRuleHelper;
@@ -82,11 +79,8 @@ export interface ClusterRoleBindingHelper extends ClusterRoleBinding {
 
 /** ClusterRoleBinding references a ClusterRole, but not contain it.  It can reference a ClusterRole in the global namespace, and adds who information via Subject. */
 export class ClusterRoleBindingHelper extends ResourceTemplate implements ClusterRoleBindingHelper {
-    static kind = 'ClusterRoleBinding';
-    static apiVersion = 'rbac/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, ClusterRoleBindingHelper.kind, ClusterRoleBindingHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "ClusterRoleBinding", "rbac.authorization.k8s.io/v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -130,11 +124,8 @@ export interface ClusterRoleBindingListHelper extends ClusterRoleBindingList {
 
 /** ClusterRoleBindingList is a collection of ClusterRoleBindings */
 export class ClusterRoleBindingListHelper extends ResourceTemplate implements ClusterRoleBindingListHelper {
-    static kind = 'ClusterRoleBindingList';
-    static apiVersion = 'rbac/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, ClusterRoleBindingListHelper.kind, ClusterRoleBindingListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "ClusterRoleBindingList", "rbac.authorization.k8s.io/v1")
     }
 
     _items: Array<ClusterRoleBinding>;
@@ -167,11 +158,8 @@ export interface ClusterRoleListHelper extends ClusterRoleList {
 
 /** ClusterRoleList is a collection of ClusterRoles */
 export class ClusterRoleListHelper extends ResourceTemplate implements ClusterRoleListHelper {
-    static kind = 'ClusterRoleList';
-    static apiVersion = 'rbac/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, ClusterRoleListHelper.kind, ClusterRoleListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "ClusterRoleList", "rbac.authorization.k8s.io/v1")
     }
 
     _items: Array<ClusterRole>;
@@ -274,11 +262,8 @@ export interface RoleHelper extends Role {
 
 /** Role is a namespaced, logical grouping of PolicyRules that can be referenced as a unit by a RoleBinding. */
 export class RoleHelper extends ResourceTemplate implements RoleHelper {
-    static kind = 'Role';
-    static apiVersion = 'rbac/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, RoleHelper.kind, RoleHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "Role", "rbac.authorization.k8s.io/v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -312,11 +297,8 @@ export interface RoleBindingHelper extends RoleBinding {
 
 /** RoleBinding references a role, but does not contain it.  It can reference a Role in the same namespace or a ClusterRole in the global namespace. It adds who information via Subjects and namespace information by which namespace it exists in.  RoleBindings in a given namespace only have effect in that namespace. */
 export class RoleBindingHelper extends ResourceTemplate implements RoleBindingHelper {
-    static kind = 'RoleBinding';
-    static apiVersion = 'rbac/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, RoleBindingHelper.kind, RoleBindingHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "RoleBinding", "rbac.authorization.k8s.io/v1")
     }
 
     _metadata: ObjectMetaHelper;
@@ -360,11 +342,8 @@ export interface RoleBindingListHelper extends RoleBindingList {
 
 /** RoleBindingList is a collection of RoleBindings */
 export class RoleBindingListHelper extends ResourceTemplate implements RoleBindingListHelper {
-    static kind = 'RoleBindingList';
-    static apiVersion = 'rbac/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, RoleBindingListHelper.kind, RoleBindingListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "RoleBindingList", "rbac.authorization.k8s.io/v1")
     }
 
     _items: Array<RoleBinding>;
@@ -397,11 +376,8 @@ export interface RoleListHelper extends RoleList {
 
 /** RoleList is a collection of Roles */
 export class RoleListHelper extends ResourceTemplate implements RoleListHelper {
-    static kind = 'RoleList';
-    static apiVersion = 'rbac/v1';
-
-    constructor(nameOrObject: string | any, namespace: string, kind: string, apiVersion: string) {
-        super(nameOrObject, namespace, RoleListHelper.kind, RoleListHelper.apiVersion)
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "RoleList", "rbac.authorization.k8s.io/v1")
     }
 
     _items: Array<Role>;
