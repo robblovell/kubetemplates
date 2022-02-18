@@ -10,7 +10,8 @@ const deployment = new DeploymentHelper('cat-in-the-hat-core')
     .$namespace('cat-in-the-hat2')
     .$spec({ app: 'a-name' }, {})
     .$labels({
-        'system.cat-in-the-hat/type': 'home-mess'
+        'system.cat-in-the-hat/type': 'home-mess',
+        thing3: 'mess3'
     })
     .$annotations({
         annotation1: 'annotate this'
