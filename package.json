@@ -6,12 +6,14 @@
   "scripts": {
     "clean-all": "yarn run clean && del packages/**/node_modules && del ./node_modules",
     "clean-resources": "lerna run clean-resources --stream",
-    "clean": "tsc -b --clean ./tsconfig.json",
+    "clean-templates": "lerna run clean-templates --stream",
+    "clean": "tsc -b --clean ./tsconfig.json && del packages/**lib",
     "build": "tsc -b ./tsconfig.json",
     "postbuild": "lerna run postbuild --stream",
     "develop": "tsc -b -w  --preserveWatchOutput ./tsconfig.json",
     "generate-docs": "lerna run generate-docs --stream",
     "generate-resources": "lerna run generate-resources --stream",
+    "generate-templates": "lerna run generate-templates --stream",
     "test": "c8 ava"
   },
   "keywords": [],
@@ -36,7 +38,6 @@
   "dependencies": {
     "@c6o/kubeclient": "^0.0.13",
     "@c6o/kubeclient-contracts": "^0.0.13",
-    "jsonpath": "^1.1.1",
     "ts-morph": "^13.0.3"
   },
   "repository": "git@github.com:robblovell/kubetemplates.git",

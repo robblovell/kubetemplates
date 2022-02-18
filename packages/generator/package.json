@@ -1,13 +1,13 @@
 {
-    "name": "@c6o/kubeclient-generator",
+    "name": "@c6o/kubetemplates-generator",
     "version": "0.0.13",
     "description": "Kubernetes resource typings generator based on github.com/silverlyra/kubernetes-types",
     "keywords": [
         "kubernetes"
     ],
-    "author": "Narayan Sainaney <narayan@codezero.io>",
-    "homepage": "https://github.com/c6o/kubeclient#readme",
-    "license": "https://github.com/c6o/legal/#license",
+    "author": "Robb Lovell <robblovell@gmail.com>",
+    "homepage": "https://github.com/robblovell/kubetemplates#readme",
+    "license": "MIT",
     "main": "lib/generate/index.js",
     "publishConfig": {
         "access": "public"
@@ -16,8 +16,8 @@
         "lib"
     ],
     "scripts": {
-        "generate-resources": "node ./lib/generate/index.js -a v1.21",
-        "clean-resources": "del --force ../resources/*"
+        "generate-templates": "node ./lib/generate/index.js -a v1.21",
+        "clean-templates": "del --force ../resources/*"
     },
     "repository": {
         "type": "git",

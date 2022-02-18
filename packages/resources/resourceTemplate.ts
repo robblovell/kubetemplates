@@ -1,10 +1,16 @@
 import { Template } from './template'
-import { Resource } from '@c6o/kubeclient-contracts'
-export { Template }
+import { Resource, Metadata, Cluster } from '@c6o/kubeclient-contracts'
+// export interface Resource {
+//     apiVersion: string // 'v1' if not specified
+//     kind: string
+//     metadata? : any
+//     spec?: any
+//     status?: any
+//     items? : Array<Omit<Resource, 'apiVersion' | 'kind'>>
+// }
 
 export interface ResourceTemplate extends Resource {
     $name(x: string): ResourceTemplate
-    // namespace: string
     $namespace(x: string): ResourceTemplate
     $labels(x: {[name: string]: string}): ResourceTemplate
     $annotations(x: {[name: string]: string}): ResourceTemplate
@@ -31,7 +37,7 @@ export const ResourceTemplate = class extends Template implements ResourceTempla
         }
         // TODO: decide if it is useful to set a namespace if the name is an object.
         // if (namespace) {
-        //     this.namespace = namespace
+        //     this.metadata.namespace = namespace
         // }
     }
 
@@ -42,13 +48,8 @@ export const ResourceTemplate = class extends Template implements ResourceTempla
     // }
 
     // TODO:
-    // _kind: string
-    // get kind() { return this._kind }
-    // // set kind(x: string) { this._kind = x }
-    //
-    // _apiVersion: string // 'v1' if not specified
-    // get apiVersion() { return this._apiVersion }
-    // // set apiVersion(x: string) { this._apiVersion = x }
+    // get kind() { return this.kind }
+    // get apiVersion() { return this.apiVersion }
 
     get name() { return this.metadata.name }
     set name(x: string) { this.metadata.name = x }
@@ -77,14 +78,33 @@ export const ResourceTemplate = class extends Template implements ResourceTempla
     // set spec(x: SpecHelper ) { this._spec = this.set(this._spec, x) as any }
     // $spec(x: SpecHelper): ResourceTemplate { this.spec = x; return this }
 
+    // TODO:
     // _status: StatusHelper
     // get status() { return this._status }
     // set status(x: StatusHelper ) { this._status = this.set(this._status, x) as any }
     // $status(x: StatusHelper): ResourceTemplate { this.status = x; return this }
 
-    create() {}
-    patch() {}
-    get() {}
-    watch() {}
-    list() {}
+    _cluster
+    get cluster() { return this._cluster }
+    set cluster(cluster: Cluster) { this._cluster = cluster }
+    $cluster(cluster: Cluster) {
+        if (!cluster && !this.cluster) throw("No Cluster.")
+        this.cluster = cluster ? cluster : this.cluster
+        return this
+    }
+
+    _result
+    get result() { return this._result }
+    set result(result: any) { this._result = result }
+
+    async create(cluster: Cluster = undefined) {
+        this.$cluster(cluster)
+        this.result = (await this.cluster.create(this.toTemplate()))
+            .throwIfError(`Create failed for ${this.toTemplate()}`)
+        return this
+    }
+    async patch(cluster: Cluster = undefined) { return this }
+    async get(cluster: Cluster = undefined) { return this }
+    async watch(cluster: Cluster = undefined) { return this }
+    async list(cluster: Cluster = undefined) { return this }
 }
