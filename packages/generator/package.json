@@ -21,10 +21,10 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/c6o/kubeclient.git"
+        "url": "git+https://github.com/robblovell/kubetemplates.git"
     },
     "bugs": {
-        "url": "https://github.com/c6o/kubeclient/issues"
+        "url": "https://github.com/robblovell/kubetemplates/issues"
     },
     "dependencies": {
         "argparse": "^1.0.10",

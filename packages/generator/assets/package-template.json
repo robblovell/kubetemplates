@@ -4,9 +4,15 @@
     "keywords": [
         "kubernetes"
     ],
-    "author": "Narayan Sainaney <narayan@codezero.io>",
-    "homepage": "https://github.com/c6o/kubeclient#readme",
-    "license": "https://github.com/c6o/legal/#license",
+    "author": "Robb Lovell <robblovell@gmail.com>",
+    "contributors": [
+        {
+            "name" : "Narayan Sainaney",
+            "email" : "narayan@codezero.io"
+        }
+    ],
+    "homepage": "https://github.com/robblovell/kubetemplates#readme",
+    "license": "MIT",
     "publishConfig": {
         "access": "public"
     },
@@ -16,10 +22,10 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/c6o/kubeclient.git"
+        "url": "git+https://github.com/robblovell/kubetemplates.git"
     },
     "bugs": {
-        "url": "https://github.com/c6o/kubeclient/issues"
+        "url": "https://github.com/robblovell/kubetemplates/issues"
     },
     "dependencies": {
         "jsonpath": "^1.1.1"

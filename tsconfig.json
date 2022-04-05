@@ -1,6 +1,7 @@
 {
     "files": [],
     "references": [
+        {"path": "./packages/helpers"},
         {"path": "./packages/generator"},
         {"path": "./packages/resources"}
     ]

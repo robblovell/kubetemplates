@@ -42,6 +42,7 @@ export const addResource = (params) => {
         let kindVersion: any = {}
         for (const property of prop) {
             if (property.name == 'kind' || property.name == 'apiVersion') {
+                // todo: static for kind and apiVersion
                 // let variable = classObject.addMember({ isStatic: false,
                 //     name: property.name, kind: StructureKind.Property })
                 // variable.setInitializer(property.type)
@@ -50,6 +51,7 @@ export const addResource = (params) => {
         }
         console.log(`name (Resource): ${name}, ${path}, ${fullPath}, ${kindVersion.kind}, ${kindVersion.apiVersion}`)
 
+        // todo: static for kind and apiVersion
         // Static members for kind and apiVersion. These are fixed for a resource.
         // let variable = classObject.addMember({ isStatic: true,
         //     name: "kind", kind: StructureKind.Property})

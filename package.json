@@ -1,8 +1,12 @@
 {
   "name": "kubetemplates",
   "version": "1.0.0",
+  "private": true,
   "description": "",
   "main": "index.js",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "clean-all": "yarn run clean && del packages/**/node_modules && del ./node_modules",
     "clean-resources": "lerna run clean-resources --stream",

@@ -1,16 +1,10 @@
 {
-  "name": "@c6o/kubetempletes-resources",
-  "description": "Kubernetes generated resources from OpenAPI",
+  "name": "@c6o/kubetempletes-helpers",
+  "description": "Kubernetes simplified resources based on the generated resources",
   "keywords": [
     "kubernetes"
   ],
   "author": "Robb Lovell <robblovell@gmail.com>",
-  "contributors": [
-    {
-      "name" : "Narayan Sainaney",
-      "email" : "narayan@codezero.io"
-    }
-  ],
   "homepage": "https://github.com/robblovell/kubetemplates#readme",
   "license": "MIT",
   "publishConfig": {
@@ -29,7 +23,8 @@
   },
   "dependencies": {
     "jsonpath": "^1.1.1",
-    "@c6o/kubeclient-contracts": "^0.0.13"
+    "@c6o/kubeclient-contracts": "^0.0.13",
+    "@c6o/kubetempletes-resources": "^0.0.13"
   },
   "version": "0.0.13"
 }
