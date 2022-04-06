@@ -1,4 +1,4 @@
-import { ResourceRuleHelper } from '@c6o/kubetempletes-resources/authorization/v1-helper'
+import { ResourceRuleHelper } from '@rel/kubetemplate-resources/authorization/v1-helper'
 
 export class Rule extends ResourceRuleHelper {
     constructor(resources = [], verbs = ['get', 'watch', 'list'], apiGroups = ['']) {

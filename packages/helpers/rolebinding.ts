@@ -1,4 +1,4 @@
-import { RoleBindingHelper, RoleRefHelper, SubjectHelper } from '@c6o/kubetempletes-resources/rbac/v1-helper'
+import { RoleBindingHelper, RoleRefHelper, SubjectHelper } from '@rel/kubetemplate-resources/rbac/v1-helper'
 
 class RoleBinding extends RoleBindingHelper {
     static kind = 'RoleBinding'

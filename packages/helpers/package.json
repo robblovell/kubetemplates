@@ -1,5 +1,5 @@
 {
-  "name": "@c6o/kubetempletes-helpers",
+  "name": "@rel/kubetempletes-helpers",
   "description": "Kubernetes simplified resources based on the generated resources",
   "keywords": [
     "kubernetes"
@@ -24,7 +24,7 @@
   "dependencies": {
     "jsonpath": "^1.1.1",
     "@c6o/kubeclient-contracts": "^0.0.13",
-    "@c6o/kubetempletes-resources": "^0.0.13"
+    "@rel/kubetemplate-resources": "^0.0.13"
   },
   "version": "0.0.13"
 }

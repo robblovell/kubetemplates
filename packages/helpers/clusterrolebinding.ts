@@ -1,4 +1,4 @@
-import { ClusterRoleBindingHelper, RoleRefHelper, SubjectHelper } from '@c6o/kubetempletes-resources/rbac/v1-helper'
+import { ClusterRoleBindingHelper, RoleRefHelper, SubjectHelper } from '@rel/kubetemplate-resources/rbac/v1-helper'
 
 class ClusterRoleBinding extends ClusterRoleBindingHelper {
 

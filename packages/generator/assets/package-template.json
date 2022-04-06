@@ -1,5 +1,5 @@
 {
-    "name": "@c6o/kubeclient-resources",
+    "name": "@rel/kubetemplete-resources",
     "description": "Kubernetes generated resources from OpenAPI",
     "keywords": [
         "kubernetes"

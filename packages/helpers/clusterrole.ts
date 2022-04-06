@@ -1,5 +1,5 @@
-import { ClusterRoleHelper } from '@c6o/kubetempletes-resources/rbac/v1-helper'
-import { PolicyRule } from '@c6o/kubetempletes-resources/rbac/v1'
+import { ClusterRoleHelper } from '@rel/kubetemplate-resources/rbac/v1-helper'
+import { PolicyRule } from '@rel/kubetemplate-resources/rbac/v1'
 import { Rule } from './objects'
 
 class ClusterRole extends ClusterRoleHelper {

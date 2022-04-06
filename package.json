@@ -1,11 +1,13 @@
 {
-  "name": "kubetemplates",
-  "version": "1.0.0",
+  "name": "@rel/kubetemplates",
+  "version": "0.0.1",
   "private": true,
   "description": "",
   "main": "index.js",
   "workspaces": [
-    "packages/*"
+    "packages/generator",
+    "packages/helpers",
+    "packages/resources"
   ],
   "scripts": {
     "clean-all": "yarn run clean && del packages/**/node_modules && del ./node_modules",

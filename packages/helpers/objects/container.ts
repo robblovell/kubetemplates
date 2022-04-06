@@ -1,5 +1,4 @@
-import { ContainerHelper, VolumeMountHelper } from '@c6o/kubetempletes-resources/lib/core/v1-helper'
-import { EnvFromSource, EnvVar } from '@c6o/kubetempletes-resources/lib/core/v1'
+import { ContainerHelper, VolumeMountHelper } from '@rel/kubetemplate-resources/core/v1-helper'
 
 export class Container extends ContainerHelper {
 

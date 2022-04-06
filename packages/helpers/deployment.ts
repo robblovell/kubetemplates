@@ -1,4 +1,4 @@
-import { DeploymentHelper } from '@c6o/kubetempletes-resources/lib/apps/v1-helper'
+import { DeploymentHelper } from '@rel/kubetemplate-resources/apps/v1-helper'
 import { Container } from './objects'
 
 class Deployment extends DeploymentHelper {

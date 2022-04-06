@@ -1,5 +1,5 @@
 {
-    "name": "@c6o/kubetemplates-generator",
+    "name": "@rel/kubetemplates-generator",
     "version": "0.0.13",
     "description": "Kubernetes resource typings generator based on github.com/silverlyra/kubernetes-types",
     "keywords": [

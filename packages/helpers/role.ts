@@ -1,4 +1,4 @@
-import { RoleHelper } from '@c6o/kubetempletes-resources/rbac/v1-helper'
+import { RoleHelper } from '@rel/kubetemplate-resources/rbac/v1-helper'
 import { Rule } from './objects'
 
 export class Role extends RoleHelper {
