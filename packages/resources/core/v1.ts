@@ -8,13 +8,13 @@ import { Quantity } from "../api/resource";
  * An AWS EBS disk must exist before mounting to a container. The disk must also be in the same AWS zone as the kubelet. An AWS EBS disk can only be mounted as read/write once. AWS EBS volumes support ownership management and SELinux relabeling.
  */
 export interface AWSElasticBlockStoreVolumeSource {
-    /** fsType is the filesystem type of the volume that you want to mount. Tip: Ensure that the filesystem type is supported by the host operating system. Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore */
+    /** Filesystem type of the volume that you want to mount. Tip: Ensure that the filesystem type is supported by the host operating system. Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore */
     fsType?: string;
-    /** partition is the partition in the volume that you want to mount. If omitted, the default is to mount by volume name. Examples: For volume /dev/sda1, you specify the partition as "1". Similarly, the volume partition for /dev/sda is "0" (or you can leave the property empty). */
+    /** The partition in the volume that you want to mount. If omitted, the default is to mount by volume name. Examples: For volume /dev/sda1, you specify the partition as "1". Similarly, the volume partition for /dev/sda is "0" (or you can leave the property empty). */
     partition?: number;
-    /** readOnly value true will force the readOnly setting in VolumeMounts. More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore */
+    /** Specify "true" to force and set the ReadOnly property in VolumeMounts to "true". If omitted, the default is "false". More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore */
     readOnly?: boolean;
-    /** volumeID is unique ID of the persistent disk resource in AWS (Amazon EBS volume). More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore */
+    /** Unique ID of the persistent disk resource in AWS (Amazon EBS volume). More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore */
     volumeID: string;
 }
 
@@ -38,39 +38,39 @@ export interface AttachedVolume {
 
 /** AzureDisk represents an Azure Data Disk mount on the host and bind mount to the pod. */
 export interface AzureDiskVolumeSource {
-    /** cachingMode is the Host Caching mode: None, Read Only, Read Write. */
+    /** Host Caching mode: None, Read Only, Read Write. */
     cachingMode?: string;
-    /** diskName is the Name of the data disk in the blob storage */
+    /** The Name of the data disk in the blob storage */
     diskName: string;
-    /** diskURI is the URI of data disk in the blob storage */
+    /** The URI the data disk in the blob storage */
     diskURI: string;
-    /** fsType is Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. */
+    /** Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. */
     fsType?: string;
-    /** kind expected values are Shared: multiple blob disks per storage account  Dedicated: single blob disk per storage account  Managed: azure managed data disk (only in managed availability set). defaults to shared */
+    /** Expected values Shared: multiple blob disks per storage account  Dedicated: single blob disk per storage account  Managed: azure managed data disk (only in managed availability set). defaults to shared */
     kind?: string;
-    /** readOnly Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. */
+    /** Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. */
     readOnly?: boolean;
 }
 
 /** AzureFile represents an Azure File Service mount on the host and bind mount to the pod. */
 export interface AzureFilePersistentVolumeSource {
-    /** readOnly defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. */
+    /** Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. */
     readOnly?: boolean;
-    /** secretName is the name of secret that contains Azure Storage Account Name and Key */
+    /** the name of secret that contains Azure Storage Account Name and Key */
     secretName: string;
-    /** secretNamespace is the namespace of the secret that contains Azure Storage Account Name and Key default is the same as the Pod */
+    /** the namespace of the secret that contains Azure Storage Account Name and Key default is the same as the Pod */
     secretNamespace?: string;
-    /** shareName is the azure Share Name */
+    /** Share Name */
     shareName: string;
 }
 
 /** AzureFile represents an Azure File Service mount on the host and bind mount to the pod. */
 export interface AzureFileVolumeSource {
-    /** readOnly defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. */
+    /** Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. */
     readOnly?: boolean;
-    /** secretName is the  name of secret that contains Azure Storage Account Name and Key */
+    /** the name of secret that contains Azure Storage Account Name and Key */
     secretName: string;
-    /** shareName is the azure share Name */
+    /** Share Name */
     shareName: string;
 }
 
@@ -88,37 +88,37 @@ export interface Binding extends Resource {
 
 /** Represents storage that is managed by an external CSI volume driver (Beta feature) */
 export interface CSIPersistentVolumeSource {
-    /** controllerExpandSecretRef is a reference to the secret object containing sensitive information to pass to the CSI driver to complete the CSI ControllerExpandVolume call. This is an alpha field and requires enabling ExpandCSIVolumes feature gate. This field is optional, and may be empty if no secret is required. If the secret object contains more than one secret, all secrets are passed. */
+    /** ControllerExpandSecretRef is a reference to the secret object containing sensitive information to pass to the CSI driver to complete the CSI ControllerExpandVolume call. This is an alpha field and requires enabling ExpandCSIVolumes feature gate. This field is optional, and may be empty if no secret is required. If the secret object contains more than one secret, all secrets are passed. */
     controllerExpandSecretRef?: SecretReference;
-    /** controllerPublishSecretRef is a reference to the secret object containing sensitive information to pass to the CSI driver to complete the CSI ControllerPublishVolume and ControllerUnpublishVolume calls. This field is optional, and may be empty if no secret is required. If the secret object contains more than one secret, all secrets are passed. */
+    /** ControllerPublishSecretRef is a reference to the secret object containing sensitive information to pass to the CSI driver to complete the CSI ControllerPublishVolume and ControllerUnpublishVolume calls. This field is optional, and may be empty if no secret is required. If the secret object contains more than one secret, all secrets are passed. */
     controllerPublishSecretRef?: SecretReference;
-    /** driver is the name of the driver to use for this volume. Required. */
+    /** Driver is the name of the driver to use for this volume. Required. */
     driver: string;
-    /** fsType to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". */
+    /** Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". */
     fsType?: string;
-    /** nodePublishSecretRef is a reference to the secret object containing sensitive information to pass to the CSI driver to complete the CSI NodePublishVolume and NodeUnpublishVolume calls. This field is optional, and may be empty if no secret is required. If the secret object contains more than one secret, all secrets are passed. */
+    /** NodePublishSecretRef is a reference to the secret object containing sensitive information to pass to the CSI driver to complete the CSI NodePublishVolume and NodeUnpublishVolume calls. This field is optional, and may be empty if no secret is required. If the secret object contains more than one secret, all secrets are passed. */
     nodePublishSecretRef?: SecretReference;
-    /** nodeStageSecretRef is a reference to the secret object containing sensitive information to pass to the CSI driver to complete the CSI NodeStageVolume and NodeStageVolume and NodeUnstageVolume calls. This field is optional, and may be empty if no secret is required. If the secret object contains more than one secret, all secrets are passed. */
+    /** NodeStageSecretRef is a reference to the secret object containing sensitive information to pass to the CSI driver to complete the CSI NodeStageVolume and NodeStageVolume and NodeUnstageVolume calls. This field is optional, and may be empty if no secret is required. If the secret object contains more than one secret, all secrets are passed. */
     nodeStageSecretRef?: SecretReference;
-    /** readOnly value to pass to ControllerPublishVolumeRequest. Defaults to false (read/write). */
+    /** Optional: The value to pass to ControllerPublishVolumeRequest. Defaults to false (read/write). */
     readOnly?: boolean;
-    /** volumeAttributes of the volume to publish. */
+    /** Attributes of the volume to publish. */
     volumeAttributes?: {[name: string]: string};
-    /** volumeHandle is the unique volume name returned by the CSI volume plugin’s CreateVolume to refer to the volume on all subsequent calls. Required. */
+    /** VolumeHandle is the unique volume name returned by the CSI volume plugin’s CreateVolume to refer to the volume on all subsequent calls. Required. */
     volumeHandle: string;
 }
 
 /** Represents a source location of a volume to mount, managed by an external CSI driver */
 export interface CSIVolumeSource {
-    /** driver is the name of the CSI driver that handles this volume. Consult with your admin for the correct name as registered in the cluster. */
+    /** Driver is the name of the CSI driver that handles this volume. Consult with your admin for the correct name as registered in the cluster. */
     driver: string;
-    /** fsType to mount. Ex. "ext4", "xfs", "ntfs". If not provided, the empty value is passed to the associated CSI driver which will determine the default filesystem to apply. */
+    /** Filesystem type to mount. Ex. "ext4", "xfs", "ntfs". If not provided, the empty value is passed to the associated CSI driver which will determine the default filesystem to apply. */
     fsType?: string;
-    /** nodePublishSecretRef is a reference to the secret object containing sensitive information to pass to the CSI driver to complete the CSI NodePublishVolume and NodeUnpublishVolume calls. This field is optional, and  may be empty if no secret is required. If the secret object contains more than one secret, all secret references are passed. */
+    /** NodePublishSecretRef is a reference to the secret object containing sensitive information to pass to the CSI driver to complete the CSI NodePublishVolume and NodeUnpublishVolume calls. This field is optional, and  may be empty if no secret is required. If the secret object contains more than one secret, all secret references are passed. */
     nodePublishSecretRef?: LocalObjectReference;
-    /** readOnly specifies a read-only configuration for the volume. Defaults to false (read/write). */
+    /** Specifies a read-only configuration for the volume. Defaults to false (read/write). */
     readOnly?: boolean;
-    /** volumeAttributes stores driver-specific properties that are passed to the CSI driver. Consult your driver's documentation for supported values. */
+    /** VolumeAttributes stores driver-specific properties that are passed to the CSI driver. Consult your driver's documentation for supported values. */
     volumeAttributes?: {[name: string]: string};
 }
 
@@ -132,57 +132,57 @@ export interface Capabilities {
 
 /** Represents a Ceph Filesystem mount that lasts the lifetime of a pod Cephfs volumes do not support ownership management or SELinux relabeling. */
 export interface CephFSPersistentVolumeSource {
-    /** monitors is Required: Monitors is a collection of Ceph monitors More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it */
+    /** Required: Monitors is a collection of Ceph monitors More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it */
     monitors: Array<string>;
-    /** path is Optional: Used as the mounted root, rather than the full Ceph tree, default is / */
+    /** Optional: Used as the mounted root, rather than the full Ceph tree, default is / */
     path?: string;
-    /** readOnly is Optional: Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it */
+    /** Optional: Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it */
     readOnly?: boolean;
-    /** secretFile is Optional: SecretFile is the path to key ring for User, default is /etc/ceph/user.secret More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it */
+    /** Optional: SecretFile is the path to key ring for User, default is /etc/ceph/user.secret More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it */
     secretFile?: string;
-    /** secretRef is Optional: SecretRef is reference to the authentication secret for User, default is empty. More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it */
+    /** Optional: SecretRef is reference to the authentication secret for User, default is empty. More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it */
     secretRef?: SecretReference;
-    /** user is Optional: User is the rados user name, default is admin More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it */
+    /** Optional: User is the rados user name, default is admin More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it */
     user?: string;
 }
 
 /** Represents a Ceph Filesystem mount that lasts the lifetime of a pod Cephfs volumes do not support ownership management or SELinux relabeling. */
 export interface CephFSVolumeSource {
-    /** monitors is Required: Monitors is a collection of Ceph monitors More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it */
+    /** Required: Monitors is a collection of Ceph monitors More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it */
     monitors: Array<string>;
-    /** path is Optional: Used as the mounted root, rather than the full Ceph tree, default is / */
+    /** Optional: Used as the mounted root, rather than the full Ceph tree, default is / */
     path?: string;
-    /** readOnly is Optional: Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it */
+    /** Optional: Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it */
     readOnly?: boolean;
-    /** secretFile is Optional: SecretFile is the path to key ring for User, default is /etc/ceph/user.secret More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it */
+    /** Optional: SecretFile is the path to key ring for User, default is /etc/ceph/user.secret More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it */
     secretFile?: string;
-    /** secretRef is Optional: SecretRef is reference to the authentication secret for User, default is empty. More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it */
+    /** Optional: SecretRef is reference to the authentication secret for User, default is empty. More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it */
     secretRef?: LocalObjectReference;
-    /** user is optional: User is the rados user name, default is admin More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it */
+    /** Optional: User is the rados user name, default is admin More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it */
     user?: string;
 }
 
 /** Represents a cinder volume resource in Openstack. A Cinder volume must exist before mounting to a container. The volume must also be in the same region as the kubelet. Cinder volumes support ownership management and SELinux relabeling. */
 export interface CinderPersistentVolumeSource {
-    /** fsType Filesystem type to mount. Must be a filesystem type supported by the host operating system. Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. More info: https://examples.k8s.io/mysql-cinder-pd/README.md */
+    /** Filesystem type to mount. Must be a filesystem type supported by the host operating system. Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. More info: https://examples.k8s.io/mysql-cinder-pd/README.md */
     fsType?: string;
-    /** readOnly is Optional: Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. More info: https://examples.k8s.io/mysql-cinder-pd/README.md */
+    /** Optional: Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. More info: https://examples.k8s.io/mysql-cinder-pd/README.md */
     readOnly?: boolean;
-    /** secretRef is Optional: points to a secret object containing parameters used to connect to OpenStack. */
+    /** Optional: points to a secret object containing parameters used to connect to OpenStack. */
     secretRef?: SecretReference;
-    /** volumeID used to identify the volume in cinder. More info: https://examples.k8s.io/mysql-cinder-pd/README.md */
+    /** volume id used to identify the volume in cinder. More info: https://examples.k8s.io/mysql-cinder-pd/README.md */
     volumeID: string;
 }
 
 /** Represents a cinder volume resource in Openstack. A Cinder volume must exist before mounting to a container. The volume must also be in the same region as the kubelet. Cinder volumes support ownership management and SELinux relabeling. */
 export interface CinderVolumeSource {
-    /** fsType is the filesystem type to mount. Must be a filesystem type supported by the host operating system. Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. More info: https://examples.k8s.io/mysql-cinder-pd/README.md */
+    /** Filesystem type to mount. Must be a filesystem type supported by the host operating system. Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. More info: https://examples.k8s.io/mysql-cinder-pd/README.md */
     fsType?: string;
-    /** readOnly defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. More info: https://examples.k8s.io/mysql-cinder-pd/README.md */
+    /** Optional: Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. More info: https://examples.k8s.io/mysql-cinder-pd/README.md */
     readOnly?: boolean;
-    /** secretRef is optional: points to a secret object containing parameters used to connect to OpenStack. */
+    /** Optional: points to a secret object containing parameters used to connect to OpenStack. */
     secretRef?: LocalObjectReference;
-    /** volumeID used to identify the volume in cinder. More info: https://examples.k8s.io/mysql-cinder-pd/README.md */
+    /** volume id used to identify the volume in cinder. More info: https://examples.k8s.io/mysql-cinder-pd/README.md */
     volumeID: string;
 }
 
@@ -278,7 +278,7 @@ export interface ConfigMapList extends Resource {
     metadata?: ListMeta;
 }
 
-/** ConfigMapNodeConfigSource contains the information to reference a ConfigMap as a config source for the Node. This API is deprecated since 1.22: https://git.k8s.io/enhancements/keps/sig-node/281-dynamic-kubelet-configuration */
+/** ConfigMapNodeConfigSource contains the information to reference a ConfigMap as a config source for the Node. */
 export interface ConfigMapNodeConfigSource {
     /** KubeletConfigKey declares which key of the referenced ConfigMap corresponds to the KubeletConfiguration structure This field is required in all cases. */
     kubeletConfigKey: string;
@@ -298,11 +298,11 @@ export interface ConfigMapNodeConfigSource {
  * The contents of the target ConfigMap's Data field will be presented in a projected volume as files using the keys in the Data field as the file names, unless the items element is populated with specific mappings of keys to paths. Note that this is identical to a configmap volume source without the default mode.
  */
 export interface ConfigMapProjection {
-    /** items if unspecified, each key-value pair in the Data field of the referenced ConfigMap will be projected into the volume as a file whose name is the key and content is the value. If specified, the listed keys will be projected into the specified paths, and unlisted keys will not be present. If a key is specified which is not present in the ConfigMap, the volume setup will error unless it is marked optional. Paths must be relative and may not contain the '..' path or start with '..'. */
+    /** If unspecified, each key-value pair in the Data field of the referenced ConfigMap will be projected into the volume as a file whose name is the key and content is the value. If specified, the listed keys will be projected into the specified paths, and unlisted keys will not be present. If a key is specified which is not present in the ConfigMap, the volume setup will error unless it is marked optional. Paths must be relative and may not contain the '..' path or start with '..'. */
     items?: Array<KeyToPath>;
     /** Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names */
     name?: string;
-    /** optional specify whether the ConfigMap or its keys must be defined */
+    /** Specify whether the ConfigMap or its keys must be defined */
     optional?: boolean;
 }
 
@@ -312,36 +312,29 @@ export interface ConfigMapProjection {
  * The contents of the target ConfigMap's Data field will be presented in a volume as files using the keys in the Data field as the file names, unless the items element is populated with specific mappings of keys to paths. ConfigMap volumes support ownership management and SELinux relabeling.
  */
 export interface ConfigMapVolumeSource {
-    /** defaultMode is optional: mode bits used to set permissions on created files by default. Must be an octal value between 0000 and 0777 or a decimal value between 0 and 511. YAML accepts both octal and decimal values, JSON requires decimal values for mode bits. Defaults to 0644. Directories within the path are not affected by this setting. This might be in conflict with other options that affect the file mode, like fsGroup, and the result can be other mode bits set. */
+    /** Optional: mode bits used to set permissions on created files by default. Must be an octal value between 0000 and 0777 or a decimal value between 0 and 511. YAML accepts both octal and decimal values, JSON requires decimal values for mode bits. Defaults to 0644. Directories within the path are not affected by this setting. This might be in conflict with other options that affect the file mode, like fsGroup, and the result can be other mode bits set. */
     defaultMode?: number;
-    /** items if unspecified, each key-value pair in the Data field of the referenced ConfigMap will be projected into the volume as a file whose name is the key and content is the value. If specified, the listed keys will be projected into the specified paths, and unlisted keys will not be present. If a key is specified which is not present in the ConfigMap, the volume setup will error unless it is marked optional. Paths must be relative and may not contain the '..' path or start with '..'. */
+    /** If unspecified, each key-value pair in the Data field of the referenced ConfigMap will be projected into the volume as a file whose name is the key and content is the value. If specified, the listed keys will be projected into the specified paths, and unlisted keys will not be present. If a key is specified which is not present in the ConfigMap, the volume setup will error unless it is marked optional. Paths must be relative and may not contain the '..' path or start with '..'. */
     items?: Array<KeyToPath>;
     /** Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names */
     name?: string;
-    /** optional specify whether the ConfigMap or its keys must be defined */
+    /** Specify whether the ConfigMap or its keys must be defined */
     optional?: boolean;
 }
 
 /** A single application container that you want to run within a pod. */
 export interface Container {
-    /** Arguments to the entrypoint. The container image's CMD is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container's environment. If a variable cannot be resolved, the reference in the input string will be unchanged. Double $$ are reduced to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e. "$$(VAR_NAME)" will produce the string literal "$(VAR_NAME)". Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell */
+    /** Arguments to the entrypoint. The docker image's CMD is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container's environment. If a variable cannot be resolved, the reference in the input string will be unchanged. The $(VAR_NAME) syntax can be escaped with a double $$, ie: $$(VAR_NAME). Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell */
     args?: Array<string>;
-    /** Entrypoint array. Not executed within a shell. The container image's ENTRYPOINT is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container's environment. If a variable cannot be resolved, the reference in the input string will be unchanged. Double $$ are reduced to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e. "$$(VAR_NAME)" will produce the string literal "$(VAR_NAME)". Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell */
+    /** Entrypoint array. Not executed within a shell. The docker image's ENTRYPOINT is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container's environment. If a variable cannot be resolved, the reference in the input string will be unchanged. The $(VAR_NAME) syntax can be escaped with a double $$, ie: $$(VAR_NAME). Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell */
     command?: Array<string>;
     /** List of environment variables to set in the container. Cannot be updated. */
     env?: Array<EnvVar>;
     /** List of sources to populate environment variables in the container. The keys defined within a source must be a C_IDENTIFIER. All invalid keys will be reported as an event when the container is starting. When a key exists in multiple sources, the value associated with the last source will take precedence. Values defined by an Env with a duplicate key will take precedence. Cannot be updated. */
     envFrom?: Array<EnvFromSource>;
-    /** Container image name. More info: https://kubernetes.io/docs/concepts/containers/images This field is optional to allow higher level config management to default or override container images in workload controllers like Deployments and StatefulSets. */
+    /** Docker image name. More info: https://kubernetes.io/docs/concepts/containers/images This field is optional to allow higher level config management to default or override container images in workload controllers like Deployments and StatefulSets. */
     image?: string;
-    /**
-     * Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always if :latest tag is specified, or IfNotPresent otherwise. Cannot be updated. More info: https://kubernetes.io/docs/concepts/containers/images#updating-images
-     *
-     * Possible enum values:
-     *  - `"Always"` means that kubelet always attempts to pull the latest image. Container will fail If the pull fails.
-     *  - `"IfNotPresent"` means that kubelet pulls if the image isn't present on disk. Container will fail if the image isn't present and the pull fails.
-     *  - `"Never"` means that kubelet never pulls an image, but only uses a local image. Container will fail if the image isn't present
-     */
+    /** Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always if :latest tag is specified, or IfNotPresent otherwise. Cannot be updated. More info: https://kubernetes.io/docs/concepts/containers/images#updating-images */
     imagePullPolicy?: string;
     /** Actions that the management system should take in response to container lifecycle events. Cannot be updated. */
     lifecycle?: Lifecycle;
@@ -355,7 +348,7 @@ export interface Container {
     readinessProbe?: Probe;
     /** Compute Resources required by this container. Cannot be updated. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/ */
     resources?: ResourceRequirements;
-    /** SecurityContext defines the security options the container should be run with. If set, the fields of SecurityContext override the equivalent fields of PodSecurityContext. More info: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/ */
+    /** Security options the pod should run with. More info: https://kubernetes.io/docs/concepts/policy/security-context/ More info: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/ */
     securityContext?: SecurityContext;
     /** StartupProbe indicates that the Pod has successfully initialized. If specified, no other probes are executed until this completes successfully. If this probe fails, the Pod will be restarted, just as if the livenessProbe failed. This can be used to provide different probe parameters at the beginning of a Pod's lifecycle, when it might take a long time to load data or warm a cache, than during steady-state operation. This cannot be updated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes */
     startupProbe?: Probe;
@@ -365,13 +358,7 @@ export interface Container {
     stdinOnce?: boolean;
     /** Optional: Path at which the file to which the container's termination message will be written is mounted into the container's filesystem. Message written is intended to be brief final status, such as an assertion failure message. Will be truncated by the node if greater than 4096 bytes. The total message length across all containers will be limited to 12kb. Defaults to /dev/termination-log. Cannot be updated. */
     terminationMessagePath?: string;
-    /**
-     * Indicate how the termination message should be populated. File will use the contents of terminationMessagePath to populate the container status message on both success and failure. FallbackToLogsOnError will use the last chunk of container log output if the termination message file is empty and the container exited with an error. The log output is limited to 2048 bytes or 80 lines, whichever is smaller. Defaults to File. Cannot be updated.
-     *
-     * Possible enum values:
-     *  - `"FallbackToLogsOnError"` will read the most recent contents of the container logs for the container status message when the container exits with an error and the terminationMessagePath has no contents.
-     *  - `"File"` is the default behavior and will set the container status message to the contents of the container's terminationMessagePath when the container exits.
-     */
+    /** Indicate how the termination message should be populated. File will use the contents of terminationMessagePath to populate the container status message on both success and failure. FallbackToLogsOnError will use the last chunk of container log output if the termination message file is empty and the container exited with an error. The log output is limited to 2048 bytes or 80 lines, whichever is smaller. Defaults to File. Cannot be updated. */
     terminationMessagePolicy?: string;
     /** Whether this container should allocate a TTY for itself, also requires 'stdin' to be true. Default is false. */
     tty?: boolean;
@@ -386,7 +373,7 @@ export interface Container {
 /** Describe a container image */
 export interface ContainerImage {
     /** Names by which this image is known. e.g. ["k8s.gcr.io/hyperkube:v1.0.7", "dockerhub.io/google_containers/hyperkube:v1.0.7"] */
-    names?: Array<string>;
+    names: Array<string>;
     /** The size of the image in bytes. */
     sizeBytes?: number;
 }
@@ -401,14 +388,7 @@ export interface ContainerPort {
     hostPort?: number;
     /** If specified, this must be an IANA_SVC_NAME and unique within the pod. Each named port in a pod must have a unique name. Name for the port that can be referred to by services. */
     name?: string;
-    /**
-     * Protocol for port. Must be UDP, TCP, or SCTP. Defaults to "TCP".
-     *
-     * Possible enum values:
-     *  - `"SCTP"` is the SCTP protocol.
-     *  - `"TCP"` is the TCP protocol.
-     *  - `"UDP"` is the UDP protocol.
-     */
+    /** Protocol for port. Must be UDP, TCP, or SCTP. Defaults to "TCP". */
     protocol?: string;
 }
 
@@ -430,7 +410,7 @@ export interface ContainerStateRunning {
 
 /** ContainerStateTerminated is a terminated state of a container. */
 export interface ContainerStateTerminated {
-    /** Container's ID in the format '<type>://<container_id>' */
+    /** Container's ID in the format 'docker://<container_id>' */
     containerID?: string;
     /** Exit status from the last termination of the container */
     exitCode: number;
@@ -456,9 +436,9 @@ export interface ContainerStateWaiting {
 
 /** ContainerStatus contains details for the current status of this container. */
 export interface ContainerStatus {
-    /** Container's ID in the format '<type>://<container_id>'. */
+    /** Container's ID in the format 'docker://<container_id>'. */
     containerID?: string;
-    /** The image the container is running. More info: https://kubernetes.io/docs/concepts/containers/images. */
+    /** The image the container is running. More info: https://kubernetes.io/docs/concepts/containers/images */
     image: string;
     /** ImageID of the container's image. */
     imageID: string;
@@ -468,7 +448,7 @@ export interface ContainerStatus {
     name: string;
     /** Specifies whether the container has passed its readiness probe. */
     ready: boolean;
-    /** The number of times the container has been restarted. */
+    /** The number of times the container has been restarted, currently based on the number of dead containers that have not yet been removed. Note that this is calculated from dead containers. But those containers are subject to garbage collection. This value will get capped at 5 by GC. */
     restartCount: number;
     /** Specifies whether the container has passed its startup probe. Initialized as false, becomes true after startupProbe is considered successful. Resets to false when the container is restarted, or if kubelet loses state temporarily. Is always true when no startupProbe is defined. */
     started?: boolean;
@@ -510,9 +490,9 @@ export interface DownwardAPIVolumeSource {
 
 /** Represents an empty directory for a pod. Empty directory volumes support ownership management and SELinux relabeling. */
 export interface EmptyDirVolumeSource {
-    /** medium represents what type of storage medium should back this directory. The default is "" which means to use the node's default medium. Must be an empty string (default) or Memory. More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir */
+    /** What type of storage medium should back this directory. The default is "" which means to use the node's default medium. Must be an empty string (default) or Memory. More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir */
     medium?: string;
-    /** sizeLimit is the total amount of local storage required for this EmptyDir volume. The size limit is also applicable for memory medium. The maximum usage on memory medium EmptyDir would be the minimum value between the SizeLimit specified here and the sum of memory limits of all containers in a pod. The default is nil which means that the limit is undefined. More info: http://kubernetes.io/docs/user-guide/volumes#emptydir */
+    /** Total amount of local storage required for this EmptyDir volume. The size limit is also applicable for memory medium. The maximum usage on memory medium EmptyDir would be the minimum value between the SizeLimit specified here and the sum of memory limits of all containers in a pod. The default is nil which means that the limit is undefined. More info: http://kubernetes.io/docs/user-guide/volumes#emptydir */
     sizeLimit?: Quantity;
 }
 
@@ -530,20 +510,13 @@ export interface EndpointAddress {
 
 /** EndpointPort is a tuple that describes a single port. */
 export interface EndpointPort {
-    /** The application protocol for this port. This field follows standard Kubernetes label syntax. Un-prefixed names are reserved for IANA standard service names (as per RFC-6335 and https://www.iana.org/assignments/service-names). Non-standard protocols should use prefixed names such as mycompany.com/my-custom-protocol. */
+    /** The application protocol for this port. This field follows standard Kubernetes label syntax. Un-prefixed names are reserved for IANA standard service names (as per RFC-6335 and http://www.iana.org/assignments/service-names). Non-standard protocols should use prefixed names such as mycompany.com/my-custom-protocol. This is a beta field that is guarded by the ServiceAppProtocol feature gate and enabled by default. */
     appProtocol?: string;
     /** The name of this port.  This must match the 'name' field in the corresponding ServicePort. Must be a DNS_LABEL. Optional only if one port is defined. */
     name?: string;
     /** The port number of the endpoint. */
     port: number;
-    /**
-     * The IP protocol for this port. Must be UDP, TCP, or SCTP. Default is TCP.
-     *
-     * Possible enum values:
-     *  - `"SCTP"` is the SCTP protocol.
-     *  - `"TCP"` is the TCP protocol.
-     *  - `"UDP"` is the UDP protocol.
-     */
+    /** The IP protocol for this port. Must be UDP, TCP, or SCTP. Default is TCP. */
     protocol?: string;
 }
 
@@ -617,7 +590,7 @@ export interface EnvFromSource {
 export interface EnvVar {
     /** Name of the environment variable. Must be a C_IDENTIFIER. */
     name: string;
-    /** Variable references $(VAR_NAME) are expanded using the previously defined environment variables in the container and any service environment variables. If a variable cannot be resolved, the reference in the input string will be unchanged. Double $$ are reduced to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e. "$$(VAR_NAME)" will produce the string literal "$(VAR_NAME)". Escaped references will never be expanded, regardless of whether the variable exists or not. Defaults to "". */
+    /** Variable references $(VAR_NAME) are expanded using the previous defined environment variables in the container and any service environment variables. If a variable cannot be resolved, the reference in the input string will be unchanged. The $(VAR_NAME) syntax can be escaped with a double $$, ie: $$(VAR_NAME). Escaped references will never be expanded, regardless of whether the variable exists or not. Defaults to "". */
     value?: string;
     /** Source for the environment variable's value. Cannot be used if value is not empty. */
     valueFrom?: EnvVarSource;
@@ -635,32 +608,19 @@ export interface EnvVarSource {
     secretKeyRef?: SecretKeySelector;
 }
 
-/**
- * An EphemeralContainer is a temporary container that you may add to an existing Pod for user-initiated activities such as debugging. Ephemeral containers have no resource or scheduling guarantees, and they will not be restarted when they exit or when a Pod is removed or restarted. The kubelet may evict a Pod if an ephemeral container causes the Pod to exceed its resource allocation.
- *
- * To add an ephemeral container, use the ephemeralcontainers subresource of an existing Pod. Ephemeral containers may not be removed or restarted.
- *
- * This is a beta feature available on clusters that haven't disabled the EphemeralContainers feature gate.
- */
+/** An EphemeralContainer is a container that may be added temporarily to an existing pod for user-initiated activities such as debugging. Ephemeral containers have no resource or scheduling guarantees, and they will not be restarted when they exit or when a pod is removed or restarted. If an ephemeral container causes a pod to exceed its resource allocation, the pod may be evicted. Ephemeral containers may not be added by directly updating the pod spec. They must be added via the pod's ephemeralcontainers subresource, and they will appear in the pod spec once added. This is an alpha feature enabled by the EphemeralContainers feature flag. */
 export interface EphemeralContainer {
-    /** Arguments to the entrypoint. The image's CMD is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container's environment. If a variable cannot be resolved, the reference in the input string will be unchanged. Double $$ are reduced to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e. "$$(VAR_NAME)" will produce the string literal "$(VAR_NAME)". Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell */
+    /** Arguments to the entrypoint. The docker image's CMD is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container's environment. If a variable cannot be resolved, the reference in the input string will be unchanged. The $(VAR_NAME) syntax can be escaped with a double $$, ie: $$(VAR_NAME). Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell */
     args?: Array<string>;
-    /** Entrypoint array. Not executed within a shell. The image's ENTRYPOINT is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container's environment. If a variable cannot be resolved, the reference in the input string will be unchanged. Double $$ are reduced to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e. "$$(VAR_NAME)" will produce the string literal "$(VAR_NAME)". Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell */
+    /** Entrypoint array. Not executed within a shell. The docker image's ENTRYPOINT is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container's environment. If a variable cannot be resolved, the reference in the input string will be unchanged. The $(VAR_NAME) syntax can be escaped with a double $$, ie: $$(VAR_NAME). Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell */
     command?: Array<string>;
     /** List of environment variables to set in the container. Cannot be updated. */
     env?: Array<EnvVar>;
     /** List of sources to populate environment variables in the container. The keys defined within a source must be a C_IDENTIFIER. All invalid keys will be reported as an event when the container is starting. When a key exists in multiple sources, the value associated with the last source will take precedence. Values defined by an Env with a duplicate key will take precedence. Cannot be updated. */
     envFrom?: Array<EnvFromSource>;
-    /** Container image name. More info: https://kubernetes.io/docs/concepts/containers/images */
+    /** Docker image name. More info: https://kubernetes.io/docs/concepts/containers/images */
     image?: string;
-    /**
-     * Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always if :latest tag is specified, or IfNotPresent otherwise. Cannot be updated. More info: https://kubernetes.io/docs/concepts/containers/images#updating-images
-     *
-     * Possible enum values:
-     *  - `"Always"` means that kubelet always attempts to pull the latest image. Container will fail If the pull fails.
-     *  - `"IfNotPresent"` means that kubelet pulls if the image isn't present on disk. Container will fail if the image isn't present and the pull fails.
-     *  - `"Never"` means that kubelet never pulls an image, but only uses a local image. Container will fail if the image isn't present
-     */
+    /** Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always if :latest tag is specified, or IfNotPresent otherwise. Cannot be updated. More info: https://kubernetes.io/docs/concepts/containers/images#updating-images */
     imagePullPolicy?: string;
     /** Lifecycle is not allowed for ephemeral containers. */
     lifecycle?: Lifecycle;
@@ -674,7 +634,7 @@ export interface EphemeralContainer {
     readinessProbe?: Probe;
     /** Resources are not allowed for ephemeral containers. Ephemeral containers use spare resources already allocated to the pod. */
     resources?: ResourceRequirements;
-    /** Optional: SecurityContext defines the security options the ephemeral container should be run with. If set, the fields of SecurityContext override the equivalent fields of PodSecurityContext. */
+    /** SecurityContext is not allowed for ephemeral containers. */
     securityContext?: SecurityContext;
     /** Probes are not allowed for ephemeral containers. */
     startupProbe?: Probe;
@@ -682,30 +642,31 @@ export interface EphemeralContainer {
     stdin?: boolean;
     /** Whether the container runtime should close the stdin channel after it has been opened by a single attach. When stdin is true the stdin stream will remain open across multiple attach sessions. If stdinOnce is set to true, stdin is opened on container start, is empty until the first client attaches to stdin, and then remains open and accepts data until the client disconnects, at which time stdin is closed and remains closed until the container is restarted. If this flag is false, a container processes that reads from stdin will never receive an EOF. Default is false */
     stdinOnce?: boolean;
-    /**
-     * If set, the name of the container from PodSpec that this ephemeral container targets. The ephemeral container will be run in the namespaces (IPC, PID, etc) of this container. If not set then the ephemeral container uses the namespaces configured in the Pod spec.
-     *
-     * The container runtime must implement support for this feature. If the runtime does not support namespace targeting then the result of setting this field is undefined.
-     */
+    /** If set, the name of the container from PodSpec that this ephemeral container targets. The ephemeral container will be run in the namespaces (IPC, PID, etc) of this container. If not set then the ephemeral container is run in whatever namespaces are shared for the pod. Note that the container runtime must support this feature. */
     targetContainerName?: string;
     /** Optional: Path at which the file to which the container's termination message will be written is mounted into the container's filesystem. Message written is intended to be brief final status, such as an assertion failure message. Will be truncated by the node if greater than 4096 bytes. The total message length across all containers will be limited to 12kb. Defaults to /dev/termination-log. Cannot be updated. */
     terminationMessagePath?: string;
-    /**
-     * Indicate how the termination message should be populated. File will use the contents of terminationMessagePath to populate the container status message on both success and failure. FallbackToLogsOnError will use the last chunk of container log output if the termination message file is empty and the container exited with an error. The log output is limited to 2048 bytes or 80 lines, whichever is smaller. Defaults to File. Cannot be updated.
-     *
-     * Possible enum values:
-     *  - `"FallbackToLogsOnError"` will read the most recent contents of the container logs for the container status message when the container exits with an error and the terminationMessagePath has no contents.
-     *  - `"File"` is the default behavior and will set the container status message to the contents of the container's terminationMessagePath when the container exits.
-     */
+    /** Indicate how the termination message should be populated. File will use the contents of terminationMessagePath to populate the container status message on both success and failure. FallbackToLogsOnError will use the last chunk of container log output if the termination message file is empty and the container exited with an error. The log output is limited to 2048 bytes or 80 lines, whichever is smaller. Defaults to File. Cannot be updated. */
     terminationMessagePolicy?: string;
     /** Whether this container should allocate a TTY for itself, also requires 'stdin' to be true. Default is false. */
     tty?: boolean;
     /** volumeDevices is the list of block devices to be used by the container. */
     volumeDevices?: Array<VolumeDevice>;
-    /** Pod volumes to mount into the container's filesystem. Subpath mounts are not allowed for ephemeral containers. Cannot be updated. */
+    /** Pod volumes to mount into the container's filesystem. Cannot be updated. */
     volumeMounts?: Array<VolumeMount>;
     /** Container's working directory. If not specified, the container runtime's default will be used, which might be configured in the container image. Cannot be updated. */
     workingDir?: string;
+}
+
+/** A list of ephemeral containers used with the Pod ephemeralcontainers subresource. */
+export interface EphemeralContainers extends Resource {
+    /** APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources */
+    apiVersion?: "v1";
+    /** A list of ephemeral containers associated with this pod. New ephemeral containers may be appended to this list, but existing ephemeral containers may not be removed or modified. */
+    ephemeralContainers: Array<EphemeralContainer>;
+    /** Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds */
+    kind?: "EphemeralContainers";
+    metadata?: ObjectMeta;
 }
 
 /** Represents an ephemeral volume that is handled by a normal storage driver. */
@@ -796,51 +757,51 @@ export interface ExecAction {
 
 /** Represents a Fibre Channel volume. Fibre Channel volumes can only be mounted as read/write once. Fibre Channel volumes support ownership management and SELinux relabeling. */
 export interface FCVolumeSource {
-    /** fsType is the filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. */
+    /** Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. */
     fsType?: string;
-    /** lun is Optional: FC target lun number */
+    /** Optional: FC target lun number */
     lun?: number;
-    /** readOnly is Optional: Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. */
+    /** Optional: Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. */
     readOnly?: boolean;
-    /** targetWWNs is Optional: FC target worldwide names (WWNs) */
+    /** Optional: FC target worldwide names (WWNs) */
     targetWWNs?: Array<string>;
-    /** wwids Optional: FC volume world wide identifiers (wwids) Either wwids or combination of targetWWNs and lun must be set, but not both simultaneously. */
+    /** Optional: FC volume world wide identifiers (wwids) Either wwids or combination of targetWWNs and lun must be set, but not both simultaneously. */
     wwids?: Array<string>;
 }
 
 /** FlexPersistentVolumeSource represents a generic persistent volume resource that is provisioned/attached using an exec based plugin. */
 export interface FlexPersistentVolumeSource {
-    /** driver is the name of the driver to use for this volume. */
+    /** Driver is the name of the driver to use for this volume. */
     driver: string;
-    /** fsType is the Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". The default filesystem depends on FlexVolume script. */
+    /** Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". The default filesystem depends on FlexVolume script. */
     fsType?: string;
-    /** options is Optional: this field holds extra command options if any. */
+    /** Optional: Extra command options if any. */
     options?: {[name: string]: string};
-    /** readOnly is Optional: defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. */
+    /** Optional: Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. */
     readOnly?: boolean;
-    /** secretRef is Optional: SecretRef is reference to the secret object containing sensitive information to pass to the plugin scripts. This may be empty if no secret object is specified. If the secret object contains more than one secret, all secrets are passed to the plugin scripts. */
+    /** Optional: SecretRef is reference to the secret object containing sensitive information to pass to the plugin scripts. This may be empty if no secret object is specified. If the secret object contains more than one secret, all secrets are passed to the plugin scripts. */
     secretRef?: SecretReference;
 }
 
 /** FlexVolume represents a generic volume resource that is provisioned/attached using an exec based plugin. */
 export interface FlexVolumeSource {
-    /** driver is the name of the driver to use for this volume. */
+    /** Driver is the name of the driver to use for this volume. */
     driver: string;
-    /** fsType is the filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". The default filesystem depends on FlexVolume script. */
+    /** Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". The default filesystem depends on FlexVolume script. */
     fsType?: string;
-    /** options is Optional: this field holds extra command options if any. */
+    /** Optional: Extra command options if any. */
     options?: {[name: string]: string};
-    /** readOnly is Optional: defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. */
+    /** Optional: Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. */
     readOnly?: boolean;
-    /** secretRef is Optional: secretRef is reference to the secret object containing sensitive information to pass to the plugin scripts. This may be empty if no secret object is specified. If the secret object contains more than one secret, all secrets are passed to the plugin scripts. */
+    /** Optional: SecretRef is reference to the secret object containing sensitive information to pass to the plugin scripts. This may be empty if no secret object is specified. If the secret object contains more than one secret, all secrets are passed to the plugin scripts. */
     secretRef?: LocalObjectReference;
 }
 
 /** Represents a Flocker volume mounted by the Flocker agent. One and only one of datasetName and datasetUUID should be set. Flocker volumes do not support ownership management or SELinux relabeling. */
 export interface FlockerVolumeSource {
-    /** datasetName is Name of the dataset stored as metadata -> name on the dataset for Flocker should be considered as deprecated */
+    /** Name of the dataset stored as metadata -> name on the dataset for Flocker should be considered as deprecated */
     datasetName?: string;
-    /** datasetUUID is the UUID of the dataset. This is unique identifier of a Flocker dataset */
+    /** UUID of the dataset. This is unique identifier of a Flocker dataset */
     datasetUUID?: string;
 }
 
@@ -850,25 +811,14 @@ export interface FlockerVolumeSource {
  * A GCE PD must exist before mounting to a container. The disk must also be in the same GCE project and zone as the kubelet. A GCE PD can only be mounted as read/write once or read-only many times. GCE PDs support ownership management and SELinux relabeling.
  */
 export interface GCEPersistentDiskVolumeSource {
-    /** fsType is filesystem type of the volume that you want to mount. Tip: Ensure that the filesystem type is supported by the host operating system. Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. More info: https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk */
+    /** Filesystem type of the volume that you want to mount. Tip: Ensure that the filesystem type is supported by the host operating system. Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. More info: https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk */
     fsType?: string;
-    /** partition is the partition in the volume that you want to mount. If omitted, the default is to mount by volume name. Examples: For volume /dev/sda1, you specify the partition as "1". Similarly, the volume partition for /dev/sda is "0" (or you can leave the property empty). More info: https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk */
+    /** The partition in the volume that you want to mount. If omitted, the default is to mount by volume name. Examples: For volume /dev/sda1, you specify the partition as "1". Similarly, the volume partition for /dev/sda is "0" (or you can leave the property empty). More info: https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk */
     partition?: number;
-    /** pdName is unique name of the PD resource in GCE. Used to identify the disk in GCE. More info: https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk */
+    /** Unique name of the PD resource in GCE. Used to identify the disk in GCE. More info: https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk */
     pdName: string;
-    /** readOnly here will force the ReadOnly setting in VolumeMounts. Defaults to false. More info: https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk */
+    /** ReadOnly here will force the ReadOnly setting in VolumeMounts. Defaults to false. More info: https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk */
     readOnly?: boolean;
-}
-
-export interface GRPCAction {
-    /** Port number of the gRPC service. Number must be in the range 1 to 65535. */
-    port: number;
-    /**
-     * Service is the name of the service to place in the gRPC HealthCheckRequest (see https://github.com/grpc/grpc/blob/master/doc/health-checking.md).
-     *
-     * If this is not specified, the default behavior is defined by gRPC.
-     */
-    service?: string;
 }
 
 /**
@@ -877,33 +827,33 @@ export interface GRPCAction {
  * DEPRECATED: GitRepo is deprecated. To provision a container with a git repo, mount an EmptyDir into an InitContainer that clones the repo using git, then mount the EmptyDir into the Pod's container.
  */
 export interface GitRepoVolumeSource {
-    /** directory is the target directory name. Must not contain or start with '..'.  If '.' is supplied, the volume directory will be the git repository.  Otherwise, if specified, the volume will contain the git repository in the subdirectory with the given name. */
+    /** Target directory name. Must not contain or start with '..'.  If '.' is supplied, the volume directory will be the git repository.  Otherwise, if specified, the volume will contain the git repository in the subdirectory with the given name. */
     directory?: string;
-    /** repository is the URL */
+    /** Repository URL */
     repository: string;
-    /** revision is the commit hash for the specified revision. */
+    /** Commit hash for the specified revision. */
     revision?: string;
 }
 
 /** Represents a Glusterfs mount that lasts the lifetime of a pod. Glusterfs volumes do not support ownership management or SELinux relabeling. */
 export interface GlusterfsPersistentVolumeSource {
-    /** endpoints is the endpoint name that details Glusterfs topology. More info: https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod */
+    /** EndpointsName is the endpoint name that details Glusterfs topology. More info: https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod */
     endpoints: string;
-    /** endpointsNamespace is the namespace that contains Glusterfs endpoint. If this field is empty, the EndpointNamespace defaults to the same namespace as the bound PVC. More info: https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod */
+    /** EndpointsNamespace is the namespace that contains Glusterfs endpoint. If this field is empty, the EndpointNamespace defaults to the same namespace as the bound PVC. More info: https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod */
     endpointsNamespace?: string;
-    /** path is the Glusterfs volume path. More info: https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod */
+    /** Path is the Glusterfs volume path. More info: https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod */
     path: string;
-    /** readOnly here will force the Glusterfs volume to be mounted with read-only permissions. Defaults to false. More info: https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod */
+    /** ReadOnly here will force the Glusterfs volume to be mounted with read-only permissions. Defaults to false. More info: https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod */
     readOnly?: boolean;
 }
 
 /** Represents a Glusterfs mount that lasts the lifetime of a pod. Glusterfs volumes do not support ownership management or SELinux relabeling. */
 export interface GlusterfsVolumeSource {
-    /** endpoints is the endpoint name that details Glusterfs topology. More info: https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod */
+    /** EndpointsName is the endpoint name that details Glusterfs topology. More info: https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod */
     endpoints: string;
-    /** path is the Glusterfs volume path. More info: https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod */
+    /** Path is the Glusterfs volume path. More info: https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod */
     path: string;
-    /** readOnly here will force the Glusterfs volume to be mounted with read-only permissions. Defaults to false. More info: https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod */
+    /** ReadOnly here will force the Glusterfs volume to be mounted with read-only permissions. Defaults to false. More info: https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod */
     readOnly?: boolean;
 }
 
@@ -917,13 +867,7 @@ export interface HTTPGetAction {
     path?: string;
     /** Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME. */
     port: number | string;
-    /**
-     * Scheme to use for connecting to the host. Defaults to HTTP.
-     *
-     * Possible enum values:
-     *  - `"HTTP"` means that the scheme used will be http://
-     *  - `"HTTPS"` means that the scheme used will be https://
-     */
+    /** Scheme to use for connecting to the host. Defaults to HTTP. */
     scheme?: string;
 }
 
@@ -933,6 +877,16 @@ export interface HTTPHeader {
     name: string;
     /** The header field value */
     value: string;
+}
+
+/** Handler defines a specific action that should be taken */
+export interface Handler {
+    /** One and only one of the following should be specified. Exec specifies the action to take. */
+    exec?: ExecAction;
+    /** HTTPGet specifies the http request to perform. */
+    httpGet?: HTTPGetAction;
+    /** TCPSocket specifies an action involving a TCP port. TCP hooks not yet supported */
+    tcpSocket?: TCPSocketAction;
 }
 
 /** HostAlias holds the mapping between IP and hostnames that will be injected as an entry in the pod's hosts file. */
@@ -945,90 +899,80 @@ export interface HostAlias {
 
 /** Represents a host path mapped into a pod. Host path volumes do not support ownership management or SELinux relabeling. */
 export interface HostPathVolumeSource {
-    /** path of the directory on the host. If the path is a symlink, it will follow the link to the real path. More info: https://kubernetes.io/docs/concepts/storage/volumes#hostpath */
+    /** Path of the directory on the host. If the path is a symlink, it will follow the link to the real path. More info: https://kubernetes.io/docs/concepts/storage/volumes#hostpath */
     path: string;
-    /** type for HostPath Volume Defaults to "" More info: https://kubernetes.io/docs/concepts/storage/volumes#hostpath */
+    /** Type for HostPath Volume Defaults to "" More info: https://kubernetes.io/docs/concepts/storage/volumes#hostpath */
     type?: string;
 }
 
 /** ISCSIPersistentVolumeSource represents an ISCSI disk. ISCSI volumes can only be mounted as read/write once. ISCSI volumes support ownership management and SELinux relabeling. */
 export interface ISCSIPersistentVolumeSource {
-    /** chapAuthDiscovery defines whether support iSCSI Discovery CHAP authentication */
+    /** whether support iSCSI Discovery CHAP authentication */
     chapAuthDiscovery?: boolean;
-    /** chapAuthSession defines whether support iSCSI Session CHAP authentication */
+    /** whether support iSCSI Session CHAP authentication */
     chapAuthSession?: boolean;
-    /** fsType is the filesystem type of the volume that you want to mount. Tip: Ensure that the filesystem type is supported by the host operating system. Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. More info: https://kubernetes.io/docs/concepts/storage/volumes#iscsi */
+    /** Filesystem type of the volume that you want to mount. Tip: Ensure that the filesystem type is supported by the host operating system. Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. More info: https://kubernetes.io/docs/concepts/storage/volumes#iscsi */
     fsType?: string;
-    /** initiatorName is the custom iSCSI Initiator Name. If initiatorName is specified with iscsiInterface simultaneously, new iSCSI interface <target portal>:<volume name> will be created for the connection. */
+    /** Custom iSCSI Initiator Name. If initiatorName is specified with iscsiInterface simultaneously, new iSCSI interface <target portal>:<volume name> will be created for the connection. */
     initiatorName?: string;
-    /** iqn is Target iSCSI Qualified Name. */
+    /** Target iSCSI Qualified Name. */
     iqn: string;
-    /** iscsiInterface is the interface Name that uses an iSCSI transport. Defaults to 'default' (tcp). */
+    /** iSCSI Interface Name that uses an iSCSI transport. Defaults to 'default' (tcp). */
     iscsiInterface?: string;
-    /** lun is iSCSI Target Lun number. */
+    /** iSCSI Target Lun number. */
     lun: number;
-    /** portals is the iSCSI Target Portal List. The Portal is either an IP or ip_addr:port if the port is other than default (typically TCP ports 860 and 3260). */
+    /** iSCSI Target Portal List. The Portal is either an IP or ip_addr:port if the port is other than default (typically TCP ports 860 and 3260). */
     portals?: Array<string>;
-    /** readOnly here will force the ReadOnly setting in VolumeMounts. Defaults to false. */
+    /** ReadOnly here will force the ReadOnly setting in VolumeMounts. Defaults to false. */
     readOnly?: boolean;
-    /** secretRef is the CHAP Secret for iSCSI target and initiator authentication */
+    /** CHAP Secret for iSCSI target and initiator authentication */
     secretRef?: SecretReference;
-    /** targetPortal is iSCSI Target Portal. The Portal is either an IP or ip_addr:port if the port is other than default (typically TCP ports 860 and 3260). */
+    /** iSCSI Target Portal. The Portal is either an IP or ip_addr:port if the port is other than default (typically TCP ports 860 and 3260). */
     targetPortal: string;
 }
 
 /** Represents an ISCSI disk. ISCSI volumes can only be mounted as read/write once. ISCSI volumes support ownership management and SELinux relabeling. */
 export interface ISCSIVolumeSource {
-    /** chapAuthDiscovery defines whether support iSCSI Discovery CHAP authentication */
+    /** whether support iSCSI Discovery CHAP authentication */
     chapAuthDiscovery?: boolean;
-    /** chapAuthSession defines whether support iSCSI Session CHAP authentication */
+    /** whether support iSCSI Session CHAP authentication */
     chapAuthSession?: boolean;
-    /** fsType is the filesystem type of the volume that you want to mount. Tip: Ensure that the filesystem type is supported by the host operating system. Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. More info: https://kubernetes.io/docs/concepts/storage/volumes#iscsi */
+    /** Filesystem type of the volume that you want to mount. Tip: Ensure that the filesystem type is supported by the host operating system. Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. More info: https://kubernetes.io/docs/concepts/storage/volumes#iscsi */
     fsType?: string;
-    /** initiatorName is the custom iSCSI Initiator Name. If initiatorName is specified with iscsiInterface simultaneously, new iSCSI interface <target portal>:<volume name> will be created for the connection. */
+    /** Custom iSCSI Initiator Name. If initiatorName is specified with iscsiInterface simultaneously, new iSCSI interface <target portal>:<volume name> will be created for the connection. */
     initiatorName?: string;
-    /** iqn is the target iSCSI Qualified Name. */
+    /** Target iSCSI Qualified Name. */
     iqn: string;
-    /** iscsiInterface is the interface Name that uses an iSCSI transport. Defaults to 'default' (tcp). */
+    /** iSCSI Interface Name that uses an iSCSI transport. Defaults to 'default' (tcp). */
     iscsiInterface?: string;
-    /** lun represents iSCSI Target Lun number. */
+    /** iSCSI Target Lun number. */
     lun: number;
-    /** portals is the iSCSI Target Portal List. The portal is either an IP or ip_addr:port if the port is other than default (typically TCP ports 860 and 3260). */
+    /** iSCSI Target Portal List. The portal is either an IP or ip_addr:port if the port is other than default (typically TCP ports 860 and 3260). */
     portals?: Array<string>;
-    /** readOnly here will force the ReadOnly setting in VolumeMounts. Defaults to false. */
+    /** ReadOnly here will force the ReadOnly setting in VolumeMounts. Defaults to false. */
     readOnly?: boolean;
-    /** secretRef is the CHAP Secret for iSCSI target and initiator authentication */
+    /** CHAP Secret for iSCSI target and initiator authentication */
     secretRef?: LocalObjectReference;
-    /** targetPortal is iSCSI Target Portal. The Portal is either an IP or ip_addr:port if the port is other than default (typically TCP ports 860 and 3260). */
+    /** iSCSI Target Portal. The Portal is either an IP or ip_addr:port if the port is other than default (typically TCP ports 860 and 3260). */
     targetPortal: string;
 }
 
 /** Maps a string key to a path within a volume. */
 export interface KeyToPath {
-    /** key is the key to project. */
+    /** The key to project. */
     key: string;
-    /** mode is Optional: mode bits used to set permissions on this file. Must be an octal value between 0000 and 0777 or a decimal value between 0 and 511. YAML accepts both octal and decimal values, JSON requires decimal values for mode bits. If not specified, the volume defaultMode will be used. This might be in conflict with other options that affect the file mode, like fsGroup, and the result can be other mode bits set. */
+    /** Optional: mode bits used to set permissions on this file. Must be an octal value between 0000 and 0777 or a decimal value between 0 and 511. YAML accepts both octal and decimal values, JSON requires decimal values for mode bits. If not specified, the volume defaultMode will be used. This might be in conflict with other options that affect the file mode, like fsGroup, and the result can be other mode bits set. */
     mode?: number;
-    /** path is the relative path of the file to map the key to. May not be an absolute path. May not contain the path element '..'. May not start with the string '..'. */
+    /** The relative path of the file to map the key to. May not be an absolute path. May not contain the path element '..'. May not start with the string '..'. */
     path: string;
 }
 
 /** Lifecycle describes actions that the management system should take in response to container lifecycle events. For the PostStart and PreStop lifecycle handlers, management of the container blocks until the action is complete, unless the container process fails, in which case the handler is aborted. */
 export interface Lifecycle {
     /** PostStart is called immediately after a container is created. If the handler fails, the container is terminated and restarted according to its restart policy. Other management of the container blocks until the hook completes. More info: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks */
-    postStart?: LifecycleHandler;
-    /** PreStop is called immediately before a container is terminated due to an API request or management event such as liveness/startup probe failure, preemption, resource contention, etc. The handler is not called if the container crashes or exits. The Pod's termination grace period countdown begins before the PreStop hook is executed. Regardless of the outcome of the handler, the container will eventually terminate within the Pod's termination grace period (unless delayed by finalizers). Other management of the container blocks until the hook completes or until the termination grace period is reached. More info: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks */
-    preStop?: LifecycleHandler;
-}
-
-/** LifecycleHandler defines a specific action that should be taken in a lifecycle hook. One and only one of the fields, except TCPSocket must be specified. */
-export interface LifecycleHandler {
-    /** Exec specifies the action to take. */
-    exec?: ExecAction;
-    /** HTTPGet specifies the http request to perform. */
-    httpGet?: HTTPGetAction;
-    /** Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept for the backward compatibility. There are no validation of this field and lifecycle hooks will fail in runtime when tcp handler is specified. */
-    tcpSocket?: TCPSocketAction;
+    postStart?: Handler;
+    /** PreStop is called immediately before a container is terminated due to an API request or management event such as liveness/startup probe failure, preemption, resource contention, etc. The handler is not called if the container crashes or exits. The reason for termination is passed to the handler. The Pod's termination grace period countdown begins before the PreStop hooked is executed. Regardless of the outcome of the handler, the container will eventually terminate within the Pod's termination grace period. Other management of the container blocks until the hook completes or until the termination grace period is reached. More info: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks */
+    preStop?: Handler;
 }
 
 /** LimitRange sets resource usage limits for each kind of resource in a Namespace. */
@@ -1055,14 +999,7 @@ export interface LimitRangeItem {
     maxLimitRequestRatio?: {[name: string]: Quantity};
     /** Min usage constraints on this kind by resource name. */
     min?: {[name: string]: Quantity};
-    /**
-     * Type of resource that this limit applies to.
-     *
-     * Possible enum values:
-     *  - `"Container"` Limit that applies to all containers in a namespace
-     *  - `"PersistentVolumeClaim"` Limit that applies to all persistent volume claims in a namespace
-     *  - `"Pod"` Limit that applies to all pods in a namespace
-     */
+    /** Type of resource that this limit applies to. */
     type: string;
 }
 
@@ -1108,19 +1045,19 @@ export interface LocalObjectReference {
 
 /** Local represents directly-attached storage with node affinity (Beta feature) */
 export interface LocalVolumeSource {
-    /** fsType is the filesystem type to mount. It applies only when the Path is a block device. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". The default value is to auto-select a filesystem if unspecified. */
+    /** Filesystem type to mount. It applies only when the Path is a block device. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". The default value is to auto-select a fileystem if unspecified. */
     fsType?: string;
-    /** path of the full path to the volume on the node. It can be either a directory or block device (disk, partition, ...). */
+    /** The full path to the volume on the node. It can be either a directory or block device (disk, partition, ...). */
     path: string;
 }
 
 /** Represents an NFS mount that lasts the lifetime of a pod. NFS volumes do not support ownership management or SELinux relabeling. */
 export interface NFSVolumeSource {
-    /** path that is exported by the NFS server. More info: https://kubernetes.io/docs/concepts/storage/volumes#nfs */
+    /** Path that is exported by the NFS server. More info: https://kubernetes.io/docs/concepts/storage/volumes#nfs */
     path: string;
-    /** readOnly here will force the NFS export to be mounted with read-only permissions. Defaults to false. More info: https://kubernetes.io/docs/concepts/storage/volumes#nfs */
+    /** ReadOnly here will force the NFS export to be mounted with read-only permissions. Defaults to false. More info: https://kubernetes.io/docs/concepts/storage/volumes#nfs */
     readOnly?: boolean;
-    /** server is the hostname or IP address of the NFS server. More info: https://kubernetes.io/docs/concepts/storage/volumes#nfs */
+    /** Server is the hostname or IP address of the NFS server. More info: https://kubernetes.io/docs/concepts/storage/volumes#nfs */
     server: string;
 }
 
@@ -1145,16 +1082,7 @@ export interface NamespaceCondition {
     reason?: string;
     /** Status of the condition, one of True, False, Unknown. */
     status: string;
-    /**
-     * Type of namespace controller condition.
-     *
-     * Possible enum values:
-     *  - `"NamespaceContentRemaining"` contains information about resources remaining in a namespace.
-     *  - `"NamespaceDeletionContentFailure"` contains information about namespace deleter errors during deletion of resources.
-     *  - `"NamespaceDeletionDiscoveryFailure"` contains information about namespace deleter errors during resource discovery.
-     *  - `"NamespaceDeletionGroupVersionParsingFailure"` contains information about namespace deleter errors parsing GV for legacy types.
-     *  - `"NamespaceFinalizersRemaining"` contains information about which finalizers are on resources remaining in a namespace.
-     */
+    /** Type of namespace controller condition. */
     type: string;
 }
 
@@ -1180,13 +1108,7 @@ export interface NamespaceSpec {
 export interface NamespaceStatus {
     /** Represents the latest available observations of a namespace's current state. */
     conditions?: Array<NamespaceCondition>;
-    /**
-     * Phase is the current lifecycle phase of the namespace. More info: https://kubernetes.io/docs/tasks/administer-cluster/namespaces/
-     *
-     * Possible enum values:
-     *  - `"Active"` means the namespace is available for use in the system
-     *  - `"Terminating"` means the namespace is undergoing graceful termination
-     */
+    /** Phase is the current lifecycle phase of the namespace. More info: https://kubernetes.io/docs/tasks/administer-cluster/namespaces/ */
     phase?: string;
 }
 
@@ -1208,16 +1130,7 @@ export interface Node extends Resource {
 export interface NodeAddress {
     /** The node address. */
     address: string;
-    /**
-     * Node address type, one of Hostname, ExternalIP or InternalIP.
-     *
-     * Possible enum values:
-     *  - `"ExternalDNS"` identifies a DNS name which resolves to an IP address which has the characteristics of a NodeExternalIP. The IP it resolves to may or may not be a listed NodeExternalIP address.
-     *  - `"ExternalIP"` identifies an IP address which is, in some way, intended to be more usable from outside the cluster then an internal IP, though no specific semantics are defined. It may be a globally routable IP, though it is not required to be. External IPs may be assigned directly to an interface on the node, like a NodeInternalIP, or alternatively, packets sent to the external IP may be NAT'ed to an internal node IP rather than being delivered directly (making the IP less efficient for node-to-node traffic than a NodeInternalIP).
-     *  - `"Hostname"` identifies a name of the node. Although every node can be assumed to have a NodeAddress of this type, its exact syntax and semantics are not defined, and are not consistent between different clusters.
-     *  - `"InternalDNS"` identifies a DNS name which resolves to an IP address which has the characteristics of a NodeInternalIP. The IP it resolves to may or may not be a listed NodeInternalIP address.
-     *  - `"InternalIP"` identifies an IP address which is assigned to one of the node's network interfaces. Every node should have at least one address of this type. An internal IP is normally expected to be reachable from every other node, but may not be visible to hosts outside the cluster. By default it is assumed that kube-apiserver can reach node internal IPs, though it is possible to configure clusters where this is not the case. NodeInternalIP is the default type of node IP, and does not necessarily imply that the IP is ONLY reachable internally. If a node has multiple internal IPs, no specific semantics are assigned to the additional IPs.
-     */
+    /** Node address type, one of Hostname, ExternalIP or InternalIP. */
     type: string;
 }
 
@@ -1241,20 +1154,11 @@ export interface NodeCondition {
     reason?: string;
     /** Status of the condition, one of True, False, Unknown. */
     status: string;
-    /**
-     * Type of node condition.
-     *
-     * Possible enum values:
-     *  - `"DiskPressure"` means the kubelet is under pressure due to insufficient available disk.
-     *  - `"MemoryPressure"` means the kubelet is under pressure due to insufficient available memory.
-     *  - `"NetworkUnavailable"` means that network for the node is not correctly configured.
-     *  - `"PIDPressure"` means the kubelet is under pressure due to insufficient available PID.
-     *  - `"Ready"` means kubelet is healthy and ready to accept pods.
-     */
+    /** Type of node condition. */
     type: string;
 }
 
-/** NodeConfigSource specifies a source of node configuration. Exactly one subfield (excluding metadata) must be non-nil. This API is deprecated since 1.22 */
+/** NodeConfigSource specifies a source of node configuration. Exactly one subfield (excluding metadata) must be non-nil. */
 export interface NodeConfigSource {
     /** ConfigMap is a reference to a Node's ConfigMap */
     configMap?: ConfigMapNodeConfigSource;
@@ -1300,17 +1204,7 @@ export interface NodeSelector {
 export interface NodeSelectorRequirement {
     /** The label key that the selector applies to. */
     key: string;
-    /**
-     * Represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
-     *
-     * Possible enum values:
-     *  - `"DoesNotExist"`
-     *  - `"Exists"`
-     *  - `"Gt"`
-     *  - `"In"`
-     *  - `"Lt"`
-     *  - `"NotIn"`
-     */
+    /** Represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt. */
     operator: string;
     /** An array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. If the operator is Gt or Lt, the values array must have a single element, which will be interpreted as an integer. This array is replaced during a strategic merge patch. */
     values?: Array<string>;
@@ -1326,7 +1220,7 @@ export interface NodeSelectorTerm {
 
 /** NodeSpec describes the attributes that a node is created with. */
 export interface NodeSpec {
-    /** Deprecated: Previously used to specify the source of the node's configuration for the DynamicKubeletConfig feature. This feature is removed from Kubelets as of 1.24 and will be fully removed in 1.26. */
+    /** If specified, the source to get node configuration from The DynamicKubeletConfig feature gate must be enabled for the Kubelet to use this field */
     configSource?: NodeConfigSource;
     /** Deprecated. Not all kubelets will set this field. Remove field after 1.13. see: https://issues.k8s.io/61966 */
     externalID?: string;
@@ -1360,14 +1254,7 @@ export interface NodeStatus {
     images?: Array<ContainerImage>;
     /** Set of ids/uuids to uniquely identify the node. More info: https://kubernetes.io/docs/concepts/nodes/node/#info */
     nodeInfo?: NodeSystemInfo;
-    /**
-     * NodePhase is the recently observed lifecycle phase of the node. More info: https://kubernetes.io/docs/concepts/nodes/node/#phase The field is never populated, and now is deprecated.
-     *
-     * Possible enum values:
-     *  - `"Pending"` means the node has been created/added by the system, but not configured.
-     *  - `"Running"` means the node has been configured and has Kubernetes components running.
-     *  - `"Terminated"` means the node has been removed from the cluster.
-     */
+    /** NodePhase is the recently observed lifecycle phase of the node. More info: https://kubernetes.io/docs/concepts/nodes/node/#phase The field is never populated, and now is deprecated. */
     phase?: string;
     /** List of volumes that are attached to the node. */
     volumesAttached?: Array<AttachedVolume>;
@@ -1433,9 +1320,9 @@ export interface PersistentVolume extends Resource {
     kind?: "PersistentVolume";
     /** Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata */
     metadata?: ObjectMeta;
-    /** spec defines a specification of a persistent volume owned by the cluster. Provisioned by an administrator. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistent-volumes */
+    /** Spec defines a specification of a persistent volume owned by the cluster. Provisioned by an administrator. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistent-volumes */
     spec?: PersistentVolumeSpec;
-    /** status represents the current information/status for the persistent volume. Populated by the system. Read-only. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistent-volumes */
+    /** Status represents the current information/status for the persistent volume. Populated by the system. Read-only. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistent-volumes */
     readonly status?: PersistentVolumeStatus;
 }
 
@@ -1447,30 +1334,23 @@ export interface PersistentVolumeClaim extends Resource {
     kind?: "PersistentVolumeClaim";
     /** Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata */
     metadata?: ObjectMeta;
-    /** spec defines the desired characteristics of a volume requested by a pod author. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims */
+    /** Spec defines the desired characteristics of a volume requested by a pod author. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims */
     spec?: PersistentVolumeClaimSpec;
-    /** status represents the current information/status of a persistent volume claim. Read-only. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims */
+    /** Status represents the current information/status of a persistent volume claim. Read-only. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims */
     readonly status?: PersistentVolumeClaimStatus;
 }
 
 /** PersistentVolumeClaimCondition contails details about state of pvc */
 export interface PersistentVolumeClaimCondition {
-    /** lastProbeTime is the time we probed the condition. */
+    /** Last time we probed the condition. */
     lastProbeTime?: Time;
-    /** lastTransitionTime is the time the condition transitioned from one status to another. */
+    /** Last time the condition transitioned from one status to another. */
     lastTransitionTime?: Time;
-    /** message is the human-readable message indicating details about last transition. */
+    /** Human-readable message indicating details about last transition. */
     message?: string;
-    /** reason is a unique, this should be a short, machine understandable string that gives the reason for condition's last transition. If it reports "ResizeStarted" that means the underlying persistent volume is being resized. */
+    /** Unique, this should be a short, machine understandable string that gives the reason for condition's last transition. If it reports "ResizeStarted" that means the underlying persistent volume is being resized. */
     reason?: string;
     status: string;
-    /**
-     *
-     *
-     * Possible enum values:
-     *  - `"FileSystemResizePending"` - controller resize is finished and a file system resize is pending on node
-     *  - `"Resizing"` - a user trigger resize of pvc has been started
-     */
     type: string;
 }
 
@@ -1478,7 +1358,7 @@ export interface PersistentVolumeClaimCondition {
 export interface PersistentVolumeClaimList extends Resource {
     /** APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources */
     apiVersion?: "v1";
-    /** items is a list of persistent volume claims. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims */
+    /** A list of persistent volume claims. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims */
     items: Array<PersistentVolumeClaim>;
     /** Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds */
     kind?: "PersistentVolumeClaimList";
@@ -1488,52 +1368,32 @@ export interface PersistentVolumeClaimList extends Resource {
 
 /** PersistentVolumeClaimSpec describes the common attributes of storage devices and allows a Source for provider-specific attributes */
 export interface PersistentVolumeClaimSpec {
-    /** accessModes contains the desired access modes the volume should have. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1 */
+    /** AccessModes contains the desired access modes the volume should have. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1 */
     accessModes?: Array<string>;
-    /** dataSource field can be used to specify either: * An existing VolumeSnapshot object (snapshot.storage.k8s.io/VolumeSnapshot) * An existing PVC (PersistentVolumeClaim) If the provisioner or an external controller can support the specified data source, it will create a new volume based on the contents of the specified data source. If the AnyVolumeDataSource feature gate is enabled, this field will always have the same contents as the DataSourceRef field. */
+    /** This field can be used to specify either: * An existing VolumeSnapshot object (snapshot.storage.k8s.io/VolumeSnapshot) * An existing PVC (PersistentVolumeClaim) * An existing custom resource that implements data population (Alpha) In order to use custom resource types that implement data population, the AnyVolumeDataSource feature gate must be enabled. If the provisioner or an external controller can support the specified data source, it will create a new volume based on the contents of the specified data source. */
     dataSource?: TypedLocalObjectReference;
-    /**
-     * dataSourceRef specifies the object from which to populate the volume with data, if a non-empty volume is desired. This may be any local object from a non-empty API group (non core object) or a PersistentVolumeClaim object. When this field is specified, volume binding will only succeed if the type of the specified object matches some installed volume populator or dynamic provisioner. This field will replace the functionality of the DataSource field and as such if both fields are non-empty, they must have the same value. For backwards compatibility, both fields (DataSource and DataSourceRef) will be set to the same value automatically if one of them is empty and the other is non-empty. There are two important differences between DataSource and DataSourceRef: * While DataSource only allows two specific types of objects, DataSourceRef
-     *   allows any non-core object, as well as PersistentVolumeClaim objects.
-     * * While DataSource ignores disallowed values (dropping them), DataSourceRef
-     *   preserves all values, and generates an error if a disallowed value is
-     *   specified.
-     * (Alpha) Using this field requires the AnyVolumeDataSource feature gate to be enabled.
-     */
-    dataSourceRef?: TypedLocalObjectReference;
-    /** resources represents the minimum resources the volume should have. If RecoverVolumeExpansionFailure feature is enabled users are allowed to specify resource requirements that are lower than previous value but must still be higher than capacity recorded in the status field of the claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources */
+    /** Resources represents the minimum resources the volume should have. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources */
     resources?: ResourceRequirements;
-    /** selector is a label query over volumes to consider for binding. */
+    /** A label query over volumes to consider for binding. */
     selector?: LabelSelector;
-    /** storageClassName is the name of the StorageClass required by the claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#class-1 */
+    /** Name of the StorageClass required by the claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#class-1 */
     storageClassName?: string;
     /** volumeMode defines what type of volume is required by the claim. Value of Filesystem is implied when not included in claim spec. */
     volumeMode?: string;
-    /** volumeName is the binding reference to the PersistentVolume backing this claim. */
+    /** VolumeName is the binding reference to the PersistentVolume backing this claim. */
     volumeName?: string;
 }
 
 /** PersistentVolumeClaimStatus is the current status of a persistent volume claim. */
 export interface PersistentVolumeClaimStatus {
-    /** accessModes contains the actual access modes the volume backing the PVC has. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1 */
+    /** AccessModes contains the actual access modes the volume backing the PVC has. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1 */
     accessModes?: Array<string>;
-    /** allocatedResources is the storage resource within AllocatedResources tracks the capacity allocated to a PVC. It may be larger than the actual capacity when a volume expansion operation is requested. For storage quota, the larger value from allocatedResources and PVC.spec.resources is used. If allocatedResources is not set, PVC.spec.resources alone is used for quota calculation. If a volume expansion capacity request is lowered, allocatedResources is only lowered if there are no expansion operations in progress and if the actual volume capacity is equal or lower than the requested capacity. This is an alpha field and requires enabling RecoverVolumeExpansionFailure feature. */
-    allocatedResources?: {[name: string]: Quantity};
-    /** capacity represents the actual resources of the underlying volume. */
+    /** Represents the actual resources of the underlying volume. */
     capacity?: {[name: string]: Quantity};
-    /** conditions is the current Condition of persistent volume claim. If underlying persistent volume is being resized then the Condition will be set to 'ResizeStarted'. */
+    /** Current Condition of persistent volume claim. If underlying persistent volume is being resized then the Condition will be set to 'ResizeStarted'. */
     conditions?: Array<PersistentVolumeClaimCondition>;
-    /**
-     * phase represents the current phase of PersistentVolumeClaim.
-     *
-     * Possible enum values:
-     *  - `"Bound"` used for PersistentVolumeClaims that are bound
-     *  - `"Lost"` used for PersistentVolumeClaims that lost their underlying PersistentVolume. The claim was bound to a PersistentVolume and this volume does not exist any longer and all data on it was lost.
-     *  - `"Pending"` used for PersistentVolumeClaims that are not yet bound
-     */
+    /** Phase represents the current phase of PersistentVolumeClaim. */
     phase?: string;
-    /** resizeStatus stores status of resize operation. ResizeStatus is not set by default but when expansion is complete resizeStatus is set to empty string by resize controller or kubelet. This is an alpha field and requires enabling RecoverVolumeExpansionFailure feature. */
-    resizeStatus?: string;
 }
 
 /** PersistentVolumeClaimTemplate is used to produce PersistentVolumeClaim objects as part of an EphemeralVolumeSource. */
@@ -1546,9 +1406,9 @@ export interface PersistentVolumeClaimTemplate {
 
 /** PersistentVolumeClaimVolumeSource references the user's PVC in the same namespace. This volume finds the bound PV and mounts that volume for the pod. A PersistentVolumeClaimVolumeSource is, essentially, a wrapper around another type of volume that is owned by someone else (the system). */
 export interface PersistentVolumeClaimVolumeSource {
-    /** claimName is the name of a PersistentVolumeClaim in the same namespace as the pod using this volume. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims */
+    /** ClaimName is the name of a PersistentVolumeClaim in the same namespace as the pod using this volume. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims */
     claimName: string;
-    /** readOnly Will force the ReadOnly setting in VolumeMounts. Default false. */
+    /** Will force the ReadOnly setting in VolumeMounts. Default false. */
     readOnly?: boolean;
 }
 
@@ -1556,7 +1416,7 @@ export interface PersistentVolumeClaimVolumeSource {
 export interface PersistentVolumeList extends Resource {
     /** APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources */
     apiVersion?: "v1";
-    /** items is a list of persistent volumes. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes */
+    /** List of persistent volumes. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes */
     items: Array<PersistentVolume>;
     /** Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds */
     kind?: "PersistentVolumeList";
@@ -1566,99 +1426,83 @@ export interface PersistentVolumeList extends Resource {
 
 /** PersistentVolumeSpec is the specification of a persistent volume. */
 export interface PersistentVolumeSpec {
-    /** accessModes contains all ways the volume can be mounted. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes */
+    /** AccessModes contains all ways the volume can be mounted. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes */
     accessModes?: Array<string>;
-    /** awsElasticBlockStore represents an AWS Disk resource that is attached to a kubelet's host machine and then exposed to the pod. More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore */
+    /** AWSElasticBlockStore represents an AWS Disk resource that is attached to a kubelet's host machine and then exposed to the pod. More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore */
     awsElasticBlockStore?: AWSElasticBlockStoreVolumeSource;
-    /** azureDisk represents an Azure Data Disk mount on the host and bind mount to the pod. */
+    /** AzureDisk represents an Azure Data Disk mount on the host and bind mount to the pod. */
     azureDisk?: AzureDiskVolumeSource;
-    /** azureFile represents an Azure File Service mount on the host and bind mount to the pod. */
+    /** AzureFile represents an Azure File Service mount on the host and bind mount to the pod. */
     azureFile?: AzureFilePersistentVolumeSource;
-    /** capacity is the description of the persistent volume's resources and capacity. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity */
+    /** A description of the persistent volume's resources and capacity. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity */
     capacity?: {[name: string]: Quantity};
-    /** cephFS represents a Ceph FS mount on the host that shares a pod's lifetime */
+    /** CephFS represents a Ceph FS mount on the host that shares a pod's lifetime */
     cephfs?: CephFSPersistentVolumeSource;
-    /** cinder represents a cinder volume attached and mounted on kubelets host machine. More info: https://examples.k8s.io/mysql-cinder-pd/README.md */
+    /** Cinder represents a cinder volume attached and mounted on kubelets host machine. More info: https://examples.k8s.io/mysql-cinder-pd/README.md */
     cinder?: CinderPersistentVolumeSource;
-    /** claimRef is part of a bi-directional binding between PersistentVolume and PersistentVolumeClaim. Expected to be non-nil when bound. claim.VolumeName is the authoritative bind between PV and PVC. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#binding */
+    /** ClaimRef is part of a bi-directional binding between PersistentVolume and PersistentVolumeClaim. Expected to be non-nil when bound. claim.VolumeName is the authoritative bind between PV and PVC. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#binding */
     claimRef?: ObjectReference;
-    /** csi represents storage that is handled by an external CSI driver (Beta feature). */
+    /** CSI represents storage that is handled by an external CSI driver (Beta feature). */
     csi?: CSIPersistentVolumeSource;
-    /** fc represents a Fibre Channel resource that is attached to a kubelet's host machine and then exposed to the pod. */
+    /** FC represents a Fibre Channel resource that is attached to a kubelet's host machine and then exposed to the pod. */
     fc?: FCVolumeSource;
-    /** flexVolume represents a generic volume resource that is provisioned/attached using an exec based plugin. */
+    /** FlexVolume represents a generic volume resource that is provisioned/attached using an exec based plugin. */
     flexVolume?: FlexPersistentVolumeSource;
-    /** flocker represents a Flocker volume attached to a kubelet's host machine and exposed to the pod for its usage. This depends on the Flocker control service being running */
+    /** Flocker represents a Flocker volume attached to a kubelet's host machine and exposed to the pod for its usage. This depends on the Flocker control service being running */
     flocker?: FlockerVolumeSource;
-    /** gcePersistentDisk represents a GCE Disk resource that is attached to a kubelet's host machine and then exposed to the pod. Provisioned by an admin. More info: https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk */
+    /** GCEPersistentDisk represents a GCE Disk resource that is attached to a kubelet's host machine and then exposed to the pod. Provisioned by an admin. More info: https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk */
     gcePersistentDisk?: GCEPersistentDiskVolumeSource;
-    /** glusterfs represents a Glusterfs volume that is attached to a host and exposed to the pod. Provisioned by an admin. More info: https://examples.k8s.io/volumes/glusterfs/README.md */
+    /** Glusterfs represents a Glusterfs volume that is attached to a host and exposed to the pod. Provisioned by an admin. More info: https://examples.k8s.io/volumes/glusterfs/README.md */
     glusterfs?: GlusterfsPersistentVolumeSource;
-    /** hostPath represents a directory on the host. Provisioned by a developer or tester. This is useful for single-node development and testing only! On-host storage is not supported in any way and WILL NOT WORK in a multi-node cluster. More info: https://kubernetes.io/docs/concepts/storage/volumes#hostpath */
+    /** HostPath represents a directory on the host. Provisioned by a developer or tester. This is useful for single-node development and testing only! On-host storage is not supported in any way and WILL NOT WORK in a multi-node cluster. More info: https://kubernetes.io/docs/concepts/storage/volumes#hostpath */
     hostPath?: HostPathVolumeSource;
-    /** iscsi represents an ISCSI Disk resource that is attached to a kubelet's host machine and then exposed to the pod. Provisioned by an admin. */
+    /** ISCSI represents an ISCSI Disk resource that is attached to a kubelet's host machine and then exposed to the pod. Provisioned by an admin. */
     iscsi?: ISCSIPersistentVolumeSource;
-    /** local represents directly-attached storage with node affinity */
+    /** Local represents directly-attached storage with node affinity */
     local?: LocalVolumeSource;
-    /** mountOptions is the list of mount options, e.g. ["ro", "soft"]. Not validated - mount will simply fail if one is invalid. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#mount-options */
+    /** A list of mount options, e.g. ["ro", "soft"]. Not validated - mount will simply fail if one is invalid. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#mount-options */
     mountOptions?: Array<string>;
-    /** nfs represents an NFS mount on the host. Provisioned by an admin. More info: https://kubernetes.io/docs/concepts/storage/volumes#nfs */
+    /** NFS represents an NFS mount on the host. Provisioned by an admin. More info: https://kubernetes.io/docs/concepts/storage/volumes#nfs */
     nfs?: NFSVolumeSource;
-    /** nodeAffinity defines constraints that limit what nodes this volume can be accessed from. This field influences the scheduling of pods that use this volume. */
+    /** NodeAffinity defines constraints that limit what nodes this volume can be accessed from. This field influences the scheduling of pods that use this volume. */
     nodeAffinity?: VolumeNodeAffinity;
-    /**
-     * persistentVolumeReclaimPolicy defines what happens to a persistent volume when released from its claim. Valid options are Retain (default for manually created PersistentVolumes), Delete (default for dynamically provisioned PersistentVolumes), and Recycle (deprecated). Recycle must be supported by the volume plugin underlying this PersistentVolume. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#reclaiming
-     *
-     * Possible enum values:
-     *  - `"Delete"` means the volume will be deleted from Kubernetes on release from its claim. The volume plugin must support Deletion.
-     *  - `"Recycle"` means the volume will be recycled back into the pool of unbound persistent volumes on release from its claim. The volume plugin must support Recycling.
-     *  - `"Retain"` means the volume will be left in its current phase (Released) for manual reclamation by the administrator. The default policy is Retain.
-     */
+    /** What happens to a persistent volume when released from its claim. Valid options are Retain (default for manually created PersistentVolumes), Delete (default for dynamically provisioned PersistentVolumes), and Recycle (deprecated). Recycle must be supported by the volume plugin underlying this PersistentVolume. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#reclaiming */
     persistentVolumeReclaimPolicy?: string;
-    /** photonPersistentDisk represents a PhotonController persistent disk attached and mounted on kubelets host machine */
+    /** PhotonPersistentDisk represents a PhotonController persistent disk attached and mounted on kubelets host machine */
     photonPersistentDisk?: PhotonPersistentDiskVolumeSource;
-    /** portworxVolume represents a portworx volume attached and mounted on kubelets host machine */
+    /** PortworxVolume represents a portworx volume attached and mounted on kubelets host machine */
     portworxVolume?: PortworxVolumeSource;
-    /** quobyte represents a Quobyte mount on the host that shares a pod's lifetime */
+    /** Quobyte represents a Quobyte mount on the host that shares a pod's lifetime */
     quobyte?: QuobyteVolumeSource;
-    /** rbd represents a Rados Block Device mount on the host that shares a pod's lifetime. More info: https://examples.k8s.io/volumes/rbd/README.md */
+    /** RBD represents a Rados Block Device mount on the host that shares a pod's lifetime. More info: https://examples.k8s.io/volumes/rbd/README.md */
     rbd?: RBDPersistentVolumeSource;
-    /** scaleIO represents a ScaleIO persistent volume attached and mounted on Kubernetes nodes. */
+    /** ScaleIO represents a ScaleIO persistent volume attached and mounted on Kubernetes nodes. */
     scaleIO?: ScaleIOPersistentVolumeSource;
-    /** storageClassName is the name of StorageClass to which this persistent volume belongs. Empty value means that this volume does not belong to any StorageClass. */
+    /** Name of StorageClass to which this persistent volume belongs. Empty value means that this volume does not belong to any StorageClass. */
     storageClassName?: string;
-    /** storageOS represents a StorageOS volume that is attached to the kubelet's host machine and mounted into the pod More info: https://examples.k8s.io/volumes/storageos/README.md */
+    /** StorageOS represents a StorageOS volume that is attached to the kubelet's host machine and mounted into the pod More info: https://examples.k8s.io/volumes/storageos/README.md */
     storageos?: StorageOSPersistentVolumeSource;
     /** volumeMode defines if a volume is intended to be used with a formatted filesystem or to remain in raw block state. Value of Filesystem is implied when not included in spec. */
     volumeMode?: string;
-    /** vsphereVolume represents a vSphere volume attached and mounted on kubelets host machine */
+    /** VsphereVolume represents a vSphere volume attached and mounted on kubelets host machine */
     vsphereVolume?: VsphereVirtualDiskVolumeSource;
 }
 
 /** PersistentVolumeStatus is the current status of a persistent volume. */
 export interface PersistentVolumeStatus {
-    /** message is a human-readable message indicating details about why the volume is in this state. */
+    /** A human-readable message indicating details about why the volume is in this state. */
     message?: string;
-    /**
-     * phase indicates if a volume is available, bound to a claim, or released by a claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#phase
-     *
-     * Possible enum values:
-     *  - `"Available"` used for PersistentVolumes that are not yet bound Available volumes are held by the binder and matched to PersistentVolumeClaims
-     *  - `"Bound"` used for PersistentVolumes that are bound
-     *  - `"Failed"` used for PersistentVolumes that failed to be correctly recycled or deleted after being released from a claim
-     *  - `"Pending"` used for PersistentVolumes that are not available
-     *  - `"Released"` used for PersistentVolumes where the bound PersistentVolumeClaim was deleted released volumes must be recycled before becoming available again this phase is used by the persistent volume claim binder to signal to another process to reclaim the resource
-     */
+    /** Phase indicates if a volume is available, bound to a claim, or released by a claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#phase */
     phase?: string;
-    /** reason is a brief CamelCase string that describes any failure and is meant for machine parsing and tidy display in the CLI. */
+    /** Reason is a brief CamelCase string that describes any failure and is meant for machine parsing and tidy display in the CLI. */
     reason?: string;
 }
 
 /** Represents a Photon Controller persistent disk resource. */
 export interface PhotonPersistentDiskVolumeSource {
-    /** fsType is the filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. */
+    /** Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. */
     fsType?: string;
-    /** pdID is the ID that identifies Photon Controller persistent disk */
+    /** ID that identifies Photon Controller persistent disk */
     pdID: string;
 }
 
@@ -1688,7 +1532,7 @@ export interface PodAffinity {
 export interface PodAffinityTerm {
     /** A label query over a set of resources, in this case pods. */
     labelSelector?: LabelSelector;
-    /** A label query over the set of namespaces that the term applies to. The term is applied to the union of the namespaces selected by this field and the ones listed in the namespaces field. null selector and null or empty namespaces list means "this pod's namespace". An empty selector ({}) matches all namespaces. This field is beta-level and is only honored when PodAffinityNamespaceSelector feature is enabled. */
+    /** A label query over the set of namespaces that the term applies to. The term is applied to the union of the namespaces selected by this field and the ones listed in the namespaces field. null selector and null or empty namespaces list means "this pod's namespace". An empty selector ({}) matches all namespaces. This field is alpha-level and is only honored when PodAffinityNamespaceSelector feature is enabled. */
     namespaceSelector?: LabelSelector;
     /** namespaces specifies a static list of namespace names that the term applies to. The term is applied to the union of the namespaces listed in this field and the ones selected by namespaceSelector. null or empty namespaces list and null namespaceSelector means "this pod's namespace" */
     namespaces?: Array<string>;
@@ -1716,15 +1560,7 @@ export interface PodCondition {
     reason?: string;
     /** Status is the status of the condition. Can be True, False, Unknown. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions */
     status: string;
-    /**
-     * Type is the type of the condition. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions
-     *
-     * Possible enum values:
-     *  - `"ContainersReady"` indicates whether all containers in the pod are ready.
-     *  - `"Initialized"` means that all init containers in the pod have started successfully.
-     *  - `"PodScheduled"` represents status of the scheduling process for this pod.
-     *  - `"Ready"` means the pod is able to service requests and should be added to the load balancing pools of all matching services.
-     */
+    /** Type is the type of the condition. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions */
     type: string;
 }
 
@@ -1766,23 +1602,9 @@ export interface PodList extends Resource {
     metadata?: ListMeta;
 }
 
-/** PodOS defines the OS parameters of a pod. */
-export interface PodOS {
-    /** Name is the name of the operating system. The currently supported values are linux and windows. Additional value may be defined in future and can be one of: https://github.com/opencontainers/runtime-spec/blob/master/config.md#platform-specific-configuration Clients should expect to handle additional values and treat unrecognized values in this field as os: null */
-    name: string;
-}
-
 /** PodReadinessGate contains the reference to a pod condition */
 export interface PodReadinessGate {
-    /**
-     * ConditionType refers to a condition in the pod's condition list with matching type.
-     *
-     * Possible enum values:
-     *  - `"ContainersReady"` indicates whether all containers in the pod are ready.
-     *  - `"Initialized"` means that all init containers in the pod have started successfully.
-     *  - `"PodScheduled"` represents status of the scheduling process for this pod.
-     *  - `"Ready"` means the pod is able to service requests and should be added to the load balancing pools of all matching services.
-     */
+    /** ConditionType refers to a condition in the pod's condition list with matching type. */
     conditionType: string;
 }
 
@@ -1793,26 +1615,26 @@ export interface PodSecurityContext {
      *
      * 1. The owning GID will be the FSGroup 2. The setgid bit is set (new files created in the volume will be owned by FSGroup) 3. The permission bits are OR'd with rw-rw----
      *
-     * If unset, the Kubelet will not modify the ownership and permissions of any volume. Note that this field cannot be set when spec.os.name is windows.
+     * If unset, the Kubelet will not modify the ownership and permissions of any volume.
      */
     fsGroup?: number;
-    /** fsGroupChangePolicy defines behavior of changing ownership and permission of the volume before being exposed inside Pod. This field will only apply to volume types which support fsGroup based ownership(and permissions). It will have no effect on ephemeral volume types such as: secret, configmaps and emptydir. Valid values are "OnRootMismatch" and "Always". If not specified, "Always" is used. Note that this field cannot be set when spec.os.name is windows. */
+    /** fsGroupChangePolicy defines behavior of changing ownership and permission of the volume before being exposed inside Pod. This field will only apply to volume types which support fsGroup based ownership(and permissions). It will have no effect on ephemeral volume types such as: secret, configmaps and emptydir. Valid values are "OnRootMismatch" and "Always". If not specified, "Always" is used. */
     fsGroupChangePolicy?: string;
-    /** The GID to run the entrypoint of the container process. Uses runtime default if unset. May also be set in SecurityContext.  If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence for that container. Note that this field cannot be set when spec.os.name is windows. */
+    /** The GID to run the entrypoint of the container process. Uses runtime default if unset. May also be set in SecurityContext.  If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence for that container. */
     runAsGroup?: number;
     /** Indicates that the container must run as a non-root user. If true, the Kubelet will validate the image at runtime to ensure that it does not run as UID 0 (root) and fail to start the container if it does. If unset or false, no such validation will be performed. May also be set in SecurityContext.  If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence. */
     runAsNonRoot?: boolean;
-    /** The UID to run the entrypoint of the container process. Defaults to user specified in image metadata if unspecified. May also be set in SecurityContext.  If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence for that container. Note that this field cannot be set when spec.os.name is windows. */
+    /** The UID to run the entrypoint of the container process. Defaults to user specified in image metadata if unspecified. May also be set in SecurityContext.  If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence for that container. */
     runAsUser?: number;
-    /** The SELinux context to be applied to all containers. If unspecified, the container runtime will allocate a random SELinux context for each container.  May also be set in SecurityContext.  If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence for that container. Note that this field cannot be set when spec.os.name is windows. */
+    /** The SELinux context to be applied to all containers. If unspecified, the container runtime will allocate a random SELinux context for each container.  May also be set in SecurityContext.  If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence for that container. */
     seLinuxOptions?: SELinuxOptions;
-    /** The seccomp options to use by the containers in this pod. Note that this field cannot be set when spec.os.name is windows. */
+    /** The seccomp options to use by the containers in this pod. */
     seccompProfile?: SeccompProfile;
-    /** A list of groups applied to the first process run in each container, in addition to the container's primary GID.  If unspecified, no groups will be added to any container. Note that this field cannot be set when spec.os.name is windows. */
+    /** A list of groups applied to the first process run in each container, in addition to the container's primary GID.  If unspecified, no groups will be added to any container. */
     supplementalGroups?: Array<number>;
-    /** Sysctls hold a list of namespaced sysctls used for the pod. Pods with unsupported sysctls (by the container runtime) might fail to launch. Note that this field cannot be set when spec.os.name is windows. */
+    /** Sysctls hold a list of namespaced sysctls used for the pod. Pods with unsupported sysctls (by the container runtime) might fail to launch. */
     sysctls?: Array<Sysctl>;
-    /** The Windows specific settings applied to all containers. If unspecified, the options within a container's SecurityContext will be used. If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence. Note that this field cannot be set when spec.os.name is linux. */
+    /** The Windows specific settings applied to all containers. If unspecified, the options within a container's SecurityContext will be used. If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence. */
     windowsOptions?: WindowsSecurityContextOptions;
 }
 
@@ -1828,19 +1650,11 @@ export interface PodSpec {
     containers: Array<Container>;
     /** Specifies the DNS parameters of a pod. Parameters specified here will be merged to the generated DNS configuration based on DNSPolicy. */
     dnsConfig?: PodDNSConfig;
-    /**
-     * Set DNS policy for the pod. Defaults to "ClusterFirst". Valid values are 'ClusterFirstWithHostNet', 'ClusterFirst', 'Default' or 'None'. DNS parameters given in DNSConfig will be merged with the policy selected with DNSPolicy. To have DNS options set along with hostNetwork, you have to specify DNS policy explicitly to 'ClusterFirstWithHostNet'.
-     *
-     * Possible enum values:
-     *  - `"ClusterFirst"` indicates that the pod should use cluster DNS first unless hostNetwork is true, if it is available, then fall back on the default (as determined by kubelet) DNS settings.
-     *  - `"ClusterFirstWithHostNet"` indicates that the pod should use cluster DNS first, if it is available, then fall back on the default (as determined by kubelet) DNS settings.
-     *  - `"Default"` indicates that the pod should use the default (as determined by kubelet) DNS settings.
-     *  - `"None"` indicates that the pod should use empty DNS settings. DNS parameters such as nameservers and search paths should be defined via DNSConfig.
-     */
+    /** Set DNS policy for the pod. Defaults to "ClusterFirst". Valid values are 'ClusterFirstWithHostNet', 'ClusterFirst', 'Default' or 'None'. DNS parameters given in DNSConfig will be merged with the policy selected with DNSPolicy. To have DNS options set along with hostNetwork, you have to specify DNS policy explicitly to 'ClusterFirstWithHostNet'. */
     dnsPolicy?: string;
     /** EnableServiceLinks indicates whether information about services should be injected into pod's environment variables, matching the syntax of Docker links. Optional: Defaults to true. */
     enableServiceLinks?: boolean;
-    /** List of ephemeral containers run in this pod. Ephemeral containers may be run in an existing pod to perform user-initiated actions such as debugging. This list cannot be specified when creating a pod, and it cannot be modified by updating the pod spec. In order to add an ephemeral container to an existing pod, use the pod's ephemeralcontainers subresource. This field is beta-level and available on clusters that haven't disabled the EphemeralContainers feature gate. */
+    /** List of ephemeral containers run in this pod. Ephemeral containers may be run in an existing pod to perform user-initiated actions such as debugging. This list cannot be specified when creating a pod, and it cannot be modified by updating the pod spec. In order to add an ephemeral container to an existing pod, use the pod's ephemeralcontainers subresource. This field is alpha-level and is only honored by servers that enable the EphemeralContainers feature. */
     ephemeralContainers?: Array<EphemeralContainer>;
     /** HostAliases is an optional list of hosts and IPs that will be injected into the pod's hosts file if specified. This is only valid for non-hostNetwork pods. */
     hostAliases?: Array<HostAlias>;
@@ -1860,34 +1674,19 @@ export interface PodSpec {
     nodeName?: string;
     /** NodeSelector is a selector which must be true for the pod to fit on a node. Selector which must match a node's labels for the pod to be scheduled on that node. More info: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/ */
     nodeSelector?: {[name: string]: string};
-    /**
-     * Specifies the OS of the containers in the pod. Some pod and container fields are restricted if this is set.
-     *
-     * If the OS field is set to linux, the following fields must be unset: -securityContext.windowsOptions
-     *
-     * If the OS field is set to windows, following fields must be unset: - spec.hostPID - spec.hostIPC - spec.securityContext.seLinuxOptions - spec.securityContext.seccompProfile - spec.securityContext.fsGroup - spec.securityContext.fsGroupChangePolicy - spec.securityContext.sysctls - spec.shareProcessNamespace - spec.securityContext.runAsUser - spec.securityContext.runAsGroup - spec.securityContext.supplementalGroups - spec.containers[*].securityContext.seLinuxOptions - spec.containers[*].securityContext.seccompProfile - spec.containers[*].securityContext.capabilities - spec.containers[*].securityContext.readOnlyRootFilesystem - spec.containers[*].securityContext.privileged - spec.containers[*].securityContext.allowPrivilegeEscalation - spec.containers[*].securityContext.procMount - spec.containers[*].securityContext.runAsUser - spec.containers[*].securityContext.runAsGroup This is an alpha field and requires the IdentifyPodOS feature
-     */
-    os?: PodOS;
-    /** Overhead represents the resource overhead associated with running a pod for a given RuntimeClass. This field will be autopopulated at admission time by the RuntimeClass admission controller. If the RuntimeClass admission controller is enabled, overhead must not be set in Pod create requests. The RuntimeClass admission controller will reject Pod create requests which have the overhead already set. If RuntimeClass is configured and selected in the PodSpec, Overhead will be set to the value defined in the corresponding RuntimeClass, otherwise it will remain unset and treated as zero. More info: https://git.k8s.io/enhancements/keps/sig-node/688-pod-overhead/README.md This field is beta-level as of Kubernetes v1.18, and is only honored by servers that enable the PodOverhead feature. */
+    /** Overhead represents the resource overhead associated with running a pod for a given RuntimeClass. This field will be autopopulated at admission time by the RuntimeClass admission controller. If the RuntimeClass admission controller is enabled, overhead must not be set in Pod create requests. The RuntimeClass admission controller will reject Pod create requests which have the overhead already set. If RuntimeClass is configured and selected in the PodSpec, Overhead will be set to the value defined in the corresponding RuntimeClass, otherwise it will remain unset and treated as zero. More info: https://git.k8s.io/enhancements/keps/sig-node/20190226-pod-overhead.md This field is alpha-level as of Kubernetes v1.16, and is only honored by servers that enable the PodOverhead feature. */
     overhead?: {[name: string]: Quantity};
-    /** PreemptionPolicy is the Policy for preempting pods with lower priority. One of Never, PreemptLowerPriority. Defaults to PreemptLowerPriority if unset. */
+    /** PreemptionPolicy is the Policy for preempting pods with lower priority. One of Never, PreemptLowerPriority. Defaults to PreemptLowerPriority if unset. This field is beta-level, gated by the NonPreemptingPriority feature-gate. */
     preemptionPolicy?: string;
     /** The priority value. Various system components use this field to find the priority of the pod. When Priority Admission Controller is enabled, it prevents users from setting this field. The admission controller populates this field from PriorityClassName. The higher the value, the higher the priority. */
     priority?: number;
     /** If specified, indicates the pod's priority. "system-node-critical" and "system-cluster-critical" are two special keywords which indicate the highest priorities with the former being the highest priority. Any other name must be defined by creating a PriorityClass object with that name. If not specified, the pod priority will be default or zero if there is no default. */
     priorityClassName?: string;
-    /** If specified, all readiness gates will be evaluated for pod readiness. A pod is ready when all its containers are ready AND all conditions specified in the readiness gates have status equal to "True" More info: https://git.k8s.io/enhancements/keps/sig-network/580-pod-readiness-gates */
+    /** If specified, all readiness gates will be evaluated for pod readiness. A pod is ready when all its containers are ready AND all conditions specified in the readiness gates have status equal to "True" More info: https://git.k8s.io/enhancements/keps/sig-network/0007-pod-ready%2B%2B.md */
     readinessGates?: Array<PodReadinessGate>;
-    /**
-     * Restart policy for all containers within the pod. One of Always, OnFailure, Never. Default to Always. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy
-     *
-     * Possible enum values:
-     *  - `"Always"`
-     *  - `"Never"`
-     *  - `"OnFailure"`
-     */
+    /** Restart policy for all containers within the pod. One of Always, OnFailure, Never. Default to Always. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy */
     restartPolicy?: string;
-    /** RuntimeClassName refers to a RuntimeClass object in the node.k8s.io group, which should be used to run this pod.  If no RuntimeClass resource matches the named class, the pod will not be run. If unset or empty, the "legacy" RuntimeClass will be used, which is an implicit class with an empty definition that uses the default runtime handler. More info: https://git.k8s.io/enhancements/keps/sig-node/585-runtime-class This is a beta feature as of Kubernetes v1.14. */
+    /** RuntimeClassName refers to a RuntimeClass object in the node.k8s.io group, which should be used to run this pod.  If no RuntimeClass resource matches the named class, the pod will not be run. If unset or empty, the "legacy" RuntimeClass will be used, which is an implicit class with an empty definition that uses the default runtime handler. More info: https://git.k8s.io/enhancements/keps/sig-node/runtime-class.md This is a beta feature as of Kubernetes v1.14. */
     runtimeClassName?: string;
     /** If specified, the pod will be dispatched by specified scheduler. If not specified, the pod will be dispatched by default scheduler. */
     schedulerName?: string;
@@ -1917,9 +1716,9 @@ export interface PodSpec {
 export interface PodStatus {
     /** Current service state of pod. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions */
     conditions?: Array<PodCondition>;
-    /** The list has one entry per container in the manifest. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status */
+    /** The list has one entry per container in the manifest. Each entry is currently the output of `docker inspect`. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status */
     containerStatuses?: Array<ContainerStatus>;
-    /** Status for any ephemeral containers that have run in this pod. This field is beta-level and available on clusters that haven't disabled the EphemeralContainers feature gate. */
+    /** Status for any ephemeral containers that have run in this pod. This field is alpha-level and is only populated by servers that enable the EphemeralContainers feature. */
     ephemeralContainerStatuses?: Array<ContainerStatus>;
     /** IP address of the host to which the pod is assigned. Empty if not yet scheduled. */
     hostIP?: string;
@@ -1935,27 +1734,13 @@ export interface PodStatus {
      * Pending: The pod has been accepted by the Kubernetes system, but one or more of the container images has not been created. This includes time before being scheduled as well as time spent downloading images over the network, which could take a while. Running: The pod has been bound to a node, and all of the containers have been created. At least one container is still running, or is in the process of starting or restarting. Succeeded: All containers in the pod have terminated in success, and will not be restarted. Failed: All containers in the pod have terminated, and at least one container has terminated in failure. The container either exited with non-zero status or was terminated by the system. Unknown: For some reason the state of the pod could not be obtained, typically due to an error in communicating with the host of the pod.
      *
      * More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-phase
-     *
-     * Possible enum values:
-     *  - `"Failed"` means that all containers in the pod have terminated, and at least one container has terminated in a failure (exited with a non-zero exit code or was stopped by the system).
-     *  - `"Pending"` means the pod has been accepted by the system, but one or more of the containers has not been started. This includes time before being bound to a node, as well as time spent pulling images onto the host.
-     *  - `"Running"` means the pod has been bound to a node and all of the containers have been started. At least one container is still running or is in the process of being restarted.
-     *  - `"Succeeded"` means that all containers in the pod have voluntarily terminated with a container exit code of 0, and the system is not going to restart any of these containers.
-     *  - `"Unknown"` means that for some reason the state of the pod could not be obtained, typically due to an error in communicating with the host of the pod. Deprecated: It isn't being set since 2015 (74da3b14b0c0f658b3bb8d2def5094686d0e9095)
      */
     phase?: string;
     /** IP address allocated to the pod. Routable at least within the cluster. Empty if not yet allocated. */
     podIP?: string;
     /** podIPs holds the IP addresses allocated to the pod. If this field is specified, the 0th entry must match the podIP field. Pods may be allocated at most 1 value for each of IPv4 and IPv6. This list is empty if no IPs have been allocated yet. */
     podIPs?: Array<PodIP>;
-    /**
-     * The Quality of Service (QOS) classification assigned to the pod based on resource requirements See PodQOSClass type for available QOS classes More info: https://git.k8s.io/community/contributors/design-proposals/node/resource-qos.md
-     *
-     * Possible enum values:
-     *  - `"BestEffort"` is the BestEffort qos class.
-     *  - `"Burstable"` is the Burstable qos class.
-     *  - `"Guaranteed"` is the Guaranteed qos class.
-     */
+    /** The Quality of Service (QOS) classification assigned to the pod based on resource requirements See PodQOSClass type for available QOS classes More info: https://git.k8s.io/community/contributors/design-proposals/node/resource-qos.md */
     qosClass?: string;
     /** A brief CamelCase message indicating details about why the pod is in this state. e.g. 'Evicted' */
     reason?: string;
@@ -2005,24 +1790,17 @@ export interface PortStatus {
     error?: string;
     /** Port is the port number of the service port of which status is recorded here */
     port: number;
-    /**
-     * Protocol is the protocol of the service port of which status is recorded here The supported values are: "TCP", "UDP", "SCTP"
-     *
-     * Possible enum values:
-     *  - `"SCTP"` is the SCTP protocol.
-     *  - `"TCP"` is the TCP protocol.
-     *  - `"UDP"` is the UDP protocol.
-     */
+    /** Protocol is the protocol of the service port of which status is recorded here The supported values are: "TCP", "UDP", "SCTP" */
     protocol: string;
 }
 
 /** PortworxVolumeSource represents a Portworx volume resource. */
 export interface PortworxVolumeSource {
-    /** fSType represents the filesystem type to mount Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs". Implicitly inferred to be "ext4" if unspecified. */
+    /** FSType represents the filesystem type to mount Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs". Implicitly inferred to be "ext4" if unspecified. */
     fsType?: string;
-    /** readOnly defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. */
+    /** Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. */
     readOnly?: boolean;
-    /** volumeID uniquely identifies a Portworx volume */
+    /** VolumeID uniquely identifies a Portworx volume */
     volumeID: string;
 }
 
@@ -2036,12 +1814,10 @@ export interface PreferredSchedulingTerm {
 
 /** Probe describes a health check to be performed against a container to determine whether it is alive or ready to receive traffic. */
 export interface Probe {
-    /** Exec specifies the action to take. */
+    /** One and only one of the following should be specified. Exec specifies the action to take. */
     exec?: ExecAction;
     /** Minimum consecutive failures for the probe to be considered failed after having succeeded. Defaults to 3. Minimum value is 1. */
     failureThreshold?: number;
-    /** GRPC specifies an action involving a GRPC port. This is an alpha field and requires enabling GRPCContainerProbe feature gate. */
-    grpc?: GRPCAction;
     /** HTTPGet specifies the http request to perform. */
     httpGet?: HTTPGetAction;
     /** Number of seconds after the container has started before liveness probes are initiated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes */
@@ -2050,9 +1826,9 @@ export interface Probe {
     periodSeconds?: number;
     /** Minimum consecutive successes for the probe to be considered successful after having failed. Defaults to 1. Must be 1 for liveness and startup. Minimum value is 1. */
     successThreshold?: number;
-    /** TCPSocket specifies an action involving a TCP port. */
+    /** TCPSocket specifies an action involving a TCP port. TCP hooks not yet supported */
     tcpSocket?: TCPSocketAction;
-    /** Optional duration in seconds the pod needs to terminate gracefully upon probe failure. The grace period is the duration in seconds after the processes running in the pod are sent a termination signal and the time when the processes are forcibly halted with a kill signal. Set this value longer than the expected cleanup time for your process. If this value is nil, the pod's terminationGracePeriodSeconds will be used. Otherwise, this value overrides the value provided by the pod spec. Value must be non-negative integer. The value zero indicates stop immediately via the kill signal (no opportunity to shut down). This is a beta field and requires enabling ProbeTerminationGracePeriod feature gate. Minimum value is 1. spec.terminationGracePeriodSeconds is used if unset. */
+    /** Optional duration in seconds the pod needs to terminate gracefully upon probe failure. The grace period is the duration in seconds after the processes running in the pod are sent a termination signal and the time when the processes are forcibly halted with a kill signal. Set this value longer than the expected cleanup time for your process. If this value is nil, the pod's terminationGracePeriodSeconds will be used. Otherwise, this value overrides the value provided by the pod spec. Value must be non-negative integer. The value zero indicates stop immediately via the kill signal (no opportunity to shut down). This is an alpha field and requires enabling ProbeTerminationGracePeriod feature gate. */
     terminationGracePeriodSeconds?: number;
     /** Number of seconds after which the probe times out. Defaults to 1 second. Minimum value is 1. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes */
     timeoutSeconds?: number;
@@ -2060,65 +1836,65 @@ export interface Probe {
 
 /** Represents a projected volume source */
 export interface ProjectedVolumeSource {
-    /** defaultMode are the mode bits used to set permissions on created files by default. Must be an octal value between 0000 and 0777 or a decimal value between 0 and 511. YAML accepts both octal and decimal values, JSON requires decimal values for mode bits. Directories within the path are not affected by this setting. This might be in conflict with other options that affect the file mode, like fsGroup, and the result can be other mode bits set. */
+    /** Mode bits used to set permissions on created files by default. Must be an octal value between 0000 and 0777 or a decimal value between 0 and 511. YAML accepts both octal and decimal values, JSON requires decimal values for mode bits. Directories within the path are not affected by this setting. This might be in conflict with other options that affect the file mode, like fsGroup, and the result can be other mode bits set. */
     defaultMode?: number;
-    /** sources is the list of volume projections */
+    /** list of volume projections */
     sources?: Array<VolumeProjection>;
 }
 
 /** Represents a Quobyte mount that lasts the lifetime of a pod. Quobyte volumes do not support ownership management or SELinux relabeling. */
 export interface QuobyteVolumeSource {
-    /** group to map volume access to Default is no group */
+    /** Group to map volume access to Default is no group */
     group?: string;
-    /** readOnly here will force the Quobyte volume to be mounted with read-only permissions. Defaults to false. */
+    /** ReadOnly here will force the Quobyte volume to be mounted with read-only permissions. Defaults to false. */
     readOnly?: boolean;
-    /** registry represents a single or multiple Quobyte Registry services specified as a string as host:port pair (multiple entries are separated with commas) which acts as the central registry for volumes */
+    /** Registry represents a single or multiple Quobyte Registry services specified as a string as host:port pair (multiple entries are separated with commas) which acts as the central registry for volumes */
     registry: string;
-    /** tenant owning the given Quobyte volume in the Backend Used with dynamically provisioned Quobyte volumes, value is set by the plugin */
+    /** Tenant owning the given Quobyte volume in the Backend Used with dynamically provisioned Quobyte volumes, value is set by the plugin */
     tenant?: string;
-    /** user to map volume access to Defaults to serivceaccount user */
+    /** User to map volume access to Defaults to serivceaccount user */
     user?: string;
-    /** volume is a string that references an already created Quobyte volume by name. */
+    /** Volume is a string that references an already created Quobyte volume by name. */
     volume: string;
 }
 
 /** Represents a Rados Block Device mount that lasts the lifetime of a pod. RBD volumes support ownership management and SELinux relabeling. */
 export interface RBDPersistentVolumeSource {
-    /** fsType is the filesystem type of the volume that you want to mount. Tip: Ensure that the filesystem type is supported by the host operating system. Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. More info: https://kubernetes.io/docs/concepts/storage/volumes#rbd */
+    /** Filesystem type of the volume that you want to mount. Tip: Ensure that the filesystem type is supported by the host operating system. Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. More info: https://kubernetes.io/docs/concepts/storage/volumes#rbd */
     fsType?: string;
-    /** image is the rados image name. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it */
+    /** The rados image name. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it */
     image: string;
-    /** keyring is the path to key ring for RBDUser. Default is /etc/ceph/keyring. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it */
+    /** Keyring is the path to key ring for RBDUser. Default is /etc/ceph/keyring. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it */
     keyring?: string;
-    /** monitors is a collection of Ceph monitors. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it */
+    /** A collection of Ceph monitors. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it */
     monitors: Array<string>;
-    /** pool is the rados pool name. Default is rbd. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it */
+    /** The rados pool name. Default is rbd. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it */
     pool?: string;
-    /** readOnly here will force the ReadOnly setting in VolumeMounts. Defaults to false. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it */
+    /** ReadOnly here will force the ReadOnly setting in VolumeMounts. Defaults to false. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it */
     readOnly?: boolean;
-    /** secretRef is name of the authentication secret for RBDUser. If provided overrides keyring. Default is nil. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it */
+    /** SecretRef is name of the authentication secret for RBDUser. If provided overrides keyring. Default is nil. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it */
     secretRef?: SecretReference;
-    /** user is the rados user name. Default is admin. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it */
+    /** The rados user name. Default is admin. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it */
     user?: string;
 }
 
 /** Represents a Rados Block Device mount that lasts the lifetime of a pod. RBD volumes support ownership management and SELinux relabeling. */
 export interface RBDVolumeSource {
-    /** fsType is the filesystem type of the volume that you want to mount. Tip: Ensure that the filesystem type is supported by the host operating system. Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. More info: https://kubernetes.io/docs/concepts/storage/volumes#rbd */
+    /** Filesystem type of the volume that you want to mount. Tip: Ensure that the filesystem type is supported by the host operating system. Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. More info: https://kubernetes.io/docs/concepts/storage/volumes#rbd */
     fsType?: string;
-    /** image is the rados image name. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it */
+    /** The rados image name. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it */
     image: string;
-    /** keyring is the path to key ring for RBDUser. Default is /etc/ceph/keyring. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it */
+    /** Keyring is the path to key ring for RBDUser. Default is /etc/ceph/keyring. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it */
     keyring?: string;
-    /** monitors is a collection of Ceph monitors. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it */
+    /** A collection of Ceph monitors. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it */
     monitors: Array<string>;
-    /** pool is the rados pool name. Default is rbd. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it */
+    /** The rados pool name. Default is rbd. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it */
     pool?: string;
-    /** readOnly here will force the ReadOnly setting in VolumeMounts. Defaults to false. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it */
+    /** ReadOnly here will force the ReadOnly setting in VolumeMounts. Defaults to false. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it */
     readOnly?: boolean;
-    /** secretRef is name of the authentication secret for RBDUser. If provided overrides keyring. Default is nil. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it */
+    /** SecretRef is name of the authentication secret for RBDUser. If provided overrides keyring. Default is nil. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it */
     secretRef?: LocalObjectReference;
-    /** user is the rados user name. Default is admin. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it */
+    /** The rados user name. Default is admin. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it */
     user?: string;
 }
 
@@ -2266,49 +2042,49 @@ export interface SELinuxOptions {
 
 /** ScaleIOPersistentVolumeSource represents a persistent ScaleIO volume */
 export interface ScaleIOPersistentVolumeSource {
-    /** fsType is the filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". Default is "xfs" */
+    /** Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". Default is "xfs" */
     fsType?: string;
-    /** gateway is the host address of the ScaleIO API Gateway. */
+    /** The host address of the ScaleIO API Gateway. */
     gateway: string;
-    /** protectionDomain is the name of the ScaleIO Protection Domain for the configured storage. */
+    /** The name of the ScaleIO Protection Domain for the configured storage. */
     protectionDomain?: string;
-    /** readOnly defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. */
+    /** Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. */
     readOnly?: boolean;
-    /** secretRef references to the secret for ScaleIO user and other sensitive information. If this is not provided, Login operation will fail. */
+    /** SecretRef references to the secret for ScaleIO user and other sensitive information. If this is not provided, Login operation will fail. */
     secretRef: SecretReference;
-    /** sslEnabled is the flag to enable/disable SSL communication with Gateway, default false */
+    /** Flag to enable/disable SSL communication with Gateway, default false */
     sslEnabled?: boolean;
-    /** storageMode indicates whether the storage for a volume should be ThickProvisioned or ThinProvisioned. Default is ThinProvisioned. */
+    /** Indicates whether the storage for a volume should be ThickProvisioned or ThinProvisioned. Default is ThinProvisioned. */
     storageMode?: string;
-    /** storagePool is the ScaleIO Storage Pool associated with the protection domain. */
+    /** The ScaleIO Storage Pool associated with the protection domain. */
     storagePool?: string;
-    /** system is the name of the storage system as configured in ScaleIO. */
+    /** The name of the storage system as configured in ScaleIO. */
     system: string;
-    /** volumeName is the name of a volume already created in the ScaleIO system that is associated with this volume source. */
+    /** The name of a volume already created in the ScaleIO system that is associated with this volume source. */
     volumeName?: string;
 }
 
 /** ScaleIOVolumeSource represents a persistent ScaleIO volume */
 export interface ScaleIOVolumeSource {
-    /** fsType is the filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". Default is "xfs". */
+    /** Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". Default is "xfs". */
     fsType?: string;
-    /** gateway is the host address of the ScaleIO API Gateway. */
+    /** The host address of the ScaleIO API Gateway. */
     gateway: string;
-    /** protectionDomain is the name of the ScaleIO Protection Domain for the configured storage. */
+    /** The name of the ScaleIO Protection Domain for the configured storage. */
     protectionDomain?: string;
-    /** readOnly Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. */
+    /** Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. */
     readOnly?: boolean;
-    /** secretRef references to the secret for ScaleIO user and other sensitive information. If this is not provided, Login operation will fail. */
+    /** SecretRef references to the secret for ScaleIO user and other sensitive information. If this is not provided, Login operation will fail. */
     secretRef: LocalObjectReference;
-    /** sslEnabled Flag enable/disable SSL communication with Gateway, default false */
+    /** Flag to enable/disable SSL communication with Gateway, default false */
     sslEnabled?: boolean;
-    /** storageMode indicates whether the storage for a volume should be ThickProvisioned or ThinProvisioned. Default is ThinProvisioned. */
+    /** Indicates whether the storage for a volume should be ThickProvisioned or ThinProvisioned. Default is ThinProvisioned. */
     storageMode?: string;
-    /** storagePool is the ScaleIO Storage Pool associated with the protection domain. */
+    /** The ScaleIO Storage Pool associated with the protection domain. */
     storagePool?: string;
-    /** system is the name of the storage system as configured in ScaleIO. */
+    /** The name of the storage system as configured in ScaleIO. */
     system: string;
-    /** volumeName is the name of a volume already created in the ScaleIO system that is associated with this volume source. */
+    /** The name of a volume already created in the ScaleIO system that is associated with this volume source. */
     volumeName?: string;
 }
 
@@ -2320,27 +2096,9 @@ export interface ScopeSelector {
 
 /** A scoped-resource selector requirement is a selector that contains values, a scope name, and an operator that relates the scope name and values. */
 export interface ScopedResourceSelectorRequirement {
-    /**
-     * Represents a scope's relationship to a set of values. Valid operators are In, NotIn, Exists, DoesNotExist.
-     *
-     * Possible enum values:
-     *  - `"DoesNotExist"`
-     *  - `"Exists"`
-     *  - `"In"`
-     *  - `"NotIn"`
-     */
+    /** Represents a scope's relationship to a set of values. Valid operators are In, NotIn, Exists, DoesNotExist. */
     operator: string;
-    /**
-     * The name of the scope that the selector applies to.
-     *
-     * Possible enum values:
-     *  - `"BestEffort"` Match all pod objects that have best effort quality of service
-     *  - `"CrossNamespacePodAffinity"` Match all pod objects that have cross-namespace pod (anti)affinity mentioned. This is a beta feature enabled by the PodAffinityNamespaceSelector feature flag.
-     *  - `"NotBestEffort"` Match all pod objects that do not have best effort quality of service
-     *  - `"NotTerminating"` Match all pod objects where spec.activeDeadlineSeconds is nil
-     *  - `"PriorityClass"` Match all pod objects that have priority class mentioned
-     *  - `"Terminating"` Match all pod objects where spec.activeDeadlineSeconds >=0
-     */
+    /** The name of the scope that the selector applies to. */
     scopeName: string;
     /** An array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch. */
     values?: Array<string>;
@@ -2354,11 +2112,6 @@ export interface SeccompProfile {
      * type indicates which kind of seccomp profile will be applied. Valid options are:
      *
      * Localhost - a profile defined in a file on the node should be used. RuntimeDefault - the container runtime default profile should be used. Unconfined - no profile should be applied.
-     *
-     * Possible enum values:
-     *  - `"Localhost"` indicates a profile defined in a file on the node should be used. The file's location relative to <kubelet-root-dir>/seccomp.
-     *  - `"RuntimeDefault"` represents the default container runtime seccomp profile.
-     *  - `"Unconfined"` indicates no seccomp profile is applied (A.K.A. unconfined).
      */
     type: string;
 }
@@ -2377,7 +2130,7 @@ export interface Secret extends Resource {
     metadata?: ObjectMeta;
     /** stringData allows specifying non-binary secret data in string form. It is provided as a write-only input field for convenience. All keys and values are merged into the data field on write, overwriting any existing values. The stringData field is never output when reading from the API. */
     stringData?: {[name: string]: string};
-    /** Used to facilitate programmatic handling of secret data. More info: https://kubernetes.io/docs/concepts/configuration/secret/#secret-types */
+    /** Used to facilitate programmatic handling of secret data. */
     type?: string;
 }
 
@@ -2421,19 +2174,19 @@ export interface SecretList extends Resource {
  * The contents of the target Secret's Data field will be presented in a projected volume as files using the keys in the Data field as the file names. Note that this is identical to a secret volume source without the default mode.
  */
 export interface SecretProjection {
-    /** items if unspecified, each key-value pair in the Data field of the referenced Secret will be projected into the volume as a file whose name is the key and content is the value. If specified, the listed keys will be projected into the specified paths, and unlisted keys will not be present. If a key is specified which is not present in the Secret, the volume setup will error unless it is marked optional. Paths must be relative and may not contain the '..' path or start with '..'. */
+    /** If unspecified, each key-value pair in the Data field of the referenced Secret will be projected into the volume as a file whose name is the key and content is the value. If specified, the listed keys will be projected into the specified paths, and unlisted keys will not be present. If a key is specified which is not present in the Secret, the volume setup will error unless it is marked optional. Paths must be relative and may not contain the '..' path or start with '..'. */
     items?: Array<KeyToPath>;
     /** Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names */
     name?: string;
-    /** optional field specify whether the Secret or its key must be defined */
+    /** Specify whether the Secret or its key must be defined */
     optional?: boolean;
 }
 
 /** SecretReference represents a Secret Reference. It has enough information to retrieve secret in any namespace */
 export interface SecretReference {
-    /** name is unique within a namespace to reference a secret resource. */
+    /** Name is unique within a namespace to reference a secret resource. */
     name?: string;
-    /** namespace defines the space within which the secret name must be unique. */
+    /** Namespace defines the space within which the secret name must be unique. */
     namespace?: string;
 }
 
@@ -2443,39 +2196,39 @@ export interface SecretReference {
  * The contents of the target Secret's Data field will be presented in a volume as files using the keys in the Data field as the file names. Secret volumes support ownership management and SELinux relabeling.
  */
 export interface SecretVolumeSource {
-    /** defaultMode is Optional: mode bits used to set permissions on created files by default. Must be an octal value between 0000 and 0777 or a decimal value between 0 and 511. YAML accepts both octal and decimal values, JSON requires decimal values for mode bits. Defaults to 0644. Directories within the path are not affected by this setting. This might be in conflict with other options that affect the file mode, like fsGroup, and the result can be other mode bits set. */
+    /** Optional: mode bits used to set permissions on created files by default. Must be an octal value between 0000 and 0777 or a decimal value between 0 and 511. YAML accepts both octal and decimal values, JSON requires decimal values for mode bits. Defaults to 0644. Directories within the path are not affected by this setting. This might be in conflict with other options that affect the file mode, like fsGroup, and the result can be other mode bits set. */
     defaultMode?: number;
-    /** items If unspecified, each key-value pair in the Data field of the referenced Secret will be projected into the volume as a file whose name is the key and content is the value. If specified, the listed keys will be projected into the specified paths, and unlisted keys will not be present. If a key is specified which is not present in the Secret, the volume setup will error unless it is marked optional. Paths must be relative and may not contain the '..' path or start with '..'. */
+    /** If unspecified, each key-value pair in the Data field of the referenced Secret will be projected into the volume as a file whose name is the key and content is the value. If specified, the listed keys will be projected into the specified paths, and unlisted keys will not be present. If a key is specified which is not present in the Secret, the volume setup will error unless it is marked optional. Paths must be relative and may not contain the '..' path or start with '..'. */
     items?: Array<KeyToPath>;
-    /** optional field specify whether the Secret or its keys must be defined */
+    /** Specify whether the Secret or its keys must be defined */
     optional?: boolean;
-    /** secretName is the name of the secret in the pod's namespace to use. More info: https://kubernetes.io/docs/concepts/storage/volumes#secret */
+    /** Name of the secret in the pod's namespace to use. More info: https://kubernetes.io/docs/concepts/storage/volumes#secret */
     secretName?: string;
 }
 
 /** SecurityContext holds security configuration that will be applied to a container. Some fields are present in both SecurityContext and PodSecurityContext.  When both are set, the values in SecurityContext take precedence. */
 export interface SecurityContext {
-    /** AllowPrivilegeEscalation controls whether a process can gain more privileges than its parent process. This bool directly controls if the no_new_privs flag will be set on the container process. AllowPrivilegeEscalation is true always when the container is: 1) run as Privileged 2) has CAP_SYS_ADMIN Note that this field cannot be set when spec.os.name is windows. */
+    /** AllowPrivilegeEscalation controls whether a process can gain more privileges than its parent process. This bool directly controls if the no_new_privs flag will be set on the container process. AllowPrivilegeEscalation is true always when the container is: 1) run as Privileged 2) has CAP_SYS_ADMIN */
     allowPrivilegeEscalation?: boolean;
-    /** The capabilities to add/drop when running containers. Defaults to the default set of capabilities granted by the container runtime. Note that this field cannot be set when spec.os.name is windows. */
+    /** The capabilities to add/drop when running containers. Defaults to the default set of capabilities granted by the container runtime. */
     capabilities?: Capabilities;
-    /** Run container in privileged mode. Processes in privileged containers are essentially equivalent to root on the host. Defaults to false. Note that this field cannot be set when spec.os.name is windows. */
+    /** Run container in privileged mode. Processes in privileged containers are essentially equivalent to root on the host. Defaults to false. */
     privileged?: boolean;
-    /** procMount denotes the type of proc mount to use for the containers. The default is DefaultProcMount which uses the container runtime defaults for readonly paths and masked paths. This requires the ProcMountType feature flag to be enabled. Note that this field cannot be set when spec.os.name is windows. */
+    /** procMount denotes the type of proc mount to use for the containers. The default is DefaultProcMount which uses the container runtime defaults for readonly paths and masked paths. This requires the ProcMountType feature flag to be enabled. */
     procMount?: string;
-    /** Whether this container has a read-only root filesystem. Default is false. Note that this field cannot be set when spec.os.name is windows. */
+    /** Whether this container has a read-only root filesystem. Default is false. */
     readOnlyRootFilesystem?: boolean;
-    /** The GID to run the entrypoint of the container process. Uses runtime default if unset. May also be set in PodSecurityContext.  If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence. Note that this field cannot be set when spec.os.name is windows. */
+    /** The GID to run the entrypoint of the container process. Uses runtime default if unset. May also be set in PodSecurityContext.  If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence. */
     runAsGroup?: number;
     /** Indicates that the container must run as a non-root user. If true, the Kubelet will validate the image at runtime to ensure that it does not run as UID 0 (root) and fail to start the container if it does. If unset or false, no such validation will be performed. May also be set in PodSecurityContext.  If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence. */
     runAsNonRoot?: boolean;
-    /** The UID to run the entrypoint of the container process. Defaults to user specified in image metadata if unspecified. May also be set in PodSecurityContext.  If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence. Note that this field cannot be set when spec.os.name is windows. */
+    /** The UID to run the entrypoint of the container process. Defaults to user specified in image metadata if unspecified. May also be set in PodSecurityContext.  If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence. */
     runAsUser?: number;
-    /** The SELinux context to be applied to the container. If unspecified, the container runtime will allocate a random SELinux context for each container.  May also be set in PodSecurityContext.  If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence. Note that this field cannot be set when spec.os.name is windows. */
+    /** The SELinux context to be applied to the container. If unspecified, the container runtime will allocate a random SELinux context for each container.  May also be set in PodSecurityContext.  If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence. */
     seLinuxOptions?: SELinuxOptions;
-    /** The seccomp options to use by this container. If seccomp options are provided at both the pod & container level, the container options override the pod options. Note that this field cannot be set when spec.os.name is windows. */
+    /** The seccomp options to use by this container. If seccomp options are provided at both the pod & container level, the container options override the pod options. */
     seccompProfile?: SeccompProfile;
-    /** The Windows specific settings applied to all containers. If unspecified, the options from the PodSecurityContext will be used. If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence. Note that this field cannot be set when spec.os.name is linux. */
+    /** The Windows specific settings applied to all containers. If unspecified, the options from the PodSecurityContext will be used. If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence. */
     windowsOptions?: WindowsSecurityContextOptions;
 }
 
@@ -2523,11 +2276,11 @@ export interface ServiceAccountList extends Resource {
 
 /** ServiceAccountTokenProjection represents a projected service account token volume. This projection can be used to insert a service account token into the pods runtime filesystem for use against APIs (Kubernetes API Server or otherwise). */
 export interface ServiceAccountTokenProjection {
-    /** audience is the intended audience of the token. A recipient of a token must identify itself with an identifier specified in the audience of the token, and otherwise should reject the token. The audience defaults to the identifier of the apiserver. */
+    /** Audience is the intended audience of the token. A recipient of a token must identify itself with an identifier specified in the audience of the token, and otherwise should reject the token. The audience defaults to the identifier of the apiserver. */
     audience?: string;
-    /** expirationSeconds is the requested duration of validity of the service account token. As the token approaches expiration, the kubelet volume plugin will proactively rotate the service account token. The kubelet will start trying to rotate the token if the token is older than 80 percent of its time to live or if the token is older than 24 hours.Defaults to 1 hour and must be at least 10 minutes. */
+    /** ExpirationSeconds is the requested duration of validity of the service account token. As the token approaches expiration, the kubelet volume plugin will proactively rotate the service account token. The kubelet will start trying to rotate the token if the token is older than 80 percent of its time to live or if the token is older than 24 hours.Defaults to 1 hour and must be at least 10 minutes. */
     expirationSeconds?: number;
-    /** path is the path relative to the mount point of the file to project the token into. */
+    /** Path is the path relative to the mount point of the file to project the token into. */
     path: string;
 }
 
@@ -2545,7 +2298,7 @@ export interface ServiceList extends Resource {
 
 /** ServicePort contains information on service's port. */
 export interface ServicePort {
-    /** The application protocol for this port. This field follows standard Kubernetes label syntax. Un-prefixed names are reserved for IANA standard service names (as per RFC-6335 and https://www.iana.org/assignments/service-names). Non-standard protocols should use prefixed names such as mycompany.com/my-custom-protocol. */
+    /** The application protocol for this port. This field follows standard Kubernetes label syntax. Un-prefixed names are reserved for IANA standard service names (as per RFC-6335 and http://www.iana.org/assignments/service-names). Non-standard protocols should use prefixed names such as mycompany.com/my-custom-protocol. This is a beta field that is guarded by the ServiceAppProtocol feature gate and enabled by default. */
     appProtocol?: string;
     /** The name of this port within the service. This must be a DNS_LABEL. All ports within a ServiceSpec must have unique names. When considering the endpoints for a Service, this must match the 'name' field in the EndpointPort. Optional if only one ServicePort is defined on this service. */
     name?: string;
@@ -2553,14 +2306,7 @@ export interface ServicePort {
     nodePort?: number;
     /** The port that will be exposed by this service. */
     port: number;
-    /**
-     * The IP protocol for this port. Supports "TCP", "UDP", and "SCTP". Default is TCP.
-     *
-     * Possible enum values:
-     *  - `"SCTP"` is the SCTP protocol.
-     *  - `"TCP"` is the TCP protocol.
-     *  - `"UDP"` is the UDP protocol.
-     */
+    /** The IP protocol for this port. Supports "TCP", "UDP", and "SCTP". Default is TCP. */
     protocol?: string;
     /** Number or name of the port to access on the pods targeted by the service. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME. If this is a string, it will be looked up as a named port in the target Pod's container ports. If this is not specified, the value of the 'port' field is used (an identity map). This field is ignored for services with clusterIP=None, and should be omitted or set equal to the 'port' field. More info: https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service */
     targetPort?: number | string;
@@ -2568,45 +2314,39 @@ export interface ServicePort {
 
 /** ServiceSpec describes the attributes that a user creates on a service. */
 export interface ServiceSpec {
-    /** allocateLoadBalancerNodePorts defines if NodePorts will be automatically allocated for services with type LoadBalancer.  Default is "true". It may be set to "false" if the cluster load-balancer does not rely on NodePorts.  If the caller requests specific NodePorts (by specifying a value), those requests will be respected, regardless of this field. This field may only be set for services with type LoadBalancer and will be cleared if the type is changed to any other type. */
+    /** allocateLoadBalancerNodePorts defines if NodePorts will be automatically allocated for services with type LoadBalancer.  Default is "true". It may be set to "false" if the cluster load-balancer does not rely on NodePorts. allocateLoadBalancerNodePorts may only be set for services with type LoadBalancer and will be cleared if the type is changed to any other type. This field is alpha-level and is only honored by servers that enable the ServiceLBNodePortControl feature. */
     allocateLoadBalancerNodePorts?: boolean;
     /** clusterIP is the IP address of the service and is usually assigned randomly. If an address is specified manually, is in-range (as per system configuration), and is not in use, it will be allocated to the service; otherwise creation of the service will fail. This field may not be changed through updates unless the type field is also being changed to ExternalName (which requires this field to be blank) or the type field is being changed from ExternalName (in which case this field may optionally be specified, as describe above).  Valid values are "None", empty string (""), or a valid IP address. Setting this to "None" makes a "headless service" (no virtual IP), which is useful when direct endpoint connections are preferred and proxying is not required.  Only applies to types ClusterIP, NodePort, and LoadBalancer. If this field is specified when creating a Service of type ExternalName, creation will fail. This field will be wiped when updating a Service to type ExternalName. More info: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies */
     clusterIP?: string;
     /**
      * ClusterIPs is a list of IP addresses assigned to this service, and are usually assigned randomly.  If an address is specified manually, is in-range (as per system configuration), and is not in use, it will be allocated to the service; otherwise creation of the service will fail. This field may not be changed through updates unless the type field is also being changed to ExternalName (which requires this field to be empty) or the type field is being changed from ExternalName (in which case this field may optionally be specified, as describe above).  Valid values are "None", empty string (""), or a valid IP address.  Setting this to "None" makes a "headless service" (no virtual IP), which is useful when direct endpoint connections are preferred and proxying is not required.  Only applies to types ClusterIP, NodePort, and LoadBalancer. If this field is specified when creating a Service of type ExternalName, creation will fail. This field will be wiped when updating a Service to type ExternalName.  If this field is not specified, it will be initialized from the clusterIP field.  If this field is specified, clients must ensure that clusterIPs[0] and clusterIP have the same value.
      *
-     * This field may hold a maximum of two entries (dual-stack IPs, in either order). These IPs must correspond to the values of the ipFamilies field. Both clusterIPs and ipFamilies are governed by the ipFamilyPolicy field. More info: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies
+     * Unless the "IPv6DualStack" feature gate is enabled, this field is limited to one value, which must be the same as the clusterIP field.  If the feature gate is enabled, this field may hold a maximum of two entries (dual-stack IPs, in either order).  These IPs must correspond to the values of the ipFamilies field. Both clusterIPs and ipFamilies are governed by the ipFamilyPolicy field. More info: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies
      */
     clusterIPs?: Array<string>;
     /** externalIPs is a list of IP addresses for which nodes in the cluster will also accept traffic for this service.  These IPs are not managed by Kubernetes.  The user is responsible for ensuring that traffic arrives at a node with this IP.  A common example is external load-balancers that are not part of the Kubernetes system. */
     externalIPs?: Array<string>;
     /** externalName is the external reference that discovery mechanisms will return as an alias for this service (e.g. a DNS CNAME record). No proxying will be involved.  Must be a lowercase RFC-1123 hostname (https://tools.ietf.org/html/rfc1123) and requires `type` to be "ExternalName". */
     externalName?: string;
-    /**
-     * externalTrafficPolicy denotes if this Service desires to route external traffic to node-local or cluster-wide endpoints. "Local" preserves the client source IP and avoids a second hop for LoadBalancer and Nodeport type services, but risks potentially imbalanced traffic spreading. "Cluster" obscures the client source IP and may cause a second hop to another node, but should have good overall load-spreading.
-     *
-     * Possible enum values:
-     *  - `"Cluster"` specifies node-global (legacy) behavior.
-     *  - `"Local"` specifies node-local endpoints behavior.
-     */
+    /** externalTrafficPolicy denotes if this Service desires to route external traffic to node-local or cluster-wide endpoints. "Local" preserves the client source IP and avoids a second hop for LoadBalancer and Nodeport type services, but risks potentially imbalanced traffic spreading. "Cluster" obscures the client source IP and may cause a second hop to another node, but should have good overall load-spreading. */
     externalTrafficPolicy?: string;
     /** healthCheckNodePort specifies the healthcheck nodePort for the service. This only applies when type is set to LoadBalancer and externalTrafficPolicy is set to Local. If a value is specified, is in-range, and is not in use, it will be used.  If not specified, a value will be automatically allocated.  External systems (e.g. load-balancers) can use this port to determine if a given node holds endpoints for this service or not.  If this field is specified when creating a Service which does not need it, creation will fail. This field will be wiped when updating a Service to no longer need it (e.g. changing type). */
     healthCheckNodePort?: number;
     /** InternalTrafficPolicy specifies if the cluster internal traffic should be routed to all endpoints or node-local endpoints only. "Cluster" routes internal traffic to a Service to all endpoints. "Local" routes traffic to node-local endpoints only, traffic is dropped if no node-local endpoints are ready. The default value is "Cluster". */
     internalTrafficPolicy?: string;
     /**
-     * IPFamilies is a list of IP families (e.g. IPv4, IPv6) assigned to this service. This field is usually assigned automatically based on cluster configuration and the ipFamilyPolicy field. If this field is specified manually, the requested family is available in the cluster, and ipFamilyPolicy allows it, it will be used; otherwise creation of the service will fail. This field is conditionally mutable: it allows for adding or removing a secondary IP family, but it does not allow changing the primary IP family of the Service. Valid values are "IPv4" and "IPv6".  This field only applies to Services of types ClusterIP, NodePort, and LoadBalancer, and does apply to "headless" services. This field will be wiped when updating a Service to type ExternalName.
+     * IPFamilies is a list of IP families (e.g. IPv4, IPv6) assigned to this service, and is gated by the "IPv6DualStack" feature gate.  This field is usually assigned automatically based on cluster configuration and the ipFamilyPolicy field. If this field is specified manually, the requested family is available in the cluster, and ipFamilyPolicy allows it, it will be used; otherwise creation of the service will fail.  This field is conditionally mutable: it allows for adding or removing a secondary IP family, but it does not allow changing the primary IP family of the Service.  Valid values are "IPv4" and "IPv6".  This field only applies to Services of types ClusterIP, NodePort, and LoadBalancer, and does apply to "headless" services.  This field will be wiped when updating a Service to type ExternalName.
      *
      * This field may hold a maximum of two entries (dual-stack families, in either order).  These families must correspond to the values of the clusterIPs field, if specified. Both clusterIPs and ipFamilies are governed by the ipFamilyPolicy field.
      */
     ipFamilies?: Array<string>;
-    /** IPFamilyPolicy represents the dual-stack-ness requested or required by this Service. If there is no value provided, then this field will be set to SingleStack. Services can be "SingleStack" (a single IP family), "PreferDualStack" (two IP families on dual-stack configured clusters or a single IP family on single-stack clusters), or "RequireDualStack" (two IP families on dual-stack configured clusters, otherwise fail). The ipFamilies and clusterIPs fields depend on the value of this field. This field will be wiped when updating a service to type ExternalName. */
+    /** IPFamilyPolicy represents the dual-stack-ness requested or required by this Service, and is gated by the "IPv6DualStack" feature gate.  If there is no value provided, then this field will be set to SingleStack. Services can be "SingleStack" (a single IP family), "PreferDualStack" (two IP families on dual-stack configured clusters or a single IP family on single-stack clusters), or "RequireDualStack" (two IP families on dual-stack configured clusters, otherwise fail). The ipFamilies and clusterIPs fields depend on the value of this field.  This field will be wiped when updating a service to type ExternalName. */
     ipFamilyPolicy?: string;
     /** loadBalancerClass is the class of the load balancer implementation this Service belongs to. If specified, the value of this field must be a label-style identifier, with an optional prefix, e.g. "internal-vip" or "example.com/internal-vip". Unprefixed names are reserved for end-users. This field can only be set when the Service type is 'LoadBalancer'. If not set, the default load balancer implementation is used, today this is typically done through the cloud provider integration, but should apply for any default implementation. If set, it is assumed that a load balancer implementation is watching for Services with a matching class. Any default load balancer implementation (e.g. cloud providers) should ignore Services that set this field. This field can only be set when creating or updating a Service to type 'LoadBalancer'. Once set, it can not be changed. This field will be wiped when a service is updated to a non 'LoadBalancer' type. */
     loadBalancerClass?: string;
-    /** Only applies to Service Type: LoadBalancer. This feature depends on whether the underlying cloud-provider supports specifying the loadBalancerIP when a load balancer is created. This field will be ignored if the cloud-provider does not support the feature. Deprecated: This field was under-specified and its meaning varies across implementations, and it cannot support dual-stack. As of Kubernetes v1.24, users are encouraged to use implementation-specific annotations when available. This field may be removed in a future API version. */
+    /** Only applies to Service Type: LoadBalancer LoadBalancer will get created with the IP specified in this field. This feature depends on whether the underlying cloud-provider supports specifying the loadBalancerIP when a load balancer is created. This field will be ignored if the cloud-provider does not support the feature. */
     loadBalancerIP?: string;
-    /** If specified and supported by the platform, this will restrict traffic through the cloud-provider load-balancer will be restricted to the specified client IPs. This field will be ignored if the cloud-provider does not support the feature." More info: https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/ */
+    /** If specified and supported by the platform, this will restrict traffic through the cloud-provider load-balancer will be restricted to the specified client IPs. This field will be ignored if the cloud-provider does not support the feature." More info: https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/ */
     loadBalancerSourceRanges?: Array<string>;
     /** The list of ports that are exposed by this service. More info: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies */
     ports?: Array<ServicePort>;
@@ -2614,25 +2354,13 @@ export interface ServiceSpec {
     publishNotReadyAddresses?: boolean;
     /** Route service traffic to pods with label keys and values matching this selector. If empty or not present, the service is assumed to have an external process managing its endpoints, which Kubernetes will not modify. Only applies to types ClusterIP, NodePort, and LoadBalancer. Ignored if type is ExternalName. More info: https://kubernetes.io/docs/concepts/services-networking/service/ */
     selector?: {[name: string]: string};
-    /**
-     * Supports "ClientIP" and "None". Used to maintain session affinity. Enable client IP based session affinity. Must be ClientIP or None. Defaults to None. More info: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies
-     *
-     * Possible enum values:
-     *  - `"ClientIP"` is the Client IP based.
-     *  - `"None"` - no session affinity.
-     */
+    /** Supports "ClientIP" and "None". Used to maintain session affinity. Enable client IP based session affinity. Must be ClientIP or None. Defaults to None. More info: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies */
     sessionAffinity?: string;
     /** sessionAffinityConfig contains the configurations of session affinity. */
     sessionAffinityConfig?: SessionAffinityConfig;
-    /**
-     * type determines how the Service is exposed. Defaults to ClusterIP. Valid options are ExternalName, ClusterIP, NodePort, and LoadBalancer. "ClusterIP" allocates a cluster-internal IP address for load-balancing to endpoints. Endpoints are determined by the selector or if that is not specified, by manual construction of an Endpoints object or EndpointSlice objects. If clusterIP is "None", no virtual IP is allocated and the endpoints are published as a set of endpoints rather than a virtual IP. "NodePort" builds on ClusterIP and allocates a port on every node which routes to the same endpoints as the clusterIP. "LoadBalancer" builds on NodePort and creates an external load-balancer (if supported in the current cloud) which routes to the same endpoints as the clusterIP. "ExternalName" aliases this service to the specified externalName. Several other fields do not apply to ExternalName services. More info: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
-     *
-     * Possible enum values:
-     *  - `"ClusterIP"` means a service will only be accessible inside the cluster, via the cluster IP.
-     *  - `"ExternalName"` means a service consists of only a reference to an external name that kubedns or equivalent will return as a CNAME record, with no exposing or proxying of any pods involved.
-     *  - `"LoadBalancer"` means a service will be exposed via an external load balancer (if the cloud provider supports it), in addition to 'NodePort' type.
-     *  - `"NodePort"` means a service will be exposed on one port of every node, in addition to 'ClusterIP' type.
-     */
+    /** topologyKeys is a preference-order list of topology keys which implementations of services should use to preferentially sort endpoints when accessing this Service, it can not be used at the same time as externalTrafficPolicy=Local. Topology keys must be valid label keys and at most 16 keys may be specified. Endpoints are chosen based on the first topology key with available backends. If this field is specified and all entries have no backends that match the topology of the client, the service has no backends for that client and connections should fail. The special value "*" may be used to mean "any topology". This catch-all value, if used, only makes sense as the last value in the list. If this is not specified or empty, no topology constraints will be applied. This field is alpha-level and is only honored by servers that enable the ServiceTopology feature. This field is deprecated and will be removed in a future version. */
+    topologyKeys?: Array<string>;
+    /** type determines how the Service is exposed. Defaults to ClusterIP. Valid options are ExternalName, ClusterIP, NodePort, and LoadBalancer. "ClusterIP" allocates a cluster-internal IP address for load-balancing to endpoints. Endpoints are determined by the selector or if that is not specified, by manual construction of an Endpoints object or EndpointSlice objects. If clusterIP is "None", no virtual IP is allocated and the endpoints are published as a set of endpoints rather than a virtual IP. "NodePort" builds on ClusterIP and allocates a port on every node which routes to the same endpoints as the clusterIP. "LoadBalancer" builds on NodePort and creates an external load-balancer (if supported in the current cloud) which routes to the same endpoints as the clusterIP. "ExternalName" aliases this service to the specified externalName. Several other fields do not apply to ExternalName services. More info: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types */
     type?: string;
 }
 
@@ -2652,29 +2380,29 @@ export interface SessionAffinityConfig {
 
 /** Represents a StorageOS persistent volume resource. */
 export interface StorageOSPersistentVolumeSource {
-    /** fsType is the filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. */
+    /** Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. */
     fsType?: string;
-    /** readOnly defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. */
+    /** Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. */
     readOnly?: boolean;
-    /** secretRef specifies the secret to use for obtaining the StorageOS API credentials.  If not specified, default values will be attempted. */
+    /** SecretRef specifies the secret to use for obtaining the StorageOS API credentials.  If not specified, default values will be attempted. */
     secretRef?: ObjectReference;
-    /** volumeName is the human-readable name of the StorageOS volume.  Volume names are only unique within a namespace. */
+    /** VolumeName is the human-readable name of the StorageOS volume.  Volume names are only unique within a namespace. */
     volumeName?: string;
-    /** volumeNamespace specifies the scope of the volume within StorageOS.  If no namespace is specified then the Pod's namespace will be used.  This allows the Kubernetes name scoping to be mirrored within StorageOS for tighter integration. Set VolumeName to any name to override the default behaviour. Set to "default" if you are not using namespaces within StorageOS. Namespaces that do not pre-exist within StorageOS will be created. */
+    /** VolumeNamespace specifies the scope of the volume within StorageOS.  If no namespace is specified then the Pod's namespace will be used.  This allows the Kubernetes name scoping to be mirrored within StorageOS for tighter integration. Set VolumeName to any name to override the default behaviour. Set to "default" if you are not using namespaces within StorageOS. Namespaces that do not pre-exist within StorageOS will be created. */
     volumeNamespace?: string;
 }
 
 /** Represents a StorageOS persistent volume resource. */
 export interface StorageOSVolumeSource {
-    /** fsType is the filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. */
+    /** Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. */
     fsType?: string;
-    /** readOnly defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. */
+    /** Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. */
     readOnly?: boolean;
-    /** secretRef specifies the secret to use for obtaining the StorageOS API credentials.  If not specified, default values will be attempted. */
+    /** SecretRef specifies the secret to use for obtaining the StorageOS API credentials.  If not specified, default values will be attempted. */
     secretRef?: LocalObjectReference;
-    /** volumeName is the human-readable name of the StorageOS volume.  Volume names are only unique within a namespace. */
+    /** VolumeName is the human-readable name of the StorageOS volume.  Volume names are only unique within a namespace. */
     volumeName?: string;
-    /** volumeNamespace specifies the scope of the volume within StorageOS.  If no namespace is specified then the Pod's namespace will be used.  This allows the Kubernetes name scoping to be mirrored within StorageOS for tighter integration. Set VolumeName to any name to override the default behaviour. Set to "default" if you are not using namespaces within StorageOS. Namespaces that do not pre-exist within StorageOS will be created. */
+    /** VolumeNamespace specifies the scope of the volume within StorageOS.  If no namespace is specified then the Pod's namespace will be used.  This allows the Kubernetes name scoping to be mirrored within StorageOS for tighter integration. Set VolumeName to any name to override the default behaviour. Set to "default" if you are not using namespaces within StorageOS. Namespaces that do not pre-exist within StorageOS will be created. */
     volumeNamespace?: string;
 }
 
@@ -2696,14 +2424,7 @@ export interface TCPSocketAction {
 
 /** The node this Taint is attached to has the "effect" on any pod that does not tolerate the Taint. */
 export interface Taint {
-    /**
-     * Required. The effect of the taint on pods that do not tolerate the taint. Valid effects are NoSchedule, PreferNoSchedule and NoExecute.
-     *
-     * Possible enum values:
-     *  - `"NoExecute"` Evict any already-running pods that do not tolerate the taint. Currently enforced by NodeController.
-     *  - `"NoSchedule"` Do not allow new pods to schedule onto the node unless they tolerate the taint, but allow all pods submitted to Kubelet without going through the scheduler to start, and allow all already-running pods to continue running. Enforced by the scheduler.
-     *  - `"PreferNoSchedule"` Like TaintEffectNoSchedule, but the scheduler tries not to schedule new pods onto the node, rather than prohibiting new pods from scheduling onto the node entirely. Enforced by the scheduler.
-     */
+    /** Required. The effect of the taint on pods that do not tolerate the taint. Valid effects are NoSchedule, PreferNoSchedule and NoExecute. */
     effect: string;
     /** Required. The taint key to be applied to a node. */
     key: string;
@@ -2715,24 +2436,11 @@ export interface Taint {
 
 /** The pod this Toleration is attached to tolerates any taint that matches the triple <key,value,effect> using the matching operator <operator>. */
 export interface Toleration {
-    /**
-     * Effect indicates the taint effect to match. Empty means match all taint effects. When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute.
-     *
-     * Possible enum values:
-     *  - `"NoExecute"` Evict any already-running pods that do not tolerate the taint. Currently enforced by NodeController.
-     *  - `"NoSchedule"` Do not allow new pods to schedule onto the node unless they tolerate the taint, but allow all pods submitted to Kubelet without going through the scheduler to start, and allow all already-running pods to continue running. Enforced by the scheduler.
-     *  - `"PreferNoSchedule"` Like TaintEffectNoSchedule, but the scheduler tries not to schedule new pods onto the node, rather than prohibiting new pods from scheduling onto the node entirely. Enforced by the scheduler.
-     */
+    /** Effect indicates the taint effect to match. Empty means match all taint effects. When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute. */
     effect?: string;
     /** Key is the taint key that the toleration applies to. Empty means match all taint keys. If the key is empty, operator must be Exists; this combination means to match all values and all keys. */
     key?: string;
-    /**
-     * Operator represents a key's relationship to the value. Valid operators are Exists and Equal. Defaults to Equal. Exists is equivalent to wildcard for value, so that a pod can tolerate all taints of a particular category.
-     *
-     * Possible enum values:
-     *  - `"Equal"`
-     *  - `"Exists"`
-     */
+    /** Operator represents a key's relationship to the value. Valid operators are Exists and Equal. Defaults to Equal. Exists is equivalent to wildcard for value, so that a pod can tolerate all taints of a particular category. */
     operator?: string;
     /** TolerationSeconds represents the period of time the toleration (which must be of effect NoExecute, otherwise this field is ignored) tolerates the taint. By default, it is not set, which means tolerate the taint forever (do not evict). Zero and negative values will be treated as 0 (evict immediately) by the system. */
     tolerationSeconds?: number;
@@ -2766,11 +2474,7 @@ export interface TopologySpreadConstraint {
      * WhenUnsatisfiable indicates how to deal with a pod if it doesn't satisfy the spread constraint. - DoNotSchedule (default) tells the scheduler not to schedule it. - ScheduleAnyway tells the scheduler to schedule the pod in any location,
      *   but giving higher precedence to topologies that would help reduce the
      *   skew.
-     * A constraint is considered "Unsatisfiable" for an incoming pod if and only if every possible node assignment for that pod would violate "MaxSkew" on some topology. For example, in a 3-zone cluster, MaxSkew is set to 1, and pods with the same labelSelector spread as 3/1/1: | zone1 | zone2 | zone3 | | P P P |   P   |   P   | If WhenUnsatisfiable is set to DoNotSchedule, incoming pod can only be scheduled to zone2(zone3) to become 3/2/1(3/1/2) as ActualSkew(2-1) on zone2(zone3) satisfies MaxSkew(1). In other words, the cluster can still be imbalanced, but scheduler won't make it *more* imbalanced. It's a required field.
-     *
-     * Possible enum values:
-     *  - `"DoNotSchedule"` instructs the scheduler not to schedule the pod when constraints are not satisfied.
-     *  - `"ScheduleAnyway"` instructs the scheduler to schedule the pod even if constraints are not satisfied.
+     * A constraint is considered "Unsatisfiable" for an incoming pod if and only if every possible node assigment for that pod would violate "MaxSkew" on some topology. For example, in a 3-zone cluster, MaxSkew is set to 1, and pods with the same labelSelector spread as 3/1/1: | zone1 | zone2 | zone3 | | P P P |   P   |   P   | If WhenUnsatisfiable is set to DoNotSchedule, incoming pod can only be scheduled to zone2(zone3) to become 3/2/1(3/1/2) as ActualSkew(2-1) on zone2(zone3) satisfies MaxSkew(1). In other words, the cluster can still be imbalanced, but scheduler won't make it *more* imbalanced. It's a required field.
      */
     whenUnsatisfiable: string;
 }
@@ -2787,26 +2491,26 @@ export interface TypedLocalObjectReference {
 
 /** Volume represents a named volume in a pod that may be accessed by any container in the pod. */
 export interface Volume {
-    /** awsElasticBlockStore represents an AWS Disk resource that is attached to a kubelet's host machine and then exposed to the pod. More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore */
+    /** AWSElasticBlockStore represents an AWS Disk resource that is attached to a kubelet's host machine and then exposed to the pod. More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore */
     awsElasticBlockStore?: AWSElasticBlockStoreVolumeSource;
-    /** azureDisk represents an Azure Data Disk mount on the host and bind mount to the pod. */
+    /** AzureDisk represents an Azure Data Disk mount on the host and bind mount to the pod. */
     azureDisk?: AzureDiskVolumeSource;
-    /** azureFile represents an Azure File Service mount on the host and bind mount to the pod. */
+    /** AzureFile represents an Azure File Service mount on the host and bind mount to the pod. */
     azureFile?: AzureFileVolumeSource;
-    /** cephFS represents a Ceph FS mount on the host that shares a pod's lifetime */
+    /** CephFS represents a Ceph FS mount on the host that shares a pod's lifetime */
     cephfs?: CephFSVolumeSource;
-    /** cinder represents a cinder volume attached and mounted on kubelets host machine. More info: https://examples.k8s.io/mysql-cinder-pd/README.md */
+    /** Cinder represents a cinder volume attached and mounted on kubelets host machine. More info: https://examples.k8s.io/mysql-cinder-pd/README.md */
     cinder?: CinderVolumeSource;
-    /** configMap represents a configMap that should populate this volume */
+    /** ConfigMap represents a configMap that should populate this volume */
     configMap?: ConfigMapVolumeSource;
-    /** csi (Container Storage Interface) represents ephemeral storage that is handled by certain external CSI drivers (Beta feature). */
+    /** CSI (Container Storage Interface) represents ephemeral storage that is handled by certain external CSI drivers (Beta feature). */
     csi?: CSIVolumeSource;
-    /** downwardAPI represents downward API about the pod that should populate this volume */
+    /** DownwardAPI represents downward API about the pod that should populate this volume */
     downwardAPI?: DownwardAPIVolumeSource;
-    /** emptyDir represents a temporary directory that shares a pod's lifetime. More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir */
+    /** EmptyDir represents a temporary directory that shares a pod's lifetime. More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir */
     emptyDir?: EmptyDirVolumeSource;
     /**
-     * ephemeral represents a volume that is handled by a cluster storage driver. The volume's lifecycle is tied to the pod that defines it - it will be created before the pod starts, and deleted when the pod is removed.
+     * Ephemeral represents a volume that is handled by a cluster storage driver. The volume's lifecycle is tied to the pod that defines it - it will be created before the pod starts, and deleted when the pod is removed.
      *
      * Use this if: a) the volume is only needed while the pod runs, b) features of normal volumes like restoring from snapshot or capacity
      *    tracking are needed,
@@ -2820,47 +2524,49 @@ export interface Volume {
      * Use CSI for light-weight local ephemeral volumes if the CSI driver is meant to be used that way - see the documentation of the driver for more information.
      *
      * A pod can use both types of ephemeral volumes and persistent volumes at the same time.
+     *
+     * This is a beta feature and only available when the GenericEphemeralVolume feature gate is enabled.
      */
     ephemeral?: EphemeralVolumeSource;
-    /** fc represents a Fibre Channel resource that is attached to a kubelet's host machine and then exposed to the pod. */
+    /** FC represents a Fibre Channel resource that is attached to a kubelet's host machine and then exposed to the pod. */
     fc?: FCVolumeSource;
-    /** flexVolume represents a generic volume resource that is provisioned/attached using an exec based plugin. */
+    /** FlexVolume represents a generic volume resource that is provisioned/attached using an exec based plugin. */
     flexVolume?: FlexVolumeSource;
-    /** flocker represents a Flocker volume attached to a kubelet's host machine. This depends on the Flocker control service being running */
+    /** Flocker represents a Flocker volume attached to a kubelet's host machine. This depends on the Flocker control service being running */
     flocker?: FlockerVolumeSource;
-    /** gcePersistentDisk represents a GCE Disk resource that is attached to a kubelet's host machine and then exposed to the pod. More info: https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk */
+    /** GCEPersistentDisk represents a GCE Disk resource that is attached to a kubelet's host machine and then exposed to the pod. More info: https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk */
     gcePersistentDisk?: GCEPersistentDiskVolumeSource;
-    /** gitRepo represents a git repository at a particular revision. DEPRECATED: GitRepo is deprecated. To provision a container with a git repo, mount an EmptyDir into an InitContainer that clones the repo using git, then mount the EmptyDir into the Pod's container. */
+    /** GitRepo represents a git repository at a particular revision. DEPRECATED: GitRepo is deprecated. To provision a container with a git repo, mount an EmptyDir into an InitContainer that clones the repo using git, then mount the EmptyDir into the Pod's container. */
     gitRepo?: GitRepoVolumeSource;
-    /** glusterfs represents a Glusterfs mount on the host that shares a pod's lifetime. More info: https://examples.k8s.io/volumes/glusterfs/README.md */
+    /** Glusterfs represents a Glusterfs mount on the host that shares a pod's lifetime. More info: https://examples.k8s.io/volumes/glusterfs/README.md */
     glusterfs?: GlusterfsVolumeSource;
-    /** hostPath represents a pre-existing file or directory on the host machine that is directly exposed to the container. This is generally used for system agents or other privileged things that are allowed to see the host machine. Most containers will NOT need this. More info: https://kubernetes.io/docs/concepts/storage/volumes#hostpath */
+    /** HostPath represents a pre-existing file or directory on the host machine that is directly exposed to the container. This is generally used for system agents or other privileged things that are allowed to see the host machine. Most containers will NOT need this. More info: https://kubernetes.io/docs/concepts/storage/volumes#hostpath */
     hostPath?: HostPathVolumeSource;
-    /** iscsi represents an ISCSI Disk resource that is attached to a kubelet's host machine and then exposed to the pod. More info: https://examples.k8s.io/volumes/iscsi/README.md */
+    /** ISCSI represents an ISCSI Disk resource that is attached to a kubelet's host machine and then exposed to the pod. More info: https://examples.k8s.io/volumes/iscsi/README.md */
     iscsi?: ISCSIVolumeSource;
-    /** name of the volume. Must be a DNS_LABEL and unique within the pod. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names */
+    /** Volume's name. Must be a DNS_LABEL and unique within the pod. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names */
     name: string;
-    /** nfs represents an NFS mount on the host that shares a pod's lifetime More info: https://kubernetes.io/docs/concepts/storage/volumes#nfs */
+    /** NFS represents an NFS mount on the host that shares a pod's lifetime More info: https://kubernetes.io/docs/concepts/storage/volumes#nfs */
     nfs?: NFSVolumeSource;
-    /** persistentVolumeClaimVolumeSource represents a reference to a PersistentVolumeClaim in the same namespace. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims */
+    /** PersistentVolumeClaimVolumeSource represents a reference to a PersistentVolumeClaim in the same namespace. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims */
     persistentVolumeClaim?: PersistentVolumeClaimVolumeSource;
-    /** photonPersistentDisk represents a PhotonController persistent disk attached and mounted on kubelets host machine */
+    /** PhotonPersistentDisk represents a PhotonController persistent disk attached and mounted on kubelets host machine */
     photonPersistentDisk?: PhotonPersistentDiskVolumeSource;
-    /** portworxVolume represents a portworx volume attached and mounted on kubelets host machine */
+    /** PortworxVolume represents a portworx volume attached and mounted on kubelets host machine */
     portworxVolume?: PortworxVolumeSource;
-    /** projected items for all in one resources secrets, configmaps, and downward API */
+    /** Items for all in one resources secrets, configmaps, and downward API */
     projected?: ProjectedVolumeSource;
-    /** quobyte represents a Quobyte mount on the host that shares a pod's lifetime */
+    /** Quobyte represents a Quobyte mount on the host that shares a pod's lifetime */
     quobyte?: QuobyteVolumeSource;
-    /** rbd represents a Rados Block Device mount on the host that shares a pod's lifetime. More info: https://examples.k8s.io/volumes/rbd/README.md */
+    /** RBD represents a Rados Block Device mount on the host that shares a pod's lifetime. More info: https://examples.k8s.io/volumes/rbd/README.md */
     rbd?: RBDVolumeSource;
-    /** scaleIO represents a ScaleIO persistent volume attached and mounted on Kubernetes nodes. */
+    /** ScaleIO represents a ScaleIO persistent volume attached and mounted on Kubernetes nodes. */
     scaleIO?: ScaleIOVolumeSource;
-    /** secret represents a secret that should populate this volume. More info: https://kubernetes.io/docs/concepts/storage/volumes#secret */
+    /** Secret represents a secret that should populate this volume. More info: https://kubernetes.io/docs/concepts/storage/volumes#secret */
     secret?: SecretVolumeSource;
-    /** storageOS represents a StorageOS volume attached and mounted on Kubernetes nodes. */
+    /** StorageOS represents a StorageOS volume attached and mounted on Kubernetes nodes. */
     storageos?: StorageOSVolumeSource;
-    /** vsphereVolume represents a vSphere volume attached and mounted on kubelets host machine */
+    /** VsphereVolume represents a vSphere volume attached and mounted on kubelets host machine */
     vsphereVolume?: VsphereVirtualDiskVolumeSource;
 }
 
@@ -2890,31 +2596,31 @@ export interface VolumeMount {
 
 /** VolumeNodeAffinity defines constraints that limit what nodes this volume can be accessed from. */
 export interface VolumeNodeAffinity {
-    /** required specifies hard node constraints that must be met. */
+    /** Required specifies hard node constraints that must be met. */
     required?: NodeSelector;
 }
 
 /** Projection that may be projected along with other supported volume types */
 export interface VolumeProjection {
-    /** configMap information about the configMap data to project */
+    /** information about the configMap data to project */
     configMap?: ConfigMapProjection;
-    /** downwardAPI information about the downwardAPI data to project */
+    /** information about the downwardAPI data to project */
     downwardAPI?: DownwardAPIProjection;
-    /** secret information about the secret data to project */
+    /** information about the secret data to project */
     secret?: SecretProjection;
-    /** serviceAccountToken is information about the serviceAccountToken data to project */
+    /** information about the serviceAccountToken data to project */
     serviceAccountToken?: ServiceAccountTokenProjection;
 }
 
 /** Represents a vSphere volume resource. */
 export interface VsphereVirtualDiskVolumeSource {
-    /** fsType is filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. */
+    /** Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. */
     fsType?: string;
-    /** storagePolicyID is the storage Policy Based Management (SPBM) profile ID associated with the StoragePolicyName. */
+    /** Storage Policy Based Management (SPBM) profile ID associated with the StoragePolicyName. */
     storagePolicyID?: string;
-    /** storagePolicyName is the storage Policy Based Management (SPBM) profile name. */
+    /** Storage Policy Based Management (SPBM) profile name. */
     storagePolicyName?: string;
-    /** volumePath is the path that identifies vSphere volume vmdk */
+    /** Path that identifies vSphere volume vmdk */
     volumePath: string;
 }
 
@@ -2932,8 +2638,6 @@ export interface WindowsSecurityContextOptions {
     gmsaCredentialSpec?: string;
     /** GMSACredentialSpecName is the name of the GMSA credential spec to use. */
     gmsaCredentialSpecName?: string;
-    /** HostProcess determines if a container should be run as a 'Host Process' container. This field is alpha-level and will only be honored by components that enable the WindowsHostProcessContainers feature flag. Setting this field without the feature flag will result in errors when validating the Pod. All of a Pod's containers must have the same effective HostProcess value (it is not allowed to have a mix of HostProcess containers and non-HostProcess containers).  In addition, if HostProcess is true then HostNetwork must also be set to true. */
-    hostProcess?: boolean;
     /** The UserName in Windows to run the entrypoint of the container process. Defaults to the user specified in image metadata if unspecified. May also be set in PodSecurityContext. If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence. */
     runAsUserName?: string;
 }

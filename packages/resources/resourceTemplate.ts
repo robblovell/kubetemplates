@@ -75,9 +75,11 @@ export const ResourceTemplate = class extends Template implements ResourceTempla
     // set status(x: StatusHelper ) { this._status = this.set(this._status, x) }
     // $status(x: StatusHelper): ResourceTemplate { this.status = x; return this }
 
+
+
     async create(cluster: Cluster) {
         const result = await cluster.create(this.toTemplate())
-        result.throwIfError(`Create failed for ${JSON.stringify(this.toTemplate())}, ${result.error.message}`)
+        result.throwIfError(`Create failed for ${this.toTemplate()}`)
         return result
     }
     async patch(cluster: Cluster) { return this }

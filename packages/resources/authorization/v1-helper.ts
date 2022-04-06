@@ -374,7 +374,6 @@ export class SelfSubjectRulesReviewHelper extends ResourceTemplate implements Se
 export interface SelfSubjectRulesReviewSpecHelper extends SelfSubjectRulesReviewSpec {
 }
 
-/** SelfSubjectRulesReviewSpec defines the specification for SelfSubjectRulesReview. */
 export class SelfSubjectRulesReviewSpecHelper extends Template implements SelfSubjectRulesReviewSpecHelper {
     constructor(obj: any) {
         super(obj)

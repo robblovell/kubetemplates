@@ -115,7 +115,7 @@ export interface HorizontalPodAutoscalerSpec {
 /** HorizontalPodAutoscalerStatus describes the current status of a horizontal pod autoscaler. */
 export interface HorizontalPodAutoscalerStatus {
     /** conditions is the set of conditions required for this autoscaler to scale its target, and indicates whether or not those conditions are met. */
-    conditions?: Array<HorizontalPodAutoscalerCondition>;
+    conditions: Array<HorizontalPodAutoscalerCondition>;
     /** currentMetrics is the last read state of the metrics used by this autoscaler. */
     currentMetrics?: Array<MetricStatus>;
     /** currentReplicas is current number of replicas of pods managed by this autoscaler, as last seen by the autoscaler. */

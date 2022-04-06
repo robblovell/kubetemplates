@@ -1,5 +1,5 @@
 import { ResourceTemplate, Template } from "../resourceTemplate";
-import { ControllerRevision, ControllerRevisionList, DaemonSet, DaemonSetCondition, DaemonSetList, DaemonSetSpec, DaemonSetStatus, DaemonSetUpdateStrategy, Deployment, DeploymentCondition, DeploymentList, DeploymentSpec, DeploymentStatus, DeploymentStrategy, ReplicaSet, ReplicaSetCondition, ReplicaSetList, ReplicaSetSpec, ReplicaSetStatus, RollingUpdateDaemonSet, RollingUpdateDeployment, RollingUpdateStatefulSetStrategy, StatefulSet, StatefulSetCondition, StatefulSetList, StatefulSetPersistentVolumeClaimRetentionPolicy, StatefulSetSpec, StatefulSetStatus, StatefulSetUpdateStrategy } from "./v1";
+import { ControllerRevision, ControllerRevisionList, DaemonSet, DaemonSetCondition, DaemonSetList, DaemonSetSpec, DaemonSetStatus, DaemonSetUpdateStrategy, Deployment, DeploymentCondition, DeploymentList, DeploymentSpec, DeploymentStatus, DeploymentStrategy, ReplicaSet, ReplicaSetCondition, ReplicaSetList, ReplicaSetSpec, ReplicaSetStatus, RollingUpdateDaemonSet, RollingUpdateDeployment, RollingUpdateStatefulSetStrategy, StatefulSet, StatefulSetCondition, StatefulSetList, StatefulSetSpec, StatefulSetStatus, StatefulSetUpdateStrategy } from "./v1";
 import { RawExtension } from "../runtime";
 import { LabelSelector, ListMeta, ObjectMeta, Time } from "../meta/v1";
 import { RawExtensionHelper } from "../runtime-helper";
@@ -1414,43 +1414,7 @@ export class StatefulSetListHelper extends ResourceTemplate implements StatefulS
     }
 }
 
-export interface StatefulSetPersistentVolumeClaimRetentionPolicyHelper extends StatefulSetPersistentVolumeClaimRetentionPolicy {
-    $whenDeleted(x: string): StatefulSetPersistentVolumeClaimRetentionPolicyHelper;
-    $whenScaled(x: string): StatefulSetPersistentVolumeClaimRetentionPolicyHelper;
-}
-
-/** StatefulSetPersistentVolumeClaimRetentionPolicy describes the policy used for PVCs created from the StatefulSet VolumeClaimTemplates. */
-export class StatefulSetPersistentVolumeClaimRetentionPolicyHelper extends Template implements StatefulSetPersistentVolumeClaimRetentionPolicyHelper {
-    constructor(obj: any) {
-        super(obj)
-    }
-
-    _whenDeleted: string;
-    get whenDeleted(): string {
-        return this._whenDeleted
-    }
-    set whenDeleted(x: string) {
-        this._whenDeleted = x
-    }
-    $whenDeleted(x: string) {
-        this.whenDeleted = x; return this
-    }
-
-    _whenScaled: string;
-    get whenScaled(): string {
-        return this._whenScaled
-    }
-    set whenScaled(x: string) {
-        this._whenScaled = x
-    }
-    $whenScaled(x: string) {
-        this.whenScaled = x; return this
-    }
-}
-
 export interface StatefulSetSpecHelper extends StatefulSetSpec {
-    $minReadySeconds(x: number): StatefulSetSpecHelper;
-    $persistentVolumeClaimRetentionPolicy(x: StatefulSetPersistentVolumeClaimRetentionPolicyHelper): StatefulSetSpecHelper;
     $podManagementPolicy(x: string): StatefulSetSpecHelper;
     $replicas(x: number): StatefulSetSpecHelper;
     $revisionHistoryLimit(x: number): StatefulSetSpecHelper;
@@ -1465,28 +1429,6 @@ export interface StatefulSetSpecHelper extends StatefulSetSpec {
 export class StatefulSetSpecHelper extends Template implements StatefulSetSpecHelper {
     constructor(obj: any) {
         super(obj)
-    }
-
-    _minReadySeconds: number;
-    get minReadySeconds(): number {
-        return this._minReadySeconds
-    }
-    set minReadySeconds(x: number) {
-        this._minReadySeconds = x
-    }
-    $minReadySeconds(x: number) {
-        this.minReadySeconds = x; return this
-    }
-
-    _persistentVolumeClaimRetentionPolicy: StatefulSetPersistentVolumeClaimRetentionPolicyHelper;
-    get persistentVolumeClaimRetentionPolicy(): StatefulSetPersistentVolumeClaimRetentionPolicyHelper {
-        return this._persistentVolumeClaimRetentionPolicy
-    }
-    set persistentVolumeClaimRetentionPolicy(x: StatefulSetPersistentVolumeClaimRetentionPolicyHelper) {
-        this._persistentVolumeClaimRetentionPolicy = x
-    }
-    $persistentVolumeClaimRetentionPolicy(x: StatefulSetPersistentVolumeClaimRetentionPolicyHelper) {
-        this.persistentVolumeClaimRetentionPolicy = x; return this
     }
 
     _podManagementPolicy: string;
@@ -1579,7 +1521,6 @@ export class StatefulSetSpecHelper extends Template implements StatefulSetSpecHe
 }
 
 export interface StatefulSetStatusHelper extends StatefulSetStatus {
-    $availableReplicas(x: number): StatefulSetStatusHelper;
     $collisionCount(x: number): StatefulSetStatusHelper;
     $conditions(x: Array<StatefulSetCondition>): StatefulSetStatusHelper;
     $currentReplicas(x: number): StatefulSetStatusHelper;
@@ -1595,17 +1536,6 @@ export interface StatefulSetStatusHelper extends StatefulSetStatus {
 export class StatefulSetStatusHelper extends Template implements StatefulSetStatusHelper {
     constructor(obj: any) {
         super(obj)
-    }
-
-    _availableReplicas: number;
-    get availableReplicas(): number {
-        return this._availableReplicas
-    }
-    set availableReplicas(x: number) {
-        this._availableReplicas = x
-    }
-    $availableReplicas(x: number) {
-        this.availableReplicas = x; return this
     }
 
     _collisionCount: number;

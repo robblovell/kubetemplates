@@ -30,14 +30,7 @@ export interface CronJobList extends Resource {
 
 /** CronJobSpec describes how the job execution will look like and when it will actually run. */
 export interface CronJobSpec {
-    /**
-     * Specifies how to treat concurrent executions of a Job. Valid values are: - "Allow" (default): allows CronJobs to run concurrently; - "Forbid": forbids concurrent runs, skipping next run if previous run hasn't finished yet; - "Replace": cancels currently running job and replaces it with a new one
-     *
-     * Possible enum values:
-     *  - `"Allow"` allows CronJobs to run concurrently.
-     *  - `"Forbid"` forbids concurrent runs, skipping next run if previous hasn't finished yet.
-     *  - `"Replace"` cancels currently running job and replaces it with a new one.
-     */
+    /** Specifies how to treat concurrent executions of a Job. Valid values are: - "Allow" (default): allows CronJobs to run concurrently; - "Forbid": forbids concurrent runs, skipping next run if previous run hasn't finished yet; - "Replace": cancels currently running job and replaces it with a new one */
     concurrencyPolicy?: string;
     /** The number of failed finished jobs to retain. Value must be non-negative integer. Defaults to 1. */
     failedJobsHistoryLimit?: number;
@@ -89,14 +82,7 @@ export interface JobCondition {
     reason?: string;
     /** Status of the condition, one of True, False, Unknown. */
     status: string;
-    /**
-     * Type of job condition, Complete or Failed.
-     *
-     * Possible enum values:
-     *  - `"Complete"` means the job has completed its execution.
-     *  - `"Failed"` means the job has failed its execution.
-     *  - `"Suspended"` means the job has been suspended.
-     */
+    /** Type of job condition, Complete or Failed. */
     type: string;
 }
 
@@ -123,9 +109,9 @@ export interface JobSpec {
      *
      * `NonIndexed` means that the Job is considered complete when there have been .spec.completions successfully completed Pods. Each Pod completion is homologous to each other.
      *
-     * `Indexed` means that the Pods of a Job get an associated completion index from 0 to (.spec.completions - 1), available in the annotation batch.kubernetes.io/job-completion-index. The Job is considered complete when there is one successfully completed Pod for each index. When value is `Indexed`, .spec.completions must be specified and `.spec.parallelism` must be less than or equal to 10^5. In addition, The Pod name takes the form `$(job-name)-$(index)-$(random-string)`, the Pod hostname takes the form `$(job-name)-$(index)`.
+     * `Indexed` means that the Pods of a Job get an associated completion index from 0 to (.spec.completions - 1), available in the annotation batch.kubernetes.io/job-completion-index. The Job is considered complete when there is one successfully completed Pod for each index. When value is `Indexed`, .spec.completions must be specified and `.spec.parallelism` must be less than or equal to 10^5.
      *
-     * This field is beta-level. More completion modes can be added in the future. If the Job controller observes a mode that it doesn't recognize, the controller skips updates for the Job.
+     * This field is alpha-level and is only honored by servers that enable the IndexedJob feature gate. More completion modes can be added in the future. If the Job controller observes a mode that it doesn't recognize, the controller skips updates for the Job.
      */
     completionMode?: string;
     /** Specifies the desired number of successfully finished pods the job should be run with.  Setting to nil means that the success of any pod signals the success of all pods, and allows parallelism to have any positive value.  Setting to 1 means that parallelism is limited to 1 and the success of that pod signals the success of the job. More info: https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/ */
@@ -136,17 +122,17 @@ export interface JobSpec {
     parallelism?: number;
     /** A label query over pods that should match the pod count. Normally, the system sets this field for you. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors */
     selector?: LabelSelector;
-    /** Suspend specifies whether the Job controller should create Pods or not. If a Job is created with suspend set to true, no Pods are created by the Job controller. If a Job is suspended after creation (i.e. the flag goes from false to true), the Job controller will delete all active Pods associated with this Job. Users must design their workload to gracefully handle this. Suspending a Job will reset the StartTime field of the Job, effectively resetting the ActiveDeadlineSeconds timer too. Defaults to false. */
+    /** Suspend specifies whether the Job controller should create Pods or not. If a Job is created with suspend set to true, no Pods are created by the Job controller. If a Job is suspended after creation (i.e. the flag goes from false to true), the Job controller will delete all active Pods associated with this Job. Users must design their workload to gracefully handle this. Suspending a Job will reset the StartTime field of the Job, effectively resetting the ActiveDeadlineSeconds timer too. This is an alpha field and requires the SuspendJob feature gate to be enabled; otherwise this field may not be set to true. Defaults to false. */
     suspend?: boolean;
     /** Describes the pod that will be created when executing a job. More info: https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/ */
     template: PodTemplateSpec;
-    /** ttlSecondsAfterFinished limits the lifetime of a Job that has finished execution (either Complete or Failed). If this field is set, ttlSecondsAfterFinished after the Job finishes, it is eligible to be automatically deleted. When the Job is being deleted, its lifecycle guarantees (e.g. finalizers) will be honored. If this field is unset, the Job won't be automatically deleted. If this field is set to zero, the Job becomes eligible to be deleted immediately after it finishes. */
+    /** ttlSecondsAfterFinished limits the lifetime of a Job that has finished execution (either Complete or Failed). If this field is set, ttlSecondsAfterFinished after the Job finishes, it is eligible to be automatically deleted. When the Job is being deleted, its lifecycle guarantees (e.g. finalizers) will be honored. If this field is unset, the Job won't be automatically deleted. If this field is set to zero, the Job becomes eligible to be deleted immediately after it finishes. This field is alpha-level and is only honored by servers that enable the TTLAfterFinished feature. */
     ttlSecondsAfterFinished?: number;
 }
 
 /** JobStatus represents the current state of a Job. */
 export interface JobStatus {
-    /** The number of pending and running pods. */
+    /** The number of actively running pods. */
     active?: number;
     /** CompletedIndexes holds the completed indexes when .spec.completionMode = "Indexed" in a text format. The indexes are represented as decimal integers separated by commas. The numbers are listed in increasing order. Three or more consecutive numbers are compressed and represented by the first and last element of the series, separated by a hyphen. For example, if the completed indexes are 1, 3, 4, 5 and 7, they are represented as "1,3-5,7". */
     completedIndexes?: string;
@@ -156,25 +142,10 @@ export interface JobStatus {
     conditions?: Array<JobCondition>;
     /** The number of pods which reached phase Failed. */
     failed?: number;
-    /**
-     * The number of pods which have a Ready condition.
-     *
-     * This field is alpha-level. The job controller populates the field when the feature gate JobReadyPods is enabled (disabled by default).
-     */
-    ready?: number;
     /** Represents time when the job controller started processing a job. When a Job is created in the suspended state, this field is not set until the first time it is resumed. This field is reset every time a Job is resumed from suspension. It is represented in RFC3339 form and is in UTC. */
     startTime?: Time;
     /** The number of pods which reached phase Succeeded. */
     succeeded?: number;
-    /**
-     * UncountedTerminatedPods holds the UIDs of Pods that have terminated but the job controller hasn't yet accounted for in the status counters.
-     *
-     * The job controller creates pods with a finalizer. When a pod terminates (succeeded or failed), the controller does three steps to account for it in the job status: (1) Add the pod UID to the arrays in this field. (2) Remove the pod finalizer. (3) Remove the pod UID from the arrays while increasing the corresponding
-     *     counter.
-     *
-     * This field is beta-level. The job controller only makes use of this field when the feature gate JobTrackingWithFinalizers is enabled (enabled by default). Old jobs might not be tracked using this field, in which case the field remains null.
-     */
-    uncountedTerminatedPods?: UncountedTerminatedPods;
 }
 
 /** JobTemplateSpec describes the data a Job should have when created from a template */
@@ -183,12 +154,4 @@ export interface JobTemplateSpec {
     metadata?: ObjectMeta;
     /** Specification of the desired behavior of the job. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status */
     spec?: JobSpec;
-}
-
-/** UncountedTerminatedPods holds UIDs of Pods that have terminated but haven't been accounted in Job status counters. */
-export interface UncountedTerminatedPods {
-    /** Failed holds UIDs of failed Pods. */
-    failed?: Array<string>;
-    /** Succeeded holds UIDs of succeeded Pods. */
-    succeeded?: Array<string>;
 }

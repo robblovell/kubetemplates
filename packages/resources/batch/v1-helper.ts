@@ -1,5 +1,5 @@
 import { ResourceTemplate, Template } from "../resourceTemplate";
-import { CronJob, CronJobList, CronJobSpec, CronJobStatus, Job, JobCondition, JobList, JobSpec, JobStatus, JobTemplateSpec, UncountedTerminatedPods } from "./v1";
+import { CronJob, CronJobList, CronJobSpec, CronJobStatus, Job, JobCondition, JobList, JobSpec, JobStatus, JobTemplateSpec } from "./v1";
 import { LabelSelector, ListMeta, ObjectMeta, Time } from "../meta/v1";
 import { LabelSelectorHelper, ListMetaHelper, ObjectMetaHelper } from "../meta/v1-helper";
 import { ObjectReference, PodTemplateSpec } from "../core/v1";
@@ -523,10 +523,8 @@ export interface JobStatusHelper extends JobStatus {
     $completionTime(x: Time): JobStatusHelper;
     $conditions(x: Array<JobCondition>): JobStatusHelper;
     $failed(x: number): JobStatusHelper;
-    $ready(x: number): JobStatusHelper;
     $startTime(x: Time): JobStatusHelper;
     $succeeded(x: number): JobStatusHelper;
-    $uncountedTerminatedPods(x: UncountedTerminatedPodsHelper): JobStatusHelper;
 }
 
 /** JobStatus represents the current state of a Job. */
@@ -590,17 +588,6 @@ export class JobStatusHelper extends Template implements JobStatusHelper {
         this.failed = x; return this
     }
 
-    _ready: number;
-    get ready(): number {
-        return this._ready
-    }
-    set ready(x: number) {
-        this._ready = x
-    }
-    $ready(x: number) {
-        this.ready = x; return this
-    }
-
     _startTime: Time;
     get startTime(): Time {
         return this._startTime
@@ -621,17 +608,6 @@ export class JobStatusHelper extends Template implements JobStatusHelper {
     }
     $succeeded(x: number) {
         this.succeeded = x; return this
-    }
-
-    _uncountedTerminatedPods: UncountedTerminatedPodsHelper;
-    get uncountedTerminatedPods(): UncountedTerminatedPodsHelper {
-        return this._uncountedTerminatedPods
-    }
-    set uncountedTerminatedPods(x: UncountedTerminatedPodsHelper) {
-        this._uncountedTerminatedPods = x
-    }
-    $uncountedTerminatedPods(x: UncountedTerminatedPodsHelper) {
-        this.uncountedTerminatedPods = x; return this
     }
 }
 
@@ -666,39 +642,5 @@ export class JobTemplateSpecHelper extends Template implements JobTemplateSpecHe
     }
     $spec(x: JobSpecHelper) {
         this.spec = x; return this
-    }
-}
-
-export interface UncountedTerminatedPodsHelper extends UncountedTerminatedPods {
-    $failed(x: Array<string>): UncountedTerminatedPodsHelper;
-    $succeeded(x: Array<string>): UncountedTerminatedPodsHelper;
-}
-
-/** UncountedTerminatedPods holds UIDs of Pods that have terminated but haven't been accounted in Job status counters. */
-export class UncountedTerminatedPodsHelper extends Template implements UncountedTerminatedPodsHelper {
-    constructor(obj: any) {
-        super(obj)
-    }
-
-    _failed: Array<string>;
-    get failed(): Array<string> {
-        return this._failed
-    }
-    set failed(x: Array<string>) {
-        this._failed = this.set(this.failed, x)
-    }
-    $failed(x: Array<string>) {
-        this.failed = x; return this
-    }
-
-    _succeeded: Array<string>;
-    get succeeded(): Array<string> {
-        return this._succeeded
-    }
-    set succeeded(x: Array<string>) {
-        this._succeeded = this.set(this.succeeded, x)
-    }
-    $succeeded(x: Array<string>) {
-        this.succeeded = x; return this
     }
 }

@@ -9,14 +9,12 @@
   ],
   "scripts": {
     "clean-all": "yarn run clean && del packages/**/node_modules && del ./node_modules",
-    "clean-resources": "lerna run clean-resources --stream",
     "clean-templates": "lerna run clean-templates --stream",
     "clean": "tsc -b --clean ./tsconfig.json && del packages/**lib",
     "build": "tsc -b ./tsconfig.json",
     "postbuild": "lerna run postbuild --stream",
     "develop": "tsc -b -w  --preserveWatchOutput ./tsconfig.json",
     "generate-docs": "lerna run generate-docs --stream",
-    "generate-resources": "lerna run generate-resources --stream",
     "generate-templates": "lerna run generate-templates --stream",
     "test": "c8 ava"
   },

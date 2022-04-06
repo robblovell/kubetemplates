@@ -97,7 +97,7 @@ export interface DaemonSetStatus {
     numberAvailable?: number;
     /** The number of nodes that are running the daemon pod, but are not supposed to run the daemon pod. More info: https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/ */
     numberMisscheduled: number;
-    /** numberReady is the number of nodes that should be running the daemon pod and have one or more of the daemon pod running with a Ready Condition. */
+    /** The number of nodes that should be running the daemon pod and have one or more of the daemon pod running and ready. */
     numberReady: number;
     /** The number of nodes that should be running the daemon pod and have none of the daemon pod running and available (ready for at least spec.minReadySeconds) */
     numberUnavailable?: number;
@@ -111,13 +111,7 @@ export interface DaemonSetStatus {
 export interface DaemonSetUpdateStrategy {
     /** Rolling update config params. Present only if type = "RollingUpdate". */
     rollingUpdate?: RollingUpdateDaemonSet;
-    /**
-     * Type of daemon set update. Can be "RollingUpdate" or "OnDelete". Default is RollingUpdate.
-     *
-     * Possible enum values:
-     *  - `"OnDelete"` Replace the old daemons only when it's killed
-     *  - `"RollingUpdate"` Replace the old daemons by new ones using rolling update i.e replace them on each node one after the other.
-     */
+    /** Type of daemon set update. Can be "RollingUpdate" or "OnDelete". Default is RollingUpdate. */
     type?: string;
 }
 
@@ -127,7 +121,7 @@ export interface Deployment extends Resource {
     apiVersion?: "apps/v1";
     /** Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds */
     kind?: "Deployment";
-    /** Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata */
+    /** Standard object metadata. */
     metadata?: ObjectMeta;
     /** Specification of the desired behavior of the Deployment. */
     spec?: DeploymentSpec;
@@ -193,7 +187,7 @@ export interface DeploymentStatus {
     conditions?: Array<DeploymentCondition>;
     /** The generation observed by the deployment controller. */
     observedGeneration?: number;
-    /** readyReplicas is the number of pods targeted by this Deployment with a Ready Condition. */
+    /** Total number of ready pods targeted by this deployment. */
     readyReplicas?: number;
     /** Total number of non-terminated pods targeted by this deployment (their labels match the selector). */
     replicas?: number;
@@ -207,13 +201,7 @@ export interface DeploymentStatus {
 export interface DeploymentStrategy {
     /** Rolling update config params. Present only if DeploymentStrategyType = RollingUpdate. */
     rollingUpdate?: RollingUpdateDeployment;
-    /**
-     * Type of deployment. Can be "Recreate" or "RollingUpdate". Default is RollingUpdate.
-     *
-     * Possible enum values:
-     *  - `"Recreate"` Kill all existing pods before creating new ones.
-     *  - `"RollingUpdate"` Replace the old ReplicaSets by new one using rolling update i.e gradually scale down the old ReplicaSets and scale up the new one.
-     */
+    /** Type of deployment. Can be "Recreate" or "RollingUpdate". Default is RollingUpdate. */
     type?: string;
 }
 
@@ -279,7 +267,7 @@ export interface ReplicaSetStatus {
     fullyLabeledReplicas?: number;
     /** ObservedGeneration reflects the generation of the most recently observed ReplicaSet. */
     observedGeneration?: number;
-    /** readyReplicas is the number of pods targeted by this ReplicaSet with a Ready Condition. */
+    /** The number of ready replicas for this replica set. */
     readyReplicas?: number;
     /** Replicas is the most recently oberved number of replicas. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/#what-is-a-replicationcontroller */
     replicas: number;
@@ -287,9 +275,9 @@ export interface ReplicaSetStatus {
 
 /** Spec to control the desired behavior of daemon set rolling update. */
 export interface RollingUpdateDaemonSet {
-    /** The maximum number of nodes with an existing available DaemonSet pod that can have an updated DaemonSet pod during during an update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). This can not be 0 if MaxUnavailable is 0. Absolute number is calculated from percentage by rounding up to a minimum of 1. Default value is 0. Example: when this is set to 30%, at most 30% of the total number of nodes that should be running the daemon pod (i.e. status.desiredNumberScheduled) can have their a new pod created before the old pod is marked as deleted. The update starts by launching new pods on 30% of nodes. Once an updated pod is available (Ready for at least minReadySeconds) the old DaemonSet pod on that node is marked deleted. If the old pod becomes unavailable for any reason (Ready transitions to false, is evicted, or is drained) an updated pod is immediatedly created on that node without considering surge limits. Allowing surge implies the possibility that the resources consumed by the daemonset on any given node can double if the readiness check fails, and so resource intensive daemonsets should take into account that they may cause evictions during disruption. This is beta field and enabled/disabled by DaemonSetUpdateSurge feature gate. */
+    /** The maximum number of nodes with an existing available DaemonSet pod that can have an updated DaemonSet pod during during an update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). This can not be 0 if MaxUnavailable is 0. Absolute number is calculated from percentage by rounding up to a minimum of 1. Default value is 0. Example: when this is set to 30%, at most 30% of the total number of nodes that should be running the daemon pod (i.e. status.desiredNumberScheduled) can have their a new pod created before the old pod is marked as deleted. The update starts by launching new pods on 30% of nodes. Once an updated pod is available (Ready for at least minReadySeconds) the old DaemonSet pod on that node is marked deleted. If the old pod becomes unavailable for any reason (Ready transitions to false, is evicted, or is drained) an updated pod is immediatedly created on that node without considering surge limits. Allowing surge implies the possibility that the resources consumed by the daemonset on any given node can double if the readiness check fails, and so resource intensive daemonsets should take into account that they may cause evictions during disruption. This is an alpha field and requires enabling DaemonSetUpdateSurge feature gate. */
     maxSurge?: number | string;
-    /** The maximum number of DaemonSet pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of total number of DaemonSet pods at the start of the update (ex: 10%). Absolute number is calculated from percentage by rounding up. This cannot be 0 if MaxSurge is 0 Default value is 1. Example: when this is set to 30%, at most 30% of the total number of nodes that should be running the daemon pod (i.e. status.desiredNumberScheduled) can have their pods stopped for an update at any given time. The update starts by stopping at most 30% of those DaemonSet pods and then brings up new DaemonSet pods in their place. Once the new pods are available, it then proceeds onto other DaemonSet pods, thus ensuring that at least 70% of original number of DaemonSet pods are available at all times during the update. */
+    /** The maximum number of DaemonSet pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of total number of DaemonSet pods at the start of the update (ex: 10%). Absolute number is calculated from percentage by rounding down to a minimum of one. This cannot be 0 if MaxSurge is 0 Default value is 1. Example: when this is set to 30%, at most 30% of the total number of nodes that should be running the daemon pod (i.e. status.desiredNumberScheduled) can have their pods stopped for an update at any given time. The update starts by stopping at most 30% of those DaemonSet pods and then brings up new DaemonSet pods in their place. Once the new pods are available, it then proceeds onto other DaemonSet pods, thus ensuring that at least 70% of original number of DaemonSet pods are available at all times during the update. */
     maxUnavailable?: number | string;
 }
 
@@ -318,7 +306,6 @@ export interface StatefulSet extends Resource {
     apiVersion?: "apps/v1";
     /** Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds */
     kind?: "StatefulSet";
-    /** Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata */
     metadata?: ObjectMeta;
     /** Spec defines the desired identities of pods in this set. */
     spec?: StatefulSetSpec;
@@ -344,35 +331,15 @@ export interface StatefulSetCondition {
 export interface StatefulSetList extends Resource {
     /** APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources */
     apiVersion?: "apps/v1";
-    /** Items is the list of stateful sets. */
     items: Array<StatefulSet>;
     /** Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds */
     kind?: "StatefulSetList";
-    /** Standard list's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata */
     metadata?: ListMeta;
-}
-
-/** StatefulSetPersistentVolumeClaimRetentionPolicy describes the policy used for PVCs created from the StatefulSet VolumeClaimTemplates. */
-export interface StatefulSetPersistentVolumeClaimRetentionPolicy {
-    /** WhenDeleted specifies what happens to PVCs created from StatefulSet VolumeClaimTemplates when the StatefulSet is deleted. The default policy of `Retain` causes PVCs to not be affected by StatefulSet deletion. The `Delete` policy causes those PVCs to be deleted. */
-    whenDeleted?: string;
-    /** WhenScaled specifies what happens to PVCs created from StatefulSet VolumeClaimTemplates when the StatefulSet is scaled down. The default policy of `Retain` causes PVCs to not be affected by a scaledown. The `Delete` policy causes the associated PVCs for any excess pods above the replica count to be deleted. */
-    whenScaled?: string;
 }
 
 /** A StatefulSetSpec is the specification of a StatefulSet. */
 export interface StatefulSetSpec {
-    /** Minimum number of seconds for which a newly created pod should be ready without any of its container crashing for it to be considered available. Defaults to 0 (pod will be considered available as soon as it is ready) This is an alpha field and requires enabling StatefulSetMinReadySeconds feature gate. */
-    minReadySeconds?: number;
-    /** persistentVolumeClaimRetentionPolicy describes the lifecycle of persistent volume claims created from volumeClaimTemplates. By default, all persistent volume claims are created as needed and retained until manually deleted. This policy allows the lifecycle to be altered, for example by deleting persistent volume claims when their stateful set is deleted, or when their pod is scaled down. This requires the StatefulSetAutoDeletePVC feature gate to be enabled, which is alpha.  +optional */
-    persistentVolumeClaimRetentionPolicy?: StatefulSetPersistentVolumeClaimRetentionPolicy;
-    /**
-     * podManagementPolicy controls how pods are created during initial scale up, when replacing pods on nodes, or when scaling down. The default policy is `OrderedReady`, where pods are created in increasing order (pod-0, then pod-1, etc) and the controller will wait until each pod is ready before continuing. When scaling down, the pods are removed in the opposite order. The alternative policy is `Parallel` which will create pods in parallel to match the desired scale without waiting, and on scale down will delete all pods at once.
-     *
-     * Possible enum values:
-     *  - `"OrderedReady"` will create pods in strictly increasing order on scale up and strictly decreasing order on scale down, progressing only when the previous pod is ready or terminated. At most one pod will be changed at any time.
-     *  - `"Parallel"` will create and delete pods as soon as the stateful set replica count is changed, and will not wait for pods to be ready or complete termination.
-     */
+    /** podManagementPolicy controls how pods are created during initial scale up, when replacing pods on nodes, or when scaling down. The default policy is `OrderedReady`, where pods are created in increasing order (pod-0, then pod-1, etc) and the controller will wait until each pod is ready before continuing. When scaling down, the pods are removed in the opposite order. The alternative policy is `Parallel` which will create pods in parallel to match the desired scale without waiting, and on scale down will delete all pods at once. */
     podManagementPolicy?: string;
     /** replicas is the desired number of replicas of the given Template. These are replicas in the sense that they are instantiations of the same Template, but individual replicas also have a consistent identity. If unspecified, defaults to 1. */
     replicas?: number;
@@ -392,8 +359,6 @@ export interface StatefulSetSpec {
 
 /** StatefulSetStatus represents the current state of a StatefulSet. */
 export interface StatefulSetStatus {
-    /** Total number of available pods (ready for at least minReadySeconds) targeted by this statefulset. This is a beta field and enabled/disabled by StatefulSetMinReadySeconds feature gate. */
-    availableReplicas: number;
     /** collisionCount is the count of hash collisions for the StatefulSet. The StatefulSet controller uses this field as a collision avoidance mechanism when it needs to create the name for the newest ControllerRevision. */
     collisionCount?: number;
     /** Represents the latest available observations of a statefulset's current state. */
@@ -404,7 +369,7 @@ export interface StatefulSetStatus {
     currentRevision?: string;
     /** observedGeneration is the most recent generation observed for this StatefulSet. It corresponds to the StatefulSet's generation, which is updated on mutation by the API Server. */
     observedGeneration?: number;
-    /** readyReplicas is the number of pods created for this StatefulSet with a Ready Condition. */
+    /** readyReplicas is the number of Pods created by the StatefulSet controller that have a Ready Condition. */
     readyReplicas?: number;
     /** replicas is the number of Pods created by the StatefulSet controller. */
     replicas: number;
@@ -418,12 +383,6 @@ export interface StatefulSetStatus {
 export interface StatefulSetUpdateStrategy {
     /** RollingUpdate is used to communicate parameters when Type is RollingUpdateStatefulSetStrategyType. */
     rollingUpdate?: RollingUpdateStatefulSetStrategy;
-    /**
-     * Type indicates the type of the StatefulSetUpdateStrategy. Default is RollingUpdate.
-     *
-     * Possible enum values:
-     *  - `"OnDelete"` triggers the legacy behavior. Version tracking and ordered rolling restarts are disabled. Pods are recreated from the StatefulSetSpec when they are manually deleted. When a scale operation is performed with this strategy,specification version indicated by the StatefulSet's currentRevision.
-     *  - `"RollingUpdate"` indicates that update will be applied to all Pods in the StatefulSet with respect to the StatefulSet ordering constraints. When a scale operation is performed with this strategy, new Pods will be created from the specification version indicated by the StatefulSet's updateRevision.
-     */
+    /** Type indicates the type of the StatefulSetUpdateStrategy. Default is RollingUpdate. */
     type?: string;
 }

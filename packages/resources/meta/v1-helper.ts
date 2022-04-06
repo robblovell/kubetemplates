@@ -590,7 +590,6 @@ export interface ManagedFieldsEntryHelper extends ManagedFieldsEntry {
     $fieldsV1(x: FieldsV1Helper): ManagedFieldsEntryHelper;
     $manager(x: string): ManagedFieldsEntryHelper;
     $operation(x: string): ManagedFieldsEntryHelper;
-    $subresource(x: string): ManagedFieldsEntryHelper;
     $time(x: Time): ManagedFieldsEntryHelper;
 }
 
@@ -642,17 +641,6 @@ export class ManagedFieldsEntryHelper extends Template implements ManagedFieldsE
     }
     $operation(x: string) {
         this.operation = x; return this
-    }
-
-    _subresource: string;
-    get subresource(): string {
-        return this._subresource
-    }
-    set subresource(x: string) {
-        this._subresource = x
-    }
-    $subresource(x: string) {
-        this.subresource = x; return this
     }
 
     _time: Time;

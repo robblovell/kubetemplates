@@ -16,7 +16,7 @@ export interface CertificateSigningRequest extends Resource {
     /** Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds */
     kind?: "CertificateSigningRequest";
     metadata?: ObjectMeta;
-    /** spec contains the certificate request, and is immutable after creation. Only the request, signerName, expirationSeconds, and usages fields can be set on creation. Other fields are derived by Kubernetes and cannot be modified by users. */
+    /** spec contains the certificate request, and is immutable after creation. Only the request, signerName, and usages fields can be set on creation. Other fields are derived by Kubernetes and cannot be modified by users. */
     spec: CertificateSigningRequestSpec;
     /** status contains information about whether the request is approved or denied, and the certificate issued by the signer, or the failure condition indicating signer failure. */
     status?: CertificateSigningRequestStatus;
@@ -46,11 +46,6 @@ export interface CertificateSigningRequestCondition {
      * Approved and Denied conditions are mutually exclusive. Approved, Denied, and Failed conditions cannot be removed once added.
      *
      * Only one condition of a given type is allowed.
-     *
-     * Possible enum values:
-     *  - `"Approved"` Approved indicates the request was approved and should be issued by the signer.
-     *  - `"Denied"` Denied indicates the request was denied and should not be issued by the signer.
-     *  - `"Failed"` Failed indicates the signer failed to issue the certificate.
      */
     type: string;
 }
@@ -68,23 +63,6 @@ export interface CertificateSigningRequestList extends Resource {
 
 /** CertificateSigningRequestSpec contains the certificate request. */
 export interface CertificateSigningRequestSpec {
-    /**
-     * expirationSeconds is the requested duration of validity of the issued certificate. The certificate signer may issue a certificate with a different validity duration so a client must check the delta between the notBefore and and notAfter fields in the issued certificate to determine the actual duration.
-     *
-     * The v1.22+ in-tree implementations of the well-known Kubernetes signers will honor this field as long as the requested duration is not greater than the maximum duration they will honor per the --cluster-signing-duration CLI flag to the Kubernetes controller manager.
-     *
-     * Certificate signers may not honor this field for various reasons:
-     *
-     *   1. Old signer that is unaware of the field (such as the in-tree
-     *      implementations prior to v1.22)
-     *   2. Signer whose configured maximum is shorter than the requested duration
-     *   3. Signer whose configured minimum is longer than the requested duration
-     *
-     * The minimum valid value for expirationSeconds is 600, i.e. 10 minutes.
-     *
-     * As of v1.22, this field is beta and is controlled via the CSRDuration feature gate.
-     */
-    expirationSeconds?: number;
     /** extra contains extra attributes of the user that created the CertificateSigningRequest. Populated by the API server on creation and immutable. */
     extra?: {[name: string]: Array<string>};
     /** groups contains group membership of the user that created the CertificateSigningRequest. Populated by the API server on creation and immutable. */

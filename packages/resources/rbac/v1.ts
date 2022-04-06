@@ -67,9 +67,9 @@ export interface PolicyRule {
     nonResourceURLs?: Array<string>;
     /** ResourceNames is an optional white list of names that the rule applies to.  An empty set means that everything is allowed. */
     resourceNames?: Array<string>;
-    /** Resources is a list of resources this rule applies to. '*' represents all resources. */
+    /** Resources is a list of resources this rule applies to.  ResourceAll represents all resources. */
     resources?: Array<string>;
-    /** Verbs is a list of Verbs that apply to ALL the ResourceKinds contained in this rule. '*' represents all verbs. */
+    /** Verbs is a list of Verbs that apply to ALL the ResourceKinds and AttributeRestrictions contained in this rule.  VerbAll represents all kinds. */
     verbs: Array<string>;
 }
 

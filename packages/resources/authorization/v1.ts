@@ -7,7 +7,6 @@ export interface LocalSubjectAccessReview extends Resource {
     apiVersion?: "authorization.k8s.io/v1";
     /** Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds */
     kind?: "LocalSubjectAccessReview";
-    /** Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata */
     metadata?: ObjectMeta;
     /** Spec holds information about the request being evaluated.  spec.namespace must be equal to the namespace you made the request against.  If empty, it is defaulted. */
     spec: SubjectAccessReviewSpec;
@@ -66,7 +65,6 @@ export interface SelfSubjectAccessReview extends Resource {
     apiVersion?: "authorization.k8s.io/v1";
     /** Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds */
     kind?: "SelfSubjectAccessReview";
-    /** Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata */
     metadata?: ObjectMeta;
     /** Spec holds information about the request being evaluated.  user and groups must be empty */
     spec: SelfSubjectAccessReviewSpec;
@@ -88,7 +86,6 @@ export interface SelfSubjectRulesReview extends Resource {
     apiVersion?: "authorization.k8s.io/v1";
     /** Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds */
     kind?: "SelfSubjectRulesReview";
-    /** Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata */
     metadata?: ObjectMeta;
     /** Spec holds information about the request being evaluated. */
     spec: SelfSubjectRulesReviewSpec;
@@ -96,7 +93,6 @@ export interface SelfSubjectRulesReview extends Resource {
     status?: SubjectRulesReviewStatus;
 }
 
-/** SelfSubjectRulesReviewSpec defines the specification for SelfSubjectRulesReview. */
 export interface SelfSubjectRulesReviewSpec {
     /** Namespace to evaluate rules for. Required. */
     namespace?: string;
@@ -108,7 +104,6 @@ export interface SubjectAccessReview extends Resource {
     apiVersion?: "authorization.k8s.io/v1";
     /** Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds */
     kind?: "SubjectAccessReview";
-    /** Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata */
     metadata?: ObjectMeta;
     /** Spec holds information about the request being evaluated */
     spec: SubjectAccessReviewSpec;

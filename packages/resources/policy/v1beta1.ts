@@ -1,5 +1,5 @@
 import { Resource } from "@c6o/kubeclient-contracts";
-import { Condition, LabelSelector, ListMeta, ObjectMeta, Time } from "../meta/v1";
+import { Condition, DeleteOptions, LabelSelector, ListMeta, ObjectMeta, Time } from "../meta/v1";
 import { SELinuxOptions } from "../core/v1";
 
 /** AllowedCSIDriver represents a single inline CSI Driver that is allowed to be used. */
@@ -24,6 +24,18 @@ export interface AllowedHostPath {
     pathPrefix?: string;
     /** when set to true, will allow host volumes matching the pathPrefix only if all volume mounts are readOnly. */
     readOnly?: boolean;
+}
+
+/** Eviction evicts a pod from its node subject to certain policies and safety constraints. This is a subresource of Pod.  A request to cause such an eviction is created by POSTing to .../pods/<pod name>/evictions. */
+export interface Eviction extends Resource {
+    /** APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources */
+    apiVersion?: "policy/v1beta1";
+    /** DeleteOptions may be provided */
+    deleteOptions?: DeleteOptions;
+    /** Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds */
+    kind?: "Eviction";
+    /** ObjectMeta describes the pod that is being evicted. */
+    metadata?: ObjectMeta;
 }
 
 /** FSGroupStrategyOptions defines the strategy type and options used to create the strategy. */
@@ -56,7 +68,6 @@ export interface PodDisruptionBudget extends Resource {
     apiVersion?: "policy/v1beta1";
     /** Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds */
     kind?: "PodDisruptionBudget";
-    /** Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata */
     metadata?: ObjectMeta;
     /** Specification of the desired behavior of the PodDisruptionBudget. */
     spec?: PodDisruptionBudgetSpec;
@@ -68,11 +79,9 @@ export interface PodDisruptionBudget extends Resource {
 export interface PodDisruptionBudgetList extends Resource {
     /** APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources */
     apiVersion?: "policy/v1beta1";
-    /** items list individual PodDisruptionBudget objects */
     items: Array<PodDisruptionBudget>;
     /** Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds */
     kind?: "PodDisruptionBudgetList";
-    /** Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata */
     metadata?: ListMeta;
 }
 

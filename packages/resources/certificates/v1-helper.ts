@@ -174,7 +174,6 @@ export class CertificateSigningRequestListHelper extends ResourceTemplate implem
 }
 
 export interface CertificateSigningRequestSpecHelper extends CertificateSigningRequestSpec {
-    $expirationSeconds(x: number): CertificateSigningRequestSpecHelper;
     $extra(x: {[name: string]: Array<string>}): CertificateSigningRequestSpecHelper;
     $groups(x: Array<string>): CertificateSigningRequestSpecHelper;
     $request(x: string): CertificateSigningRequestSpecHelper;
@@ -188,17 +187,6 @@ export interface CertificateSigningRequestSpecHelper extends CertificateSigningR
 export class CertificateSigningRequestSpecHelper extends Template implements CertificateSigningRequestSpecHelper {
     constructor(obj: any) {
         super(obj)
-    }
-
-    _expirationSeconds: number;
-    get expirationSeconds(): number {
-        return this._expirationSeconds
-    }
-    set expirationSeconds(x: number) {
-        this._expirationSeconds = x
-    }
-    $expirationSeconds(x: number) {
-        this.expirationSeconds = x; return this
     }
 
     _extra: {[name: string]: Array<string>};

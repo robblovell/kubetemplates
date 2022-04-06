@@ -1,7 +1,7 @@
 import { ResourceTemplate, Template } from "../resourceTemplate";
-import { AllowedCSIDriver, AllowedFlexVolume, AllowedHostPath, FSGroupStrategyOptions, HostPortRange, IDRange, PodDisruptionBudget, PodDisruptionBudgetList, PodDisruptionBudgetSpec, PodDisruptionBudgetStatus, PodSecurityPolicy, PodSecurityPolicyList, PodSecurityPolicySpec, RunAsGroupStrategyOptions, RunAsUserStrategyOptions, RuntimeClassStrategyOptions, SELinuxStrategyOptions, SupplementalGroupsStrategyOptions } from "./v1beta1";
-import { Condition, LabelSelector, ListMeta, ObjectMeta, Time } from "../meta/v1";
-import { LabelSelectorHelper, ListMetaHelper, ObjectMetaHelper } from "../meta/v1-helper";
+import { AllowedCSIDriver, AllowedFlexVolume, AllowedHostPath, Eviction, FSGroupStrategyOptions, HostPortRange, IDRange, PodDisruptionBudget, PodDisruptionBudgetList, PodDisruptionBudgetSpec, PodDisruptionBudgetStatus, PodSecurityPolicy, PodSecurityPolicyList, PodSecurityPolicySpec, RunAsGroupStrategyOptions, RunAsUserStrategyOptions, RuntimeClassStrategyOptions, SELinuxStrategyOptions, SupplementalGroupsStrategyOptions } from "./v1beta1";
+import { Condition, DeleteOptions, LabelSelector, ListMeta, ObjectMeta, Time } from "../meta/v1";
+import { DeleteOptionsHelper, LabelSelectorHelper, ListMetaHelper, ObjectMetaHelper } from "../meta/v1-helper";
 import { SELinuxOptions } from "../core/v1";
 import { SELinuxOptionsHelper } from "../core/v1-helper";
 
@@ -68,6 +68,40 @@ export class AllowedHostPathHelper extends Template implements AllowedHostPathHe
     }
     $readOnly(x: boolean) {
         this.readOnly = x; return this
+    }
+}
+
+export interface EvictionHelper extends Eviction {
+    $deleteOptions(x: DeleteOptionsHelper): EvictionHelper;
+    $metadata(x: ObjectMetaHelper): EvictionHelper;
+}
+
+/** Eviction evicts a pod from its node subject to certain policies and safety constraints. This is a subresource of Pod.  A request to cause such an eviction is created by POSTing to .../pods/<pod name>/evictions. */
+export class EvictionHelper extends ResourceTemplate implements EvictionHelper {
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "Eviction", "policy/v1beta1")
+    }
+
+    _deleteOptions: DeleteOptionsHelper;
+    get deleteOptions(): DeleteOptionsHelper {
+        return this._deleteOptions
+    }
+    set deleteOptions(x: DeleteOptionsHelper) {
+        this._deleteOptions = x
+    }
+    $deleteOptions(x: DeleteOptionsHelper) {
+        this.deleteOptions = x; return this
+    }
+
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
+        return this._metadata
+    }
+    set metadata(x: ObjectMetaHelper) {
+        this._metadata = x
+    }
+    $metadata(x: ObjectMetaHelper) {
+        this.metadata = x; return this
     }
 }
 

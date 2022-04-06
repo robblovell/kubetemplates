@@ -59,7 +59,7 @@ export class ClusterRoleHelper extends ResourceTemplate implements ClusterRoleHe
         this.metadata = x; return this
     }
 
-    protected _rules: Array<PolicyRule>;
+    _rules: Array<PolicyRule>;
     get rules(): Array<PolicyRule> {
         return this._rules
     }

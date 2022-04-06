@@ -1,5 +1,5 @@
 import { ResourceTemplate, Template } from "../resourceTemplate";
-import { CustomResourceColumnDefinition, CustomResourceConversion, CustomResourceDefinition, CustomResourceDefinitionCondition, CustomResourceDefinitionList, CustomResourceDefinitionNames, CustomResourceDefinitionSpec, CustomResourceDefinitionStatus, CustomResourceDefinitionVersion, CustomResourceSubresourceScale, CustomResourceSubresourceStatus, CustomResourceSubresources, CustomResourceValidation, ExternalDocumentation, JSONSchemaProps, ServiceReference, ValidationRule, WebhookClientConfig, WebhookConversion } from "./v1";
+import { CustomResourceColumnDefinition, CustomResourceConversion, CustomResourceDefinition, CustomResourceDefinitionCondition, CustomResourceDefinitionList, CustomResourceDefinitionNames, CustomResourceDefinitionSpec, CustomResourceDefinitionStatus, CustomResourceDefinitionVersion, CustomResourceSubresourceScale, CustomResourceSubresourceStatus, CustomResourceSubresources, CustomResourceValidation, ExternalDocumentation, JSONSchemaProps, ServiceReference, WebhookClientConfig, WebhookConversion } from "./v1";
 import { ListMeta, ObjectMeta, Time } from "../meta/v1";
 import { ListMetaHelper, ObjectMetaHelper } from "../meta/v1-helper";
 
@@ -726,40 +726,6 @@ export class ServiceReferenceHelper extends Template implements ServiceReference
     }
     $port(x: number) {
         this.port = x; return this
-    }
-}
-
-export interface ValidationRuleHelper extends ValidationRule {
-    $message(x: string): ValidationRuleHelper;
-    $rule(x: string): ValidationRuleHelper;
-}
-
-/** ValidationRule describes a validation rule written in the CEL expression language. */
-export class ValidationRuleHelper extends Template implements ValidationRuleHelper {
-    constructor(obj: any) {
-        super(obj)
-    }
-
-    _message: string;
-    get message(): string {
-        return this._message
-    }
-    set message(x: string) {
-        this._message = x
-    }
-    $message(x: string) {
-        this.message = x; return this
-    }
-
-    _rule: string;
-    get rule(): string {
-        return this._rule
-    }
-    set rule(x: string) {
-        this._rule = x
-    }
-    $rule(x: string) {
-        this.rule = x; return this
     }
 }
 

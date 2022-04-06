@@ -19,11 +19,8 @@ export interface TokenRequest extends Resource {
     apiVersion?: "authentication.k8s.io/v1";
     /** Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds */
     kind?: "TokenRequest";
-    /** Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata */
     metadata?: ObjectMeta;
-    /** Spec holds information about the request being evaluated */
     spec: TokenRequestSpec;
-    /** Status is filled in by the server and indicates whether the token can be authenticated. */
     status?: TokenRequestStatus;
 }
 
@@ -51,7 +48,6 @@ export interface TokenReview extends Resource {
     apiVersion?: "authentication.k8s.io/v1";
     /** Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds */
     kind?: "TokenReview";
-    /** Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata */
     metadata?: ObjectMeta;
     /** Spec holds information about the request being evaluated */
     spec: TokenReviewSpec;

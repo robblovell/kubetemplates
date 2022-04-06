@@ -1,5 +1,5 @@
 import { ResourceTemplate, Template } from "../resourceTemplate";
-import { AWSElasticBlockStoreVolumeSource, Affinity, AttachedVolume, AzureDiskVolumeSource, AzureFilePersistentVolumeSource, AzureFileVolumeSource, Binding, CSIPersistentVolumeSource, CSIVolumeSource, Capabilities, CephFSPersistentVolumeSource, CephFSVolumeSource, CinderPersistentVolumeSource, CinderVolumeSource, ClientIPConfig, ComponentCondition, ComponentStatus, ComponentStatusList, ConfigMap, ConfigMapEnvSource, ConfigMapKeySelector, ConfigMapList, ConfigMapNodeConfigSource, ConfigMapProjection, ConfigMapVolumeSource, Container, ContainerImage, ContainerPort, ContainerState, ContainerStateRunning, ContainerStateTerminated, ContainerStateWaiting, ContainerStatus, DaemonEndpoint, DownwardAPIProjection, DownwardAPIVolumeFile, DownwardAPIVolumeSource, EmptyDirVolumeSource, EndpointAddress, EndpointPort, EndpointSubset, Endpoints, EndpointsList, EnvFromSource, EnvVar, EnvVarSource, EphemeralContainer, EphemeralVolumeSource, Event, EventList, EventSeries, EventSource, ExecAction, FCVolumeSource, FlexPersistentVolumeSource, FlexVolumeSource, FlockerVolumeSource, GCEPersistentDiskVolumeSource, GRPCAction, GitRepoVolumeSource, GlusterfsPersistentVolumeSource, GlusterfsVolumeSource, HTTPGetAction, HTTPHeader, HostAlias, HostPathVolumeSource, ISCSIPersistentVolumeSource, ISCSIVolumeSource, KeyToPath, Lifecycle, LifecycleHandler, LimitRange, LimitRangeItem, LimitRangeList, LimitRangeSpec, LoadBalancerIngress, LoadBalancerStatus, LocalObjectReference, LocalVolumeSource, NFSVolumeSource, Namespace, NamespaceCondition, NamespaceList, NamespaceSpec, NamespaceStatus, Node, NodeAddress, NodeAffinity, NodeCondition, NodeConfigSource, NodeConfigStatus, NodeDaemonEndpoints, NodeList, NodeSelector, NodeSelectorRequirement, NodeSelectorTerm, NodeSpec, NodeStatus, NodeSystemInfo, ObjectFieldSelector, ObjectReference, PersistentVolume, PersistentVolumeClaim, PersistentVolumeClaimCondition, PersistentVolumeClaimList, PersistentVolumeClaimSpec, PersistentVolumeClaimStatus, PersistentVolumeClaimTemplate, PersistentVolumeClaimVolumeSource, PersistentVolumeList, PersistentVolumeSpec, PersistentVolumeStatus, PhotonPersistentDiskVolumeSource, Pod, PodAffinity, PodAffinityTerm, PodAntiAffinity, PodCondition, PodDNSConfig, PodDNSConfigOption, PodIP, PodList, PodOS, PodReadinessGate, PodSecurityContext, PodSpec, PodStatus, PodTemplate, PodTemplateList, PodTemplateSpec, PortStatus, PortworxVolumeSource, PreferredSchedulingTerm, Probe, ProjectedVolumeSource, QuobyteVolumeSource, RBDPersistentVolumeSource, RBDVolumeSource, ReplicationController, ReplicationControllerCondition, ReplicationControllerList, ReplicationControllerSpec, ReplicationControllerStatus, ResourceFieldSelector, ResourceQuota, ResourceQuotaList, ResourceQuotaSpec, ResourceQuotaStatus, ResourceRequirements, SELinuxOptions, ScaleIOPersistentVolumeSource, ScaleIOVolumeSource, ScopeSelector, ScopedResourceSelectorRequirement, SeccompProfile, Secret, SecretEnvSource, SecretKeySelector, SecretList, SecretProjection, SecretReference, SecretVolumeSource, SecurityContext, Service, ServiceAccount, ServiceAccountList, ServiceAccountTokenProjection, ServiceList, ServicePort, ServiceSpec, ServiceStatus, SessionAffinityConfig, StorageOSPersistentVolumeSource, StorageOSVolumeSource, Sysctl, TCPSocketAction, Taint, Toleration, TopologySelectorLabelRequirement, TopologySelectorTerm, TopologySpreadConstraint, TypedLocalObjectReference, Volume, VolumeDevice, VolumeMount, VolumeNodeAffinity, VolumeProjection, VsphereVirtualDiskVolumeSource, WeightedPodAffinityTerm, WindowsSecurityContextOptions } from "./v1";
+import { AWSElasticBlockStoreVolumeSource, Affinity, AttachedVolume, AzureDiskVolumeSource, AzureFilePersistentVolumeSource, AzureFileVolumeSource, Binding, CSIPersistentVolumeSource, CSIVolumeSource, Capabilities, CephFSPersistentVolumeSource, CephFSVolumeSource, CinderPersistentVolumeSource, CinderVolumeSource, ClientIPConfig, ComponentCondition, ComponentStatus, ComponentStatusList, ConfigMap, ConfigMapEnvSource, ConfigMapKeySelector, ConfigMapList, ConfigMapNodeConfigSource, ConfigMapProjection, ConfigMapVolumeSource, Container, ContainerImage, ContainerPort, ContainerState, ContainerStateRunning, ContainerStateTerminated, ContainerStateWaiting, ContainerStatus, DaemonEndpoint, DownwardAPIProjection, DownwardAPIVolumeFile, DownwardAPIVolumeSource, EmptyDirVolumeSource, EndpointAddress, EndpointPort, EndpointSubset, Endpoints, EndpointsList, EnvFromSource, EnvVar, EnvVarSource, EphemeralContainer, EphemeralContainers, EphemeralVolumeSource, Event, EventList, EventSeries, EventSource, ExecAction, FCVolumeSource, FlexPersistentVolumeSource, FlexVolumeSource, FlockerVolumeSource, GCEPersistentDiskVolumeSource, GitRepoVolumeSource, GlusterfsPersistentVolumeSource, GlusterfsVolumeSource, HTTPGetAction, HTTPHeader, Handler, HostAlias, HostPathVolumeSource, ISCSIPersistentVolumeSource, ISCSIVolumeSource, KeyToPath, Lifecycle, LimitRange, LimitRangeItem, LimitRangeList, LimitRangeSpec, LoadBalancerIngress, LoadBalancerStatus, LocalObjectReference, LocalVolumeSource, NFSVolumeSource, Namespace, NamespaceCondition, NamespaceList, NamespaceSpec, NamespaceStatus, Node, NodeAddress, NodeAffinity, NodeCondition, NodeConfigSource, NodeConfigStatus, NodeDaemonEndpoints, NodeList, NodeSelector, NodeSelectorRequirement, NodeSelectorTerm, NodeSpec, NodeStatus, NodeSystemInfo, ObjectFieldSelector, ObjectReference, PersistentVolume, PersistentVolumeClaim, PersistentVolumeClaimCondition, PersistentVolumeClaimList, PersistentVolumeClaimSpec, PersistentVolumeClaimStatus, PersistentVolumeClaimTemplate, PersistentVolumeClaimVolumeSource, PersistentVolumeList, PersistentVolumeSpec, PersistentVolumeStatus, PhotonPersistentDiskVolumeSource, Pod, PodAffinity, PodAffinityTerm, PodAntiAffinity, PodCondition, PodDNSConfig, PodDNSConfigOption, PodIP, PodList, PodReadinessGate, PodSecurityContext, PodSpec, PodStatus, PodTemplate, PodTemplateList, PodTemplateSpec, PortStatus, PortworxVolumeSource, PreferredSchedulingTerm, Probe, ProjectedVolumeSource, QuobyteVolumeSource, RBDPersistentVolumeSource, RBDVolumeSource, ReplicationController, ReplicationControllerCondition, ReplicationControllerList, ReplicationControllerSpec, ReplicationControllerStatus, ResourceFieldSelector, ResourceQuota, ResourceQuotaList, ResourceQuotaSpec, ResourceQuotaStatus, ResourceRequirements, SELinuxOptions, ScaleIOPersistentVolumeSource, ScaleIOVolumeSource, ScopeSelector, ScopedResourceSelectorRequirement, SeccompProfile, Secret, SecretEnvSource, SecretKeySelector, SecretList, SecretProjection, SecretReference, SecretVolumeSource, SecurityContext, Service, ServiceAccount, ServiceAccountList, ServiceAccountTokenProjection, ServiceList, ServicePort, ServiceSpec, ServiceStatus, SessionAffinityConfig, StorageOSPersistentVolumeSource, StorageOSVolumeSource, Sysctl, TCPSocketAction, Taint, Toleration, TopologySelectorLabelRequirement, TopologySelectorTerm, TopologySpreadConstraint, TypedLocalObjectReference, Volume, VolumeDevice, VolumeMount, VolumeNodeAffinity, VolumeProjection, VsphereVirtualDiskVolumeSource, WeightedPodAffinityTerm, WindowsSecurityContextOptions } from "./v1";
 import { Condition, LabelSelector, ListMeta, MicroTime, ObjectMeta, Time } from "../meta/v1";
 import { LabelSelectorHelper, ListMetaHelper, ObjectMetaHelper } from "../meta/v1-helper";
 import { Quantity } from "../api/resource";
@@ -1150,7 +1150,7 @@ export interface ConfigMapNodeConfigSourceHelper extends ConfigMapNodeConfigSour
     $uid(x: string): ConfigMapNodeConfigSourceHelper;
 }
 
-/** ConfigMapNodeConfigSource contains the information to reference a ConfigMap as a config source for the Node. This API is deprecated since 1.22: https://git.k8s.io/enhancements/keps/sig-node/281-dynamic-kubelet-configuration */
+/** ConfigMapNodeConfigSource contains the information to reference a ConfigMap as a config source for the Node. */
 export class ConfigMapNodeConfigSourceHelper extends Template implements ConfigMapNodeConfigSourceHelper {
     constructor(obj: any) {
         super(obj)
@@ -2507,13 +2507,7 @@ export interface EphemeralContainerHelper extends EphemeralContainer {
     $workingDir(x: string): EphemeralContainerHelper;
 }
 
-/**
- * An EphemeralContainer is a temporary container that you may add to an existing Pod for user-initiated activities such as debugging. Ephemeral containers have no resource or scheduling guarantees, and they will not be restarted when they exit or when a Pod is removed or restarted. The kubelet may evict a Pod if an ephemeral container causes the Pod to exceed its resource allocation.
- *
- * To add an ephemeral container, use the ephemeralcontainers subresource of an existing Pod. Ephemeral containers may not be removed or restarted.
- *
- * This is a beta feature available on clusters that haven't disabled the EphemeralContainers feature gate.
- */
+/** An EphemeralContainer is a container that may be added temporarily to an existing pod for user-initiated activities such as debugging. Ephemeral containers have no resource or scheduling guarantees, and they will not be restarted when they exit or when a pod is removed or restarted. If an ephemeral container causes a pod to exceed its resource allocation, the pod may be evicted. Ephemeral containers may not be added by directly updating the pod spec. They must be added via the pod's ephemeralcontainers subresource, and they will appear in the pod spec once added. This is an alpha feature enabled by the EphemeralContainers feature flag. */
 export class EphemeralContainerHelper extends Template implements EphemeralContainerHelper {
     constructor(obj: any) {
         super(obj)
@@ -2759,6 +2753,40 @@ export class EphemeralContainerHelper extends Template implements EphemeralConta
     }
     $workingDir(x: string) {
         this.workingDir = x; return this
+    }
+}
+
+export interface EphemeralContainersHelper extends EphemeralContainers {
+    $ephemeralContainers(x: Array<EphemeralContainer>): EphemeralContainersHelper;
+    $metadata(x: ObjectMetaHelper): EphemeralContainersHelper;
+}
+
+/** A list of ephemeral containers used with the Pod ephemeralcontainers subresource. */
+export class EphemeralContainersHelper extends ResourceTemplate implements EphemeralContainersHelper {
+    constructor(nameOrObject: string | any, namespace: string) {
+        super(nameOrObject, namespace, "EphemeralContainers", "v1")
+    }
+
+    _ephemeralContainers: Array<EphemeralContainer>;
+    get ephemeralContainers(): Array<EphemeralContainer> {
+        return this._ephemeralContainers
+    }
+    set ephemeralContainers(x: Array<EphemeralContainer>) {
+        this._ephemeralContainers = this.set(this.ephemeralContainers, x)
+    }
+    $ephemeralContainers(x: Array<EphemeralContainer>) {
+        this.ephemeralContainers = x; return this
+    }
+
+    _metadata: ObjectMetaHelper;
+    get metadata(): ObjectMetaHelper {
+        return this._metadata
+    }
+    set metadata(x: ObjectMetaHelper) {
+        this._metadata = x
+    }
+    $metadata(x: ObjectMetaHelper) {
+        this.metadata = x; return this
     }
 }
 
@@ -3404,39 +3432,6 @@ export class GCEPersistentDiskVolumeSourceHelper extends Template implements GCE
     }
 }
 
-export interface GRPCActionHelper extends GRPCAction {
-    $port(x: number): GRPCActionHelper;
-    $service(x: string): GRPCActionHelper;
-}
-
-export class GRPCActionHelper extends Template implements GRPCActionHelper {
-    constructor(obj: any) {
-        super(obj)
-    }
-
-    _port: number;
-    get port(): number {
-        return this._port
-    }
-    set port(x: number) {
-        this._port = x
-    }
-    $port(x: number) {
-        this.port = x; return this
-    }
-
-    _service: string;
-    get service(): string {
-        return this._service
-    }
-    set service(x: string) {
-        this._service = x
-    }
-    $service(x: string) {
-        this.service = x; return this
-    }
-}
-
 export interface GitRepoVolumeSourceHelper extends GitRepoVolumeSource {
     $directory(x: string): GitRepoVolumeSourceHelper;
     $repository(x: string): GitRepoVolumeSourceHelper;
@@ -3680,6 +3675,52 @@ export class HTTPHeaderHelper extends Template implements HTTPHeaderHelper {
     }
     $value(x: string) {
         this.value = x; return this
+    }
+}
+
+export interface HandlerHelper extends Handler {
+    $exec(x: ExecActionHelper): HandlerHelper;
+    $httpGet(x: HTTPGetActionHelper): HandlerHelper;
+    $tcpSocket(x: TCPSocketActionHelper): HandlerHelper;
+}
+
+/** Handler defines a specific action that should be taken */
+export class HandlerHelper extends Template implements HandlerHelper {
+    constructor(obj: any) {
+        super(obj)
+    }
+
+    _exec: ExecActionHelper;
+    get exec(): ExecActionHelper {
+        return this._exec
+    }
+    set exec(x: ExecActionHelper) {
+        this._exec = x
+    }
+    $exec(x: ExecActionHelper) {
+        this.exec = x; return this
+    }
+
+    _httpGet: HTTPGetActionHelper;
+    get httpGet(): HTTPGetActionHelper {
+        return this._httpGet
+    }
+    set httpGet(x: HTTPGetActionHelper) {
+        this._httpGet = x
+    }
+    $httpGet(x: HTTPGetActionHelper) {
+        this.httpGet = x; return this
+    }
+
+    _tcpSocket: TCPSocketActionHelper;
+    get tcpSocket(): TCPSocketActionHelper {
+        return this._tcpSocket
+    }
+    set tcpSocket(x: TCPSocketActionHelper) {
+        this._tcpSocket = x
+    }
+    $tcpSocket(x: TCPSocketActionHelper) {
+        this.tcpSocket = x; return this
     }
 }
 
@@ -4082,8 +4123,8 @@ export class KeyToPathHelper extends Template implements KeyToPathHelper {
 }
 
 export interface LifecycleHelper extends Lifecycle {
-    $postStart(x: LifecycleHandlerHelper): LifecycleHelper;
-    $preStop(x: LifecycleHandlerHelper): LifecycleHelper;
+    $postStart(x: HandlerHelper): LifecycleHelper;
+    $preStop(x: HandlerHelper): LifecycleHelper;
 }
 
 /** Lifecycle describes actions that the management system should take in response to container lifecycle events. For the PostStart and PreStop lifecycle handlers, management of the container blocks until the action is complete, unless the container process fails, in which case the handler is aborted. */
@@ -4092,72 +4133,26 @@ export class LifecycleHelper extends Template implements LifecycleHelper {
         super(obj)
     }
 
-    _postStart: LifecycleHandlerHelper;
-    get postStart(): LifecycleHandlerHelper {
+    _postStart: HandlerHelper;
+    get postStart(): HandlerHelper {
         return this._postStart
     }
-    set postStart(x: LifecycleHandlerHelper) {
+    set postStart(x: HandlerHelper) {
         this._postStart = x
     }
-    $postStart(x: LifecycleHandlerHelper) {
+    $postStart(x: HandlerHelper) {
         this.postStart = x; return this
     }
 
-    _preStop: LifecycleHandlerHelper;
-    get preStop(): LifecycleHandlerHelper {
+    _preStop: HandlerHelper;
+    get preStop(): HandlerHelper {
         return this._preStop
     }
-    set preStop(x: LifecycleHandlerHelper) {
+    set preStop(x: HandlerHelper) {
         this._preStop = x
     }
-    $preStop(x: LifecycleHandlerHelper) {
+    $preStop(x: HandlerHelper) {
         this.preStop = x; return this
-    }
-}
-
-export interface LifecycleHandlerHelper extends LifecycleHandler {
-    $exec(x: ExecActionHelper): LifecycleHandlerHelper;
-    $httpGet(x: HTTPGetActionHelper): LifecycleHandlerHelper;
-    $tcpSocket(x: TCPSocketActionHelper): LifecycleHandlerHelper;
-}
-
-/** LifecycleHandler defines a specific action that should be taken in a lifecycle hook. One and only one of the fields, except TCPSocket must be specified. */
-export class LifecycleHandlerHelper extends Template implements LifecycleHandlerHelper {
-    constructor(obj: any) {
-        super(obj)
-    }
-
-    _exec: ExecActionHelper;
-    get exec(): ExecActionHelper {
-        return this._exec
-    }
-    set exec(x: ExecActionHelper) {
-        this._exec = x
-    }
-    $exec(x: ExecActionHelper) {
-        this.exec = x; return this
-    }
-
-    _httpGet: HTTPGetActionHelper;
-    get httpGet(): HTTPGetActionHelper {
-        return this._httpGet
-    }
-    set httpGet(x: HTTPGetActionHelper) {
-        this._httpGet = x
-    }
-    $httpGet(x: HTTPGetActionHelper) {
-        this.httpGet = x; return this
-    }
-
-    _tcpSocket: TCPSocketActionHelper;
-    get tcpSocket(): TCPSocketActionHelper {
-        return this._tcpSocket
-    }
-    set tcpSocket(x: TCPSocketActionHelper) {
-        this._tcpSocket = x
-    }
-    $tcpSocket(x: TCPSocketActionHelper) {
-        this.tcpSocket = x; return this
     }
 }
 
@@ -4897,7 +4892,7 @@ export interface NodeConfigSourceHelper extends NodeConfigSource {
     $configMap(x: ConfigMapNodeConfigSourceHelper): NodeConfigSourceHelper;
 }
 
-/** NodeConfigSource specifies a source of node configuration. Exactly one subfield (excluding metadata) must be non-nil. This API is deprecated since 1.22 */
+/** NodeConfigSource specifies a source of node configuration. Exactly one subfield (excluding metadata) must be non-nil. */
 export class NodeConfigSourceHelper extends Template implements NodeConfigSourceHelper {
     constructor(obj: any) {
         super(obj)
@@ -5776,7 +5771,6 @@ export class PersistentVolumeClaimListHelper extends ResourceTemplate implements
 export interface PersistentVolumeClaimSpecHelper extends PersistentVolumeClaimSpec {
     $accessModes(x: Array<string>): PersistentVolumeClaimSpecHelper;
     $dataSource(x: TypedLocalObjectReferenceHelper): PersistentVolumeClaimSpecHelper;
-    $dataSourceRef(x: TypedLocalObjectReferenceHelper): PersistentVolumeClaimSpecHelper;
     $resources(x: ResourceRequirementsHelper): PersistentVolumeClaimSpecHelper;
     $selector(x: LabelSelectorHelper): PersistentVolumeClaimSpecHelper;
     $storageClassName(x: string): PersistentVolumeClaimSpecHelper;
@@ -5810,17 +5804,6 @@ export class PersistentVolumeClaimSpecHelper extends Template implements Persist
     }
     $dataSource(x: TypedLocalObjectReferenceHelper) {
         this.dataSource = x; return this
-    }
-
-    _dataSourceRef: TypedLocalObjectReferenceHelper;
-    get dataSourceRef(): TypedLocalObjectReferenceHelper {
-        return this._dataSourceRef
-    }
-    set dataSourceRef(x: TypedLocalObjectReferenceHelper) {
-        this._dataSourceRef = x
-    }
-    $dataSourceRef(x: TypedLocalObjectReferenceHelper) {
-        this.dataSourceRef = x; return this
     }
 
     _resources: ResourceRequirementsHelper;
@@ -5881,11 +5864,9 @@ export class PersistentVolumeClaimSpecHelper extends Template implements Persist
 
 export interface PersistentVolumeClaimStatusHelper extends PersistentVolumeClaimStatus {
     $accessModes(x: Array<string>): PersistentVolumeClaimStatusHelper;
-    $allocatedResources(x: {[name: string]: Quantity}): PersistentVolumeClaimStatusHelper;
     $capacity(x: {[name: string]: Quantity}): PersistentVolumeClaimStatusHelper;
     $conditions(x: Array<PersistentVolumeClaimCondition>): PersistentVolumeClaimStatusHelper;
     $phase(x: string): PersistentVolumeClaimStatusHelper;
-    $resizeStatus(x: string): PersistentVolumeClaimStatusHelper;
 }
 
 /** PersistentVolumeClaimStatus is the current status of a persistent volume claim. */
@@ -5903,17 +5884,6 @@ export class PersistentVolumeClaimStatusHelper extends Template implements Persi
     }
     $accessModes(x: Array<string>) {
         this.accessModes = x; return this
-    }
-
-    _allocatedResources: {[name: string]: Quantity};
-    get allocatedResources(): {[name: string]: Quantity} {
-        return this._allocatedResources
-    }
-    set allocatedResources(x: {[name: string]: Quantity}) {
-        this._allocatedResources = this.set(this.allocatedResources, x)
-    }
-    $allocatedResources(x: {[name: string]: Quantity}) {
-        this.allocatedResources = x; return this
     }
 
     _capacity: {[name: string]: Quantity};
@@ -5947,17 +5917,6 @@ export class PersistentVolumeClaimStatusHelper extends Template implements Persi
     }
     $phase(x: string) {
         this.phase = x; return this
-    }
-
-    _resizeStatus: string;
-    get resizeStatus(): string {
-        return this._resizeStatus
-    }
-    set resizeStatus(x: string) {
-        this._resizeStatus = x
-    }
-    $resizeStatus(x: string) {
-        this.resizeStatus = x; return this
     }
 }
 
@@ -6894,16 +6853,6 @@ export class PodListHelper extends ResourceTemplate implements PodListHelper {
     }
 }
 
-export interface PodOSHelper extends PodOS {
-}
-
-/** PodOS defines the OS parameters of a pod. */
-export class PodOSHelper extends Template implements PodOSHelper {
-    constructor(obj: any) {
-        super(obj)
-    }
-}
-
 export interface PodReadinessGateHelper extends PodReadinessGate {
     $conditionType(x: string): PodReadinessGateHelper;
 }
@@ -7074,7 +7023,6 @@ export interface PodSpecHelper extends PodSpec {
     $initContainers(x: Array<Container>): PodSpecHelper;
     $nodeName(x: string): PodSpecHelper;
     $nodeSelector(x: any): PodSpecHelper;
-    $os(x: PodOSHelper): PodSpecHelper;
     $overhead(x: {[name: string]: Quantity}): PodSpecHelper;
     $preemptionPolicy(x: string): PodSpecHelper;
     $priority(x: number): PodSpecHelper;
@@ -7286,17 +7234,6 @@ export class PodSpecHelper extends Template implements PodSpecHelper {
     }
     $nodeSelector(x: any) {
         this.nodeSelector = x; return this
-    }
-
-    _os: PodOSHelper;
-    get os(): PodOSHelper {
-        return this._os
-    }
-    set os(x: PodOSHelper) {
-        this._os = x
-    }
-    $os(x: PodOSHelper) {
-        this.os = x; return this
     }
 
     _overhead: {[name: string]: Quantity};
@@ -7894,7 +7831,6 @@ export class PreferredSchedulingTermHelper extends Template implements Preferred
 export interface ProbeHelper extends Probe {
     $exec(x: ExecActionHelper): ProbeHelper;
     $failureThreshold(x: number): ProbeHelper;
-    $grpc(x: GRPCActionHelper): ProbeHelper;
     $httpGet(x: HTTPGetActionHelper): ProbeHelper;
     $initialDelaySeconds(x: number): ProbeHelper;
     $periodSeconds(x: number): ProbeHelper;
@@ -7930,17 +7866,6 @@ export class ProbeHelper extends Template implements ProbeHelper {
     }
     $failureThreshold(x: number) {
         this.failureThreshold = x; return this
-    }
-
-    _grpc: GRPCActionHelper;
-    get grpc(): GRPCActionHelper {
-        return this._grpc
-    }
-    set grpc(x: GRPCActionHelper) {
-        this._grpc = x
-    }
-    $grpc(x: GRPCActionHelper) {
-        this.grpc = x; return this
     }
 
     _httpGet: HTTPGetActionHelper;
@@ -10022,6 +9947,7 @@ export interface ServiceSpecHelper extends ServiceSpec {
     $selector(x: any): ServiceSpecHelper;
     $sessionAffinity(x: string): ServiceSpecHelper;
     $sessionAffinityConfig(x: SessionAffinityConfigHelper): ServiceSpecHelper;
+    $topologyKeys(x: Array<string>): ServiceSpecHelper;
     $type(x: string): ServiceSpecHelper;
 }
 
@@ -10227,6 +10153,17 @@ export class ServiceSpecHelper extends Template implements ServiceSpecHelper {
     }
     $sessionAffinityConfig(x: SessionAffinityConfigHelper) {
         this.sessionAffinityConfig = x; return this
+    }
+
+    _topologyKeys: Array<string>;
+    get topologyKeys(): Array<string> {
+        return this._topologyKeys
+    }
+    set topologyKeys(x: Array<string>) {
+        this._topologyKeys = this.set(this.topologyKeys, x)
+    }
+    $topologyKeys(x: Array<string>) {
+        this.topologyKeys = x; return this
     }
 
     _type: string;
@@ -11382,7 +11319,6 @@ export class WeightedPodAffinityTermHelper extends Template implements WeightedP
 export interface WindowsSecurityContextOptionsHelper extends WindowsSecurityContextOptions {
     $gmsaCredentialSpec(x: string): WindowsSecurityContextOptionsHelper;
     $gmsaCredentialSpecName(x: string): WindowsSecurityContextOptionsHelper;
-    $hostProcess(x: boolean): WindowsSecurityContextOptionsHelper;
     $runAsUserName(x: string): WindowsSecurityContextOptionsHelper;
 }
 
@@ -11412,17 +11348,6 @@ export class WindowsSecurityContextOptionsHelper extends Template implements Win
     }
     $gmsaCredentialSpecName(x: string) {
         this.gmsaCredentialSpecName = x; return this
-    }
-
-    _hostProcess: boolean;
-    get hostProcess(): boolean {
-        return this._hostProcess
-    }
-    set hostProcess(x: boolean) {
-        this._hostProcess = x
-    }
-    $hostProcess(x: boolean) {
-        this.hostProcess = x; return this
     }
 
     _runAsUserName: string;

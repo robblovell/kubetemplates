@@ -6,7 +6,7 @@ import { LoadBalancerStatus, TypedLocalObjectReference } from "../core/v1";
 export interface HTTPIngressPath {
     /** Backend defines the referenced service endpoint to which the traffic will be forwarded to. */
     backend: IngressBackend;
-    /** Path is matched against the path of an incoming request. Currently it can contain characters disallowed from the conventional "path" part of a URL as defined by RFC 3986. Paths must begin with a '/' and must be present when using PathType with value "Exact" or "Prefix". */
+    /** Path is matched against the path of an incoming request. Currently it can contain characters disallowed from the conventional "path" part of a URL as defined by RFC 3986. Paths must begin with a '/'. When unspecified, all paths from incoming requests are matched. */
     path?: string;
     /**
      * PathType determines the interpretation of the Path matching. PathType can be one of the following values: * Exact: Matches the URL path exactly. * Prefix: Matches based on a URL path prefix split by '/'. Matching is
@@ -21,7 +21,7 @@ export interface HTTPIngressPath {
      *   or treat it identically to Prefix or Exact path types.
      * Implementations are required to support all path types.
      */
-    pathType: string;
+    pathType?: string;
 }
 
 /** HTTPIngressRuleValue is a list of http selectors pointing to backends. In the example: http://<host>/<path>?<searchpart> -> backend where where parts of the url correspond to RFC 3986, this resource will be used to match against everything after the last '/' and before the first '?' or '#'. */
@@ -94,7 +94,7 @@ export interface IngressClassParametersReference {
     name: string;
     /** Namespace is the namespace of the resource being referenced. This field is required when scope is set to "Namespace" and must be unset when scope is set to "Cluster". */
     namespace?: string;
-    /** Scope represents if this refers to a cluster or namespace scoped resource. This may be set to "Cluster" (default) or "Namespace". */
+    /** Scope represents if this refers to a cluster or namespace scoped resource. This may be set to "Cluster" (default) or "Namespace". Field can be enabled with IngressClassNamespacedParams feature gate. */
     scope?: string;
 }
 
@@ -228,7 +228,7 @@ export interface NetworkPolicyPeer {
 
 /** NetworkPolicyPort describes a port to allow traffic on */
 export interface NetworkPolicyPort {
-    /** If set, indicates that the range of ports from port to endPort, inclusive, should be allowed by the policy. This field cannot be defined if the port field is not defined or if the port field is defined as a named (string) port. The endPort must be equal or greater than port. This feature is in Beta state and is enabled by default. It can be disabled using the Feature Gate "NetworkPolicyEndPort". */
+    /** If set, indicates that the range of ports from port to endPort, inclusive, should be allowed by the policy. This field cannot be defined if the port field is not defined or if the port field is defined as a named (string) port. The endPort must be equal or greater than port. This feature is in Alpha state and should be enabled using the Feature Gate "NetworkPolicyEndPort". */
     endPort?: number;
     /** The port on the given protocol. This can either be a numerical or named port on a pod. If this field is not provided, this matches all port names and numbers. If present, only traffic on the specified protocol AND port will be matched. */
     port?: number | string;
