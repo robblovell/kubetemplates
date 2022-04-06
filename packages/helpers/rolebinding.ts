@@ -6,7 +6,7 @@ class RoleBinding extends RoleBindingHelper {
 
     constructor(name, namespace, roleReference= {}, subjects= []) {
         super(name, namespace)
-        this.binding(roleReference, subjects)
+        this.$binding(roleReference, subjects)
         return this
     }
 
@@ -20,9 +20,10 @@ class RoleBinding extends RoleBindingHelper {
         return this
     }
 
-    binding(roleReference, subjects) {
+    $binding(roleReference, subjects) {
         this.$roleRef(roleReference)
         this.$subjects(subjects)
+        return this
     }
 }
 
